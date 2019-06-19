@@ -1,0 +1,2 @@
+gcloud auth login
+gsutil cors set "C:\Users\karar\Desktop\cors.json" gs://arecaceworld.appspot.com
