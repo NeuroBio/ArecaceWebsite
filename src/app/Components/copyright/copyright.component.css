@@ -1,0 +1,17 @@
+div.MainState{
+    padding-left: 50px;
+    max-width: 800px;
+}
+
+h4.dent {
+    padding-left: 25px;
+}
+
+div#disclaimer {
+    max-width: 800px;
+}
+
+ul {
+    max-width: 800px;
+    padding-left: 75px;
+}

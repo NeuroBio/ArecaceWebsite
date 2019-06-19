@@ -1,0 +1,30 @@
+<div class="formstyle">
+    <h2 class="formstyle">Guild Upload Form:</h2>
+    <hr><br/>
+
+  <form [formGroup]="guildForm">
+    Name: <input formControlName="GuildName" type="text"><br/><br/>
+
+    Guildmaster: <input formControlName="Master" type="text"><br/><br/>
+
+    Founded: <input class="short" formControlName="Founded" type="number"><br/><br/>
+
+    Host Territory: <input class="long" formControlName="Host" type="text"><br/><br/>
+
+    Description:<br/> <textarea formControlName="Description" rows="15" cols="66"></textarea><br/><br/>
+
+    History:<br/> <textarea formControlName="History" rows="15" cols="66"></textarea><br/><br/>
+
+    Insignia: <input type="file" #insig (change)="onFile($event)"><br/><br/>
+
+    Alt Text:<br/>
+    <textarea formControlName="AltText" rows="4" cols="66"></textarea><br/><br/>
+  </form>
+  
+  <button type="button" (click)="onDelete()" [disabled]="(editGuild === undefined || !allowDelete)">Delete</button>
+      <button type="button" (click)="updateAll()" [disabled]="(editGuild === undefined || !allowEditAll)">Update All</button>
+  <button type="button" (click)="onReset()">Reset</button>
+  <button type="button" (click)="onSubmit()">{{ action }}</button>
+
+  {{ message }}
+</div>

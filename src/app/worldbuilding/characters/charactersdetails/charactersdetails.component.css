@@ -1,0 +1,16 @@
+div#Bio {
+    height: 470px;
+    min-width: 340px;
+    float: left;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+
+img#BioImage {
+    max-height: 450px;
+}
+
+div.textblock {
+    max-width: 1000px;
+}

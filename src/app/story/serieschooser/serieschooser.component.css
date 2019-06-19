@@ -1,0 +1,32 @@
+div#splatter {
+    background-repeat: repeat;
+    background-color: rgb(53, 53, 53);
+    background-image: url(https://firebasestorage.googleapis.com/v0/b/arecaceworld.appspot.com/o/WebSite%2Fsmear6.png?alt=media&token=b42c567e-c131-4c08-9f95-7858a976060e);
+}
+
+label {
+    border: 0px;
+    padding: 0px;
+}
+
+div.radio {
+    padding-left: 7px;
+    float: left;
+    border-right: 3px solid white;
+}
+
+div.drops {
+    padding-top: 7px;
+    padding-left: 7px;
+    float:left;
+}
+
+select {
+    max-width: 250px;
+}
+
+div.loading {
+    float: left;
+    height: 33px;
+    width: 33px;
+}

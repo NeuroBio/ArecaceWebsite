@@ -1,0 +1,36 @@
+<div id="holder">
+    <div *ngIf="loading===true" class="loading"></div>
+    <div [hidden]="loading">
+
+        <!--Header-->
+        <header>
+            <div class="compheader">
+                <h2>{{ guild.GuildName }}</h2>
+            </div>
+            <hr>
+        </header>
+
+        <!--Body--> 
+        <div id="insig">
+            <img [src]="guild.Links[0]" (load)="loading=false" [alt]="guild.AltText"> 
+        </div>
+        
+        <div class="textblock">
+            <b>Current Master: </b>{{ guild.Master }}<br>
+            <b>Founded: </b>{{ guild.Founded }} DE<br>
+            <b>Host Territory: </b>{{ guild.Host }}<br>    
+        </div>
+        <br>
+        
+        <div class="textblock">
+            <b>Description: </b>{{ guild.Description }}<br>
+        </div>
+        <br>
+
+        <div class="textblock">
+            <b>Brief History: </b>{{ guild.History }}<br>
+        </div>
+
+    </div> 
+    <br>      
+</div>

@@ -1,0 +1,28 @@
+<div class="formstyle">
+    <h2 class="formstyle">Story Upload Form:</h2>
+    <hr><br/>
+    
+
+    <form [formGroup]="storyForm">
+        Type: <select formControlName="Type">
+            <option value="Narrative">Narrative</option>
+            <option value="Script">Script</option>
+        </select><br/><br/>
+        
+        Series: <input type="text" formControlName="Series"><br/><br/>
+        
+        Title: <input type="text" formControlName="Title"><br/><br/>
+        
+        Section: <input type="number" class="short" formControlName="Section"><br/><br/><br/>
+        
+        Synopsis: <textarea rows="4" cols="66" formControlName="Synopsis"></textarea><br/><br/><br/>
+        
+        Story: <textarea formControlName="Story" rows="30" cols="66"></textarea><br/><br/>
+    </form>
+    
+    <button type="button" (click)="onDelete()" [disabled]="(editStory === undefined || !allowDelete)">Delete</button>
+      <button type="button" (click)="updateAll()" [disabled]="(editStory === undefined || !allowEditAll)">Update All</button>
+    <button type="button" (click)="onReset()">Reset</button>
+    <button type="button" (click)="onSubmit()">{{action}}</button>
+    {{message}}
+</div>

@@ -1,0 +1,24 @@
+<div class="formstyle">
+    <h2 class="formstyle">Update Form:</h2>
+    <hr><br/>
+    <form [formGroup]="updateForm" id="updateForm">
+
+      Poster: <input formControlName="Poster" type="text"><br/><br/>
+      
+      Body:<br/> <textarea formControlName="Body" rows="6" cols="65"></textarea>
+      <br/><br/>
+      
+      Image: <input type="file" #Image (change)="onFile($event)"><br/><br/>
+
+      Alt Text:<br/>
+      <textarea formControlName="AltText" rows="4" cols="66"></textarea><br/><br/>
+
+        <button type="button" (click)="onDelete()" [disabled]="(editUpdate === undefined || !allowDelete)">Delete</button>
+        <button type="button" (click)="updateAll()" [disabled]="(editUpdate === undefined || !allowEditAll)">Update All</button>
+        <button type="button" (click)="onReset()">Reset</button>
+        <button type="button" (click)="onSubmit()">{{action}}</button>
+    </form>
+      
+      {{message}}
+  </div>
+  

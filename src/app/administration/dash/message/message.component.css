@@ -1,0 +1,52 @@
+div.buttonbank{
+    float:left;
+    position: relative;
+    width:120px;
+    border: 1px solid white;
+    height:193.5px;
+    max-height: 600px;
+    overflow-x: hidden;
+}
+div.buttonbank.posts{
+    width: 236px;
+    overflow-y: scroll;
+}
+
+div#buttoninfo{
+    display: flex;
+    align-items: center;
+}
+
+button{
+    font-weight: bold;
+    padding:7px;
+    flex-grow: 1;
+    background-color: #c0c0c0;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+button.selected{
+    background-color: #f0f0f0;
+}
+
+div#frame{
+    position: relative;
+    float:left;
+    border: 2px solid white;
+    font-family: Arial, Helvetica, sans-serif;
+    max-width: 600px;
+    min-width: 300px;
+    padding:7px;
+}
+
+div#message{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+div#actions{
+    text-align: center;
+}

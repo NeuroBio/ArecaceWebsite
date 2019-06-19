@@ -1,0 +1,7 @@
+  <h3>File Type: </h3>
+  <div *ngFor="let type of typeList">
+    <input type="radio" name="uploadtype"
+    (click)="onClick(type)"
+    [checked]="type===current"
+    [value]="type" [routerLink]="type">{{ type | titlecase }}<br/>
+  </div>

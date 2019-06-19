@@ -1,0 +1,20 @@
+<div #frame id="bookframe" (window:resize)="onResize()">
+
+    <div [hidden]="loading" role="main" tabindex="0">
+        <div #main>
+            <h3>{{ story.metaData.Title }}</h3>
+            <div #tool class="tooltip">Details
+                <div class="tooltiptext" [style.width.px]="leftspace">
+                    Synopsis: {{ story.metaData.Synopsis }}
+                    <br><br>
+                    Wordcount: {{ story.metaData.WordCount }}
+                </div>
+            </div>
+        </div>
+        <div style="clear: both"></div>
+        <hr>
+            
+        <div id="maintext" [innerHTML]="story.text"></div>            
+    </div>
+
+</div>

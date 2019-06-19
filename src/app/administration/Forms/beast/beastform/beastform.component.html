@@ -1,0 +1,40 @@
+<div class="formstyle">
+  <h2 class="formstyle">Beast Upload Form:</h2>
+  <hr><br/>
+  <form [formGroup]="beastForm" id="beastForm">
+      Beast Name: <input type="text" formControlName="Name"><br/><br/>
+
+      Phylogeny: <select formControlName="Phylo">
+        <option *ngFor="let phy of dropDowns.Phylo"
+        [value]="phy">
+        {{phy}}</option>
+      </select><br/><br/>
+  
+      Continent: <select formControlName="Region">
+        <option *ngFor="let reg of dropDowns.Region"
+        [value]="reg">
+          {{reg}}</option>
+      </select><br/><br/>
+  
+      Biome: <select formControlName="Biome">
+        <option *ngFor="let bio of dropDowns.Biome"
+        [value]=bio>
+        {{bio}}</option>
+      </select><br/><br/>
+  
+      Thumb: <input #Thumb type="file" class="fileupload" (change)="getThumb($event)"><br/><br/>
+  
+      FullImage: <input #Full type="file" class="fileupload" (change)="getFull($event)"><br/><br/>
+      
+      Alt Text:<br/>
+      <textarea formControlName="AltText" rows="4" cols="66"></textarea><br/><br/>
+
+      <button type="button" (click)="onDelete()" [disabled]="(editBeast === undefined || !allowDelete)">Delete</button>
+      <button type="button" (click)="updateAll()" [disabled]="(editBeast === undefined || !allowEditAll)">Update All</button>
+      <button type="button" (click)="onReset()">Reset</button>
+      <button type="button" (click)="onSubmit()">{{action}}</button>
+
+  </form>
+    
+    {{message}}
+</div>

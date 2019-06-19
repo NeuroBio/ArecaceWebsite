@@ -1,0 +1,27 @@
+<div id="top">
+
+    <div *ngIf="loading===true" class="loading"></div>
+    
+    <div [hidden]="loading">
+        <!--Header-->
+        <header>
+            <div class="compheader" role="header">
+                <h2 class="compheader">{{ ref.Topic }}</h2>
+            </div>
+        </header>
+        <hr>
+
+        <!--Body-->   
+        <div id="outer">
+            <div id="imageholder">
+                <img class="imgcaption" id="main" alt=""
+                [src]="ref.Links[0]" (load)="loading=false">
+            </div>
+    
+            <p class="caption">{{ ref.Caption }}</p>
+            <div class="textblock">{{ ref.FullText }}</div>
+        </div>
+    </div>
+
+    <br>
+</div>

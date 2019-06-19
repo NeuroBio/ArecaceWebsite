@@ -1,0 +1,16 @@
+service firebase.storage {
+  match /b/{bucket}/o {
+    match /{allPaths=**} {
+      allow read;
+      allow write: if isAdmin();
+    }
+  }
+    
+  function isAdmin(){
+  	return request.auth.uid == 'gwOXDQChwVSOOIZZUmNkUAgDJML2'
+	}
+  
+  function isSignedIn() {
+    return request.auth != null;
+  }
+}

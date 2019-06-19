@@ -1,0 +1,28 @@
+div#splatter {
+    background-repeat: repeat;
+    background-color: rgb(53, 53, 53);
+    background-image: url(https://firebasestorage.googleapis.com/v0/b/arecaceworld.appspot.com/o/WebSite%2Fsmear4.png?alt=media&token=fc921624-299c-4470-b40e-a22d256f81dd);
+}
+
+img#meme {
+    height: auto;
+    max-width: 100%;
+    float: left;
+    background-color: rgb(116, 116, 116);
+    border: 7px solid #232323;
+}
+
+div#meme{
+    max-width: 1000px;
+    padding-left: 7px;
+}
+
+p {
+    padding-top: 0px;
+    margin-top: 0px;
+}
+
+h3 {
+    margin: 0px;
+    margin-bottom: 15px;
+}

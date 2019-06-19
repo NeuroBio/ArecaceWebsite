@@ -1,0 +1,45 @@
+div#splatter {
+    background-repeat: repeat;
+    background-color: rgb(53, 53, 53);
+    background-image: url(https://firebasestorage.googleapis.com/v0/b/arecaceworld.appspot.com/o/WebSite%2Fsmear4.png?alt=media&token=fc921624-299c-4470-b40e-a22d256f81dd);
+}
+
+div#preview {
+    float: left;
+    max-width: 500px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-flow: column;
+}
+
+img#TG {
+    height: auto;
+    max-width: 100%;
+    margin: 20px;
+}
+
+div#spiel {
+    float: left;
+    max-width: 500px;
+}
+
+a#teaser {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+p#subtext {
+    font-size: 12px;
+    margin-top: 0px;
+}
+
+h3 {
+    padding: 0px;
+    margin: 0px;
+}
+
+p#sorry {
+    font-size: 14px;
+}

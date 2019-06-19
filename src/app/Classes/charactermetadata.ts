@@ -1,0 +1,37 @@
+export class CharacterMetaData {
+    ID: string = '';
+    FirstName: string = '';
+    LastName: string = '';    
+    SMClass: string = 'Source Magician';
+    Occupation: string = '';
+    Country: string = 'Escholzian';
+    Territory: string = 'The Chloris Plains';
+    City: string = '';
+    Ethnicity1: string = 'Hns';
+    Ethnicity2: string = 'Hns';
+    Age: number = 0;
+    Year: number = 283;
+    Era: string ="DE";
+    Qt: string = 'Qt1-1';
+    Day: number = 1;
+    Zodiac: string = 'The Engineer';
+    Ft: number = 0;
+    Inch: number = 0;
+    Cm: number = 0;
+    DistinguishingMarks: string = '';
+    Personality: string = '';
+    Philosophy: string = '';
+    MotivationsGoals: string = '';
+    Strengths: string = '';
+    Weaknesses: string = '';
+    SourceAbilities: string;
+    Unique: string;
+    SourceAbilitiesFormatted:string;
+    Relations: string;
+    RelationsFormatted: string;
+    BriefBackground: string = '';
+    FullBackground: string = '';
+    Links: string[] = [];
+    ReferenceIDs: string[] = [];
+    References: any[] = [];
+}

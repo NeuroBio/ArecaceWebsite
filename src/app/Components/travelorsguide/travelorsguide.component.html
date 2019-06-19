@@ -1,0 +1,48 @@
+
+<!-- Header -->
+<div class="compheader">
+  <h2 class="compheader">Traveler's Guide to Arecace</h2>
+</div>
+<hr>
+
+<div id="splatter">
+  <div id="preview">
+      <br>
+      <h3>Example Pages</h3>
+        <img id="TG" [src]="previews[index]"><br>
+        <div>
+            <button (click)="nextPage(-1)">Prev</button> <b>|||</b>
+            <button (click)="nextPage(1)">Next</button>
+        </div>
+    </div>
+    
+    
+    <div id="spiel" role="main">
+      <br><br>
+        <div class="textblock">
+          <h3>What is this?</h3><br>
+          The Traveler’s Guide is an over 300 page-long document where I have compiled all of my world building info about Arecace.  This includes information and images not currently present on this website or my deviantArt account and some that was never released publicly.  It is available only in electronic form, so that it can retain its hyperlink system for quick referencing.  When you buy, you will get two copies; one has an off-white background that I feel is easier to read on bright screens and feels more like a real document.  The other has a white background for printing purposes.
+        </div><br><br>
+
+
+        <div class="textblock">
+          <a  id="teaser" href="https://firebasestorage.googleapis.com/v0/b/arecaceworld.appspot.com/o/WebSite%2FTraveler'sGuide%2FTravelerGuidePreview.pdf?alt=media&token=b32dfe07-e8ac-4718-8b9f-014c54855123" target="_blank">
+            Download 15 Page Teaser
+          </a>
+        </div>
+        <p class="caption">Includes ToC, Remarks, and sections: The Natural History of Arecace and The Colonization of Arecace.  The table of contents links to sections in the full version, but this functionality was lost when I created the teaser.</p>
+
+        
+        <br>
+        <div class="textblock">
+            <h3>Buy for {{cost}}USD:</h3>
+    
+            <p id="sorry">
+              Sorry, it's not available yet!  I'm still adding key content and editing the text.  I expect to be finished before the end of 2019.
+            </p>        
+        </div>
+    </div>
+    <div style="clear:both;"></div>
+    <br>
+</div>
+

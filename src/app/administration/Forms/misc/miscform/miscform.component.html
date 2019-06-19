@@ -1,0 +1,23 @@
+<div class="formstyle">
+    <h2 class="formstyle"> Misc Upload Form:</h2>
+    <hr><br/>
+    <form [formGroup]="miscForm" id="miscForm">
+        Misc Name: <input type="text" formControlName="Name"><br/><br/>
+
+        Thumb: <input #Thumb type="file" class="fileupload" (change)="getThumb($event)"><br/><br/>
+
+        FullImage: <input #Full type="file" class="fileupload" (change)="getFull($event)"><br/><br/>
+        
+        Date: <input type="text" formControlName="Date"><br/><br/>
+
+        Description:<br/> <textarea formControlName="Description" rows="15" cols="66"></textarea><br/><br/>
+
+        <button type="button" (click)="onDelete()" [disabled]="(editMisc === undefined || !allowDelete)">Delete</button>
+      <button type="button" (click)="updateAll()" [disabled]="(editMisc === undefined || !allowEditAll)">Update All</button>
+        <button type="button" (click)="onReset()">Reset</button>
+        <button type="button" (click)="onSubmit()">{{action}}</button>
+
+    </form>
+    
+    {{message}}
+</div>

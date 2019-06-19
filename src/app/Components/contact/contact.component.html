@@ -1,0 +1,93 @@
+<div id="splatter">
+  <br>
+  <form [formGroup]="contactForm" id="contactform">
+    
+    <div id="cssgone">
+      Hello!  If you can see this, then you have CSS disabled.  Please do NOT fill out entries with *!
+      <br><br>
+    </div>
+    
+    
+    Reason for Contact:
+    <span class="invalid" role="alert"
+    [style.display]="ReasonInvalid ? 'inline-block' : 'none'">
+      *required field
+    </span>
+    <br>
+    <select id="reason" formControlName="Reason" (change)="retrieveInfo()">
+      <option *ngFor="let reason of reasons"
+      [value]=reason>
+        {{ reason }}
+      </option>
+    </select><br>
+
+    <div class="alert" role="alert"
+    [style.display]="dropdownInfo ? 'block' : 'none'">{{ dropdownInfo }}
+    </div>
+    <br>
+    
+    
+    Name:
+    <span class="invalid" role="alert"
+    [style.display]="NameInvalid ? 'inline-block' : 'none'">
+      *required field</span>
+    <br>
+
+    <input id="FirstName" type='text' formControlName="FirstName">
+    <div id="star">Last:*</div><input id="LastName" type='text' value="1"
+    tabindex="-1" autocomplete="new-password"
+    formControlName="LastName">
+    
+    <br><br>
+    
+    <div id="Phone">Phone:*<br> <input id="Email" type='text' value="1"
+      tabindex="-1" autocomplete="new-password"
+      formControlName="Phone">
+      <br><br>
+    </div>
+
+    Email:
+    <span class="invalid" role="alert"
+    [style.display]="EmailInvalid ? 'inline-block' : 'none'">
+      *This email is invalid
+    </span>
+    <br>
+    <input id="Address" type="email" formControlName="Email"><br>
+    <div class="info">
+      You're not added to any mailing lists, and I don't sell or give away this data.
+    </div>
+    <br>
+    
+    Message:
+    <span class="invalid" role="alert"
+    [style.display]="MessageInvalid ? 'inline-block' : 'none'">
+      *Either your message was too short or it included script tags or links.
+    </span>
+    <br>
+    <textarea id="message" rows="8" cols="66" #characters
+    ng-trim="false" maxlength="5500"
+    autocomplete="new-password" formControlName="Message">
+    </textarea><br>
+    <div class="info">
+      Characters: {{ characters.value.length }}<br>
+      Messages must be 100-5500 characters and cannot include links or &lt;script&gt; tags.
+    </div>
+    <br><br>
+  
+    <div id="Reply">
+      Get a reply?* <input type="checkbox" name="email-me" value="1"
+      tabindex="-1" autocomplete="off"
+      formControlName="Reply"><br><br>
+    </div>
+    
+    <button (click)="onSubmit()" [disabled]="(active || tempDisable)">Submit</button>
+    <div class="alert" role="alert"
+      [style.display]="message ? 'inline-block' : 'none'">
+      &nbsp;&nbsp;{{ message }}
+    </div>
+    <br>
+
+  </form>
+
+  <br>
+</div>

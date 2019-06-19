@@ -1,0 +1,93 @@
+/*super background image*/
+div#splatter {
+    background-position: 200px 0px;
+    background-color: rgb(53, 53, 53);
+    background-image: url(https://firebasestorage.googleapis.com/v0/b/arecaceworld.appspot.com/o/WebSite%2Fsmear2.png?alt=media&token=03185fb3-b90c-4635-98c7-5e045e6b2579);
+}
+
+
+/*the div image that hangs out behind the main content buttons*/
+div#mapped {
+    background-image: url(https://firebasestorage.googleapis.com/v0/b/arecaceworld.appspot.com/o/WebSite%2FArecace%20Shipping%20Routes.png?alt=media&token=ade78c73-a4f3-45a4-be8f-388a44fb9570);
+    background-repeat: repeat-y;
+    width: 100%;
+    background-position: right;
+    max-width: 1100px;
+}
+
+/* Navigation */
+nav#world {
+    max-width:700px;
+}
+
+div.imagebutton {
+    padding: 0px;
+    margin: 0px;
+    height: 300px;
+    width: 300px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: #d1d1d1;
+    text-align: right;
+    border: 3px solid #454545;
+    display: inline-block;
+    color: black;
+    z-index: 1;
+}
+
+
+span {
+    padding: 10px;
+    font-size: 24px;
+    font-weight: bold;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.div#imagebutton:hover {
+    filter: contrast(75%) saturate(90%) brightness(110%);
+    border: 3px solid #a7a7a7;
+}
+
+.proxy {
+    display: block;
+    height: inherit;
+    width: inherit;
+}
+
+.proxy:hover {
+    background-color: rgba(255,255,255,.5);
+}
+
+.proxy:active {
+    background-color: rgba(0,0,0,.2);
+}
+
+
+/*routing links for each button*/
+div#introduction {
+    background-image: url(https://firebasestorage.googleapis.com/v0/b/arecaceworld.appspot.com/o/WebSite%2Fworld%20buttons%2Fintro%202.png?alt=media&token=32c3f3d8-063d-4923-8f39-dc7890deb8e1);
+}
+
+div#bestiary {
+    background-image: url(https://firebasestorage.googleapis.com/v0/b/arecaceworld.appspot.com/o/WebSite%2Fworld%20buttons%2Fbestiary.png?alt=media&token=420ff3f9-b984-4ed3-9c92-224f54656fd5);
+}
+
+div#characters {
+    background-image: url(https://firebasestorage.googleapis.com/v0/b/arecaceworld.appspot.com/o/WebSite%2Fworld%20buttons%2Fcharacters.png?alt=media&token=890227f4-e0ff-408c-b950-470c10f6704e);
+}
+
+div#source {
+    background-image: url(https://firebasestorage.googleapis.com/v0/b/arecaceworld.appspot.com/o/WebSite%2Fworld%20buttons%2Fsource.png?alt=media&token=93ad9b0d-7dda-429a-9323-3f92ff83fec4);
+}
+
+div#culture {
+    background-image: url(https://firebasestorage.googleapis.com/v0/b/arecaceworld.appspot.com/o/WebSite%2Fworld%20buttons%2Fculture.png?alt=media&token=8357e30d-5839-46ad-88a6-3b1db9ddbfef);
+}
+
+div#guilds {
+    background-image: url(https://firebasestorage.googleapis.com/v0/b/arecaceworld.appspot.com/o/WebSite%2Fworld%20buttons%2Fguilds.png?alt=media&token=9ca20138-76ed-4a0e-a45a-f15c73c45506);
+}
+
+div#maps {
+    background-image: url(https://firebasestorage.googleapis.com/v0/b/arecaceworld.appspot.com/o/WebSite%2Fworld%20buttons%2Fintro.png?alt=media&token=7d07824c-ee14-473f-9b1c-1af30f9d8fa4);
+}

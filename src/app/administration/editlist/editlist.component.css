@@ -1,0 +1,35 @@
+div.sidebarlab {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+
+ul.sidebarlist {
+    max-width: 120px;
+    overflow: hidden;
+    background-color: #454545;
+    margin: 1px;
+    padding-left: 35px;
+}
+
+li.sidebarlist {
+    list-style: none;
+    margin-left: -25px;
+}
+
+li.sidebarlist:hover {
+    background-color: #747474;
+}
+
+li.sidebarlist.selected {
+    background-color: #747474;
+}
+
+li.sidebarlist:active {
+    background-color: #232323;
+}
+
+button {
+    display:block;
+}

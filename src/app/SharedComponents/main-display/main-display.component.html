@@ -1,0 +1,16 @@
+<div id="holder">
+    
+  <!--SideBar-->
+      <app-sidebar
+      [current]="current"
+      [labels]="labels"
+      [linkList]="linkList"
+      ></app-sidebar>
+  
+  <!--Reference Info-->
+      <div id="details" role="main">
+          <router-outlet></router-outlet>
+      </div>
+  
+  </div>
+   

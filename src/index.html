@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Arecace</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+
+  <base href="/">
+
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+
+  <style>
+    #loading {
+      display: inline-block;
+      width: 250px;
+      height: 250px;
+      border: 3px solid rgba(255,255,255,.3);
+      border-radius: 100%;
+      border-top-color: rgb(0, 0, 0);
+      animation: spin 1s ease-in infinite;
+      -webkit-animation: spin 1s ease-in infinite;
+    }
+
+    @keyframes spin {
+      to { -webkit-transform: rotate(360deg); }
+    }
+    @-webkit-keyframes spin {
+      to { -webkit-transform: rotate(360deg); }
+    }
+  </style>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-136106805-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+  
+    gtag('config', 'UA-136106805-1');
+  </script>
+
+
+
+</head>
+<body>
+  <app-root><div id="loading"></div></app-root>
+</body>
+</html>

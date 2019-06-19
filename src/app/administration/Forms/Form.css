@@ -1,0 +1,51 @@
+/*Form styling*/
+div.formstyle{
+    margin:3px;
+    padding:4px;
+    width: 740px;
+    overflow: auto;
+    border: 1px solid white;
+  }
+  h2.formstyle{
+    padding: 5px;
+    margin: 0px;
+  }
+
+  input.fileupload{
+    width: 500px;
+  }
+
+  textarea{
+    font-size: 18px;
+    font-family: 'Courier New', Courier, monospace;
+  }
+
+  option{
+    font-size: 18px;  
+  }
+  input{
+    font-size: 18px;
+  }
+  input.short{
+    width:50px;
+    text-align: center;
+  }
+  input.medium{
+    width: 130px;
+  }
+  input.long{
+    width:600px;
+  }
+  
+  input.fileupload{
+    width:500px;
+  }
+  
+  input[type="checkbox"]{
+    width: 25px; /*Desired width*/
+    height: 25px; /*Desired height*/
+  }
+
+  button[type="button"]{
+    float:right;
+  }

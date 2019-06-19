@@ -1,0 +1,280 @@
+/*Components Headers*/
+div.compheader {
+  padding-left: 20px;
+  min-height: 70px;
+  background: #454545;
+}
+
+h2.compheader {
+  margin: 0px;
+  padding: 0px;
+  padding-top: 12px;
+  padding-left: 5px;
+}
+
+
+
+/*Toggle buttons*/
+div.toggler {
+  display: inline-block;
+}
+
+input[type="radio"].toggler {
+  display: none;
+  visibility: hidden;
+}
+
+input[type="radio"].toggler:checked + label {
+  background-color: rgb(163, 163, 163);
+}
+
+input[type="radio"].toggler:not(:checked) + label {
+  background-color: #707070;
+}
+
+label {
+  padding: 5px;
+  border: 1px solid black;
+  margin: 3px;
+  white-space: nowrap
+}
+
+label.toggler {
+  cursor: pointer;
+  padding-right: 10px;
+}
+
+label.toggler:focus {
+  border: 1px dotted white;
+}
+
+
+
+/*buttons with a fancy outline*/
+.strokeme {
+  color: black;
+  text-shadow:
+  -2px -2px 0 white,
+  2px -2px 0 white,
+  -2px 2px 0 white,
+  2px 2px 0 white;
+}
+
+
+
+/*image captions*/
+.imgcaption {
+  margin-bottom: 0px;
+  padding-bottom: 0px;
+  background-color: rgb(116, 116, 116);
+}
+
+p.caption {
+  margin-top: 0px;
+  padding: 5px;
+  font-size: 12px;
+  background-color: #454545;
+  line-height: 160%;
+}
+
+
+
+/* extended text blocks*/
+div.textblock, .firstblock {
+  line-height: 150%;
+  font-size: 10;
+  white-space: pre-line;
+  background-color: #2b2b2b;/*#3a3a3a;#d4d4d4;*/
+  padding: 15px;
+  color: rgb(238, 238, 238);
+}
+
+div.firstblock {
+  overflow: hidden;
+  min-width: 300px;
+}
+
+p.textblock {
+  color: inherit;
+  margin: 0;
+  margin-bottom: 3px;
+}
+
+
+
+/* Navigation "buttons */
+div.navver {
+  display: inline-block;
+  font-size: 25px;
+  font-weight: bold;
+  font-family: Arial, Helvetica, sans-serif;
+  padding: 0;
+  margin-right: 7px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  background-color: #d1d1d1;
+  border: 2px solid black; 
+}
+
+div.navver:hover {
+  background-color: #ebe9e9;
+}
+
+a.navver:active {
+  background-color: rgb(59, 59, 59);
+}
+
+a.navver {
+  display: block;
+  color: black;
+  padding:5px;
+}
+
+a.navver:hover {
+  color:black;
+}
+
+
+
+div.fillspace{
+  overflow: hidden;
+  padding: 15px;
+  width: 1000px;
+  height: 100vh;
+}
+
+
+
+/* General */
+body {
+  background-color: #232323;
+}
+
+div {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 18px;
+  color: white;
+}
+
+h1 {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 45px;
+  color: white;
+  padding: 0px;
+  margin-right: 75px;
+}
+
+h2 {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 35px;
+  color: white;
+  padding: 0px;
+  margin-right: 75px;
+}
+
+h3 {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 25px;
+  color: white;
+  padding: 0px;
+  margin-right: 75px;
+}
+
+h4 {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 20px;
+  color: white;
+  padding: 0px;
+  margin-right: 75px;
+}
+
+a {
+    color: #aaaaaa;
+    font-size: 20px;
+    font-family: 'Courier New', Courier, monospace;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+a:hover {
+  color:whitesmoke;
+}
+
+button {
+  background-color: rgb(201, 201, 201);
+  border: 1px solid black;
+  color: rgb(0, 0, 0);
+  padding: 5px 25px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 20px;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+button:hover {
+  background-color: rgb(230, 230, 230)
+}
+
+button:active {
+  background-color: rgb(24, 24, 24);
+}
+
+button:disabled {
+  color: #a5a5a5;
+}
+
+button:disabled:hover {
+  background-color: rgb(201, 201, 201);
+}
+
+select {
+    color: black;
+    font-size: 20px;
+    font-weight: bold;
+    font-family: 'Courier New', Courier, monospace;   
+}
+  
+p {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 18px;
+  color: white;   
+  line-height: 140%; 
+}
+
+b {
+  color:white;
+}
+
+hr {
+  padding: 0px;
+  margin:0px;
+  border-top: 2px solid white;
+}
+
+ul {
+  font-family: Arial, Helvetica, sans-serif;
+  color: white;
+}
+
+ol {
+  font-family: Arial, Helvetica, sans-serif;
+  color: white;
+}
+
+.loading {
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  border: 3px solid rgba(255,255,255,.3);
+  border-radius: 100%;
+  border-top-color: white;
+  animation: spin 1s infinite;
+  -webkit-animation: spin 1s infinite;
+}
+
+option {
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: bold;
+  font-size: inherit;
+}

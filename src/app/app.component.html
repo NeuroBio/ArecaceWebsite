@@ -1,0 +1,31 @@
+
+<img id="flag" #flag src="assets/tester.png" alt="">
+
+<!-- HEADER AND BANNER -->
+<div id="myHeader">
+    <div id="banner" role="banner"> 
+        <h1 id="title">Arecace</h1>
+        <nav id="header" role="navigation">
+            <div *ngFor="let link of linkList" class="navver">
+                    <a class="navver" [routerLink]="link">{{ link | titlecase }}</a>
+            </div>
+        </nav>
+    </div>
+</div>
+<hr>
+
+    <router-outlet></router-outlet>
+
+<!-- FOOTER -->
+<hr>
+<div id="footer">
+    &copy;kArA Redwing: Website 2018-{{year}}, Content 2004-{{year}} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <div>
+        <a class="footer" routerLink="/about">About</a> &nbsp;<b>|</b>&nbsp;
+        <a class="footer" routerLink="/contact">Contact</a> &nbsp;<b>|</b>&nbsp;
+        <a class="footer" routerLink="/faq">FAQ</a> &nbsp;<b>|</b>&nbsp;
+        <a class="footer" routerLink="/sitemap">Site Map</a> &nbsp;<b>|</b>&nbsp;
+        <a class="footer" routerLink="/guide">Buy Traveler's Guide</a> &nbsp;<b>|</b>&nbsp;
+        <a class="footer" routerLink="/kArAAdministrativeUpload/Dash">Admin</a>
+    </div>
+</div>

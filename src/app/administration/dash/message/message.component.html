@@ -1,0 +1,58 @@
+<br>
+<div class="toggler">
+    <input type="radio" class="toggler" name="datapick" id="new"
+    (click)="getSaved(false)" checked=true>
+    <label for="new">New</label>
+    <input type="radio" class="toggler" name="datapick" id="saved"
+    (click)="getSaved(true)">
+    <label for="saved">Saved</label>
+</div>
+<br><br>
+
+<!--button bank: reasons-->
+<div id="outer" *ngIf="Messages">
+        <div class="buttonbank">
+          <div id="buttoninfo" *ngFor="let class of classes, let i = index">
+              <button (click)="fetchMessages(i)"
+              [class.selected.button]="i===currentReason">
+                  {{ class }}
+                </button>
+                <span>{{ Messages[i].length }}</span>
+          </div>
+        </div>
+        
+    <!--button bank: messages-->
+    <div>
+        <div class="buttonbank posts">
+          <button id="buttoninfo" *ngFor="let mess of messageBank, let i = index"
+          (click)="openMessage(i)"
+          [class.selected.button]="i===currentMessage">
+              {{ mess.Name }}<br>
+              {{ mess.Date }}
+          </button>
+        </div>
+    </div>    
+</div>
+
+<!--actual messages-->
+<div id="frame">
+  <div *ngIf="readMessage">
+      <br>
+      Date: {{ readMessage.Date }}<br>
+      Sender: {{ readMessage.Name }} <br>
+      Email: {{ readMessage.Email }}<br><br>
+      <hr>
+      <div id="message">
+        <br>
+        {{ readMessage.Message }}
+      </div>
+    </div>
+  </div>
+<div style="clear:both"></div>
+
+<!-- what to do with them -->
+<div id="actions">
+    <button type="button" (click)="onDelete()">Delete</button>
+    <button type="button" (click)="onSave()" [disabled]="noSave">Save</button>
+</div>
+

@@ -1,0 +1,107 @@
+div#splatter {
+    background-repeat: repeat;
+    background-color: rgb(53, 53, 53);
+    background-image: url(https://firebasestorage.googleapis.com/v0/b/arecaceworld.appspot.com/o/WebSite%2Fsmear4.png?alt=media&token=fc921624-299c-4470-b40e-a22d256f81dd);
+}
+
+
+/*feeeeeeeeeeeeeeed*/
+div#updatefeed {
+    position: relative;
+    float: left;
+    height: 400px;
+    max-width: 600px;
+    min-width: 300px;
+    border: 1px solid white;
+    margin: 10px;
+    overflow-y: scroll;
+}
+
+div#updatefeedheader {
+    position: -webkit-sticky;
+    position: sticky;
+    background-color: #454545;
+    display: block;
+    top: 0px;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 25px;
+    font-weight: bold;
+    padding-top: 10px;
+    text-align: center;
+}
+
+div.textblock {
+    max-width: 500px;
+    float: left;
+    margin: 10px;
+}
+
+
+
+/* the quickstart nightmare*/
+div#quickstart {
+    display: inline-block;
+    background-color: #454545;
+    border: 1px solid white;
+    margin: 10px;
+    max-width: calc(100vw - 40px);
+
+}
+
+h3#qsheader {
+    margin: 7px;
+}
+
+div#buttonbox {
+    background-image: url(https://firebasestorage.googleapis.com/v0/b/arecaceworld.appspot.com/o/WebSite%2Frsz_2croccart.png?alt=media&token=911f5edc-3fdb-4067-bae3-acbcb3cdd583);
+    display: flex;
+    background-position: left 60%;
+    max-width: inherit;
+    min-width: inherit;
+}
+
+.strokeme {
+    font-weight: bold;
+    background: rgba(255,255,255,.7);
+}
+
+div#smallbuttons {
+    min-width: 80px;
+    width: 200px;
+}
+
+button#small {
+    height: 100px;
+    width: 100%;
+    overflow: hidden;
+}
+
+button#small2 {
+    height: 100px;
+    width: 100%;
+    overflow: hidden;
+}
+
+button#large {
+    width: 200px;
+    height: 200px;
+    min-width: 80px;
+    overflow: hidden;
+}
+
+button#large2 {
+    width: 200px;
+    height: 200px;
+    min-width: 80px;
+    overflow: hidden;
+}
+
+
+
+button:hover {
+    background: rgba(255,255,255,.2)
+}
+
+button:active {
+    background: rgba(0,0,0,.2)
+}

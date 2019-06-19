@@ -1,0 +1,61 @@
+div#splatter {
+    background-repeat: repeat;
+    background-color: rgb(53, 53, 53);
+    background-image: url(https://firebasestorage.googleapis.com/v0/b/arecaceworld.appspot.com/o/WebSite%2Fsmear4.png?alt=media&token=fc921624-299c-4470-b40e-a22d256f81dd);
+}
+
+form#contactform {
+    position: relative;
+    color: white;
+    background-color: #232323;
+    font-size: 20px;
+    border: 2px solid white;
+    margin: 20px;
+    padding: 7px;
+    font-family: Arial, Helvetica, sans-serif;
+    max-width: 600px;
+}
+
+span.invalid {
+    font-size: 14px;
+    display: none;
+    color: red;
+}
+
+div.alert {
+    display: none;
+}
+
+div.info {
+    font-size: 14px;
+}
+
+select#reason {
+    max-width: 250px;
+}
+
+textarea#message {
+    width: 100%;
+    resize: horizontal;
+}
+
+div#Phone {
+    position: fixed;
+    left: -300px;
+}
+
+div#cssgone {
+    display: none !important;
+}
+
+div#star {
+    display: none !important;
+}
+
+input#LastName {
+    display: none !important;
+}
+
+div#Reply {
+    display: none !important
+}

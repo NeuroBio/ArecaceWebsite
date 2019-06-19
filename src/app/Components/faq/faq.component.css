@@ -1,0 +1,31 @@
+div#splatter {
+    background-repeat: repeat;
+    background-color: rgb(53, 53, 53);
+    background-image: url(https://firebasestorage.googleapis.com/v0/b/arecaceworld.appspot.com/o/WebSite%2Fsmear4.png?alt=media&token=fc921624-299c-4470-b40e-a22d256f81dd);
+}
+
+ol {
+    max-width: 800px;
+}
+
+li {
+    font-size: 25px;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+    margin-left:-30px;
+    padding: 7px;
+    background-color: #232323;
+    list-style-position: inside;
+}
+
+div.inList {
+    font-weight: normal;
+    padding: 10px;
+    padding-left: 57px;
+    line-height: 150%;
+}
+
+img.support {
+    border:0px;
+    height:30px;
+}

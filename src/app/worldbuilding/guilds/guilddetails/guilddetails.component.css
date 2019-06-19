@@ -1,0 +1,37 @@
+div#holder {
+    min-height: 80vh;
+}
+
+div.compheader {
+    text-align: center;
+    padding-top: 12px;
+}
+
+h2 {
+    margin: 0px;
+    padding: 0px;
+}
+
+div#insig {
+    min-width: 230px;
+    max-width: 300px;
+    min-height: 560px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    float: left;
+}
+
+
+div.textblockcontainer {
+    position: relative;
+    display: block;
+    float: left;
+}
+
+div.textblock {
+    max-width: 1000px;
+    display: block;
+    min-width: 300px;
+    float: none;
+}

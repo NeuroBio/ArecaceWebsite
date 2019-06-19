@@ -1,0 +1,103 @@
+/*blow up image view*/
+nav#biggerouter {
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 5;
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+}
+
+div#biggerback {
+    background-color: black;
+    opacity: .5;
+    height: inherit;
+    width: inherit;
+}
+
+.loading {
+    height: 200px;
+    width: 200px;
+    border: 8px solid rgba(255,255,255,.3);
+    border-top-color: white;
+    position: absolute;
+    left: 40%;
+    top: 40%;
+}
+
+div#content {
+    z-index: 10;
+    margin: 0px;
+    position: absolute;
+    max-width: calc(100vw - 15px);
+    min-width: 200px;
+    max-height: 90vh;
+    overflow-x: auto;
+    background-color: rgb(116, 116, 116);
+}
+
+div#aligner {
+    max-height: 100vh;
+    max-width: 100vw;
+    display: flex;
+    align-items: flex-start;
+}
+
+img#bigger {
+    margin: auto;
+    max-width: 100vw;
+    padding: 0px;
+}
+
+div.textblock {
+    min-width: 200px;
+    max-width: 400px;
+    overflow-y: auto;
+}
+
+h3 {
+    text-align: left;
+}
+
+img#right {
+    z-index: 0;
+    background-color: black;
+    position: absolute;
+    width: 50px;
+    min-width: 0;
+    min-height: 0;
+    top: 50%;
+    right: 0%;
+    cursor: pointer;
+}
+
+img#left {
+    z-index: 0;
+    padding: 7px;
+    background-color: black;
+    position: absolute;
+    width: 50px;
+    min-width: 0;
+    min-height: 0;
+    top: 50%;
+    left: 0%;
+    cursor: pointer;
+}
+
+img:focus {
+    outline: 2px dotted white;
+}
+
+div#help {
+    position: relative;
+    padding: 2px;
+    width: 300px;
+    object-fit: contain;
+    right: 0;
+    bottom: 0;
+    font-size: 14px;
+}

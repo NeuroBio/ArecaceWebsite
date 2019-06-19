@@ -1,0 +1,38 @@
+<div class="formstyle">
+    <h2 class="formstyle">Chapter Upload Form:</h2>
+    <hr><br>
+
+<form #form [formGroup]="chapterForm">
+    Arc: <select formControlName="Arc">
+      <option *ngFor="let arc of Arcs"
+        [value]=arc>
+        {{arc}}
+      </option>
+    </select><br><br>
+
+    Chapter Name: <input type="text" formControlName="Name"><br><br>
+    
+    ID: <input type="number" formControlName="ID"><br><br>
+    
+    Index: <input type="number" formControlName="Index"><br><br>
+    
+    Message: <input type="text" formControlName="Message"><br><br>
+    <br>
+
+    <div *ngFor="let pages of dummy;let i = index">
+        Page {{i+1}}:
+        <input class="fileupload" type="file"
+        (change)="updatePage(i, $event)">
+    </div>
+
+    <button type="button" (click)="addPage(true)">+</button>
+    <button type="button" (click)="addPage(false)">-</button><br><br>
+    
+    
+    <button type="button" (click)="onDelete()" [disabled]="(editChapter === undefined || !allowDelete)">Delete</button>
+      <button type="button" (click)="updateAll()" [disabled]="(editChapter === undefined || !allowEditAll)">Update All</button>
+    <button type="button" (click)="onReset()">Reset</button>
+    <button type="button" (click)="onSubmit()">{{ action }}</button>
+</form>
+{{message}}
+</div>

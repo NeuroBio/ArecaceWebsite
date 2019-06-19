@@ -1,0 +1,20 @@
+<div class="compheader" role="header">
+  <h2 class="compheader">Worldbuilding Index</h2>
+</div>
+<hr>
+
+<!--Button navigation-->
+<div id="splatter">
+  <div id="mapped" role="navigation">
+
+    <nav id="world">
+      <div class="imagebutton" *ngFor="let section of navInfo"
+      [id]="section.link">
+        <a class="proxy" [routerLink]="section.link">
+          <span class="strokeme">{{ section.text }}</span>
+        </a>
+      </div>       
+    </nav>
+    
+  </div>
+</div>

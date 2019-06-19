@@ -1,0 +1,20 @@
+<!--Sidebar-->
+<div class="sidebarlab">{{ type | titlecase }}:</div>
+
+<div *ngIf="showButtons">
+    <button *ngFor="let subtype of typeData.Path"
+    (click)="setSubtype(subtype)">
+        {{ subtype }}</button>
+</div>
+<div *ngIf="loading === false">
+    <ul class="sidebarlist" *ngFor="let item of selectable, let i = index">
+        <li class="sidebarlist"
+        [class.selected.sidebarlist] = "item.ID===selected"
+        (click)="onSelect(item.ID,i)">
+            {{ item.ID }}
+        </li>        
+    </ul>                
+</div>
+
+<!--Loader-->
+<div class="loading" *ngIf="loading === true"></div>
