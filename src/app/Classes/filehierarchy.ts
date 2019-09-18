@@ -1,8 +1,8 @@
 export class Hier{
     Terminal: boolean;
-    Path: string[];
+    Path: string;
     NextTypeFinal: boolean;
-    constructor(a:boolean, b:string[], c:boolean){
+    constructor(a:boolean, b:string, c:boolean){
         this.Terminal=a;
         this.Path=b;
         this.NextTypeFinal=c;
@@ -10,14 +10,16 @@ export class Hier{
 }
 
 export class FileHierarchy{
-    bestiary: Hier = new Hier(true, ['Bestiary'], true);
-    chapter: Hier = new Hier(false, ['Arc1Data', 'Arc2Data'], true );
-    characters: Hier = new Hier(true, ['CharacterBios'], true);
-    culture: Hier = new Hier(true, ['CultureInfo'], true);
-    guilds: Hier = new Hier(true, ['Guilds'], true);
-    maps: Hier = new Hier(true, ['Maps'], true);
-    extras: Hier = new Hier(true, ['MiscArt'], true);
-    story: Hier = new Hier(false, ['Narratives', 'Scripts'], false);
-    source: Hier = new Hier(true, ['SourceInfo'], true);
-    update: Hier = new Hier(true, ['Inanity'], true);
+    bestiary: Hier = new Hier(true, 'Bestiary', true);
+    arc1: Hier = new Hier(true, 'Arc1Data', true );
+    arc2: Hier = new Hier(true, 'Arc2Data', true );
+    characters: Hier = new Hier(true, 'CharacterBios', true);
+    culture: Hier = new Hier(true, 'CultureInfo', true);
+    guilds: Hier = new Hier(true, 'Guilds', true);
+    maps: Hier = new Hier(true, 'Maps', true);
+    extras: Hier = new Hier(true, 'MiscArt', true);
+    scripts: Hier = new Hier(false, 'Scripts', false);
+    narratives: Hier = new Hier(false, 'Narratives', false);
+    source: Hier = new Hier(true, 'SourceInfo', true);
+    update: Hier = new Hier(true, 'Inanity', true);
 }

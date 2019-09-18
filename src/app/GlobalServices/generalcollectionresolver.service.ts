@@ -18,7 +18,7 @@ export class GeneralcollectionresolverService implements Resolve<any>{
   
   resolve(route: ActivatedRouteSnapshot){
     const type = route.url[route.url.length-1].path
-    return this.firebaseserv.returnCollect(this.FH[type].Path[0]).pipe(
+    return this.firebaseserv.returnCollect(this.FH[type].Path).pipe(
       take(1),
       tap(collect =>{
         if(collect[0]){

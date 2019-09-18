@@ -21,7 +21,8 @@ import { UpdateFormComponent } from './Forms/Update/update-form/update-form.comp
 import { MiscFormComponent } from './Forms/misc/miscform/miscform.component';
 import { AdminDutiesComponent } from './DashBoard/adminDuties/adminDuties.component';
 import { MessageComponent } from './DashBoard/message/message.component';
-import { MasterFormComponent } from './Forms/master-form/master-form.component'
+import { MasterFormComponent } from './Forms/master-form/master-form.component';
+import { ButtonsComponent } from './Forms/buttons/buttons.component'
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { MasterFormComponent } from './Forms/master-form/master-form.component'
     MiscFormComponent,
     AdminDutiesComponent,
     MessageComponent,
-    MasterFormComponent
+    MasterFormComponent,
+    ButtonsComponent
   ],
   imports: [
     CommonModule,

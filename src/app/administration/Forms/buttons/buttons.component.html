@@ -1,0 +1,11 @@
+<button type="button" (click)="onSubmit()"> {{ action }} </button>
+
+<button type="button" (click)="onReset()">Reset</button>
+
+<button type="button" (click)="onDelete()"
+[disabled]="(action === 'Submit' || !allowDelete)">Delete</button>
+
+<button type="button" (click)="onUpdateAll()"
+[disabled]="(action === 'Submit' || !allowEditAll)">Update All</button>
+
+<div>{{ message }}</div>

@@ -135,7 +135,7 @@ export class ChapterFormComponent implements OnInit, OnDestroy{
   }
 
   updateAll(){
-    this.editserv.getEditableCollection(this.fileHierarchy.chapter.Path[0])
+    this.editserv.getEditableCollection(this.fileHierarchy.arc1.Path)
                   .subscribe(collect =>{
                     collect.forEach(member => {
                         this.editChapter = member;

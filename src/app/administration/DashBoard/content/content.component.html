@@ -10,7 +10,7 @@
     <input id="none" type="radio" name="options" checked="true"  (click)="onAllow(0)"><br>
     <label class="standard" for="delete">Delete</label>
     <input id="delete" type="radio" name="options" (click)="onAllow(1)"><br>
-    <label class="standard" for="all">EditAll</label>
+    <label class="standard" for="all">Update All</label>
     <input id="all" type="radio" name="options" (click)="onAllow(2)"><br>
 </div><br>
 
@@ -36,7 +36,5 @@
 
 
 <!--Form Proper-->
-<div style="float:left;">
-    <router-outlet></router-outlet>
-</div>
+<router-outlet></router-outlet>
 <div style="clear:both"></div><br><br>

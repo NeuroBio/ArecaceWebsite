@@ -22,10 +22,10 @@
     <textarea formControlName="AltText" rows="4" cols="66"></textarea><br/><br/>
   </form>
   
-  <button type="button" (click)="onDelete()" [disabled]="(editGuild === undefined || !allowDelete)">Delete</button>
+  <!-- <button type="button" (click)="onDelete()" [disabled]="(editGuild === undefined || !allowDelete)">Delete</button>
       <button type="button" (click)="updateAll()" [disabled]="(editGuild === undefined || !allowEditAll)">Update All</button>
   <button type="button" (click)="onReset()">Reset</button>
   <button type="button" (click)="onSubmit()">{{ action }}</button>
-
-  {{ message }}
+  {{ message }} -->
+  <app-formButtons></app-formButtons>
 </div>

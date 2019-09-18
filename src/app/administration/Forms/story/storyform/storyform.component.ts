@@ -120,8 +120,7 @@ export class StoryFormComponent implements OnInit, OnDestroy {
   }
 
   updateAll(){
-    this.fileHierarchy.story.Path.forEach(type =>
-      this.editserv.getEditableCollection(type)
+      this.editserv.getEditableCollection(this.fileHierarchy.scripts.Path)
       .subscribe(collect =>{
         collect.forEach(member => {
             this.editStory = member;
@@ -129,6 +128,5 @@ export class StoryFormComponent implements OnInit, OnDestroy {
             this.onSubmit();  
         })
       })
-    )
   }
 }

@@ -23,7 +23,6 @@ export class EditListComponent implements OnInit, OnDestroy {
 
   selected: string;
   selectable: any[];
-  showButtons: boolean = false;
   loading: boolean = false;
   
   stream1: Subscription;
@@ -39,10 +38,9 @@ export class EditListComponent implements OnInit, OnDestroy {
       this.typeData = this.filehier[type];
       this.selectable = undefined; 
       if(this.typeData.Terminal){
-        this.showButtons = false;
-        this.getCollection(this.typeData.Path[0])
+        this.getCollection(this.typeData.Path)
       }else{
-        this.showButtons = true;
+        this.setSubtype(this.typeData.Path);
       }
     })
     
@@ -55,7 +53,7 @@ export class EditListComponent implements OnInit, OnDestroy {
   }
 
   setSubtype(subtype: string){
-      this.path = [subtype];
+    this.path = [subtype];
     this.getCollection(this.path.join('/'))
   }
 
