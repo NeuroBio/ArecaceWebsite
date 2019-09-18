@@ -11,6 +11,28 @@
   <link rel="icon" type="image/x-icon" href="favicon.ico">
 
   <style>
+    body, html {
+      height: 100%;
+      background: rgb(35,35,35);
+    }
+
+    #outer {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      background: url(./assets/Murex.png) center center no-repeat;
+    }
+    #firsttitle {
+      position: absolute;
+      top: calc(50% + 130px);
+      font-family: 'Courier New', Courier, monospace;
+      font-weight: bold;
+      font-size: 40px;
+      color: whitesmoke;
+    }
     #loading {
       display: inline-block;
       width: 250px;
@@ -19,9 +41,8 @@
       border-radius: 100%;
       border-top-color: rgb(0, 0, 0);
       animation: spin 1s ease-in infinite;
-      -webkit-animation: spin 1s ease-in infinite;
+      -webkit-animation: spin 1s ease-in infinite; 
     }
-
     @keyframes spin {
       to { -webkit-transform: rotate(360deg); }
     }
@@ -44,6 +65,11 @@
 
 </head>
 <body>
-  <app-root><div id="loading"></div></app-root>
+  <app-root>
+    <div id="outer">
+        <div id="loading"></div>
+        <div id="firsttitle">Arecace</div>
+    </div>
+  </app-root>
 </body>
 </html>
