@@ -10,8 +10,8 @@ div#updatefeed {
     position: relative;
     float: left;
     height: 400px;
-    max-width: 600px;
-    min-width: 300px;
+    width: 600px;
+    max-width: 100%;
     border: 1px solid white;
     margin: 10px;
     overflow-y: scroll;
