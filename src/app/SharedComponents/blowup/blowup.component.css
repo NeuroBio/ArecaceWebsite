@@ -19,14 +19,10 @@ div#biggerback {
     width: inherit;
 }
 
-.loading {
-    height: 200px;
-    width: 200px;
-    border: 8px solid rgba(255,255,255,.3);
-    border-top-color: white;
-    position: absolute;
-    left: 40%;
-    top: 40%;
+#loading {
+   display: flex;
+   justify-self: center;
+   align-self: center;
 }
 
 div#content {
@@ -35,8 +31,7 @@ div#content {
     position: absolute;
     max-width: calc(100vw - 15px);
     min-width: 200px;
-    max-height: 90vh;
-    overflow-x: auto;
+    max-height: 95vh;
     background-color: rgb(116, 116, 116);
 }
 
@@ -49,8 +44,13 @@ div#aligner {
 
 img#bigger {
     margin: auto;
-    max-width: 100vw;
+    max-width: calc(100vw - 350px);
+    max-height: 95vh;
     padding: 0px;
+    align-self: center;
+    justify-self: center;
+    object-fit: scale-down;
+    min-width: 300px;
 }
 
 div.textblock {
@@ -64,8 +64,7 @@ h3 {
 }
 
 img#right {
-    z-index: 0;
-    background-color: black;
+    z-index: 15;
     position: absolute;
     width: 50px;
     min-width: 0;
@@ -73,12 +72,12 @@ img#right {
     top: 50%;
     right: 0%;
     cursor: pointer;
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
 }
 
 img#left {
-    z-index: 0;
-    padding: 7px;
-    background-color: black;
+    z-index: 15;
     position: absolute;
     width: 50px;
     min-width: 0;
@@ -100,4 +99,11 @@ div#help {
     right: 0;
     bottom: 0;
     font-size: 14px;
+}
+
+div#SeeFull {
+    z-index: 15;
+    position: fixed;
+    bottom: 0;
+    right: 7px;
 }

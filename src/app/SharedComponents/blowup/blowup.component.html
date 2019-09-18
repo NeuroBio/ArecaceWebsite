@@ -6,17 +6,20 @@
     <img #left id="left" src="assets/svgs/back.svg" alt="Prev"
     (click)="onArrow(-1)" tabindex="0" role="button">
 
-    <img #right id="right" src="assets/svgs/forward.svg" alt="Next"
+    <img #right id="right" src="assets/svgs/back.svg" alt="Next"
     (click)="onArrow(1)" tabindex="0" role="button">    
 
     <!-- Image and Text -->  
     <div id="content" (window:resize)="onResize()">
-      
       <div class="imgcaption" id="aligner">
         
-          <img #bigger id="bigger"    
-          [src]="bigUrl" [alt]="activeMember.AltText ? activeMember.AltText : ''"
-          (load)="onResize()">  
+          <div *ngIf="loading" id="loading"></div>
+            <img #bigger id="bigger"
+            [hidden]="loading"
+            [src]="bigUrl"
+            [alt]="activeMember.AltText ? activeMember.AltText : ''"
+            (load)="onResize()">    
+
 
         <div *ngIf="activeMember.Description" class="textblock"
         [style.height.px]="textHeight">
@@ -26,7 +29,12 @@
           <br><br>
         </div>
 
-      </div>    
+      </div>
+
+      <!-- Link out to full image -->
+      <div id="SeeFull">
+          <a [href]="bigUrl" target="_blank">Download</a>
+      </div>
     </div>
 
 </nav>

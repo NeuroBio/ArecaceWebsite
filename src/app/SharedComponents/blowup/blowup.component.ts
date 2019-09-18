@@ -40,10 +40,15 @@ export class BlowUpComponent implements OnInit {
   }
 
   onResize(){
-    this.textHeight = this.bigger.nativeElement.offsetHeight - 30;
-    if(this.textHeight < 400){
-      this.textHeight = 400;
-    }
+    console.log("trigger")
+    this.loading = false;
+    setTimeout(() =>{
+      this.textHeight = this.bigger.nativeElement.offsetHeight - 30;
+      if(this.textHeight < 600){
+        this.textHeight = 600;
+      }
+    }, 10)
+    
   }      
 
   onArrow(incre:number){
