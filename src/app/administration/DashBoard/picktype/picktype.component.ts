@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy }   from '@angular/core';
 
 import { Subscription }                   from 'rxjs';
 
-import { EditService }                    from '../edit.service';
+import { EditService }                    from '../../services/edit.service';
 import { FileHierarchy }                  from 'src/app/Classes/filehierarchy';
 
 @Component({

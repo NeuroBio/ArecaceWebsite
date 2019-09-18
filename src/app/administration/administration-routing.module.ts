@@ -1,11 +1,11 @@
 import { NgModule }                 from '@angular/core';
 import { Routes, RouterModule }     from '@angular/router';
 
-import { AuthGuard }                from './auth/auth.guard'
+import { AuthGuard }                from './security/Auth/auth.guard'
 
-import { AdminComponent }           from './admin/admin.component';
-import { ForbiddenComponent }       from './forbidden/forbidden.component';
-import { ContentComponent }         from './dash/content/content.component';
+import { AdminComponent }           from './DashBoard/admin/admin.component';
+import { ForbiddenComponent }       from './DashBoard/forbidden/forbidden.component';
+import { ContentComponent }         from './DashBoard/content/content.component';
 
 import { CharacterFormComponent }   from './Forms/character/characterform/characterform.component';
 import { BeastFormComponent }       from './Forms/beast/beastform/beastform.component';
@@ -15,17 +15,17 @@ import { GuildFormComponent }       from './Forms/guild/guildform/guildform.comp
 import { SourceFormComponent }      from './Forms/source/sourceform/sourceform.component';
 import { UpdateFormComponent }      from './Forms/Update/update-form/update-form.component'
 import { MiscFormComponent }        from './Forms/misc/miscform/miscform.component';
-import { MaindashComponent }        from './dash/maindash/maindash.component';
-import { MessageComponent }         from './dash/message/message.component';
+import { AdminDutiesComponent }        from './DashBoard/adminDuties/adminDuties.component';
+import { MessageComponent }         from './DashBoard/message/message.component';
 
-import { MessageresolverService } from './dash/message/messageresolver.service';
+import { MessageresolverService } from './DashBoard/message/messageresolver.service';
 
 
 const AdminRoutes: Routes = [
   {path: 'kArAAdministrativeUpload', component: AdminComponent,
     children:[
       {path: '', component: ForbiddenComponent},
-      {path: 'Dash', component: MaindashComponent, 
+      {path: 'Dash', component: AdminDutiesComponent, 
       canActivate: [AuthGuard],
       children:[
         {path: 'Content', component:ContentComponent, 

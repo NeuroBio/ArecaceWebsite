@@ -2,8 +2,8 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { Subscription }                 from 'rxjs';
 
-import { EditService }                  from '../edit.service';
-import { FileHierarchy, Hier }          from '../../Classes/filehierarchy';
+import { EditService }                  from '../../services/edit.service';
+import { FileHierarchy, Hier }          from '../../../Classes/filehierarchy';
 
 
 @Component({

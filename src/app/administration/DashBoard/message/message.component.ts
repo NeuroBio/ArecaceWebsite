@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { CRUD } from '../../CRUD.service';
+import { CRUD } from '../../services/CRUD.service';
 import { MessageService } from './message.service';
 
 @Component({

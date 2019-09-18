@@ -1,8 +1,8 @@
 import { Component, OnInit, OnDestroy, ViewChild, ElementRef, QueryList, ViewChildren }                          from '@angular/core';
 import { FormControl, FormArray,FormBuilder } from '@angular/forms';
 import { ChapterMetaData }                    from 'src/app/Classes/chaptermetadata'
-import { CRUD }                    from '../../../CRUD.service'
-import { EditService }      from '../../../edit.service';
+import { CRUD }                    from '../../../services/CRUD.service'
+import { EditService }      from '../../../services/edit.service';
 import { Subscription } from 'rxjs';
 import { FileHierarchy } from 'src/app/Classes/filehierarchy';
 

@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { EditService } from 'src/app/administration/edit.service';
-import { CRUD } from 'src/app/administration/CRUD.service';
+import { EditService } from 'src/app/administration/services/edit.service';
+import { CRUD } from 'src/app/administration/services/CRUD.service';
 import { formatDate } from '@angular/common';
 import { PostData } from 'src/app/Classes/postdata';
 import { FileHierarchy } from 'src/app/Classes/filehierarchy';

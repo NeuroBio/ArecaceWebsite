@@ -2,8 +2,8 @@ import { Component, OnInit, ViewChild, OnDestroy, ElementRef } from '@angular/co
 import { FormBuilder } from '@angular/forms';
 
 import { GuildMetaData } from 'src/app/Classes/guildmetadata';
-import { CRUD } from '../../../CRUD.service';
-import { EditService }      from '../../../edit.service';
+import { CRUD } from '../../../services/CRUD.service';
+import { EditService }      from '../../../services/edit.service';
 import { Subscription } from 'rxjs';
 import { FileHierarchy } from 'src/app/Classes/filehierarchy';
 

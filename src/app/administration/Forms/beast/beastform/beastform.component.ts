@@ -2,8 +2,8 @@ import { Component, OnInit, OnDestroy, ElementRef } from '@angular/core';
 import { Validators, FormBuilder }        from '@angular/forms';
 import { ViewChild } from '@angular/core'
 
-import { CRUD } from '../../../CRUD.service'
-import { EditService }  from '../../../edit.service'
+import { CRUD } from '../../../services/CRUD.service'
+import { EditService }  from '../../../services/edit.service'
 
 import { BestDropDowns } from '../bestdropdowns'
 import { BeastMetaData } from 'src/app/Classes/beastmetadata';

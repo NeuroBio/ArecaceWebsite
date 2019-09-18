@@ -32,10 +32,10 @@ export class AuthGuard implements CanActivate {
       map((user:User) => {
         if(user){
             if(user.roles[1]){return true};
-          }
+        }
         this.auth.redirectUrl = url;
-            this.router.navigate(['/kArAAdministrativeUpload'])
-            return false;
+        this.router.navigate(['/kArAAdministrativeUpload'])
+        return false;
       })
     );
   }

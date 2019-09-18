@@ -1,7 +1,7 @@
 import { Component, OnInit }    from '@angular/core';
 import { ActivatedRoute }       from '@angular/router';
 
-import { EditService }          from '../../edit.service';
+import { EditService }          from '../../services/edit.service';
 
 @Component({
   selector: 'app-content',

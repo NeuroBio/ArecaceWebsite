@@ -3,9 +3,9 @@ import { Validators, FormBuilder, FormGroup, FormArray, FormControl}        from
 
 import { CharacterMetaData }                  from 'src/app/Classes/charactermetadata';
 import { UploadCharacterDrops }         from '../uploadcharacterdrops';
-import { CRUD }               from '../../../CRUD.service';
+import { CRUD }               from '../../../services/CRUD.service';
 import { Subscription } from 'rxjs';
-import { EditService } from '../../../edit.service';
+import { EditService } from '../../../services/edit.service';
 import { SourceAbilities, Relations } from '../formclasses';
 import { FileHierarchy } from 'src/app/Classes/filehierarchy';
 

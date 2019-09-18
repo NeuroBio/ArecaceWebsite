@@ -3,8 +3,8 @@ import { FormBuilder } from '@angular/forms';
 import { Subscription } from 'rxjs';
 
 
-import { CRUD } from '../../../CRUD.service'
-import { EditService } from '../../../edit.service';
+import { CRUD } from '../../../services/CRUD.service'
+import { EditService } from '../../../services/edit.service';
 import { FileHierarchy } from 'src/app/Classes/filehierarchy';
 
 @Component({
