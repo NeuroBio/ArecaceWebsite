@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormBuilder }        from '@angular/forms';
 
 import { CRUD } from '../../../services/CRUD.service'
-import { EditService }  from '../../../services/edit.service'
+import { CRUDcontrollerService }  from '../../../services/CRUDcontroller.service'
 import { Subscription } from 'rxjs';
 import { Categories, Paths } from '../../../../Classes/categories'
 import { FileHierarchy } from 'src/app/Classes/filehierarchy';
@@ -37,7 +37,7 @@ export class SourceFormComponent implements OnInit {
 
   constructor(private uploadserv:CRUD,
               private fb:FormBuilder,
-              private editserv:EditService) { }
+              private editserv:CRUDcontrollerService) { }
 
   ngOnInit() {
     this.editserv.itemType.subscribe(type =>{

@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy }   from '@angular/core';
 
 import { Subscription }                   from 'rxjs';
 
-import { EditService }                    from '../../services/edit.service';
+import { CRUDcontrollerService }                    from '../../services/CRUDcontroller.service';
 import { FileHierarchy }                  from 'src/app/Classes/filehierarchy';
 
 @Component({
@@ -17,7 +17,7 @@ export class PickTypeComponent implements OnInit, OnDestroy{
   stream: Subscription;
   typeList: string[] = Object.getOwnPropertyNames(new FileHierarchy);
 
-  constructor(private editserv: EditService) { }
+  constructor(private editserv: CRUDcontrollerService) { }
   
   ngOnInit(){
     this.stream = this.editserv.itemType.subscribe(type  => this.current = type);

@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { Subscription }                 from 'rxjs';
 
-import { EditService }                  from '../../services/edit.service';
+import { CRUDcontrollerService }                  from '../../services/CRUDcontroller.service';
 import { FileHierarchy, Hier }          from '../../../Classes/filehierarchy';
 
 
@@ -29,7 +29,7 @@ export class EditListComponent implements OnInit, OnDestroy {
   stream1: Subscription;
   stream2: Subscription;
 
-  constructor(private editserv: EditService) { }
+  constructor(private editserv: CRUDcontrollerService) { }
 
   ngOnInit() {
     this.stream1 = this.editserv.itemType.subscribe(type => {

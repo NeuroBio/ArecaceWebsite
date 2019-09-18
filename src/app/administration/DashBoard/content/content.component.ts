@@ -1,7 +1,7 @@
 import { Component, OnInit }    from '@angular/core';
 import { ActivatedRoute }       from '@angular/router';
 
-import { EditService }          from '../../services/edit.service';
+import { CRUDcontrollerService }          from '../../services/CRUDcontroller.service';
 
 @Component({
   selector: 'app-content',
@@ -14,7 +14,7 @@ export class ContentComponent implements OnInit {
   edit:boolean = false;
   
   constructor(private route: ActivatedRoute,
-              private editserv: EditService) { }
+              private editserv: CRUDcontrollerService) { }
 
   ngOnInit() { 
     this.route.firstChild.url.subscribe(path =>

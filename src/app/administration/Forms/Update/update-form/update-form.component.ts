@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { EditService } from 'src/app/administration/services/edit.service';
+import { CRUDcontrollerService } from 'src/app/administration/services/CRUDcontroller.service';
 import { CRUD } from 'src/app/administration/services/CRUD.service';
 import { formatDate } from '@angular/common';
 import { PostData } from 'src/app/Classes/postdata';
@@ -30,7 +30,7 @@ export class UpdateFormComponent implements OnInit, OnDestroy {
 
 
   constructor(private fb: FormBuilder,
-              private editserv: EditService,
+              private editserv: CRUDcontrollerService,
               private uploadserv: CRUD) { }
 
   ngOnInit() {

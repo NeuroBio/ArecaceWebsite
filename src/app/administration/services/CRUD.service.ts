@@ -60,7 +60,8 @@ export class CRUD {
       return this.firebaseserv.editDocument(editDoc, path, docKey);
   }
 
-  deleteItem(StorageUrls:string[]=[], docPath:string, docKey:string){
+  //removed string[] = []
+  deleteItem(StorageUrls:string[], docPath:string, docKey:string){
     return Promise.all(StorageUrls.map(pic =>{
       return this.firebaseserv.deleteImage(pic)
     })).then(()=>

@@ -5,7 +5,7 @@ import { CharacterMetaData }                  from 'src/app/Classes/charactermet
 import { UploadCharacterDrops }         from '../uploadcharacterdrops';
 import { CRUD }               from '../../../services/CRUD.service';
 import { Subscription } from 'rxjs';
-import { EditService } from '../../../services/edit.service';
+import { CRUDcontrollerService } from '../../../services/CRUDcontroller.service';
 import { SourceAbilities, Relations } from '../formclasses';
 import { FileHierarchy } from 'src/app/Classes/filehierarchy';
 
@@ -47,7 +47,7 @@ export class CharacterFormComponent implements OnInit, OnDestroy{
 
   constructor(private fb: FormBuilder,
               private uploadserv: CRUD,
-              private editserv: EditService) {}
+              private editserv: CRUDcontrollerService) {}
 
   ngOnInit() {
     this.stream = this.editserv.itemToEdit.subscribe(item => {

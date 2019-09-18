@@ -3,7 +3,7 @@ import { FormBuilder } from '@angular/forms';
 
 import { GuildMetaData } from 'src/app/Classes/guildmetadata';
 import { CRUD } from '../../../services/CRUD.service';
-import { EditService }      from '../../../services/edit.service';
+import { CRUDcontrollerService }      from '../../../services/CRUDcontroller.service';
 import { Subscription } from 'rxjs';
 import { FileHierarchy } from 'src/app/Classes/filehierarchy';
 
@@ -32,7 +32,7 @@ export class GuildFormComponent implements OnInit, OnDestroy {
 
   constructor(private fb: FormBuilder,
               private uploadserv: CRUD,
-              private editserv: EditService) { }
+              private editserv: CRUDcontrollerService) { }
 
   ngOnInit() {
     this.stream = this.editserv.itemToEdit.subscribe(item => {

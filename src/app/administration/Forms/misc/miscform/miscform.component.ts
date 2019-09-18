@@ -3,7 +3,7 @@ import { Validators, FormBuilder }        from '@angular/forms';
 import { ViewChild } from '@angular/core'
 
 import { CRUD } from '../../../services/CRUD.service'
-import { EditService }  from '../../../services/edit.service'
+import { CRUDcontrollerService }  from '../../../services/CRUDcontroller.service'
 
 import { Subscription } from 'rxjs';
 import { ExtrasMetaData } from 'src/app/Classes/extrasmetadata';
@@ -36,7 +36,7 @@ export class MiscFormComponent implements OnInit, OnDestroy {
 
   constructor(private uploadserv:CRUD,
               private fb:FormBuilder,
-              private editserv:EditService) { }
+              private editserv:CRUDcontrollerService) { }
 
   ngOnInit() {
     this.stream = this.editserv.itemToEdit.subscribe(item => {

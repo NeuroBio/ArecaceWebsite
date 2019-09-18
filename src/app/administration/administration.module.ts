@@ -20,7 +20,8 @@ import { SourceFormComponent }      from './Forms/source/sourceform/sourceform.c
 import { UpdateFormComponent } from './Forms/Update/update-form/update-form.component';
 import { MiscFormComponent } from './Forms/misc/miscform/miscform.component';
 import { AdminDutiesComponent } from './DashBoard/adminDuties/adminDuties.component';
-import { MessageComponent } from './DashBoard/message/message.component'
+import { MessageComponent } from './DashBoard/message/message.component';
+import { MasterFormComponent } from './Forms/master-form/master-form.component'
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { MessageComponent } from './DashBoard/message/message.component'
     UpdateFormComponent,
     MiscFormComponent,
     AdminDutiesComponent,
-    MessageComponent
+    MessageComponent,
+    MasterFormComponent
   ],
   imports: [
     CommonModule,

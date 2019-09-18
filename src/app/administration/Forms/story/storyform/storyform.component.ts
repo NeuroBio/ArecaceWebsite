@@ -4,7 +4,7 @@ import { Subscription } from 'rxjs';
 
 
 import { CRUD } from '../../../services/CRUD.service'
-import { EditService } from '../../../services/edit.service';
+import { CRUDcontrollerService } from '../../../services/CRUDcontroller.service';
 import { FileHierarchy } from 'src/app/Classes/filehierarchy';
 
 @Component({
@@ -30,7 +30,7 @@ export class StoryFormComponent implements OnInit, OnDestroy {
   fileHierarchy = new FileHierarchy;
 
   constructor(private uploaderserv: CRUD,
-              private editserv: EditService,
+              private editserv: CRUDcontrollerService,
               private fb:FormBuilder) { }
 
   ngOnInit() {

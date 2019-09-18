@@ -10,7 +10,7 @@ import { FireBaseService }              from 'src/app/GlobalServices/firebase.se
   providedIn: 'root'
 })
 
-export class EditService {
+export class CRUDcontrollerService {
 
   itemType = new BehaviorSubject<string>('');
   itemToEdit = new BehaviorSubject<any>(undefined);
