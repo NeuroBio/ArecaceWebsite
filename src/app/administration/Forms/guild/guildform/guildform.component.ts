@@ -14,24 +14,25 @@ import { CRUDcontrollerService }        from '../../../services/CRUDcontroller.s
 
 export class GuildFormComponent implements OnInit, OnDestroy {
   
-  guildForm = this.createForm();
-  @ViewChild('insig') Insig: ElementRef;
-  insigniaFile: any;
+  Form = this.createForm();
+  @ViewChild('insig') imageUploader: ElementRef;
+  imageFile: any;
+
   stream1: Subscription;
   stream2: Subscription;
   editFormData: any;
   init = true;
 
   constructor(private fb: FormBuilder,
-              private editserv: CRUDcontrollerService) { }
+              private controller: CRUDcontrollerService) { }
 
   ngOnInit() {
-    this.stream1 = this.editserv.itemToEdit.subscribe(item => {
-      this.editFormData=item;
+    this.stream1 = this.controller.itemToEdit.subscribe(item => {
+      this.editFormData = item;
       this.assignFormData();
       this.init = false;
     });
-    this.stream2 =this.editserv.triggerProcess.subscribe(() => this.processForm());
+    this.stream2 = this.controller.triggerProcess.subscribe(() => this.processForm());
   }
 
   ngOnDestroy() {
@@ -56,7 +57,7 @@ export class GuildFormComponent implements OnInit, OnDestroy {
   assignFormData() {
     if(this.editFormData){
       this.onReset();
-      this.guildForm = this.editserv.quickAssign(this.guildForm, this.editFormData);
+      this.Form = this.controller.quickAssign(this.Form, this.editFormData);
     }else if(!this.init){
       this.onReset();
     }
@@ -64,39 +65,36 @@ export class GuildFormComponent implements OnInit, OnDestroy {
 
   processForm() {
     //Incomplete Form
-    // if(this.insigniaFile === undefined &&
-    //     this.guildForm.controls.Links.value === '') {
-    //   this.editserv.activeFormData.next("abort");
-    //   return ;
-    // }
+    if(this.imageFile === undefined &&
+        this.Form.controls.Links.value === '') {
+      this.controller.activeFormData.next(["abort",
+        "Guild files require an insignia image."]);
+      return ;
+    }
     
     //Complete Form
-    const Guild:GuildMetaData = this.guildForm.value;
-    Guild.ID = Guild.GuildName.split(' ')[0];
-    if(Guild.ID === 'The'){
-      Guild.ID = 'DIA'
+    const Final:GuildMetaData = this.Form.value;
+    Final.ID = Final.GuildName.split(' ')[0];
+    if(Final.ID === 'The'){
+      Final.ID = 'DIA'
     }
-    this.editserv.activeFormData.next([Guild,
-                                      [`GuildInsig/${Guild.ID}`],
-                                      [this.insigniaFile],
-                                      Guild.Links,
+    this.controller.activeFormData.next([Final,
+                                      [`GuildInsig/${Final.ID}`],
+                                      [this.imageFile],
+                                      Final.Links,
                                       undefined,
                                       undefined,
                                       undefined]);
   }
 
   onFile(event:any) {
-    this.insigniaFile = event;
-  }
-
-  resetFile() {
-    this.Insig.nativeElement.value = '';
-    this.insigniaFile = undefined;
+    this.imageFile = event;
   }
 
   onReset() {
-    this.guildForm = this.createForm();
-    this.resetFile();
-    this.editserv.message.next('');
+    this.Form = this.createForm();
+    this.imageUploader.nativeElement.value = '';
+    this.imageFile = undefined;
+    this.controller.message.next('');
   }
 }

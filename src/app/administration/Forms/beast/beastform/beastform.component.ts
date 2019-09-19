@@ -2,13 +2,11 @@ import { Component, OnInit, OnDestroy, ElementRef } from '@angular/core';
 import { Validators, FormBuilder }        from '@angular/forms';
 import { ViewChild } from '@angular/core'
 
-import { CRUD } from '../../../services/CRUD.service'
 import { CRUDcontrollerService }  from '../../../services/CRUDcontroller.service'
 
 import { BestDropDowns } from '../bestdropdowns'
 import { BeastMetaData } from 'src/app/Classes/beastmetadata';
 import { Subscription } from 'rxjs';
-import { FileHierarchy } from 'src/app/Classes/filehierarchy';
 
 @Component({
   selector: 'app-beastform',
@@ -17,135 +15,36 @@ import { FileHierarchy } from 'src/app/Classes/filehierarchy';
 })
 export class BeastFormComponent implements OnInit, OnDestroy {
 
-  init:boolean = true;
-  message:string='';
   dropDowns = new BestDropDowns();
-  editBeast:any;
-  action:string = 'Submit';
-  stream: Subscription;
-  stream2: Subscription;
-  stream3: Subscription;
-  allowDelete: boolean;
-  allowUpdateAll: boolean;
-
-  beastForm = this.createForm();
+  Form = this.createForm();
   @ViewChild('Thumb') thumbValue: ElementRef;
   @ViewChild('Full') fullValue: ElementRef;
-  thumbEvent:any;
-  fullEvent:any;
-  fileHierarchy = new FileHierarchy;
+  thumbFile: any;
+  fullFile: any;
 
-  constructor(private uploadserv:CRUD,
-              private fb:FormBuilder,
-              private editserv:CRUDcontrollerService) { }
+  editFormData: any;
+  stream1: Subscription;
+  stream2: Subscription;
+  init = true;
+  
+  constructor(private fb: FormBuilder,
+              private controller: CRUDcontrollerService) { }
 
   ngOnInit() {
-    this.stream = this.editserv.itemToEdit.subscribe(item => {
-      this.editBeast=item;
-      this.assignEdit();
-      this.init = false
+    this.stream1 = this.controller.itemToEdit.subscribe(item => {
+      this.editFormData = item;
+      this.assignFormData();
+      this.init = false;
     });
-    // this.stream2 = this.editserv.allowDelete.subscribe(bool => this.allowDelete = bool);
-    // this.stream3 = this.editserv.allowUpdateAll.subscribe(bool => this.allowUpdateAll = bool);
+    this.stream2 = this.controller.triggerProcess.subscribe(() => this.processForm());
   }
 
-  ngOnDestroy(){
-    this.stream.unsubscribe()
-    // this.stream2.unsubscribe()
-    // this.stream3.unsubscribe()
+  ngOnDestroy() {
+    this.stream1.unsubscribe();
+    this.stream2.unsubscribe();
   }
 
-  
-  assignEdit(){
-    if(this.editBeast){
-      this.beastForm = this.editserv.quickAssign(this.beastForm, this.editBeast);
-      if(this.editBeast.BeastName){
-        this.beastForm.controls.Name.patchValue(this.editBeast.BeastName);
-      }
-      this.resetFileUpload()
-      this.action = 'Accept Edits';
-    }else if(!this.init){
-      this.onReset()
-    }
-  }
-
-  getThumb(event:any){
-    this.thumbEvent = event;
-  }
-  getFull(event:any){
-    this.fullEvent = event;
-  }
-
-  onSubmit(){
-    this.message = 'Processing Data...'
-    const results = Object.assign({}, this.beastForm.value);
-    results.ID = this.beastForm.controls.Name.value.split(' ').join('');
-    const newBeast:BeastMetaData = results;
-
-    const imagePaths = [`Bestiary/${newBeast.ID}-thumb`,
-                        `Bestiary/${newBeast.ID}-full`];
-    const images = [this.thumbEvent, this.fullEvent];
-
-    if(!this.editBeast){
-      this.message = "Hold on, uploading!";
-      return this.uploadserv.uploadImages(imagePaths, images)
-      .then(links => {
-        newBeast.Links = links;
-        return this.uploadserv.uploadItem(newBeast,'Bestiary');
-      }).then(() => {
-          this.onReset();
-          this.message="Successful upload!"
-      });
-    }else{
-      this.message = "Hold on, editing!";
-      return this.uploadserv.editImages(imagePaths, images, this.editBeast.Links)
-      .then(links => {
-        newBeast.Links = links;
-        return this.uploadserv.editItem(newBeast,'Bestiary', this.editBeast.key);
-      }).then(() => {
-          this.editserv.itemToEdit.next(undefined);
-          this.message="Successful edit!";
-      });
-    }
-  }
-  
-  onDelete(){
-    const pics:string[] = this.editBeast.Links;                             
-    this.message = 'Hold on, deleting!'
-    this.uploadserv.deleteItem(pics, 'Bestiary', this.editBeast.key)
-    .then(() => {
-      this.editserv.itemToEdit.next(undefined);
-      this.message = 'Successful Delete!';
-    })
-  }
-  
-  resetFileUpload(){
-    this.thumbEvent=undefined;
-    this.fullEvent=undefined;
-    this.thumbValue.nativeElement.value='';
-    this.fullValue.nativeElement.value='';
-  }
-
-  onReset(){
-    this.beastForm = this.createForm();
-    this.resetFileUpload()
-    this.action = 'Submit';
-  }
-
-
-  updateAll(){
-    this.editserv.getEditableCollection(this.fileHierarchy.bestiary.Path[0])
-                  .subscribe(collect =>{
-                    collect.forEach(member => {
-                        this.editBeast = member;
-                        this.assignEdit();
-                        this.onSubmit();  
-      })
-    })
-  }
-
-
-  createForm(){
+  createForm() {
     return this.fb.group({
       Name: ['', Validators.required],
       Phylo: 'Mammalia',
@@ -153,6 +52,60 @@ export class BeastFormComponent implements OnInit, OnDestroy {
       Biome: 'Plains',
       Links: '',
       AltText: ''
-    })
+    });
   }
+
+  assignFormData() {
+    if(this.editFormData) {
+      this.onReset();
+      this.Form = this.controller.quickAssign(this.Form, this.editFormData);
+      // if(this.editFormData.BeastName){
+      //   this.Form.controls.Name.patchValue(this.editFormData.BeastName);
+      // }
+    } else if(!this.init) {
+      this.onReset();
+    }
+  }
+
+  getThumb(event:any) {
+    this.thumbFile = event;
+  }
+
+  getFull(event:any) {
+    this.fullFile = event;
+  }
+
+  processForm() {
+    //Incomplete Form
+     if((this.thumbFile === undefined ||
+      this.fullFile === undefined)
+      && this.Form.controls.Links.value === '') {
+       this.controller.activeFormData.next(["abort",
+       "Bestiary files require a card image and its thumbnail."]);
+       return ;
+    }
+    
+    //Complete Form
+    const Final:BeastMetaData = this.Form.value;
+    Final.ID = Final.Name.split(' ').join('');
+    
+    this.controller.activeFormData.next([Final,
+                                      [`Bestiary/${Final.ID}-thumb`,
+                                      `Bestiary/${Final.ID}-full`],
+                                      [this.thumbFile, this.fullFile],
+                                      Final.Links,
+                                      undefined,
+                                      undefined,
+                                      undefined]);
+  }
+  
+  onReset() {
+    this.Form = this.createForm();
+    this.thumbFile=undefined;
+    this.fullFile=undefined;
+    this.thumbValue.nativeElement.value='';
+    this.fullValue.nativeElement.value='';
+    this.controller.message.next('');
+  }
+
 }

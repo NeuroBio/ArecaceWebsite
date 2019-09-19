@@ -34,7 +34,7 @@ export class CRUDcontrollerService {
   constructor(private firebaseserv: FireBaseService,
               private crud: CRUD) { }
   
-  //Data fetchgin functions
+  //Data fetching functions
   assignItemType(itemType: string) {
     return this.itemType.next(itemType);
   }
@@ -80,8 +80,8 @@ export class CRUDcontrollerService {
     this.activeFormData.pipe(take(1)).subscribe(data =>{
   
       //submit button hit with invalid form.
-      if(data === "abort"){
-        this.message.next("An image is required.");
+      if(data[0] === "abort"){
+        this.message.next(data[1]);
         this.allowButtons.next(buttonState);
         return;
       }

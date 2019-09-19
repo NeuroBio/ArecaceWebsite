@@ -19,7 +19,6 @@ export class ButtonsComponent implements OnInit, OnDestroy {
   stream1: Subscription;
   stream2: Subscription;
   stream3: Subscription;
-  stream4: Subscription;
 
   constructor(private controller: CRUDcontrollerService) { }
 
@@ -30,21 +29,16 @@ export class ButtonsComponent implements OnInit, OnDestroy {
       this.allowDelete = array.delete;
       this.allowUpdateAll = array.updateAll;
     })
-    // this.stream1 = this.controller.allowUpdateAll.subscribe(bool => this.allowUpdateAll = bool);
-    // this.stream2 = this.controller.allowDelete.subscribe(bool => this.allowDelete = bool);
-    // this.controller.allowSubmit.subscribe(bool => this.allowSubmit = bool);
-    // this.controller.allowReset.subscribe(bool => this.allowReset = bool);
-    this.stream3 = this.controller.itemToEdit.subscribe(data => {
+    this.stream2 = this.controller.itemToEdit.subscribe(data => {
       this.action = data === undefined ? "Submit" : "Edit"
     });
-    this.stream4 = this.controller.message.subscribe(string => this.message = string);
+    this.stream3 = this.controller.message.subscribe(string => this.message = string);
   }
 
   ngOnDestroy() {
     this.stream1.unsubscribe();
     this.stream2.unsubscribe();
     this.stream3.unsubscribe();
-    // this.stream4.unsubscribe();
   }
 
   onSubmit() {
