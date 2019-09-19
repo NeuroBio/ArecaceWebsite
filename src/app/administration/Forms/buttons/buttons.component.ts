@@ -38,10 +38,10 @@ export class ButtonsComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
-    if (this.action = "Submit") {
+    if (this.action === "Submit") {
       this.controller.onSubmit();
     } else {
-
+      this.controller.onEdit();
     }
   }
 

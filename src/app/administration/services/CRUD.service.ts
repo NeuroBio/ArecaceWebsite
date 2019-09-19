@@ -24,7 +24,7 @@ export class CRUD {
   
       })).then(() => {return links }) //return all links  
     }else{
-      return Promise.resolve([undefined])
+      return Promise.resolve([]);
     }
   }
 

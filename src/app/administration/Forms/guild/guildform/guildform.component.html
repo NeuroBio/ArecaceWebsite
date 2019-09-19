@@ -2,30 +2,27 @@
 
   <form [formGroup]="guildForm">
     <h2 class="formstyle">Guild Upload Form:</h2>
-    <hr><br/>
+    <hr>
     
-    Name: <input formControlName="GuildName" type="text"><br/><br/>
+    <p>Name: <input formControlName="GuildName" type="text"></p>
 
-    Guildmaster: <input formControlName="Master" type="text"><br/><br/>
+    <p>Guildmaster: <input formControlName="Master" type="text"></p>
 
-    Founded: <input class="short" formControlName="Founded" type="number"><br/><br/>
+    <p>Founded: <input class="short" formControlName="Founded" type="number"></p>
 
-    Host Territory: <input class="long" formControlName="Host" type="text"><br/><br/>
+    <p>Host Territory: <input class="long" formControlName="Host" type="text"></p>
 
-    Description:<br/> <textarea formControlName="Description" rows="15" cols="66"></textarea><br/><br/>
+    <p>Description:<br>
+      <textarea formControlName="Description" rows="15" cols="66"></textarea></p>
 
-    History:<br/> <textarea formControlName="History" rows="15" cols="66"></textarea><br/><br/>
+    <p>History:<br>
+      <textarea formControlName="History" rows="15" cols="66"></textarea></p>
 
-    Insignia: <input type="file" #insig (change)="onFile($event)"><br/><br/>
+    <p>Insignia: <input type="file" #insig (change)="onFile($event)"></p>
 
-    Alt Text:<br/>
-    <textarea formControlName="AltText" rows="4" cols="66"></textarea><br/><br/>
+    <p>Alt Text:<br>
+      <textarea formControlName="AltText" rows="4" cols="66"></textarea></p>
+
+    <app-formButtons></app-formButtons>
   </form>
-  
-  <!-- <button type="button" (click)="onDelete()" [disabled]="(editGuild === undefined || !allowDelete)">Delete</button>
-      <button type="button" (click)="updateAll()" [disabled]="(editGuild === undefined || !allowEditAll)">Update All</button>
-  <button type="button" (click)="onReset()">Reset</button>
-  <button type="button" (click)="onSubmit()">{{ action }}</button>
-  {{ message }} -->
-  <app-formButtons></app-formButtons>
 </div>

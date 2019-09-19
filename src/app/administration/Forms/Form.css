@@ -1,51 +1,60 @@
 /*Form styling*/
-div.formstyle{
+div.formstyle {
     margin:3px;
     padding:4px;
     width: 740px;
     overflow: auto;
     border: 1px solid white;
   }
-  h2.formstyle{
+
+  h2.formstyle {
     padding: 5px;
     margin: 0px;
   }
 
-  input.fileupload{
+  input.fileupload {
     width: 500px;
   }
 
-  textarea{
+  textarea {
     font-size: 18px;
     font-family: 'Courier New', Courier, monospace;
   }
 
-  option{
+  option {
     font-size: 18px;  
   }
-  input{
+  
+  input {
     font-size: 18px;
   }
-  input.short{
+  
+  input.short {
     width:50px;
     text-align: center;
   }
-  input.medium{
+  
+  input.medium {
     width: 130px;
   }
-  input.long{
+
+  input.long {
     width:600px;
   }
   
-  input.fileupload{
+  input.fileupload {
     width:500px;
   }
   
-  input[type="checkbox"]{
-    width: 25px; /*Desired width*/
-    height: 25px; /*Desired height*/
+  input[type="checkbox"] {
+    width: 25px;
+    height: 25px;
   }
 
-  button[type="button"]{
+  button[type="button"] {
     float:right;
+  }
+
+  app-formButtons {
+    padding-bottom: 10px;
   }

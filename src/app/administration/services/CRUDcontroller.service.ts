@@ -30,26 +30,26 @@ export class CRUDcontrollerService {
   constructor(private firebaseserv: FireBaseService,
               private crud: CRUD) { }
   
-  assignItemType (itemType: string) {
+  assignItemType(itemType: string) {
     return this.itemType.next(itemType);
   }
 
-  getItemType () {
+  getItemType() {
     return this.itemType;
   }
 
-  getEditableCollection (path: string): Observable<any[]>{
+  getEditableCollection(path: string): Observable<any[]>{
       return this.firebaseserv.returnCollectionWithKeys(path).pipe(
         map(collect =>
           collect.sort((a,b) => a.ID > b.ID ? 1:-1)
     ));
   }
 
-  assignEditItem (item: any) {
+  assignEditItem(item: any) {
     return this.itemToEdit.next(item);
   }
   
-  quickAssign (Form: FormGroup, edit: any): FormGroup{
+  quickAssign(Form: FormGroup, edit: any): FormGroup{
     Object.keys(Form.controls).forEach(key =>{
       if(typeof(Form.controls[key].value) !== "object"){
         if(edit[key] !== undefined){
@@ -66,13 +66,17 @@ export class CRUDcontrollerService {
 
 
   //Key upload/download functions
-  onSubmit(){
+  onSubmit(): void {
     this.message.next("Processing...");
     this.triggerProcess.next();
-
     this.activeFormData.pipe(take(1)).subscribe(data =>{
+      
+      //submit button hit with invalid form.
+      if(data === "abort"){
+        return;
+      }
+
       this.message.next("Submitting...");
-      //data array is: form data[0], images[1], then paths[2]
       const meta = data[0];
       this.crud.uploadImages(data[2], data[1])
       .then( links => {
@@ -85,17 +89,19 @@ export class CRUDcontrollerService {
     });
   }
 
-  onEdit(){
+  onEdit(): void {
     this.message.next("Processing...");
     this.triggerProcess.next();
 
     this.activeFormData.pipe(take(1)).subscribe(data =>{
-      this.message.next("Submitting...");
+      this.message.next("Editing...");
       const meta = data[0];
       this.crud.editImages(data[2], data[1], data[3])
       .then( links => {
         meta.Links = links;
-        return this.crud.uploadItem(meta, this.fileHierarchy[this.itemType.value].Path);
+        return this.crud.editItem(meta,
+          this.fileHierarchy[this.itemType.value].Path,
+          this.itemToEdit.value.key);
       }).then(() =>{
         this.itemToEdit.next(undefined);
         this.message.next("Submitted!");
@@ -103,24 +109,25 @@ export class CRUDcontrollerService {
     });
   }
 
-  onDelete(){
+  onDelete(): void {
     this.message.next('Hold on, deleting...');
     this.crud.deleteItem(this.itemToEdit.value.Links,
       this.fileHierarchy[this.itemType.value].Path,
       this.itemToEdit.value.key)
-    .then(() =>
+    .then( () => {
+        this.itemToEdit.next(undefined);
         this.message.next('Delete successful!')
-    );
+    });
   }
 
-  onUpdateAll() {
+  onUpdateAll(): void {
     this.getEditableCollection(this.fileHierarchy[this.itemType.value].Path)
-    .subscribe(collect =>{
-        collect.forEach(member => {
-        this.itemToEdit = member;
-        this.onSubmit();
+    .pipe(take(1)).subscribe( collect =>{
+        collect.forEach( (member, i) => {
+        this.itemToEdit.next(member);
+        return this.onEdit();
       });
-    })
+    });
   }
 
 }
