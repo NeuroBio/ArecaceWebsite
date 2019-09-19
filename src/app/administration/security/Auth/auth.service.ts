@@ -49,10 +49,7 @@ export class AuthService {
       ID: user.ID,
       roles:user.roles
     }
-
     return data
-
-
   }
 
   logout() {
