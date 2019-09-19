@@ -24,7 +24,8 @@ export class CRUDcontrollerService {
 
   itemType = new BehaviorSubject<string>('');
   itemToEdit = new BehaviorSubject<any>(undefined);
-  //activeFormData is: form data[0], new images[1], new paths[2], old paths[3]
+  //activeFormData is: form data[0], new image paths[1], new images[2],
+  //old image paths[3], text path[4], new text[5], old  text path [6] 
   activeFormData = new BehaviorSubject<any>(undefined);
   message = new BehaviorSubject<string>(undefined);
 
@@ -84,12 +85,18 @@ export class CRUDcontrollerService {
         this.allowButtons.next(buttonState);
         return;
       }
-
       this.message.next("Submitting...");
       const meta = data[0];
-      this.crud.uploadImages(data[2], data[1])
+      this.crud.uploadImages(data[1], data[2])
       .then(links => {
-        meta.Links = links;
+        if("Links" in meta){
+          meta.Links = links;
+        }
+        return this.crud.uploadStory(data[3], data[4])       
+      }).then(link =>{
+        if("StoryLink" in meta){
+          meta.StorkLink = link;
+        }
         return this.crud.uploadItem(meta, this.fileHierarchy[this.itemType.value].Path);
       }).then(() => {
         this.itemToEdit.next(undefined);
@@ -105,6 +112,7 @@ export class CRUDcontrollerService {
     const buttonState = this.allowButtons.value;
     this.allowButtons.next(new ButtonController([false, false, false, false]));
     let meta: any;
+    let story: any[];
 
     this.message.next("Processing...");
     this.triggerProcess.next();
@@ -113,9 +121,17 @@ export class CRUDcontrollerService {
     .then(data => {
       this.message.next("Editing...");
       meta = data[0];
-      return this.crud.editImages(data[2], data[1], data[3])
+      story = [data[4], data[5], data[6]]
+      return this.crud.editImages(data[1], data[2], data[3])
     }).then(links => {
-      meta.Links = links;
+      if("Links" in meta){
+        meta.Links = links;
+      }
+      return this.crud.editStory(story[0], story[1], story[2])       
+    }).then(link =>{
+      if("StoryLink" in meta){
+        meta.StorkLink = link;
+      }
       return this.crud.editItem(meta,
               this.fileHierarchy[this.itemType.value].Path,
               this.itemToEdit.value.key);
@@ -133,9 +149,16 @@ export class CRUDcontrollerService {
     const buttonState = this.allowButtons.value;
     this.allowButtons.next(new ButtonController([false, false, false, false]));
     this.message.next('Hold on, deleting...');
-    this.crud.deleteItem(this.itemToEdit.value.Links,
-      this.fileHierarchy[this.itemType.value].Path,
-      this.itemToEdit.value.key)
+    const item = this.itemToEdit.value
+    
+    const links = [];
+    if("Links" in item){
+      item.Links.forEach(link => links.push(link));
+    }
+    if("StoryLink" in item){
+      links.push(item.StoryLink);
+    }
+    this.crud.deleteItem(links, this.fileHierarchy[this.itemType.value].Path, item.key)
     .then(() => {
         this.itemToEdit.next(undefined);
         this.message.next('Delete successful!')

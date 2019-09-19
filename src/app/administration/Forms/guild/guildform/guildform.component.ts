@@ -64,22 +64,25 @@ export class GuildFormComponent implements OnInit, OnDestroy {
 
   processForm() {
     //Incomplete Form
-    if(this.insigniaFile === undefined &&
-        this.guildForm.controls.Links.value === '') {
-      this.editserv.activeFormData.next("abort");
-      return ;
-    }
+    // if(this.insigniaFile === undefined &&
+    //     this.guildForm.controls.Links.value === '') {
+    //   this.editserv.activeFormData.next("abort");
+    //   return ;
+    // }
     
     //Complete Form
-    const newGuild:GuildMetaData = this.guildForm.value;
-    newGuild.ID = newGuild.GuildName.split(' ')[0];
-    if(newGuild.ID === 'The'){
-      newGuild.ID = 'DIA'
+    const Guild:GuildMetaData = this.guildForm.value;
+    Guild.ID = Guild.GuildName.split(' ')[0];
+    if(Guild.ID === 'The'){
+      Guild.ID = 'DIA'
     }
-    this.editserv.activeFormData.next([newGuild,
+    this.editserv.activeFormData.next([Guild,
+                                      [`GuildInsig/${Guild.ID}`],
                                       [this.insigniaFile],
-                                      [`GuildInsig/${newGuild.ID}`],
-                                      newGuild.Links]);
+                                      Guild.Links,
+                                      undefined,
+                                      undefined,
+                                      undefined]);
   }
 
   onFile(event:any) {

@@ -12,7 +12,7 @@ export class CRUD {
   constructor(private firebaseserv:FireBaseService,
               private httpclient:HttpClient) { }
 
-  uploadImages(paths:string[], images:any[]){
+  uploadImages(paths: string[], images: any[]) {
     if(images[0]){
       let links = new Array<string>(paths.length);
       return Promise.all(images.map((event,index) => {//upload each image
@@ -31,7 +31,7 @@ export class CRUD {
     }
   }
 
-  editImages(paths:string[], newImages:any[], oldImages:any[]){
+  editImages(paths: string[], newImages: any[], oldImages: any[]) {
     let links = new Array<string>(paths.length);
     return Promise.all(newImages.map((event,index) => {
       
@@ -51,16 +51,48 @@ export class CRUD {
     });
   }
 
-  private removeOldImage(link:string){
+  private removeOldImage(link:string) {
     console.log(link)
-    if(link){
+    if(link) {
       return this.firebaseserv.deleteImage(link);
-    }else{
+    } else {
       return Promise.resolve(undefined)
     }
   }
 
-  uploadItem(newDoc:any, path:string){
+  uploadStory(text: Blob, path: string) {
+    if(text) {
+      return this.firebaseserv.uploadBlob(path, text)//upload the text
+      .then(() => { return this.firebaseserv.returnImage(path).toPromise() }//get the downloadlink
+      ).catch(err => {
+        err.Stage = "Upload Story"
+        return(Promise.reject(err))
+      });
+    } else {
+      return Promise.resolve('');
+    }
+  }
+
+  editStory(path: string, newText: Blob,  oldText: string) {
+    if(!newText) {//change nothing!
+      return oldText;
+    } else {
+      return this.firebaseserv.deleteImage(oldText) //delete old text
+      .then(() => { return this.firebaseserv.uploadBlob(path, newText) //upload new text
+      }).then(() =>  { return this.firebaseserv.returnImage(path).toPromise() //get link
+      }).catch(err => {
+        err.Stage = "Edit Story"
+        return(Promise.reject(err))
+      });
+    }
+  }
+
+  getText(link:string): Observable<string> {
+    return this.httpclient.get(link, {responseType: 'text'});
+  }
+
+
+  uploadItem(newDoc:any, path:string) {
     return this.firebaseserv.uploadDocument(newDoc, path)
     .catch(err => {
       err.stage = "Upload Item";
@@ -68,7 +100,7 @@ export class CRUD {
     });;
   }
 
-  editItem(editDoc:any, path:string, docKey:string){
+  editItem(editDoc:any, path:string, docKey:string) {
       return this.firebaseserv.editDocument(editDoc, path, docKey)
       .catch(err => {
         err.stage = "Edit Item";
@@ -87,6 +119,11 @@ export class CRUD {
       return Promise.reject(err);
     });
   }
+
+
+
+
+
 
 
   uploadWriting(newStory:any, path:string, text:Blob, blobPath:string, seriesData:any){
@@ -141,8 +178,4 @@ export class CRUD {
     }
   }
 
-
-  getText(link:string): Observable<string>{
-    return this.httpclient.get(link, {responseType: 'text'});
-  }
 }
