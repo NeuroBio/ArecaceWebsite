@@ -2,7 +2,7 @@ import { Injectable }                   from '@angular/core';
 import { FormGroup }                    from '@angular/forms';
 
 import { map, take, tap }                          from 'rxjs/operators';
-import { BehaviorSubject, Observable, Subject }  from 'rxjs';
+import { BehaviorSubject, Observable, Subject, of }  from 'rxjs';
 
 import { FireBaseService }              from 'src/app/GlobalServices/firebase.service';
 import { FileHierarchy } from 'src/app/Classes/filehierarchy';
@@ -16,8 +16,11 @@ export class CRUDcontrollerService {
 
   fileHierarchy = new FileHierarchy;
 
-  allowDelete = new BehaviorSubject<boolean>(false);
-  allowEditAll = new BehaviorSubject<boolean>(false);
+  allowButtons = new BehaviorSubject<ButtonController>(new ButtonController([true, true, false, false]))
+  // allowDelete = new BehaviorSubject<boolean>(false);
+  // allowUpdateAll = new BehaviorSubject<boolean>(false);
+  // allowReset = new BehaviorSubject<boolean>(false);
+  // allowSubmit = new BehaviorSubject<boolean>(false);
 
   itemType = new BehaviorSubject<string>('');
   itemToEdit = new BehaviorSubject<any>(undefined);
@@ -30,6 +33,7 @@ export class CRUDcontrollerService {
   constructor(private firebaseserv: FireBaseService,
               private crud: CRUD) { }
   
+  //Data fetchgin functions
   assignItemType(itemType: string) {
     return this.itemType.next(itemType);
   }
@@ -66,68 +70,125 @@ export class CRUDcontrollerService {
 
 
   //Key upload/download functions
-  onSubmit(): void {
+  onSubmit() {
+    const buttonState = this.allowButtons.value;
+    this.allowButtons.next(new ButtonController([false, false, false, false]));
+
     this.message.next("Processing...");
     this.triggerProcess.next();
     this.activeFormData.pipe(take(1)).subscribe(data =>{
-      
+  
       //submit button hit with invalid form.
       if(data === "abort"){
+        this.message.next("An image is required.");
+        this.allowButtons.next(buttonState);
         return;
       }
 
       this.message.next("Submitting...");
       const meta = data[0];
       this.crud.uploadImages(data[2], data[1])
-      .then( links => {
+      .then(links => {
         meta.Links = links;
         return this.crud.uploadItem(meta, this.fileHierarchy[this.itemType.value].Path);
-      }).then( () => {
+      }).then(() => {
         this.itemToEdit.next(undefined);
         this.message.next("Submitted!");
+        this.allowButtons.next(buttonState);
+      }).catch(err => {
+        this.throwError(err, buttonState);
       });
     });
   }
 
-  onEdit(): void {
+  async onEdit(): Promise<any>{
+    const buttonState = this.allowButtons.value;
+    this.allowButtons.next(new ButtonController([false, false, false, false]));
+    let meta: any;
+
     this.message.next("Processing...");
     this.triggerProcess.next();
 
-    this.activeFormData.pipe(take(1)).subscribe(data =>{
+    return this.activeFormData.pipe(take(1)).toPromise()
+    .then(data => {
       this.message.next("Editing...");
-      const meta = data[0];
-      this.crud.editImages(data[2], data[1], data[3])
-      .then( links => {
-        meta.Links = links;
-        return this.crud.editItem(meta,
-          this.fileHierarchy[this.itemType.value].Path,
-          this.itemToEdit.value.key);
-      }).then(() =>{
-        this.itemToEdit.next(undefined);
-        this.message.next("Submitted!");
-      });
+      meta = data[0];
+      return this.crud.editImages(data[2], data[1], data[3])
+    }).then(links => {
+      meta.Links = links;
+      return this.crud.editItem(meta,
+              this.fileHierarchy[this.itemType.value].Path,
+              this.itemToEdit.value.key);
+    }).then(() =>{
+      this.itemToEdit.next(undefined);
+      this.message.next("Edit successful!");
+      this.allowButtons.next(buttonState);
+    }).catch(err => {
+      this.throwError(err, buttonState);
+      return Promise.reject();
     });
   }
 
-  onDelete(): void {
+  onDelete() {
+    const buttonState = this.allowButtons.value;
+    this.allowButtons.next(new ButtonController([false, false, false, false]));
     this.message.next('Hold on, deleting...');
     this.crud.deleteItem(this.itemToEdit.value.Links,
       this.fileHierarchy[this.itemType.value].Path,
       this.itemToEdit.value.key)
-    .then( () => {
+    .then(() => {
         this.itemToEdit.next(undefined);
         this.message.next('Delete successful!')
+        this.allowButtons.next(buttonState);
+    }).catch(err => {
+        this.throwError(err, buttonState);
     });
   }
 
-  onUpdateAll(): void {
+  onUpdateAll() {
+    const buttonState = this.allowButtons.value;
+    this.allowButtons.next(new ButtonController([false, false, false, false]));
+
     this.getEditableCollection(this.fileHierarchy[this.itemType.value].Path)
     .pipe(take(1)).subscribe( collect =>{
-        collect.forEach( (member, i) => {
-        this.itemToEdit.next(member);
-        return this.onEdit();
-      });
+      return this.updateLoop(collect).then(() => {      
+      this.message.next("All entries updated!");
+      this.allowButtons.next(buttonState);
+      }).catch(() => this.allowButtons.next(buttonState));
     });
   }
 
+  async updateLoop(collect: any[]) {
+    for (const member of collect){
+      this.itemToEdit.next(member);
+      await this.onEdit().catch(() => Promise.reject());
+    }
+  }
+
+  throwError(err: any, button: ButtonController) {
+    this.message.next(`Execution Failed
+                      Stage: ${err.stage}
+                      Error: ${err.message}`);
+    this.allowButtons.next(button);
+  }
+
+  updateButton(which: string, to: boolean){
+    const buttonState = this.allowButtons.value;
+    buttonState[which] = to;
+    this.allowButtons.next(buttonState);
+  }
+
+}
+
+export class ButtonController {
+  submit: boolean;
+  reset: boolean;
+  delete: boolean;
+  updateAll: boolean;
+  constructor(bool: boolean[]){
+    this.submit = bool[0];
+    this.reset = bool[1];
+    this.delete = bool[2];
+    this.updateAll = bool[3];
+  }
 }

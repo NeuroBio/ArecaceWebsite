@@ -14,7 +14,7 @@
       <textarea formControlName="AltText" rows="4" cols="66"></textarea><br/><br/>
 
         <button type="button" (click)="onDelete()" [disabled]="(editUpdate === undefined || !allowDelete)">Delete</button>
-        <button type="button" (click)="updateAll()" [disabled]="(editUpdate === undefined || !allowEditAll)">Update All</button>
+        <button type="button" (click)="updateAll()" [disabled]="(editUpdate === undefined || !allowUpdateAll)">Update All</button>
         <button type="button" (click)="onReset()">Reset</button>
         <button type="button" (click)="onSubmit()">{{action}}</button>
     </form>

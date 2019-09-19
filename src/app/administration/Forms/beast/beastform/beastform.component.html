@@ -30,7 +30,7 @@
       <textarea formControlName="AltText" rows="4" cols="66"></textarea><br/><br/>
 
       <button type="button" (click)="onDelete()" [disabled]="(editBeast === undefined || !allowDelete)">Delete</button>
-      <button type="button" (click)="updateAll()" [disabled]="(editBeast === undefined || !allowEditAll)">Update All</button>
+      <button type="button" (click)="updateAll()" [disabled]="(editBeast === undefined || !allowUpdateAll)">Update All</button>
       <button type="button" (click)="onReset()">Reset</button>
       <button type="button" (click)="onSubmit()">{{action}}</button>
 

@@ -13,7 +13,7 @@
         Description:<br/> <textarea formControlName="Description" rows="15" cols="66"></textarea><br/><br/>
 
         <button type="button" (click)="onDelete()" [disabled]="(editMisc === undefined || !allowDelete)">Delete</button>
-      <button type="button" (click)="updateAll()" [disabled]="(editMisc === undefined || !allowEditAll)">Update All</button>
+      <button type="button" (click)="updateAll()" [disabled]="(editMisc === undefined || !allowUpdateAll)">Update All</button>
         <button type="button" (click)="onReset()">Reset</button>
         <button type="button" (click)="onSubmit()">{{action}}</button>
 

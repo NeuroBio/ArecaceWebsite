@@ -55,8 +55,8 @@ export class GuildFormComponent implements OnInit, OnDestroy {
 
   assignFormData() {
     if(this.editFormData){
+      this.onReset();
       this.guildForm = this.editserv.quickAssign(this.guildForm, this.editFormData);
-      this.resetFile();
     }else if(!this.init){
       this.onReset();
     }
@@ -66,9 +66,8 @@ export class GuildFormComponent implements OnInit, OnDestroy {
     //Incomplete Form
     if(this.insigniaFile === undefined &&
         this.guildForm.controls.Links.value === '') {
-      this.editserv.message.next("An image is required.");
       this.editserv.activeFormData.next("abort");
-      return
+      return ;
     }
     
     //Complete Form

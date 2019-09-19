@@ -30,7 +30,7 @@
     
     
     <button type="button" (click)="onDelete()" [disabled]="(editChapter === undefined || !allowDelete)">Delete</button>
-      <button type="button" (click)="updateAll()" [disabled]="(editChapter === undefined || !allowEditAll)">Update All</button>
+      <button type="button" (click)="updateAll()" [disabled]="(editChapter === undefined || !allowUpdateAll)">Update All</button>
     <button type="button" (click)="onReset()">Reset</button>
     <button type="button" (click)="onSubmit()">{{ action }}</button>
 </form>

@@ -1,28 +1,25 @@
-<div class="formstyle">
+<form [formGroup]="guildForm">
+  <h2 class="formstyle">Guild Upload Form:</h2>
+  <hr>
+  
+  <p>Name: <input formControlName="GuildName" type="text"></p>
 
-  <form [formGroup]="guildForm">
-    <h2 class="formstyle">Guild Upload Form:</h2>
-    <hr>
-    
-    <p>Name: <input formControlName="GuildName" type="text"></p>
+  <p>Guildmaster: <input formControlName="Master" type="text"></p>
 
-    <p>Guildmaster: <input formControlName="Master" type="text"></p>
+  <p>Founded: <input class="short" formControlName="Founded" type="number"></p>
 
-    <p>Founded: <input class="short" formControlName="Founded" type="number"></p>
+  <p>Host Territory: <input class="long" formControlName="Host" type="text"></p>
 
-    <p>Host Territory: <input class="long" formControlName="Host" type="text"></p>
+  <p>Description:<br>
+    <textarea formControlName="Description" rows="15" cols="66"></textarea></p>
 
-    <p>Description:<br>
-      <textarea formControlName="Description" rows="15" cols="66"></textarea></p>
+  <p>History:<br>
+    <textarea formControlName="History" rows="15" cols="66"></textarea></p>
 
-    <p>History:<br>
-      <textarea formControlName="History" rows="15" cols="66"></textarea></p>
+  <p>Insignia: <input type="file" #insig (change)="onFile($event)"></p>
 
-    <p>Insignia: <input type="file" #insig (change)="onFile($event)"></p>
+  <p>Alt Text:<br>
+    <textarea formControlName="AltText" rows="4" cols="66"></textarea></p>
 
-    <p>Alt Text:<br>
-      <textarea formControlName="AltText" rows="4" cols="66"></textarea></p>
-
-    <app-formButtons></app-formButtons>
-  </form>
-</div>
+  <app-formButtons></app-formButtons>
+</form>

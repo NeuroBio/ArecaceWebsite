@@ -185,7 +185,7 @@
 
 
         <button type="button" (click)="onDelete()" [disabled]="(editChara === undefined || !allowDelete)">Delete</button>
-      <button type="button" (click)="updateAll()" [disabled]="(editChara === undefined || !allowEditAll)">Update All</button>
+      <button type="button" (click)="updateAll()" [disabled]="(editChara === undefined || !allowUpdateAll)">Update All</button>
         <button type="button" (click)="onReset()" style="float:right;">Reset</button>
         <button type="button" (click)="onSubmit()" style="float:right;">{{ action }}</button>
         <br><br>

@@ -28,14 +28,14 @@ export class ContentComponent implements OnInit {
 
   onAllow(type:number){
     if (type===0){
-      this.editserv.allowDelete.next(false);
-      this.editserv.allowEditAll.next(false);
+      this.editserv.updateButton('delete', false);
+      this.editserv.updateButton('updateAll', false);
     }else if(type===1){
-      this.editserv.allowDelete.next(true);
-      this.editserv.allowEditAll.next(false);
+      this.editserv.updateButton('delete', true);
+      this.editserv.updateButton('updateAll', false);
     }else{
-      this.editserv.allowDelete.next(false);
-      this.editserv.allowEditAll.next(true);
+      this.editserv.updateButton('delete', false);
+      this.editserv.updateButton('updateAll', true);
     }
   }
   

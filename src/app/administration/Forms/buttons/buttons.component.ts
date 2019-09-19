@@ -9,8 +9,10 @@ import { Subscription } from 'rxjs';
 })
 export class ButtonsComponent implements OnInit, OnDestroy {
 
-  allowEditAll: boolean;
+  allowUpdateAll: boolean;
   allowDelete: boolean;
+  allowSubmit: boolean;
+  allowReset: boolean;
   message: string;
   action: string;
 
@@ -22,8 +24,16 @@ export class ButtonsComponent implements OnInit, OnDestroy {
   constructor(private controller: CRUDcontrollerService) { }
 
   ngOnInit() {
-    this.stream1 = this.controller.allowEditAll.subscribe(bool => this.allowEditAll = bool);
-    this.stream2 = this.controller.allowDelete.subscribe(bool => this.allowDelete = bool);
+    this.stream1 = this.controller.allowButtons.subscribe(array =>{
+      this.allowSubmit = array.submit;
+      this.allowReset = array.reset;
+      this.allowDelete = array.delete;
+      this.allowUpdateAll = array.updateAll;
+    })
+    // this.stream1 = this.controller.allowUpdateAll.subscribe(bool => this.allowUpdateAll = bool);
+    // this.stream2 = this.controller.allowDelete.subscribe(bool => this.allowDelete = bool);
+    // this.controller.allowSubmit.subscribe(bool => this.allowSubmit = bool);
+    // this.controller.allowReset.subscribe(bool => this.allowReset = bool);
     this.stream3 = this.controller.itemToEdit.subscribe(data => {
       this.action = data === undefined ? "Submit" : "Edit"
     });

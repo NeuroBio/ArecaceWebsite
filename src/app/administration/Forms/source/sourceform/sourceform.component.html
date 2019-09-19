@@ -19,7 +19,7 @@
         <textarea formControlName="FullText" rows="20" cols="66"></textarea><br/><br/>
 
         <button type="button" (click)="onDelete()" [disabled]="(editSource === undefined || !allowDelete)">Delete</button>
-        <button type="button" (click)="updateAll()" [disabled]="(editSource === undefined || !allowEditAll)">Update All</button>
+        <button type="button" (click)="updateAll()" [disabled]="(editSource === undefined || !allowUpdateAll)">Update All</button>
         <button type="button" (click)="onReset()">Reset</button>
         <button type="button" (click)="onSubmit()">{{action}}</button>
         {{message}}

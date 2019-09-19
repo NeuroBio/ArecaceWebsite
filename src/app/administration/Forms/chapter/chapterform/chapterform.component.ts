@@ -25,7 +25,7 @@ export class ChapterFormComponent implements OnInit, OnDestroy{
   stream2: Subscription;
   stream3: Subscription;
   allowDelete: boolean;
-  allowEditAll: boolean;
+  allowUpdateAll: boolean;
 
   init:boolean=true;
   @ViewChild('form') form:ElementRef;
@@ -41,14 +41,14 @@ export class ChapterFormComponent implements OnInit, OnDestroy{
       this.assignEdit();
       this.init = false
     })
-    this.stream2 = this.editserv.allowDelete.subscribe(bool => this.allowDelete = bool);
-    this.stream3 = this.editserv.allowEditAll.subscribe(bool => this.allowEditAll = bool);
+    // this.stream2 = this.editserv.allowDelete.subscribe(bool => this.allowDelete = bool);
+    // this.stream3 = this.editserv.allowUpdateAll.subscribe(bool => this.allowUpdateAll = bool);
   }
 
   ngOnDestroy(){
     this.stream.unsubscribe()
-    this.stream2.unsubscribe()
-    this.stream3.unsubscribe()
+    // this.stream2.unsubscribe()
+    // this.stream3.unsubscribe()
   }
 
   assignEdit(){

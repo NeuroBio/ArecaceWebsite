@@ -1,8 +1,6 @@
 import { Injectable }                         from '@angular/core';
 import { HttpClient }                         from '@angular/common/http';
-
 import { Observable }                         from 'rxjs';
-
 import { FireBaseService }                    from 'src/app/GlobalServices/firebase.service';
 
 @Injectable({
@@ -19,10 +17,15 @@ export class CRUD {
       let links = new Array<string>(paths.length);
       return Promise.all(images.map((event,index) => {//upload each image
         return this.firebaseserv.uploadImage(paths[index], event)
-        .then(() => {return this.firebaseserv.returnImage(paths[index]).toPromise()})//return download link
-        .then(url => {links[index]=url})
-  
-      })).then(() => {return links }) //return all links  
+        .then(() => {
+          return this.firebaseserv.returnImage(paths[index]).toPromise() //return download link
+        }).then(url => { links[index]=url } )
+      })
+      ).then(() => { return links }) //return all links
+      .catch(err => {
+        err.stage = "Upload Images";
+        return Promise.reject(err);
+      });   
     }else{
       return Promise.resolve([]);
     }
@@ -37,14 +40,19 @@ export class CRUD {
 
       }else{//Delete old image and upload new image
         return this.removeOldImage(oldImages[index])//this.firebaseserv.deleteImage(oldImages[index]) //delete old image
-        .then(() => {return this.firebaseserv.uploadImage(paths[index], event)})//upload new image
-        .then(() => {return this.firebaseserv.returnImage(paths[index]).toPromise()})//return download link
-        .then(url => {links[index]=url})
+        .then(() => { return this.firebaseserv.uploadImage(paths[index], event) })//upload new image
+        .then(() => { return this.firebaseserv.returnImage(paths[index]).toPromise() })//return download link
+        .then(url => { links[index]=url} )
       }
-    })).then(() => {return(links)}) //return all links
+    })).then(() => { return(links) })
+    .catch(err => {
+      err.stage = "Edit Images";
+      return Promise.reject(err);
+    });
   }
 
   private removeOldImage(link:string){
+    console.log(link)
     if(link){
       return this.firebaseserv.deleteImage(link);
     }else{
@@ -53,11 +61,19 @@ export class CRUD {
   }
 
   uploadItem(newDoc:any, path:string){
-    return this.firebaseserv.uploadDocument(newDoc, path);
+    return this.firebaseserv.uploadDocument(newDoc, path)
+    .catch(err => {
+      err.stage = "Upload Item";
+      return Promise.reject(err);
+    });;
   }
 
   editItem(editDoc:any, path:string, docKey:string){
-      return this.firebaseserv.editDocument(editDoc, path, docKey);
+      return this.firebaseserv.editDocument(editDoc, path, docKey)
+      .catch(err => {
+        err.stage = "Edit Item";
+        return Promise.reject(err);
+      });;
   }
 
   //removed string[] = []
@@ -66,7 +82,10 @@ export class CRUD {
       return this.firebaseserv.deleteImage(pic)
     })).then(()=>
       this.firebaseserv.deleteDocument(docPath, docKey)
-    )
+    ).catch(err => {
+      err.stage = "Delete Item and Images";
+      return Promise.reject(err);
+    });
   }
 
 
@@ -75,7 +94,10 @@ export class CRUD {
     .then(link=> {
       newStory.StoryLink = link;
       this.firebaseserv.uploadDocument(newStory, `${path}/${seriesData.ID}/${seriesData.ID}`)
-    })
+    }).catch(err => {
+      err.stage = "Upload Writing";
+      return Promise.reject(err);
+    });
   }
 
   private uploadBlob(text:Blob, blobPath:string, path:string, seriesData:any){
@@ -92,7 +114,10 @@ export class CRUD {
     }).then(link=> {
       editStory.StoryLink = link;
       this.firebaseserv.editDocument(editStory, `${newPath}/${newSeriesData.ID}/${newSeriesData.ID}`, oldStory.key);
-    })
+    }).catch(err => {
+      err.stage = "Edit Writing";
+      return Promise.reject(err);
+    });
   }
 
   private checkSeriesChange(editStory:any, oldStory:any, oldPath:string, newPath:string, newSeriesData:any){
@@ -118,6 +143,6 @@ export class CRUD {
 
 
   getText(link:string): Observable<string>{
-    return this.httpclient.get(link, {responseType: 'text'})
+    return this.httpclient.get(link, {responseType: 'text'});
   }
 }
