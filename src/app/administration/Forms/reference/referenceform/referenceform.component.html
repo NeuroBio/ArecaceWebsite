@@ -1,0 +1,21 @@
+<form [formGroup]="Form">
+    <h2 class="formstyle">{{type | titlecase}} Upload Form:</h2>
+    <hr>
+
+    <p>Category: <select formControlName="Category">
+        <option *ngFor="let cat of categories"
+        [value]="cat"> {{ cat }}</option>
+    </select></p>
+    
+    <p>Topic: <input type="text" formControlName="Topic"></p>
+    
+    <p>Image: <input #image type="file" class="fileupload" (change)="getImage($event)"></p>
+
+    <p>Image Caption:<br/>
+    <textarea formControlName="Caption" rows="4" cols="66"></textarea></p>
+    
+    <p>Full Text:<br/>
+    <textarea formControlName="FullText" rows="20" cols="66"></textarea></p>
+
+    <app-formButtons></app-formButtons>
+</form>

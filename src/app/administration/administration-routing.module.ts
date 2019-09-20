@@ -12,9 +12,9 @@ import { BeastFormComponent }       from './Forms/beast/beastform/beastform.comp
 import { ChapterFormComponent }     from './Forms/chapter/chapterform/chapterform.component'
 import { StoryFormComponent}        from './Forms/story/storyform/storyform.component';
 import { GuildFormComponent }       from './Forms/guild/guildform/guildform.component';
-import { SourceFormComponent }      from './Forms/source/sourceform/sourceform.component';
+import { ReferenceFormComponent }      from './Forms/reference/referenceform/referenceform.component';
 import { UpdateFormComponent }      from './Forms/Update/update-form/update-form.component'
-import { MiscFormComponent }        from './Forms/misc/miscform/miscform.component';
+import { ExtrasFormComponent }        from './Forms/extras/extrasform/extrasform.component';
 import { AdminDutiesComponent }        from './DashBoard/adminDuties/adminDuties.component';
 import { MessageComponent }         from './DashBoard/message/message.component';
 
@@ -38,11 +38,11 @@ const AdminRoutes: Routes = [
           {path: 'narratives', component: StoryFormComponent},
           {path: 'scripts', component: StoryFormComponent},
           {path: 'guilds', component: GuildFormComponent},
-          {path: 'source', component: SourceFormComponent},
+          {path: 'source', component: ReferenceFormComponent},
           {path: 'update', component: UpdateFormComponent},
-          {path: 'culture', component: SourceFormComponent},
-          {path: 'extras', component: MiscFormComponent},
-          {path: 'maps', component: SourceFormComponent},
+          {path: 'culture', component: ReferenceFormComponent},
+          {path: 'extras', component: ExtrasFormComponent},
+          {path: 'maps', component: ReferenceFormComponent},
         ]},
         {path:'Messages', component: MessageComponent,
           resolve: {MessageresolverService}}

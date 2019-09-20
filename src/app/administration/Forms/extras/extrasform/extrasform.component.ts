@@ -8,11 +8,11 @@ import { CRUDcontrollerService }        from '../../../services/CRUDcontroller.s
 import { ExtrasMetaData }               from 'src/app/Classes/extrasmetadata';
 
 @Component({
-  selector: 'app-miscform',
-  templateUrl: './miscform.component.html',
+  selector: 'app-extrasform',
+  templateUrl: './extrasform.component.html',
   styleUrls: ['../../Form.css']
 })
-export class MiscFormComponent implements OnInit, OnDestroy {
+export class ExtrasFormComponent implements OnInit, OnDestroy {
 
   Form = this.createForm();
   @ViewChild('Thumb') thumbUploader: ElementRef;

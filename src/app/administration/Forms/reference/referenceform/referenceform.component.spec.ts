@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SourceFormComponent } from './sourceform.component';
+import { ReferenceFormComponent } from './referenceform.component';
 
-describe('SourceFormComponent', () => {
-  let component: SourceFormComponent;
-  let fixture: ComponentFixture<SourceFormComponent>;
+describe('ReferenceFormComponent', () => {
+  let component: ReferenceFormComponent;
+  let fixture: ComponentFixture<ReferenceFormComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SourceFormComponent ]
+      declarations: [ ReferenceFormComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SourceFormComponent);
+    fixture = TestBed.createComponent(ReferenceFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
