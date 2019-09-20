@@ -6,4 +6,5 @@ export class PostData{
     Time: string;
     Links: string[];
     AltText: string;
+    Edited: boolean;
 }
