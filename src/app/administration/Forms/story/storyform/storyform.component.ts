@@ -79,6 +79,7 @@ export class StoryFormComponent implements OnInit, OnDestroy {
       `${Final.Type}/${Final.ID}`,
       newText,
       oldText]);
+      
 
       // return this.uploaderserv.uploadWriting(newStory, `${newStory.Type}s`, 
       //                                         newText,
