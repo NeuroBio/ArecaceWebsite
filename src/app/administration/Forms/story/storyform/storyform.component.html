@@ -1,28 +1,21 @@
-<div class="formstyle">
+<form [formGroup]="Form">
     <h2 class="formstyle">Story Upload Form:</h2>
-    <hr><br/>
-    
+    <hr>
 
-    <form [formGroup]="storyForm">
-        Type: <select formControlName="Type">
+        <p>Type: <select formControlName="Type">
             <option value="Narrative">Narrative</option>
             <option value="Script">Script</option>
-        </select><br/><br/>
+        </select></p>
         
-        Series: <input type="text" formControlName="Series"><br/><br/>
+    <p>Series: <input type="text" formControlName="Series"></p>
         
-        Title: <input type="text" formControlName="Title"><br/><br/>
+    <p>Title: <input type="text" formControlName="Title"></p>
         
-        Section: <input type="number" class="short" formControlName="Section"><br/><br/><br/>
+    <p>Section: <input type="number" class="short" formControlName="Section"></p>
         
-        Synopsis: <textarea rows="4" cols="66" formControlName="Synopsis"></textarea><br/><br/><br/>
+    <p>Synopsis: <textarea rows="4" cols="66" formControlName="Synopsis"></textarea></p>
         
-        Story: <textarea formControlName="Story" rows="30" cols="66"></textarea><br/><br/>
-    </form>
-    
-    <button type="button" (click)="onDelete()" [disabled]="(editStory === undefined || !allowDelete)">Delete</button>
-      <button type="button" (click)="updateAll()" [disabled]="(editStory === undefined || !allowUpdateAll)">Update All</button>
-    <button type="button" (click)="onReset()">Reset</button>
-    <button type="button" (click)="onSubmit()">{{action}}</button>
-    {{message}}
-</div>
+    <p>Story: <textarea formControlName="Story" rows="30" cols="66"></textarea></p>
+
+    <app-formButtons></app-formButtons>
+</form>

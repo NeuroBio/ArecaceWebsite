@@ -65,7 +65,7 @@ export class CRUD {
       return this.firebaseserv.uploadBlob(path, text)//upload the text
       .then(() => { return this.firebaseserv.returnImage(path).toPromise() }//get the downloadlink
       ).catch(err => {
-        err.Stage = "Upload Story"
+        err.stage = "Upload Story"
         return(Promise.reject(err))
       });
     } else {
@@ -81,7 +81,7 @@ export class CRUD {
       .then(() => { return this.firebaseserv.uploadBlob(path, newText) //upload new text
       }).then(() =>  { return this.firebaseserv.returnImage(path).toPromise() //get link
       }).catch(err => {
-        err.Stage = "Edit Story"
+        err.stage = "Edit Story"
         return(Promise.reject(err))
       });
     }

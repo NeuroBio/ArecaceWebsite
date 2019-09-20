@@ -43,8 +43,12 @@ export class UpdateFormComponent implements OnInit, OnDestroy {
     return this.fb.group({
       Poster: 'kArA',
       Body: '',
-      AltText: ''
-    })
+      AltText: '',
+      Links: '',
+      Date: '',
+      Time: '',
+      Edited: false
+    });
   }
 
   assignFormData() {
@@ -57,29 +61,32 @@ export class UpdateFormComponent implements OnInit, OnDestroy {
   }
 
   processForm() {
-  //Process for upload
-    // this.message = 'Processing Data...'
     const Final: PostData = this.Form.value;
-    // let oldImages: string[] = [];
-
-    if(Final.ID === '') {
+    let oldImages: string[] = [];
+    let newImages: any[] = []
+    if(!this.editFormData) {
+      console.log("in")
       Final.Date = formatDate(new Date(), 'yyyy-MM-dd', 'en');
       Final.Time = formatDate(new Date(), 'HH:mm', 'en');
       Final.ID = `${Final.Date}, ${Final.Time}`;
-      Final.Edited = false;
     }else{
       Final.Date = this.editFormData.Date;
       Final.Time = this.editFormData.Time;
       Final.ID = this.editFormData.ID;
       Final.Edited = true;
-    //   if(this.editFormData.Links){
-    //     oldImages = this.editFormData.Links;
-    //  }
+      if(this.editFormData.Links){
+        oldImages = this.editFormData.Links;
+      }
     }
+
+    if(this.imageFile){
+      newImages = [this.imageFile];
+    }
+
     this.controller.activeFormData.next([Final,
                                         [`Inanity/${Final.ID}`],
-                                        [this.imageFile],
-                                        Final.Links,
+                                        newImages,
+                                        oldImages,
                                         undefined,
                                         undefined,
                                         undefined]);

@@ -4,7 +4,7 @@ export class PostData{
     Poster: string;
     Date: string;
     Time: string;
-    Links: string[];
+    Links?: string[];
     AltText: string;
     Edited: boolean;
 }

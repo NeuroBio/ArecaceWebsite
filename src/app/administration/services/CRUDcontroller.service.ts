@@ -67,6 +67,10 @@ export class CRUDcontrollerService {
     return Form;
   }
 
+  getText(link: string){
+    return this.crud.getText(link);
+  }
+
 
 
 
@@ -85,18 +89,22 @@ export class CRUDcontrollerService {
         this.allowButtons.next(buttonState);
         return;
       }
+
       this.message.next("Submitting...");
-      const meta = data[0];
-      this.crud.uploadImages(data[1], data[2])
+      let meta = data[0];
+      const images = [data[1], data[2], data[3]];
+      const story = [data[4], data[5], data[6]];
+      console.log("images");
+      this.crud.uploadImages(images[0], images[1])
       .then(links => {
-        if("Links" in meta){
-          meta.Links = links;
-        }
-        return this.crud.uploadStory(data[3], data[4])       
+        meta = this.checkLinks(meta, links);
+        console.log("Text");
+        return this.crud.uploadStory(story[0], story[1])       
       }).then(link =>{
         if("StoryLink" in meta){
-          meta.StorkLink = link;
+          meta.StoryLink = link;
         }
+        console.log("meta");
         return this.crud.uploadItem(meta, this.fileHierarchy[this.itemType.value].Path);
       }).then(() => {
         this.itemToEdit.next(undefined);
@@ -109,11 +117,12 @@ export class CRUDcontrollerService {
     });
   }
 
-  async onEdit(): Promise<any>{
+  async onEdit(all: boolean = false): Promise<any> {
     const buttonState = this.allowButtons.value;
     this.allowButtons.next(new ButtonController([false, false, false, false]));
     let meta: any;
     let story: any[];
+    let images: any[];
 
     this.message.next("Processing...");
     this.triggerProcess.next();
@@ -121,18 +130,21 @@ export class CRUDcontrollerService {
     return this.activeFormData.pipe(take(1)).toPromise()
     .then(data => {
       this.message.next("Editing...");
+      console.log(data);
       meta = data[0];
-      story = [data[4], data[5], data[6]]
-      return this.crud.editImages(data[1], data[2], data[3])
+      images = [data[1], data[2], data[3]];
+      story = [data[4], data[5], data[6]];
+      console.log("images");
+      return this.crud.editImages(images[0], images[1], images[2])
     }).then(links => {
-      if("Links" in meta){
-        meta.Links = links;
-      }
+      meta = this.checkLinks(meta, links);
+      console.log("text");
       return this.crud.editStory(story[0], story[1], story[2])       
     }).then(link =>{
       if("StoryLink" in meta){
-        meta.StorkLink = link;
+        meta.StoryLink = link;
       }
+      console.log("meta");
       return this.crud.editItem(meta,
               this.fileHierarchy[this.itemType.value].Path,
               this.itemToEdit.value.key);
@@ -143,7 +155,9 @@ export class CRUDcontrollerService {
     }).catch(err => {
       this.throwError(err, buttonState);
       console.log(meta)
-      return Promise.reject();
+      if(all){
+        return Promise.reject();
+      }
     });
   }
 
@@ -186,7 +200,7 @@ export class CRUDcontrollerService {
   async updateLoop(collect: any[]) {
     for (const member of collect){
       this.itemToEdit.next(member);
-      await this.onEdit().catch(() => Promise.reject());
+      await this.onEdit(true).catch(() => Promise.reject());
     }
   }
 
@@ -201,6 +215,17 @@ export class CRUDcontrollerService {
     const buttonState = this.allowButtons.value;
     buttonState[which] = to;
     this.allowButtons.next(buttonState);
+  }
+
+  checkLinks(meta: any, links: string[]){
+    if("Links" in meta){
+      if(links[0]){
+        meta.Links = links;
+      }else{
+        delete meta.Links;
+      }
+    }
+    return(meta);
   }
 
 }
