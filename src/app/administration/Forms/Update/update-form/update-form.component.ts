@@ -1,9 +1,11 @@
-import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
-import { CRUDcontrollerService } from 'src/app/administration/services/CRUDcontroller.service';
-import { formatDate } from '@angular/common';
-import { PostData } from 'src/app/Classes/postdata';
-import { Subscription } from 'rxjs';
+import { Component, OnInit, ViewChild,
+         ElementRef, OnDestroy }              from '@angular/core';
+import { formatDate }                         from '@angular/common';
+import { FormBuilder }                        from '@angular/forms';
+import { Subscription }                       from 'rxjs';
+
+import { CRUDcontrollerService }              from 'src/app/administration/services/CRUDcontroller.service';
+import { PostData }                           from 'src/app/Classes/postdata';
 
 @Component({
   selector: 'app-update-form',
@@ -15,7 +17,7 @@ export class UpdateFormComponent implements OnInit, OnDestroy {
 
   Form = this.createForm();
   @ViewChild('Image') imageUploader:ElementRef;
-  imageFile:any;
+  imageFile: any;
   stream1: Subscription;
   stream2: Subscription;
 
@@ -65,7 +67,6 @@ export class UpdateFormComponent implements OnInit, OnDestroy {
     let oldImages: string[] = [];
     let newImages: any[] = []
     if(!this.editFormData) {
-      console.log("in")
       Final.Date = formatDate(new Date(), 'yyyy-MM-dd', 'en');
       Final.Time = formatDate(new Date(), 'HH:mm', 'en');
       Final.ID = `${Final.Date}, ${Final.Time}`;

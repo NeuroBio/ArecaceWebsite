@@ -24,12 +24,22 @@ export class CharactersDetailsComponent implements OnInit {
         window.scroll(0,0);
         this.loading = this.global.ImagesLoadable;
         this.char = data.Chara;
+        this.char.References = this.blowupReorganization(this.char.References);
         this.FullBio = (this.char.BriefBackground === '');
    });
   }
 
-  changeBio(toggle: boolean){
+  changeBio(toggle: boolean) {
     this.FullBio = toggle;
+  }
+
+  //consequence of reoganization the uploads such that links can only be packages one way.
+  //If this is too horrible, character references may need their own edit form.
+  blowupReorganization(refs: any[]) {
+    refs.map((ref, index) =>
+      ref.Links = [this.char.Links[index*2+1],
+                  this.char.Links[index*2+2]]);
+    return refs
   }
 
 }

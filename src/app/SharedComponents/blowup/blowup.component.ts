@@ -40,7 +40,6 @@ export class BlowUpComponent implements OnInit {
   }
 
   onResize(){
-    console.log("trigger")
     this.loading = false;
     setTimeout(() =>{
       this.textHeight = this.bigger.nativeElement.offsetHeight - 30;

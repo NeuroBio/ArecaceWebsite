@@ -17,7 +17,7 @@ import { StoryFormComponent }           from './Forms/story/storyform/storyform.
 import { GuildFormComponent }           from './Forms/guild/guildform/guildform.component';
 import { EditListComponent }            from './DashBoard/editlist/editlist.component';
 import { ReferenceFormComponent }          from './Forms/reference/referenceform/referenceform.component';
-import { UpdateFormComponent }          from './Forms/Update/update-form/update-form.component';
+import { UpdateFormComponent }          from './Forms/update/update-form/update-form.component';
 import { ExtrasFormComponent }            from './Forms/extras/extrasform/extrasform.component';
 import { AdminDutiesComponent }         from './DashBoard/adminDuties/adminDuties.component';
 import { MessageComponent }             from './DashBoard/message/message.component';

@@ -25,18 +25,11 @@ export class FireBaseService {
   }
   
   returnCollect(path:string): Observable<any>{
-    return this.database.collection<any[]>(path).valueChanges()
-    /*
-    .pipe(
-      catchError(err => {console.log(err)
-        console.log("in")
-        let lol:any[][]
-                  return of(lol)} )
-    );*/
+    return this.database.collection<any[]>(path).valueChanges();
   }
 
   uploadDocument(newDoc:any, path:string){
-    return this.database.collection<any>(path).add(newDoc)
+    return this.database.collection<any>(path).add(newDoc);
   }
 
   editDocument(newDoc:any, path:string, key:string){
@@ -57,7 +50,7 @@ export class FireBaseService {
   }
 
   uploadBlob(path:string, blob:Blob){
-    return this.storage.ref(path).put(blob)
+    return this.storage.ref(path).put(blob);
   }
 
   returnCollectionWithKeys(path:string){
