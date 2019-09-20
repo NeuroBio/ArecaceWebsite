@@ -1,4 +1,4 @@
-<form [formGroup]="characterForm">
+<form [formGroup]="Form">
 <h2 class="formstyle">Character Upload Form:</h2>
 <hr>  
     
@@ -22,12 +22,12 @@
         (change)="updateTerritory($event.target.value)">
         <option *ngFor="let country of DropDowns.countries; let i = index"
         [value]="country.id">
-        {{country.id}}</option>
+        {{ country.id }}</option>
     </select>
     
     Territory <select formControlName="Territory">
         <option *ngFor="let terr of activeRegion"
-        [value]="terr">{{terr}}</option>
+        [value]="terr">{{ terr }}</option>
     </select></p>
 
 
@@ -38,7 +38,7 @@
     [style.background-color]="toneColor1">
         <option *ngFor="let peep of DropDowns.Ethnicity"
         [style.background-color]="peep.hex"
-        [value]="peep.id">{{peep.id}}</option>
+        [value]="peep.id">{{ peep.id }}</option>
     </select> / 
     
     <select formControlName="Ethnicity2"
@@ -46,7 +46,7 @@
     [style.background-color]="toneColor2">
         <option *ngFor="let peep of DropDowns.Ethnicity"
         [style.background-color]="peep.hex"
-        [value]="peep.id">{{peep.id}}</option>
+        [value]="peep.id">{{ peep.id }}</option>
     </select></p>
     
     <p>Age:<br>&nbsp;&nbsp;&nbsp;&nbsp;
@@ -57,19 +57,19 @@
 
     <select formControlName="Era">
         <option *ngFor="let era of DropDowns.Era"
-        [value]="era">{{era}}</option>
+        [value]="era">{{ era }}</option>
     </select> 
 
     <select formControlName="Qt"
     (change)="updateAge($event.target.value)">
         <option *ngFor="let qt of DropDowns.Quartrits; let i = index"
-        [value]="qt.qt">{{qt.qt}}</option>
+        [value]="qt.qt">{{ qt.qt }}</option>
     </select> 
 
     <select formControlName="Day">
         <option *ngFor="let day of daysArray; let i = index"
-        [value]="i+1">{{i+1}}</option>
-    </select> ({{characterForm.controls.Zodiac.value}})</p>
+        [value]="i+1">{{ i+1 }}</option>
+    </select>({{ Form.controls.Zodiac.value }})</p>
 
 
     <p>Height:<br>&nbsp;&nbsp;&nbsp;&nbsp;

@@ -21,7 +21,7 @@ import { UpdateFormComponent }          from './Forms/Update/update-form/update-
 import { MiscFormComponent }            from './Forms/misc/miscform/miscform.component';
 import { AdminDutiesComponent }         from './DashBoard/adminDuties/adminDuties.component';
 import { MessageComponent }             from './DashBoard/message/message.component';
-import { ButtonsComponent }             from './Forms/buttons/buttons.component'
+import { ButtonsComponent }             from './Forms/z-buttons/buttons.component'
 
 @NgModule({
   declarations: [

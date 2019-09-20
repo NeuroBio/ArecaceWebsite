@@ -65,8 +65,8 @@ export class GuildFormComponent implements OnInit, OnDestroy {
 
   processForm() {
     //Incomplete Form
-    if(this.imageFile === undefined &&
-        this.Form.controls.Links.value === '') {
+    if(this.imageFile === undefined
+      && this.Form.controls.Links.value === '') {
       this.controller.activeFormData.next(["abort",
         "Guild files require an insignia image."]);
       return ;

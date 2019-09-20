@@ -19,11 +19,11 @@ export class CharacterFormComponent implements OnInit, OnDestroy{
 
 //form generator vals
   DropDowns = new UploadCharacterDrops;
-  characterForm = this.createCharacterForm();
-  @ViewChild('bioPic') Image: ElementRef;
-  imageLink: any;
-  fullLinks = [];
-  thumbLinks = [];
+  Form = this.createForm();
+  @ViewChild('bioPic') biopicUploader: ElementRef;
+  biopicFile: any;
+  fullFiles = [];
+  thumbFiles = [];
 
   stream1: Subscription;
   stream2: Subscription;
@@ -58,7 +58,7 @@ export class CharacterFormComponent implements OnInit, OnDestroy{
     this.stream2.unsubscribe()
   }
 
-  createCharacterForm() {
+  createForm() {
     return this.fb.group({
       FirstName: '',
       LastName: '',
@@ -100,12 +100,12 @@ export class CharacterFormComponent implements OnInit, OnDestroy{
   assignFormData() {
     if(this.editFormData){
       this.onReset();
-      this.characterForm = this.controller.quickAssign(this.characterForm, this.editFormData);
+      this.Form = this.controller.quickAssign(this.Form, this.editFormData);
       
-      this.characterForm.controls.SourceAbilities.setValue(
+      this.Form.controls.SourceAbilities.setValue(
         <SourceAbilities[]>JSON.parse(this.editFormData.SourceAbilities));
       
-      this.characterForm.controls.Unique.setValue(
+      this.Form.controls.Unique.setValue(
         <SourceAbilities[]>JSON.parse(this.editFormData.Unique));
       
         const relatives = <Relations[]>JSON.parse(this.editFormData.Relations);
@@ -114,7 +114,7 @@ export class CharacterFormComponent implements OnInit, OnDestroy{
         this.editFormData.ReferenceIDs.forEach(Ref => this.addRef(true, Ref.Ref));
       }
 
-      this.showUnique = this.characterForm.controls.Unique.value.Known;
+      this.showUnique = this.Form.controls.Unique.value.Known;
       this.setdisplayValues();
     }else{
       this.onReset();
@@ -123,11 +123,15 @@ export class CharacterFormComponent implements OnInit, OnDestroy{
   
   processForm() {
     //Invalid Form
-    if(false){
-
+    //Incomplete Form
+    if(this.biopicFile === undefined
+      && this.Form.controls.Links.value === '') {
+       this.controller.activeFormData.next(["abort",
+       "Bio files require a bio image."]);
+       return ;
     }
 
-    const Final:CharacterMetaData = this.characterForm.value; 
+    const Final:CharacterMetaData = this.Form.value; 
     Final.SourceAbilitiesFormatted = this.FormatSA(Final);
     Final.RelationsFormatted = this.FormatRelat(Final);
     Final.SourceAbilities = JSON.stringify(Final.SourceAbilities);
@@ -137,8 +141,8 @@ export class CharacterFormComponent implements OnInit, OnDestroy{
     Final.References = this.createReference(Final.ReferenceIDs, Final.FirstName);
 
     const imagePaths = [`CharacterBios/${Final.FirstName}`]
-                        .concat(this.refNames(this.fullLinks, Final.FirstName));
-    const imageEvents = [this.imageLink].concat(this.combineLinks(this.fullLinks, this.thumbLinks));
+                        .concat(this.refNames(this.fullFiles, Final.FirstName));
+    const imageEvents = [this.biopicFile].concat(this.combineLinks(this.fullFiles, this.thumbFiles));
     
     this.controller.activeFormData.next([Final,
                                       imagePaths,
@@ -152,17 +156,27 @@ export class CharacterFormComponent implements OnInit, OnDestroy{
   onReset() {
     this.RelationsArray = this.fb.array([]);
     this.ReferencesArray = this.fb.array([]);
-    this.characterForm = this.createCharacterForm();
+    this.Form = this.createForm();
     this.daysArray = new Array(30);
     this.setdisplayValues();
-    this.Image.nativeElement.value = '';
-    this.imageLink = undefined;
-    this.fullLinks = [];
-    this.thumbLinks = [];
+    this.biopicUploader.nativeElement.value = '';
+    this.biopicFile = undefined;
+    this.fullFiles = [];
+    this.thumbFiles = [];
     this.showUnique = false;
   }
 
+  uploadBioPic(event: any) {
+    this.biopicFile = event;
+  }
 
+  uploadFull(event: any, index: number) {
+    this.fullFiles[index] = event;
+  }
+
+  uploadThumb(event: any, index: number) {
+    this.thumbFiles[index] = event;
+  }
 
   //Processing functions
   populateSAbilities() {
@@ -175,25 +189,25 @@ export class CharacterFormComponent implements OnInit, OnDestroy{
 
   addRelative(add: boolean, name: string = '', ship: string = '') {
     if(add){
-      (<FormArray>this.characterForm.controls.Relations)
+      (<FormArray>this.Form.controls.Relations)
       .push(this.fb.group({RelationName: name, Relationship:ship}));
     }else{
-      (<FormArray>this.characterForm.controls.Relations)
-      .removeAt(this.characterForm.controls.Relations.value.length-1);
+      (<FormArray>this.Form.controls.Relations)
+      .removeAt(this.Form.controls.Relations.value.length-1);
     }
   }
 
   addRef(add: boolean, ref: string = '') {
     if(add){
-      (<FormArray>this.characterForm.controls.ReferenceIDs)
+      (<FormArray>this.Form.controls.ReferenceIDs)
       .push(this.fb.group({ Ref: ref }));
-      this.fullLinks.push('');
-      this.thumbLinks.push('');
+      this.fullFiles.push('');
+      this.thumbFiles.push('');
     }else{
-      (<FormArray>this.characterForm.controls.ReferenceIDs)
-      .removeAt(this.characterForm.controls.ReferenceIDs.value.length-1);
-      this.fullLinks.pop();
-      this.thumbLinks.pop();
+      (<FormArray>this.Form.controls.ReferenceIDs)
+      .removeAt(this.Form.controls.ReferenceIDs.value.length-1);
+      this.fullFiles.pop();
+      this.thumbFiles.pop();
     }
   }
 
@@ -278,38 +292,26 @@ export class CharacterFormComponent implements OnInit, OnDestroy{
     this.showUnique = check;
   }
 
-  uploadBioPic(event: any) {
-    this.imageLink = event;
-  }
-
-  uploadFull(event: any, index: number) {
-    this.fullLinks[index] = event;
-  }
-
-  uploadThumb(event: any, index: number) {
-    this.thumbLinks[index] = event;
-  }
-
   updateTerritory(nation: string) {
     this.activeRegion = this.DropDowns.countries.filter(x => nation === x.id)[0].terr;
-    this.characterForm.patchValue({Territory: this.activeRegion[0]})
+    this.Form.patchValue({Territory: this.activeRegion[0]})
   }
 
   updateAge(qt: string){
     const qtData = this.DropDowns.Quartrits.filter(x => qt === x.qt)[0];
     this.daysArray = new Array(qtData.days);
-    this.characterForm.patchValue({ Zodiac: qtData.zodiac, Day: 1 })
+    this.Form.patchValue({ Zodiac: qtData.zodiac, Day: 1 })
   }
 
   updateCM() {
-    const inches: number = this.characterForm.controls.Ft.value*12
-                          + this.characterForm.controls.Inch.value
-    this.characterForm.patchValue({ Cm:(inches*2.54).toFixed(2) })
+    const inches: number = this.Form.controls.Ft.value*12
+                          + this.Form.controls.Inch.value
+    this.Form.patchValue({ Cm:(inches*2.54).toFixed(2) })
   }
 
   updateFtIn() {
-    const inches = this.characterForm.controls.Cm.value*.393701;
-    this.characterForm.patchValue({
+    const inches = this.Form.controls.Cm.value*.393701;
+    this.Form.patchValue({
       Inch: (inches%12).toFixed(2),
       Ft: Math.floor(inches/12)
     })
@@ -317,7 +319,7 @@ export class CharacterFormComponent implements OnInit, OnDestroy{
 
   getDropData(group:string, id: string, formvalue: string, desired: string) {
     return this.DropDowns[group].find(member =>
-      member[id] === this.characterForm.controls[formvalue].value
+      member[id] === this.Form.controls[formvalue].value
       )[desired]
   }
 

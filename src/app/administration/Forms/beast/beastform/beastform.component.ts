@@ -17,8 +17,8 @@ export class BeastFormComponent implements OnInit, OnDestroy {
 
   dropDowns = new BestDropDowns();
   Form = this.createForm();
-  @ViewChild('Thumb') thumbValue: ElementRef;
-  @ViewChild('Full') fullValue: ElementRef;
+  @ViewChild('Thumb') thumbUploader: ElementRef;
+  @ViewChild('Full') fullUploader: ElementRef;
   thumbFile: any;
   fullFile: any;
 
@@ -64,19 +64,11 @@ export class BeastFormComponent implements OnInit, OnDestroy {
     }
   }
 
-  getThumb(event:any) {
-    this.thumbFile = event;
-  }
-
-  getFull(event:any) {
-    this.fullFile = event;
-  }
-
   processForm() {
     //Incomplete Form
-     if((this.thumbFile === undefined ||
-      this.fullFile === undefined)
-      && this.Form.controls.Links.value === '') {
+     if((this.thumbFile === undefined
+          || this.fullFile === undefined)
+        && this.Form.controls.Links.value === '') {
        this.controller.activeFormData.next(["abort",
        "Bestiary files require a card image and its thumbnail."]);
        return ;
@@ -100,9 +92,17 @@ export class BeastFormComponent implements OnInit, OnDestroy {
     this.Form = this.createForm();
     this.thumbFile=undefined;
     this.fullFile=undefined;
-    this.thumbValue.nativeElement.value='';
-    this.fullValue.nativeElement.value='';
+    this.thumbUploader.nativeElement.value='';
+    this.fullUploader.nativeElement.value='';
     this.controller.message.next('');
+  }
+  
+  getThumb(event:any) {
+    this.thumbFile = event;
+  }
+
+  getFull(event:any) {
+    this.fullFile = event;
   }
 
 }
