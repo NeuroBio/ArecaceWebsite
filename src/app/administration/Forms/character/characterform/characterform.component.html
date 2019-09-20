@@ -130,7 +130,9 @@
 
 
 
-    <p>Family in Story:</p>
+    <p>Family in Story:
+        <button type="button" (click)="addRelative(true)">+</button>
+        <button type="button" (click)="addRelative(false)">-</button></p>
     <div formArrayName="Relations">
         <div *ngFor="let relative of RelationsArray.controls; let i = index"
         [formGroupName]="i">
@@ -142,9 +144,7 @@
             <br>    
         </div>
     </div>
-    <p><button type="button" (click)="addRelative(true)">+</button>
-    <button type="button" (click)="addRelative(false)">-</button></p>
-
+    
 
     <p> Background in Brief:<br>
     <textarea formControlName="BriefBackground" rows="2" cols="65"></textarea></p>
@@ -157,7 +157,9 @@
     <p>Bio Picture: <br><input class="fileupload"  #bioPic type="file" (change)="uploadBioPic($event)"
     accept=".png,.jpg"></p>
 
-    
+    <p>Other References:<br>
+        <button type="button" (click)="addRef(true)">+</button>
+        <button type="button" (click)="addRef(false)">-</button></p>
     <div formArrayName="ReferenceIDs">
         <div *ngFor="let refs of ReferencesArray.controls; let i = index"
         [formGroupName]="i">
@@ -169,11 +171,9 @@
             (change)="uploadFull($event, i)"><br>
             Thumb:<br>
             <input class="fileupload" type="file"
-            (change)="uploadThumb($event, i)"><br>
+            (change)="uploadThumb($event, i)"><br><br>
         </div>
     </div>
-    <p><button type="button" (click)="addRef(true)">+</button>
-    <button type="button" (click)="addRef(false)">-</button></p>
 
     <app-formButtons></app-formButtons>
 </form>

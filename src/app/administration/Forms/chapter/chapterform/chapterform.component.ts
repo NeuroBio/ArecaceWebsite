@@ -1,151 +1,49 @@
-import { Component, OnInit, OnDestroy, ViewChild, ElementRef, QueryList, ViewChildren }                          from '@angular/core';
-import { FormControl, FormArray,FormBuilder } from '@angular/forms';
+import { Component, OnInit, OnDestroy, ViewChild, ElementRef }                          from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { ChapterMetaData }                    from 'src/app/Classes/chaptermetadata'
-import { CRUD }                    from '../../../services/CRUD.service'
 import { CRUDcontrollerService }      from '../../../services/CRUDcontroller.service';
 import { Subscription } from 'rxjs';
-import { FileHierarchy } from 'src/app/Classes/filehierarchy';
 
 @Component({
   selector: 'app-chapterform',
   templateUrl: './chapterform.component.html',
   styleUrls: ['../../Form.css']
 })
-export class ChapterFormComponent implements OnInit, OnDestroy{
+export class ChapterFormComponent implements OnInit, OnDestroy {
 
-  chapterForm = this.createForm()
-  pageLinks:any[] = new Array(10);
-  dummy = new Array(10) 
-  Arcs = [1,2,3,4, "WRC", "LW", 7, "Dae"]
-  message:string = '';
-  action:string="Submit"
-  editChapter:any;
-  edit:boolean = false;
-  stream:Subscription;
+  Form = this.createForm()
+  @ViewChild('form') formHtml:ElementRef;
+  
+  stream1: Subscription;
   stream2: Subscription;
-  stream3: Subscription;
-  allowDelete: boolean;
-  allowUpdateAll: boolean;
+  editFormData: any;
+  init = true;
 
-  init:boolean=true;
-  @ViewChild('form') form:ElementRef;
-  fileHierarchy = new FileHierarchy;
-
+  pageFiles = new Array(10);
+  dummy = new Array(10);
+  Arcs = [1,2,3,4, "WRC", "LW", 7, "Dae"];
+  message: string = '';
+  
+  
+  
   constructor(private fb:FormBuilder,
-              private uploadserv:CRUD,
-              private editserv:CRUDcontrollerService) { }
+              private controller:CRUDcontrollerService) { }
   
-  ngOnInit(){
-    this.stream = this.editserv.itemToEdit.subscribe(item => {
-      this.editChapter=item;
-      this.assignEdit();
-      this.init = false
-    })
-    // this.stream2 = this.editserv.allowDelete.subscribe(bool => this.allowDelete = bool);
-    // this.stream3 = this.editserv.allowUpdateAll.subscribe(bool => this.allowUpdateAll = bool);
+  ngOnInit() {
+    this.stream1 = this.controller.itemToEdit.subscribe(item => {
+      this.editFormData = item;
+      this.assignFormData();
+      this.init = false;
+    });
+    this.stream2 = this.controller.triggerProcess.subscribe(() => this.processForm());
   }
 
-  ngOnDestroy(){
-    this.stream.unsubscribe()
-    // this.stream2.unsubscribe()
-    // this.stream3.unsubscribe()
+  ngOnDestroy() {
+    this.stream1.unsubscribe();
+    this.stream2.unsubscribe();
   }
 
-  assignEdit(){
-    if(this.editChapter){
-      this.chapterForm = this.editserv.quickAssign(this.chapterForm, this.editChapter)
-      this.action = "Accept Edits"
-      this.pageLinks = Array.apply(null, Array(this.editChapter.Links.length)).map(function () {})
-      this.dummy = new Array(this.pageLinks.length)
-      this.edit = true;
-    }else if(!this.init){
-      this.onReset()
-    }
-  }    
-
-
-  addPage(add:boolean){
-    if(add){
-      this.pageLinks.push('');
-      this.dummy.push('');
-    }else{
-      this.pageLinks.pop();
-      this.dummy.pop();
-    }
-  }
-
-  updatePage(ind:number,event:any){
-    this.pageLinks[ind] = event;
-  }
-
-  getPageNames(pages:any[], newChap:any){
-    let pageNames:string[]=[];
-    for(let i = 0; i< pages.length; i++){
-      pageNames.push(`ComicPages/Arc${newChap.Arc}/${newChap.ID}-${i}`);
-    }
-    return(pageNames);
-  }
-
-  
-  onSubmit(){
-    this.message = 'Processing Data...'
-    const newChap = this.chapterForm.value;
-    newChap.NumPages = this.pageLinks.length;
-    const pageNames:string[] = this.getPageNames(this.pageLinks, newChap);
-
-    if(!this.editChapter){
-      this.message = "Hold on, uploading!";
-      return this.uploadserv.uploadImages(pageNames, this.pageLinks)
-      .then(links => {
-        newChap.Links = links;
-        return this.uploadserv.uploadItem(newChap,`Arc${newChap.Arc}Data`);
-      }).then(() => {
-          this.onReset();
-          this.message="Successful upload!"
-      });
-    }else{
-      this.message = "Hold on, editing!";
-      return this.uploadserv.editImages(pageNames, this.pageLinks, this.editChapter.Links)
-      .then(links => {
-        newChap.Links = links;
-        return this.uploadserv.editItem(newChap,`Arc${newChap.Arc}Data`, this.editChapter.key);
-      }).then(() => {
-          this.editserv.itemToEdit.next(undefined);
-          this.message="Successful edit!";
-      });
-    }
-  }
-  
-  onDelete(){
-    this.message = 'Hold on, deleting!'
-    this.uploadserv.deleteItem(this.editChapter.Links, `Arc${this.editChapter.Arc}Data`, this.editChapter.key)
-    .then(() => {
-      this.editserv.itemToEdit.next(undefined);
-      this.message = 'Successful Delete!';
-    })
-  }
-
-  onReset(){
-      this.form.nativeElement.reset();
-      this.chapterForm = this.createForm();
-      this.pageLinks = new Array(10);
-      this.action = "Submit";
-      this.dummy = new Array(10);
-      this.edit = false;
-  }
-
-  updateAll(){
-    this.editserv.getEditableCollection(this.fileHierarchy.arc1.Path)
-                  .subscribe(collect =>{
-                    collect.forEach(member => {
-                        this.editChapter = member;
-                        this.assignEdit();
-                        this.onSubmit();  
-      })
-    })
-  }
-
-  createForm(){
+  createForm() {
     return this.fb.group({
       Name: '',
       ID: '',
@@ -153,6 +51,60 @@ export class ChapterFormComponent implements OnInit, OnDestroy{
       Arc: 1,
       Message: '',
       Links: ''
-    })
+    });
   }
+
+  assignFormData() {
+    if(this.editFormData) {
+      this.Form = this.controller.quickAssign(this.Form, this.editFormData);
+      this.pageFiles = Array.apply(null, Array(this.editFormData.Links.length)).map(function () {});
+      this.dummy = new Array(this.pageFiles.length);
+    } else if(!this.init) {
+      this.onReset();
+    }
+  }    
+  
+  processForm() {
+    const Final: ChapterMetaData = this.Form.value;
+    Final.NumPages = this.pageFiles.length;
+    const pagePaths: string[] = this.getPagePaths(this.pageFiles, Final);
+    this.controller.activeFormData.next([Final,
+                                        pagePaths,
+                                        this.pageFiles,
+                                        Final.Links,
+                                        undefined,
+                                        undefined,
+                                        undefined]);
+        // return this.uploadserv.uploadItem(newChap,`Arc${newChap.Arc}Data`);
+  }
+
+  onReset() {
+      this.formHtml.nativeElement.reset();
+      this.Form = this.createForm();
+      this.pageFiles = new Array(10);
+      this.dummy = new Array(10);
+  }
+
+  addPage(add: boolean) {
+    if(add){
+      this.pageFiles.push('');
+      this.dummy.push('');
+    }else{
+      this.pageFiles.pop();
+      this.dummy.pop();
+    }
+  }
+
+  updatePage(ind: number, event: any) {
+    this.pageFiles[ind] = event;
+  }
+
+  getPagePaths(pages: any[], newChap: any){
+    let pagePaths: string[] = [];
+    for(let i = 0; i< pages.length; i++){
+      pagePaths.push(`ComicPages/Arc${newChap.Arc}/${newChap.ID}-${i}`);
+    }
+    return(pagePaths);
+  }
+
 }
