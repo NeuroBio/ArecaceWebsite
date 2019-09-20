@@ -59,9 +59,6 @@ export class BeastFormComponent implements OnInit, OnDestroy {
     if(this.editFormData) {
       this.onReset();
       this.Form = this.controller.quickAssign(this.Form, this.editFormData);
-      // if(this.editFormData.BeastName){
-      //   this.Form.controls.Name.patchValue(this.editFormData.BeastName);
-      // }
     } else if(!this.init) {
       this.onReset();
     }

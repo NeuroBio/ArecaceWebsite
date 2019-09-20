@@ -103,6 +103,7 @@ export class CRUDcontrollerService {
         this.message.next("Submitted!");
         this.allowButtons.next(buttonState);
       }).catch(err => {
+        console.log(meta)
         this.throwError(err, buttonState);
       });
     });
@@ -141,6 +142,7 @@ export class CRUDcontrollerService {
       this.allowButtons.next(buttonState);
     }).catch(err => {
       this.throwError(err, buttonState);
+      console.log(meta)
       return Promise.reject();
     });
   }

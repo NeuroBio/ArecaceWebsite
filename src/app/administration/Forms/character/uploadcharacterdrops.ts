@@ -57,5 +57,3 @@ export class UploadCharacterDrops {
                           "Integrate", "Maintain", "Metamorph", "Rebuild",
                           "Refine", "Soothe", "Stagnate"]
 }
-
-    
