@@ -1,4 +1,4 @@
-export class PostData{
+export class PostData {
     ID: string;
     Body: string;
     Poster: string;

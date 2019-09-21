@@ -1,4 +1,4 @@
-export class BeastMetaData{
+export class BeastMetaData {
     Name: string;
     ID: string;
     Phylo: string;

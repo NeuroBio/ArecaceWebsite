@@ -1,4 +1,4 @@
-export class ChapterMetaData{
+export class ChapterMetaData {
     Name: string;
     ID: number;
     Index: number;

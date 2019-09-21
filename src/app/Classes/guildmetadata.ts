@@ -1,4 +1,4 @@
-export class GuildMetaData{
+export class GuildMetaData {
     ID: string;
     GuildName: string;
     Master: string;

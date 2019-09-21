@@ -1,4 +1,4 @@
-export class ExtrasMetaData{
+export class ExtrasMetaData {
     Name: string;
     ID: string;
     Links: string[];

@@ -1,4 +1,4 @@
-export class Hier{
+export class Hier {
     Terminal: boolean;
     Path: string;
     NextTypeFinal: boolean;
@@ -9,7 +9,7 @@ export class Hier{
     }
 }
 
-export class FileHierarchy{
+export class FileHierarchy {
     bestiary: Hier = new Hier(true, 'Bestiary', true);
     arc1: Hier = new Hier(true, 'Arc1Data', true );
     arc2: Hier = new Hier(true, 'Arc2Data', true );

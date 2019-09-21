@@ -45,7 +45,6 @@ export class SeriesChooserComponent implements OnInit, OnDestroy {
     this.stream1 = this.storyserv.storyType.subscribe(string => { 
       this.localLoading = true;
       this.storyserv.updateLoading(true);
-      console.log(string);
       this.storyType = string;
     });
 

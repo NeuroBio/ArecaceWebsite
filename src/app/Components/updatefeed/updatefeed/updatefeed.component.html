@@ -3,7 +3,7 @@
 
       <div role="article" class="textblock">
           <b>Poster: </b> <span id="name">{{ post.Poster }}</span>
-          <div id="date"><b>Date: </b> {{ post.Date }}, {{ post.Time }}</div><br>
+          <div id="right"><b>Date: </b> {{ post.Date }}, {{ post.Time }}</div><br>
           <div style="clear: both;"></div>
           <hr>
           <br>
@@ -11,6 +11,8 @@
           <div *ngIf="post.Links">
             <img [src]="post.Links" [alt]="post.AltText">
           </div>
+          <div id="right" *ngIf="post.Edited">(Edited)</div>
+          <div style="clear: both;"></div>
       </div>
       <br>
 
