@@ -15,7 +15,9 @@ import { StoryMetaData }                    from 'src/app/Classes/storymetadata'
 
 export class SeriesChooserComponent implements OnInit, OnDestroy {
 
-  seriesMetaData$: Observable<any[]>
+  seriesIDs: string[];
+  seriesNames: string[];
+  
   series: string[];
   currentSeries: string;
   currentSection: string;
@@ -23,7 +25,7 @@ export class SeriesChooserComponent implements OnInit, OnDestroy {
   stream2: Subscription;
   stream3: Subscription;
   titles: StoryMetaData[];
-  type: boolean;
+  storyType: string;
   localLoading: boolean;
 
   constructor(private storyserv: StoryService,
@@ -32,16 +34,19 @@ export class SeriesChooserComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     window.scroll(0,0);
+    
+    this.storyserv.seriesIDName.subscribe(IDName => {
+      this.seriesIDs = Object.keys(IDName);
+      this.seriesNames = Object.values(IDName);
+    });
 
-    this.seriesMetaData$ = this.storyserv.getMetaData().pipe(
-      tap(() =>
-        this.storyserv.getSeriesData().subscribe(titles => this.titles = titles))
-    );
+    this.storyserv.getSeriesData().subscribe(titles => this.titles = titles);
 
-    this.stream1 = this.storyserv.script.subscribe(bool => { 
+    this.stream1 = this.storyserv.storyType.subscribe(string => { 
       this.localLoading = true;
       this.storyserv.updateLoading(true);
-      this.type = bool;
+      console.log(string);
+      this.storyType = string;
     });
 
     this.stream2 = this.storyserv.currentSeries.subscribe(ser => {
@@ -70,8 +75,8 @@ export class SeriesChooserComponent implements OnInit, OnDestroy {
     this.router.navigate([`${section}`], { relativeTo: this.route });
   }
 
-  changeType(scripts:Boolean){
-    if(scripts){
+  updateType(scripts: string) {
+    if(scripts === 'Scripts') {
       this.router.navigate([`../../Scripts`], { relativeTo: this.route });
     }else{
       this.router.navigate([`../../Narratives`], { relativeTo: this.route });

@@ -1,4 +1,4 @@
-export class StoryMetaData{
+export class StoryMetaData {
     ID: string;
     Type: string;
     Series: string;

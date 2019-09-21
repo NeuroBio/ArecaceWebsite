@@ -18,8 +18,8 @@ export class FileHierarchy{
     guilds: Hier = new Hier(true, 'Guilds', true);
     maps: Hier = new Hier(true, 'Maps', true);
     extras: Hier = new Hier(true, 'MiscArt', true);
-    scripts: Hier = new Hier(false, 'Scripts', false);
-    narratives: Hier = new Hier(false, 'Narratives', false);
+    scripts: Hier = new Hier(true, 'Scripts', true);
+    narratives: Hier = new Hier(true, 'Narratives', true);
     source: Hier = new Hier(true, 'SourceInfo', true);
     update: Hier = new Hier(true, 'Inanity', true);
 }

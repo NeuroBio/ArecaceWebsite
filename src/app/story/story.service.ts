@@ -11,17 +11,48 @@ import { StoryMetaData }                    from 'src/app/Classes/storymetadata'
 
 export class StoryService {
 
-  series = new BehaviorSubject<any[]>([])
+  /*Notes: Data is pulled down as all stories from resolver one.
+  serializer storts that information into a dictionary and makes
+  a converto between the ID (no spaces; used in route segments) and
+  the actual name (has spaces; for display purposes).  Resolver 2
+  takes one series (StoryMetaData array) from serials and populates it
+  into currentSeries.  This data together is used for the story
+  chooser component.  The final resolver (3) takes a story from the
+  currentSeries and loads it into currentSection.  Thus, only one
+  asnyc call is made.*/
+
+  serials = new BehaviorSubject<any>(undefined);
+  seriesIDName = new BehaviorSubject<object>({});
   seriesTitles = new BehaviorSubject<StoryMetaData[]>(new StoryMetaData()[0])
-  script = new BehaviorSubject<boolean>(true);
+  storyType = new BehaviorSubject<string>("Scripts");
   currentSeries = new BehaviorSubject<string>('');
   currentSection = new BehaviorSubject<string>('');
   loading = new BehaviorSubject<boolean>(true);
 
   constructor() { }
 
-  initializeMetaData(metaData: StoryMetaData[]): void{
-    return this.series.next(metaData);
+  initializeMetaData(metaData: StoryMetaData[], type: string): void {
+    this.storyType.next(type);
+    return this.serials.next(this.serialize(metaData));
+  }
+
+  serialize(stories: StoryMetaData[]){
+    let serialize = {};
+    let IDName = {};
+    for(const story of stories){
+      if(story.Series in serialize){
+        serialize[story.Series].push(story);
+      }else{
+        serialize[story.Series] = [story];
+        IDName[story.Series.split(' ').join('')] = story.Series;
+      }
+    }
+    this.seriesIDName.next(IDName);
+    return serialize;
+  }
+
+  getSeries(name: string): StoryMetaData[] {
+    return this.serials.value[name];
   }
 
   initializeSeriesData(serieData: StoryMetaData[]){
@@ -30,7 +61,7 @@ export class StoryService {
   }
 
   getMetaData(){
-    return this.series;
+    return this.serials;
   }
   getSeriesData(){
     return this.seriesTitles;
@@ -44,18 +75,18 @@ export class StoryService {
   }
 
   getType(){
-    return this.script
+    return this.storyType;
   }
 
   getCurrent(): Observable<any[]>{
     return of ([this.currentSeries,
                 this.currentSection,
-                this.script])
+                this.storyType])
   }
   
-  changeType(type: boolean){
-    this.script.next(type);
-  }
+  // updateType(type: boolean){
+  //   this.storyType.next(type);
+  // }
 
   changeSection(newSec: string){
     this.currentSection.next(newSec);

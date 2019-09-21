@@ -23,11 +23,10 @@ export class StoryResolver1Service implements Resolve<any>{
     const type = route.paramMap.get('StoryType');
     return this.firebaseserv.returnCollect(type).pipe(
         take(1),
-        mergeMap(seriesData => {
-          if(seriesData[0]){
-            this.storyserv.changeType(type==="Scripts");
-            this.storyserv.initializeMetaData(seriesData);
-            return of (seriesData);
+        mergeMap(allStories => {
+          if(allStories[0]){
+            this.storyserv.initializeMetaData(allStories, type);
+            return of (allStories);
           }else{
             this.router.navigate(['/story/Narratives']);
             return EMPTY;

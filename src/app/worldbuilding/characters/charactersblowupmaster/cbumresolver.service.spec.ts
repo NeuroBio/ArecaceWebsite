@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { CbumresolverService } from './cbumresolver.service';
+import { CBUMResolverService } from './cbumresolver.service';
 
-describe('CbumresolverService', () => {
+describe('CBUMResolverService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: CbumresolverService = TestBed.get(CbumresolverService);
+    const service: CBUMResolverService = TestBed.get(CBUMResolverService);
     expect(service).toBeTruthy();
   });
 });

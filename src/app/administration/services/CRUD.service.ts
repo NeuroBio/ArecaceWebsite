@@ -60,7 +60,7 @@ export class CRUD {
     }
   }
 
-  uploadStory(text: Blob, path: string) {
+  uploadStory(path: string, text: Blob) {
     if(text) {
       return this.firebaseserv.uploadBlob(path, text)//upload the text
       .then(() => { return this.firebaseserv.returnImage(path).toPromise() }//get the downloadlink

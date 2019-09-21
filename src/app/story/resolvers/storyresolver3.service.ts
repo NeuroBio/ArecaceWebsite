@@ -29,9 +29,11 @@ export class StoryResolver3Service implements Resolve<any>{
               this.storyserv.changeSection(metaData.ID);
               return this.getText(metaData.StoryLink).pipe(
                 map(text => ({metaData, text}))
-              )
+              );
             }else{
-              this.router.navigate([`story/${route.parent.paramMap.get('StoryType')}/${route.parent.paramMap.get('SeriesID')}`])
+              this.router.navigate([`story/${route.parent.paramMap
+                .get('StoryType')}/${route.parent.paramMap
+                  .get('SeriesID')}`])
               return EMPTY
           }})
       ))
