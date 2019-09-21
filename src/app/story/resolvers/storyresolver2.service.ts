@@ -30,17 +30,6 @@ export class StoryResolver2Service implements Resolve<any> {
       this.router.navigate([`story/${type}`]);
       return EMPTY;
     }
-      // flatMap(ID => this.storyserv.getSeries(ID).pipe(
-      // tap(series => {
-        // if(series[0]){
-        //   series.sort((a,b) => a.Section < b.Section ? -1 : 1)
-        //   this.storyserv.initializeSeriesData(series);
-        //   this.storyserv.changeSeries(serie);
-    //       return of (series)
-    //     }else{
-    //     }
-    //   })
-    // )
   }
 
   checkUrl(url:string, type:string){
@@ -54,14 +43,5 @@ export class StoryResolver2Service implements Resolve<any> {
       return url
     }
   }
-
-  // checkUrl(url:string){
-  //   if(url === 'First'){
-  //     return this.storyserv.getSeriesData().pipe(
-  //       map(serie => serie[0].ID))
-  //   }else{
-  //     return of (url)
-  //   }
-  // }
 
 }

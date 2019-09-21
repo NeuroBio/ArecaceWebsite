@@ -18,6 +18,7 @@ export class StoryResolver3Service implements Resolve<any>{
               private router: Router,
               private httpclient:HttpClient) { }
 
+  //see the story service for notes
   resolve(route: ActivatedRouteSnapshot): Observable<any>{
      return this.checkUrl(route.paramMap.get('StoryID')).pipe(
       take(1),
@@ -45,6 +46,7 @@ export class StoryResolver3Service implements Resolve<any>{
   getText(link:string): Observable<string>{
     return this.httpclient.get(link, {responseType: 'text'})
   }
+  
   checkUrl(url:string){
     if(url === 'First'){
       return this.storyserv.getSeriesData().pipe(

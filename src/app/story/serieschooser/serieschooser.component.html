@@ -34,7 +34,7 @@
         <div class="drops">
             Section:
             <select (change)="changeSection($event.target.value)">
-              <option *ngFor="let title of titles"
+              <option *ngFor="let title of titlesInSeries"
               [selected]="title.ID===currentSection"
               [value]="title.ID">
                 {{ title.Title }}

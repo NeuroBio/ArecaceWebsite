@@ -16,6 +16,7 @@ export class StorydisplayComponent implements OnInit {
   @ViewChild('frame') frame: ElementRef;
   @ViewChild('main') main: ElementRef;
   leftspace: number;
+  
   story: any;
   loading: boolean;
 

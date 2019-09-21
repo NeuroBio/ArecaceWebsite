@@ -19,6 +19,7 @@ export class StoryResolver1Service implements Resolve<any>{
               private storyserv: StoryService,
               private router:Router) { }
 
+  //see the story service for notes
   resolve(route: ActivatedRouteSnapshot): Observable<StoryMetaData[] | never>{
     const type = route.paramMap.get('StoryType');
     return this.firebaseserv.returnCollect(type).pipe(

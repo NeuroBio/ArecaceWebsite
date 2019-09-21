@@ -84,10 +84,7 @@ export class StoryService {
                 this.storyType])
   }
   
-  // updateType(type: boolean){
-  //   this.storyType.next(type);
-  // }
-
+  
   changeSection(newSec: string){
     this.currentSection.next(newSec);
   }
