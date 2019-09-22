@@ -14,7 +14,7 @@ export class CharactersDetailsComponent implements OnInit {
 
   char: CharacterMetaData;
   loading: boolean;
-  FullBio: boolean=false;
+  FullBio = false;
   
   constructor(private route: ActivatedRoute,
               private global: GlobalVarsService) { }

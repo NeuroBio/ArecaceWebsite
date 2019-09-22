@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 })
 export class GlobalVarsService {
   
-  ImagesLoadable:boolean;
+  ImagesLoadable;
 
   constructor() { }
 }

@@ -9,6 +9,9 @@ import { MainDisplayComponent }       from './main-display/main-display.componen
 import { SideBarComponent }           from './sidebar/sidebar.component';
 import { NotFoundComponent }          from './notfound/notfound.component';
 import { BlowupmasterComponent } from './blowupmaster/blowupmaster.component'
+import { OptionsComponent } from './options/options.component';
+import { DropDownComponent } from './drop-down/drop-down.component';
+
 
 @NgModule({
   declarations: [
@@ -18,7 +21,9 @@ import { BlowupmasterComponent } from './blowupmaster/blowupmaster.component'
     GridComponent,
     BlowUpComponent,
     NotFoundComponent,
-    BlowupmasterComponent
+    BlowupmasterComponent,
+    OptionsComponent,
+    DropDownComponent
   ],
   imports: [
     CommonModule,

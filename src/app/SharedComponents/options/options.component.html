@@ -1,0 +1,22 @@
+
+<div id="chooser"
+*ngIf="width > 600; then sidebar else dropdown">
+    <!-- template will replace this div -->
+</div>
+
+
+<ng-template #sidebar>
+    <app-sidebar
+    [current]="current"
+    [labels]="labels"
+    [linkList]="linkList"
+    ></app-sidebar>
+</ng-template>
+
+<ng-template #dropdown>
+  <app-drop-down
+    [current]="current"
+    [labels]="labels"
+    [linkList]="linkList"
+    ></app-drop-down>
+</ng-template>

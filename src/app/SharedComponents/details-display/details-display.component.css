@@ -12,10 +12,12 @@ div#outer {
 div#imageholder {
     max-width: 1000px;
     max-height: 1000px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
 }
 
 img#main {
-    display: block;
     max-width: inherit;
     max-height: inherit;
     object-fit: contain;

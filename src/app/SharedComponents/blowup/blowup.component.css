@@ -72,8 +72,8 @@ img#right {
     top: 50%;
     right: 0%;
     cursor: pointer;
-    -webkit-transform: scaleX(-1);
-    transform: scaleX(-1);
+    -webkit-transform: rotate(-90deg);
+    transform: rotate(-90deg);
 }
 
 img#left {
@@ -85,6 +85,8 @@ img#left {
     top: 50%;
     left: 0%;
     cursor: pointer;
+    -webkit-transform: rotate(90deg);
+    transform: rotate(90deg);
 }
 
 img:focus {

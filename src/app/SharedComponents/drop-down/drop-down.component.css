@@ -1,0 +1,16 @@
+#greyband {
+    top: auto;
+    left: auto;
+}
+
+div.sidebarlab {
+    cursor: pointer;
+}
+
+img#downUp {
+    width: 25px;
+    cursor: pointer;
+    position: relative;
+    top: 5.5px;
+    background-color: rgba(0,0,0,.3);
+}

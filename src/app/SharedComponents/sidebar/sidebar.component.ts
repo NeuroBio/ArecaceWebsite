@@ -3,7 +3,7 @@ import { Component, Input, ViewChild, ElementRef, HostListener, AfterViewInit, A
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
-  styleUrls: ['./sidebar.component.css']
+  styleUrls: ['../options/options.component.css']
 })
 
 export class SideBarComponent implements AfterContentChecked{
@@ -16,6 +16,7 @@ export class SideBarComponent implements AfterContentChecked{
   @ViewChild('container') container: ElementRef;
   @ViewChild('list') list: ElementRef;
  
+  style = true;
   height = 0;
 
   ngAfterContentChecked(){
@@ -27,7 +28,6 @@ export class SideBarComponent implements AfterContentChecked{
     if(this.height < this.list.nativeElement.offsetHeight){
       this.height = window.innerHeight -
       Math.max(this.container.nativeElement.getBoundingClientRect().top, 0)-3;
-      console.log("trigger")
     }
   }
 

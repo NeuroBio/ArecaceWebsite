@@ -1,0 +1,27 @@
+<svg id="greyband" [style.height.px]="height">
+    <rect width="100%" height="100%" style="fill:#616161"/>
+</svg>
+
+<div #linkListHolder role="navigation">
+  <div *ngFor="let list of linkList, let i = index">
+
+    <hr *ngIf="i!==0">
+    <div class="sidebarlab" (click)="onReveal(i)">
+      {{ labels[i] }}
+      <img id="downUp" src="assets/svgs/back.svg" alt=""
+      [style.transform]="'rotate(' + rotationArray[i] + 'deg)'"
+      (onclick)="onReveal(i)"> 
+    </div>
+    <hr>
+
+    <ul class="sidebarlist" [style.display]="revealArray[i] ? 'inline-block' : 'none'">
+      <li class="sidebarlist" *ngFor="let namelink of list"
+      [class.selected.sidebarlist]="namelink[1] === current"
+      (click)="onSelect(namelink[1])">
+        <a [routerLink]="[namelink[1]]">{{ namelink[0] }}</a>
+      </li>
+    </ul>
+    <hr>
+
+  </div>
+</div>
