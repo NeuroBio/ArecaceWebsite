@@ -1,6 +1,6 @@
 <nav id="biggerouter">
 
-    <div id="biggerback" [routerLink]="['../']"></div>
+    <div #back id="biggerback" [routerLink]="['../']"></div>
    
     <!-- Left and Right arrow "buttons" -->
     <img #left id="left" src="assets/svgs/back.svg" alt="Prev"
@@ -11,7 +11,7 @@
 
     <!-- Image and Text -->  
     <div id="content" (window:resize)="onResize()">
-      <div class="imgcaption" id="aligner">
+      <div class="imgcaption" id="aligner"> 
         
           <div *ngIf="loading" id="loading"></div>
             <img #bigger id="bigger"
@@ -20,9 +20,9 @@
             [alt]="activeMember.AltText ? activeMember.AltText : ''"
             (load)="onResize()">    
 
-
         <div *ngIf="activeMember.Description" class="textblock"
-        [style.height.px]="textHeight">
+        [style.height.px]="textHeight"
+        [hidden]="loading">
           <h3>{{ activeMember.Name }}</h3>
           {{ activeMember.Date }}<br><br>
           {{ activeMember.Description }}
@@ -31,10 +31,15 @@
 
       </div>
 
+      <div id="Back">
+          <a [routerLink]="['../']">Go Back</a>
+      </div>
+
       <!-- Link out to full image -->
       <div id="SeeFull">
           <a [href]="bigUrl" target="_blank">Download</a>
       </div>
+
     </div>
 
 </nav>

@@ -1,4 +1,5 @@
 div#splatter {
+    position: relative;
     background-repeat: repeat;
     background-color: rgb(53, 53, 53);
     background-image: url(https://firebasestorage.googleapis.com/v0/b/arecaceworld.appspot.com/o/WebSite%2Fsmear4.png?alt=media&token=fc921624-299c-4470-b40e-a22d256f81dd);
@@ -9,12 +10,13 @@ div#splatter {
 div#updatefeed {
     position: relative;
     float: left;
-    height: 400px;
-    width: 600px;
-    max-width: 100%;
+    height: 500px;
+    width: calc(100% - 20px);
+    max-width: 530px;
     border: 1px solid white;
     margin: 10px;
     overflow-y: scroll;
+    margin-right: 10px;
 }
 
 div#updatefeedheader {
@@ -44,8 +46,7 @@ div#quickstart {
     background-color: #454545;
     border: 1px solid white;
     margin: 10px;
-    max-width: calc(100vw - 40px);
-
+    max-width: calc(100vw - 50px);
 }
 
 h3#qsheader {
@@ -62,7 +63,9 @@ div#buttonbox {
 
 .strokeme {
     font-weight: bold;
-    background: rgba(255,255,255,.7);
+    background: rgba(255,255,255,.75);
+    text-align: center;
+    padding: 0;
 }
 
 div#smallbuttons {

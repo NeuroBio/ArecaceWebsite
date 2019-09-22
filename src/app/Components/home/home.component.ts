@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 
 @Component({
   selector: 'app-home',
@@ -8,11 +8,27 @@ import { Component, OnInit } from '@angular/core';
 
 export class HomeComponent implements OnInit {
 
+
+  buttonText: string[];
+
   constructor() { }
 
   ngOnInit() {
     window.scroll(0,0);
+    this.setButtonText();
   }
+
+  @HostListener('window:resize')
+  setButtonText() {
+    if(window.innerWidth < 560){
+      this.buttonText = ['Intro', 'Scripts','Comic','Play- ground'];
+    }else{
+      this.buttonText = ['Full Introduction',
+              'Start Comic Scripts',
+              'See Latest Page',
+              'Playgound (under construction!)'];
+    }
+  }  
     /*Finish implementing this later
     import { FireBaseService } from 'src/app/GlobalServices/firebase.service';
     import { tap } from 'rxjs/operators';

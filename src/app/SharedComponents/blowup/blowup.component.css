@@ -1,7 +1,7 @@
 /*blow up image view*/
 nav#biggerouter {
-    height: 100%;
-    width: 100%;
+    height: 100vh;
+    width: 100vw;
     position: fixed;
     left: 0;
     top: 0;
@@ -13,16 +13,12 @@ nav#biggerouter {
 }
 
 div#biggerback {
+    position: relative;
     background-color: black;
     opacity: .5;
     height: inherit;
     width: inherit;
-}
-
-#loading {
-   display: flex;
-   justify-self: center;
-   align-self: center;
+    justify-content: center;
 }
 
 div#content {
@@ -33,13 +29,15 @@ div#content {
     min-width: 200px;
     max-height: 95vh;
     background-color: rgb(116, 116, 116);
+    
 }
 
 div#aligner {
     max-height: 100vh;
     max-width: 100vw;
     display: flex;
-    align-items: flex-start;
+    min-width: 300px;
+    min-height: 300px;
 }
 
 img#bigger {
@@ -51,6 +49,7 @@ img#bigger {
     justify-self: center;
     object-fit: scale-down;
     min-width: 300px;
+    min-height: 300px;
 }
 
 div.textblock {
@@ -74,6 +73,7 @@ img#right {
     cursor: pointer;
     -webkit-transform: rotate(-90deg);
     transform: rotate(-90deg);
+    background-color: rgba(0,0,0,.3);
 }
 
 img#left {
@@ -87,13 +87,14 @@ img#left {
     cursor: pointer;
     -webkit-transform: rotate(90deg);
     transform: rotate(90deg);
+    background-color: rgba(0,0,0,.3);
 }
 
 img:focus {
     outline: 2px dotted white;
 }
 
-div#help {
+/* div#help {
     position: relative;
     padding: 2px;
     width: 300px;
@@ -101,11 +102,20 @@ div#help {
     right: 0;
     bottom: 0;
     font-size: 14px;
-}
+} */
 
 div#SeeFull {
     z-index: 15;
     position: fixed;
     bottom: 0;
     right: 7px;
+    background-color: rgba(0,0,0,.3);
+}
+
+div#Back {
+    z-index: 15;
+    position: fixed;
+    bottom: 0;
+    left: 7px;
+    background-color: rgba(0,0,0,.3);
 }

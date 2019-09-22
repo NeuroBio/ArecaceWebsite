@@ -28,6 +28,9 @@ export class BlowUpComponent implements OnInit {
   @ViewChild('bigger') bigger: ElementRef;
   textHeight: number;
 
+  @ViewChild('back') back: ElementRef;
+  lewl: any;
+
   constructor(private router: Router,
               private location: Location,
               private global: GlobalVarsService) { }
@@ -37,14 +40,16 @@ export class BlowUpComponent implements OnInit {
     this.bigUrl = this.activeMember.Links[1];
     this.loading = this.global.ImagesLoadable;
       setTimeout(() => { this.onResize() }, 10);
+    this.lewl = [this.back.nativeElement.offsetHeight, this.back.nativeElement.offsetWidth,
+      window.innerHeight,window.innerWidth];
   }
 
   onResize(){
     this.loading = false;
     setTimeout(() =>{
       this.textHeight = this.bigger.nativeElement.offsetHeight - 30;
-      if(this.textHeight < 600){
-        this.textHeight = 600;
+      if(this.textHeight < 400){
+        this.textHeight = 400;
       }
     }, 10)
     
