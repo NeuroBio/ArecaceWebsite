@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { FireBaseService } from './firebase.service';
 import { GeneralcollectionService } from './generalcollection.service';
-import { FileHierarchy } from 'src/app/Classes/filehierarchy';
+import { FirebasePaths } from 'src/app/Classes/FirebasePaths';
 import { take, tap } from 'rxjs/operators';
 import { ActivatedRouteSnapshot, Resolve, Router } from '@angular/router';
 
@@ -10,7 +10,7 @@ import { ActivatedRouteSnapshot, Resolve, Router } from '@angular/router';
 })
 export class GeneralcollectionresolverService implements Resolve<any>{
   
-  FH = new FileHierarchy;
+  firePaths = new FirebasePaths;
 
   constructor(private firebaseserv: FireBaseService,
               private generalcollectionserv: GeneralcollectionService,
@@ -18,7 +18,7 @@ export class GeneralcollectionresolverService implements Resolve<any>{
   
   resolve(route: ActivatedRouteSnapshot){
     const type = route.url[route.url.length-1].path
-    return this.firebaseserv.returnCollect(this.FH[type].Path).pipe(
+    return this.firebaseserv.returnCollect(this.firePaths[type]).pipe(
       take(1),
       tap(collect =>{
         if(collect[0]){

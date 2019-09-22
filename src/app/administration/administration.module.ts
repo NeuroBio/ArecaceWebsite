@@ -21,7 +21,8 @@ import { UpdateFormComponent }          from './Forms/update/update-form/update-
 import { ExtrasFormComponent }            from './Forms/extras/extrasform/extrasform.component';
 import { AdminDutiesComponent }         from './DashBoard/adminDuties/adminDuties.component';
 import { MessageComponent }             from './DashBoard/message/message.component';
-import { ButtonsComponent }             from './Forms/z-buttons/buttons.component'
+import { ButtonsComponent }             from './Forms/z-buttons/buttons.component';
+import { HomeComponent } from './Forms/home/home.component'
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { ButtonsComponent }             from './Forms/z-buttons/buttons.componen
     ExtrasFormComponent,
     AdminDutiesComponent,
     MessageComponent,
-    ButtonsComponent
+    ButtonsComponent,
+    HomeComponent
   ],
   imports: [
     CommonModule,

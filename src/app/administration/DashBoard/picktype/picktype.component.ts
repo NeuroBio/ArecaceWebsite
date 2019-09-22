@@ -3,7 +3,7 @@ import { Component, OnInit, OnDestroy }   from '@angular/core';
 import { Subscription }                   from 'rxjs';
 
 import { CRUDcontrollerService }          from '../../services/CRUDcontroller.service';
-import { FileHierarchy }                  from 'src/app/Classes/filehierarchy';
+import { FirebasePaths }                  from 'src/app/Classes/FirebasePaths';
 
 @Component({
   selector: 'app-picktype',
@@ -15,7 +15,7 @@ export class PickTypeComponent implements OnInit, OnDestroy{
 
   current: string;
   stream: Subscription;
-  typeList: string[] = Object.keys(new FileHierarchy);
+  typeList: string[] = Object.keys(new FirebasePaths);
 
   constructor(private controller: CRUDcontrollerService) { }
   

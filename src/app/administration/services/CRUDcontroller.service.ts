@@ -5,7 +5,7 @@ import { map, take, tap }                          from 'rxjs/operators';
 import { BehaviorSubject, Observable, Subject, of }  from 'rxjs';
 
 import { FireBaseService }              from 'src/app/GlobalServices/firebase.service';
-import { FileHierarchy } from 'src/app/Classes/filehierarchy';
+import { FirebasePaths } from 'src/app/Classes/FirebasePaths';
 import { CRUD } from './CRUD.service';
 
 @Injectable({
@@ -14,21 +14,16 @@ import { CRUD } from './CRUD.service';
 
 export class CRUDcontrollerService {
 
-  fileHierarchy = new FileHierarchy;
-
+  firePaths = new FirebasePaths;
   allowButtons = new BehaviorSubject<ButtonController>(new ButtonController([true, true, false, false]))
-  // allowDelete = new BehaviorSubject<boolean>(false);
-  // allowUpdateAll = new BehaviorSubject<boolean>(false);
-  // allowReset = new BehaviorSubject<boolean>(false);
-  // allowSubmit = new BehaviorSubject<boolean>(false);
-
   itemType = new BehaviorSubject<string>('');
   itemToEdit = new BehaviorSubject<any>(undefined);
+  
   //activeFormData is: form data[0], new image paths[1], new images[2],
   //old image paths[3], text path[4], new text[5], old  text path [6] 
   activeFormData = new BehaviorSubject<any>(undefined);
+  
   message = new BehaviorSubject<string>(undefined);
-
   triggerProcess = new Subject<any>();
 
   constructor(private firebaseserv: FireBaseService,
@@ -105,7 +100,7 @@ export class CRUDcontrollerService {
           meta.StoryLink = link;
         }
         console.log("meta");
-        return this.crud.uploadItem(meta, this.fileHierarchy[this.itemType.value].Path);
+        return this.crud.uploadItem(meta, this.firePaths[this.itemType.value]);
       }).then(() => {
         this.itemToEdit.next(undefined);
         this.message.next("Submitted!");
@@ -146,7 +141,7 @@ export class CRUDcontrollerService {
       }
       console.log("meta");
       return this.crud.editItem(meta,
-              this.fileHierarchy[this.itemType.value].Path,
+              this.firePaths[this.itemType.value],
               this.itemToEdit.value.key);
     }).then(() =>{
       this.itemToEdit.next(undefined);
@@ -174,7 +169,7 @@ export class CRUDcontrollerService {
     if("StoryLink" in item){
       links.push(item.StoryLink);
     }
-    this.crud.deleteItem(links, this.fileHierarchy[this.itemType.value].Path, item.key)
+    this.crud.deleteItem(links, this.firePaths[this.itemType.value], item.key)
     .then(() => {
         this.itemToEdit.next(undefined);
         this.message.next('Delete successful!')
@@ -188,7 +183,7 @@ export class CRUDcontrollerService {
     const buttonState = this.allowButtons.value;
     this.allowButtons.next(new ButtonController([false, false, false, false]));
 
-    this.getEditableCollection(this.fileHierarchy[this.itemType.value].Path)
+    this.getEditableCollection(this.firePaths[this.itemType.value])
     .pipe(take(1)).subscribe( collect =>{
       return this.updateLoop(collect).then(() => {      
       this.message.next("All entries updated!");
