@@ -65,7 +65,7 @@ export class ChapterFormComponent implements OnInit, OnDestroy {
   }    
   
   processForm() {
-    const Final: ChapterMetaData = this.Form.value;
+    const Final: ChapterMetaData = Object.assign({}, this.Form.value);
     Final.NumPages = this.pageFiles.length;
     const pagePaths: string[] = this.getPagePaths(this.pageFiles, Final);
     this.controller.activeFormData.next([Final,

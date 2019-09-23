@@ -63,7 +63,7 @@
     <select formControlName="Qt"
     (change)="updateAge($event.target.value)">
         <option *ngFor="let qt of DropDowns.Quartrits; let i = index"
-        [value]="qt.qt">{{ qt.qt }}</option>
+        [value]="qt">{{ qt }}</option>
     </select> 
 
     <select formControlName="Day">

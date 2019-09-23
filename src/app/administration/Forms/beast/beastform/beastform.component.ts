@@ -75,7 +75,7 @@ export class BeastFormComponent implements OnInit, OnDestroy {
     }
     
     //Complete Form
-    const Final:BeastMetaData = this.Form.value;
+    const Final:BeastMetaData = Object.assign({}, this.Form.value);
     Final.ID = Final.Name.split(' ').join('');
     
     this.controller.activeFormData.next([Final,

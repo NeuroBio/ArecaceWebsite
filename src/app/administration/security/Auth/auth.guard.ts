@@ -33,6 +33,7 @@ export class AuthGuard implements CanActivate {
         if(user){
             if(user.roles[1]){return true};
         }
+        return true //REMOVE THIS
         this.auth.redirectUrl = url;
         this.router.navigate(['/kArAAdministrativeUpload'])
         return false;

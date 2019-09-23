@@ -86,7 +86,7 @@ export class ReferenceFormComponent implements OnInit, OnDestroy {
     }
     
     //Complete Form
-    const Final = this.Form.value;
+    const Final = Object.assign({}, this.Form.value);
     Final.ID = this.Form.controls.Topic.value.split(' ').join('');
 
     this.controller.activeFormData.next([Final,

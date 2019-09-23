@@ -7,6 +7,7 @@ import { CharacterMetaData }            from 'src/app/Classes/charactermetadata'
 import { CRUDcontrollerService }        from '../../../services/CRUDcontroller.service';
 import { UploadCharacterDrops }         from '../uploadcharacterdrops';
 import { SourceAbilities, Relations }   from '../formclasses';
+import { BirthdayService } from '../birthday.service';
 
 
 @Component({
@@ -42,7 +43,8 @@ export class CharacterFormComponent implements OnInit, OnDestroy{
   showUnique = false; 
 
   constructor(private fb: FormBuilder,
-              private controller: CRUDcontrollerService) {}
+              private controller: CRUDcontrollerService,
+              private birthday: BirthdayService) {}
 
   ngOnInit() {
     this.stream1 = this.controller.itemToEdit.subscribe(item => {
@@ -131,7 +133,7 @@ export class CharacterFormComponent implements OnInit, OnDestroy{
        return ;
     }
 
-    const Final:CharacterMetaData = this.Form.value; 
+    const Final:CharacterMetaData = Object.assign({}, this.Form.value); 
     Final.SourceAbilitiesFormatted = this.FormatSA(Final);
     Final.RelationsFormatted = this.FormatRelat(Final);
     Final.SourceAbilities = JSON.stringify(Final.SourceAbilities);
@@ -144,6 +146,7 @@ export class CharacterFormComponent implements OnInit, OnDestroy{
                         .concat(this.refNames(this.fullFiles, Final.FirstName));
     const imageEvents = [this.biopicFile].concat(this.combineLinks(this.fullFiles, this.thumbFiles));
     
+    this.birthday.updateBirthdayData(Final);
     this.controller.activeFormData.next([Final,
                                       imagePaths,
                                       imageEvents,
@@ -297,10 +300,10 @@ export class CharacterFormComponent implements OnInit, OnDestroy{
     this.Form.patchValue({Territory: this.activeRegion[0]})
   }
 
-  updateAge(qt: string){
-    const qtData = this.DropDowns.Quartrits.filter(x => qt === x.qt)[0];
-    this.daysArray = new Array(qtData.days);
-    this.Form.patchValue({ Zodiac: qtData.zodiac, Day: 1 })
+  updateAge(chosenQT: string){
+    const index = this.DropDowns.Quartrits.findIndex(QT => chosenQT === QT);
+    this.daysArray = new Array(this.DropDowns.Months[index]);
+    this.Form.patchValue({ Zodiac: this.DropDowns.Zodiacs[index], Day: 1 })
   }
 
   updateCM() {

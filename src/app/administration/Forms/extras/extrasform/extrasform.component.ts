@@ -69,7 +69,7 @@ export class ExtrasFormComponent implements OnInit, OnDestroy {
         "Misc files require full and thumb images."]);
       return ;
     }
-    const Final:ExtrasMetaData = this.Form.value;
+    const Final:ExtrasMetaData = Object.assign({}, this.Form.value);
     Final.ID = this.Form.controls.Name.value.split(' ').join('');
 
     this.controller.activeFormData.next([Final,

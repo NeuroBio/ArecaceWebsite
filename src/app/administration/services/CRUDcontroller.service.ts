@@ -18,6 +18,7 @@ export class CRUDcontrollerService {
   allowButtons = new BehaviorSubject<ButtonController>(new ButtonController([true, true, false, false]))
   itemType = new BehaviorSubject<string>('');
   itemToEdit = new BehaviorSubject<any>(undefined);
+  itemList = new BehaviorSubject<any[]>(undefined);
   
   //activeFormData is: form data[0], new image paths[1], new images[2],
   //old image paths[3], text path[4], new text[5], old  text path [6] 
@@ -41,7 +42,7 @@ export class CRUDcontrollerService {
   getEditableCollection(path: string): Observable<any[]>{
       return this.firebaseserv.returnCollectionWithKeys(path).pipe(
         map(collect =>
-          collect.sort((a,b) => a.ID > b.ID ? 1:-1)
+          collect.sort((a,b) => a.ID > b.ID ? 1:-1),
     ));
   }
 
@@ -60,6 +61,12 @@ export class CRUDcontrollerService {
       }
     });
     return Form;
+  }
+
+  assignItemList(path: string) {
+    return this.getEditableCollection(path).subscribe(collect => {
+      this.itemList.next(collect)
+    });
   }
 
   getText(link: string){
@@ -183,13 +190,10 @@ export class CRUDcontrollerService {
     const buttonState = this.allowButtons.value;
     this.allowButtons.next(new ButtonController([false, false, false, false]));
 
-    this.getEditableCollection(this.firePaths[this.itemType.value])
-    .pipe(take(1)).subscribe( collect =>{
-      return this.updateLoop(collect).then(() => {      
+      return this.updateLoop(this.itemList.value).then(() => {      
       this.message.next("All entries updated!");
       this.allowButtons.next(buttonState);
       }).catch(() => this.allowButtons.next(buttonState));
-    });
   }
 
   async updateLoop(collect: any[]) {

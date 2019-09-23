@@ -60,7 +60,7 @@ export class StoryFormComponent implements OnInit, OnDestroy {
   }
 
   processForm() {
-    let Final = this.Form.value;
+    let Final = Object.assign({}, this.Form.value);
     delete Final.Story;
     let oldText:string;
     if(this.editFormData){

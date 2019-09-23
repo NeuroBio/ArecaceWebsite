@@ -63,7 +63,7 @@ export class UpdateFormComponent implements OnInit, OnDestroy {
   }
 
   processForm() {
-    const Final: PostData = this.Form.value;
+    const Final: PostData = Object.assign({}, this.Form.value);
     let oldImages: string[] = [];
     let newImages: any[] = []
     if(!this.editFormData) {

@@ -23,30 +23,33 @@ export class EditListComponent implements OnInit, OnDestroy {
   loading: boolean = false;
   
   stream1: Subscription;
+  stream2: Subscription;
 
-  constructor(private editserv: CRUDcontrollerService) { }
+  constructor(private controller: CRUDcontrollerService) { }
 
   ngOnInit() {
-    this.stream1 = this.editserv.itemType.subscribe(type => {
+    this.stream1 = this.controller.itemType.subscribe(type => {
       this.type = type;
-      this.editserv.assignEditItem(undefined);
+      this.controller.assignEditItem(undefined);
       this.loading = true;
-      this.editserv.getEditableCollection(this.firePaths[type])
-        .subscribe(collect => {
-          this.selectable = collect;
-          this.loading = false;
-      });
+      this.controller.assignItemList(this.firePaths[type])
+    });
+    
+    this.stream2 = this.controller.itemList.subscribe(list => {
+      this.selectable = list;
+      this.loading = false;
     });
   }
   
   ngOnDestroy(){
     this.stream1.unsubscribe();
-    this.editserv.assignEditItem(undefined);
+    this.stream2.unsubscribe();
+    this.controller.assignEditItem(undefined);
   }
 
   onSelect(selected: string, ind: number){
       this.selected = selected;
-      this.editserv.assignEditItem(this.selectable[ind])  
+      this.controller.assignEditItem(this.selectable[ind])  
   }
 
 }

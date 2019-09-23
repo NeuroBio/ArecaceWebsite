@@ -73,7 +73,7 @@ export class GuildFormComponent implements OnInit, OnDestroy {
     }
     
     //Complete Form
-    const Final:GuildMetaData = this.Form.value;
+    const Final:GuildMetaData = Object.assign({}, this.Form.value);
     Final.ID = Final.GuildName.split(' ')[0];
     if(Final.ID === 'The'){
       Final.ID = 'DIA'

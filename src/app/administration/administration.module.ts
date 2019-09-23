@@ -22,7 +22,6 @@ import { ExtrasFormComponent }            from './Forms/extras/extrasform/extras
 import { AdminDutiesComponent }         from './DashBoard/adminDuties/adminDuties.component';
 import { MessageComponent }             from './DashBoard/message/message.component';
 import { ButtonsComponent }             from './Forms/z-buttons/buttons.component';
-import { HomeComponent } from './Forms/home/home.component'
 
 @NgModule({
   declarations: [
@@ -43,7 +42,6 @@ import { HomeComponent } from './Forms/home/home.component'
     AdminDutiesComponent,
     MessageComponent,
     ButtonsComponent,
-    HomeComponent
   ],
   imports: [
     CommonModule,
@@ -52,4 +50,5 @@ import { HomeComponent } from './Forms/home/home.component'
     AdministrationRoutingModule
   ]
 })
+
 export class AdministrationModule { }

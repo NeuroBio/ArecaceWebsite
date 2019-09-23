@@ -1,8 +1,5 @@
-export class QTData{
-    qt:string;
-    days:number;
-    zodiac:string;
-}
+import { DateInfo } from 'src/app/Classes/datedata';
+
 export class countryData{
     id:string;
     terr:string[];
@@ -26,18 +23,11 @@ export class UploadCharacterDrops {
         {id:"Salixen", terr:["Alliar", "Allium", "Anthus", "Tanacet", "Urtica"]}
     ];     
     
-    Quartrits:QTData[]=[{qt:"Qt1-1", days:30, zodiac:"The Engineer"},
-                        {qt:"Qt1-2", days:29, zodiac:"The Guardian"},
-                        {qt:"Qt1-3", days:30, zodiac:"The Healer"},
-                        {qt:"Qt2-1", days:30, zodiac:"The Mother"},
-                        {qt:"Qt2-2", days:29, zodiac:"The Musician"},
-                        {qt:"Qt2-3", days:30, zodiac:"The Jester"},
-                        {qt:"Qt3-1", days:30, zodiac:"The Magician"},
-                        {qt:"Qt3-2", days:29, zodiac:"The Mercenary"},
-                        {qt:"Qt3-3", days:30, zodiac:"The Hunter"},
-                        {qt:"Qt4-1", days:30, zodiac:"The Drifter"},
-                        {qt:"Qt4-2", days:29, zodiac:"The Diplomat"},
-                        {qt:"Qt4-3", days:30, zodiac:"The Philosopher"}];
+    Months: number[]
+    
+    Quartrits: string[]
+
+    Zodiacs: string[]
 
     Ethnicity:EthnicityData[]=[{id:"Hnd", hex:"#513d1e"},
                                 {id:"Hnd-s", hex:"#997757"},
@@ -56,4 +46,10 @@ export class UploadCharacterDrops {
                           "Energy Gathering", "Epitax", "Ghost Hack", "Growth",
                           "Integrate", "Maintain", "Metamorph", "Rebuild",
                           "Refine", "Soothe", "Stagnate"]
+    constructor() {
+        const Dates = new DateInfo();
+        this.Months = Dates.ArecaceMonthLengths;
+        this.Quartrits = Dates.ArecaceMonthNames;
+        this.Zodiacs = Dates.ArecaceZodiac;
+    }
 }
