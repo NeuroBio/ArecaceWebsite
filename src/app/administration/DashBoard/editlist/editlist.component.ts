@@ -38,6 +38,7 @@ export class EditListComponent implements OnInit, OnDestroy {
       });
     });
   }
+  
   ngOnDestroy(){
     this.stream1.unsubscribe();
     this.editserv.assignEditItem(undefined);

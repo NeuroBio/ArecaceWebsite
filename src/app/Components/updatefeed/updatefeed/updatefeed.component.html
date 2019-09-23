@@ -11,7 +11,7 @@
           <div *ngIf="post.Links">
             <img [src]="post.Links" [alt]="post.AltText">
           </div>
-          <div id="right" *ngIf="post.Edited">(Edited)</div>
+          <div id="right" *ngIf="post.Edited === true">(Edited)</div>
           <div style="clear: both;"></div>
       </div>
       <br>
