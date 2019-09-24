@@ -28,7 +28,6 @@ export class CharacterFormComponent implements OnInit, OnDestroy{
 
   stream1: Subscription;
   stream2: Subscription;
-  editFormData: any;
   init = true;
   
   SourceAbilitiesArray = this.populateSAbilities();
@@ -48,8 +47,7 @@ export class CharacterFormComponent implements OnInit, OnDestroy{
 
   ngOnInit() {
     this.stream1 = this.controller.itemToEdit.subscribe(item => {
-      this.editFormData = item;
-      this.assignFormData();
+      this.assignFormData(item);
       this.init = false;
     });
     this.stream2 = this.controller.triggerProcess.subscribe(() => this.processForm());
@@ -99,21 +97,21 @@ export class CharacterFormComponent implements OnInit, OnDestroy{
     });
   }
 
-  assignFormData() {
-    if(this.editFormData){
+  assignFormData(editFormData: any) {
+    if(editFormData) {
       this.onReset();
-      this.Form = this.controller.quickAssign(this.Form, this.editFormData);
+      this.Form = this.controller.quickAssign(this.Form, editFormData);
       
       this.Form.controls.SourceAbilities.setValue(
-        <SourceAbilities[]>JSON.parse(this.editFormData.SourceAbilities));
+        <SourceAbilities[]>JSON.parse(editFormData.SourceAbilities));
       
       this.Form.controls.Unique.setValue(
-        <SourceAbilities[]>JSON.parse(this.editFormData.Unique));
+        <SourceAbilities[]>JSON.parse(editFormData.Unique));
       
-        const relatives = <Relations[]>JSON.parse(this.editFormData.Relations);
+        const relatives = <Relations[]>JSON.parse(editFormData.Relations);
       relatives.forEach(relative => this.addRelative(true, relative.RelationName, relative.Relationship));
-      if(this.editFormData.ReferenceIDs){
-        this.editFormData.ReferenceIDs.forEach(Ref => this.addRef(true, Ref.Ref));
+      if(editFormData.ReferenceIDs){
+        editFormData.ReferenceIDs.forEach(Ref => this.addRef(true, Ref.Ref));
       }
 
       this.showUnique = this.Form.controls.Unique.value.Known;

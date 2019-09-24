@@ -16,7 +16,6 @@ export class ChapterFormComponent implements OnInit, OnDestroy {
   
   stream1: Subscription;
   stream2: Subscription;
-  editFormData: any;
   init = true;
 
   pageFiles = new Array(10);
@@ -31,8 +30,7 @@ export class ChapterFormComponent implements OnInit, OnDestroy {
   
   ngOnInit() {
     this.stream1 = this.controller.itemToEdit.subscribe(item => {
-      this.editFormData = item;
-      this.assignFormData();
+      this.assignFormData(item);
       this.init = false;
     });
     this.stream2 = this.controller.triggerProcess.subscribe(() => this.processForm());
@@ -54,10 +52,11 @@ export class ChapterFormComponent implements OnInit, OnDestroy {
     });
   }
 
-  assignFormData() {
-    if(this.editFormData) {
-      this.Form = this.controller.quickAssign(this.Form, this.editFormData);
-      this.pageFiles = Array.apply(null, Array(this.editFormData.Links.length)).map(function () {});
+  assignFormData(editFormData: any) {
+    if(editFormData) {
+      this.onReset();
+      this.Form = this.controller.quickAssign(this.Form, editFormData);
+      this.pageFiles = Array.apply(null, Array(editFormData.Links.length)).map(function () {});
       this.dummy = new Array(this.pageFiles.length);
     } else if(!this.init) {
       this.onReset();

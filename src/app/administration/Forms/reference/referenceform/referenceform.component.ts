@@ -21,7 +21,6 @@ export class ReferenceFormComponent implements OnInit, OnDestroy {
   stream1: Subscription;
   stream2: Subscription;
 
-  editFormData: any;
   init = true;
   
   cats = new Categories;
@@ -36,8 +35,7 @@ export class ReferenceFormComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.stream1 = this.controller.itemToEdit.subscribe(item => {
-      this.editFormData = item;
-      this.assignFormData();
+      this.assignFormData(item);
       this.init = false;
     });
     this.stream2 = this.controller.triggerProcess.subscribe(() => this.processForm());
@@ -67,10 +65,10 @@ export class ReferenceFormComponent implements OnInit, OnDestroy {
     });
   }
 
-  assignFormData() {
-    if(this.editFormData) {
+  assignFormData(editFormData: any) {
+    if(editFormData) {
       this.onReset();
-      this.Form = this.controller.quickAssign(this.Form, this.editFormData);
+      this.Form = this.controller.quickAssign(this.Form, editFormData);
     } else if(!this.init) {
       this.onReset();
     }

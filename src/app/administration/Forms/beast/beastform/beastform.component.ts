@@ -22,7 +22,6 @@ export class BeastFormComponent implements OnInit, OnDestroy {
   thumbFile: any;
   fullFile: any;
 
-  editFormData: any;
   stream1: Subscription;
   stream2: Subscription;
   init = true;
@@ -32,8 +31,7 @@ export class BeastFormComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.stream1 = this.controller.itemToEdit.subscribe(item => {
-      this.editFormData = item;
-      this.assignFormData();
+      this.assignFormData(item);
       this.init = false;
     });
     this.stream2 = this.controller.triggerProcess.subscribe(() => this.processForm());
@@ -55,10 +53,10 @@ export class BeastFormComponent implements OnInit, OnDestroy {
     });
   }
 
-  assignFormData() {
-    if(this.editFormData) {
+  assignFormData(editFormData: any) {
+    if(editFormData) {
       this.onReset();
-      this.Form = this.controller.quickAssign(this.Form, this.editFormData);
+      this.Form = this.controller.quickAssign(this.Form, editFormData);
     } else if(!this.init) {
       this.onReset();
     }

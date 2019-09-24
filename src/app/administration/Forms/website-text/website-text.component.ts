@@ -13,7 +13,6 @@ import { takeUntil } from 'rxjs/operators';
 export class WebsiteTextComponent implements OnInit, OnDestroy {
 
   Form = this.createForm();
-  editFormData: any;
   stream1 = new Subscription();
   stop$ = new Subject<boolean>();
 
@@ -24,8 +23,7 @@ export class WebsiteTextComponent implements OnInit, OnDestroy {
     this.controller.itemToEdit
     .pipe(takeUntil(this.stop$))
     .subscribe(item => {
-      this.editFormData = item;
-      this.assignFormData();
+      this.assignFormData(item);
     });
 
     this.stream1 = this.controller.triggerProcess.subscribe(() => this.processForm());
@@ -43,10 +41,10 @@ export class WebsiteTextComponent implements OnInit, OnDestroy {
     })
   }
 
-  assignFormData() {
-    if(this.editFormData) {
+  assignFormData(editFormData: any) {
+    if(editFormData) {
       this.onReset();
-      this.Form = this.controller.quickAssign(this.Form, this.editFormData);
+      this.Form = this.controller.quickAssign(this.Form, editFormData);
       this.stop$.next(true)
     }
   }
