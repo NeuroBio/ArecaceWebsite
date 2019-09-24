@@ -25,11 +25,10 @@ export class DropDownComponent implements OnInit {
       this.revealArray.push(false);
       this.rotationArray.push(0);
     });
-    
   }
 
   onSelect(selected: string) {
-    this.current = selected; 
+    this.current = selected;
   }
 
   onReveal(index: number){

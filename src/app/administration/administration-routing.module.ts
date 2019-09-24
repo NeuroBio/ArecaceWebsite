@@ -17,8 +17,10 @@ import { UpdateFormComponent }      from './Forms/update/update-form/update-form
 import { ExtrasFormComponent }      from './Forms/extras/extrasform/extrasform.component';
 import { AdminDutiesComponent }     from './DashBoard/adminDuties/adminDuties.component';
 import { MessageComponent }         from './DashBoard/message/message.component';
+import { PagesComponent } from './DashBoard/pages/pages.component';
 
 import { MessageresolverService } from './DashBoard/message/messageresolver.service';
+import { WebsiteTextComponent } from './Forms/website-text/website-text.component';
 
 
 const AdminRoutes: Routes = [
@@ -44,6 +46,13 @@ const AdminRoutes: Routes = [
           {path: 'extras', component: ExtrasFormComponent},
           {path: 'maps', component: ReferenceFormComponent},
         ]},
+        {path: 'Pages', component:PagesComponent, 
+         children:[
+          {path: '', redirectTo: 'home', pathMatch: 'full'},
+          {path: 'home', component: WebsiteTextComponent },
+          {path: 'about', component: WebsiteTextComponent },
+         ]
+      },
         {path:'Messages', component: MessageComponent,
           resolve: {MessageresolverService}}
       ]

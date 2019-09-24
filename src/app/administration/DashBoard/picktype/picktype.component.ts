@@ -1,9 +1,7 @@
 import { Component, OnInit, OnDestroy }   from '@angular/core';
-
 import { Subscription }                   from 'rxjs';
 
 import { CRUDcontrollerService }          from '../../services/CRUDcontroller.service';
-import { FirebasePaths }                  from 'src/app/Classes/FirebasePaths';
 
 @Component({
   selector: 'app-picktype',
@@ -14,17 +12,18 @@ import { FirebasePaths }                  from 'src/app/Classes/FirebasePaths';
 export class PickTypeComponent implements OnInit, OnDestroy{
 
   current: string;
-  stream: Subscription;
-  typeList: string[] = Object.keys(new FirebasePaths);
+  stream1: Subscription;
+  typeList: string[];
 
   constructor(private controller: CRUDcontrollerService) { }
   
   ngOnInit(){
-    this.stream = this.controller.itemType.subscribe(type  => this.current = type);
+    this.stream1 = this.controller.itemType.subscribe(type  => this.current = type);
+    this.typeList = Object.keys(this.controller.firePaths.value);
   }
   
   ngOnDestroy(){
-    this.stream.unsubscribe();
+    this.stream1.unsubscribe();
   }
   onClick(type: string){
     this.controller.assignItemType(type);

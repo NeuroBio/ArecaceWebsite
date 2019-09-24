@@ -21,7 +21,10 @@ import { UpdateFormComponent }          from './Forms/update/update-form/update-
 import { ExtrasFormComponent }            from './Forms/extras/extrasform/extrasform.component';
 import { AdminDutiesComponent }         from './DashBoard/adminDuties/adminDuties.component';
 import { MessageComponent }             from './DashBoard/message/message.component';
-import { ButtonsComponent }             from './Forms/z-buttons/buttons.component';
+import { ButtonsComponent }             from './Forms/z-buttons/upload-content/buttons.component';
+import { PagesComponent } from './DashBoard/pages/pages.component';
+import { WebsiteTextComponent } from './Forms/website-text/website-text.component';
+import { PageSubmitComponent } from './Forms/z-buttons/page-submit/page-submit.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +45,9 @@ import { ButtonsComponent }             from './Forms/z-buttons/buttons.componen
     AdminDutiesComponent,
     MessageComponent,
     ButtonsComponent,
+    PagesComponent,
+    WebsiteTextComponent,
+    PageSubmitComponent,
   ],
   imports: [
     CommonModule,

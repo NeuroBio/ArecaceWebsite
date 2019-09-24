@@ -2,9 +2,8 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { Subscription }                 from 'rxjs';
 
-import { CRUDcontrollerService }                  from '../../services/CRUDcontroller.service';
-import { FirebasePaths }          from '../../../Classes/FirebasePaths';
-
+import { CRUDcontrollerService }         from '../../services/CRUDcontroller.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-editlist',
@@ -14,42 +13,56 @@ import { FirebasePaths }          from '../../../Classes/FirebasePaths';
 
 export class EditListComponent implements OnInit, OnDestroy {
   
-  firePaths = new FirebasePaths;
   path: string;
   type: string;
 
   selected: string;
   selectable: any[];
   loading: boolean = false;
-  
+
   stream1: Subscription;
   stream2: Subscription;
 
-  constructor(private controller: CRUDcontrollerService) { }
+  constructor(private controller: CRUDcontrollerService,
+              private route: ActivatedRoute,
+              private router: Router) { }
 
   ngOnInit() {
     this.stream1 = this.controller.itemType.subscribe(type => {
       this.type = type;
       this.controller.assignEditItem(undefined);
       this.loading = true;
-      this.controller.assignItemList(this.firePaths[type])
+      this.controller.assignItemList(this.controller.firePaths.value[type])
     });
-    
+
     this.stream2 = this.controller.itemList.subscribe(list => {
       this.selectable = list;
+      this.forPagesInit();
       this.loading = false;
     });
   }
-  
-  ngOnDestroy(){
+
+  ngOnDestroy() {
     this.stream1.unsubscribe();
     this.stream2.unsubscribe();
     this.controller.assignEditItem(undefined);
   }
 
-  onSelect(selected: string, ind: number){
+  onSelect(selected: string, ind: number) {
       this.selected = selected;
-      this.controller.assignEditItem(this.selectable[ind])  
+      if(this.type === "Website"){
+        this.router.navigate([`./${this.selected}`], { relativeTo: this.route })
+      }
+      this.controller.assignEditItem(this.selectable[ind]);
+  }
+
+  forPagesInit() {
+    if(this.type === "Website"  && this.selectable){
+      const access = this.route.snapshot.firstChild.url.toString();
+      this.controller.assignEditItem(
+        this.selectable.find(element => element.ID === access));
+      this.selected = access; 
+    }
   }
 
 }

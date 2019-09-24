@@ -11,31 +11,32 @@ import { CRUDcontrollerService }          from '../../services/CRUDcontroller.se
 
 export class ContentComponent implements OnInit {
 
-  edit:boolean = false;
+  edit = false;
   
   constructor(private route: ActivatedRoute,
-              private editserv: CRUDcontrollerService) { }
+              private controller: CRUDcontrollerService) { }
 
-  ngOnInit() { 
+  ngOnInit() {
+    this.controller.assignFirePaths(false);
     this.route.firstChild.url.subscribe(path =>
-        this.editserv.assignItemType(path[path.length-1].toString())
+        this.controller.assignItemType(path[path.length-1].toString())
     );
   }
   
-  onEditCheck(edit:boolean){
-    this.edit=edit;
+  onEditCheck(edit:boolean) {
+    this.edit = edit;
   }
 
-  onAllow(type:number){
+  onAllow(type:number) {
     if (type===0){
-      this.editserv.updateButton('delete', false);
-      this.editserv.updateButton('updateAll', false);
-    }else if(type===1){
-      this.editserv.updateButton('delete', true);
-      this.editserv.updateButton('updateAll', false);
-    }else{
-      this.editserv.updateButton('delete', false);
-      this.editserv.updateButton('updateAll', true);
+      this.controller.updateButton('delete', false);
+      this.controller.updateButton('updateAll', false);
+    } else if(type===1) {
+      this.controller.updateButton('delete', true);
+      this.controller.updateButton('updateAll', false);
+    } else {
+      this.controller.updateButton('delete', false);
+      this.controller.updateButton('updateAll', true);
     }
   }
   

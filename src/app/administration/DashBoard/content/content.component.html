@@ -1,37 +1,37 @@
 <!--Main Controls-->
 <div style="float:left;"> 
-<app-picktype></app-picktype><br>
+    <app-picktype></app-picktype><br>
 
 
-<!-- Enable scary buttons -->
-<div>
-    <h3>Allow:</h3>
-    <label class="standard" for="none">None</label>
-    <input id="none" type="radio" name="options" checked="true"  (click)="onAllow(0)"><br>
-    <label class="standard" for="delete">Delete</label>
-    <input id="delete" type="radio" name="options" (click)="onAllow(1)"><br>
-    <label class="standard" for="all">Update All</label>
-    <input id="all" type="radio" name="options" (click)="onAllow(2)"><br>
-</div><br>
+    <!-- Enable scary buttons -->
+    <div>
+        <h3>Allow:</h3>
+        <label class="standard" for="none">None</label>
+        <input id="none" type="radio" name="options" checked="true"  (click)="onAllow(0)"><br>
+        <label class="standard" for="delete">Delete</label>
+        <input id="delete" type="radio" name="options" (click)="onAllow(1)"><br>
+        <label class="standard" for="all">Update All</label>
+        <input id="all" type="radio" name="options" (click)="onAllow(2)"><br>
+    </div><br>
 
-<!--Form picker-->
-<div class="toggler" style="float:left">
+    <!--Form picker-->
+    <div class="toggler" style="float:left">
 
-    <input type="radio" class="toggler" name="editup" id="upload" checked=true
-    (click)="onEditCheck(false)">
-    <label for="upload">Upload</label>
+        <input type="radio" class="toggler" name="editup" id="upload" checked=true
+        (click)="onEditCheck(false)">
+        <label for="upload">Upload</label>
 
-    <input type="radio" class="toggler" name="editup" id="edit"
-    (click)="onEditCheck(true)">
-    <label for="edit">Edit</label>
+        <input type="radio" class="toggler" name="editup" id="edit"
+        (click)="onEditCheck(true)">
+        <label for="edit">Edit</label>
+    </div>
 
-</div>
-<div style="clear: both"></div>
-<br>
+    <div style="clear: both"></div>
+    <br>
 
 
-<!--Edit List-->
-<app-editlist *ngIf="edit === true"></app-editlist>
+    <!--Edit List-->
+    <app-editlist *ngIf="edit === true"></app-editlist>
 </div>
 
 

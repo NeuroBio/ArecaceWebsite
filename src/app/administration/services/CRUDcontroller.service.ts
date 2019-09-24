@@ -14,12 +14,12 @@ import { CRUD } from './CRUD.service';
 
 export class CRUDcontrollerService {
 
-  firePaths = new FirebasePaths;
+  firePaths = new BehaviorSubject<any>(undefined);
   allowButtons = new BehaviorSubject<ButtonController>(new ButtonController([true, true, false, false]))
   itemType = new BehaviorSubject<string>('');
   itemToEdit = new BehaviorSubject<any>(undefined);
   itemList = new BehaviorSubject<any[]>(undefined);
-  
+
   //activeFormData is: form data[0], new image paths[1], new images[2],
   //old image paths[3], text path[4], new text[5], old  text path [6] 
   activeFormData = new BehaviorSubject<any>(undefined);
@@ -31,25 +31,29 @@ export class CRUDcontrollerService {
               private crud: CRUD) { }
   
   //Data fetching functions
+  assignFirePaths(website: boolean) {
+    if(website){
+      this.firePaths.next({Website: 'WebsiteText'});
+      this.itemType.next('Website');
+    }else{
+      this.firePaths.next(new FirebasePaths());
+    }
+  }
+
   assignItemType(itemType: string) {
     return this.itemType.next(itemType);
-  }
-
-  getItemType() {
-    return this.itemType;
-  }
-
-  getEditableCollection(path: string): Observable<any[]>{
-      return this.firebaseserv.returnCollectionWithKeys(path).pipe(
-        map(collect =>
-          collect.sort((a,b) => a.ID > b.ID ? 1:-1),
-    ));
   }
 
   assignEditItem(item: any) {
     return this.itemToEdit.next(item);
   }
-  
+
+  assignItemList(path: string) {
+    return this.getEditableCollection(path).subscribe(collect => {
+      this.itemList.next(collect);
+    });
+  }
+
   quickAssign(Form: FormGroup, edit: any): FormGroup{
     Object.keys(Form.controls).forEach(key =>{
       if(typeof(Form.controls[key].value) !== "object"){
@@ -63,12 +67,17 @@ export class CRUDcontrollerService {
     return Form;
   }
 
-  assignItemList(path: string) {
-    return this.getEditableCollection(path).subscribe(collect => {
-      this.itemList.next(collect)
-    });
+  getItemType() {
+    return this.itemType;
   }
 
+  getEditableCollection(path: string): Observable<any[]>{
+      return this.firebaseserv.returnCollectionWithKeys(path).pipe(
+        map(collect =>
+          collect.sort((a,b) => a.ID > b.ID ? 1:-1),
+    ));
+  }
+ 
   getText(link: string){
     return this.crud.getText(link);
   }
@@ -107,7 +116,7 @@ export class CRUDcontrollerService {
           meta.StoryLink = link;
         }
         console.log("meta");
-        return this.crud.uploadItem(meta, this.firePaths[this.itemType.value]);
+        return this.crud.uploadItem(meta, this.firePaths.value[this.itemType.value]);
       }).then(() => {
         this.itemToEdit.next(undefined);
         this.message.next("Submitted!");
@@ -148,7 +157,7 @@ export class CRUDcontrollerService {
       }
       console.log("meta");
       return this.crud.editItem(meta,
-              this.firePaths[this.itemType.value],
+              this.firePaths.value[this.itemType.value],
               this.itemToEdit.value.key);
     }).then(() =>{
       this.itemToEdit.next(undefined);
@@ -176,7 +185,7 @@ export class CRUDcontrollerService {
     if("StoryLink" in item){
       links.push(item.StoryLink);
     }
-    this.crud.deleteItem(links, this.firePaths[this.itemType.value], item.key)
+    this.crud.deleteItem(links, this.firePaths.value[this.itemType.value], item.key)
     .then(() => {
         this.itemToEdit.next(undefined);
         this.message.next('Delete successful!')

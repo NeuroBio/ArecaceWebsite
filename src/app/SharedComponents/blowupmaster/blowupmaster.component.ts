@@ -13,7 +13,7 @@ export class BlowupmasterComponent implements OnInit {
   gridPath: string;
 
   constructor(private route: ActivatedRoute,
-    private generalcollectserv: GeneralcollectionService) { }
+              private generalcollectserv: GeneralcollectionService) { }
 
   ngOnInit() {
     this.gridPath = this.route.parent.snapshot.url.join('/');

@@ -1,11 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { CRUDcontrollerService } from '../../services/CRUDcontroller.service';
+import { CRUDcontrollerService } from '../../../services/CRUDcontroller.service';
 import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-formButtons',
   templateUrl: './buttons.component.html',
-  styleUrls: ['./buttons.component.css']
+  styleUrls: []
 })
 export class ButtonsComponent implements OnInit, OnDestroy {
 
