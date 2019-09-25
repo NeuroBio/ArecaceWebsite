@@ -37,6 +37,7 @@ export class FaqTextComponent implements OnInit, OnDestroy {
 
   createForm() {
     return this.fb.group({
+      ID: '',
       Questions: this.QuestionsArray
     });
   }
