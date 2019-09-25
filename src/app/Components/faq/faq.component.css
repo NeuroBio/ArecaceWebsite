@@ -4,24 +4,34 @@ div#splatter {
     background-image: url(https://firebasestorage.googleapis.com/v0/b/arecaceworld.appspot.com/o/WebSite%2Fsmear4.png?alt=media&token=fc921624-299c-4470-b40e-a22d256f81dd);
 }
 
-::ng-deep ol {
-    max-width: 800px;
+ul {
+    max-width: 840px;
+    list-style-type: none;
+    margin-left: -33px;
 }
 
-::ng-deep li {
+div.liStyle {
     font-size: 25px;
     font-family: 'Courier New', Courier, monospace;
     font-weight: bold;
-    margin-left:-30px;
     padding: 7px;
+    margin-right: 7px;
+    margin-left: 3px;
     background-color: #232323;
     list-style-position: inside;
 }
 
-::ng-deep div.inList {
-    font-weight: normal;
+p {
     padding: 10px;
     padding-left: 57px;
+    padding-right: 7px;
+    margin: 0px;
+}
+
+span.inList {
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: normal;
+    font-size: 18px;
     line-height: 150%;
 }
 

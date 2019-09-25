@@ -4,4 +4,21 @@
 <hr>
 
 <!-- QUESTIONS -->
-<div id="splatter" [innerHTML]="this.sanitizer.bypassSecurityTrustHtml(mainText)"></div>
+<div id="splatter">
+    <br>
+    <ul>
+        <li *ngFor="let question of mainText; let i = index">
+            <div class="liStyle">
+                {{ i+1 + '.' + ' ' + question.Question }}
+                <p>
+                    <span class="inList" [innerHTML]="question.Answer"></span>
+                    <span *ngIf="question.RouterLink">
+                            <a [routerLink]="question.RouterLink"> here</a>.
+                    </span>        
+                </p> 
+            </div>
+            <br><br>
+        </li>
+    </ul>
+
+</div>
