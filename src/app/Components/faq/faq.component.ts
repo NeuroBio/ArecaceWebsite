@@ -23,7 +23,6 @@ export class FAQComponent implements OnInit{
                                 .find(member =>
                                   member.ID =='faq').Questions
     );
-    console.log(this.mainText)
   }
 
   

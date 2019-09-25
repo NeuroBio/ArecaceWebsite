@@ -37,7 +37,7 @@ p#subtext {
     margin-top: 0px;
 }
 
-h3 {
+::ng-deep h3 {
     padding: 0px;
     margin: 0px;
 }
