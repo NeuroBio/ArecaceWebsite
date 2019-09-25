@@ -10,6 +10,7 @@ import { HomeComponent }            from './Components/home/home.component';
 import { LoginComponent }           from './Components/login/login.component';
 import { PageNotFoundComponent }    from './Components/pagenotfound/pagenotfound.component';
 import { TravelorsGuideComponent }  from './Components/travelorsguide/travelorsguide.component';
+// import { GeneralTextResolverService } from './GlobalServices/general-text-resolver.service';
 
 const routes: Routes = [
   {path: '', redirectTo: 'home', pathMatch: 'full'},

@@ -20,7 +20,7 @@ export class SideBarComponent implements AfterContentChecked{
   height = 0;
 
   ngAfterContentChecked(){
-    this.onResize();
+    setTimeout(() => { this.onResize()}, 10);
   }
   
   @HostListener('window:scroll') 

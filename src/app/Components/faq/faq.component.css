@@ -4,11 +4,11 @@ div#splatter {
     background-image: url(https://firebasestorage.googleapis.com/v0/b/arecaceworld.appspot.com/o/WebSite%2Fsmear4.png?alt=media&token=fc921624-299c-4470-b40e-a22d256f81dd);
 }
 
-ol {
+::ng-deep ol {
     max-width: 800px;
 }
 
-li {
+::ng-deep li {
     font-size: 25px;
     font-family: 'Courier New', Courier, monospace;
     font-weight: bold;
@@ -18,14 +18,14 @@ li {
     list-style-position: inside;
 }
 
-div.inList {
+::ng-deep div.inList {
     font-weight: normal;
     padding: 10px;
     padding-left: 57px;
     line-height: 150%;
 }
 
-img.support {
+::ng-deep img.support {
     border:0px;
     height:30px;
 }

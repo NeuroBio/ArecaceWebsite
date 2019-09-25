@@ -8,7 +8,8 @@ import { ActivatedRouteSnapshot, Resolve, Router } from '@angular/router';
 @Injectable({
   providedIn: 'root'
 })
-export class GeneralcollectionresolverService implements Resolve<any>{
+
+export class GeneralcollectionresolverService implements Resolve<any> {
   
   firePaths = new FirebasePaths;
 

@@ -1,17 +1,25 @@
-div.MainState{
+::ng-deep div.MainState{
     padding-left: 50px;
     max-width: 800px;
 }
 
-h4.dent {
+::ng-deep h4.dent {
     padding-left: 25px;
 }
 
-div#disclaimer {
+::ng-deep div.MainState div#disclaimer {
     max-width: 800px;
 }
 
-ul {
+::ng-deep ul {
     max-width: 800px;
     padding-left: 75px;
+}
+
+::ng-deep ul li{
+    font-size: 16px;
+}
+
+::ng-deep div.MainState ul li{
+    font-size: 18px;
 }

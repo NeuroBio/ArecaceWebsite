@@ -1,4 +1,5 @@
 import { Component, OnInit, HostListener } from '@angular/core';
+import { TextProvider } from 'src/app/GlobalServices/textprovider.service';
 
 @Component({
   selector: 'app-home',
@@ -10,10 +11,13 @@ export class HomeComponent implements OnInit {
 
 
   buttonText: string[];
+  mainText: string;
 
-  constructor() { }
+  constructor(private textprovider: TextProvider) { }
 
   ngOnInit() {
+    this.mainText = this.textprovider.WebsiteText
+                        .find(member => member.ID === 'home').Text
     window.scroll(0,0);
     this.setButtonText();
   }

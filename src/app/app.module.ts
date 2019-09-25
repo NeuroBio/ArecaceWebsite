@@ -1,5 +1,5 @@
 import { BrowserModule }            from '@angular/platform-browser';
-import { NgModule }                 from '@angular/core';
+import { NgModule, APP_INITIALIZER }                 from '@angular/core';
 import { ReactiveFormsModule }      from '@angular/forms';
 
 import { AngularFireModule }        from '@angular/fire';
@@ -30,7 +30,11 @@ import { HomeComponent }            from './Components/home/home.component';
 import { LoginComponent }           from './Components/login/login.component';
 import { PageNotFoundComponent }    from './Components/pagenotfound/pagenotfound.component';
 import { TravelorsGuideComponent }  from './Components/travelorsguide/travelorsguide.component';
+import { TextProvider } from './GlobalServices/textprovider.service';
 
+export function TextFactory(provider: TextProvider) {
+  return () => provider.load();
+}
 @NgModule({
   declarations: [
     AppComponent,
@@ -66,7 +70,10 @@ import { TravelorsGuideComponent }  from './Components/travelorsguide/travelorsg
     AppRoutingModule,//this should always be LAST!!!
 
   ],
-  providers: [],
+  providers: [TextProvider,
+              {provide: APP_INITIALIZER, useFactory: TextFactory,
+              deps: [TextProvider], multi: true}
+            ],
   bootstrap: [AppComponent]
 })
 

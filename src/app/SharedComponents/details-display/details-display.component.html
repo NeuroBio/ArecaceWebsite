@@ -1,23 +1,23 @@
 <div id="top">
     
-        <!--Header-->
-        <header>
-            <div class="compheader" role="header">
-                <h2 class="compheader">{{ ref.Topic }}</h2>
-            </div>
-        </header>
-        <hr>
+    <!--Header-->
+    <header>
+        <div class="compheader" role="header">
+            <h2 class="compheader">{{ ref.Topic }}</h2>
+        </div>
+    </header>
+    <hr>
 
-        <!--Body-->
-        <div id="outer">
-            <div id="imageholder">
-                <div *ngIf="loading===true" class="loading"></div>
-                <img class="imgcaption" id="main" [hidden]="loading"
-                alt="" [src]="ref.Links[0]" (load)="loading=false">
-            </div>
-    
-            <p class="caption">{{ ref.Caption }}</p>
-            <div class="textblock">{{ ref.FullText }}</div>
+    <!--Body-->
+    <div id="outer">
+        <div id="imageholder">
+            <div *ngIf="loading===true" class="loading"></div>
+            <img class="imgcaption" id="main" [hidden]="loading"
+            alt="" [src]="ref.Links[0]" (load)="loading=false">
+        </div>
+
+        <p class="caption">{{ ref.Caption }}</p>
+        <div class="textblock">{{ ref.FullText }}</div>
     </div>
 
     <br>

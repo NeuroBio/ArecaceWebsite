@@ -51,6 +51,11 @@ const AdminRoutes: Routes = [
           {path: '', redirectTo: 'home', pathMatch: 'full'},
           {path: 'home', component: WebsiteTextComponent },
           {path: 'about', component: WebsiteTextComponent },
+          {path: 'travelersguide', component: WebsiteTextComponent },
+          {path: 'faq', component: WebsiteTextComponent },
+          {path: 'copyright', component: WebsiteTextComponent },
+          {path: 'intro', component: WebsiteTextComponent },
+          {path: 'login', component: WebsiteTextComponent },
          ]
       },
         {path:'Messages', component: MessageComponent,

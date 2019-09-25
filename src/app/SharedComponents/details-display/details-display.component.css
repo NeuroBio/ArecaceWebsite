@@ -7,7 +7,6 @@ div#outer {
     flex-flow: column;
     justify-items: center;
     align-items: center;
-    padding-right: 7px;
 }
 
 div#imageholder {
@@ -15,16 +14,14 @@ div#imageholder {
     max-height: 1000px;
     align-items: center;
     justify-content: center;
-    display: flex;
 }
 
 img#main {
     max-width: inherit;
     max-height: inherit;
-    object-fit: contain;
+    object-fit: scale-down;
     width: 100%;
     height: 100%;
-    min-width: 100vw;
 }
 
 div.textblock {

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../administration/security/Auth/auth.service';
+import { TextProvider } from 'src/app/GlobalServices/textprovider.service';
 
 @Component({
   selector: 'app-login',
@@ -8,9 +9,13 @@ import { AuthService } from '../../administration/security/Auth/auth.service';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(public auth: AuthService) { }
+  mainText: string;
+  constructor(public auth: AuthService,
+              private textprovider: TextProvider) { }
 
   ngOnInit() {
+    this.mainText = this.textprovider.WebsiteText
+                        .find(member => member.ID =='login').Text;
   }
 
 }

@@ -5,17 +5,7 @@
 
 <!-- User NOT logged in -->
 <ng-template #guest>
-    <h3>Hello!</h3>
-    <p>Thanks for the interest in my website and wanting to see what exactly is hidden beyond the "login" gate.  Unfortunately, you cannot log in or make an account yet, because there is no user-specific content, and I am the only user.  These features will be added in release 2!</p>
-    <div>
-        In the long term, I would like to include:
-        <ul>
-                <li>Access to paid premium content including the Traveler's Guide</li>
-                <li>A forum for users to post in</li>
-                <li>Saving info related to playground activities</li>
-                <li>Saving your place in the comic or scripts</li>
-        </ul>
-    </div>
+    <div [innerHTML]="mainText"></div>
     <div id="googleBtn" (click)="auth.googleLogin()"></div>
 
 </ng-template>
