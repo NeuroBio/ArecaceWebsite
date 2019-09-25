@@ -25,6 +25,7 @@ import { ButtonsComponent }             from './Forms/z-buttons/upload-content/b
 import { PagesComponent } from './DashBoard/pages/pages.component';
 import { WebsiteTextComponent } from './Forms/website-text/website-text.component';
 import { PageSubmitComponent } from './Forms/z-buttons/page-submit/page-submit.component';
+import { AboutTextComponent } from './Forms/about-text/about-text.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { PageSubmitComponent } from './Forms/z-buttons/page-submit/page-submit.c
     PagesComponent,
     WebsiteTextComponent,
     PageSubmitComponent,
+    AboutTextComponent,
   ],
   imports: [
     CommonModule,

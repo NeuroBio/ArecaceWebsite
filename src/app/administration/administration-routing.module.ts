@@ -21,6 +21,7 @@ import { PagesComponent } from './DashBoard/pages/pages.component';
 
 import { MessageresolverService } from './DashBoard/message/messageresolver.service';
 import { WebsiteTextComponent } from './Forms/website-text/website-text.component';
+import { AboutTextComponent } from './Forms/about-text/about-text.component';
 
 
 const AdminRoutes: Routes = [
@@ -50,7 +51,7 @@ const AdminRoutes: Routes = [
          children:[
           {path: '', redirectTo: 'home', pathMatch: 'full'},
           {path: 'home', component: WebsiteTextComponent },
-          {path: 'about', component: WebsiteTextComponent },
+          {path: 'about', component: AboutTextComponent },
           {path: 'travelersguide', component: WebsiteTextComponent },
           {path: 'faq', component: WebsiteTextComponent },
           {path: 'copyright', component: WebsiteTextComponent },
