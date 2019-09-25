@@ -30,7 +30,7 @@ export class AboutTextComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.stop$.next(true)
+    this.stop$.next(true);
     this.stream1.unsubscribe();
   }
 
@@ -41,14 +41,14 @@ export class AboutTextComponent implements OnInit, OnDestroy {
       Story: '',
       Me: '',
       Website: ''
-    })
+    });
   }
 
   assignFormData(editFormData: any) {
     if(editFormData) {
       this.onReset();
       this.Form = this.controller.quickAssign(this.Form, editFormData);
-      this.stop$.next(true)
+      this.stop$.next(true);
     }
   }
 

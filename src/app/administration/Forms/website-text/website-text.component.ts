@@ -31,7 +31,7 @@ export class WebsiteTextComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.stop$.next(true)
+    this.stop$.next(true);
     this.stream1.unsubscribe();
   }
 
@@ -39,7 +39,7 @@ export class WebsiteTextComponent implements OnInit, OnDestroy {
     return this.fb.group({
       ID: '',
       Text: ''
-    })
+    });
   }
 
   assignFormData(editFormData: any) {
@@ -47,7 +47,7 @@ export class WebsiteTextComponent implements OnInit, OnDestroy {
       this.onReset();
       this.key = editFormData.key;
       this.Form = this.controller.quickAssign(this.Form, editFormData);
-      this.stop$.next(true)
+      this.stop$.next(true);
     }
   }
 

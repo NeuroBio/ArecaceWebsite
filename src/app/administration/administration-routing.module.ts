@@ -22,6 +22,7 @@ import { PagesComponent } from './DashBoard/pages/pages.component';
 import { MessageresolverService } from './DashBoard/message/messageresolver.service';
 import { WebsiteTextComponent } from './Forms/website-text/website-text.component';
 import { AboutTextComponent } from './Forms/about-text/about-text.component';
+import { FaqTextComponent } from './Forms/faq-text/faq-text.component';
 
 
 const AdminRoutes: Routes = [
@@ -53,7 +54,7 @@ const AdminRoutes: Routes = [
           {path: 'home', component: WebsiteTextComponent },
           {path: 'about', component: AboutTextComponent },
           {path: 'travelersguide', component: WebsiteTextComponent },
-          {path: 'faq', component: WebsiteTextComponent },
+          {path: 'faq', component: FaqTextComponent },
           {path: 'copyright', component: WebsiteTextComponent },
           {path: 'intro', component: WebsiteTextComponent },
           {path: 'login', component: WebsiteTextComponent },
