@@ -1,0 +1,28 @@
+<form [formGroup]="Form">
+    <h2 class="formstyle">FAQ:</h2>
+    <hr>
+
+        <button type="button" (click)="addIntro(true)">+</button>
+        <button type="button" (click)="addIntro(false)">-</button>
+    <div formArrayName="Intros">
+        <div *ngFor="let intro of IntrosArray.controls; let i = index"
+        [formGroupName]="i">
+            Intro {{ i+1 }}
+            <p>Title: <input class="long" type="Title" formControlName="Title"></p>
+            
+            <p>Text:<br>
+              <textarea formControlName="Text" rows="8" cols="66"></textarea></p>
+
+            <p>Router Links: <input class="long" type="text" formControlName="RouterLinks"></p>
+            <p>Router Links Names: <input type="text" formControlName="RouterLinksNames"></p>
+            <p>Image: <input class="long" type="file" (change)="onFile($event, i)"></p>
+            <hr>
+        </div>
+    </div>
+
+    <app-pageButton></app-pageButton>
+</form>
+
+<!-- <div class="WYSIWYG"></div> -->
+
+<div style="clear: both"></div>

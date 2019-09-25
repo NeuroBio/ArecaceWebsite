@@ -7,8 +7,7 @@
     <div formArrayName="Questions">
         <div *ngFor="let question of QuestionsArray.controls; let i = index"
         [formGroupName]="i">
-            
-            <p>Question: <input class="long" type="text" formControlName="Question"></p>
+            <p>Question {{ i+1 }}: <input class="long" type="text" formControlName="Question"></p>
             
             <p>Answer:<br>
               <textarea formControlName="Answer" rows="8" cols="66"></textarea></p>

@@ -27,6 +27,7 @@ import { WebsiteTextComponent } from './Forms/website-text/website-text.componen
 import { PageSubmitComponent } from './Forms/z-buttons/page-submit/page-submit.component';
 import { AboutTextComponent } from './Forms/about-text/about-text.component';
 import { FaqTextComponent } from './Forms/faq-text/faq-text.component';
+import { IntroTextComponent } from './Forms/intro-text/intro-text.component';
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import { FaqTextComponent } from './Forms/faq-text/faq-text.component';
     PageSubmitComponent,
     AboutTextComponent,
     FaqTextComponent,
+    IntroTextComponent,
   ],
   imports: [
     CommonModule,

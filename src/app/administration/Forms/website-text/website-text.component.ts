@@ -56,7 +56,7 @@ export class WebsiteTextComponent implements OnInit, OnDestroy {
     this.controller.activeFormData.next([Final,
                                          [],
                                          [],
-                                         undefined,
+                                         [],
                                          undefined,
                                          undefined,
                                          undefined]);

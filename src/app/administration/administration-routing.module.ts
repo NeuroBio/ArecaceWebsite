@@ -23,6 +23,7 @@ import { MessageresolverService } from './DashBoard/message/messageresolver.serv
 import { WebsiteTextComponent } from './Forms/website-text/website-text.component';
 import { AboutTextComponent } from './Forms/about-text/about-text.component';
 import { FaqTextComponent } from './Forms/faq-text/faq-text.component';
+import { IntroTextComponent } from './Forms/intro-text/intro-text.component';
 
 
 const AdminRoutes: Routes = [
@@ -56,7 +57,7 @@ const AdminRoutes: Routes = [
           {path: 'travelersguide', component: WebsiteTextComponent },
           {path: 'faq', component: FaqTextComponent },
           {path: 'copyright', component: WebsiteTextComponent },
-          {path: 'intro', component: WebsiteTextComponent },
+          {path: 'intro', component: IntroTextComponent },
           {path: 'login', component: WebsiteTextComponent },
          ]
       },

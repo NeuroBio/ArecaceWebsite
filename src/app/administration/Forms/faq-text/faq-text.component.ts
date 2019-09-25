@@ -45,14 +45,11 @@ export class FaqTextComponent implements OnInit, OnDestroy {
   assignFormData(editFormData: any) {
     if(editFormData) {
       this.onReset();
-      // this.Form = this.controller.quickAssign(this.Form, editFormData);
       this.QuestionsArray;
-      const Questions = <Question[]>JSON.parse(editFormData.Question);
+      const Questions = <Question[]>JSON.parse(editFormData.Questions);
       Questions.forEach(question => {this.addQuestion(
         true, question.Question, question.Answer, question.RouterLink
       )});
-      // const relatives = <Relations[]>JSON.parse(editFormData.Relations);
-      // relatives.forEach(relative => this.addRelative(true, relative.RelationName, relative.Relationship));
       this.stop$.next(true);
     }
   }
@@ -63,7 +60,7 @@ export class FaqTextComponent implements OnInit, OnDestroy {
     this.controller.activeFormData.next([Final,
                                          [],
                                          [],
-                                         undefined,
+                                         [],
                                          undefined,
                                          undefined,
                                          undefined]);
@@ -78,14 +75,12 @@ export class FaqTextComponent implements OnInit, OnDestroy {
   addQuestion(add: boolean, question: string = '',
               answer: string = '', routerLink: string = '') {
     if(add){
-      // (<FormArray>this.Form.controls.Questions)
       this.QuestionsArray.push(this.fb.group({
                                   Question: question,
                                   Answer: answer,
                                   RouterLink: routerLink})
       );
     }else{
-      // (<FormArray>this.Form.controls.Questions)
       this.QuestionsArray.removeAt(this.QuestionsArray.value.length-1);
     }
   }
