@@ -48,27 +48,34 @@ export class IntroTextComponent implements OnInit, OnDestroy {
   assignFormData(editFormData: any) {
     if(editFormData) {
       this.onReset();
-      this.IntrosArray;
-      const Intros = <Intro[]>JSON.parse(editFormData.Intros);
+      this.Form = this.controller.quickAssign(this.Form, editFormData);
+      const Intros = <any[]>JSON.parse(editFormData.Intros);
       Intros.forEach(intro => {this.addIntro(
         true, intro.Title, intro.Text,
-        intro.RouterLinks, intro.RouterLinksNames,
+        intro.RouterLinks.join(', '),
+        intro.RouterLinksNames.join(', '),
         intro.Image
       )});
-      this.oldLinks = editFormData.Links;
+      if(editFormData.Links){
+        this.oldLinks = editFormData.Links;
+      }
       this.stop$.next(true);
     }
   }
 
   processForm() {
-    const Final = Object.assign({}, this.Form.value);
-    Final.Intros = JSON.stringify(Final.Intros);
-    let paths: string[] = [];
+    let Final = Object.assign({}, this.Form.value);
+    Final.Links = [];
+    Final.Intros = this.formatIntro(this.IntrosArray.value);
+
+    let paths: string[] = [''];
     this.ImageEvents.forEach((event,i) => paths.push(`Intros/${i}`));
     const extend = paths.length - this.oldLinks.length
+
     for(let i = 0; i < extend; i++){
-      this.oldLinks.push();
+      this.oldLinks.push('');
     }
+   
     this.controller.activeFormData.next([Final,
                                          paths,
                                          this.ImageEvents,
@@ -79,14 +86,13 @@ export class IntroTextComponent implements OnInit, OnDestroy {
   }
 
   onReset() {
-    this.ImageEvents = [];
+    this.ImageEvents = [''];
     this.IntrosArray = this.fb.array([]);
     this.Form = this.createForm();
   }
 
-
   addIntro(add: boolean, title: string = '', text: string = '',
-            routerLinks: string = '', routerLinksNames,
+            routerLinks: string = '', routerLinksNames: string = '',
             image: boolean = false) {
     if(add){
       this.IntrosArray.push(this.fb.group({
@@ -106,4 +112,15 @@ export class IntroTextComponent implements OnInit, OnDestroy {
   onFile(event: any, index: number) {
     this.ImageEvents[index] = event;
   }
+
+  formatIntro(intros: any) {
+    const formattedIntros: Intro[] = []
+    for(let intro of intros){
+      intro.RouterLinks = intro.RouterLinks.split(', ');
+      intro.RouterLinksNames = intro.RouterLinksNames.split(', ');
+      formattedIntros.push(intro);
+    }
+    return JSON.stringify(formattedIntros);
+  }
 }
+
