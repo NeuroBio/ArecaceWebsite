@@ -5,6 +5,7 @@ import { Observable, Subscription }                     from 'rxjs'
 
 import { ComicService }                                 from '../comic.service';
 import { ChapterMetaData }                              from 'src/app/Classes/chaptermetadata';
+import { TextProvider } from 'src/app/GlobalServices/textprovider.service';
 
 
 
@@ -23,10 +24,12 @@ export class BookComponent implements OnInit, OnDestroy {
   maxChap: number;
   loading: boolean = false;
   stream: Subscription;
+  mainText: string;
   
   constructor(private comicserv: ComicService,
               private route: ActivatedRoute,
-              private router: Router) { }
+              private router: Router,
+              private textprovider: TextProvider) { }
 
   ngOnInit() {
     window.scroll(0,0);
@@ -36,6 +39,9 @@ export class BookComponent implements OnInit, OnDestroy {
         this.initialVarAssign(path, chap)).unsubscribe()
     ).unsubscribe();
     this.stream = this.comicserv.loading.subscribe(bool => this.loading = bool);
+
+    this.mainText = this.textprovider.WebsiteText
+                        .find(member => member.ID === 'comic').Text;
   }
 
   ngOnDestroy(){

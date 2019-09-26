@@ -34,6 +34,7 @@ input[type="radio"].toggler:not(:checked) + label {
 
 label {
   padding: 5px;
+  text-align: center;
   border: 1px solid black;
   margin: 3px;
   white-space: nowrap

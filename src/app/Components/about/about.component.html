@@ -18,8 +18,7 @@
             <input type="radio" class="toggler" name="abouter" [id]="choice"
             (click)="pickAbout(i)" [checked]="contentPicker === i">
             <label class="toggler" [for]="choice"  tabindex="0"
-            (keyup.enter)="pickAbout(i)">
-                {{ choice }}</label>
+            (keyup.enter)="pickAbout(i)">{{ choice }}</label>
         </div>
     </div>
 
