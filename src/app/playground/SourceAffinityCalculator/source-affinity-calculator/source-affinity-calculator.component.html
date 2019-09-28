@@ -6,10 +6,7 @@
       </div>
     
       <p>Abilities:
-          <button type="button" (click)="addAbility(true)">+</button>
-          <button type="button" (click)="addAbility(false)"
-          [disabled]="abilitiesArray.length === 0"
-          >-</button>
+          <button type="button" (click)="addAbility()">+</button>
       </p>
       
       <div formArrayName="Abilities">
@@ -30,7 +27,9 @@
                 <option *ngFor="let master of mastery; let j = index" [value]="j">
                   {{ master }}
                 </option>
-              </select>  
+              </select>
+
+              <button type="button" (click)="removeAbility(i)">-</button>
           </div>
           <br><br>
         </div>
@@ -40,12 +39,14 @@
     
       <div class="stayTogether">
           Esarian Genetics:
-          <input class="short" formControlName="EsarianGenes" type="number">&nbsp;
+          <input class="short" formControlName="EsarianGenes"
+          type="number" min="0" max="1" step=".05">&nbsp;
       </div>
     
       <div class="stayTogether">
           Connection Genetics:
-          <input class="short" formControlName="ConnectionGenes" type="number">
+          <input class="short" formControlName="ConnectionGenes"
+          type="number" min="0" max="1" step=".05">
       </div>
       <br>
     

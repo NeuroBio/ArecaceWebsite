@@ -1,0 +1,22 @@
+<form [formGroup]="Form">
+  <select formControlName="Start">
+    <option selected="true" (click)="onSwitch(true)">
+      Earth
+    </option>
+    <option (click)="onSwitch(false)">
+      Arecace
+    </option>
+  </select>
+
+  <select formControlName="Month" (change)="onMonthChange($event.value)">
+      <option *ngFor="let month of months; let i = index" value="i">
+        {{ month }}
+      </option>
+  </select>
+
+  <select formControlName="Day">
+    <option *ngFor="let day of days; let i = index">
+        {{ i }}
+      </option>
+  </select>
+</form>

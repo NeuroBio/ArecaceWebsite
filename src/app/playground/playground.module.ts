@@ -5,10 +5,12 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { PlaygroundRoutingModule } from './playground-routing.module';
 import { PlaygroundhomeComponent } from './playgroundhome/playgroundhome.component';
 import { SourceAffinityCalculatorComponent } from './SourceAffinityCalculator/source-affinity-calculator/source-affinity-calculator.component';
+import { DateConverterComponent } from './date-converter/date-converter.component';
 
 @NgModule({
   declarations: [PlaygroundhomeComponent,
-    SourceAffinityCalculatorComponent],
+    SourceAffinityCalculatorComponent,
+    DateConverterComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,

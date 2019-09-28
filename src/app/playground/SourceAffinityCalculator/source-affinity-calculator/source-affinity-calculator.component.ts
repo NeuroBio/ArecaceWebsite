@@ -53,15 +53,15 @@ export class SourceAffinityCalculatorComponent implements OnInit {
     }
   }
 
-  addAbility(add: boolean, ability: string = 'EnergyGathering', mastery: number = 0){
-    if(add) {
+  addAbility(ability: string = 'EnergyGathering', mastery: number = 0){
       this.abilitiesArray.push(this.fb.group({
         Ability: ability,
         Mastery: mastery
       }));
-    } else {
-      this.abilitiesArray.removeAt(this.abilitiesArray.value.length-1);
-    }
+  }
+
+  removeAbility(index: number) {
+    this.abilitiesArray.removeAt(index);
   }
 
   onSubmit() {
@@ -86,7 +86,7 @@ export class SourceAffinityCalculatorComponent implements OnInit {
   onReset() {
     this.abilitiesArray = this.fb.array([]);
     this.Form = this.createForm();
-    this.addAbility(true);
+    this.addAbility();
     this.result = undefined;
     this.rank = undefined;
     this.error = undefined;
