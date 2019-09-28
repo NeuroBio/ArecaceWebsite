@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { formatDate } from '@angular/common';
+import { DateInfo } from 'src/app/Classes/datedata';
 
 @Component({
   selector: 'app-playgroundhome',
@@ -7,9 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PlaygroundhomeComponent implements OnInit {
 
+  arecaceDate: string;
+  DateInfo = new DateInfo();
+
   constructor() { }
 
   ngOnInit() {
+    const now = formatDate(new Date(), 'MM-dd', 'en').split('-');
+    this.arecaceDate = this.DateInfo.earthtoArecaceConverter(+now[0], +now[1]);
   }
 
 }

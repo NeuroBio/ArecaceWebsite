@@ -4,35 +4,35 @@ export class DateInfo {
     ArecaceMonthNames = ["Qt1-1", "Qt1-2", "Qt1-3",
                          "Qt2-1", "Qt2-2", "Qt2-3",
                          "Qt3-1", "Qt3-2", "Qt3-3",
-                         "Qt4-1", "Qt4-2", "Qt4-3",]
+                         "Qt4-1", "Qt4-2", "Qt4-3",];
 
     ArecaceMonthLengths = [30, 29, 30, 30, 29, 30,
-                           30, 29, 30, 30, 29, 30]
+                           30, 29, 30, 30, 29, 30];
 
     ArecaceZodiac = ["The Engineer", "The Guardian",
                      "The Healer", "The Mother",
                      "The Musician", "The Jester",
                      "The Magician", "The Mercenary",
                      "The Hunter", "The Drifter",
-                     "The Diplomat","The Philosopher"]
+                     "The Diplomat","The Philosopher"];
     
-    ArecaceDates: string[]
+    ArecaceDates: string[];
 
     EarthMonthNames = ["Jan", "Feb", "Mar",
                        "Apr", "May", "Jun",
                        "Jul", "Aug", "Sep",
-                       "Oct", "Nov", "Dec"]
+                       "Oct", "Nov", "Dec"];
     
     EarthMonthLengths = [31, 29, 31, 30, 31, 30,
-                         31, 31, 30, 31, 30, 31]
+                         31, 31, 30, 31, 30, 31];
 
-    EarthDates: string[]
+    EarthDates: string[];
     
     Missing = ["02-29", "04-29", "04-30", "05-30", "05-31",
-    "07-30", "07-31", "08-30", "08-31", "10-31"]
+    "07-30", "07-31", "08-30", "08-31", "10-31"];
     
     MissingPositions = [60, 120, 121, 151, 152,
-                        212, 213, 243, 244, 305]
+                        212, 213, 243, 244, 305];
     
     constructor() {
         this.EarthDates = this.makeDates(this.EarthMonthLengths);
@@ -58,6 +58,23 @@ export class DateInfo {
             return `0${ind}`;
         }
         return(ind);
+    }
+
+    arecacetoEarthConverter(QT: string, day: number) {
+        const month = this.ArecaceMonthNames
+                                    .findIndex(month => QT === month)+1;
+        const dateCheck = `${this.quickFormat(month)}-${this.quickFormat(day)}`;
+        const index = this.ArecaceDates
+                                    .findIndex(date => dateCheck === date);
+        return(this.EarthDates[index]);
+    }
+
+    earthtoArecaceConverter(month: number, day: number) {
+        const dateCheck = `${this.quickFormat(month)}-${this.quickFormat(day)}`;
+        const index = this.EarthDates
+                                    .findIndex(date => dateCheck === date);
+        const numericDate = this.ArecaceDates[index].split('-');
+        return(`${this.ArecaceMonthNames[+numericDate[0]]} ${numericDate[1]}`)
     }
 }
 

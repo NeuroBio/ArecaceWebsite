@@ -22,7 +22,7 @@ export class BirthdayService {
     this.firebaseserv.returnDocument('CloudData/Birthdays')
     .pipe(take(1)).subscribe(birthdays => {
       birthdays = JSON.parse(birthdays.Birthdays);
-      const date = this.arecacetoEarthConverter(char.Qt, char.Day);
+      const date = this.DateInfo.arecacetoEarthConverter(char.Qt, char.Day);
       const index = birthdays.find(birthday => birthday.Name == char.FirstName);
       if(index) {
         if(date === birthdays[index].Date) {
@@ -40,12 +40,5 @@ export class BirthdayService {
     });
   }
 
-  arecacetoEarthConverter(QT: string, day: number) {
-    const month = this.DateInfo.ArecaceMonthNames
-                                .findIndex(month => QT === month)+1;
-    const dateCheck = `${this.DateInfo.quickFormat(month)}-${this.DateInfo.quickFormat(day)}`
-    const index = this.DateInfo.ArecaceDates
-                                .findIndex(date => dateCheck === date);
-    return(this.DateInfo.EarthDates[index])
-  }
+  
 }
