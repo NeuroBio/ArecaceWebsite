@@ -47,6 +47,7 @@ export class CalculatorService {
         }
       }
     })
+
     if(esarianGenetics > 1
       || esarianGenetics < 0
       || esarianGenetics === null
@@ -54,6 +55,13 @@ export class CalculatorService {
       || connectionGenetics < 0
       || connectionGenetics === null) {
       throw new Error('Genetics values cannot be less than 0 or greater than 1.');
+    }
+
+    const abilities = abilitymastery.map(abimas => abimas.Ability);
+    const uniqueAbilities = new Set(abilities);
+
+    if(uniqueAbilities.size !== abilities.length) {
+      throw new Error('You cannot have duplicate Source Abilities.');
     }
   }
 
