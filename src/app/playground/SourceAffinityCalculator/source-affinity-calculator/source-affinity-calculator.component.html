@@ -1,12 +1,12 @@
 <div id="outer">
-  <form [formGroup]="Form">
-      <div>
-        <h2>Calculate Source Affinity Cost</h2>
-        <hr>
-      </div>
-    
-      <p>Abilities:
-          <button type="button" (click)="addAbility()">+</button>
+  <div id="header">
+      <h2>Source Affinity Cost Calculater</h2>
+  </div>
+  <hr id="top">
+
+  <form [formGroup]="Form">    
+      <p>
+          <button type="button" (click)="addAbility()">Add Ability</button>
       </p>
       
       <div formArrayName="Abilities">

@@ -8,6 +8,11 @@ input.short {
     font-size: 18px;
 }
 
+div#header {
+    background-color: rgb(15, 104, 99);
+    padding: 7px;
+}
+
 div {
     color: black;
     font-weight: bold;
@@ -31,6 +36,10 @@ hr {
     border-top: 2px solid black;
 }
 
+hr#top{
+    margin: 0px;
+}
+
 div.stayTogether {
     display: inline-block;
 }
@@ -49,4 +58,22 @@ div#outer {
 div#Error {
     color: white;
     margin: 7px;
+}
+
+button {
+    padding: 7px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    background-color: rgb(15, 104, 99);
+    color: whitesmoke;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: rgb(19, 134, 131);
+}
+
+button:active {
+    background-color: rgb(3, 43, 41);
 }
