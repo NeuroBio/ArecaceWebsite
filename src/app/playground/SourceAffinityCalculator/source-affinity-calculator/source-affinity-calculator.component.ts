@@ -19,6 +19,7 @@ export class SourceAffinityCalculatorComponent implements OnInit {
   mastery = ["Low", "Mid", "High", "Top"];
   abilityKeys = Object.keys(new AbilityData());
   abilityNames = new AbilityNames().Names;
+  show = false;
 
   constructor(private SAserv: CalculatorService,
               private fb: FormBuilder) { }
@@ -90,5 +91,9 @@ export class SourceAffinityCalculatorComponent implements OnInit {
     this.result = undefined;
     this.rank = undefined;
     this.error = undefined;
+  }
+
+  onShow() {
+    this.show = !this.show;
   }
 }

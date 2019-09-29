@@ -77,3 +77,8 @@ button:hover {
 button:active {
     background-color: rgb(3, 43, 41);
 }
+
+li {
+    color: black;
+    margin: 10px;
+}
