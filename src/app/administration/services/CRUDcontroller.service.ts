@@ -160,7 +160,9 @@ export class CRUDcontrollerService {
               this.firePaths.value[this.itemType.value],
               this.itemToEdit.value.key);
     }).then(() =>{
-      this.itemToEdit.next(undefined);
+      if(this.itemType.value !== 'Website') {
+        this.itemToEdit.next(undefined);
+      }
       this.message.next("Edit successful!");
       this.allowButtons.next(buttonState);
     }).catch(err => {
