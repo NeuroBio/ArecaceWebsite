@@ -25,8 +25,8 @@ export class DateConverterComponent implements OnInit {
   createForm() {
     return this.fb.group({
       Start: 'Earth',
-      Month: 'Jan',
-      Day: 1
+      Month: 0,
+      Day: 0
         });
   }
 
@@ -47,6 +47,7 @@ export class DateConverterComponent implements OnInit {
   }
 
   onMonthChange(month: number) {
+    console.log(month);
     this.days = new Array(this.monthLengths[month]);
   }
 
