@@ -1,6 +1,7 @@
 Form {
     background-color: lightseagreen;
     padding: 10px;
+    max-width: 800px;
 }
 
 input.short {

@@ -1,3 +1,21 @@
-<p>
-  guild-survey works!
-</p>
+<form [formGroup]="Form">
+  <h2>Guild Survey</h2>
+
+  <div formArrayName="Answers">
+      <div *ngFor="let question of questions; let i = index"
+      [formGroupName]="i">
+
+        <div class="question">
+          <p>{{ i+1 + ') ' + question.Question }} </p>
+          
+          <div *ngFor="let answer of question.Answers; let j = index">
+              <label>{{ answer }}</label> <input type="radio" [value]="j" formControlName="Answer">
+          </div>
+        </div>
+        <br>
+
+      </div>
+      <button [disabled]="!Form.valid" (click)="onSubmit()">Submit</button>
+  </div>
+
+</form>
