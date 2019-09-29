@@ -23,7 +23,7 @@ export class BirthdayService {
     .pipe(take(1)).subscribe(birthdays => {
       birthdays = JSON.parse(birthdays.Birthdays);
       const date = this.DateInfo.arecacetoEarthConverter(char.Qt, char.Day);
-      const index = birthdays.find(birthday => birthday.Name == char.FirstName);
+      const index = birthdays.findIndex(birthday => birthday.Name == char.FirstName);
       if(index) {
         if(date === birthdays[index].Date) {
           return;
