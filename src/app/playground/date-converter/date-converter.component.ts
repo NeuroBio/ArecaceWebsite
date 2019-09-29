@@ -14,7 +14,7 @@ export class DateConverterComponent implements OnInit {
   months = this.dateInfo.EarthMonthNames;
   monthLengths = this.dateInfo.EarthMonthLengths;
   days = new Array(this.monthLengths[0]);
-
+  convertedDate = "Qt1-1 12";
 
   constructor(private fb: FormBuilder) { }
 
@@ -37,18 +37,31 @@ export class DateConverterComponent implements OnInit {
   onSwitch(earth: boolean) {
     if(earth){
       this.months = this.dateInfo.EarthMonthNames;
-      this.monthLengths = this.dateInfo.EarthMonthLengths;
-      
+      this.monthLengths = this.dateInfo.EarthMonthLengths;      
     } else {
       this.months = this.dateInfo.ArecaceMonthNames;
       this.monthLengths = this.dateInfo.ArecaceMonthLengths;
     }
+    this.Form.patchValue({Month: 0});
     this.onMonthChange(0);
   }
 
   onMonthChange(month: number) {
-    console.log(month);
     this.days = new Array(this.monthLengths[month]);
+    this.Form.patchValue({Day: 0});
+    this.onAnyChange();
+  }
+
+  onAnyChange() {
+    if(this.Form.value.Start === 'Earth') {
+      this.convertedDate = this.dateInfo.earthtoArecaceConverter(
+        (+this.Form.value.Month)+1, (+this.Form.value.Day)+1);
+    } else {
+      const tempDate = this.dateInfo.arecacetoEarthConverter(
+        this.dateInfo.ArecaceMonthNames[+this.Form.value.Month],
+        (+this.Form.value.Day)+1).split('-');
+      this.convertedDate = `${this.dateInfo.EarthMonthNames[(+tempDate[0])-1]}-${tempDate[1]}`
+    }
   }
 
 }

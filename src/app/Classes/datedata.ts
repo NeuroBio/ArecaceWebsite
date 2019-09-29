@@ -77,7 +77,11 @@ export class DateInfo {
         const index = this.EarthDates
                                     .findIndex(date => dateCheck === date);
         const numericDate = this.ArecaceDates[index].split('-');
-        return(`${this.ArecaceMonthNames[+numericDate[0]]} ${numericDate[1]}`)
+        if(numericDate[0] === "NA") {
+            return "This date doesn't exist on Arecace"
+        } else {
+            return(`${this.ArecaceMonthNames[(+numericDate[0])-1]} ${numericDate[1]}`)
+        }
     }
 }
 

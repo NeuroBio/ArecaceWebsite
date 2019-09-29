@@ -1,9 +1,12 @@
 <form [formGroup]="Form">
+  <h3>Date Converter:</h3>
+  <hr>
   <select formControlName="Start">
-    <option selected="true" (click)="onSwitch(true)">
+    <option selected="true"
+    (click)="onSwitch(true)" value="Earth">
       Earth
     </option>
-    <option (click)="onSwitch(false)">
+    <option (click)="onSwitch(false)" value="Arecace">
       Arecace
     </option>
   </select>
@@ -14,9 +17,13 @@
       </option>
   </select>
 
-  <select formControlName="Day">
+  <select formControlName="Day" (change)="onAnyChange()">
     <option *ngFor="let day of days; let i = index" [value]="i">
         {{ i+1 }}
       </option>
   </select>
+
+  <div>
+      Converts to: {{ convertedDate }}.
+  </div>
 </form>
