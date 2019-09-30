@@ -28,6 +28,7 @@ import { PageSubmitComponent } from './Forms/z-buttons/page-submit/page-submit.c
 import { AboutTextComponent } from './Forms/about-text/about-text.component';
 import { FaqTextComponent } from './Forms/faq-text/faq-text.component';
 import { IntroTextComponent } from './Forms/intro-text/intro-text.component';
+import { SurveyComponent } from './Forms/survey/survey/survey.component';
 
 @NgModule({
   declarations: [
@@ -54,6 +55,7 @@ import { IntroTextComponent } from './Forms/intro-text/intro-text.component';
     AboutTextComponent,
     FaqTextComponent,
     IntroTextComponent,
+    SurveyComponent,
   ],
   imports: [
     CommonModule,

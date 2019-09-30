@@ -21,9 +21,6 @@ export class ChapterFormComponent implements OnInit, OnDestroy {
   pageFiles = new Array(10);
   dummy = new Array(10);
   Arcs = [1,2,3,4, "WRC", "LW", 7, "Dae"];
-  message: string = '';
-  
-  
   
   constructor(private fb:FormBuilder,
               private controller:CRUDcontrollerService) { }

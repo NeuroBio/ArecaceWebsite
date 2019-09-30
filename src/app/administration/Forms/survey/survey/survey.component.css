@@ -1,0 +1,30 @@
+
+div.tab {
+    margin-left: 25px;
+}
+
+div.tabright {
+    display: flex;
+    justify-content: flex-end;
+}
+
+form#results {
+    display: inline-block;
+    width: auto;
+    right: 0;
+}
+
+form#outcome {
+    width: 720px;
+    margin-bottom: 30px;
+}
+
+div#questions{
+    display: inline-block;
+}
+
+div.qrHolder{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+}
