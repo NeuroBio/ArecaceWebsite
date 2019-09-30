@@ -1,7 +1,7 @@
-<form [formGroup]="Form">
+<form [formGroup]="mainForm">
   
   <p>
-      Survey ID: <input type="text" formControlNmae="ID">
+      Survey ID: <input type="text" formControlName="ID">
   </p>
 
   <!-- Outcomes -->
@@ -87,4 +87,5 @@
     </div>
   </div>
 
+  <app-formButtons></app-formButtons>
 </form>

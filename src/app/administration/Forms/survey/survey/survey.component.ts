@@ -12,18 +12,19 @@ import { SurveyQuestion } from 'src/app/playground/guild-survey/survey-question'
 
 export class SurveyComponent implements OnInit , OnDestroy {
 
+  mainForm = this.createForm();
+  outcomeForm = this.creatOutcomeForm();
+  resultsForm = this.createResultsForm();
+
   questions = this.fb.array([]);
-  Form: FormGroup;
-  outcomeForm: FormGroup;
-  results = this.fb.array([]);
   outcomes = this.fb.array([]);
+  results = this.fb.array([]);
+  
   stream1: Subscription;
   stream2: Subscription;
   init = true;
   edit = false;
   editInd: number;
-  resultsForm = this.createResultsForm();
-
    
   constructor(private fb: FormBuilder,
               private controller: CRUDcontrollerService) { }
@@ -35,23 +36,16 @@ export class SurveyComponent implements OnInit , OnDestroy {
     });
     this.stream2 = this.controller.triggerProcess.subscribe(() => this.processForm());
 
-    const questions: SurveyQuestion[] = [{Question: 'testing!', Answers: ['tan', "snek", 'prpr']},
-                                        {Question: 'FREEEEEEEEEEEEEE?', Answers: ['Tega', "Lizard", 'Chocolate']}]
-    const outcomes = [{Name:'Tega', Text: "tester"},
-                      {Name:"Reptile", Text: "tester2"},
-                      {Name: 'Kara', Text: "never gonna stop"}];
-
-    const results = [ [{Tega: 1, Reptile: 0, Kara: 0} , {Tega: 0, Reptile: 1, Kara: .5}, {Tega: 0, Reptile: 0, Kara: 1}],
-                      [{Tega: 1, Reptile: 0, Kara: 0} , {Tega: .5, Reptile: 1, Kara: .5}, {Tega: .5, Reptile: 0, Kara: 1}]
-                    ]
-
-    outcomes.forEach(o => this.outcomes.push(this.fb.group({Name: o.Name, Text: o.Text})));
-    // this.questions = this.fb.array([this.fb.group({0:1}),this.fb.group({0:1})]);
-    questions.forEach((q,i) => this.addQuestion(true, q.Question, q.Answers, results[i]));
-    // console.log(this.Form.controls.Questions)
-    // console.log(this.questions.controls[0].value)
-    this.Form = this.createForm();
-    this.outcomeForm = this.creatOutcomeForm();
+    // const questions: SurveyQuestion[] = [{Question: 'testing!', Answers: ['tan', "snek", 'prpr']},
+    //                                     {Question: 'FREEEEEEEEEEEEEE?', Answers: ['Tega', "Lizard", 'Chocolate']}]
+    // const outcomes = [{Name:'Tega', Text: "tester"},
+    //                   {Name:"Reptile", Text: "tester2"},
+    //                   {Name: 'Kara', Text: "never gonna stop"}];
+    // const results = [ [{Tega: 1, Reptile: 0, Kara: 0} , {Tega: 0, Reptile: 1, Kara: .5}, {Tega: 0, Reptile: 0, Kara: 1}],
+    //                   [{Tega: 1, Reptile: 0, Kara: 0} , {Tega: .5, Reptile: 1, Kara: .5}, {Tega: .5, Reptile: 0, Kara: 1}]
+                    // ]
+    // outcomes.forEach(o => this.outcomes.push(this.fb.group({Name: o.Name, Text: o.Text})));
+    // questions.forEach((q,i) => this.addQuestion(true, q.Question, q.Answers, results[i]));
   }
 
   ngOnDestroy() {
@@ -63,7 +57,6 @@ export class SurveyComponent implements OnInit , OnDestroy {
     return this.fb.group({
       ID: '',
       Questions: this.questions,
-      // Results: this.results,
     });
   }
   createResultsForm(){
@@ -82,7 +75,12 @@ export class SurveyComponent implements OnInit , OnDestroy {
   assignFormData(editFormData: any) {
     if(editFormData) {
       this.onReset();
-      this.Form = this.controller.quickAssign(this.Form, editFormData);
+      this.mainForm = this.controller.quickAssign(this.mainForm, editFormData);
+      const outcomes = JSON.parse(editFormData.Outcomes);
+      const questions = JSON.parse(editFormData.Questions);
+      const results = JSON.parse(editFormData.Results);
+      outcomes.forEach(o => this.outcomes.push(this.fb.group({Name: o.Name, Text: o.Text})));
+      questions.forEach((q,i) => this.addQuestion(true, q.Question, q.Answers, results[i]));  
     } else if(!this.init) {
       this.onReset();
     }
@@ -99,7 +97,14 @@ export class SurveyComponent implements OnInit , OnDestroy {
   }
   
   processForm() {
-    const Final: SurveyQuestion = Object.assign({}, this.Form.value);
+    const ID = this.mainForm.controls.ID.value;
+    const Questions = this.unpackQuestions(this.questions.value);
+    const Results = this.unpackResults(this.results.value);
+    const Outcomes = this.outcomes.value;
+    const Final = {Questions: JSON.stringify(Questions),
+                   Results: JSON.stringify(Results),
+                   Outcomes: JSON.stringify(Outcomes),
+                   ID: ID};
 
     this.controller.activeFormData.next([Final,
                                         [],
@@ -111,8 +116,13 @@ export class SurveyComponent implements OnInit , OnDestroy {
   }
 
   onReset() {
-      this.Form = this.createForm();
-      this.onResetOutcomes();
+    this.questions = this.fb.array([]);
+    this.outcomes = this.fb.array([]);
+    this.results = this.fb.array([]);
+    this.mainForm = this.createForm();
+    this.onResetOutcomes();
+    this.editInd = undefined;
+    this.edit = false;
   }
 
   onResetOutcomes() {
@@ -138,7 +148,7 @@ export class SurveyComponent implements OnInit , OnDestroy {
               answer.removeControl(oldName);
               answer.addControl(formData.Name, new FormControl(oldValue));
             })
-            this.results.removeAt(0)
+            this.results.removeAt(0);
             this.results.push(this.fb.group({Results: temp}));
           });
         }
@@ -152,7 +162,7 @@ export class SurveyComponent implements OnInit , OnDestroy {
           let temp = (<FormArray>question.get('Results'))
           temp.controls.map((answer: FormGroup) =>
             answer.addControl(formData.Name, new FormControl(0)) )
-          this.results.removeAt(0)
+          this.results.removeAt(0);
           this.results.push(this.fb.group({Results: temp}));
         });
       }
@@ -164,13 +174,12 @@ export class SurveyComponent implements OnInit , OnDestroy {
       this.results.controls.forEach((question, i) => {
         let temp = (<FormArray>question.get('Results'))
         temp.controls.map((answer: FormGroup) =>
-          answer.removeControl(formData.Name) )
-        this.results.removeAt(0)
+          answer.removeControl(formData.Name) );
+        this.results.removeAt(0);
         this.results.push(this.fb.group({Results: temp}));
       });
     }
     this.onResetOutcomes();
-    console.log(this.results.value)
   }
 
   addQuestion(add: boolean, question: string = '',
@@ -227,4 +236,24 @@ export class SurveyComponent implements OnInit , OnDestroy {
     return newOutcomes;
   }
 
+  unpackQuestions(questions: any) {
+    let Q: SurveyQuestion[] = [];
+    questions.forEach(q => {
+      let A: string[] = [];
+      q.Answers.forEach(a => A.push(a.Answer));
+      Q.push({Question: q.Question,
+              Answers: A});
+    });
+    return Q;
+  }
+
+  unpackResults(results: any) {
+    let R: object[][] = [];
+    results.forEach(r => {
+      let S: object[] = [];
+      r.Results.forEach(s => S.push(s));
+      R.push(S);
+    })
+    return R;
+  }
 }
