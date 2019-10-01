@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { FormBuilder, FormArray, FormControl, FormGroup, Validators, Form } from '@angular/forms';
 import { CRUDcontrollerService } from 'src/app/administration/services/CRUDcontroller.service';
-import { SurveyQuestion } from 'src/app/playground/guild-survey/survey-question';
+import { SurveyQuestion, SurveyOutcome } from 'src/app/playground/guild-survey/survey-question';
 
 @Component({
   selector: 'app-survey',
@@ -104,10 +104,12 @@ export class SurveyComponent implements OnInit , OnDestroy {
     const ID = this.mainForm.controls.ID.value;
     const Questions = this.unpackQuestions();
     const Results = this.unpackResults();
-    const Outcomes = this.outcomes.value;
+    const Outcomes: SurveyOutcome[] = this.outcomes.value;
+    const MaxScores = this.calculateMaxScores(Results, Outcomes);
     const Final = {Questions: JSON.stringify(Questions),
                    Results: JSON.stringify(Results),
                    Outcomes: JSON.stringify(Outcomes),
+                   MaxScores: JSON.stringify(MaxScores),
                    ID: ID};
     this.controller.activeFormData.next([Final,
                                         [],
@@ -258,5 +260,19 @@ export class SurveyComponent implements OnInit , OnDestroy {
       R.push(S);
     })
     return R;
+  }
+
+  calculateMaxScores(results: object[][], outcomes: SurveyOutcome[]) {
+    let maxScores: object = {};
+    outcomes.forEach(o => {
+      maxScores[o.Name] = 0;
+    })
+
+    results.forEach(q =>
+      Object.keys(maxScores).forEach(key =>{
+        let temp: number[] = q.map(a => a[key]);
+        maxScores[key] += +temp.reduce((a,b) => a > b ? a : b);
+      }) )
+      return maxScores;
   }
 }

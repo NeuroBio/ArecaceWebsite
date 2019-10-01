@@ -16,7 +16,7 @@ export class GuildSurveyComponent implements OnInit {
   //{Question: 'Testing 2!', Answers: ['d', "e", 'f']}]
   outcomes: SurveyOutcome[];
   results: object[][];
-  maxScores: object[];
+  maxScores: object;
   answers = this.fb.array([]);
   Form = this.createForm();
   survey$: Observable<SurveyData>
