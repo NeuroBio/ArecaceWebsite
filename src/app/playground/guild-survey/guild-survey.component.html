@@ -1,16 +1,20 @@
 <form [formGroup]="Form">
-  <h2>Guild Survey</h2>
+  <h2>Guild Aplication:</h2>
 
+  <div *ngIf="survey$ | async as survey">
+
+  </div>
   <div formArrayName="Answers">
       <div *ngFor="let question of questions; let i = index"
       [formGroupName]="i">
 
         <div class="question">
-          <p>{{ i+1 + ') ' + question.Question }} </p>
+          <h3>{{ i+1 + ') ' + question.Question }} </h3>
           
-          <div *ngFor="let answer of question.Answers; let j = index">
-              <label>{{ answer }}</label> <input type="radio" [value]="j" formControlName="Answer">
-          </div>
+          <p *ngFor="let answer of question.Answers; let j = index">
+              <input type="radio" [value]="j" formControlName="Answer" [id]="i + ',' + j">
+              <label [for]="i + ',' + j">{{ answer }}</label>
+          </p>
         </div>
         <br>
 
