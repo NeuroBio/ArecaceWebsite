@@ -124,14 +124,14 @@ export class SurveyComponent implements OnInit , OnDestroy {
     this.outcomes = this.fb.array([]);
     this.results = this.fb.array([]);
     this.mainForm = this.createForm();
+    this.resultsForm = this.createResultsForm();
     this.onResetOutcomes();
-    this.editInd = undefined;
-    this.edit = false;
   }
 
   onResetOutcomes() {
     this.outcomeForm = this.creatOutcomeForm();
     this.edit = false;
+    this.editInd = undefined;
   }
 
   addOutcome(add: boolean) {
