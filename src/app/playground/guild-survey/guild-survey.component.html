@@ -23,3 +23,9 @@
   </div>
 
 </form>
+
+<div *ngIf="surveyResult" id="surveyResults">
+  <div [innerHTML]="surveyResult.Text"></div>
+  --{{ match }}% match
+
+</div>

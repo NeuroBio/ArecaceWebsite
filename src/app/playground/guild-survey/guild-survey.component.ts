@@ -4,6 +4,7 @@ import { SurveyQuestion, SurveyData, SurveyOutcome } from './survey-question';
 import { Observable } from 'rxjs';
 import { FireBaseService } from 'src/app/GlobalServices/firebase.service';
 import { map } from 'rxjs/operators';
+import { stringify } from '@angular/compiler/src/util';
 
 @Component({
   selector: 'app-guild-survey',
@@ -20,6 +21,8 @@ export class GuildSurveyComponent implements OnInit {
   answers = this.fb.array([]);
   Form = this.createForm();
   survey$: Observable<SurveyData>
+  surveyResult: SurveyOutcome;
+  match: number;
   
   constructor(private fb: FormBuilder,
               private firebaseserv: FireBaseService) { }
@@ -55,17 +58,34 @@ export class GuildSurveyComponent implements OnInit {
   onSubmit() {
 
     //Calculate scores
-    let finalScores: object = {};
+    let finalScores: object = {}; 
     this.outcomes.forEach(o => {
       finalScores[o.Name] = 0;
     });
+    let outcomes = Object.keys(finalScores);
 
     this.Form.value.Answers.forEach((q,i) =>{
       let temp = this.results[i][q.Answer]
-      Object.keys(temp).forEach(key => finalScores[key] += +temp[key]);
+      outcomes.forEach(key => finalScores[key] += +temp[key]);
     });
 
-    console.log(finalScores);
-    
+    outcomes.forEach(key => {
+      if(this.maxScores[key] !== 0){
+        finalScores[key] = finalScores[key]/this.maxScores[key];
+      } else {
+        finalScores[key] = 0;
+      }
+    });
+
+    console.log(finalScores)
+    let finalOutcome = outcomes[0];
+    outcomes.forEach(key => {
+      if(finalScores[finalOutcome] < finalScores[key]){
+        finalOutcome = key;
+      }
+    })
+
+    this.surveyResult = this.outcomes.find(o => o.Name === finalOutcome);
+    this.match = Math.trunc(finalScores[finalOutcome]*1000)/100;
   }
 }
