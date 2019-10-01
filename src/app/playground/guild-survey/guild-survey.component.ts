@@ -9,8 +9,8 @@ import { SurveyQuestion } from './survey-question';
 })
 export class GuildSurveyComponent implements OnInit {
 
-  questions: SurveyQuestion[] = [{Question: 'testing!', Answers: ['tan', "snek", 'prpr']},
-  {Question: 'FREEEEEEEEEEEEEE?', Answers: ['Tega', "Lizard", 'Chocolate']}]
+  questions: SurveyQuestion[] = [{Question: 'testing!', Answers: ['a', "b", 'c']},
+  {Question: 'Testing 2!', Answers: ['d', "e", 'f']}]
   answers = this.fb.array([]);
   Form = this.createForm();
   

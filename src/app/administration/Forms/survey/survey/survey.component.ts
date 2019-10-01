@@ -102,14 +102,13 @@ export class SurveyComponent implements OnInit , OnDestroy {
   
   processForm() {
     const ID = this.mainForm.controls.ID.value;
-    const Questions = this.unpackQuestions(this.questions.value);
-    const Results = this.unpackResults(this.results.value);
+    const Questions = this.unpackQuestions();
+    const Results = this.unpackResults();
     const Outcomes = this.outcomes.value;
     const Final = {Questions: JSON.stringify(Questions),
                    Results: JSON.stringify(Results),
                    Outcomes: JSON.stringify(Outcomes),
                    ID: ID};
-
     this.controller.activeFormData.next([Final,
                                         [],
                                         [],
@@ -240,22 +239,22 @@ export class SurveyComponent implements OnInit , OnDestroy {
     return newOutcomes;
   }
 
-  unpackQuestions(questions: any) {
+  unpackQuestions() {
     let Q: SurveyQuestion[] = [];
-    questions.forEach(q => {
+    this.questions.controls.forEach(q => {
       let A: string[] = [];
-      q.Answers.forEach(a => A.push(a.Answer));
-      Q.push({Question: q.Question,
+      (<FormArray>q.get('Answers')).controls.forEach(a => A.push(a.value.Answer));
+      Q.push({Question: q.value.Question,
               Answers: A});
     });
     return Q;
   }
 
-  unpackResults(results: any) {
+  unpackResults() {
     let R: object[][] = [];
-    results.forEach(r => {
+    this.results.controls.forEach(r => {
       let S: object[] = [];
-      r.Results.forEach(s => S.push(s));
+      (<FormArray>r.get('Results')).controls.forEach(s => S.push(s.value));
       R.push(S);
     })
     return R;
