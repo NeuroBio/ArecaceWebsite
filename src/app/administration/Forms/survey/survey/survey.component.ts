@@ -12,13 +12,16 @@ import { SurveyQuestion } from 'src/app/playground/guild-survey/survey-question'
 
 export class SurveyComponent implements OnInit , OnDestroy {
 
+  
+  questions = this.fb.array([]);
+  outcomes = this.fb.array([]);
+  results = this.fb.array([]);
+
   mainForm = this.createForm();
   outcomeForm = this.creatOutcomeForm();
   resultsForm = this.createResultsForm();
 
-  questions = this.fb.array([]);
-  outcomes = this.fb.array([]);
-  results = this.fb.array([]);
+ 
   
   stream1: Subscription;
   stream2: Subscription;
@@ -43,7 +46,7 @@ export class SurveyComponent implements OnInit , OnDestroy {
     //                   {Name: 'Kara', Text: "never gonna stop"}];
     // const results = [ [{Tega: 1, Reptile: 0, Kara: 0} , {Tega: 0, Reptile: 1, Kara: .5}, {Tega: 0, Reptile: 0, Kara: 1}],
     //                   [{Tega: 1, Reptile: 0, Kara: 0} , {Tega: .5, Reptile: 1, Kara: .5}, {Tega: .5, Reptile: 0, Kara: 1}]
-                    // ]
+    //                 ]
     // outcomes.forEach(o => this.outcomes.push(this.fb.group({Name: o.Name, Text: o.Text})));
     // questions.forEach((q,i) => this.addQuestion(true, q.Question, q.Answers, results[i]));
   }
@@ -59,6 +62,7 @@ export class SurveyComponent implements OnInit , OnDestroy {
       Questions: this.questions,
     });
   }
+  
   createResultsForm(){
     return this.fb.group({
       Results: this.results
