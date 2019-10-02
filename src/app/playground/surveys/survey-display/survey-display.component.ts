@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
-import { SurveyQuestion, SurveyData, SurveyOutcome } from './survey-question';
-import { Observable } from 'rxjs';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { FormBuilder, Validators, FormArray, FormGroup } from '@angular/forms';
+import { SurveyQuestion, SurveyData, SurveyOutcome } from '../surveyclasses';
+import { Observable, Subscription } from 'rxjs';
 import { FireBaseService } from 'src/app/GlobalServices/firebase.service';
-import { map } from 'rxjs/operators';
+import { map, take } from 'rxjs/operators';
 import { SurveyService } from '../survey.service';
+import { Route } from '@angular/compiler/src/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-survey-display',
@@ -13,43 +15,31 @@ import { SurveyService } from '../survey.service';
 })
 export class SurveyDisplayComponent implements OnInit {
 
-  questions: SurveyQuestion[];// = [{Question: 'testing!', Answers: ['a', "b", 'c']},
-  //{Question: 'Testing 2!', Answers: ['d', "e", 'f']}]
-  outcomes: SurveyOutcome[];
-  results: object[][];
-  maxScores: object;
-  answers = this.fb.array([]);
-  Form = this.createForm();
-  survey$: Observable<SurveyData>
+  Questions: SurveyQuestion[];
+  Name: string;
+  answers: FormArray
+  Form: FormGroup;
   surveyResult: SurveyOutcome;
-  match: number;
-  
+
   constructor(private fb: FormBuilder,
-              private firebaseserv: FireBaseService,
-              private surveyserv: SurveyService) { }
+              private surveyserv: SurveyService,
+              private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.survey$ = this.firebaseserv.returnCollect('Surveys').pipe(map(x => {
-      return {Questions: JSON.parse(x[0].Questions),
-              Results: JSON.parse(x[0].Results),
-              Outcomes: JSON.parse(x[0].Outcomes),
-              MaxScores: JSON.parse(x[0].MaxScores)}
-    }));
-
-    this.survey$.subscribe(survey => {
-      this.questions = survey.Questions;
-      this.results = survey.Results;
-      this.outcomes = survey.Outcomes;
-      this.maxScores = survey.MaxScores;
-      survey.Questions.forEach(() => this.addQuestion());
-    })
+    this.route.data.subscribe((data: {Survey: any})=>{
+      window.scroll(0,0);
+      this.Questions = this.surveyserv.assignSurveyData(data.Survey);
+      this.Name = data.Survey.Name;
+      this.onReset()
+      this.Questions.forEach(() => this.addQuestion());
+      this.surveyserv.showSurvey.next(true);
+    });
   }
-
+ 
   createForm() {
     return this.fb.group({
       Answers: this.answers
     });
-    
   }
 
   addQuestion(){
@@ -57,19 +47,13 @@ export class SurveyDisplayComponent implements OnInit {
   }
 
   onSubmit() {
-
   this.surveyserv.calculateFinalScores(
-    this.Form.controls.Answers.value,
-    this.outcomes, this.results, this.maxScores)
-
-    // let finalOutcome = outcomes[0];
-    // outcomes.forEach(key => {
-    //   if(finalScores[finalOutcome] < finalScores[key]){
-    //     finalOutcome = key;
-    //   }
-    // })
-
-    // this.surveyResult = this.outcomes.find(o => o.Name === finalOutcome);
-    // this.match = Math.trunc(finalScores[finalOutcome]*1000)/10;
+    this.Form.controls.Answers.value)
   }
+
+  onReset() {
+    this.answers = this.fb.array([]);
+    this.Form = this.createForm();
+  }
+
 }

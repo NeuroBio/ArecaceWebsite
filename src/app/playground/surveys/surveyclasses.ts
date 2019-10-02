@@ -10,7 +10,9 @@ export class SurveyQuestion {
 
 export class SurveyOutcome {
     Name: string;
-    Outcomes: string;
+    Text: string;
+    Link?: string;
+    LinkName?: string;
 }
 
 export class SurveyData {
@@ -18,12 +20,16 @@ export class SurveyData {
     Results: object[][];
     Outcomes: SurveyOutcome[];
     MaxScores: object[];
+    ID: string;
+    Name: string;
 
     constructor(q: SurveyQuestion[], r: object[][], o: SurveyOutcome[],
-                m: object[]) {
+                m: object[], id: string, name: string) {
         this.Questions = q;
         this.Results = r;
         this.Outcomes = o;
         this.MaxScores = m;
+        this.ID = id;
+        this.Name = name;
     }
 }

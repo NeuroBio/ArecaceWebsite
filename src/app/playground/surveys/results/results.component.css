@@ -1,6 +1,7 @@
 div#outer {
     border: 1pt solid white;
     background-color: rgb(49, 49, 49);
+    margin: 7px;
 }
 
 div#match {
@@ -11,4 +12,8 @@ div#match {
 h3 {
     margin: 5px;
     padding: 0px;
+}
+
+button {
+    margin: 10px;
 }

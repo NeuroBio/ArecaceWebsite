@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +8,6 @@ import { map, tap } from 'rxjs/operators';
 export class GeneralcollectionService {
 
   collectionData = new BehaviorSubject<any[]>([]);
-  memberDara = new BehaviorSubject<any>(undefined);
   
   initializeMetaData(meta:any[]){
     this.collectionData.next(meta);
@@ -23,8 +22,7 @@ export class GeneralcollectionService {
   getMember(ID:string){
     return this.returnMetaData().pipe(
       map(members =>
-        members.find(member => member.ID === ID)),
-      tap(member => this.memberDara.next(member))
+        members.find(member => member.ID === ID))
     );
   }
 

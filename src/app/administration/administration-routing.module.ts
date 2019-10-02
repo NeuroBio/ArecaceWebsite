@@ -49,7 +49,7 @@ const AdminRoutes: Routes = [
           {path: 'culture', component: ReferenceFormComponent},
           {path: 'extras', component: ExtrasFormComponent},
           {path: 'maps', component: ReferenceFormComponent},
-          {path: 'survey', component: SurveyComponent },
+          {path: 'surveys', component: SurveyComponent },
         ]},
         {path: 'Pages', component:PagesComponent, 
          children:[

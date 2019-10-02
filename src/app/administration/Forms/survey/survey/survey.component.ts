@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { FormBuilder, FormArray, FormControl, FormGroup, Validators, Form } from '@angular/forms';
 import { CRUDcontrollerService } from 'src/app/administration/services/CRUDcontroller.service';
-import { SurveyQuestion, SurveyOutcome } from 'src/app/playground/surveys/survey-display/survey-question';
+import { SurveyQuestion, SurveyOutcome } from 'src/app/playground/surveys/surveyclasses';
 
 @Component({
   selector: 'app-survey',
@@ -59,6 +59,7 @@ export class SurveyComponent implements OnInit , OnDestroy {
   createForm() {
     return this.fb.group({
       ID: '',
+      Name: '',
       Questions: this.questions,
     });
   }
@@ -72,7 +73,9 @@ export class SurveyComponent implements OnInit , OnDestroy {
   creatOutcomeForm() {
     return this.fb.group({
       Name: ['', Validators.required],
-      Text: ['', Validators.required]
+      Text: ['', Validators.required],
+      Link: '',
+      LinkName: ''
     });
   }
 
@@ -80,10 +83,11 @@ export class SurveyComponent implements OnInit , OnDestroy {
     if(editFormData) {
       this.onReset();
       this.mainForm = this.controller.quickAssign(this.mainForm, editFormData);
-      const outcomes = JSON.parse(editFormData.Outcomes);
-      const questions = JSON.parse(editFormData.Questions);
+      const outcomes: SurveyOutcome[] = JSON.parse(editFormData.Outcomes);
+      const questions: SurveyQuestion[] = JSON.parse(editFormData.Questions);
       const results = JSON.parse(editFormData.Results);
-      outcomes.forEach(o => this.outcomes.push(this.fb.group({Name: o.Name, Text: o.Text})));
+      outcomes.forEach(o => this.outcomes.push(this.fb.group({Name: o.Name, Text: o.Text,
+                                                              Link: o.Link, LinkName: o.LinkName})));
       questions.forEach((q,i) => this.addQuestion(true, q.Question, q.Answers, results[i]));  
     } else if(!this.init) {
       this.onReset();
@@ -93,15 +97,13 @@ export class SurveyComponent implements OnInit , OnDestroy {
   assignOutcomeForm(index: number) {
     this.editInd = index;
     this.edit = true;
-    const temp = this.outcomes.controls[index]
-    this.outcomeForm.patchValue({
-      Name: temp.value.Name,
-      Text: temp.value.Text
-    })
+    this.controller.quickAssign(this.outcomeForm,
+                                this.outcomes.controls[index].value)
   }
   
   processForm() {
     const ID = this.mainForm.controls.ID.value;
+    const Name = this.mainForm.controls.Name.value;
     const Questions = this.unpackQuestions();
     const Results = this.unpackResults();
     const Outcomes: SurveyOutcome[] = this.outcomes.value;
@@ -110,7 +112,8 @@ export class SurveyComponent implements OnInit , OnDestroy {
                    Results: JSON.stringify(Results),
                    Outcomes: JSON.stringify(Outcomes),
                    MaxScores: JSON.stringify(MaxScores),
-                   ID: ID};
+                   ID: ID,
+                   Name: Name};
     this.controller.activeFormData.next([Final,
                                         [],
                                         [],
@@ -142,7 +145,9 @@ export class SurveyComponent implements OnInit , OnDestroy {
         const oldName = this.outcomes.controls[this.editInd].value.Name;
         this.outcomes.controls[this.editInd].setValue({
           Name: formData.Name,
-          Text: formData.Text
+          Text: formData.Text,
+          Link: formData.Link,
+          LinkName: formData.LinkName
         });
 
         if(oldName !== formData.Name){

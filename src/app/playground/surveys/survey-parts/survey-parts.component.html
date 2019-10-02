@@ -1,4 +1,4 @@
 
-<app-results></app-results>
+<app-results *ngIf="showForm === false"></app-results>
 
-<app-survey-display></app-survey-display>
+<app-survey-display *ngIf="showForm === true"></app-survey-display>

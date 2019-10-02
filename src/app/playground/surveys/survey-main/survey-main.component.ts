@@ -11,7 +11,7 @@ import { map } from 'rxjs/operators';
 })
 export class SurveyMainComponent implements OnInit {
 
-  current: string ="Guild";
+  current: string;
   surveys$: Observable<string[]>;
 
   constructor(private generalcollectserv: GeneralcollectionService,
@@ -25,9 +25,9 @@ export class SurveyMainComponent implements OnInit {
       })
     )
     
-    // this.route.firstChild.paramMap.subscribe(
-    //   path => this.current = path.get('SurveyID')
-    // )
+    this.route.firstChild.paramMap.subscribe(
+      path => this.current = path.get('SurveyID')
+    )
   }
 
 }

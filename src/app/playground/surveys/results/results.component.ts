@@ -1,20 +1,32 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy } from '@angular/core';
+import { SurveyOutcome } from '../surveyclasses';
+import { SurveyService } from '../survey.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-results',
   templateUrl: './results.component.html',
   styleUrls: ['./results.component.css']
 })
-export class ResultsComponent implements OnInit {
+export class ResultsComponent implements OnInit, OnDestroy {
 
-  @Input() results = {Text: "Results info.",
-                      Link: "Test",
-                      LinkName: "A Link!",
-                      Match: 89};
+  results = {Outcome: new SurveyOutcome(),
+              Match: 89};
+  stream1: Subscription;
 
-  constructor() { }
+  constructor(private surveyserv: SurveyService) { }
 
   ngOnInit() {
+    this.stream1 = this.surveyserv.surveyResults.subscribe(results =>
+      this.results = results);
   }
 
+  ngOnDestroy() {
+    this.stream1.unsubscribe();
+  }
+
+  onReset(){
+    this.surveyserv.surveyResults.next(undefined);
+    this.surveyserv.showSurvey.next(true);
+  }
 }
