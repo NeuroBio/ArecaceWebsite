@@ -1,6 +1,5 @@
 <div id="holder">
-    <div *ngIf="loading===true" class="loading"></div>
-    <div [hidden]="loading">
+    <div>
 
         <!--Header-->
         <header>
@@ -12,7 +11,9 @@
 
         <!--Body--> 
         <div id="insig">
-            <img [src]="guild.Links[0]" (load)="loading=false" [alt]="guild.AltText"> 
+            <div *ngIf="loading===true" class="loading"></div>
+            <img [src]="guild.Links[0]" (load)="loading=false"
+            [alt]="guild.AltText" [hidden]="loading"> 
         </div>
         
         <div class="textblock">

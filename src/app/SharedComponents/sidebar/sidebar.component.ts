@@ -17,7 +17,8 @@ export class SideBarComponent implements AfterContentChecked{
   @ViewChild('list') list: ElementRef;
  
   style = true;
-  height = 0;
+  listHeight = 0;
+  greybarHeight = 0;
 
   ngAfterContentChecked(){
     setTimeout(() => { this.onResize()}, 10);
@@ -25,9 +26,10 @@ export class SideBarComponent implements AfterContentChecked{
   
   @HostListener('window:scroll') 
   onResize(){
-    if(this.height < this.list.nativeElement.offsetHeight){
-      this.height = window.innerHeight -
-      Math.max(this.container.nativeElement.getBoundingClientRect().top, 0)-3;
+    if(this.listHeight < this.list.nativeElement.offsetHeight){
+      this.listHeight = window.innerHeight -
+      Math.max(this.container.nativeElement.getBoundingClientRect().top, 0)-4;
+      this.greybarHeight = this.container.nativeElement.scrollHeight;
     }
   }
 

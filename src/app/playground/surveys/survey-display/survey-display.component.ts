@@ -1,17 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { SurveyQuestion, SurveyData, SurveyOutcome } from './survey-question';
 import { Observable } from 'rxjs';
 import { FireBaseService } from 'src/app/GlobalServices/firebase.service';
 import { map } from 'rxjs/operators';
-import { stringify } from '@angular/compiler/src/util';
+import { SurveyService } from '../survey.service';
 
 @Component({
-  selector: 'app-guild-survey',
-  templateUrl: './guild-survey.component.html',
-  styleUrls: ['./guild-survey.component.css']
+  selector: 'app-survey-display',
+  templateUrl: './survey-display.component.html',
+  styleUrls: ['./survey-display.component.css']
 })
-export class GuildSurveyComponent implements OnInit {
+export class SurveyDisplayComponent implements OnInit {
 
   questions: SurveyQuestion[];// = [{Question: 'testing!', Answers: ['a', "b", 'c']},
   //{Question: 'Testing 2!', Answers: ['d', "e", 'f']}]
@@ -25,7 +25,8 @@ export class GuildSurveyComponent implements OnInit {
   match: number;
   
   constructor(private fb: FormBuilder,
-              private firebaseserv: FireBaseService) { }
+              private firebaseserv: FireBaseService,
+              private surveyserv: SurveyService) { }
 
   ngOnInit() {
     this.survey$ = this.firebaseserv.returnCollect('Surveys').pipe(map(x => {
@@ -57,35 +58,18 @@ export class GuildSurveyComponent implements OnInit {
 
   onSubmit() {
 
-    //Calculate scores
-    let finalScores: object = {}; 
-    this.outcomes.forEach(o => {
-      finalScores[o.Name] = 0;
-    });
-    let outcomes = Object.keys(finalScores);
+  this.surveyserv.calculateFinalScores(
+    this.Form.controls.Answers.value,
+    this.outcomes, this.results, this.maxScores)
 
-    this.Form.value.Answers.forEach((q,i) =>{
-      let temp = this.results[i][q.Answer]
-      outcomes.forEach(key => finalScores[key] += +temp[key]);
-    });
+    // let finalOutcome = outcomes[0];
+    // outcomes.forEach(key => {
+    //   if(finalScores[finalOutcome] < finalScores[key]){
+    //     finalOutcome = key;
+    //   }
+    // })
 
-    outcomes.forEach(key => {
-      if(this.maxScores[key] !== 0){
-        finalScores[key] = finalScores[key]/this.maxScores[key];
-      } else {
-        finalScores[key] = 0;
-      }
-    });
-
-    console.log(finalScores)
-    let finalOutcome = outcomes[0];
-    outcomes.forEach(key => {
-      if(finalScores[finalOutcome] < finalScores[key]){
-        finalOutcome = key;
-      }
-    })
-
-    this.surveyResult = this.outcomes.find(o => o.Name === finalOutcome);
-    this.match = Math.trunc(finalScores[finalOutcome]*1000)/100;
+    // this.surveyResult = this.outcomes.find(o => o.Name === finalOutcome);
+    // this.match = Math.trunc(finalScores[finalOutcome]*1000)/10;
   }
 }

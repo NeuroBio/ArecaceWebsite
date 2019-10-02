@@ -1,0 +1,13 @@
+<div id="outer">
+  <div id="match">{{ results.Match }}% match</div>
+
+  <h3>{{ Title }} Results:</h3>
+  <hr>
+
+  <div [innerHTML]="results.Text"></div>
+
+  <div class="navver" *ngIf="results.Link">
+      <a class="navver" [routerLink]="results.Link">
+          {{ results.LinkName }}</a>
+  </div>
+</div>

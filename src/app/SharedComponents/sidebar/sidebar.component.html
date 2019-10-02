@@ -1,12 +1,12 @@
 <div #container class="sidebar" role="navigation">
 
-  <svg id ="greyband" [style.height.px]="container.scrollHeight">
+  <svg id ="greyband" [style.height.px]="greybarHeight">
       <rect width="100%" height="100%" style="fill:#616161"/>
   </svg>
 
   
 
-  <div id="listHolder" #listHolder [style.maxHeight.px]="height"
+  <div id="listHolder" #listHolder [style.maxHeight.px]="listHeight"
   (window:resize)="onResize()">
   <div #list>
       <div *ngFor="let list of linkList, let i = index">

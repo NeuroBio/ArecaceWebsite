@@ -1,35 +1,37 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GeneralcollectionService {
 
-  metaData = new BehaviorSubject<any[]>([0]);
+  collectionData = new BehaviorSubject<any[]>([]);
+  memberDara = new BehaviorSubject<any>(undefined);
   
   initializeMetaData(meta:any[]){
-    this.metaData.next(meta);
+    this.collectionData.next(meta);
   }
 
 
   returnMetaData(){
-    return this.metaData;
+    return this.collectionData;
   }
 
 
   getMember(ID:string){
     return this.returnMetaData().pipe(
       map(members =>
-        members.find(member => member.ID === ID))
+        members.find(member => member.ID === ID)),
+      tap(member => this.memberDara.next(member))
     );
   }
 
-  getReference(ID:string, Ref:string){
-    return this.getMember(ID).pipe(
-      map(member =>
-        member.References.find(member => member.ID === Ref))
-    );
-  }
+  // getReference(ID:string, Ref:string){
+  //   return this.getMember(ID).pipe(
+  //     map(member =>
+  //       member.References.find(member => member.ID === Ref))
+  //   );
+  // }
 }
