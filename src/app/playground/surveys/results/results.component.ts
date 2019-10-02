@@ -10,8 +10,9 @@ import { Subscription } from 'rxjs';
 })
 export class ResultsComponent implements OnInit, OnDestroy {
 
-  results = {Outcome: new SurveyOutcome(),
-              Match: 89};
+  results: any;
+  // = {Outcome: new SurveyOutcome(),
+  //            Match: 89};
   stream1: Subscription;
 
   constructor(private surveyserv: SurveyService) { }

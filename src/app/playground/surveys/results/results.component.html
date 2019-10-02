@@ -1,15 +1,18 @@
 <div id="outer">
   <div id="match">{{ results.Match }}% match</div>
 
-  <h3>{{ results.SurveyName }} Results:</h3>
-  <hr>
-
-  <div [innerHTML]="results.Outcome.Text"></div>
-
-  <div class="navver" *ngIf="results.Outcome.Link">
-      <a class="navver" [routerLink]="results.Outcome.Link">
-          {{ results.Outcome.LinkName }}</a>
+  <div id="inner">
+    <h3>{{ results.Name }} Results:</h3>
+    <hr>
+  
+    <p [innerHTML]="results.Outcome.Text"></p>
+  
+    <div class="navver" *ngIf="results.Outcome.Link">
+        <a class="navver" [routerLink]="results.Outcome.Link">
+            {{ results.Outcome.LinkName }}</a>
+    </div>
   </div>
+
 </div>
 
 <button (click)="onReset()">Reset Survey</button>

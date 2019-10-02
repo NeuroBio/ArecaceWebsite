@@ -59,7 +59,7 @@ export class SurveyService {
     }
     catch {
       this.surveyResults.next(this.processor
-        .standard(finalScores, surveyData, answers, keys));
+        .standard(finalScores, surveyData, keys));
     }
   }
 
