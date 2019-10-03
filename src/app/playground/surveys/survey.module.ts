@@ -7,6 +7,7 @@ import { SurveyDisplayComponent } from './survey-display/survey-display.componen
 import { ReactiveFormsModule } from '@angular/forms';
 import { ResultsComponent } from './results/results.component';
 import { SurveyPartsComponent } from './survey-parts/survey-parts.component';
+import { SurveyStatsComponent } from './survey-stats/survey-stats.component';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { SurveyPartsComponent } from './survey-parts/survey-parts.component';
     SurveyMainComponent,
     SurveyDisplayComponent,
     ResultsComponent,
-    SurveyPartsComponent
+    SurveyPartsComponent,
+    SurveyStatsComponent
   ],
   
   imports: [

@@ -19,12 +19,12 @@ export class SurveyData {
     Questions: SurveyQuestion[];
     Results: object[][];
     Outcomes: SurveyOutcome[];
-    MaxScores: object[];
+    MaxScores: any;
     ID: string;
     Name: string;
 
     constructor(q: SurveyQuestion[], r: object[][], o: SurveyOutcome[],
-                m: object[], id: string, name: string) {
+                m: any, id: string, name: string) {
         this.Questions = q;
         this.Results = r;
         this.Outcomes = o;

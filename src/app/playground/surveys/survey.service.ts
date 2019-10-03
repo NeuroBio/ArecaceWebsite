@@ -31,7 +31,7 @@ export class SurveyService {
     
     // Get/Make data structures
     const surveyData = this.surveyData.value
-    let finalScores: object = {}; 
+    let finalScores: any = {}; 
     surveyData.Outcomes.forEach(o => {
       finalScores[o.Name] = 0;
     });

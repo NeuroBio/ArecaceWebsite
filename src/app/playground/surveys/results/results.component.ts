@@ -1,5 +1,4 @@
-import { Component, OnInit, Input, OnDestroy } from '@angular/core';
-import { SurveyOutcome } from '../surveyclasses';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { SurveyService } from '../survey.service';
 import { Subscription } from 'rxjs';
 
@@ -11,15 +10,23 @@ import { Subscription } from 'rxjs';
 export class ResultsComponent implements OnInit, OnDestroy {
 
   results: any;
-  // = {Outcome: new SurveyOutcome(),
-  //            Match: 89};
   stream1: Subscription;
+  showAll = false;
+  showSpecific: boolean[] = [];
+  outcomes: string[] = [];
+  tooLow: number;
+  acceptable: boolean;
 
   constructor(private surveyserv: SurveyService) { }
 
   ngOnInit() {
-    this.stream1 = this.surveyserv.surveyResults.subscribe(results =>
-      this.results = results);
+    this.stream1 = this.surveyserv.surveyResults.subscribe(results => {
+      this.results = results;
+      this.showSpecific = [];
+      this.results.AllScores.forEach(() => this.showSpecific.push(false));
+      this.tooLow = this.results.AllScores.findIndex(x => x.Score < this.results.Limit);
+      this.acceptable = this.results.Limit === undefined ? false : true;
+    });
   }
 
   ngOnDestroy() {
@@ -29,5 +36,13 @@ export class ResultsComponent implements OnInit, OnDestroy {
   onReset(){
     this.surveyserv.surveyResults.next(undefined);
     this.surveyserv.showSurvey.next(true);
+  }
+
+  setShowAll() {
+    this.showAll = !this.showAll;
+  }
+
+  setShowSpecific(index: number) {
+    this.showSpecific[index] = !this.showSpecific[index];
   }
 }

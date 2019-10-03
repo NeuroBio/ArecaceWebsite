@@ -86,7 +86,6 @@ export class SurveyComponent implements OnInit , OnDestroy {
       const outcomes: SurveyOutcome[] = JSON.parse(editFormData.Outcomes);
       const questions: SurveyQuestion[] = JSON.parse(editFormData.Questions);
       const results = JSON.parse(editFormData.Results);
-      console.log(results)
       outcomes.forEach(o => this.outcomes.push(this.fb.group({Name: o.Name, Text: o.Text,
                                                               Link: o.Link, LinkName: o.LinkName})));
       questions.forEach((q,i) => this.addQuestion(true, q.Question, q.Answers, results[i]));  
@@ -142,7 +141,6 @@ export class SurveyComponent implements OnInit , OnDestroy {
   addOutcome(add: boolean) {
     const formData = Object.assign({}, this.outcomeForm.value);
     const newData: FormArray[] =[];
-    console.log(formData)
 
     if(add){
       if(this.edit) { //changing old outcome

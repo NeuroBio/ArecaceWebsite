@@ -1,4 +1,4 @@
-div#outer {
+div.outer {
     border: 1pt solid white;
     background-color: rgb(49, 49, 49);
     margin: 7px;
@@ -12,6 +12,7 @@ div#match {
 
 div#inner {
     padding: 7px;
+    white-space: pre-line;
 }
 
 h3 {
@@ -19,6 +20,17 @@ h3 {
     padding: 0px;
 }
 
+h3.scoreQualifier {
+    border-top: 3px white solid;
+    border-bottom: 3px white solid;
+    padding: 3px;
+}
+
 button {
     margin: 10px;
+}
+
+div.scores {
+    padding: 7px;
+    font-size: 20px;
 }
