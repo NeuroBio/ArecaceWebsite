@@ -33,7 +33,8 @@ export class SurveyProcessorService {
 
     allScores.sort((a,b) => a.Score > b.Score ? -1 : 1);
 
-    return({Outcome: Outcome, Match: Match, Name: Name, AllScores: allScores});
+    return({Outcome: Outcome, Match: Match, Name: Name,
+            AllScores: allScores, OutcomeKey: finalOutcome});
   }
 
   Guild(finalScores: any, surveyData: SurveyData, answers: any[], keys: string[]) {
@@ -74,6 +75,7 @@ export class SurveyProcessorService {
       bestMatch = `Your best match was with ${Results.Outcome.Name} Guild.`
       Results.Outcome = surveyData.Outcomes.find(a => a.Name === 'NoGuild');
       esarian = '';
+      Results.OutcomeKey = "NoGuild"
     }
 
     Results.Outcome.Text = `${age}${esarian}${Results.Outcome.Text} ${bestMatch}\n\n${assassin} (${assassinMatch}% match)`

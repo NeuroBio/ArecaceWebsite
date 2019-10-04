@@ -43,7 +43,7 @@ export class SurveyDisplayComponent implements OnInit {
   }
 
   addQuestion(){
-    this.answers.push(this.fb.group({Answer: ['', Validators.required]}));
+    this.answers.push(this.fb.group({Answer: [1, Validators.required]}));
   }
 
   onSubmit() {

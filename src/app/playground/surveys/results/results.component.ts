@@ -12,6 +12,7 @@ export class ResultsComponent implements OnInit, OnDestroy {
   results: any;
   stream1: Subscription;
   showAll = false;
+  showStats = false;
   showSpecific: boolean[] = [];
   outcomes: string[] = [];
   tooLow: number;
@@ -44,5 +45,10 @@ export class ResultsComponent implements OnInit, OnDestroy {
 
   setShowSpecific(index: number) {
     this.showSpecific[index] = !this.showSpecific[index];
+  }
+
+  setShowStats() {
+    console.log("uhm")
+    this.showStats = !this.showStats;
   }
 }

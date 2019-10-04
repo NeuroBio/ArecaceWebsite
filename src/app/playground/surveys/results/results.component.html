@@ -16,6 +16,7 @@
 </div>
 
 <button (click)="setShowAll()">All Scores</button>
+<button (click)="setShowStats()">Stats</button>
 <button (click)="onReset()">Reset Survey</button>
 
 <div *ngIf="showAll === true" class="outer">
@@ -32,4 +33,8 @@
     </p>
   </div>
 
+</div>
+
+<div *ngIf="showStats === true">
+    <app-survey-stats></app-survey-stats>
 </div>

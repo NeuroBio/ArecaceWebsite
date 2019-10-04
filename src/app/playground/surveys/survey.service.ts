@@ -4,6 +4,8 @@ import { BehaviorSubject, Subscription } from 'rxjs';
 import { Inject } from '@angular/compiler/src/core';
 import { SurveyData } from './surveyclasses';
 import { SurveyProcessorService } from './survey-processor.service';
+import { FireBaseService } from 'src/app/GlobalServices/firebase.service';
+import { take } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -13,8 +15,10 @@ export class SurveyService {
   surveyData = new BehaviorSubject<SurveyData>(undefined);
   surveyResults = new BehaviorSubject<any>(undefined);
   showSurvey = new BehaviorSubject<boolean>(true);
+  surveyStats = new BehaviorSubject<any>(undefined);
 
-  constructor(private processor: SurveyProcessorService) { }
+  constructor(private processor: SurveyProcessorService,
+              private firebaseserv: FireBaseService) { }
 
   assignSurveyData(data: any){
     this.surveyData.next({Questions: JSON.parse(data.Questions),
@@ -23,6 +27,7 @@ export class SurveyService {
                           MaxScores: JSON.parse(data.MaxScores),
                           ID: data.ID,
                           Name: data.Name});
+    // this.getStats(this.surveyData.value.ID);
     return this.surveyData.value.Questions;
   }
   
@@ -61,7 +66,27 @@ export class SurveyService {
       this.surveyResults.next(this.processor
         .standard(finalScores, surveyData, keys));
     }
+
+    // this.surveyResults.value
+    return this.updateStatistics(this.surveyResults.value.OutcomeKey);
   }
 
+  getStats(ID: string){
+    return this.firebaseserv.returnDocument(`SurveyStats/${ID}`)
+      //.pipe(take(1))
+      //.subscribe(() => console.log("CRY"))
+        //counts => this.surveyStats.next(counts));
+  }
+
+  updateStatistics(match: string) {
+    const ID = this.surveyData.value.ID;
+    return this.getStats(ID)
+    .pipe(take(1)).subscribe
+    (surveyStats => {
+      surveyStats[match] += 1
+      this.surveyStats.next(surveyStats);
+      return this.firebaseserv.editDocument(surveyStats, "SurveyStats", ID);
+    });
+  }
 
 }
