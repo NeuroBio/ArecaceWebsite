@@ -59,6 +59,9 @@
     <div id="questions">
       {{ 'Question ' + (i+1) + ': ' }}<br>
         <textarea rows=3 cols=40 formControlName="Question"></textarea>
+
+        <button (click)="addAnswer(true, i)">+</button>
+        <button (click)="addAnswer(False, i)">-</button>
         
         <!-- Answers -->
         <div formArrayName="Answers" class="tab">
@@ -68,8 +71,6 @@
                 <textarea rows=3 cols=40 formControlName="Answer"></textarea>
             </div>
         </div>
-        <button (click)="addAnswer(true, i)">+</button>
-        <button (click)="addAnswer(False, i)">-</button>
       </div>
     
 

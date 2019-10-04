@@ -17,7 +17,7 @@ export class ReferenceFormComponent implements OnInit, OnDestroy {
   
   Form: FormGroup;
   @ViewChild('image') imageUploader: ElementRef;
-  imageFile:any;
+  imageFile: any;
   stream1: Subscription;
   stream2: Subscription;
 
@@ -33,19 +33,18 @@ export class ReferenceFormComponent implements OnInit, OnDestroy {
               private controller: CRUDcontrollerService) { }
 
   ngOnInit() {
-    this.stream1 = this.controller.itemToEdit
-      .subscribe(item => this.assignFormData(item));
-    
-    this.stream2 = this.controller.triggerProcess
-      .subscribe(() => this.processForm());
-
     this.controller.itemType.subscribe(type => {
       this.type = type;
       this.categories = this.cats[type];
       this.docPath = this.paths[type][0];
       this.imagePath = this.paths[type][1];
-      this.Form.controls.Category.patchValue(this.categories[0]);
     }).unsubscribe();
+
+    this.stream1 = this.controller.itemToEdit
+      .subscribe(item => this.assignFormData(item));
+    
+    this.stream2 = this.controller.triggerProcess
+      .subscribe(() => this.processForm());
   }
 
   ngOnDestroy() {

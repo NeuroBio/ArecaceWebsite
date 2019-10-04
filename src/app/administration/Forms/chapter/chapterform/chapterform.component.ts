@@ -22,6 +22,7 @@ export class ChapterFormComponent implements OnInit, OnDestroy {
   pageFiles = new Array(10);
   dummy = new Array(10);
   Arcs = [1,2,3,4, "WRC", "LW", 7, "Dae"];
+  init = true;
   
   constructor(private fb:FormBuilder,
               private controller:CRUDcontrollerService) { }
@@ -57,6 +58,7 @@ export class ChapterFormComponent implements OnInit, OnDestroy {
         .map(function () {});
       this.dummy = new Array(this.pageFiles.length);
     }
+    this.init = false;
   }    
   
   processForm() {
@@ -74,10 +76,12 @@ export class ChapterFormComponent implements OnInit, OnDestroy {
   }
 
   onReset() {
-      this.formHtml.nativeElement.reset();
       this.Form = this.createForm();
       this.pageFiles = new Array(10);
       this.dummy = new Array(10);
+      if(!this.init) {
+        this.formHtml.nativeElement.reset();
+      }
   }
 
   addPage(add: boolean) {

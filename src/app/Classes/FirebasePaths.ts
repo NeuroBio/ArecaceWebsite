@@ -38,5 +38,6 @@ export class FirebasePaths {
     source = 'SourceInfo';
     update = 'Inanity';
     surveys = 'Surveys';
+    surveystats = 'SurveyStats';
     SAs = 'SourceAffinities';
 }

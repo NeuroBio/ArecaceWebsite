@@ -1,0 +1,24 @@
+<form [formGroup]="Form">
+  <p>
+      ID: <input type="text" formControlName="ID">
+  </p>
+
+  <button (click)="setShowSurveys()">Attach to Survey</button>
+  
+  <div *ngIf="showSurveys === true">
+    <p *ngFor="let survey of surveys; let i = index">
+      <button (click)="populateOutcomes(i)">{{ survey.ID }}</button>
+    </p>
+  </div>
+
+  <div formArrayName="Outcomes">
+    <button (click)="this.addOutcome(true)">+</button>
+    <p *ngFor="let outcome of outcomes.controls; let i = index"
+      [formGroupName]="i">
+      Outcome {{ i+1 }}: <input type="text" formControlName="Name">
+      <button (click)="this.addOutcome(false, i)">-</button>
+    </p>
+  </div>
+
+  <app-formButtons></app-formButtons>
+</form>

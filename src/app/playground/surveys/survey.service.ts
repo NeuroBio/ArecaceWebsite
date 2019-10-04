@@ -1,24 +1,30 @@
-import { Injectable, OnInit, OnDestroy } from '@angular/core';
-import { GeneralcollectionService } from 'src/app/GlobalServices/generalcollection.service';
+import { Injectable, OnDestroy } from '@angular/core';
 import { BehaviorSubject, Subscription } from 'rxjs';
-import { Inject } from '@angular/compiler/src/core';
 import { SurveyData } from './surveyclasses';
 import { SurveyProcessorService } from './survey-processor.service';
 import { FireBaseService } from 'src/app/GlobalServices/firebase.service';
-import { take } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
-export class SurveyService {
+export class SurveyService implements OnDestroy {
 
   surveyData = new BehaviorSubject<SurveyData>(undefined);
   surveyResults = new BehaviorSubject<any>(undefined);
   showSurvey = new BehaviorSubject<boolean>(true);
-  surveyStats = new BehaviorSubject<any>(undefined);
+  allSurveyStats = new BehaviorSubject<any>(undefined);
+  currentSurveyStats = new BehaviorSubject<any>(undefined);
+  stream1: Subscription;
 
   constructor(private processor: SurveyProcessorService,
-              private firebaseserv: FireBaseService) { }
+              private firebaseserv: FireBaseService) {
+    this.stream1 = this.firebaseserv.returnCollect(`SurveyStats`)
+      .subscribe(surveyStats => this.allSurveyStats.next(surveyStats));
+  }
+
+  ngOnDestroy() {
+    this.stream1.unsubscribe();
+  }
 
   assignSurveyData(data: any){
     this.surveyData.next({Questions: JSON.parse(data.Questions),
@@ -69,19 +75,13 @@ export class SurveyService {
     return this.updateStatistics(this.surveyResults.value.OutcomeKey);
   }
 
-  getStats(ID: string){
-    return this.firebaseserv.returnDocument(`SurveyStats/${ID}`)
-  }
-
   updateStatistics(match: string) {
     const ID = this.surveyData.value.ID;
-    return this.getStats(ID)
-    .pipe(take(1)).subscribe
-    (surveyStats => {
-      surveyStats[match] += 1
-      this.surveyStats.next(surveyStats);
-      return this.firebaseserv.editDocument(surveyStats, "SurveyStats", ID);
-    });
+    let surveyStats = this.allSurveyStats.value.find(x => x.ID = ID)
+    console.log(surveyStats);
+    surveyStats[match] += 1
+    this.currentSurveyStats.next(surveyStats);
+    return this.firebaseserv.editDocument(surveyStats, "SurveyStats", ID);
   }
 
 }

@@ -25,6 +25,7 @@ import { AboutTextComponent } from './Forms/about-text/about-text.component';
 import { FaqTextComponent } from './Forms/faq-text/faq-text.component';
 import { IntroTextComponent } from './Forms/intro-text/intro-text.component';
 import { SurveyComponent } from './Forms/survey/survey/survey.component';
+import { SurveyStatsComponent } from './Forms/survey/survey-stats/survey-stats.component';
 
 
 const AdminRoutes: Routes = [
@@ -50,6 +51,7 @@ const AdminRoutes: Routes = [
           {path: 'extras', component: ExtrasFormComponent},
           {path: 'maps', component: ReferenceFormComponent},
           {path: 'surveys', component: SurveyComponent },
+          {path: 'surveystats', component: SurveyStatsComponent },
         ]},
         {path: 'Pages', component:PagesComponent, 
          children:[

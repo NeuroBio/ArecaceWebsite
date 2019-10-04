@@ -29,6 +29,7 @@ import { AboutTextComponent } from './Forms/about-text/about-text.component';
 import { FaqTextComponent } from './Forms/faq-text/faq-text.component';
 import { IntroTextComponent } from './Forms/intro-text/intro-text.component';
 import { SurveyComponent } from './Forms/survey/survey/survey.component';
+import { SurveyStatsComponent } from './Forms/survey/survey-stats/survey-stats.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +57,7 @@ import { SurveyComponent } from './Forms/survey/survey/survey.component';
     FaqTextComponent,
     IntroTextComponent,
     SurveyComponent,
+    SurveyStatsComponent,
   ],
   imports: [
     CommonModule,

@@ -11,10 +11,12 @@ export class SurveyStatsComponent implements OnInit, AfterContentChecked {
   Stats: any = {};
   @ViewChild('holder') Holder: ElementRef;
   width = 500;
+  height: number;
+  
   constructor(private surveyserv: SurveyService) { }
 
   ngOnInit() {
-    this.surveyserv.surveyStats.subscribe(counts =>
+    this.surveyserv.currentSurveyStats.subscribe(counts =>
       this.displayData(counts));
   }
 
@@ -24,11 +26,15 @@ export class SurveyStatsComponent implements OnInit, AfterContentChecked {
 
   displayData(counts: any) {
     if(counts){
+      delete counts.ID;
       this.Stats.Keys = Object.keys(counts);
       this.Stats.Counts = Object.values(counts);
       this.Stats.Max = this.Stats.Counts.reduce((a,b) => a + b);
-      this.Stats.Counts = this.Stats.Counts.map(count => count/this.Stats.Max);
-      this.Stats.CountsDisplay = this.Stats.Counts.map(count => Math.trunc(count*1000)/10);
+      this.Stats.Counts = this.Stats.Counts
+        .map(count => count/this.Stats.Max);
+      this.Stats.CountsDisplay = this.Stats.Counts
+        .map(count => Math.trunc(count*1000)/10);
+      this.height = 45 * this.Stats.Keys.length;
     }
   }
 
