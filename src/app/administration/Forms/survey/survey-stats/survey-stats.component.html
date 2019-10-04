@@ -12,7 +12,7 @@
   </div>
 
   <div formArrayName="Outcomes">
-    <button (click)="this.addOutcome(true)">+</button>
+    <button (click)="this.addOutcome(true, 0)">+</button>
     <p *ngFor="let outcome of outcomes.controls; let i = index"
       [formGroupName]="i">
       Outcome {{ i+1 }}: <input type="text" formControlName="Name">

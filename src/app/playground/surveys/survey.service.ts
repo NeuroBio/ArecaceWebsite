@@ -78,7 +78,6 @@ export class SurveyService implements OnDestroy {
   updateStatistics(match: string) {
     const ID = this.surveyData.value.ID;
     let surveyStats = this.allSurveyStats.value.find(x => x.ID = ID)
-    console.log(surveyStats);
     surveyStats[match] += 1
     this.currentSurveyStats.next(surveyStats);
     return this.firebaseserv.editDocument(surveyStats, "SurveyStats", ID);

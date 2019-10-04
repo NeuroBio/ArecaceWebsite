@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { GeneralcollectionService } from 'src/app/GlobalServices/generalcollection.service';
 import { ActivatedRoute } from '@angular/router';
 import { map } from 'rxjs/operators';
+import { AuthService } from 'src/app/administration/security/Auth/auth.service';
 
 @Component({
   selector: 'app-survey-main',
@@ -15,7 +16,8 @@ export class SurveyMainComponent implements OnInit {
   surveys$: Observable<string[]>;
 
   constructor(private generalcollectserv: GeneralcollectionService,
-              private route: ActivatedRoute) { }
+              private route: ActivatedRoute,
+              private auth: AuthService) { }
 
   ngOnInit() {
     this.surveys$ = this.generalcollectserv.returnMetaData().pipe(
@@ -27,7 +29,11 @@ export class SurveyMainComponent implements OnInit {
     
     this.route.firstChild.paramMap.subscribe(
       path => this.current = path.get('SurveyID')
-    )
+    );
+
+    // if(!this.auth.user) {
+      this.auth.anonymousLogin();
+    // }
   }
 
 }

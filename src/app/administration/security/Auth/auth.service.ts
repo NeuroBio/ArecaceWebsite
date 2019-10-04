@@ -20,7 +20,6 @@ export class AuthService {
 
   constructor(private authorize: AngularFireAuth,
                 private afs: AngularFirestore){ 
-
     this.user = this.authorize.authState.pipe(
       switchMap(user => {
         if (user) {
@@ -32,24 +31,32 @@ export class AuthService {
     )
   }
 
+
+  anonymousLogin() {
+    return this.authorize.auth.signInAnonymously()
+    .then((credential) =>{
+      this.updateUserData(credential.user);
+    })
+  }
+
   googleLogin() {
     const provider = new auth.GoogleAuthProvider()
     return this.oAuthLogin(provider);
   }
+
   private oAuthLogin(provider) {
     return this.authorize.auth.signInWithPopup(provider)
       .then((credential) => {
-        this.updateUserData(credential.user)
+        this.updateUserData(credential.user);
       })
   }
+
   private updateUserData(user) {
-    const data: User = {
-      email: user.email,
-      userName: user.userName,
-      ID: user.ID,
-      roles:user.roles
-    }
-    return data
+    const data: User = {email: user.email,
+                        userName: user.userName,
+                        ID: user.ID,
+                        roles:user.roles}
+    return data;
   }
 
   logout() {

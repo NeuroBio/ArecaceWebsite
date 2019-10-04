@@ -31,6 +31,7 @@ import { LoginComponent }           from './Components/login/login.component';
 import { PageNotFoundComponent }    from './Components/pagenotfound/pagenotfound.component';
 import { TravelorsGuideComponent }  from './Components/travelorsguide/travelorsguide.component';
 import { TextProvider } from './GlobalServices/textprovider.service';
+import { AuthService } from './administration/security/Auth/auth.service';
 
 export function TextFactory(provider: TextProvider) {
   return () => provider.load();
@@ -70,7 +71,8 @@ export function TextFactory(provider: TextProvider) {
     AppRoutingModule,//this should always be LAST!!!
 
   ],
-  providers: [TextProvider,
+  providers: [AuthService,
+              TextProvider,
               {provide: APP_INITIALIZER, useFactory: TextFactory,
               deps: [TextProvider], multi: true}
             ],
