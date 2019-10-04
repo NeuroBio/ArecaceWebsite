@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild,
          ElementRef, OnDestroy }              from '@angular/core';
 import { formatDate }                         from '@angular/common';
-import { FormBuilder }                        from '@angular/forms';
+import { FormBuilder, FormGroup }             from '@angular/forms';
 import { Subscription }                       from 'rxjs';
 
 import { CRUDcontrollerService }              from 'src/app/administration/services/CRUDcontroller.service';
@@ -15,30 +15,27 @@ import { PostData }                           from 'src/app/Classes/postdata';
 
 export class UpdateFormComponent implements OnInit, OnDestroy {
 
-  Form = this.createForm();
+  Form: FormGroup;
   @ViewChild('Image') imageUploader:ElementRef;
   imageFile: any;
   stream1: Subscription;
   stream2: Subscription;
+  oldPost: any;
 
-  editFormData: any;
-  init = true;  
 
   constructor(private fb: FormBuilder,
               private controller: CRUDcontrollerService) { }
 
   ngOnInit() {
-    this.stream1 = this.controller.itemToEdit.subscribe(item => {
-      this.editFormData = item;
-      this.assignFormData();
-      this.init = false;
-    });
-    this.stream2 = this.controller.triggerProcess.subscribe(() => this.processForm());
+    this.stream1 = this.controller.itemToEdit
+      .subscribe(item => this.assignFormData(item));
+    this.stream2 = this.controller.triggerProcess
+      .subscribe(() => this.processForm());
   }
   
   ngOnDestroy(){
-    this.stream1.unsubscribe()
-    this.stream2.unsubscribe()
+    this.stream1.unsubscribe();
+    this.stream2.unsubscribe();
   }
 
   createForm(){
@@ -53,12 +50,10 @@ export class UpdateFormComponent implements OnInit, OnDestroy {
     });
   }
 
-  assignFormData() {
-    if(this.editFormData){
-      this.onReset();
-      this.Form = this.controller.quickAssign(this.Form, this.editFormData);
-    }else if(!this.init){
-      this.onReset();
+  assignFormData(editFormData) {
+    this.onReset();
+    if(editFormData) {
+      this.Form = this.controller.quickAssign(this.Form, editFormData);
     }
   }
 
@@ -66,17 +61,18 @@ export class UpdateFormComponent implements OnInit, OnDestroy {
     const Final: PostData = Object.assign({}, this.Form.value);
     let oldImages: string[] = [];
     let newImages: any[] = []
-    if(!this.editFormData) {
+
+    if(!this.oldPost) {
       Final.Date = formatDate(new Date(), 'yyyy-MM-dd', 'en');
       Final.Time = formatDate(new Date(), 'HH:mm', 'en');
       Final.ID = `${Final.Date}, ${Final.Time}`;
     }else{
-      Final.Date = this.editFormData.Date;
-      Final.Time = this.editFormData.Time;
-      Final.ID = this.editFormData.ID;
+      Final.Date = this.oldPost.Date;
+      Final.Time = this.oldPost.Time;
+      Final.ID = this.oldPost.ID;
       Final.Edited = true;
-      if(this.editFormData.Links){
-        oldImages = this.editFormData.Links;
+      if(this.oldPost.Links){
+        oldImages = this.oldPost.Links;
       }
     }
 
@@ -93,13 +89,14 @@ export class UpdateFormComponent implements OnInit, OnDestroy {
                                         undefined]);
   }
 
-  onReset(){
+  onReset() {
     this.Form = this.createForm();
     this.imageUploader.nativeElement.value = '';
     this.imageFile = undefined;
+    this.oldPost = undefined;
   }
 
-  onFile(event:any) {
+  onFile(event: any) {
     this.imageFile = event;
   }
 }

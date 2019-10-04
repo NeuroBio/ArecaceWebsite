@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild,
          OnDestroy, ElementRef }        from '@angular/core';
-import { FormBuilder }                  from '@angular/forms';
+import { FormBuilder, FormGroup }       from '@angular/forms';
 import { Subscription }                 from 'rxjs';
 
 import { GuildMetaData }                from 'src/app/Classes/guildmetadata';
@@ -14,23 +14,21 @@ import { CRUDcontrollerService }        from '../../../services/CRUDcontroller.s
 
 export class GuildFormComponent implements OnInit, OnDestroy {
   
-  Form = this.createForm();
+  Form: FormGroup;
   @ViewChild('insig') imageUploader: ElementRef;
   imageFile: any;
 
   stream1: Subscription;
   stream2: Subscription;
-  init = true;
 
   constructor(private fb: FormBuilder,
               private controller: CRUDcontrollerService) { }
 
   ngOnInit() {
-    this.stream1 = this.controller.itemToEdit.subscribe(item => {
-      this.assignFormData(item);
-      this.init = false;
-    });
-    this.stream2 = this.controller.triggerProcess.subscribe(() => this.processForm());
+    this.stream1 = this.controller.itemToEdit
+      .subscribe(item => this.assignFormData(item));
+    this.stream2 = this.controller.triggerProcess
+      .subscribe(() => this.processForm());
   }
 
   ngOnDestroy() {
@@ -53,11 +51,9 @@ export class GuildFormComponent implements OnInit, OnDestroy {
   }
 
   assignFormData(editFormData: any) {
+    this.onReset();
     if(editFormData) {
-      this.onReset();
       this.Form = this.controller.quickAssign(this.Form, editFormData);
-    }else if(!this.init){
-      this.onReset();
     }
   }
 

@@ -1,12 +1,12 @@
-import { Component, OnInit, OnDestroy, ElementRef } from '@angular/core';
-import { Validators, FormBuilder }        from '@angular/forms';
-import { ViewChild } from '@angular/core'
+import { Component, OnInit, ViewChild,
+         OnDestroy, ElementRef }                  from '@angular/core';
+import { Validators, FormBuilder, FormGroup }     from '@angular/forms';
+import { Subscription }                           from 'rxjs';
 
-import { CRUDcontrollerService }  from '../../../services/CRUDcontroller.service'
+import { CRUDcontrollerService }                  from '../../../services/CRUDcontroller.service'
 
-import { BestDropDowns } from '../bestdropdowns'
-import { BeastMetaData } from 'src/app/Classes/beastmetadata';
-import { Subscription } from 'rxjs';
+import { BestDropDowns }                          from '../bestdropdowns'
+import { BeastMetaData }                          from 'src/app/Classes/beastmetadata';
 
 @Component({
   selector: 'app-beastform',
@@ -16,7 +16,7 @@ import { Subscription } from 'rxjs';
 export class BeastFormComponent implements OnInit, OnDestroy {
 
   dropDowns = new BestDropDowns();
-  Form = this.createForm();
+  Form: FormGroup
   @ViewChild('Thumb') thumbUploader: ElementRef;
   @ViewChild('Full') fullUploader: ElementRef;
   thumbFile: any;
@@ -24,17 +24,15 @@ export class BeastFormComponent implements OnInit, OnDestroy {
 
   stream1: Subscription;
   stream2: Subscription;
-  init = true;
   
   constructor(private fb: FormBuilder,
               private controller: CRUDcontrollerService) { }
 
   ngOnInit() {
-    this.stream1 = this.controller.itemToEdit.subscribe(item => {
-      this.assignFormData(item);
-      this.init = false;
-    });
-    this.stream2 = this.controller.triggerProcess.subscribe(() => this.processForm());
+    this.stream1 = this.controller.itemToEdit
+      .subscribe(item => this.assignFormData(item));
+    this.stream2 = this.controller.triggerProcess
+      .subscribe(() => this.processForm());
   }
 
   ngOnDestroy() {
@@ -54,11 +52,9 @@ export class BeastFormComponent implements OnInit, OnDestroy {
   }
 
   assignFormData(editFormData: any) {
+    this.onReset();
     if(editFormData) {
-      this.onReset();
       this.Form = this.controller.quickAssign(this.Form, editFormData);
-    } else if(!this.init) {
-      this.onReset();
     }
   }
 
@@ -88,10 +84,10 @@ export class BeastFormComponent implements OnInit, OnDestroy {
   
   onReset() {
     this.Form = this.createForm();
-    this.thumbFile=undefined;
-    this.fullFile=undefined;
-    this.thumbUploader.nativeElement.value='';
-    this.fullUploader.nativeElement.value='';
+    this.thumbFile = undefined;
+    this.fullFile = undefined;
+    this.thumbUploader.nativeElement.value = '';
+    this.fullUploader.nativeElement.value = '';
     this.controller.message.next('');
   }
   

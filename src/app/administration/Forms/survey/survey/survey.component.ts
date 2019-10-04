@@ -25,9 +25,9 @@ export class SurveyComponent implements OnInit , OnDestroy {
   
   stream1: Subscription;
   stream2: Subscription;
-  init = true;
-  edit = false;
+  editOutcome = false;
   editInd: number;
+  newSurvey: boolean;
    
   constructor(private fb: FormBuilder,
               private controller: CRUDcontrollerService) { }
@@ -35,7 +35,7 @@ export class SurveyComponent implements OnInit , OnDestroy {
   ngOnInit() {
     this.stream1 = this.controller.itemToEdit.subscribe(item => {
       this.assignFormData(item);
-      this.init = false;
+      this.newSurvey = false;
     });
     this.stream2 = this.controller.triggerProcess.subscribe(() => this.processForm());
 
@@ -80,8 +80,9 @@ export class SurveyComponent implements OnInit , OnDestroy {
   }
 
   assignFormData(editFormData: any) {
+    this.onReset();
     if(editFormData) {
-      this.onReset();
+      this.newSurvey = false
       this.mainForm = this.controller.quickAssign(this.mainForm, editFormData);
       const outcomes: SurveyOutcome[] = JSON.parse(editFormData.Outcomes);
       const questions: SurveyQuestion[] = JSON.parse(editFormData.Questions);
@@ -89,14 +90,14 @@ export class SurveyComponent implements OnInit , OnDestroy {
       outcomes.forEach(o => this.outcomes.push(this.fb.group({Name: o.Name, Text: o.Text,
                                                               Link: o.Link, LinkName: o.LinkName})));
       questions.forEach((q,i) => this.addQuestion(true, q.Question, q.Answers, results[i]));  
-    } else if(!this.init) {
-      this.onReset();
+    } else {
+      this.newSurvey = true;
     }
   }
   
   assignOutcomeForm(index: number) {
     this.editInd = index;
-    this.edit = true;
+    this.editOutcome = true;
     this.controller.quickAssign(this.outcomeForm,
                                 this.outcomes.controls[index].value)
   }
@@ -134,7 +135,7 @@ export class SurveyComponent implements OnInit , OnDestroy {
 
   onResetOutcomes() {
     this.outcomeForm = this.creatOutcomeForm();
-    this.edit = false;
+    this.editOutcome = false;
     this.editInd = undefined;
   }
 
@@ -143,7 +144,7 @@ export class SurveyComponent implements OnInit , OnDestroy {
     const newData: FormArray[] =[];
 
     if(add){
-      if(this.edit) { //changing old outcome
+      if(this.editOutcome) { //changing old outcome
         const oldName = this.outcomes.controls[this.editInd].value.Name;
         this.outcomes.controls[this.editInd].setValue({
           Name: formData.Name,

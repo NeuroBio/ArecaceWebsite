@@ -1,8 +1,10 @@
-import { Component, OnInit, OnDestroy, ViewChild, ElementRef }                          from '@angular/core';
-import { FormBuilder } from '@angular/forms';
-import { ChapterMetaData }                    from 'src/app/Classes/chaptermetadata'
-import { CRUDcontrollerService }      from '../../../services/CRUDcontroller.service';
-import { Subscription } from 'rxjs';
+import { Component, OnInit, OnDestroy,
+          ViewChild, ElementRef }         from '@angular/core';
+import { FormBuilder, FormGroup }         from '@angular/forms';
+import { Subscription }                   from 'rxjs';
+
+import { CRUDcontrollerService }          from '../../../services/CRUDcontroller.service';
+import { ChapterMetaData }                from 'src/app/Classes/chaptermetadata'
 
 @Component({
   selector: 'app-chapterform',
@@ -11,12 +13,11 @@ import { Subscription } from 'rxjs';
 })
 export class ChapterFormComponent implements OnInit, OnDestroy {
 
-  Form = this.createForm()
+  Form: FormGroup;
   @ViewChild('form') formHtml:ElementRef;
   
   stream1: Subscription;
   stream2: Subscription;
-  init = true;
 
   pageFiles = new Array(10);
   dummy = new Array(10);
@@ -26,11 +27,10 @@ export class ChapterFormComponent implements OnInit, OnDestroy {
               private controller:CRUDcontrollerService) { }
   
   ngOnInit() {
-    this.stream1 = this.controller.itemToEdit.subscribe(item => {
-      this.assignFormData(item);
-      this.init = false;
-    });
-    this.stream2 = this.controller.triggerProcess.subscribe(() => this.processForm());
+    this.stream1 = this.controller.itemToEdit
+      .subscribe(item => this.assignFormData(item));
+    this.stream2 = this.controller.triggerProcess
+      .subscribe(() => this.processForm());
   }
 
   ngOnDestroy() {
@@ -50,13 +50,12 @@ export class ChapterFormComponent implements OnInit, OnDestroy {
   }
 
   assignFormData(editFormData: any) {
+    this.onReset();
     if(editFormData) {
-      this.onReset();
       this.Form = this.controller.quickAssign(this.Form, editFormData);
-      this.pageFiles = Array.apply(null, Array(editFormData.Links.length)).map(function () {});
+      this.pageFiles = Array.apply(null, Array(editFormData.Links.length))
+        .map(function () {});
       this.dummy = new Array(this.pageFiles.length);
-    } else if(!this.init) {
-      this.onReset();
     }
   }    
   
@@ -95,7 +94,7 @@ export class ChapterFormComponent implements OnInit, OnDestroy {
     this.pageFiles[ind] = event;
   }
 
-  getPagePaths(pages: any[], newChap: any){
+  getPagePaths(pages: any[], newChap: any) {
     let pagePaths: string[] = [];
     for(let i = 0; i< pages.length; i++){
       pagePaths.push(`ComicPages/Arc${newChap.Arc}/${newChap.ID}-${i}`);

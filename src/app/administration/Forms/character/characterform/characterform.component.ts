@@ -1,13 +1,14 @@
 import { Component, ViewChild, OnInit,
-         OnDestroy, ElementRef }        from '@angular/core';
-import { FormBuilder, FormArray}        from '@angular/forms';
-import { Subscription }                 from 'rxjs';
+         OnDestroy, ElementRef }                    from '@angular/core';
+import { FormBuilder, FormArray, FormGroup}         from '@angular/forms';
+import { Subscription }                             from 'rxjs';
 
-import { CharacterMetaData }            from 'src/app/Classes/charactermetadata';
-import { CRUDcontrollerService }        from '../../../services/CRUDcontroller.service';
-import { UploadCharacterDrops }         from '../uploadcharacterdrops';
-import { SourceAbilities, Relations }   from '../formclasses';
-import { BirthdayService } from '../birthday.service';
+import { CRUDcontrollerService }                    from '../../../services/CRUDcontroller.service';
+import { BirthdayService }                           from '../birthday.service';
+
+import { CharacterMetaData }                        from 'src/app/Classes/charactermetadata';
+import { SourceAbilities, Relations }               from '../formclasses';
+import { UploadCharacterDrops }                     from '../uploadcharacterdrops';
 
 
 @Component({
@@ -20,42 +21,39 @@ export class CharacterFormComponent implements OnInit, OnDestroy{
 
 //form generator vals
   DropDowns = new UploadCharacterDrops;
-  Form = this.createForm();
+  Form: FormGroup;
   @ViewChild('bioPic') biopicUploader: ElementRef;
   biopicFile: any;
-  fullFiles = [];
-  thumbFiles = [];
+  fullFiles: any[];
+  thumbFiles: any[];
 
   stream1: Subscription;
   stream2: Subscription;
-  init = true;
   
   SourceAbilitiesArray = this.populateSAbilities();
-  RelationsArray = this.fb.array([]);
-  ReferencesArray = this.fb.array([]);
-  proxyarray: number[] = [];
+  RelationsArray: FormArray;
+  ReferencesArray: FormArray;
 
   toneColor1: string;
   toneColor2: string;
   activeRegion: string[];
-  daysArray = new Array(30);
-  showUnique = false; 
+  daysArray: number[];
+  showUnique: boolean; 
 
   constructor(private fb: FormBuilder,
               private controller: CRUDcontrollerService,
               private birthday: BirthdayService) {}
 
   ngOnInit() {
-    this.stream1 = this.controller.itemToEdit.subscribe(item => {
-      this.assignFormData(item);
-      this.init = false;
-    });
-    this.stream2 = this.controller.triggerProcess.subscribe(() => this.processForm());
+    this.stream1 = this.controller.itemToEdit
+      .subscribe(item => this.assignFormData(item));
+    this.stream2 = this.controller.triggerProcess
+      .subscribe(() => this.processForm());
   }
 
   ngOnDestroy() {
-    this.stream1.unsubscribe()
-    this.stream2.unsubscribe()
+    this.stream1.unsubscribe();
+    this.stream2.unsubscribe();
   }
 
   createForm() {
@@ -98,8 +96,8 @@ export class CharacterFormComponent implements OnInit, OnDestroy{
   }
 
   assignFormData(editFormData: any) {
+    this.onReset();
     if(editFormData) {
-      this.onReset();
       this.Form = this.controller.quickAssign(this.Form, editFormData);
       
       this.Form.controls.SourceAbilities.setValue(
@@ -109,15 +107,14 @@ export class CharacterFormComponent implements OnInit, OnDestroy{
         <SourceAbilities[]>JSON.parse(editFormData.Unique));
       
         const relatives = <Relations[]>JSON.parse(editFormData.Relations);
-      relatives.forEach(relative => this.addRelative(true, relative.RelationName, relative.Relationship));
+      relatives.forEach(relative =>
+        this.addRelative(true, relative.RelationName, relative.Relationship));
       if(editFormData.ReferenceIDs){
         editFormData.ReferenceIDs.forEach(Ref => this.addRef(true, Ref.Ref));
       }
 
       this.showUnique = this.Form.controls.Unique.value.Known;
       this.setdisplayValues();
-    }else{
-      this.onReset();
     }
   }
   
@@ -142,9 +139,11 @@ export class CharacterFormComponent implements OnInit, OnDestroy{
 
     const imagePaths = [`CharacterBios/${Final.FirstName}`]
                         .concat(this.refNames(this.fullFiles, Final.FirstName));
-    const imageEvents = [this.biopicFile].concat(this.combineLinks(this.fullFiles, this.thumbFiles));
+    const imageEvents = [this.biopicFile]
+      .concat(this.combineLinks(this.fullFiles, this.thumbFiles));
     
     this.birthday.updateBirthdayData(Final);
+
     this.controller.activeFormData.next([Final,
                                       imagePaths,
                                       imageEvents,
@@ -201,12 +200,12 @@ export class CharacterFormComponent implements OnInit, OnDestroy{
   addRef(add: boolean, ref: string = '') {
     if(add){
       (<FormArray>this.Form.controls.ReferenceIDs)
-      .push(this.fb.group({ Ref: ref }));
+        .push(this.fb.group({ Ref: ref }));
       this.fullFiles.push('');
       this.thumbFiles.push('');
     }else{
       (<FormArray>this.Form.controls.ReferenceIDs)
-      .removeAt(this.Form.controls.ReferenceIDs.value.length-1);
+        .removeAt(this.Form.controls.ReferenceIDs.value.length-1);
       this.fullFiles.pop();
       this.thumbFiles.pop();
     }
@@ -214,11 +213,12 @@ export class CharacterFormComponent implements OnInit, OnDestroy{
 
   FormatSA(data:any) {
     let abilities:string[] = [];
-    data.SourceAbilities.forEach(ability =>{
+    data.SourceAbilities.forEach(ability => {
       if(ability.Known){
         abilities.push(ability.Ability);
       }
-    })
+    });
+
     if(data.Unique.Known){
       abilities.push(data.Unique.Ability);
     }
@@ -234,10 +234,11 @@ export class CharacterFormComponent implements OnInit, OnDestroy{
     let relations:string[] = [];
     data.Relations.forEach(relation => {
       relations.push(`${relation.RelationName}-${relation.Relationship}`)
-    })
+    });
+
     let final = relations.join(', ');
     if(final === ""){
-      final = "None"
+      final = "None";
     }
     return final;
   }
@@ -245,7 +246,8 @@ export class CharacterFormComponent implements OnInit, OnDestroy{
   combineLinks(full: string[], thumb: string[]) {
     if(thumb.length > 0){
       return thumb.map((thumb,i) => [thumb, full[i]])
-        .reduce(function(a,b) { return a.concat(b); });
+        .reduce(function(a,b) {
+          return a.concat(b); });
     }else{
       return [];
     }
@@ -253,7 +255,7 @@ export class CharacterFormComponent implements OnInit, OnDestroy{
 
   refNames(imageEvents: any[], name:string) {
     let imgNames: string[] = [];
-    for(let event in imageEvents){
+    for(let event in imageEvents) {
       imgNames.push(`CharacterBios/${name}-Ref${event}-thumb`);
       imgNames.push(`CharacterBios/${name}-Ref${event}-full`);
     }
@@ -261,10 +263,10 @@ export class CharacterFormComponent implements OnInit, OnDestroy{
   }
 
   createReference(ids: any[], name: string) {
-    if(name.endsWith('s')){
-      name = name.concat("'") 
-    }else{
-      name = name.concat("'s")
+    if(name.endsWith('s')) {
+      name = name.concat("'");
+    } else {
+      name = name.concat("'s");
     }
 
     let references: any[] = [];
@@ -283,9 +285,11 @@ export class CharacterFormComponent implements OnInit, OnDestroy{
   //display functions
   updateColor(select: string, which: number) {
     if(which === 1) {
-      this.toneColor1 = this.DropDowns.Ethnicity.filter(x => select === x.id)[0].hex;
+      this.toneColor1 = this.DropDowns.Ethnicity
+        .filter(x => select === x.id)[0].hex;
     } else {
-      this.toneColor2 = this.DropDowns.Ethnicity.filter(x => select === x.id)[0].hex;
+      this.toneColor2 = this.DropDowns.Ethnicity
+        .filter(x => select === x.id)[0].hex;
     }
   }
 
@@ -294,11 +298,12 @@ export class CharacterFormComponent implements OnInit, OnDestroy{
   }
 
   updateTerritory(nation: string) {
-    this.activeRegion = this.DropDowns.countries.filter(x => nation === x.id)[0].terr;
-    this.Form.patchValue({Territory: this.activeRegion[0]})
+    this.activeRegion = this.DropDowns.countries
+      .filter(x => nation === x.id)[0].terr;
+    this.Form.patchValue({Territory: this.activeRegion[0]});
   }
 
-  updateAge(chosenQT: string){
+  updateAge(chosenQT: string) {
     const index = this.DropDowns.Quartrits.findIndex(QT => chosenQT === QT);
     this.daysArray = new Array(this.DropDowns.Months[index]);
     this.Form.patchValue({ Zodiac: this.DropDowns.Zodiacs[index], Day: 1 })
@@ -306,8 +311,8 @@ export class CharacterFormComponent implements OnInit, OnDestroy{
 
   updateCM() {
     const inches: number = this.Form.controls.Ft.value*12
-                          + this.Form.controls.Inch.value
-    this.Form.patchValue({ Cm:(inches*2.54).toFixed(2) })
+                          + this.Form.controls.Inch.value;
+    this.Form.patchValue({ Cm:(inches*2.54).toFixed(2) });
   }
 
   updateFtIn() {
@@ -315,19 +320,18 @@ export class CharacterFormComponent implements OnInit, OnDestroy{
     this.Form.patchValue({
       Inch: (inches%12).toFixed(2),
       Ft: Math.floor(inches/12)
-    })
+    });
   }
 
   getDropData(group:string, id: string, formvalue: string, desired: string) {
     return this.DropDowns[group].find(member =>
-      member[id] === this.Form.controls[formvalue].value
-      )[desired]
+      member[id] === this.Form.controls[formvalue].value)[desired];
   }
 
   setdisplayValues() {
-    this.toneColor1 = this.getDropData('Ethnicity', 'id', 'Ethnicity1', 'hex')
-    this.toneColor2 = this.getDropData('Ethnicity', 'id', 'Ethnicity2', 'hex')
-    this.activeRegion = this.getDropData('countries', 'id', 'Country', 'terr')
+    this.toneColor1 = this.getDropData('Ethnicity', 'id', 'Ethnicity1', 'hex');
+    this.toneColor2 = this.getDropData('Ethnicity', 'id', 'Ethnicity2', 'hex');
+    this.activeRegion = this.getDropData('countries', 'id', 'Country', 'terr');
   }
   
 }

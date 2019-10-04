@@ -27,7 +27,6 @@ export class SurveyService {
                           MaxScores: JSON.parse(data.MaxScores),
                           ID: data.ID,
                           Name: data.Name});
-    // this.getStats(this.surveyData.value.ID);
     return this.surveyData.value.Questions;
   }
   
@@ -67,15 +66,11 @@ export class SurveyService {
         .standard(finalScores, surveyData, keys));
     }
 
-    // this.surveyResults.value
     return this.updateStatistics(this.surveyResults.value.OutcomeKey);
   }
 
   getStats(ID: string){
     return this.firebaseserv.returnDocument(`SurveyStats/${ID}`)
-      //.pipe(take(1))
-      //.subscribe(() => console.log("CRY"))
-        //counts => this.surveyStats.next(counts));
   }
 
   updateStatistics(match: string) {

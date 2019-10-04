@@ -33,7 +33,6 @@ export class SurveyStatsComponent implements OnInit, AfterContentChecked {
   }
 
   onResize() {
-    console.log(this.width)
       this.width = (this.Holder.nativeElement.getBoundingClientRect().right -
                     this.Holder.nativeElement.getBoundingClientRect().left)
   }
