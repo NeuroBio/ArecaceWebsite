@@ -10,7 +10,7 @@ export class SurveyStatsComponent implements OnInit, AfterContentChecked {
 
   Stats: any = {};
   @ViewChild('holder') Holder: ElementRef;
-  width = 0;
+  width = 500;
   constructor(private surveyserv: SurveyService) { }
 
   ngOnInit() {
@@ -33,6 +33,7 @@ export class SurveyStatsComponent implements OnInit, AfterContentChecked {
   }
 
   onResize() {
+    console.log(this.width)
       this.width = (this.Holder.nativeElement.getBoundingClientRect().right -
                     this.Holder.nativeElement.getBoundingClientRect().left)
   }

@@ -48,7 +48,6 @@ export class ResultsComponent implements OnInit, OnDestroy {
   }
 
   setShowStats() {
-    console.log("uhm")
     this.showStats = !this.showStats;
   }
 }
