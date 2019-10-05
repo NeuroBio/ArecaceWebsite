@@ -31,9 +31,9 @@ export class SurveyMainComponent implements OnInit {
       path => this.current = path.get('SurveyID')
     );
 
-    // if(!this.auth.user) {
+    if(!this.auth.isLoggedIn) {
       this.auth.anonymousLogin();
-    // }
+    }
   }
 
 }

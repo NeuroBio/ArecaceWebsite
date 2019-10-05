@@ -9,7 +9,7 @@ service cloud.firestore {
     match /SurveyStats/{allDocuments} {
         allow read;
         allow write: if isUser();
-        allow create;
+        allow create: if isAdmin();
     }
   
     match /Contact/{allDocuments} {
@@ -19,6 +19,10 @@ service cloud.firestore {
     
     match /ContactSaved/{allDocuments} {
         allow read, write: if isAdmin();
+    }
+
+    match /Users/{allDocuments} {
+        allow read, write: if isUser();
     }
 
     function isAdmin() {
