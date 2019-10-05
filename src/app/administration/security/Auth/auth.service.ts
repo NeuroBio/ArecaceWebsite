@@ -1,9 +1,8 @@
 import { Injectable }         from '@angular/core';
 import { AngularFireAuth }    from '@angular/fire/auth';
-import { AngularFirestore } from '@angular/fire/firestore';
 import { auth } from 'firebase/app';
-import { Observable, of, BehaviorSubject } from 'rxjs'
-import { switchMap, take } from 'rxjs/operators';
+import { of, BehaviorSubject } from 'rxjs'
+import { switchMap } from 'rxjs/operators';
 import { User } from 'src/app/Classes/user'; 
 import { FireBaseService } from 'src/app/GlobalServices/firebase.service';
 
@@ -40,7 +39,6 @@ export class AuthService {
 
 
   anonymousLogin() {
-    console.log("log in anon")
     return this.authorize.auth.signInAnonymously()
     .then((credential) =>{
       this.updateUserData(credential.user, true,
@@ -81,25 +79,13 @@ export class AuthService {
 
   private updateUserData(user: any, anon: boolean, newUser: boolean) {
     let data: User;
-
-    // return this.user.pipe(take(1)).subscribe(fb => {
-      // console.log("fb piped and return!")
-      // console.log(fb)
-      // if(fb.roles){ //returning user
-      //   data = {email: fb.email,
-      //     userName: fb.userName,
-      //     ID: fb.ID,
-      //     roles: fb.roles};
-      // } else { //new user!
-      if(newUser && !anon){
-        data = {email: user.email,
-          userName: 'defaultUserName_2.0',
-          ID: 2,
-          roles: [true, false]};
-        this.firebaseserv.editDocument(data, 'Users', user.uid);
-      }
-    // return data
-    // })
+    if(newUser && !anon){
+      data = {email: user.email,
+        userName: 'defaultUserName_2.0',
+        ID: 2,
+        roles: [true, false]};
+      this.firebaseserv.editDocument(data, 'Users', user.uid);
+    }
   }
 
   logout() {
