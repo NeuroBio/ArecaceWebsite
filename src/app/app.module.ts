@@ -3,6 +3,7 @@ import { NgModule, APP_INITIALIZER }                 from '@angular/core';
 import { ReactiveFormsModule }      from '@angular/forms';
 
 import { AngularFireModule }        from '@angular/fire';
+// import { AngularFireFunctionsModule } from '@angular/fire';
 import { AngularFirestoreModule }   from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireAuthModule }    from '@angular/fire/auth';

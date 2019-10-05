@@ -6,7 +6,11 @@ service cloud.firestore {
       allow write: if isAdmin();
   	}
     
-    
+    match /SurveyStats/{allDocuments} {
+        allow read;
+        allow write: if isUser();
+        allow create;
+    }
   
     match /Contact/{allDocuments} {
         allow read, write: if isAdmin();
