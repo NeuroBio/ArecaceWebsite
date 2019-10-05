@@ -2,7 +2,7 @@ import { Injectable }         from '@angular/core';
 import { AngularFireAuth }    from '@angular/fire/auth';
 import { auth } from 'firebase/app';
 import { of, BehaviorSubject } from 'rxjs'
-import { switchMap } from 'rxjs/operators';
+import { switchMap, take } from 'rxjs/operators';
 import { User } from 'src/app/Classes/user'; 
 import { FireBaseService } from 'src/app/GlobalServices/firebase.service';
 
@@ -80,11 +80,15 @@ export class AuthService {
   private updateUserData(user: any, anon: boolean, newUser: boolean) {
     let data: User;
     if(newUser && !anon){
-      data = {email: user.email,
-        userName: 'defaultUserName_2.0',
-        ID: 2,
-        roles: [true, false]};
-      this.firebaseserv.editDocument(data, 'Users', user.uid);
+      return this.firebaseserv.returnCollectionWithKeys('NumUsers').pipe(take(1))
+      .subscribe(ID => {
+        data = {email: user.email,
+          userName: 'defaultUserName_2.0',
+          ID: ID[0].NumUsers-1,
+          roles: [true, false]};
+        this.firebaseserv.editDocument({NumUsers: ID[0].NumUsers += 1}, 'NumUsers', ID[0].key);
+        this.firebaseserv.editDocument(data, 'Users', user.uid);
+      });
     }
   }
 
