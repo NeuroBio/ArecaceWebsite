@@ -84,7 +84,7 @@ export class AuthService {
       .subscribe(ID => {
         data = {email: user.email,
           userName: 'defaultUserName_2.0',
-          ID: ID[0].NumUsers-1,
+          ID: ID[0].NumUsers,
           roles: [true, false]};
         this.firebaseserv.editDocument({NumUsers: ID[0].NumUsers += 1}, 'NumUsers', ID[0].key);
         this.firebaseserv.editDocument(data, 'Users', user.uid);
