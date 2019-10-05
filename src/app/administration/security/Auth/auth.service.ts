@@ -5,6 +5,7 @@ import { auth } from 'firebase/app';
 import { Observable, of } from 'rxjs'
 import { switchMap } from 'rxjs/operators';
 import { User } from 'src/app/Classes/user'; 
+import { FirebaseAuth } from '@angular/fire';
 
 @Injectable({
   providedIn: 'root'
@@ -15,13 +16,20 @@ export class AuthService {
   isLoggedIn = false;
   redirectUrl: string;
   
-  
+  authState: any = null;
   user: Observable<User>;
 
   constructor(private authorize: AngularFireAuth,
-                private afs: AngularFirestore){ 
+                private afs: AngularFirestore){
+
+    this.authorize.authState.subscribe(auth => {
+      console.log("trigger 1")
+      this.authState = auth;
+    });
+
     this.user = this.authorize.authState.pipe(
       switchMap(user => {
+        console.log('trigger 2')
         if (user) {
           return this.afs.doc<User>(`Users/${user.uid}`).valueChanges()
         } else {
@@ -45,10 +53,18 @@ export class AuthService {
   }
 
   private oAuthLogin(provider) {
-    return this.authorize.auth.signInWithPopup(provider)
+    if(this.authState){//upgrade anon users
+      this.authorize.auth.currentUser.linkWithPopup(provider)
       .then((credential) => {
         this.updateUserData(credential.user);
-      })
+      });
+
+    } else {
+      return this.authorize.auth.signInWithPopup(provider)
+      .then((credential) => {
+        this.updateUserData(credential.user);
+      });
+    }
   }
 
   private updateUserData(user) {
