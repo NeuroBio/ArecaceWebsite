@@ -36,7 +36,9 @@ export class AuthService {
     ).subscribe(user => this.user.next(user));
   }
 
-
+  load() {
+    return new Promise((resolve) => resolve());
+  }
 
   anonymousLogin() {
     return this.authorize.auth.signInAnonymously()

@@ -37,6 +37,10 @@ import { AuthService } from './administration/security/Auth/auth.service';
 export function TextFactory(provider: TextProvider) {
   return () => provider.load();
 }
+
+export function AuthFactory(provider: AuthService) {
+  return () => provider.load();
+}
 @NgModule({
   declarations: [
     AppComponent,
@@ -76,9 +80,11 @@ export function TextFactory(provider: TextProvider) {
   providers: [AuthService,
               TextProvider,
               {provide: APP_INITIALIZER, useFactory: TextFactory,
-              deps: [TextProvider], multi: true}
+              deps: [TextProvider], multi: true},
+              {provide: APP_INITIALIZER, useFactory: AuthFactory,
+                deps: [AuthService], multi: true}
             ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent, ]
 })
 
 export class AppModule { }

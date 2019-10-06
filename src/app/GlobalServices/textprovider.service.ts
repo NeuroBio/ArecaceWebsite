@@ -11,7 +11,7 @@ export class TextProvider {
   constructor(private firebaseserv: FireBaseService) { }
 
   load() {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
       this.firebaseserv.returnCollect('WebsiteText')
       .subscribe(text => {
         if(text){

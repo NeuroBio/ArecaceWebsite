@@ -51,6 +51,7 @@ export class OthersArtFormComponent implements OnInit, OnDestroy {
     this.onReset();
     if(editFormData) {
       this.Form = this.controller.quickAssign(this.Form, editFormData);
+      this.Form.patchValue({Allowed: editFormData.Allowed === true ? 'true' : 'false'});
     }
   }
 
@@ -66,7 +67,7 @@ export class OthersArtFormComponent implements OnInit, OnDestroy {
     const Final: OthersArt = Object.assign({}, this.Form.value);
     Final.ID = `${this.Form.controls.Name.value.split(' ').join('')}-by-${this.Form.controls.Artist.value.split(' ').join('')}`
     Final.Allowed = this.Form.value.Allowed === "true";
-    
+
     this.controller.activeFormData.next([Final,
                                         [`MiscArt/${Final.ID}-thumb`,
                                         `MiscArt/${Final.ID}-full`],
