@@ -31,9 +31,8 @@
 
       </div>
       <div id="othersArt" *ngIf="activeMember.Artist">
-        <a [href]="activeMember.ArtistLink">
-          Artist:{{ activeMember.Artist }},
-          Year: {{ activeMember.Date }}</a>
+        <a [href]="activeMember.ArtistLink" target="_blank">
+          Artist: {{ activeMember.Artist }}, {{ activeMember.Date }}</a>
       </div>
 
       <div id="Back">

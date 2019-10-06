@@ -72,7 +72,11 @@ service cloud.firestore {
     match /Narratives/{allDocuments} {
     		allow read;
     }
-        
+
+    match /OthersArt/{allDocuments} {
+    		allow read;
+    }
+
     match /Scripts/{allDocuments} {
     		allow read;
     }

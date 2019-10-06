@@ -8,10 +8,10 @@ import { GeneralmemberresolverService } from '../GlobalServices/generalmemberres
 
 const playgroundRoutes: Routes = [
   {path: 'playground', component: PlaygroundhomeComponent},
-  {path: 'playground/otherart', component: OthersArtComponent,
+  {path: 'playground/othersart', component: OthersArtComponent,
   resolve: {GeneralcollectionresolverService},
   children: [
-    {path: 'notfound', redirectTo: '/extras'},
+    {path: 'notfound', redirectTo: '/othersart'},
     {path: ':ExtraID', component: BlowupmasterComponent,
      resolve: {links: GeneralmemberresolverService}},
   ]}
