@@ -17,6 +17,7 @@ export class StoryFormComponent implements OnInit, OnDestroy {
   stream2: Subscription;
 
   oldText: string;
+  type: string;
 
   constructor(private controller: CRUDcontrollerService,
               private fb: FormBuilder) { }
@@ -26,6 +27,8 @@ export class StoryFormComponent implements OnInit, OnDestroy {
       .subscribe(item => this.assignFormData(item));
     this.stream2 = this.controller.triggerProcess
       .subscribe(() => this.processForm());
+    this.controller.itemType.subscribe(type => 
+      this.type = type).unsubscribe();
   }
   
   ngOnDestroy() {
@@ -35,7 +38,7 @@ export class StoryFormComponent implements OnInit, OnDestroy {
 
   createForm() {
     return this.fb.group({
-      Type: 'Narrative',
+      Type: '',
       Series: '',
       Title: '',
       Section: 0,
@@ -58,6 +61,7 @@ export class StoryFormComponent implements OnInit, OnDestroy {
   processForm() {
     let Final = Object.assign({}, this.Form.value);
     delete Final.Story;
+    Final.type = this.type;
     
     let oldText: string;
     if(this.oldText){
