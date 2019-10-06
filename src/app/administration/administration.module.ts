@@ -30,6 +30,7 @@ import { FaqTextComponent } from './Forms/faq-text/faq-text.component';
 import { IntroTextComponent } from './Forms/intro-text/intro-text.component';
 import { SurveyComponent } from './Forms/survey/survey/survey.component';
 import { SurveyStatsComponent } from './Forms/survey/survey-stats/survey-stats.component';
+import { OthersArtFormComponent } from './Forms/othersart/othersartform/othersartform.component';
 
 @NgModule({
   declarations: [
@@ -58,6 +59,7 @@ import { SurveyStatsComponent } from './Forms/survey/survey-stats/survey-stats.c
     IntroTextComponent,
     SurveyComponent,
     SurveyStatsComponent,
+    OthersArtFormComponent,
   ],
   imports: [
     CommonModule,

@@ -30,6 +30,11 @@
         </div>
 
       </div>
+      <div id="othersArt" *ngIf="activeMember.Artist">
+        <a [href]="activeMember.ArtistLink">
+          Artist:{{ activeMember.Artist }},
+          Year: {{ activeMember.Date }}</a>
+      </div>
 
       <div id="Back">
           <a [routerLink]="['../']">Go Back</a>

@@ -58,6 +58,12 @@ div.textblock {
     overflow-y: auto;
 }
 
+div#othersArt {
+    padding: 3px;
+    background-color: #2b2b2b;
+    text-align: center;
+}
+
 h3 {
     text-align: left;
 }
