@@ -7,16 +7,21 @@ import { SourceAffinityCalculatorComponent } from './SourceAffinityCalculator/so
 import { DateConverterComponent } from './date-converter/date-converter.component';
 import { SurveyModule } from './surveys/survey.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { OthersArtComponent } from './others-art/others-art.component';
+import { SharedModule } from '../SharedComponents/shared.module';
 
 @NgModule({
   declarations: [PlaygroundhomeComponent,
     SourceAffinityCalculatorComponent,
-    DateConverterComponent],
+    DateConverterComponent,
+    OthersArtComponent],
     
   imports: [
     CommonModule,
     SurveyModule,
     ReactiveFormsModule,
+    SharedModule,
+    
     PlaygroundRoutingModule //must be last!
   ]
 })
