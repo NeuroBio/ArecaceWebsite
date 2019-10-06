@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FireBaseService } from 'src/app/GlobalServices/firebase.service';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { AuthService } from 'src/app/administration/security/Auth/auth.service';
 
 @Component({
@@ -29,6 +29,8 @@ export class PixelArmyComponent implements OnInit {
       }),
       map(art => art.sort((a,b) => a.Date > b.Date ? -1 : 1))
     );
+
+    this.pixels$.subscribe(x => console.log(x))
   }
 
 }

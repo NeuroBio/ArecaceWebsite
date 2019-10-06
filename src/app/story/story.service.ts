@@ -19,7 +19,7 @@ export class StoryService {
   into currentSeries.  This data together is used for the story
   chooser component.  The final resolver (3) takes a story from the
   currentSeries and loads it into currentSection.  Thus, only one
-  asnyc call is made.*/
+  async call is made.*/
 
   serials = new BehaviorSubject<any>(undefined);
   seriesIDName = new BehaviorSubject<object>({});
