@@ -77,6 +77,10 @@ service cloud.firestore {
     		allow read;
     }
 
+    match /Pixels/{allDocuments} {
+    		allow read;
+    }
+
     match /Scripts/{allDocuments} {
     		allow read;
     }

@@ -40,5 +40,6 @@ export class FirebasePaths {
     surveys = 'Surveys';
     surveystats = 'SurveyStats';
     othersart = 'OthersArt';
+    pixels = 'Pixels';
     SAs = 'SourceAffinities';
 }

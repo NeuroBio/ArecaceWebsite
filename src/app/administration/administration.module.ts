@@ -31,6 +31,7 @@ import { IntroTextComponent } from './Forms/intro-text/intro-text.component';
 import { SurveyComponent } from './Forms/survey/survey/survey.component';
 import { SurveyStatsComponent } from './Forms/survey/survey-stats/survey-stats.component';
 import { OthersArtFormComponent } from './Forms/othersart/othersartform/othersartform.component';
+import { PixelformComponent } from './Forms/othersart/pixelform/pixelform.component';
 
 @NgModule({
   declarations: [
@@ -60,6 +61,7 @@ import { OthersArtFormComponent } from './Forms/othersart/othersartform/othersar
     SurveyComponent,
     SurveyStatsComponent,
     OthersArtFormComponent,
+    PixelformComponent,
   ],
   imports: [
     CommonModule,

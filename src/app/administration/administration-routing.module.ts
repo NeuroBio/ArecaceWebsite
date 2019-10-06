@@ -27,6 +27,7 @@ import { IntroTextComponent } from './Forms/intro-text/intro-text.component';
 import { SurveyComponent } from './Forms/survey/survey/survey.component';
 import { SurveyStatsComponent } from './Forms/survey/survey-stats/survey-stats.component';
 import { OthersArtFormComponent } from './Forms/othersart/othersartform/othersartform.component';
+import { PixelformComponent } from './Forms/othersart/pixelform/pixelform.component';
 
 
 const AdminRoutes: Routes = [
@@ -53,7 +54,8 @@ const AdminRoutes: Routes = [
           { path: 'maps', component: ReferenceFormComponent },
           { path: 'surveys', component: SurveyComponent },
           { path: 'surveystats', component: SurveyStatsComponent },
-          { path: 'othersart', component: OthersArtFormComponent }
+          { path: 'othersart', component: OthersArtFormComponent },
+          { path: 'pixels', component: PixelformComponent }
         ]},
         {path: 'Pages', component:PagesComponent, 
          children:[
