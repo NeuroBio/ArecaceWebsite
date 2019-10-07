@@ -85,6 +85,10 @@ service cloud.firestore {
     		allow read;
     }
     
+    match /SourceAffinities/{allDocuments} {
+    		allow read;
+    }
+    
     match /SourceInfo/{allDocuments} {
     		allow read;
     }

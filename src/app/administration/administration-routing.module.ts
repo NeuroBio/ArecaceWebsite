@@ -28,7 +28,7 @@ import { SurveyStatsComponent } from './Forms/survey/survey-stats/survey-stats.c
 import { OthersArtFormComponent } from './Forms/othersart/othersartform/othersartform.component';
 import { PixelformComponent } from './Forms/othersart/pixelform/pixelform.component';
 import { CharacterFormComponent } from '../SharedForms/MakeCharacter/characterform/characterform.component';
-import { SourceAffinityComponent } from './Forms/source-affinity/source-affinity.component';
+import { SourceAffinityComponent } from './Forms/sourceaffinity/source-affinity/source-affinity.component';
 
 
 const AdminRoutes: Routes = [
