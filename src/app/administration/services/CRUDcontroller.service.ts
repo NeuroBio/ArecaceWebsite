@@ -7,6 +7,7 @@ import { BehaviorSubject, Observable, Subject }  from 'rxjs';
 import { FireBaseService }              from 'src/app/GlobalServices/firebase.service';
 import { CRUD } from './CRUD.service';
 import { ButtonController } from '../../SharedForms/Buttons/buttoncontroller';
+import { formatDate } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
@@ -118,6 +119,7 @@ export class CRUDcontrollerService {
         if("StoryLink" in meta){
           meta.StoryLink = link;
         }
+        meta.TimeStampCreate = this.createTimestamp();
         console.log("meta");
         return this.crud.uploadItem(meta, this.firePaths.value[this.itemType.value]);
       }).then(() => {
@@ -158,6 +160,7 @@ export class CRUDcontrollerService {
       if("StoryLink" in meta){
         meta.StoryLink = link;
       }
+      meta.TimeStampModified = this.createTimestamp();
       console.log("meta");
       return this.crud.editItem(meta,
               this.firePaths.value[this.itemType.value],
@@ -241,4 +244,7 @@ export class CRUDcontrollerService {
     return(meta);
   }
 
+  createTimestamp() {
+    return formatDate(new Date(), 'yyyy-MM-dd, HH:mm', 'en')
+  }
 }
