@@ -64,6 +64,8 @@ export class PixelformComponent implements OnInit, OnDestroy {
     
     const Final: OthersArt = Object.assign({}, this.Form.value);
     Final.ID = `${this.Form.controls.Name.value.split(' ').join('')}-by-${this.Form.controls.Artist.value.split(' ').join('')}`
+    Final.ID = Final.ID.replace('\'', '');
+    
     Final.Allowed = this.Form.value.Allowed === "true";
 
     this.controller.activeFormData.next([Final,
