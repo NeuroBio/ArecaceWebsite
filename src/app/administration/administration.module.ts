@@ -30,6 +30,7 @@ import { SurveyStatsComponent } from './Forms/survey/survey-stats/survey-stats.c
 import { OthersArtFormComponent } from './Forms/othersart/othersartform/othersartform.component';
 import { PixelformComponent } from './Forms/othersart/pixelform/pixelform.component';
 import { SharedFormsModule } from '../SharedForms/shared-forms.module';
+import { SourceAffinityComponent } from './Forms/source-affinity/source-affinity.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,8 @@ import { SharedFormsModule } from '../SharedForms/shared-forms.module';
     SurveyComponent,
     SurveyStatsComponent,
     OthersArtFormComponent,
-    PixelformComponent
+    PixelformComponent,
+    SourceAffinityComponent
   ],
   imports: [
     CommonModule,
