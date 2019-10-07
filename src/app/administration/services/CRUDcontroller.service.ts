@@ -6,7 +6,7 @@ import { BehaviorSubject, Observable, Subject }  from 'rxjs';
 
 import { FireBaseService }              from 'src/app/GlobalServices/firebase.service';
 import { CRUD } from './CRUD.service';
-import { ButtonController } from '../Forms/z-buttons/buttoncontroller';
+import { ButtonController } from '../../SharedForms/Buttons/buttoncontroller';
 
 @Injectable({
   providedIn: 'root'

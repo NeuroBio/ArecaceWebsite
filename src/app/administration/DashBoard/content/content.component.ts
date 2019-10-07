@@ -31,14 +31,14 @@ export class ContentComponent implements OnInit {
 
   onAllow(type:number) {
     if (type===0){
-      this.controller.updateButton('delete', false);
-      this.controller.updateButton('updateAll', false);
+      this.controller.updateButton('Delete', false);
+      this.controller.updateButton('UpdateAll', false);
     } else if(type===1) {
-      this.controller.updateButton('delete', true);
-      this.controller.updateButton('updateAll', false);
+      this.controller.updateButton('Delete', true);
+      this.controller.updateButton('UpdateAll', false);
     } else {
-      this.controller.updateButton('delete', false);
-      this.controller.updateButton('updateAll', true);
+      this.controller.updateButton('Delete', false);
+      this.controller.updateButton('UpdateAll', true);
     }
   }
   

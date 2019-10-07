@@ -20,7 +20,6 @@ import { UpdateFormComponent }          from './Forms/update/update-form/update-
 import { ExtrasFormComponent }            from './Forms/extras/extrasform/extrasform.component';
 import { AdminDutiesComponent }         from './DashBoard/adminDuties/adminDuties.component';
 import { MessageComponent }             from './DashBoard/message/message.component';
-import { ButtonsComponent }             from './Forms/z-buttons/upload-content/buttons.component';
 import { PagesComponent } from './DashBoard/pages/pages.component';
 import { WebsiteTextComponent } from './Forms/website-text/website-text.component';
 import { AboutTextComponent } from './Forms/about-text/about-text.component';
@@ -49,7 +48,6 @@ import { SharedFormsModule } from '../SharedForms/shared-forms.module';
     ExtrasFormComponent,
     AdminDutiesComponent,
     MessageComponent,
-    ButtonsComponent,
     PagesComponent,
     WebsiteTextComponent,
     AboutTextComponent,

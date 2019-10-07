@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { CRUDcontrollerService } from '../../../services/CRUDcontroller.service';
+import { CRUDcontrollerService } from '../../../administration/services/CRUDcontroller.service';
 import { Subscription } from 'rxjs';
 import { ButtonController } from '../buttoncontroller';
 
@@ -10,7 +10,7 @@ import { ButtonController } from '../buttoncontroller';
 })
 export class ButtonsComponent implements OnInit, OnDestroy {
 
-  allow: ButtonController; //submit, reset, delete, updateAll
+  allow: ButtonController;
   show: ButtonController;
   message: string;
   action: string;
@@ -23,7 +23,7 @@ export class ButtonsComponent implements OnInit, OnDestroy {
   constructor(private controller: CRUDcontrollerService) { }
 
   ngOnInit() {
-    this.stream1 = this.controller.allowButtons.subscribe(array => this.allow = array);
+    this.stream1 = this.controller.allowButtons.subscribe(array => {this.allow = array;console.log(this.allow)});
     this.stream2 = this.controller.showButtons.subscribe(array => this.show = array)
     this.stream3 = this.controller.itemToEdit.subscribe(data => {
       this.action = data === undefined ? "Submit" : "Edit"
