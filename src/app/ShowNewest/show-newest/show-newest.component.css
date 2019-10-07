@@ -1,0 +1,76 @@
+div#outer {
+    border: 1px solid white;
+    background-color: rgb(23, 23, 23);
+    overflow: auto;
+    max-width: 750px;
+    margin: 7px;
+    position: relative;
+}
+
+div#pickItems {
+    display: flex;
+    align-items: center
+}
+
+div#inner {
+    background: #454545;
+    display: flex;
+    overflow: hidden;
+}
+
+h3 {
+    margin: 7px;
+}
+
+a.displayItem {
+    border: 3px solid #454545;
+    margin: 7px;
+    background-color: rgb(116, 116, 116);
+    height: 150px;
+    width: 150px;
+    flex-shrink: 0;
+    background-repeat: no-repeat;
+    cursor: pointer;
+    background-position: center;
+    text-align: center;
+    background-size: contain;
+}
+
+a.displayItem:hover {
+    color: black;
+    background-color: rgb(158, 158, 158);
+    border: 3px solid white;
+}
+
+a#seeAll {
+    margin: 7px;
+}
+
+
+img:focus {
+    outline: 2px dotted white;
+}
+
+img#right {
+    margin: 3px;
+    flex-grow: 0;
+    flex-shrink: 0;
+    height: 50px;
+    top: 50%;
+    cursor: pointer;
+    -webkit-transform: rotate(-90deg);
+    transform: rotate(-90deg);
+    background-color: rgba(0,0,0,.3);
+}
+
+img#left {
+    margin: 3px;
+    flex-grow: 0;
+    flex-shrink: 0;
+    height: 50px;
+    top: 50%;
+    cursor: pointer;
+    -webkit-transform: rotate(90deg);
+    transform: rotate(90deg);
+    background-color: rgba(0,0,0,.3);
+}

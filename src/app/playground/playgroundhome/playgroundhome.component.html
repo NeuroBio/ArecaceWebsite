@@ -1,14 +1,15 @@
 <div class="background">
+    <div id="date">
+        Date: {{ arecaceDate }}
+    </div>
     <div class="compheader">
         <h2 class="compheader">Playground</h2>
-      </div>
-      <hr>
+    </div>
+    <hr>
 
-      <div id="date">
-        Date: {{ arecaceDate }}
-      </div>
+      
 
-  <div style="border: 1px solid white; padding: 7px; max-width: 300px">
+  <!-- <div style="border: 1px solid white; padding: 7px; max-width: 300px">
       This page is still under construction!  For now, new features will be loose on this page, but they will eventually have their own pages.  I’m currently working on the following features:
       <ul>
       <li><s>Earth to Arecace date converter</s></li>
@@ -17,11 +18,21 @@
       <li><s>Art by others</s></li>
       <li><s>“which Guild would hire you” survey</s></li>
       </ul>
+  </div> -->
+
+  <div class="navver" role="nav" id="quickNav" *ngFor="let link of links">
+      <a class="navver" [routerLink]="link.Link">{{ link.Title }}</a>
   </div>
+
+  <app-show-newest
+    contentType = "Art by Others"
+    collectionName = "OthersArt"
+    contentLink = "othersart">
+  </app-show-newest>
+
+
+  <app-date-converter></app-date-converter>
+
+  <app-source-affinity-calculator></app-source-affinity-calculator>
 </div>
-<button routerLink="surveys">Surveys</button><br>
-<button routerLink="othersart">Art by Others</button><br>
 
-<app-date-converter></app-date-converter>
-
-<app-source-affinity-calculator></app-source-affinity-calculator>

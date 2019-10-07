@@ -25,19 +25,17 @@ export class AuthGuard implements CanActivate {
     return this.checkAdmin(url);
   }
 
-
-  checkAdmin(url:string): Observable<boolean>{
+  checkAdmin(url:string): Observable<boolean> {
     return this.auth.user.pipe(
       take(1),
       map((user:User) => {
-        if(user){
+        if(user) {
             if(user.roles[1]){return true};
         }
-        return true //remove this
         this.auth.redirectUrl = url;
-        this.router.navigate(['/kArAAdministrativeUpload'])
+        this.router.navigate(['/kArAAdministrativeUpload']);
         return false;
       })
     );
-  }    
+  }
 }

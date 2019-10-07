@@ -11,6 +11,10 @@ export class PlaygroundhomeComponent implements OnInit {
 
   arecaceDate: string;
   DateInfo = new DateInfo();
+  links = [ {Link: "surveys", Title: "Surveys"},
+            {Link: "othersart", Title: "Art by Others"},
+            {Link: "calculators", Title: "Calculators"},
+            {Link: "activities", Title: "Activities"},]
 
   constructor() { }
 

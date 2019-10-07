@@ -55,6 +55,7 @@ export class SourceAffinityCalculatorComponent implements OnInit, OnDestroy {
   assignData(editFormData: any) {
     this.onReset();
     if(editFormData){
+      this.removeAbility(0);
       this.controller.quickAssign(this.Form, editFormData);
       const Build = JSON.parse(editFormData.Build);
       Build.forEach(abimas => this.addAbility(abimas.Ability, abimas.Mastery));

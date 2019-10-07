@@ -10,6 +10,7 @@ import { OthersArtComponent } from './others-art/others-art.component';
 import { SharedModule } from '../SharedComponents/shared.module';
 import { PixelArmyComponent } from './pixel-army/pixel-army.component';
 import { SharedFormsModule } from '../SharedForms/shared-forms.module';
+import { ShowNewestModule } from '../ShowNewest/show-newest.module';
 
 @NgModule({
   declarations: [PlaygroundhomeComponent,
@@ -23,6 +24,7 @@ import { SharedFormsModule } from '../SharedForms/shared-forms.module';
     ReactiveFormsModule,
     SharedModule,
     SharedFormsModule,
+    ShowNewestModule,
     
     PlaygroundRoutingModule //must be last!
   ]
