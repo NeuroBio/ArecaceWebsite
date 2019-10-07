@@ -11,12 +11,14 @@ import { SharedModule } from '../SharedComponents/shared.module';
 import { PixelArmyComponent } from './pixel-army/pixel-army.component';
 import { SharedFormsModule } from '../SharedForms/shared-forms.module';
 import { ShowNewestModule } from '../ShowNewest/show-newest.module';
+import { CalculatorsComponent } from './calculators/calculators.component';
 
 @NgModule({
   declarations: [PlaygroundhomeComponent,
     DateConverterComponent,
     OthersArtComponent,
-    PixelArmyComponent],
+    PixelArmyComponent,
+    CalculatorsComponent],
     
   imports: [
     CommonModule,
