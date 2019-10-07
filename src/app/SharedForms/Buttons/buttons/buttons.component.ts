@@ -23,7 +23,7 @@ export class ButtonsComponent implements OnInit, OnDestroy {
   constructor(private controller: CRUDcontrollerService) { }
 
   ngOnInit() {
-    this.stream1 = this.controller.allowButtons.subscribe(array => {this.allow = array;console.log(this.allow)});
+    this.stream1 = this.controller.allowButtons.subscribe(array => this.allow = array);
     this.stream2 = this.controller.showButtons.subscribe(array => this.show = array)
     this.stream3 = this.controller.itemToEdit.subscribe(data => {
       this.action = data === undefined ? "Submit" : "Edit"

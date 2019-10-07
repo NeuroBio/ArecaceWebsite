@@ -29,8 +29,6 @@ export class PixelArmyComponent implements OnInit {
       }),
       map(art => art.sort((a,b) => a.Date > b.Date ? -1 : 1))
     );
-
-    this.pixels$.subscribe(x => console.log(x))
   }
 
 }
