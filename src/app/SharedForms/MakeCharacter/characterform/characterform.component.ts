@@ -3,18 +3,19 @@ import { Component, ViewChild, OnInit,
 import { FormBuilder, FormArray, FormGroup}         from '@angular/forms';
 import { Subscription }                             from 'rxjs';
 
-import { CRUDcontrollerService }                    from '../../../services/CRUDcontroller.service';
-import { BirthdayService }                           from '../birthday.service';
+import { CRUDcontrollerService }                    from '../../../administration/services/CRUDcontroller.service';
 
 import { CharacterMetaData }                        from 'src/app/Classes/charactermetadata';
 import { SourceAbilities, Relations }               from '../formclasses';
 import { UploadCharacterDrops }                     from '../uploadcharacterdrops';
+import { BirthdayService } from '../birthday.service';
+
 
 
 @Component({
   selector: 'app-characterform',
   templateUrl: './characterform.component.html',
-  styleUrls: ['../../Form.css']
+  styleUrls: ['../../../administration/Forms/Form.css']
 })
 
 export class CharacterFormComponent implements OnInit, OnDestroy{
@@ -38,13 +39,19 @@ export class CharacterFormComponent implements OnInit, OnDestroy{
   toneColor2: string;
   activeRegion: string[];
   daysArray: number[];
-  showUnique: boolean; 
+  showUnique: boolean;
+  imageFolderPath: string;
 
   constructor(private fb: FormBuilder,
               private controller: CRUDcontrollerService,
               private birthday: BirthdayService) {}
 
   ngOnInit() {
+    if(this.controller.itemType.value === 'Character') {
+      this.imageFolderPath = "CharacterBios"
+    } else {
+      this.imageFolderPath = "UserFCs"
+    }
     this.stream1 = this.controller.itemToEdit
       .subscribe(item => this.assignFormData(item));
     this.stream2 = this.controller.triggerProcess
@@ -137,12 +144,14 @@ export class CharacterFormComponent implements OnInit, OnDestroy{
     Final.ID = Final.FirstName.split(' ').join('');
     Final.References = this.createReference(Final.ReferenceIDs, Final.FirstName);
 
-    const imagePaths = [`CharacterBios/${Final.FirstName}`]
+    const imagePaths = [`${this.imageFolderPath}/${Final.FirstName}`]
                         .concat(this.refNames(this.fullFiles, Final.FirstName));
     const imageEvents = [this.biopicFile]
       .concat(this.combineLinks(this.fullFiles, this.thumbFiles));
     
-    this.birthday.updateBirthdayData(Final);
+    if(this.imageFolderPath === 'CharacterBios') {
+      this.birthday.updateBirthdayData(Final);
+    }
 
     this.controller.activeFormData.next([Final,
                                       imagePaths,

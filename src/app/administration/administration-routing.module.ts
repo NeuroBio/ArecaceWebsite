@@ -7,7 +7,6 @@ import { AdminComponent }           from './DashBoard/admin/admin.component';
 import { ForbiddenComponent }       from './DashBoard/forbidden/forbidden.component';
 import { ContentComponent }         from './DashBoard/content/content.component';
 
-import { CharacterFormComponent }   from './Forms/character/characterform/characterform.component';
 import { BeastFormComponent }       from './Forms/beast/beastform/beastform.component';
 import { ChapterFormComponent }     from './Forms/chapter/chapterform/chapterform.component'
 import { StoryFormComponent}        from './Forms/story/storyform/storyform.component';
@@ -28,6 +27,7 @@ import { SurveyComponent } from './Forms/survey/survey/survey.component';
 import { SurveyStatsComponent } from './Forms/survey/survey-stats/survey-stats.component';
 import { OthersArtFormComponent } from './Forms/othersart/othersartform/othersartform.component';
 import { PixelformComponent } from './Forms/othersart/pixelform/pixelform.component';
+import { CharacterFormComponent } from '../SharedForms/MakeCharacter/characterform/characterform.component';
 
 
 const AdminRoutes: Routes = [

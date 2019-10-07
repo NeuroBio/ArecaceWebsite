@@ -1,12 +1,12 @@
 import { Injectable }                   from '@angular/core';
 import { FormGroup }                    from '@angular/forms';
 
-import { map, take, tap }                          from 'rxjs/operators';
-import { BehaviorSubject, Observable, Subject, of }  from 'rxjs';
+import { map, take }                          from 'rxjs/operators';
+import { BehaviorSubject, Observable, Subject }  from 'rxjs';
 
 import { FireBaseService }              from 'src/app/GlobalServices/firebase.service';
-import { FirebasePaths } from 'src/app/Classes/FirebasePaths';
 import { CRUD } from './CRUD.service';
+import { ButtonController } from '../Forms/z-buttons/buttoncontroller';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +15,10 @@ import { CRUD } from './CRUD.service';
 export class CRUDcontrollerService {
 
   firePaths = new BehaviorSubject<any>(undefined);
-  allowButtons = new BehaviorSubject<ButtonController>(new ButtonController([true, true, false, false]))
+  
+  showButtons = new BehaviorSubject<ButtonController>(undefined);
+  allowButtons = new BehaviorSubject<ButtonController>(new ButtonController([true, true, false, false]));
+  
   itemType = new BehaviorSubject<string>('');
   itemToEdit = new BehaviorSubject<any>(undefined);
   itemList = new BehaviorSubject<any[]>(undefined);
@@ -31,13 +34,13 @@ export class CRUDcontrollerService {
               private crud: CRUD) { }
   
   //Data fetching functions
-  assignFirePaths(website: boolean) {
-    if(website){
-      this.firePaths.next({Website: 'WebsiteText'});
-      this.itemType.next('Website');
-    }else{
-      this.firePaths.next(new FirebasePaths());
-    }
+  assignFirePaths(paths: any, itemType: string = '') {
+    this.firePaths.next(paths);
+    this.itemType.next(itemType);
+  }
+
+  assignButtons(states: boolean[]) {
+    this.showButtons.next(new ButtonController(states));
   }
 
   assignItemType(itemType: string) {
@@ -238,17 +241,4 @@ export class CRUDcontrollerService {
     return(meta);
   }
 
-}
-
-export class ButtonController {
-  submit: boolean;
-  reset: boolean;
-  delete: boolean;
-  updateAll: boolean;
-  constructor(bool: boolean[]){
-    this.submit = bool[0];
-    this.reset = bool[1];
-    this.delete = bool[2];
-    this.updateAll = bool[3];
-  }
 }

@@ -2,6 +2,7 @@ import { Component, OnInit }    from '@angular/core';
 import { ActivatedRoute }       from '@angular/router';
 
 import { CRUDcontrollerService }          from '../../services/CRUDcontroller.service';
+import { FirebasePaths } from 'src/app/Classes/FirebasePaths';
 
 @Component({
   selector: 'app-content',
@@ -17,7 +18,8 @@ export class ContentComponent implements OnInit {
               private controller: CRUDcontrollerService) { }
 
   ngOnInit() {
-    this.controller.assignFirePaths(false);
+    this.controller.assignFirePaths(new FirebasePaths());
+    this.controller.assignButtons([true, true, true, true]);
     this.route.firstChild.url.subscribe(path =>
         this.controller.assignItemType(path[path.length-1].toString())
     );
