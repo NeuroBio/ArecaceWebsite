@@ -87,7 +87,7 @@ export class AuthService {
   isUser(){
     if(this.isLoggedIn){
       if(!this.isAnon){
-        return this.user.value.roles[0];
+        return this.user.value.User;
       }
     }
     return false;
@@ -96,7 +96,7 @@ export class AuthService {
   isAdmin(){
     if(this.isLoggedIn){
       if(!this.isAnon()){
-        return this.user.value.roles[1];
+        return this.user.value.Admin;
       }
     }
     return false;
@@ -110,7 +110,8 @@ export class AuthService {
         data = {email: user.email,
           userName: 'defaultUserName_2.0',
           ID: ID[0].NumUsers,
-          roles: [true, false]};
+          User: true,
+          Admin: false};
         this.firebaseserv.editDocument({NumUsers: ID[0].NumUsers += 1}, 'NumUsers', ID[0].key);
         this.firebaseserv.editDocument(data, 'Users', user.uid);
       });

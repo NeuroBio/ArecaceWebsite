@@ -109,7 +109,7 @@ service cloud.firestore {
     
     
     function isAdmin() {
-        return get(/databases/$(database)/documents/Users/$(request.auth.uid)).data.roles[1] == true;
+        return get(/databases/$(database)/documents/Users/$(request.auth.uid)).data.Admin == true;
       }
 
     function isUser() {
