@@ -13,6 +13,7 @@
 <!-- User logged in -->
 <!-- <ng-template #authenticated>
     <div *ngIf="auth.user | async as user"> -->
+        <app-login></app-login>
         <h3>Welcome Back, {{ user.userName }}, ID#{{ user.ID }}</h3>
         <p>
             Currently, there is no user specific content; I'm still building this part of the website.
@@ -28,8 +29,14 @@
           <li>Save your place in the comic and scripts</li>                
         </ul>
         <hr>
-        <app-login></app-login>
-        <button (click)="showAccountInfo()">Show Account Info</button>
+        
+        <hr>
+        <button (click)="setShowAccountInfo()">Show Account Info</button>
 
+
+        <app-user-info
+        [user]="user"
+        *ngIf="showAccountInfo === true"
+        ></app-user-info>
       <!-- </div> -->
   <!-- </ng-template> -->

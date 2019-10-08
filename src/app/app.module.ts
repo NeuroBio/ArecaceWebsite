@@ -33,6 +33,7 @@ import { TravelorsGuideComponent }  from './SimplePages/travelorsguide/travelors
 import { TextProvider } from './GlobalServices/textprovider.service';
 import { AuthService } from './administration/security/Auth/auth.service';
 import { UserDashModule } from './UserDash/user-dash.module';
+import { PickUpComponent } from './UserDash/pick-up/pick-up.component';
 
 export function TextFactory(provider: TextProvider) {
   return () => provider.load();
@@ -51,7 +52,8 @@ export function AuthFactory(provider: AuthService) {
     CopyrightComponent,
     PageNotFoundComponent,
     BadserviceComponent,
-    ContactComponent
+    ContactComponent,
+    PickUpComponent
     ],
   imports: [
     BrowserModule,
