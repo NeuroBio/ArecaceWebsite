@@ -19,10 +19,8 @@ export class PixelArmyComponent implements OnInit {
   ngOnInit() {
     this.pixels$ = this.firebaseserv.returnCollect('Pixels').pipe(
       map(art => {
-        if(this.auth.isLoggedIn){
-          if(this.auth.user.value.roles[1]){
-            return art;
-          }
+        if(this.auth.isAdmin()){
+          return art;
         }
         art = art.filter(a => a.Allowed);
         return art;

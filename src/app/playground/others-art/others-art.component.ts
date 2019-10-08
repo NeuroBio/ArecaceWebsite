@@ -23,7 +23,7 @@ export class OthersArtComponent implements OnInit {
       take(1),
       map(art => {
         if(this.auth.isLoggedIn){
-          if(this.auth.user.value.roles[1]){
+          if(this.auth.isAdmin()){
             return art;
           }
         }

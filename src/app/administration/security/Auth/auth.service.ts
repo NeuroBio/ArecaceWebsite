@@ -5,6 +5,7 @@ import { of, BehaviorSubject } from 'rxjs'
 import { switchMap, take } from 'rxjs/operators';
 import { User } from 'src/app/Classes/user'; 
 import { FireBaseService } from 'src/app/GlobalServices/firebase.service';
+import { FirebasePaths } from 'src/app/Classes/FirebasePaths';
 
 @Injectable({
   providedIn: 'root'
@@ -15,12 +16,12 @@ export class AuthService {
   isLoggedIn = false;
   redirectUrl: string;
   
-  authState: any = null;
+  authState = null;
   user = new BehaviorSubject(undefined)
 
   constructor(private authorize: AngularFireAuth,
               private firebaseserv: FireBaseService) { }
-              
+
   load() {
     this.authorize.authState.subscribe(auth => {
       this.authState = auth;
@@ -30,6 +31,7 @@ export class AuthService {
       this.authorize.authState.pipe(switchMap(user => {
         if (user) {
           this.isLoggedIn = true;
+          user.getIdToken();
           return this.firebaseserv.returnDocument(`Users/${user.uid}`);
         } else {
           return of (null);
@@ -54,8 +56,6 @@ export class AuthService {
     return this.oAuthLogin(provider);
   }
 
-
-
   private oAuthLogin(provider) {
     if(this.authState){ //upgrade anon users
       this.authorize.auth.currentUser.linkWithPopup(provider)
@@ -78,6 +78,28 @@ export class AuthService {
                             credential.additionalUserInfo.isNewUser);
       });
     }
+  }
+
+  isAnon() {
+    return this.authState.isAnonymous;
+  }
+
+  isUser(){
+    if(this.isLoggedIn){
+      if(!this.isAnon){
+        return this.user.value.roles[0];
+      }
+    }
+    return false;
+  }
+
+  isAdmin(){
+    if(this.isLoggedIn){
+      if(!this.isAnon()){
+        return this.user.value.roles[1];
+      }
+    }
+    return false;
   }
 
   private updateUserData(user: any, anon: boolean, newUser: boolean) {
