@@ -1,0 +1,35 @@
+<!-- <div *ngIf="auth.user | async; then authenticated else guest">
+</div> -->
+
+
+<!-- User NOT logged in -->
+<!-- <ng-template #guest>
+    <div [innerHTML]="mainText"></div>
+    <div id="googleBtn" (click)="auth.googleLogin()"></div>
+
+</ng-template> -->
+
+
+<!-- User logged in -->
+<!-- <ng-template #authenticated>
+    <div *ngIf="auth.user | async as user"> -->
+        <h3>Welcome Back, {{ user.userName }}, ID#{{ user.ID }}</h3>
+        <p>
+            Currently, there is no user specific content; I'm still building this part of the website.
+        </p>
+        <p>
+            Key features I am working on now include:
+        </p>
+        <ul>
+          <li>The ability to change your user name.</li>
+          <li>Saving survey data.</li>
+          <li>Saving Source Affinity Calculations.</li>
+          <li>Saving character sheets. (meaning I also need to finish the character maker)</li>
+          <li>Save your place in the comic and scripts</li>                
+        </ul>
+        <hr>
+        <app-login></app-login>
+        <button (click)="showAccountInfo()">Show Account Info</button>
+
+      <!-- </div> -->
+  <!-- </ng-template> -->

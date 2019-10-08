@@ -1,4 +1,4 @@
-import { Component, Input, ViewChild, ElementRef, HostListener, AfterViewInit, AfterViewChecked, AfterContentInit, AfterContentChecked } from '@angular/core';
+import { Component, Input, ViewChild, ElementRef, HostListener, AfterContentChecked } from '@angular/core';
 
 @Component({
   selector: 'app-sidebar',

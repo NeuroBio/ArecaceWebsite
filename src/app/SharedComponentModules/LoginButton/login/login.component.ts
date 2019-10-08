@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../../administration/security/Auth/auth.service';
+import { AuthService } from '../../../administration/security/Auth/auth.service';
 import { TextProvider } from 'src/app/GlobalServices/textprovider.service';
 
 @Component({
@@ -10,6 +10,12 @@ import { TextProvider } from 'src/app/GlobalServices/textprovider.service';
 export class LoginComponent implements OnInit {
 
   mainText: string;
+  user = {ID: 10,
+          email: "fake@fake.com",
+          userName: "tester",
+          Admin: false,
+          User: true
+          }
   constructor(public auth: AuthService,
               private textprovider: TextProvider) { }
 

@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { CRUDcontrollerService } from '../../../administration/services/CRUDcontroller.service';
+import { CRUDcontrollerService } from '../../../../administration/services/CRUDcontroller.service';
 import { Subscription } from 'rxjs';
 import { ButtonController } from '../buttoncontroller';
 

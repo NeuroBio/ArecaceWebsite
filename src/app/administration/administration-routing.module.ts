@@ -27,7 +27,7 @@ import { SurveyComponent } from './Forms/survey/survey/survey.component';
 import { SurveyStatsComponent } from './Forms/survey/survey-stats/survey-stats.component';
 import { OthersArtFormComponent } from './Forms/othersart/othersartform/othersartform.component';
 import { PixelformComponent } from './Forms/othersart/pixelform/pixelform.component';
-import { CharacterFormComponent } from '../SharedForms/MakeCharacter/characterform/characterform.component';
+import { CharacterFormComponent } from '../SharedComponentModules/SharedForms/MakeCharacter/characterform/characterform.component';
 import { SourceAffinityComponent } from './Forms/sourceaffinity/source-affinity/source-affinity.component';
 
 

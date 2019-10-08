@@ -3,7 +3,7 @@ import { Component, ViewChild, OnInit,
 import { FormBuilder, FormArray, FormGroup}         from '@angular/forms';
 import { Subscription }                             from 'rxjs';
 
-import { CRUDcontrollerService }                    from '../../../administration/services/CRUDcontroller.service';
+import { CRUDcontrollerService }                    from '../../../../administration/services/CRUDcontroller.service';
 
 import { CharacterMetaData }                        from 'src/app/Classes/charactermetadata';
 import { SourceAbilities, Relations }               from '../formclasses';
@@ -15,7 +15,7 @@ import { BirthdayService } from '../birthday.service';
 @Component({
   selector: 'app-characterform',
   templateUrl: './characterform.component.html',
-  styleUrls: ['../../../administration/Forms/Form.css']
+  styleUrls: ['../../../../administration/Forms/Form.css']
 })
 
 export class CharacterFormComponent implements OnInit, OnDestroy{

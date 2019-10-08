@@ -4,7 +4,7 @@ import { CommonModule }         from '@angular/common';
 import { SitemapRoutingModule } from './sitemap-routing.module';
 
 import { SiteMapComponent }     from './sitemap/sitemap.component';
-import { SharedModule }         from 'src/app/SharedComponents/shared.module';
+import { LinkListModule } from 'src/app/SharedComponentModules/PrimaryContentDisplayer/LinkListDisplay/linklist.module';
 
 @NgModule({
   declarations: [
@@ -12,7 +12,7 @@ import { SharedModule }         from 'src/app/SharedComponents/shared.module';
   ],
   imports: [
     CommonModule,
-    SharedModule,
+    LinkListModule,
     SitemapRoutingModule
   ]
 })

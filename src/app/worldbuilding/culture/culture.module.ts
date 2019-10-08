@@ -1,7 +1,7 @@
 import { NgModule }             from '@angular/core';
 import { CommonModule }         from '@angular/common';
 
-import { SharedModule }         from 'src/app/SharedComponents/shared.module';
+import { PrimaryContentDisplayModule }         from 'src/app/SharedComponentModules/PrimaryContentDisplayer/primary-content-display.module';
 
 import { CultureRoutingModule } from './culture-routing.module';
 import { CulturemainComponent } from './culturemain/culturemain.component';
@@ -12,7 +12,7 @@ import { CulturemainComponent } from './culturemain/culturemain.component';
   ],
   imports: [
     CommonModule,
-    SharedModule,
+    PrimaryContentDisplayModule,
     CultureRoutingModule
   ]
 })

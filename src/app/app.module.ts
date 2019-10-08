@@ -16,23 +16,23 @@ import { ComicBookModule }          from './comic-book/comicbook.module';
 import { CultureModule }            from './worldbuilding/culture/culture.module';
 import { ExtrasModule }             from './extras/extras.module';
 import { PlaygroundModule }         from './playground/playground.module';
-import { SitemapModule }            from './Components/sitemap/sitemap.module';
+import { SitemapModule }            from './SimplePages/sitemap/sitemap.module';
 import { StoryModule }              from './story/story.module';
-import { UpdatefeedModule }         from './Components/updatefeed/updatefeed.module';
+import { UpdatefeedModule }         from './SharedComponentModules/UpdateFeed/updatefeed.module';
 import { WorldbuildingModule }      from './worldbuilding/worldbuilding.module';
 
 import { AppComponent }             from './app.component';
-import { AboutComponent }           from './Components/about/about.component';
-import { BadserviceComponent }      from './Components/badservice/badservice.component';
-import { ContactComponent }         from './Components/contact/contact.component';
-import { FAQComponent }             from './Components/faq/faq.component';
-import { CopyrightComponent }       from './Components/copyright/copyright.component';
-import { HomeComponent }            from './Components/home/home.component';
-import { LoginComponent }           from './Components/login/login.component';
-import { PageNotFoundComponent }    from './Components/pagenotfound/pagenotfound.component';
-import { TravelorsGuideComponent }  from './Components/travelorsguide/travelorsguide.component';
+import { AboutComponent }           from './SimplePages/about/about.component';
+import { BadserviceComponent }      from './SimplePages/badservice/badservice.component';
+import { ContactComponent }         from './SimplePages/contact/contact.component';
+import { FAQComponent }             from './SimplePages/faq/faq.component';
+import { CopyrightComponent }       from './SimplePages/copyright/copyright.component';
+import { HomeComponent }            from './SimplePages/home/home.component';
+import { PageNotFoundComponent }    from './SimplePages/pagenotfound/pagenotfound.component';
+import { TravelorsGuideComponent }  from './SimplePages/travelorsguide/travelorsguide.component';
 import { TextProvider } from './GlobalServices/textprovider.service';
 import { AuthService } from './administration/security/Auth/auth.service';
+import { UserDashModule } from './UserDash/user-dash.module';
 
 export function TextFactory(provider: TextProvider) {
   return () => provider.load();
@@ -51,8 +51,7 @@ export function AuthFactory(provider: AuthService) {
     CopyrightComponent,
     PageNotFoundComponent,
     BadserviceComponent,
-    ContactComponent,
-    LoginComponent,
+    ContactComponent
     ],
   imports: [
     BrowserModule,
@@ -65,6 +64,7 @@ export function AuthFactory(provider: AuthService) {
     CultureModule,
     ExtrasModule,
     SitemapModule,
+    UserDashModule,
 
     ReactiveFormsModule,
 

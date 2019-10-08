@@ -29,7 +29,7 @@ import { SurveyComponent } from './Forms/survey/survey/survey.component';
 import { SurveyStatsComponent } from './Forms/survey/survey-stats/survey-stats.component';
 import { OthersArtFormComponent } from './Forms/othersart/othersartform/othersartform.component';
 import { PixelformComponent } from './Forms/othersart/pixelform/pixelform.component';
-import { SharedFormsModule } from '../SharedForms/shared-forms.module';
+import { SharedFormsModule } from '../SharedComponentModules/SharedForms/shared-forms.module';
 import { SourceAffinityComponent } from './Forms/sourceaffinity/source-affinity/source-affinity.component';
 
 @NgModule({

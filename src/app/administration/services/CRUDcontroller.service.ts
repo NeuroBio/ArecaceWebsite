@@ -6,7 +6,7 @@ import { BehaviorSubject, Observable, Subject }  from 'rxjs';
 
 import { FireBaseService }              from 'src/app/GlobalServices/firebase.service';
 import { CRUD } from './CRUD.service';
-import { ButtonController } from '../../SharedForms/Buttons/buttoncontroller';
+import { ButtonController } from '../../SharedComponentModules/SharedForms/Buttons/buttoncontroller';
 import { formatDate } from '@angular/common';
 
 @Injectable({

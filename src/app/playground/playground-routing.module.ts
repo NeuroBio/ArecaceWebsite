@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { PlaygroundhomeComponent } from './playgroundhome/playgroundhome.component'
 import { OthersArtComponent } from './others-art/others-art.component';
 import { GeneralcollectionresolverService } from 'src/app/GlobalServices/generalcollectionresolver.service'
-import { BlowupmasterComponent } from '../SharedComponents/blowupmaster/blowupmaster.component';
+import { BlowupmasterComponent } from '../SharedComponentModules/PrimaryContentDisplayer/GridBlowUp/blowupmaster/blowupmaster.component';
 import { GeneralmemberresolverService } from '../GlobalServices/generalmemberresolver.service';
 import { DateConverterComponent } from './CalcConvert/date-converter/date-converter.component';
 import { SourceCalcFrameComponent } from './CalcConvert/source-calc-frame/source-calc-frame.component';

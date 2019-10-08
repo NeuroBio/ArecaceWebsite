@@ -7,8 +7,9 @@ import { CharactersMainComponent }      from './charactersmain/charactersmain.co
 import { CharactersDetailsComponent }   from './charactersdetails/charactersdetails.component';
 import { HomeComponent }                from './home/home.component';
 import { CharactersBlowupmasterComponent } from './charactersblowupmaster/charactersblowupmaster.component';
+import { GridBlowupModule } from 'src/app/SharedComponentModules/PrimaryContentDisplayer/GridBlowUp/grid-blowup.module';
+import { PrimaryContentDisplayModule } from 'src/app/SharedComponentModules/PrimaryContentDisplayer/primary-content-display.module';
 
-import { SharedModule }                 from 'src/app/SharedComponents/shared.module';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { SharedModule }                 from 'src/app/SharedComponents/shared.mo
   ],
   imports: [
     CommonModule,
-    SharedModule,
+    GridBlowupModule,
+    PrimaryContentDisplayModule,
     CharactersRoutingModule
   ]
 })

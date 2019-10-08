@@ -3,7 +3,7 @@ import { CommonModule }           from '@angular/common';
 
 import { MiscRoutingModule }      from './extras-routing.module';
 import { ExtrasMainComponent }    from './extrasmain/extrasmain.component';
-import { SharedModule }           from 'src/app/SharedComponents/shared.module'
+import { GridBlowupModule }       from '../SharedComponentModules/PrimaryContentDisplayer/GridBlowUp/grid-blowup.module';
 
 @NgModule({
   declarations: [
@@ -12,7 +12,7 @@ import { SharedModule }           from 'src/app/SharedComponents/shared.module'
   imports: [
     CommonModule,
     MiscRoutingModule,
-    SharedModule
+    GridBlowupModule
   ]
 })
 

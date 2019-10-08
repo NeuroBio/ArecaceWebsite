@@ -3,7 +3,7 @@ import { Routes, RouterModule }             from '@angular/router';
 
 import { GuildsMainComponent }              from './guildsmain/guildsmain.component';
 import { GuildDetailsComponent }            from './guilddetails/guilddetails.component';
-import { NotFoundComponent }                from 'src/app/SharedComponents/notfound/notfound.component'
+import { NotFoundComponent }                from 'src/app/SharedComponentModules/PrimaryContentDisplayer/ContentDisplay/notfound/notfound.component'
 
 import { GeneralcollectionresolverService}  from 'src/app/GlobalServices/generalcollectionresolver.service';
 import { GeneralmemberresolverService }     from 'src/app/GlobalServices/generalmemberresolver.service';

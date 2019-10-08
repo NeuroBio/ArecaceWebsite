@@ -1,4 +1,4 @@
-import { AbilityMastery } from '../SharedForms/SourceAffinityCalculator/sourceclasses';
+import { AbilityMastery } from '../SharedComponentModules/SharedForms/SourceAffinityCalculator/sourceclasses';
 
 export class SA {
     Build: AbilityMastery[];

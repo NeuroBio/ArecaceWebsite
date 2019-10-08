@@ -4,7 +4,7 @@ import { CommonModule }             from '@angular/common';
 import { BestiaryRoutingModule }    from './bestiary-routing.module';
 
 import { BestiaryComponent }        from './bestiary/bestiary.component';
-import { SharedModule }             from 'src/app/SharedComponents/shared.module';
+import { GridBlowupModule } from 'src/app/SharedComponentModules/PrimaryContentDisplayer/GridBlowUp/grid-blowup.module';
 
 @NgModule({
   declarations: [
@@ -12,7 +12,7 @@ import { SharedModule }             from 'src/app/SharedComponents/shared.module
   ],
   imports: [
     CommonModule,
-    SharedModule,
+    GridBlowupModule,
     BestiaryRoutingModule
   ]
 })

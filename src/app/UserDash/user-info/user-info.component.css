@@ -1,0 +1,16 @@
+div#accountInfo {
+    border: 1px white solid;
+    max-width: 400px;
+}
+
+div#accountInfo p {
+    margin: 0px;
+    padding-top: 0px;
+    padding-bottom: 20px;
+    padding-left: 30px;
+}
+
+h4 {
+    padding: 7px;
+    margin: 0px;
+}
