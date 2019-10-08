@@ -16,16 +16,18 @@ export class AuthService {
   redirectUrl: string;
   
   authState: any = null;
-  user = new BehaviorSubject(null)
+  user = new BehaviorSubject(undefined)
 
   constructor(private authorize: AngularFireAuth,
-              private firebaseserv: FireBaseService) {
-
+              private firebaseserv: FireBaseService) { }
+              
+  load() {
     this.authorize.authState.subscribe(auth => {
       this.authState = auth;
     });
 
-    this.authorize.authState.pipe(switchMap(user => {
+    return new Promise(resolve =>
+      this.authorize.authState.pipe(switchMap(user => {
         if (user) {
           this.isLoggedIn = true;
           return this.firebaseserv.returnDocument(`Users/${user.uid}`);
@@ -33,11 +35,10 @@ export class AuthService {
           return of (null);
         }
       })
-    ).subscribe(user => this.user.next(user));
-  }
-
-  load() {
-    return new Promise((resolve) => resolve());
+    ).subscribe(user => {
+      this.user.next(user)
+      resolve();
+    }));
   }
 
   anonymousLogin() {
