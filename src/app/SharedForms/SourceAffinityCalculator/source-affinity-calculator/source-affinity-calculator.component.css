@@ -45,11 +45,15 @@ div.stayTogether {
     display: inline-block;
 }
 
-div#Results {
+div#bottom {
     background-color: rgb(15, 104, 99);
+    border-top: 3px solid black;
+    min-height: 40px;
+}
+
+div#Results {
     padding: 7px;
     color: white;
-    border-top: 3px solid black;
 }
 
 div#outer {

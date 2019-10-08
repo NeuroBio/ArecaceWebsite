@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { FormBuilder, FormArray, FormControl, FormGroup, Validators, Form } from '@angular/forms';
 import { CRUDcontrollerService } from 'src/app/administration/services/CRUDcontroller.service';
-import { SurveyQuestion, SurveyOutcome } from 'src/app/playground/surveys/surveyclasses';
+import { SurveyQuestion, SurveyOutcome } from 'src/app/Classes/surveyclasses';
 
 @Component({
   selector: 'app-survey',

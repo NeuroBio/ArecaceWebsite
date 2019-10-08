@@ -24,7 +24,7 @@ export class FireBaseService {
     return this.database.doc<any>(path).valueChanges();
   }
   
-  returnCollect(path:string): Observable<any>{
+  returnCollect(path:string): Observable<any[]>{
     return this.database.collection<any[]>(path).valueChanges();
   }
 

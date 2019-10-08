@@ -5,14 +5,14 @@ import { OthersArtComponent } from './others-art/others-art.component';
 import { GeneralcollectionresolverService } from 'src/app/GlobalServices/generalcollectionresolver.service'
 import { BlowupmasterComponent } from '../SharedComponents/blowupmaster/blowupmaster.component';
 import { GeneralmemberresolverService } from '../GlobalServices/generalmemberresolver.service';
-import { DateConverterComponent } from './date-converter/date-converter.component';
-import { SourceAffinityCalculatorComponent } from '../SharedForms/SourceAffinityCalculator/source-affinity-calculator/source-affinity-calculator.component';
+import { DateConverterComponent } from './CalcConvert/date-converter/date-converter.component';
+import { SourceCalcFrameComponent } from './CalcConvert/source-calc-frame/source-calc-frame.component';
 
 const playgroundRoutes: Routes = [
   {path: 'playground', component: PlaygroundhomeComponent,
   children: [
     {path: 'dateconvert', component: DateConverterComponent},
-    {path: 'sourceaffinity', component: SourceAffinityCalculatorComponent} 
+    {path: 'sourceaffinity', component: SourceCalcFrameComponent} 
   ]},
   {path: 'playground/othersart', component: OthersArtComponent,
   resolve: {GeneralcollectionresolverService},

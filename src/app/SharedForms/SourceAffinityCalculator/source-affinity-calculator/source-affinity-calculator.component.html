@@ -68,9 +68,11 @@
       <button type="button" (click)=onReset()>Reset</button>
     </p>
   </form>
-  <div id="Error" *ngIf="error">{{ error }}</div>
-  <div id="Results" *ngIf="result">
-    Source Affinity Cost: {{ result }} <br>
-    Source Magician Status: {{ rank }}
+  <div id="bottom">
+    <div id="Error" *ngIf="error">{{ error }}</div>
+    <div id="Results" *ngIf="result">
+        Source Affinity Cost: {{ result }} <br>
+        Source Magician Status: {{ rank }}
+    </div>
   </div>      
 </div>
