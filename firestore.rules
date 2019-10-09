@@ -14,7 +14,7 @@ service cloud.firestore {
   
     match /Contact/{allDocuments} {
         allow read, write: if isAdmin();
-        allow create: isUser();
+        allow create: if isUser();
     }
 
     match /Users/{userID} {
