@@ -16,9 +16,9 @@ export class PickUpComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this.comFrag = this.user.Comic.split('/');
-    this.scriFrag = this.user.Script.split('/');
-    this.narFrag = this.user.Narrative.split('/');
+    this.comFrag = this.user.Comic ? this.user.Comic.split('/') : [];
+    this.scriFrag = this.user.Script ? this.user.Script.split('/') : [];
+    this.narFrag = this.user.Narrative ? this.user.Narrative.split('/') : [];
 
   }
 

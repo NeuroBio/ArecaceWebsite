@@ -30,9 +30,18 @@
         </div>
 
       </div>
-      <div *ngIf="activeMember.Artist"> </div>
-        <div *ngIf="activeMember.ArtistLink; then Link else noLink">
+      <div *ngIf="activeMember.Artist">
+        
+        <div *ngIf="activeMember.ArtistLink" id="othersArt">
+            <a [href]="activeMember.ArtistLink" target="_blank">
+                Artist: {{ activeMember.Artist }}, {{ activeMember.Date }}</a>  
         </div>
+        <div *ngIf="!activeMember.ArtistLink" id="othersArt">
+            Artist: {{ activeMember.Artist }}, {{ activeMember.Date }}
+        </div>
+
+      </div>
+
       <div id="Back">
           <a [routerLink]="['../']">Go Back</a>
       </div>
@@ -45,16 +54,3 @@
     </div>
 
 </nav>
-
-<ng-template #Link>
-  <div id="othersArt">
-      <a [href]="activeMember.ArtistLink" target="_blank">
-          Artist: {{ activeMember.Artist }}, {{ activeMember.Date }}</a>  
-  </div>
-</ng-template>
-
-<ng-template #noLink>
-    <div id="othersArt">
-        Artist: {{ activeMember.Artist }}, {{ activeMember.Date }}
-    </div>
-</ng-template>
