@@ -3,6 +3,7 @@ import { FormBuilder, Validators }  from '@angular/forms';
 
 import { messageValidator }         from './Validate';
 import { ContactService }           from './contact.service';
+import { AuthService } from 'src/app/administration/security/Auth/auth.service';
 
 @Component({
   selector: 'app-contact',
@@ -33,11 +34,15 @@ export class ContactComponent implements OnInit {
   MessageInvalid: boolean = false;
 
   constructor(private fb: FormBuilder,
-              private contactserv: ContactService) { }
+              private contactserv: ContactService,
+              private auth: AuthService) { }
 
   ngOnInit() {
     window.scroll(0,0);
     this.resetTimer();
+    if(!this.auth.isLoggedIn) {
+      this.auth.anonymousLogin();
+    }
   }
 
   createForm(){
