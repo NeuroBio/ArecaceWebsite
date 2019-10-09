@@ -15,4 +15,7 @@ export class UserInfoComponent implements OnInit {
   ngOnInit() {
   }
 
+  changeUserName() {
+
+  }
 }

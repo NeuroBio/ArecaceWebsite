@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { User } from 'src/app/Classes/user';
 
 @Component({
   selector: 'app-pick-up',
@@ -7,9 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PickUpComponent implements OnInit {
 
+  comFrag: string[];
+  scriFrag: string[];
+  narFrag: string[];
+  @Input() user: User;
+  
   constructor() { }
 
   ngOnInit() {
+    this.comFrag = this.user.Comic.split('/');
+    this.scriFrag = this.user.Script.split('/');
+    this.narFrag = this.user.Narrative.split('/');
+
   }
 
 }

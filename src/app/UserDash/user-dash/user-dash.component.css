@@ -1,4 +1,15 @@
-app-login {
+button#logout {
     float: right;
     position: sticky;
+}
+
+div#outer {
+    background-image: url(https://firebasestorage.googleapis.com/v0/b/arecaceworld.appspot.com/o/WebSite%2Fsmear2.png?alt=media&token=03185fb3-b90c-4635-98c7-5e045e6b2579);
+}
+
+div#UserComponents {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
 }

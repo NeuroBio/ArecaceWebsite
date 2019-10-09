@@ -69,6 +69,7 @@ const AdminRoutes: Routes = [
           {path: 'copyright', component: WebsiteTextComponent },
           {path: 'intro', component: IntroTextComponent },
           {path: 'login', component: WebsiteTextComponent },
+          {path: 'userdash', component: WebsiteTextComponent },
           {path: 'comic', component: WebsiteTextComponent },
          ]
       },

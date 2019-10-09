@@ -8,7 +8,6 @@ import { AuthService } from '../../../administration/security/Auth/auth.service'
 })
 export class LoginComponent {
 
- 
   constructor(public auth: AuthService) { }
 
 }
