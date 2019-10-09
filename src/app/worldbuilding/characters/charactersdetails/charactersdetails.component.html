@@ -3,7 +3,8 @@
   <div id="Bio">
       <div *ngIf="loading===true" class="loading"></div>
       <img id="BioImage" [hidden]="loading" [src]="char.Links[0]" (load)="loading=false"
-      [alt]="char.FirstName+' '+char.LastName">    
+      [alt]="char.FirstName+' '+char.LastName">
+      <a [hidden]="loading" [href]="char.Links[0]" target="_blank">download larger version</a>
   </div>
 
   <br>
