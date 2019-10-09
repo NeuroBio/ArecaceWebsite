@@ -5,7 +5,6 @@ import { of, BehaviorSubject } from 'rxjs'
 import { switchMap, take } from 'rxjs/operators';
 import { User } from 'src/app/Classes/user'; 
 import { FireBaseService } from 'src/app/GlobalServices/firebase.service';
-import { FirebasePaths } from 'src/app/Classes/FirebasePaths';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +16,8 @@ export class AuthService {
   redirectUrl: string;
   
   authState = null;
-  user = new BehaviorSubject(undefined)
+  user = new BehaviorSubject<User>(undefined)
+  uid = new BehaviorSubject<string>(undefined);
 
   constructor(private authorize: AngularFireAuth,
               private firebaseserv: FireBaseService) { }
@@ -31,7 +31,7 @@ export class AuthService {
       this.authorize.authState.pipe(switchMap(user => {
         if (user) {
           this.isLoggedIn = true;
-          user.getIdToken();
+          this.uid.next(user.uid);
           return this.firebaseserv.returnDocument(`Users/${user.uid}`);
         } else {
           return of (null);
@@ -107,11 +107,7 @@ export class AuthService {
     if(newUser && !anon){
       return this.firebaseserv.returnCollectionWithKeys('NumUsers').pipe(take(1))
       .subscribe(ID => {
-        data = {email: user.email,
-          userName: 'defaultUserName_2.0',
-          ID: ID[0].NumUsers,
-          User: true,
-          Admin: false};
+        data = new User(user.email, ID[0].NumUsers);
         this.firebaseserv.editDocument({NumUsers: ID[0].NumUsers += 1}, 'NumUsers', ID[0].key);
         this.firebaseserv.editDocument(data, 'Users', user.uid);
       });
@@ -121,6 +117,11 @@ export class AuthService {
   logout() {
     this.authorize.auth.signOut();
     this.isLoggedIn = false;
+  }
+
+  refresh() {
+    console.log("auth refresh")
+    this.authState.getIdToken(true);
   }
 
 }
