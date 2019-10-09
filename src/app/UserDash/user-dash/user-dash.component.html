@@ -1,4 +1,4 @@
-<!-- <div *ngIf="auth.user | async; then authenticated else guest"></div> -->
+<div *ngIf="auth.user | async; then authenticated else guest"></div>
 
 
 <!-- User NOT logged in -->
@@ -9,8 +9,8 @@
 
 
 <!-- User logged in -->
-<!-- <ng-template #authenticated>
-    <div id="outer" *ngIf="auth.user | async as user"> -->
+<ng-template #authenticated>
+    <div id="outer" *ngIf="auth.user | async as user">
         <button id="logout" (click)="auth.logout()">Logout</button>
         <h3>Welcome Back, {{ user.userName }}, ID#{{ user.ID }}</h3>
         <div [innerHTML]="loggedinText"></div>
@@ -45,5 +45,5 @@
         *ngIf="showAccountInfo === true"
         ></app-user-info>
 
-      <!-- </div>
-  </ng-template> -->
+      </div>
+  </ng-template>
