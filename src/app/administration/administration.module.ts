@@ -31,6 +31,7 @@ import { OthersArtFormComponent } from './Forms/othersart/othersartform/othersar
 import { PixelformComponent } from './Forms/othersart/pixelform/pixelform.component';
 import { SharedFormsModule } from '../SharedComponentModules/SharedForms/shared-forms.module';
 import { SourceAffinityComponent } from './Forms/sourceaffinity/source-affinity/source-affinity.component';
+import { LooseNotesFormComponent } from './Forms/loosenotes/loose-notes-form/loose-notes-form.component';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,8 @@ import { SourceAffinityComponent } from './Forms/sourceaffinity/source-affinity/
     SurveyStatsComponent,
     OthersArtFormComponent,
     PixelformComponent,
-    SourceAffinityComponent
+    SourceAffinityComponent,
+    LooseNotesFormComponent
   ],
   imports: [
     CommonModule,

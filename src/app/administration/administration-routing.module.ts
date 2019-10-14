@@ -29,6 +29,7 @@ import { OthersArtFormComponent } from './Forms/othersart/othersartform/othersar
 import { PixelformComponent } from './Forms/othersart/pixelform/pixelform.component';
 import { CharacterFormComponent } from '../SharedComponentModules/SharedForms/MakeCharacter/characterform/characterform.component';
 import { SourceAffinityComponent } from './Forms/sourceaffinity/source-affinity/source-affinity.component';
+import { LooseNotesFormComponent } from './Forms/loosenotes/loose-notes-form/loose-notes-form.component';
 
 
 const AdminRoutes: Routes = [
@@ -57,7 +58,8 @@ const AdminRoutes: Routes = [
           { path: 'surveystats', component: SurveyStatsComponent },
           { path: 'othersart', component: OthersArtFormComponent },
           { path: 'pixels', component: PixelformComponent },
-          { path: 'SAs', component: SourceAffinityComponent}
+          { path: 'SAs', component: SourceAffinityComponent},
+          { path: 'notes', component: LooseNotesFormComponent}
         ]},
         {path: 'Pages', component:PagesComponent, 
          children:[

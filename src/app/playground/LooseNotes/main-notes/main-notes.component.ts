@@ -3,7 +3,6 @@ import { Observable } from 'rxjs';
 import { GeneralcollectionService } from 'src/app/GlobalServices/generalcollection.service';
 import { ActivatedRoute } from '@angular/router';
 import { map } from 'rxjs/operators';
-import { LooseNotesMetaData } from 'src/app/Classes/notesmetadata';
 
 @Component({
   selector: 'app-main-notes',
@@ -22,7 +21,7 @@ export class MainNotesComponent implements OnInit {
     this.notes$ = this.generalcollectserv.returnMetaData().pipe(
       map((notes) => {
         notes.sort((a,b) => a.TimeStampCreated < b.TimeStampCreated ? -1 : 1);
-        return notes.map(note => [note.ShortTitle.concat('-' + note.Created), note.ID]);
+        return notes.map(note => [note.ShortTitle, note.ID]);
       })
     );
     

@@ -1,0 +1,17 @@
+<form [formGroup]="Form">
+  <h2 class="formstyle">Loose Notes Upload:</h2>
+  <hr>
+    <p>Title: <input class="long" type="Title" formControlName="Title"></p>
+
+    <p>Short Title: <input class="medium" type="Title" formControlName="ShortTitle"></p>
+          
+    <p>Text:<br>
+    <textarea formControlName="Text" rows="8" cols="66"></textarea></p>
+
+  <app-formButtons></app-formButtons>
+</form>
+
+<div class="WYSIWYG" [innerHTML]="Form.value.Text"></div>
+
+
+<div style="clear: both"></div>

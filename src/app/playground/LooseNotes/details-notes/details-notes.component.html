@@ -1,7 +1,7 @@
-<div class="textblock">
+<div  id="outer" class="textblock">
     <h3>{{ note.Title }}</h3>
     <hr>
-    <div>{{ note.Text }}</div>
+    <div class="textblock" [innerHTML]="note.Text"></div>
     <hr>
     <div id="dates">
         Date Posted: {{ note.Created }}

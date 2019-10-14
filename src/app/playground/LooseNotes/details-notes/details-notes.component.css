@@ -18,3 +18,23 @@ div#dates {
 div.textblock {
     margin: 10px;
 }
+
+div#outer {
+    max-width: 700px;
+}
+
+::ng-deep div#outer hr {
+    border: 1px solid white;
+    margin-top: 7px;
+    margin-bottom: 7px;
+}
+
+::ng-deep div#outer h3 {
+    margin: 0px;
+    padding-top: 7px;
+    padding-bottom: 7px;
+}
+
+::ng-deep div#outer h4 {
+    text-decoration: underline;
+}
