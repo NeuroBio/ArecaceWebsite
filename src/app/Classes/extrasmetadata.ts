@@ -4,4 +4,6 @@ export class ExtrasMetaData {
     Links: string[];
     Description: string;
     Date: string;
+    TimeStampCreated?: string;
+    TimeStampModified?: string;
 }

@@ -34,4 +34,6 @@ export class CharacterMetaData {
     Links: string[] = [];
     ReferenceIDs: string[] = [];
     References: any[] = [];
+    TimeStampCreated?: string;
+    TimeStampModified?: string;
 }

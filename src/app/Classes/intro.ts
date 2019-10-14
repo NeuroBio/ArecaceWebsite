@@ -4,4 +4,6 @@ export class Intro {
     Image: boolean;
     RouterLinks: string[];
     RouterLinksNames: string[];
+    TimeStampCreated?: string;
+    TimeStampModified?: string;
 }

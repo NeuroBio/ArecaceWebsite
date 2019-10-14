@@ -7,4 +7,6 @@ export class StoryMetaData {
     Synopsis: string;
     WordCount: number;
     StoryLink: string;
+    TimeStampCreated?: string;
+    TimeStampModified?: string;
 }

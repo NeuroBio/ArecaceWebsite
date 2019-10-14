@@ -22,6 +22,8 @@ export class SurveyData {
     MaxScores: any;
     ID: string;
     Name: string;
+    TimeStampCreated?: string;
+    TimeStampModified?: string;
 
     constructor(q: SurveyQuestion[], r: object[][], o: SurveyOutcome[],
                 m: any, id: string, name: string) {

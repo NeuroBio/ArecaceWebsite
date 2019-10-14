@@ -161,6 +161,7 @@ export class CRUDcontrollerService {
         meta.StoryLink = link;
       }
       meta.TimeStampModified = this.createTimestamp();
+      meta.TimeStampCreated = "2019-03-08, 00:00"
       console.log("meta");
       return this.crud.editItem(meta,
               this.firePaths.value[this.itemType.value],

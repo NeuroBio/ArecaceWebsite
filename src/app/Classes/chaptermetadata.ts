@@ -6,4 +6,6 @@ export class ChapterMetaData {
     NumPages: number;
     Links: string[];
     Message: string;
+    TimeStampCreated?: string;
+    TimeStampModified?: string;
 }

@@ -7,4 +7,6 @@ export class PostData {
     Links?: string[];
     AltText: string;
     Edited: boolean;
+    TimeStampCreated?: string;
+    TimeStampModified?: string;
 }
