@@ -8,6 +8,4 @@ export class SA {
     ID: string;
     Name: string;
     Rank: string;
-    TimeStampCreated?: string;
-    TimeStampModified?: string;
 }

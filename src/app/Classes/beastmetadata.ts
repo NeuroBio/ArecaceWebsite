@@ -6,6 +6,4 @@ export class BeastMetaData {
     Biome: string;
     Links: string[];
     AltText: string;
-    TimeStampCreated?: string;
-    TimeStampModified?: string;
 }

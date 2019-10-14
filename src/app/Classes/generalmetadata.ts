@@ -5,6 +5,4 @@ export class GeneralMetaData {
     Caption: string;
     FullText: string;
     Links: string[];
-    TimeStampCreated?: string;
-    TimeStampModified?: string;
 }

@@ -8,6 +8,7 @@ import { FireBaseService }              from 'src/app/GlobalServices/firebase.se
 import { CRUD } from './CRUD.service';
 import { ButtonController } from '../../SharedComponentModules/SharedForms/Buttons/buttoncontroller';
 import { formatDate } from '@angular/common';
+import { NewestCueService } from './newest-cue.service';
 
 @Injectable({
   providedIn: 'root'
@@ -32,7 +33,8 @@ export class CRUDcontrollerService {
   triggerProcess = new Subject<any>();
 
   constructor(private firebaseserv: FireBaseService,
-              private crud: CRUD) { }
+              private crud: CRUD,
+              private newestCue: NewestCueService) { }
   
   //Data fetching functions
   assignFirePaths(paths: any, itemType: string = '') {
@@ -119,7 +121,8 @@ export class CRUDcontrollerService {
         if("StoryLink" in meta){
           meta.StoryLink = link;
         }
-        meta.TimeStampCreated = this.createTimestamp();
+        this.newestCue.updateCue(meta, this.itemType.value);
+        // meta.TimeStampCreated = this.createTimestamp();
         console.log("meta");
         return this.crud.uploadItem(meta, this.firePaths.value[this.itemType.value]);
       }).then(() => {
@@ -160,8 +163,7 @@ export class CRUDcontrollerService {
       if("StoryLink" in meta){
         meta.StoryLink = link;
       }
-      meta.TimeStampModified = this.createTimestamp();
-      meta.TimeStampCreated = "2019-03-08, 00:00"
+      // meta.TimeStampModified = this.createTimestamp();
       console.log("meta");
       return this.crud.editItem(meta,
               this.firePaths.value[this.itemType.value],

@@ -6,6 +6,4 @@ export class OthersArt {
     Artist: string;
     ArtistLink: string;
     Allowed: boolean;
-    TimeStampCreated?: string;
-    TimeStampModified?: string;
 }
