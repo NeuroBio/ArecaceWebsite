@@ -1,4 +1,10 @@
-<h4>{{ note.Title }}</h4>
-<div>{{ note.Text }}</div>
-Date Posted: {{ note.TimeStampCreated }}
-<!-- <span *ngIf="note.TimeStampModified">Edited: {{ note.TimeStampModified }}</span> -->
+<div class="textblock">
+    <h3>{{ note.Title }}</h3>
+    <hr>
+    <div>{{ note.Text }}</div>
+    <hr>
+    <div id="dates">
+        Date Posted: {{ note.Created }}
+        <!-- <span *ngIf="note.TimeStampModified">Edited: {{ note.TimeStampModified }}</span> -->
+    </div>
+</div>
