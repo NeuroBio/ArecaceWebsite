@@ -12,16 +12,16 @@ import { map } from 'rxjs/operators';
 export class MainNotesComponent implements OnInit {
 
   current: string;
-  guilds$: Observable<string[][][]>;
+  notes$: Observable<string[][][]>;
 
   constructor(private generalcollectserv: GeneralcollectionService,
               private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.guilds$ = this.generalcollectserv.returnMetaData().pipe(
-      map(Guilds => {
-        Guilds.sort((a,b) => a.Founded < b.Founded ? -1 : 1);
-        return Guilds.map(Guild => [Guild.ID, Guild.ID]);
+    this.notes$ = this.generalcollectserv.returnMetaData().pipe(
+      map(notes => {
+        notes.sort((a,b) => a.TimeStampCreated < b.TimeStampCreated ? -1 : 1);
+        return notes.map(notes => [notes.Title, notes.Title]);
       })
     );
     
