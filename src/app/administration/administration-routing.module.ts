@@ -33,7 +33,7 @@ import { LooseNotesFormComponent } from './Forms/loosenotes/loose-notes-form/loo
 
 
 const AdminRoutes: Routes = [
-  {path: 'kArAAdministrativeUpload', component: AdminComponent,
+  {path: '', component: AdminComponent,
     children:[
       {path: '', component: ForbiddenComponent},
       {path: 'Dash', component: AdminDutiesComponent, 

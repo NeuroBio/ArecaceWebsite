@@ -10,7 +10,7 @@ import { LatestResolverService }    from './page/latestresolver.service';
 
 
 const comicbookRoutes: Routes = [
-  {path: 'comic', component: BookComponent,
+  {path: '', component: BookComponent,
   resolve: {BookResolverService},
   children: [
       {path: '', redirectTo: 'latest', pathMatch: 'prefix'},

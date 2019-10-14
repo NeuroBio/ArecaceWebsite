@@ -1,6 +1,5 @@
 import { NgModule }                 from '@angular/core';
 import { CommonModule }             from '@angular/common';
-import { HttpClientModule }         from '@angular/common/http';
 
 import { StoryRoutingModule }       from './story-routing.module';
 
@@ -16,7 +15,6 @@ import { PrimaryContentDisplayModule }             from 'src/app/SharedComponent
   ],
   imports: [
     CommonModule,
-    HttpClientModule,
     PrimaryContentDisplayModule,
     StoryRoutingModule
   ]

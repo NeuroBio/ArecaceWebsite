@@ -88,8 +88,6 @@
     <p>Distinguishing Marks: <br>
     <textarea formControlName="DistinguishingMarks" rows="2" cols="65"></textarea></p>
 
-
-
     <p>Personality:<br>
     <textarea formControlName="Personality" rows="6" cols="65"></textarea></p>
 
@@ -153,8 +151,12 @@
     <textarea formControlName="FullBackground" rows="6" cols="65"></textarea></p>    
 
 
+    <p>Bio Picture Thumb: <br><input class="fileupload"  #bioPicThumb type="file"
+        (change)="uploadBioPicThumb($event)"
+    accept=".png,.jpg"></p>
 
-    <p>Bio Picture: <br><input class="fileupload"  #bioPic type="file" (change)="uploadBioPic($event)"
+    <p>Bio Picture Full: <br><input class="fileupload"  #bioPicFull type="file"
+        (change)="uploadBioPicFull($event)"
     accept=".png,.jpg"></p>
 
     <p>Other References:<br>

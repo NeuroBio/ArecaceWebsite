@@ -4,7 +4,7 @@
       <div *ngIf="loading===true" class="loading"></div>
       <img id="BioImage" [hidden]="loading" [src]="char.Links[0]" (load)="loading=false"
       [alt]="char.FirstName+' '+char.LastName">
-      <a [hidden]="loading" [href]="char.Links[0]" target="_blank">download larger version</a>
+      <a [hidden]="loading" [href]="char.Links[1]" target="_blank">download larger version</a>
   </div>
 
   <br>
@@ -68,7 +68,7 @@
       <div style="clear: both"></div>
       <br>
 
-      <div class="textblock" *ngIf="char.Links[1]">
+      <div class="textblock" *ngIf="char.Links[2]">
         <b>Other References:</b><br>
         <app-grid
         [collect]="char.References"

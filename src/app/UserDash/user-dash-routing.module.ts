@@ -4,7 +4,7 @@ import { UserDashComponent } from './user-dash/user-dash.component';
 
 
 const userRoutes:Routes = [
-  {path: 'dash', component: UserDashComponent},
+  {path: '', component: UserDashComponent},
 
 ];
 

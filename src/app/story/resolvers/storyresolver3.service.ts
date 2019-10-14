@@ -16,7 +16,7 @@ export class StoryResolver3Service implements Resolve<any>{
 
   constructor(private storyserv: StoryService,
               private router: Router,
-              private httpclient:HttpClient) { }
+              private httpclient: HttpClient) { }
 
   //see the story service for notes
   resolve(route: ActivatedRouteSnapshot): Observable<any>{

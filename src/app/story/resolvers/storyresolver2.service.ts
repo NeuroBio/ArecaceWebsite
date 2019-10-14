@@ -2,9 +2,6 @@ import { Injectable }                               from '@angular/core';
 import { Resolve, Router, ActivatedRouteSnapshot }  from '@angular/router';
 
 import { of, EMPTY }                                from 'rxjs';
-import { tap, take, flatMap }                                from 'rxjs/operators';
-
-import { FireBaseService }                          from 'src/app/GlobalServices/firebase.service';
 import { StoryService }                             from '../story.service';
 
 @Injectable({

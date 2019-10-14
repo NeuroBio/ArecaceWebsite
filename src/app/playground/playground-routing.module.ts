@@ -9,15 +9,15 @@ import { DateConverterComponent } from './CalcConvert/date-converter/date-conver
 import { SourceCalcFrameComponent } from './CalcConvert/source-calc-frame/source-calc-frame.component';
 
 const playgroundRoutes: Routes = [
-  {path: 'playground', component: PlaygroundhomeComponent,
+  {path: '', component: PlaygroundhomeComponent,
   children: [
     {path: 'dateconvert', component: DateConverterComponent},
     {path: 'sourceaffinity', component: SourceCalcFrameComponent} 
   ]},
-  {path: 'playground/othersart', component: OthersArtComponent,
+  {path: 'othersart', component: OthersArtComponent,
   resolve: {GeneralcollectionresolverService},
   children: [
-    {path: 'notfound', redirectTo: '/othersart'},
+    {path: 'notfound', redirectTo: 'othersart'},
     {path: ':ExtraID', component: BlowupmasterComponent,
      resolve: {links: GeneralmemberresolverService}},
   ]}

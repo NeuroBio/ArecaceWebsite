@@ -23,8 +23,11 @@ export class CharacterFormComponent implements OnInit, OnDestroy{
 //form generator vals
   DropDowns = new UploadCharacterDrops;
   Form: FormGroup;
-  @ViewChild('bioPic') biopicUploader: ElementRef;
-  biopicFile: any;
+
+  @ViewChild('bioPicThumb') biopicThumbUploader: ElementRef;
+  @ViewChild('bioPicFull') biopicFullUploader: ElementRef;
+  biopicThumbFile: any;
+  biopicFullFile: any;
   fullFiles: any[];
   thumbFiles: any[];
 
@@ -128,7 +131,8 @@ export class CharacterFormComponent implements OnInit, OnDestroy{
   processForm() {
     //Invalid Form
     //Incomplete Form
-    if(this.biopicFile === undefined
+    if((this.biopicFullFile === undefined
+      || this.biopicThumbFile === undefined)
       && this.Form.controls.Links.value === '') {
        this.controller.activeFormData.next(["abort",
        "Bio files require a bio image."]);
@@ -144,9 +148,11 @@ export class CharacterFormComponent implements OnInit, OnDestroy{
     Final.ID = Final.FirstName.split(' ').join('');
     Final.References = this.createReference(Final.ReferenceIDs, Final.FirstName);
 
-    const imagePaths = [`${this.imageFolderPath}/${Final.FirstName}`]
-                        .concat(this.refNames(this.fullFiles, Final.FirstName));
-    const imageEvents = [this.biopicFile]
+    const imagePaths = [`${this.imageFolderPath}/${Final.FirstName}-Thumb`,
+                        `${this.imageFolderPath}/${Final.FirstName}-Full`
+                        ].concat(this.refNames(this.fullFiles, Final.FirstName));
+    
+    const imageEvents = [this.biopicThumbFile, this.biopicFullFile]
       .concat(this.combineLinks(this.fullFiles, this.thumbFiles));
     
     if(this.imageFolderPath === 'CharacterBios') {
@@ -154,12 +160,12 @@ export class CharacterFormComponent implements OnInit, OnDestroy{
     }
 
     this.controller.activeFormData.next([Final,
-                                      imagePaths,
-                                      imageEvents,
-                                      Final.Links,
-                                      undefined,
-                                      undefined,
-                                      undefined]);
+                                        imagePaths,
+                                        imageEvents,
+                                        Final.Links,
+                                        undefined,
+                                        undefined,
+                                        undefined]);
   }
 
   onReset() {
@@ -168,15 +174,21 @@ export class CharacterFormComponent implements OnInit, OnDestroy{
     this.Form = this.createForm();
     this.daysArray = new Array(30);
     this.setdisplayValues();
-    this.biopicUploader.nativeElement.value = '';
-    this.biopicFile = undefined;
+    this.biopicFullUploader.nativeElement.value = '';
+    this.biopicFullFile = undefined;
+    this.biopicThumbUploader.nativeElement.value = '';
+    this.biopicThumbFile = undefined;
     this.fullFiles = [];
     this.thumbFiles = [];
     this.showUnique = false;
   }
 
-  uploadBioPic(event: any) {
-    this.biopicFile = event;
+  uploadBioPicFull(event: any) {
+    this.biopicFullFile = event;
+  }
+
+  uploadBioPicThumb(event: any) {
+    this.biopicThumbFile = event;
   }
 
   uploadFull(event: any, index: number) {

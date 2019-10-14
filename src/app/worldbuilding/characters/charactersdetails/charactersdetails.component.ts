@@ -37,8 +37,8 @@ export class CharactersDetailsComponent implements OnInit {
   //If this is too horrible, character references may need their own edit form.
   blowupReorganization(refs: any[]) {
     refs.map((ref, index) =>
-      ref.Links = [this.char.Links[index*2+1],
-                  this.char.Links[index*2+2]]);
+      ref.Links = [this.char.Links[(index+1)*2],
+                  this.char.Links[(index+1)*2+1]]);
     return refs
   }
 

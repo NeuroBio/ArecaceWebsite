@@ -18,7 +18,12 @@ export class GeneralcollectionresolverService implements Resolve<any> {
               private router: Router) { }
   
   resolve(route: ActivatedRouteSnapshot){
-    const type = route.url[route.url.length-1].path
+    let type:string;
+    if(route.url[0]){
+      type = route.url[route.url.length-1].path;
+    } else {
+      type = 'extras';
+    }
     return this.firebaseserv.returnCollect(this.firePaths[type]).pipe(
       take(1),
       tap(collect =>{

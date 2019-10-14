@@ -5,8 +5,8 @@ import { IntroductionComponent }    from './introduction/introduction.component'
 import { WorldbuildingComponent }   from './worldbuilding/worldbuilding.component';
 
 const worldRoutes:Routes = [
-  {path: 'world', component: WorldbuildingComponent},
-  {path: 'world/introduction', component: IntroductionComponent},
+  {path: '', component: WorldbuildingComponent},
+  {path: 'introduction', component: IntroductionComponent},
 ];
 
 @NgModule({

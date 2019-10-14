@@ -12,6 +12,7 @@ import { TravelorsGuideComponent }  from './SimplePages/travelorsguide/travelors
 // import { GeneralTextResolverService } from './GlobalServices/general-text-resolver.service';
 
 const routes: Routes = [
+  //simple pages
   {path: '', redirectTo: 'home', pathMatch: 'full'},
   {path: 'about', component: AboutComponent},
   {path: 'badservice', component: BadserviceComponent},
@@ -20,6 +21,26 @@ const routes: Routes = [
   {path: 'faq/copyright', component: CopyrightComponent},
   {path: 'guide', component: TravelorsGuideComponent},
   {path: 'home', component: HomeComponent}, 
+
+  //modules
+  {path: 'comic',
+    loadChildren: './comic-book/comicbook.module#ComicBookModule'},
+  {path: 'dash',
+    loadChildren: './UserDash/user-dash.module#UserDashModule'},
+  {path: 'extras',
+    loadChildren: './extras/extras.module#ExtrasModule'},
+  {path: 'kArAAdministrativeUpload',
+    loadChildren: './administration/administration.module#AdministrationModule'},
+  {path: 'playground',
+    loadChildren: './playground/playground.module#PlaygroundModule'},
+  {path: 'story',
+    loadChildren: './story/story.module#StoryModule'},
+  {path: 'sitemap',
+    loadChildren: './SimplePages/sitemap/sitemap.module#SitemapModule'},
+  {path: 'world',
+    loadChildren: './worldbuilding/worldbuilding.module#WorldbuildingModule'},
+  
+  //final catch
   {path: '**', component: PageNotFoundComponent}
 ];
 

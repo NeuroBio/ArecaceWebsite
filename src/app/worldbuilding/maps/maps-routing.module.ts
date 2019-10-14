@@ -9,7 +9,7 @@ import { GeneralmemberresolverService }       from '../../GlobalServices/general
 import { GeneralcollectionresolverService }   from '../../GlobalServices/generalcollectionresolver.service';
 
 const mapRoutes: Routes = [
-  {path: 'world/maps', component: MapsMainComponent,
+  {path: 'maps', component: MapsMainComponent,
     resolve: {GeneralcollectionresolverService},
     children: [
       {path: '', redirectTo: 'WorldMap', pathMatch: 'full'},

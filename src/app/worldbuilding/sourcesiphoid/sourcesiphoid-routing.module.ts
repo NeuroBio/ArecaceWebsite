@@ -11,7 +11,7 @@ import { GeneralcollectionresolverService }   from 'src/app/GlobalServices/gener
 import { GeneralmemberresolverService }       from 'src/app/GlobalServices/generalmemberresolver.service';
 
 const sourcesiphRoutes: Routes = [
-  {path: 'world/source', component: SourceSiphoidMainComponent,
+  {path: 'source', component: SourceSiphoidMainComponent,
     resolve: {GeneralcollectionresolverService},
     children:[
       {path: '', redirectTo: 'SourceandSiphoid', pathMatch: "full"},

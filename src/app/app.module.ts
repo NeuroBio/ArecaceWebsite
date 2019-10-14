@@ -11,15 +11,7 @@ import { environment }              from '../environments/environment';
 
 import { AppRoutingModule }         from './app-routing.module';
 
-import { AdministrationModule }     from './administration/administration.module';
-import { ComicBookModule }          from './comic-book/comicbook.module';
-import { CultureModule }            from './worldbuilding/culture/culture.module';
-import { ExtrasModule }             from './extras/extras.module';
-import { PlaygroundModule }         from './playground/playground.module';
-import { SitemapModule }            from './SimplePages/sitemap/sitemap.module';
-import { StoryModule }              from './story/story.module';
 import { UpdatefeedModule }         from './SharedComponentModules/UpdateFeed/updatefeed.module';
-import { WorldbuildingModule }      from './worldbuilding/worldbuilding.module';
 
 import { AppComponent }             from './app.component';
 import { AboutComponent }           from './SimplePages/about/about.component';
@@ -32,7 +24,7 @@ import { PageNotFoundComponent }    from './SimplePages/pagenotfound/pagenotfoun
 import { TravelorsGuideComponent }  from './SimplePages/travelorsguide/travelorsguide.component';
 import { TextProvider } from './GlobalServices/textprovider.service';
 import { AuthService } from './administration/security/Auth/auth.service';
-import { UserDashModule } from './UserDash/user-dash.module';
+import { HttpClientModule } from '@angular/common/http';
 
 export function TextFactory(provider: TextProvider) {
   return () => provider.load();
@@ -55,16 +47,8 @@ export function AuthFactory(provider: AuthService) {
     ],
   imports: [
     BrowserModule,
-    WorldbuildingModule,
-    ComicBookModule,
-    AdministrationModule,
-    StoryModule,
-    PlaygroundModule,
+    HttpClientModule,
     UpdatefeedModule,
-    CultureModule,
-    ExtrasModule,
-    SitemapModule,
-    UserDashModule,
 
     ReactiveFormsModule,
 

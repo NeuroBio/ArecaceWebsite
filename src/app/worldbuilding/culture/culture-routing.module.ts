@@ -9,7 +9,7 @@ import { GeneralcollectionresolverService } from 'src/app/GlobalServices/general
 import { GeneralmemberresolverService }     from 'src/app/GlobalServices/generalmemberresolver.service';
 
 const cultureRoutes: Routes = [
-  {path: 'world/culture', component: CulturemainComponent,
+  {path: 'culture', component: CulturemainComponent,
     resolve: {GeneralcollectionresolverService},
     children:[
       {path: '', redirectTo: 'Zodiac', pathMatch: 'full'},

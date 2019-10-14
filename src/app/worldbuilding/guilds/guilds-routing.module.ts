@@ -9,7 +9,7 @@ import { GeneralcollectionresolverService}  from 'src/app/GlobalServices/general
 import { GeneralmemberresolverService }     from 'src/app/GlobalServices/generalmemberresolver.service';
 
 const guildRoutes: Routes = [
-  {path: 'world/guilds', component: GuildsMainComponent,
+  {path: 'guilds', component: GuildsMainComponent,
   resolve: {GeneralcollectionresolverService},
   children: [
     {path: '', redirectTo: 'DIA', pathMatch: 'full'},

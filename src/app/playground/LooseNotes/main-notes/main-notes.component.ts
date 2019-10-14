@@ -20,7 +20,7 @@ export class MainNotesComponent implements OnInit {
   ngOnInit() {
     this.notes$ = this.generalcollectserv.returnMetaData().pipe(
       map((notes) => {
-        notes.sort((a,b) => a.TimeStampCreated < b.TimeStampCreated ? -1 : 1);
+        notes.sort((a,b) => a.TimeStampCreated < b.TimeStampCreated ? 1 : -1);
         return notes.map(note => [note.ShortTitle, note.ID]);
       })
     );

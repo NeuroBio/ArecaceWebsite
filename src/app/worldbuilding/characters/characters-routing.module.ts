@@ -11,7 +11,7 @@ import { CharactersBlowupmasterComponent } from './charactersblowupmaster/charac
 import { CBUMResolverService } from './charactersblowupmaster/cbumresolver.service';
 
 const characterRoutes: Routes = [
-  {path: 'world/characters', component: CharactersMainComponent,
+  {path: 'characters', component: CharactersMainComponent,
     resolve: { GeneralcollectionresolverService },
     children:[
       {path: '', component: HomeComponent },
