@@ -20,10 +20,17 @@ export class GeneralcollectionService {
 
 
   getMember(ID:string){
-    return this.returnMetaData().pipe(
-      map(members =>
-        members.find(member => member.ID === ID))
-    );
+    if(ID === 'Latest') {
+      return this.returnMetaData().pipe(
+        map(members =>
+          members.reduce((a, b) => a.TimeStampCreated > b.TimeStampCreated ? a : b))
+      );
+    } else {
+      return this.returnMetaData().pipe(
+        map(members =>
+          members.find(member => member.ID === ID))
+      );
+    }
   }
 
   // getReference(ID:string, Ref:string){

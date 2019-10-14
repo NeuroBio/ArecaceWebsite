@@ -27,7 +27,7 @@ export class ShowNewestComponent implements OnInit {
         members = members.filter(member => member.Allowed !== false);
 
         // order
-        members = members.sort((a,b) => a.TimeStampCreate > b.TimeStampCreate ? 1 :-1);
+        members = members.sort((a,b) => a.TimeStampCreated > b.TimeStampCreated ? 1 :-1);
         
         //cut to newest
         if(members.length > 10) {

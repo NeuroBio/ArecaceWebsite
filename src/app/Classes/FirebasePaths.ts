@@ -42,4 +42,5 @@ export class FirebasePaths {
     othersart = 'OthersArt';
     pixels = 'Pixels';
     SAs = 'SourceAffinities';
+    notes = "LooseNotes"
 }

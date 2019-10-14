@@ -119,7 +119,7 @@ export class CRUDcontrollerService {
         if("StoryLink" in meta){
           meta.StoryLink = link;
         }
-        meta.TimeStampCreate = this.createTimestamp();
+        meta.TimeStampCreated = this.createTimestamp();
         console.log("meta");
         return this.crud.uploadItem(meta, this.firePaths.value[this.itemType.value]);
       }).then(() => {

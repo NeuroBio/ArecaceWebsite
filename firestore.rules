@@ -60,6 +60,10 @@ service cloud.firestore {
     match /Inanity/{allDocuments} {
     		allow read;
     }
+
+    match /LooseNotes/{allDocuments} {
+    		allow read;
+    }
     
     match /Maps/{allDocuments} {
     		allow read;
