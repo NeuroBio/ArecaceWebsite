@@ -29,7 +29,8 @@ export class PageComponent implements OnInit {
     if(this.init){
       this.init = false;
     }else{
-      this.main.nativeElement.scrollIntoView();
+      window.scroll(0, 120);
+      //this.main.nativeElement.scrollIntoView();
     }
   }
 }

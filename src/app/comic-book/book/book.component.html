@@ -1,5 +1,5 @@
-
 <div id="splatter">
+
 <!--Comic Header-->
 <div id="topblock" role="navigation">
     <div class="container" id="chapselect">
@@ -32,9 +32,6 @@
             </select>
         </div>
 
-
-        <!--loading spinner-->
-        <div *ngIf="loading" class="loading"></div><br/>
         <div style="clear:both"></div>
 
 
@@ -60,7 +57,8 @@
 
 <hr>
 
-
+ <!--Loading spinner-->
+<div *ngIf="loading" class="loading"></div>
 
 
 <!--Comic Body-->
@@ -75,9 +73,6 @@
 
     <!--Comic Footer-->
     <div id="footbox" role="navigation">
-
-        <!--loading spinner 2-->
-        <span id="footspin" *ngIf="loading" class="loading"></span>
 
         <!--buttons-->
         <span>
@@ -97,3 +92,4 @@
 </div>
 
 </div>
+
