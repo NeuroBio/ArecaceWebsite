@@ -17,7 +17,7 @@ const playgroundRoutes: Routes = [
   {path: 'othersart', component: OthersArtComponent,
   resolve: {GeneralcollectionresolverService},
   children: [
-    {path: 'notfound', redirectTo: 'othersart'},
+    {path: 'notfound', redirectTo: ''},
     {path: ':ExtraID', component: BlowupmasterComponent,
      resolve: {links: GeneralmemberresolverService}},
   ]}

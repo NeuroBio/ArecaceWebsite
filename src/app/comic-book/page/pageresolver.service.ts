@@ -14,7 +14,7 @@ import { ComicService }                     from '../comic.service';
 
 export class PageResolverService implements Resolve<string>{
 
-  constructor(private comicserv:ComicService,
+  constructor(private comicserv: ComicService,
               private router: Router) { }
   
   resolve(route: ActivatedRouteSnapshot):Observable<string | never>{

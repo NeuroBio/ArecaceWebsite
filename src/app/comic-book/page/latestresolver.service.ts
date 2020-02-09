@@ -15,8 +15,6 @@ export class LatestResolverService implements Resolve<string>{
   constructor(private comicserv: ComicService) { }
   
   resolve(): Observable<string>{
-    return this.comicserv.getLatest().pipe(
-      take(1)
-    )
+    return this.comicserv.getLatest().pipe( take(1) );
   }
 }
