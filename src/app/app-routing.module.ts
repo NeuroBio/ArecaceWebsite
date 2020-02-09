@@ -9,7 +9,6 @@ import { FAQComponent }             from './SimplePages/faq/faq.component';
 import { HomeComponent }            from './SimplePages/home/home.component';
 import { PageNotFoundComponent }    from './SimplePages/pagenotfound/pagenotfound.component';
 import { TravelorsGuideComponent }  from './SimplePages/travelorsguide/travelorsguide.component';
-// import { GeneralTextResolverService } from './GlobalServices/general-text-resolver.service';
 
 const routes: Routes = [
   //simple pages

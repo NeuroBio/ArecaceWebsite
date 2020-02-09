@@ -17,16 +17,16 @@ export class AppComponent implements AfterViewInit{
   linkList: string[] = ['home', 'comic', 'story',
                         'world', 'extras', 'dash']
 
-  constructor(private global: GlobalVarsService){ }
+  constructor(private global: GlobalVarsService) { }
 
-  ngAfterViewInit(){
+  ngAfterViewInit() {
     if((this.flag.nativeElement.offsetWidth == 1 && this.flag.nativeElement.readyState == 'complete') ||
-    (this.flag.nativeElement.offsetWidth == 1 && this.flag.nativeElement.readyState == undefined)){
+    (this.flag.nativeElement.offsetWidth == 1 && this.flag.nativeElement.readyState == undefined)) {
       this.global.ImagesLoadable = true;
-    }else{
-      if(this.mobilecheck){
+    } else {
+      if(this.mobilecheck) {
         this.global.ImagesLoadable = false;
-      }else{
+      } else {
         this.global.ImagesLoadable = true;
       }
     }

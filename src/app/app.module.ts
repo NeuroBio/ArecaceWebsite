@@ -45,6 +45,7 @@ export function AuthFactory(provider: AuthService) {
     BadserviceComponent,
     ContactComponent,
     ],
+
   imports: [
     BrowserModule,
     HttpClientModule,
@@ -61,6 +62,7 @@ export function AuthFactory(provider: AuthService) {
     AppRoutingModule,//this should always be LAST!!!
 
   ],
+
   providers: [AuthService,
               TextProvider,
               {provide: APP_INITIALIZER, useFactory: TextFactory,
@@ -68,7 +70,8 @@ export function AuthFactory(provider: AuthService) {
               {provide: APP_INITIALIZER, useFactory: AuthFactory,
                 deps: [AuthService], multi: true}
             ],
-  bootstrap: [AppComponent, ]
+
+  bootstrap: [AppComponent]
 })
 
 export class AppModule { }

@@ -128,3 +128,8 @@ div#Back {
     left: 7px;
     background-color: rgba(0,0,0,.3);
 }
+
+div#loading {
+    margin: auto;
+    /* align-self: center; */
+}
