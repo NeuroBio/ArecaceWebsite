@@ -1,5 +1,4 @@
 <nav id="biggerouter">
-
     <div #back id="biggerback" [routerLink]="['../']"></div>
    
     <!-- Left and Right arrow "buttons" -->
@@ -13,7 +12,7 @@
     <div id="content" (window:resize)="onResize()">
       <div class="imgcaption" id="aligner"> 
         
-          <div *ngIf="loading" id="loading"></div>
+          <div *ngIf="loading" class="loading"></div>
             <img #bigger id="bigger"
             [hidden]="loading"
             [src]="bigUrl"
@@ -23,10 +22,17 @@
         <div *ngIf="activeMember.Description" class="textblock"
         [style.height.px]="textHeight"
         [hidden]="loading">
-          <h3>{{ activeMember.Name }}</h3>
-          {{ activeMember.Date }}<br><br>
-          {{ activeMember.Description }}
-          <br><br>
+        <!--Show/hide info-->
+          <img [hidden]="loading"
+          id="downUp" src="assets/svgs/back.svg" alt=""
+          [style.transform]="'rotate(' + rotation + 'deg)'"
+          (click)="showHideDescription()">
+          <div id="textblockinner" [hidden]="loading" [style.display]="this.showDescription ? 'block' : 'none'">
+            <h3 [hidden]="loading">{{ activeMember.Name }}</h3><br>
+            {{ activeMember.Date }}<br><br>
+            {{ activeMember.Description }}
+            <br><br>  
+          </div>
         </div>
 
       </div>

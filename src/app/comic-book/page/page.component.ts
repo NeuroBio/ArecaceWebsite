@@ -13,7 +13,7 @@ export class PageComponent implements OnInit {
   
   pageUrl: string;
   init: boolean;
-  @ViewChild('main') main:ElementRef;
+  @ViewChild('main', { static: true }) main:ElementRef;
   
   constructor(private route: ActivatedRoute,
               private comicserv: ComicService) { }
@@ -29,7 +29,8 @@ export class PageComponent implements OnInit {
     if(this.init){
       this.init = false;
     }else{
-      this.main.nativeElement.scrollIntoView();
+      window.scroll(0, 120);
+      //this.main.nativeElement.scrollIntoView();
     }
   }
 }

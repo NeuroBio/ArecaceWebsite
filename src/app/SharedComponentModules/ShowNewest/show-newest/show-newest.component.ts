@@ -14,9 +14,9 @@ export class ShowNewestComponent implements OnInit {
   @Input() contentType: string;
   @Input() collectionName: string;
   @Input() contentLink: string;
-  @ViewChild('items') items: ElementRef;
-  @ViewChild('right') right: ElementRef;
-  @ViewChild('left') left: ElementRef;
+  @ViewChild('items', { static: false }) items: ElementRef;
+  @ViewChild('right', { static: true }) right: ElementRef;
+  @ViewChild('left', { static: true }) left: ElementRef;
 
   constructor(private firebaseserv: FireBaseService) { }
 

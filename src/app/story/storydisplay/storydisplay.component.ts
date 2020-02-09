@@ -12,9 +12,9 @@ import { StoryService }                             from '../story.service';
 })
 export class StorydisplayComponent implements OnInit {
 
-  @ViewChild('tool') tool: ElementRef;
-  @ViewChild('frame') frame: ElementRef;
-  @ViewChild('main') main: ElementRef;
+  @ViewChild('tool', { static: true }) tool: ElementRef;
+  @ViewChild('frame', { static: true }) frame: ElementRef;
+  @ViewChild('main', { static: true }) main: ElementRef;
   leftspace: number;
   
   story: any;

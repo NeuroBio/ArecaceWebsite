@@ -14,7 +14,7 @@ export class DropDownComponent implements OnInit {
                                     [ ['subtester 1', 'subtester1'] ] ];
   @Input() current: string = "tester2";
   revealArray: boolean[] = [];
-  @ViewChild('linkListHolder') linkListHolder: ElementRef;
+  @ViewChild('linkListHolder', { static: true }) linkListHolder: ElementRef;
   height = 0;
   rotationArray: number[] = [];
   

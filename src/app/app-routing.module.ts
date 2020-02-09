@@ -9,7 +9,6 @@ import { FAQComponent }             from './SimplePages/faq/faq.component';
 import { HomeComponent }            from './SimplePages/home/home.component';
 import { PageNotFoundComponent }    from './SimplePages/pagenotfound/pagenotfound.component';
 import { TravelorsGuideComponent }  from './SimplePages/travelorsguide/travelorsguide.component';
-// import { GeneralTextResolverService } from './GlobalServices/general-text-resolver.service';
 
 const routes: Routes = [
   //simple pages
@@ -24,21 +23,21 @@ const routes: Routes = [
 
   //modules
   {path: 'comic',
-    loadChildren: './comic-book/comicbook.module#ComicBookModule'},
+    loadChildren: () => import('./comic-book/comicbook.module').then(m => m.ComicBookModule)},
   {path: 'dash',
-    loadChildren: './UserDash/user-dash.module#UserDashModule'},
+    loadChildren: () => import('./UserDash/user-dash.module').then(m => m.UserDashModule)},
   {path: 'extras',
-    loadChildren: './extras/extras.module#ExtrasModule'},
+    loadChildren: () => import('./extras/extras.module').then(m => m.ExtrasModule)},
   {path: 'kArAAdministrativeUpload',
-    loadChildren: './administration/administration.module#AdministrationModule'},
+    loadChildren: () => import('./administration/administration.module').then(m => m.AdministrationModule)},
   {path: 'playground',
-    loadChildren: './playground/playground.module#PlaygroundModule'},
+    loadChildren: () => import('./playground/playground.module').then(m => m.PlaygroundModule)},
   {path: 'story',
-    loadChildren: './story/story.module#StoryModule'},
+    loadChildren: () => import('./story/story.module').then(m => m.StoryModule)},
   {path: 'sitemap',
-    loadChildren: './SimplePages/sitemap/sitemap.module#SitemapModule'},
+    loadChildren: () => import('./SimplePages/sitemap/sitemap.module').then(m => m.SitemapModule)},
   {path: 'world',
-    loadChildren: './worldbuilding/worldbuilding.module#WorldbuildingModule'},
+    loadChildren: () => import('./worldbuilding/worldbuilding.module').then(m => m.WorldbuildingModule)},
   
   //final catch
   {path: '**', component: PageNotFoundComponent}

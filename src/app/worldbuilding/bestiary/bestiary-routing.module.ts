@@ -11,7 +11,7 @@ const bestiaryRoutes: Routes = [
   {path: 'bestiary', component: BestiaryComponent,
     resolve: {GeneralcollectionresolverService},
     children:[
-      {path: 'notfound', redirectTo: 'bestiary'},
+      {path: 'notfound', redirectTo: ''},
       {path: ':BeastID', component: BlowupmasterComponent,
       resolve: {links: GeneralmemberresolverService}}
     ]

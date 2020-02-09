@@ -9,7 +9,7 @@ import { SurveyService } from '../survey.service';
 export class SurveyStatsComponent implements OnInit, AfterContentChecked {
 
   Stats: any = {};
-  @ViewChild('holder') Holder: ElementRef;
+  @ViewChild('holder', { static: true }) Holder: ElementRef;
   width = 500;
   height: number;
   

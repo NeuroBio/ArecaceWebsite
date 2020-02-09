@@ -24,8 +24,8 @@ export class CharacterFormComponent implements OnInit, OnDestroy{
   DropDowns = new UploadCharacterDrops;
   Form: FormGroup;
 
-  @ViewChild('bioPicThumb') biopicThumbUploader: ElementRef;
-  @ViewChild('bioPicFull') biopicFullUploader: ElementRef;
+  @ViewChild('bioPicThumb', { static: true }) biopicThumbUploader: ElementRef;
+  @ViewChild('bioPicFull', { static: true }) biopicFullUploader: ElementRef;
   biopicThumbFile: any;
   biopicFullFile: any;
   fullFiles: any[];

@@ -28,7 +28,7 @@ export class ComicService {
     return this.ChapterData;
   }
 
-  getChap(chapID:number): Observable<ChapterMetaData>{
+  getChap(chapID: number): Observable<ChapterMetaData>{
     return this.getMetaData().pipe(
       map(chaps =>
         chaps.find(chaps =>
@@ -36,10 +36,16 @@ export class ComicService {
     );
   }
 
-  getPage(fullID:string): Observable<string>{
+  getPage(fullID: string): Observable<string>{
     const ids = fullID.split("-")
     return this.getChap(+ids[0]).pipe(
-      map(chap => chap.Links[+ids[1]-1])
+      map(chap => {
+        if(chap) {
+          return chap.Links[+ids[1]-1];
+        } else {
+          return;
+        }
+      })
     );
   }
 

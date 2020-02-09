@@ -1,6 +1,7 @@
 import { Component, OnInit }                from '@angular/core';
 import { ActivatedRoute }                   from '@angular/router';
 import { GeneralcollectionService }         from 'src/app/GlobalServices/generalcollection.service';
+import { GetRouteSegmentsService } from 'src/app/GlobalServices/getroutesegments.service';
 
 @Component({
   selector: 'app-blowupmaster',
@@ -13,10 +14,11 @@ export class BlowupmasterComponent implements OnInit {
   gridPath: string;
 
   constructor(private route: ActivatedRoute,
-              private generalcollectserv: GeneralcollectionService) { }
+              private generalcollectserv: GeneralcollectionService,
+              private getrouteserv: GetRouteSegmentsService) { }
 
   ngOnInit() {
-    this.gridPath = this.route.parent.snapshot.url.join('/');
+    this.gridPath = this.getrouteserv.fetch(this.route.snapshot.pathFromRoot);
     this.generalcollectserv.returnMetaData().subscribe(collect => 
       this.linksList = collect).unsubscribe();
 

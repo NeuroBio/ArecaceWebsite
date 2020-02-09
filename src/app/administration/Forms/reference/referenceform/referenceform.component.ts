@@ -16,7 +16,7 @@ import { Categories, Paths }              from '../../../../Classes/categories'
 export class ReferenceFormComponent implements OnInit, OnDestroy {
   
   Form: FormGroup;
-  @ViewChild('image') imageUploader: ElementRef;
+  @ViewChild('image', { static: true }) imageUploader: ElementRef;
   imageFile: any;
   stream1: Subscription;
   stream2: Subscription;

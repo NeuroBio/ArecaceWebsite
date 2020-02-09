@@ -16,7 +16,7 @@ import { UpdateFormComponent }      from './Forms/update/update-form/update-form
 import { ExtrasFormComponent }      from './Forms/extras/extrasform/extrasform.component';
 import { AdminDutiesComponent }     from './DashBoard/adminDuties/adminDuties.component';
 import { MessageComponent }         from './DashBoard/message/message.component';
-import { PagesComponent } from './DashBoard/pages/pages.component';
+import { PagesComponent }           from './DashBoard/pages/pages.component';
 
 import { MessageresolverService } from './DashBoard/message/messageresolver.service';
 import { WebsiteTextComponent } from './Forms/website-text/website-text.component';

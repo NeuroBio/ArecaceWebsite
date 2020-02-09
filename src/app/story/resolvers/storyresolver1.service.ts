@@ -21,7 +21,8 @@ export class StoryResolver1Service implements Resolve<any>{
 
   //see the story service for notes
   resolve(route: ActivatedRouteSnapshot): Observable<StoryMetaData[] | never>{
-    const type = route.paramMap.get('StoryType');
+    let type = route.paramMap.get('StoryType');
+    this.catchErrors(type);
     return this.firebaseserv.returnCollect(type).pipe(
         take(1),
         mergeMap(allStories => {
@@ -36,4 +37,14 @@ export class StoryResolver1Service implements Resolve<any>{
     );
   }
   
+  catchErrors(type: string) {
+    if(type === 'Script') {
+      this.router.navigate(['/story/Scripts']);
+      return EMPTY;
+    }
+    if(type !== 'Scripts' && type !== 'Narratives') {
+      this.router.navigate(['/story/Narratives']);
+      return EMPTY;
+    }
+  }
 }

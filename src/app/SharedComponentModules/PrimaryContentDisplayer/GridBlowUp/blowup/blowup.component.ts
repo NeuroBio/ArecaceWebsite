@@ -20,16 +20,16 @@ export class BlowUpComponent implements OnInit {
 
   bigUrl: string;
   activeMember: any;
-  
   loading: boolean;
+  showDescription = true;
+  rotation = 0;
 
-  @ViewChild('left') left: ElementRef;
-  @ViewChild('right') right: ElementRef;
-  @ViewChild('bigger') bigger: ElementRef;
+  @ViewChild('left', { static: true }) left: ElementRef;
+  @ViewChild('right', { static: true }) right: ElementRef;
+  @ViewChild('bigger', { static: true }) bigger: ElementRef;
   textHeight: number;
 
-  @ViewChild('back') back: ElementRef;
-  lewl: any;
+  @ViewChild('back', { static: true }) back: ElementRef;
 
   constructor(private router: Router,
               private location: Location,
@@ -39,21 +39,25 @@ export class BlowUpComponent implements OnInit {
     this.activeMember = this.linksList[this.index];
     this.bigUrl = this.activeMember.Links[1];
     this.loading = this.global.ImagesLoadable;
-      setTimeout(() => { this.onResize() }, 10);
-    this.lewl = [this.back.nativeElement.offsetHeight, this.back.nativeElement.offsetWidth,
-      window.innerHeight,window.innerWidth];
+    setTimeout(() => { this.onResize() }, 10);
   }
 
   onResize(){
     this.loading = false;
-    setTimeout(() =>{
+    setTimeout(() => {
       this.textHeight = this.bigger.nativeElement.offsetHeight - 30;
       if(this.textHeight < 400){
         this.textHeight = 400;
       }
     }, 10)
     
-  }      
+  }
+
+  showHideDescription() {
+    this.showDescription = !this.showDescription;
+    this.showDescription ? this.rotation = 0 : this.rotation = 270;
+    this.onResize();
+  }
 
   onArrow(incre:number){
     this.loading = this.global.ImagesLoadable;

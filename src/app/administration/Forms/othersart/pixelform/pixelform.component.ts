@@ -12,7 +12,7 @@ import { OthersArt } from 'src/app/Classes/othersart';
 export class PixelformComponent implements OnInit, OnDestroy {
 
   Form: FormGroup;
-  @ViewChild('File') fileUploader: ElementRef;
+  @ViewChild('File', { static: true }) fileUploader: ElementRef;
   file: any;
 
   stream1: Subscription;
