@@ -1,0 +1,104 @@
+<form [formGroup]="mainForm">
+  <h2 class="formstyle"> Survey Form:</h2>
+  <hr>
+
+  <p>
+      Survey ID: <input type="text" formControlName="ID">
+  </p>
+
+  <p>
+      Survey Name: <input type="text" formControlName="Name">
+  </p>
+
+  <!-- Outcomes -->
+  <form [formGroup]="outcomeForm" id="outcome">
+      <h3>Add/Edit Outcomes:</h3>
+    <p>
+        Current Outcomes: <button *ngFor="let outcome of outcomes.controls; let i = index"
+        (click)="assignOutcomeForm(i)">
+          {{ outcome.value.Name }}</button>
+    </p>
+    <p>
+        Name: <input type="text" class="medium" formControlName="Name">
+    </p>
+    <p>
+        Text:<br>
+        <textarea rows=3 cols=40 formControlName="Text"></textarea>    
+    </p>
+    <p>
+        RouterLink: <input type="text" class="medium" formControlName="Link">
+    </p>
+    <p>
+        RounterLinkName: <input type="text" class="medium" formControlName="LinkName">
+    </p>
+    <p>
+      <button (click)="addOutcome(true)" [disabled]="!outcomeForm.valid">Submit</button>
+      <button (click)="addOutcome(false)">Delete</button>
+      <button (click)="onResetOutcomes()">Reset</button>  
+    </p>
+  </form>
+
+
+
+
+  <h3>Add/Edit Questions:</h3>
+  <p>
+      <button (click)="addQuestion(true)">Add Question</button>
+      <button (click)="addQuestion(false)">Remove Question</button>    
+  </p>
+  <hr>
+  <br>
+
+
+
+
+  <!-- Questions interwoven with Results -->
+  <div formArrayName="Questions">
+
+    <div *ngFor="let question of questions.controls; let i = index"
+    [formGroupName]="i" class="qrHolder">
+
+    <div id="questions">
+      {{ 'Question ' + (i+1) + ': ' }}<br>
+        <textarea rows=3 cols=40 formControlName="Question"></textarea>
+
+        <button (click)="addAnswer(true, i)">+</button>
+        <button (click)="addAnswer(False, i)">-</button>
+        
+        <!-- Answers -->
+        <div formArrayName="Answers" class="tab">
+            <div *ngFor="let answer of question.get('Answers').controls; let j = index"
+            [formGroupName]="j">
+                {{ 'Option ' + (j+1) + ':' }}<br>
+                <textarea rows=3 cols=40 formControlName="Answer"></textarea>
+            </div>
+        </div>
+      </div>
+    
+
+    <!-- Results -->
+    <form [formGroup]="resultsForm" id="results">
+        <div formArrayName="Results">
+          <div [formGroupName]="i">
+              <div formArrayName="Results">
+
+                <div *ngFor="let outcome of results.controls[i].get('Results').controls; let k = index"
+                [formGroupName]="k">
+                {{ 'Option ' + (k+1) + ':' }}
+
+                <div *ngFor="let outcome of outcomes.controls" class="tabright">
+                    {{ outcome.value.Name + ':' }}
+                    <input [formControlName]="outcome.value.Name" type="text"  class="short">
+                </div>
+                <br>
+                
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <app-formButtons></app-formButtons>
+</form>

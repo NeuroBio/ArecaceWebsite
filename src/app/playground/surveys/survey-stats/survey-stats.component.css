@@ -1,0 +1,33 @@
+div#outer {
+    position: relative;
+    margin: 10px;
+    width: 500px;
+    max-width: calc(100vw - 70px);
+    overflow: hidden;
+    border: 1px solid white;
+    background-color: rgb(23, 23, 23);
+}
+
+
+text {
+    font-family: 'Courier New', Courier, monospace;
+    fill: white;
+}
+
+div#title {
+    background-color: rgb(23, 23, 23);
+    width: 100%;
+    font-size: 30px;
+    font-weight: bold;
+    color: white;
+    font-family: 'Courier New', Courier, monospace;
+    padding: 7px;
+    white-space: wrap;
+}
+
+div#bottom {
+    background-color: rgb(23, 23, 23); 
+    font-family: 'Courier New', Courier, monospace;
+    color: white;
+    padding: 7px;
+}

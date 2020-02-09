@@ -2,14 +2,14 @@ import { NgModule }                           from '@angular/core';
 import { Routes, RouterModule }               from '@angular/router';
 
 import { MapsMainComponent }                  from './mapsmain/mapsmain.component';
-import { DetailsDisplayComponent }            from 'src/app/SharedComponents/details-display/details-display.component';
-import { NotFoundComponent }                  from 'src/app/SharedComponents/notfound/notfound.component'
+import { DetailsDisplayComponent }            from 'src/app/SharedComponentModules/PrimaryContentDisplayer/ContentDisplay/details-display/details-display.component';
+import { NotFoundComponent }                  from 'src/app/SharedComponentModules/PrimaryContentDisplayer/ContentDisplay/notfound/notfound.component'
 
 import { GeneralmemberresolverService }       from '../../GlobalServices/generalmemberresolver.service';
 import { GeneralcollectionresolverService }   from '../../GlobalServices/generalcollectionresolver.service';
 
 const mapRoutes: Routes = [
-  {path: 'world/maps', component: MapsMainComponent,
+  {path: 'maps', component: MapsMainComponent,
     resolve: {GeneralcollectionresolverService},
     children: [
       {path: '', redirectTo: 'WorldMap', pathMatch: 'full'},

@@ -1,0 +1,25 @@
+
+<div id="outer">
+  <h3>Newest Posts in {{ contentType | titlecase }}</h3>
+  
+  <div id="pickItems">
+      <img #left id="left" src="assets/svgs/back.svg"
+        alt="Prev" (click)="scroll(false)" tabindex="0">
+
+      <div #items role="nav" id="inner" *ngIf="display$ | async as display">
+        
+        <a class="strokeme displayItem" *ngFor="let member of display"
+          [style.background-image]="'url('+member.Image+')'"
+          [routerLink]="member.Link">
+          {{ member.Name }}
+        </a>
+      </div>
+      <img #right id="right" src="assets/svgs/back.svg"
+        alt="Next" (click)="scroll(true)" tabindex="0">
+  </div>
+
+
+  <a id="seeAll" [routerLink]="contentLink">
+    See all {{ contentType | titlecase }}
+  </a>
+</div>

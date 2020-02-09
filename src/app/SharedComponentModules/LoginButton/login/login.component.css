@@ -1,0 +1,27 @@
+div#googleBtn{
+    cursor: pointer;
+    height:60px;
+    width:240px;
+    background-size: contain;
+    background-image: url("src/assets/svgs/g-normal.png");
+}
+
+div#googleBtn:hover{
+    background-size: contain;
+    background-image: url("src/assets/svgs/g-focus.png");
+}
+
+div#googleBtn:focus{
+    background-size: contain;
+    background-image: url("src/assets/svgs/g-focus.png");
+}
+
+div#googleBtn:active{
+    background-size: contain;
+    background-image: url("src/assets/svgs/g-press.png");
+}
+
+div#googleBtn:disabled{
+    background-size: contain;
+    background-image: url("src/assets/svgs/g-disabled.png");
+}

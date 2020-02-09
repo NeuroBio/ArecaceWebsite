@@ -10,8 +10,8 @@ import { StoryResolver3Service } from './resolvers/storyresolver3.service';
 
 
 const storyRoutes: Routes = [
-  {path: 'story', redirectTo: 'story/Scripts', pathMatch:"full"},
-  {path: 'story/:StoryType',
+  {path: '', redirectTo: 'Scripts', pathMatch:"full"},
+  {path: ':StoryType',
   resolve: {StoryResolver1Service},
   children:[
     {path: '', redirectTo: "First", pathMatch:'full'},

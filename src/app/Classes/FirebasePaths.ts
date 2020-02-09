@@ -37,4 +37,10 @@ export class FirebasePaths {
     narratives = 'Narratives';
     source = 'SourceInfo';
     update = 'Inanity';
+    surveys = 'Surveys';
+    surveystats = 'SurveyStats';
+    othersart = 'OthersArt';
+    pixels = 'Pixels';
+    SAs = 'SourceAffinities';
+    notes = "LooseNotes"
 }

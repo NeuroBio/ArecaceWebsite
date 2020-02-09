@@ -1,12 +1,7 @@
 <form [formGroup]="Form">
-    <h2 class="formstyle">Story Upload Form:</h2>
+    <h2 class="formstyle">{{type | titlecase}} Form:</h2>
     <hr>
-
-        <p>Type: <select formControlName="Type">
-            <option value="Narrative">Narrative</option>
-            <option value="Script">Script</option>
-        </select></p>
-        
+       
     <p>Series: <input type="text" formControlName="Series"></p>
         
     <p>Title: <input type="text" formControlName="Title"></p>

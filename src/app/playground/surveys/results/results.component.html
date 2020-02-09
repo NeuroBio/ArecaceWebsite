@@ -1,0 +1,40 @@
+<div class="outer">
+  <div id="match">{{ results.Match }}% match</div>
+
+  <div id="inner">
+    <h3>{{ results.Name }} Results:</h3>
+    <hr>
+  
+    <p [innerHTML]="results.Outcome.Text"></p>
+  
+    <div class="navver" *ngIf="results.Outcome.Link">
+        <a class="navver" [routerLink]="results.Outcome.Link">
+            {{ results.Outcome.LinkName }}</a>
+    </div>
+  </div>
+
+</div>
+
+<button (click)="setShowAll()">All Scores</button>
+<button (click)="setShowStats()">Stats</button>
+<button (click)="onReset()">Reset Survey</button>
+
+<div *ngIf="showAll === true" class="outer">
+
+  <div class="scores" *ngFor="let score of results.AllScores; let i = index">
+    <h3 class="scoreQualifier" *ngIf="i === 0 && acceptable === true">Acceptable Scores: </h3>
+    <h3 class="scoreQualifier" *ngIf="i === tooLow">Unacceptable Scores: </h3>
+    <p>
+      {{ score.Name }}: {{ score.Score }}% Match
+      <button (click)="setShowSpecific(i)">Read Result</button>    
+    </p>
+    <p *ngIf="showSpecific[i] === true"
+      [innerHTML]="score.Text">
+    </p>
+  </div>
+
+</div>
+
+<div *ngIf="showStats === true">
+    <app-survey-stats></app-survey-stats>
+</div>

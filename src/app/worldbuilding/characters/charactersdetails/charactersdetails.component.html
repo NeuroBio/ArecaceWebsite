@@ -3,7 +3,8 @@
   <div id="Bio">
       <div *ngIf="loading===true" class="loading"></div>
       <img id="BioImage" [hidden]="loading" [src]="char.Links[0]" (load)="loading=false"
-      [alt]="char.FirstName+' '+char.LastName">    
+      [alt]="char.FirstName+' '+char.LastName">
+      <a [hidden]="loading" [href]="char.Links[1]" target="_blank">download larger version</a>
   </div>
 
   <br>
@@ -14,7 +15,7 @@
           <p class="textblock"><b>Occupation: </b> {{ char.Occupation }}</p>
           <p class="textblock"><b>Nationality: </b>{{ char.Country }}, {{ char.Territory }} Territory</p>
           <p class="textblock"><b>Ethnicity: </b>{{ char.Ethnicity1 }}/{{ char.Ethnicity2 }}</p>
-          <p class="textblock"><b>Age: </b> {{ char.Age }}, born {{ char.Year }}{{ char.Era }} {{ char.Qt }} {{ char.Day }}, ({{ char.Zodiac }})</p>
+          <p class="textblock"><b>Age: </b> {{ char.Age }}, born {{ char.Year }}{{ char.Era }}, {{ char.Qt }} {{ char.Day }}, ({{ char.Zodiac }})</p>
           <p class="textblock"><b>Height: </b>{{ char.Cm }} cm</p>
           <b>Distinguishing Marks: </b>{{ char.DistinguishingMarks }}<br>
       </div>
@@ -67,7 +68,7 @@
       <div style="clear: both"></div>
       <br>
 
-      <div class="textblock" *ngIf="char.Links[1]">
+      <div class="textblock" *ngIf="char.Links[2]">
         <b>Other References:</b><br>
         <app-grid
         [collect]="char.References"

@@ -2,6 +2,7 @@ import { Injectable }                         from '@angular/core';
 import { HttpClient }                         from '@angular/common/http';
 import { Observable }                         from 'rxjs';
 import { FireBaseService }                    from 'src/app/GlobalServices/firebase.service';
+import { AuthService } from '../security/Auth/auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,8 @@ import { FireBaseService }                    from 'src/app/GlobalServices/fireb
 export class CRUD {
 
   constructor(private firebaseserv:FireBaseService,
-              private httpclient:HttpClient) { }
+              private httpclient:HttpClient,
+              private auth: AuthService) { }
 
   uploadImages(paths: string[], images: any[]) {
     if(images[0]){

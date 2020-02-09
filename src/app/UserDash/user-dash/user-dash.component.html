@@ -1,0 +1,49 @@
+<div *ngIf="auth.user | async; then authenticated else guest"></div>
+
+
+<!-- User NOT logged in -->
+<ng-template #guest>
+    <div [innerHTML]="loggedoutText"></div>
+    <app-login></app-login>
+</ng-template>
+
+
+<!-- User logged in -->
+<ng-template #authenticated>
+    <div id="outer" *ngIf="auth.user | async as user">
+        <button id="logout" (click)="auth.logout()">Logout</button>
+        <h3>Welcome Back, {{ user.userName }}, ID#{{ user.ID }}</h3>
+        <div [innerHTML]="loggedinText"></div>
+        <hr>
+
+        <div id="UserComponents">
+            <app-pick-up
+            [user]="user"
+            ></app-pick-up>
+    
+            <app-fan-characters
+            [data]="data.Characters"
+            title="Your Fan Characters"
+            ></app-fan-characters>
+    
+            <app-fan-characters
+            [data]="data.SAs"
+            title="Your Source Affinity Data"
+            ></app-fan-characters>
+    
+            <app-fan-characters
+            [data]="data.Surveys"
+            title="Your Survey Data"
+            ></app-fan-characters>
+        </div>        
+        <hr>
+
+        <button (click)="setShowAccountInfo()">Show Account Info</button>
+
+        <app-user-info
+        [user]="user"
+        *ngIf="showAccountInfo === true"
+        ></app-user-info>
+
+      </div>
+  </ng-template>

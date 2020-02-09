@@ -1,28 +1,127 @@
 service cloud.firestore {
 
   match /databases/{database}/documents {
-    match /{document=**} {
-      allow read;
-      allow write: if isAdmin();
-  	}
-    
-    
+  
+  	match /{document=**} {
+        allow read, write: if isAdmin();
+    }
+     
+    match /SurveyStats/{allDocuments} {
+        allow read;
+        allow write: if isUser();
+        allow create: if isAdmin();
+    }
   
     match /Contact/{allDocuments} {
         allow read, write: if isAdmin();
-        allow create;
-    }
-    
-    match /ContactSaved/{allDocuments} {
-        allow read, write: if isAdmin();
+        allow create: if isUser();
     }
 
+    match /Users/{userID} {
+        allow read, write: if isOwner(userID);
+    }
+    
+    match /NumUsers/{allDocuments} {
+    		allow read, write: if isUser();
+    }
+
+
+
+
+		
+    match /Arc1Data/{allDocuments} {
+    		allow read;
+    }
+    
+    match /Bestiary/{allDocuments} {
+    		allow read;
+    }
+    
+    match /CharacterBios/{allDocuments} {
+    		allow read;
+    }
+    
+    match /CloudData/{allDocuments} {
+    		allow read;
+    }
+    
+    match /ConnectionTest/{allDocuments} {
+    		allow read;
+    }
+    
+    match /CultureInfo/{allDocuments} {
+    		allow read;
+    }
+    
+    match /Guilds/{allDocuments} {
+    		allow read;
+    }
+    
+    match /Inanity/{allDocuments} {
+    		allow read;
+    }
+
+    match /LooseNotes/{allDocuments} {
+    		allow read;
+    }
+    
+    match /Maps/{allDocuments} {
+    		allow read;
+    }
+    
+    match /MiscArt/{allDocuments} {
+    		allow read;
+    }
+    
+    match /Narratives/{allDocuments} {
+    		allow read;
+    }
+
+    match /OthersArt/{allDocuments} {
+    		allow read;
+    }
+
+    match /Pixels/{allDocuments} {
+    		allow read;
+    }
+
+    match /Scripts/{allDocuments} {
+    		allow read;
+    }
+    
+    match /SourceAffinities/{allDocuments} {
+    		allow read;
+    }
+    
+    match /SourceInfo/{allDocuments} {
+    		allow read;
+    }
+    
+    match /Surveys/{allDocuments} {
+    		allow read;
+    }
+    
+    match /WebsiteText/{allDocuments} {
+    		allow read;
+    }
+
+		
+    
+    
+    
+    
+    
+    
     function isAdmin() {
-        return get(/databases/$(database)/documents/Users/$(request.auth.uid)).data.roles[1] == true;
+        return get(/databases/$(database)/documents/Users/$(request.auth.uid)).data.Admin == true;
       }
 
     function isUser() {
         return request.auth != null;
+    }
+
+    function isOwner(userID) {
+        return request.auth.uid == userID;
     }
   }
   

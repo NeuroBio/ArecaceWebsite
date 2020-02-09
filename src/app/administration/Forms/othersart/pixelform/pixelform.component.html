@@ -1,0 +1,23 @@
+<form [formGroup]="Form">
+    <h2 class="formstyle"> Pixel Form:</h2>
+    <hr>
+  
+    <p> Piece Name: <input type="text" formControlName="Name"></p>
+  
+    <p>Pixel: <input #File type="file" class="fileupload" (change)="getFile($event)"></p>
+      
+    <p>Date (YYYY): <input type="text" formControlName="Date"></p>
+  
+    <p>Artist:<br/> <input type="text" formControlName="Artist"></p>
+  
+    <p>Artist Link:<br/> <input type="text" formControlName="ArtistLink"></p>
+  
+    <p>Allowed:<br/>
+      <input type="radio" value="false" formControlName="Allowed" id="no">
+      <label for="no">No</label>
+      <input type="radio" value="true" formControlName="Allowed" id="yes">
+      <label for="yes">Yes</label>
+    </p>
+  
+    <app-formButtons></app-formButtons>
+  </form>

@@ -1,0 +1,78 @@
+<div id="outer">
+  <div id="header">
+      <h2>Source Affinity Cost Calculater</h2>
+  </div>
+  <hr id="top">
+
+  <form [formGroup]="Form">
+    <button (click)="onShow()">Info</button>
+    <div *ngIf="show">
+      <ul>
+        <li> Only include one copy of each Source Ability.
+        </li>
+        <li> Low Tier means an ability can be used, though not very well and with little power.  Mid Tier means the user has quite a bit of control over the ability, but they are lacking fine tuned control.  High Tier comes with more control; the user is more likely to use the ability in unexpected ways (compared to Low and Mid Tier users) and specialize it into a new subskill of the same class (e.g. Stagnate into Shatter).  Top tier means the user has complete mastery of the ability and can use it to its full potential in terms of power output and finesse.
+        </li>
+        <li> Do NOT include Metamorph for modern Esarian characters unless they are fusing with a familiar (e.g. Roderick).  It is an unnecessary handicap.  Stable fusion requires Mid-Tier mastery.  Higher mastery allows for faster Formshifting.
+        </li>
+      </ul>
+      <hr>
+    </div>
+    
+    <p>
+        <button type="button" (click)="addAbility()">Add Ability</button>
+    </p>
+    
+    <div formArrayName="Abilities">
+        <div *ngFor="let newAbility of abilitiesArray.controls; let i = index"
+        [formGroupName]="i">
+        <div class="stayTogether">
+            Ability: 
+            <select formControlName="Ability">
+                <option *ngFor="let ability of abilityKeys; let i = index"
+                [value]="ability">
+                    {{ abilityNames[i] }}
+                </option>
+            </select>  
+        </div>
+        <div class="stayTogether">
+            &nbsp; Mastery:
+            <select formControlName="Mastery">
+              <option *ngFor="let master of mastery; let j = index" [value]="j">
+                {{ master }}
+              </option>
+            </select>
+
+            <button type="button" (click)="removeAbility(i)">-</button>
+        </div>
+        <br><br>
+      </div>
+    </div>
+  
+    <br>
+  
+    <div class="stayTogether">
+        Esarian Genetics:
+        <input class="short" formControlName="EsarianGenes"
+        type="number" min="0" max="1" step=".05">&nbsp;
+    </div>
+  
+    <div class="stayTogether">
+        Connection Genetics:
+        <input class="short" formControlName="ConnectionGenes"
+        type="number" min="0" max="1" step=".05">
+    </div>
+    <br>
+  
+    <p>
+      <button type="button" (click)=onSubmit()>Submit</button>&nbsp;
+      <button type="button" (click)=onReset()>Reset</button>
+    </p>
+  </form>
+  <div id="bottom">
+    <div id="Error" *ngIf="error">{{ error }}</div>
+    <div id="Results" *ngIf="result">
+        Source Affinity Cost: {{ result }} <br>
+        Source Magician Status: {{ rank }}
+    </div>
+  </div>      
+</div>

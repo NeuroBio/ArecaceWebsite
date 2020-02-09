@@ -7,7 +7,6 @@ import { AdminComponent }           from './DashBoard/admin/admin.component';
 import { ForbiddenComponent }       from './DashBoard/forbidden/forbidden.component';
 import { ContentComponent }         from './DashBoard/content/content.component';
 
-import { CharacterFormComponent }   from './Forms/character/characterform/characterform.component';
 import { BeastFormComponent }       from './Forms/beast/beastform/beastform.component';
 import { ChapterFormComponent }     from './Forms/chapter/chapterform/chapterform.component'
 import { StoryFormComponent}        from './Forms/story/storyform/storyform.component';
@@ -24,10 +23,17 @@ import { WebsiteTextComponent } from './Forms/website-text/website-text.componen
 import { AboutTextComponent } from './Forms/about-text/about-text.component';
 import { FaqTextComponent } from './Forms/faq-text/faq-text.component';
 import { IntroTextComponent } from './Forms/intro-text/intro-text.component';
+import { SurveyComponent } from './Forms/survey/survey/survey.component';
+import { SurveyStatsComponent } from './Forms/survey/survey-stats/survey-stats.component';
+import { OthersArtFormComponent } from './Forms/othersart/othersartform/othersartform.component';
+import { PixelformComponent } from './Forms/othersart/pixelform/pixelform.component';
+import { CharacterFormComponent } from '../SharedComponentModules/SharedForms/MakeCharacter/characterform/characterform.component';
+import { SourceAffinityComponent } from './Forms/sourceaffinity/source-affinity/source-affinity.component';
+import { LooseNotesFormComponent } from './Forms/loosenotes/loose-notes-form/loose-notes-form.component';
 
 
 const AdminRoutes: Routes = [
-  {path: 'kArAAdministrativeUpload', component: AdminComponent,
+  {path: '', component: AdminComponent,
     children:[
       {path: '', component: ForbiddenComponent},
       {path: 'Dash', component: AdminDutiesComponent, 
@@ -35,19 +41,25 @@ const AdminRoutes: Routes = [
       children:[
         {path: 'Content', component:ContentComponent, 
         children:[
-          {path: '', redirectTo: 'characters', pathMatch: 'full'},
-          {path: 'characters', component: CharacterFormComponent },
-          {path: 'bestiary', component: BeastFormComponent },
-          {path: 'arc1', component: ChapterFormComponent },
-          {path: 'arc2', component: ChapterFormComponent },
-          {path: 'narratives', component: StoryFormComponent},
-          {path: 'scripts', component: StoryFormComponent},
-          {path: 'guilds', component: GuildFormComponent},
-          {path: 'source', component: ReferenceFormComponent},
-          {path: 'update', component: UpdateFormComponent},
-          {path: 'culture', component: ReferenceFormComponent},
-          {path: 'extras', component: ExtrasFormComponent},
-          {path: 'maps', component: ReferenceFormComponent},
+          { path: '', redirectTo: 'characters', pathMatch: 'full'},
+          { path: 'characters', component: CharacterFormComponent },
+          { path: 'bestiary', component: BeastFormComponent },
+          { path: 'arc1', component: ChapterFormComponent },
+          { path: 'arc2', component: ChapterFormComponent },
+          { path: 'narratives', component: StoryFormComponent },
+          { path: 'scripts', component: StoryFormComponent },
+          { path: 'guilds', component: GuildFormComponent },
+          { path: 'source', component: ReferenceFormComponent },
+          { path: 'update', component: UpdateFormComponent },
+          { path: 'culture', component: ReferenceFormComponent },
+          { path: 'extras', component: ExtrasFormComponent },
+          { path: 'maps', component: ReferenceFormComponent },
+          { path: 'surveys', component: SurveyComponent },
+          { path: 'surveystats', component: SurveyStatsComponent },
+          { path: 'othersart', component: OthersArtFormComponent },
+          { path: 'pixels', component: PixelformComponent },
+          { path: 'SAs', component: SourceAffinityComponent},
+          { path: 'notes', component: LooseNotesFormComponent}
         ]},
         {path: 'Pages', component:PagesComponent, 
          children:[
@@ -59,6 +71,7 @@ const AdminRoutes: Routes = [
           {path: 'copyright', component: WebsiteTextComponent },
           {path: 'intro', component: IntroTextComponent },
           {path: 'login', component: WebsiteTextComponent },
+          {path: 'userdash', component: WebsiteTextComponent },
           {path: 'comic', component: WebsiteTextComponent },
          ]
       },

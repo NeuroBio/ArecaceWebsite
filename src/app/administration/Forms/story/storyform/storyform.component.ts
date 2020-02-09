@@ -1,9 +1,8 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
-import { Subscription } from 'rxjs';
+import { Component, OnInit, OnDestroy }     from '@angular/core';
+import { FormBuilder, FormGroup }           from '@angular/forms';
+import { Subscription }                     from 'rxjs';
 
-import { CRUDcontrollerService } from '../../../services/CRUDcontroller.service';
-import { stringify } from '@angular/core/src/render3/util';
+import { CRUDcontrollerService }            from '../../../services/CRUDcontroller.service';
 
 @Component({
   selector: 'app-storyform',
@@ -13,23 +12,23 @@ import { stringify } from '@angular/core/src/render3/util';
 
 export class StoryFormComponent implements OnInit, OnDestroy {
   
-  Form = this.createForm();
+  Form: FormGroup;
   stream1: Subscription;
   stream2: Subscription;
 
-  editFormData:any;
-  init = true;
+  oldText: string;
+  type: string;
 
   constructor(private controller: CRUDcontrollerService,
               private fb: FormBuilder) { }
 
   ngOnInit() {
-    this.stream1 = this.controller.itemToEdit.subscribe(item => {
-      this.editFormData = item;
-      this.assignFormData();
-      this.init = false;
-    });
-    this.stream2 = this.controller.triggerProcess.subscribe(() => this.processForm());
+    this.stream1 = this.controller.itemToEdit
+      .subscribe(item => this.assignFormData(item));
+    this.stream2 = this.controller.triggerProcess
+      .subscribe(() => this.processForm());
+    this.controller.itemType.subscribe(type => 
+      this.type = type).unsubscribe();
   }
   
   ngOnDestroy() {
@@ -37,9 +36,9 @@ export class StoryFormComponent implements OnInit, OnDestroy {
     this.stream2.unsubscribe();
   }
 
-  createForm(){
+  createForm() {
     return this.fb.group({
-      Type: 'Narrative',
+      Type: '',
       Series: '',
       Title: '',
       Section: 0,
@@ -49,48 +48,43 @@ export class StoryFormComponent implements OnInit, OnDestroy {
     })
   }
 
-  assignFormData() {
-    if(this.editFormData){
-      this.Form = this.controller.quickAssign(this.Form, this.editFormData);
-      this.controller.getText(this.editFormData.StoryLink).subscribe( text =>
-        this.Form.controls.Story.setValue(text) )
-    }else if(!this.init){
-      this.onReset()
+  assignFormData(editFormData: any) {
+    this.onReset();
+    if(editFormData){
+      this.Form = this.controller.quickAssign(this.Form, editFormData);
+      this.controller.getText(editFormData.StoryLink).subscribe( text =>
+        this.Form.controls.Story.setValue(text) );
+        this.oldText = editFormData.StoryLink;
     }
   }
 
   processForm() {
     let Final = Object.assign({}, this.Form.value);
     delete Final.Story;
-    let oldText:string;
-    if(this.editFormData){
-      oldText = this.editFormData.StoryLink;
+    Final.type = this.type;
+    
+    let oldText: string;
+    if(this.oldText){
+      oldText = this.oldText;
     }
-    const text:string = this.Form.controls.Story.value;
-    Final.WordCount = text.trim().split(/\s+/).length
-    Final.ID = `${Final.Title.replace(/\s/g, "")}`
-    // const seriesData = {ID: `${Final.Series.replace(/\s/g, "")}`,
-    //                     Name: Final.Series}
+    const text: string = this.Form.controls.Story.value;
+    
+    Final.WordCount = text.trim().split(/\s+/).length;
+    Final.ID = `${Final.Title.replace(/\s/g, "")}`;
     var newText = new Blob([text], {type: 'text/plain'});
+    
     this.controller.activeFormData.next([Final,
-      [],
-      [],
-      undefined,
-      `${Final.Type}/${Final.ID}`,
-      newText,
-      oldText]);
-      
-
-      // return this.uploaderserv.uploadWriting(newStory, `${newStory.Type}s`, 
-      //                                         newText,
-      //                                         `${newStory.Type}s/${newStory.ID}`, seriesData)
-      // const oldSeries = this.editStory.Series.split(' ').join('')
-      // return this.uploaderserv.editWriting(newStory, `${newStory.Type}s`, newText, `${newStory.Type}s/${newStory.ID}`,
-      //                                       seriesData, this.editStory, `${newStory.Type}s/${oldSeries}/${oldSeries}`)
+                                        [],
+                                        [],
+                                        undefined,
+                                        `${Final.Type}/${Final.ID}`,
+                                        newText,
+                                        oldText]);
   }
 
   onReset() {
     this.Form = this.createForm();
+    this.oldText = undefined;
   }
 
 }

@@ -1,0 +1,19 @@
+<div class="compheader" role="header">
+  <h2 class="compheader">Arecace Content by Other Artists</h2>
+</div>
+<hr>
+
+<app-pixel-army></app-pixel-army>
+
+<div id="background">
+      <hr>
+
+  <br>
+  <app-grid
+  [collect]="arts$ | async">
+  </app-grid>
+
+
+  <!--Blow up version-->
+  <router-outlet></router-outlet>
+</div>

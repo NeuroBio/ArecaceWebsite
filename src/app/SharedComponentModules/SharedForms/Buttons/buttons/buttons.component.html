@@ -1,0 +1,19 @@
+<button type="button" (click)="onSubmit()"
+[disabled]="!allow.Submit" *ngIf="show.Submit">
+    {{ action }} </button>
+
+<button type="button" (click)="onReset()"
+[disabled]="!allow.Reset" *ngIf="show.Reset">
+    Reset</button>
+
+<button type="button" (click)="onDelete()"
+[disabled]="(action === 'Submit' || !allow.Delete)"
+*ngIf="show.Delete">
+    Delete</button>
+
+<button type="button" (click)="onUpdateAll()"
+[disabled]="(action === 'Submit' || !allow.UpdateAll)"
+*ngIf="show.UpdateAll">
+    Update All</button>
+
+<div style="white-space: pre-line">{{ message }}</div>

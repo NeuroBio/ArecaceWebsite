@@ -68,3 +68,7 @@ form {
     margin:3px;
     padding:4px;
   }
+
+  label {
+    border: 0px;
+  }

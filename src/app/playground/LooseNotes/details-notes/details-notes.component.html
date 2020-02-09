@@ -1,0 +1,10 @@
+<div  id="outer" class="textblock">
+    <h3>{{ note.Title }}</h3>
+    <hr>
+    <div class="textblock" [innerHTML]="note.Text"></div>
+    <hr>
+    <div id="dates">
+        Date Posted: {{ note.Created }}
+        <!-- <span *ngIf="note.TimeStampModified">Edited: {{ note.TimeStampModified }}</span> -->
+    </div>
+</div>

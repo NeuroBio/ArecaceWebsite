@@ -15,7 +15,7 @@ export class AppComponent implements AfterViewInit{
   title: string = 'Arecace';
   year: number = new Date().getFullYear()
   linkList: string[] = ['home', 'comic', 'story',
-                        'world', 'extras', 'login']
+                        'world', 'extras', 'dash']
 
   constructor(private global: GlobalVarsService){ }
 

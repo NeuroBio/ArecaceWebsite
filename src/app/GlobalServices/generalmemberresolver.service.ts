@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { GeneralcollectionService } from './generalcollection.service';
-import { Router, Resolve, ActivatedRouteSnapshot, ActivatedRoute } from '@angular/router';
+import { Router, Resolve, ActivatedRouteSnapshot } from '@angular/router';
 import { take, tap } from 'rxjs/operators';
 import { of, EMPTY } from 'rxjs';
 

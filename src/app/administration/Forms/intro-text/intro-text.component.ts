@@ -33,7 +33,7 @@ export class IntroTextComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.stop$.next(true)
+    this.stop$.next(true);
     this.stream1.unsubscribe();
   }
 

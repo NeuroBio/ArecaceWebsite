@@ -5,7 +5,7 @@ import { GuildsMainComponent }    from './guildsmain/guildsmain.component';
 import { GuildDetailsComponent }  from './guilddetails/guilddetails.component';
 
 import { GuildsRoutingModule }    from './guilds-routing.module';
-import { SharedModule }           from 'src/app/SharedComponents/shared.module';
+import { PrimaryContentDisplayModule }           from 'src/app/SharedComponentModules/PrimaryContentDisplayer/primary-content-display.module';
 
 @NgModule({
   declarations: [
@@ -14,7 +14,7 @@ import { SharedModule }           from 'src/app/SharedComponents/shared.module';
   ],
   imports: [
     CommonModule,
-    SharedModule,
+    PrimaryContentDisplayModule,
     GuildsRoutingModule
   ]
 })

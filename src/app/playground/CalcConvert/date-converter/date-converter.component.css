@@ -1,0 +1,14 @@
+form {
+    border: 1px white solid;
+    display: inline-block;
+    padding: 7px;
+}
+
+h3 {
+    margin: 0px;
+    margin-bottom: 0px;
+}
+
+hr {
+    margin-bottom: 5px;
+}

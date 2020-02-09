@@ -1,0 +1,89 @@
+Form {
+    background-color: lightseagreen;
+    padding: 10px;
+    max-width: 800px;
+}
+
+input.short {
+    width: 50px;
+    font-size: 18px;
+}
+
+div#header {
+    background-color: rgb(15, 104, 99);
+    padding: 7px;
+}
+
+div {
+    color: black;
+    font-weight: bold;
+}
+
+form p {
+    color: black;
+    font-weight: bold;
+}
+
+h2 {
+    color: black;
+    margin: 0px;
+}
+
+hr {
+    margin: 0px;
+    margin-bottom: 10px;
+    padding: 0px;
+    border: 1px solid black;
+    border-top: 2px solid black;
+}
+
+hr#top{
+    margin: 0px;
+}
+
+div.stayTogether {
+    display: inline-block;
+}
+
+div#bottom {
+    background-color: rgb(15, 104, 99);
+    border-top: 3px solid black;
+    min-height: 40px;
+}
+
+div#Results {
+    padding: 7px;
+    color: white;
+}
+
+div#outer {
+    display: inline-block;
+}
+
+div#Error {
+    color: white;
+    margin: 7px;
+}
+
+button {
+    padding: 7px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    background-color: rgb(15, 104, 99);
+    color: whitesmoke;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: rgb(19, 134, 131);
+}
+
+button:active {
+    background-color: rgb(3, 43, 41);
+}
+
+li {
+    color: black;
+    margin: 10px;
+}

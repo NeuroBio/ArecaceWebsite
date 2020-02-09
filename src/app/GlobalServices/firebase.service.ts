@@ -2,9 +2,9 @@ import { Injectable }             from '@angular/core';
 import { AngularFirestore }       from '@angular/fire/firestore';
 import { AngularFireStorage }     from '@angular/fire/storage';
 
-import { Observable, of }             from 'rxjs';
+import { Observable }             from 'rxjs';
 
-import { finalize, map, tap, take, catchError }               from 'rxjs/operators';
+import { finalize, map, tap, take }               from 'rxjs/operators';
 
 
 @Injectable({
@@ -24,7 +24,7 @@ export class FireBaseService {
     return this.database.doc<any>(path).valueChanges();
   }
   
-  returnCollect(path:string): Observable<any>{
+  returnCollect(path:string): Observable<any[]>{
     return this.database.collection<any[]>(path).valueChanges();
   }
 
@@ -63,9 +63,9 @@ export class FireBaseService {
         return data;
       });
     }))
-   }
+  }
 
-   checkDir(path:string, document:any): Observable<any>{
+  checkDir(path:string, document:any): Observable<any>{
     return this.returnDocument(`${path}/${document.ID}`)
       .pipe(
         take(1),
@@ -76,5 +76,5 @@ export class FireBaseService {
           return x;
         })
       )
-    }
+  }
 }

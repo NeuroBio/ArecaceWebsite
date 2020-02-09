@@ -1,18 +1,18 @@
 import { NgModule }                 from '@angular/core';
 import { Routes, RouterModule }     from '@angular/router';
 
-import { AboutComponent }           from './Components/about/about.component';
-import { BadserviceComponent }      from './Components/badservice/badservice.component';
-import { ContactComponent }         from './Components/contact/contact.component';
-import { CopyrightComponent }       from './Components/copyright/copyright.component';
-import { FAQComponent }             from './Components/faq/faq.component';
-import { HomeComponent }            from './Components/home/home.component';
-import { LoginComponent }           from './Components/login/login.component';
-import { PageNotFoundComponent }    from './Components/pagenotfound/pagenotfound.component';
-import { TravelorsGuideComponent }  from './Components/travelorsguide/travelorsguide.component';
+import { AboutComponent }           from './SimplePages/about/about.component';
+import { BadserviceComponent }      from './SimplePages/badservice/badservice.component';
+import { ContactComponent }         from './SimplePages/contact/contact.component';
+import { CopyrightComponent }       from './SimplePages/copyright/copyright.component';
+import { FAQComponent }             from './SimplePages/faq/faq.component';
+import { HomeComponent }            from './SimplePages/home/home.component';
+import { PageNotFoundComponent }    from './SimplePages/pagenotfound/pagenotfound.component';
+import { TravelorsGuideComponent }  from './SimplePages/travelorsguide/travelorsguide.component';
 // import { GeneralTextResolverService } from './GlobalServices/general-text-resolver.service';
 
 const routes: Routes = [
+  //simple pages
   {path: '', redirectTo: 'home', pathMatch: 'full'},
   {path: 'about', component: AboutComponent},
   {path: 'badservice', component: BadserviceComponent},
@@ -20,8 +20,27 @@ const routes: Routes = [
   {path: 'faq', component: FAQComponent},
   {path: 'faq/copyright', component: CopyrightComponent},
   {path: 'guide', component: TravelorsGuideComponent},
-  {path: 'home', component: HomeComponent},
-  {path: 'login', component: LoginComponent}, 
+  {path: 'home', component: HomeComponent}, 
+
+  //modules
+  {path: 'comic',
+    loadChildren: './comic-book/comicbook.module#ComicBookModule'},
+  {path: 'dash',
+    loadChildren: './UserDash/user-dash.module#UserDashModule'},
+  {path: 'extras',
+    loadChildren: './extras/extras.module#ExtrasModule'},
+  {path: 'kArAAdministrativeUpload',
+    loadChildren: './administration/administration.module#AdministrationModule'},
+  {path: 'playground',
+    loadChildren: './playground/playground.module#PlaygroundModule'},
+  {path: 'story',
+    loadChildren: './story/story.module#StoryModule'},
+  {path: 'sitemap',
+    loadChildren: './SimplePages/sitemap/sitemap.module#SitemapModule'},
+  {path: 'world',
+    loadChildren: './worldbuilding/worldbuilding.module#WorldbuildingModule'},
+  
+  //final catch
   {path: '**', component: PageNotFoundComponent}
 ];
 

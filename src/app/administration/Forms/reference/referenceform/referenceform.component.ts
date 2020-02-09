@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild,
          ElementRef, OnDestroy }          from '@angular/core';
-import { FormBuilder }                    from '@angular/forms';
+import { FormBuilder, FormGroup }         from '@angular/forms';
 import { Subscription }                   from 'rxjs';
 
 import { CRUDcontrollerService }          from '../../../services/CRUDcontroller.service'
@@ -15,16 +15,15 @@ import { Categories, Paths }              from '../../../../Classes/categories'
 
 export class ReferenceFormComponent implements OnInit, OnDestroy {
   
-  Form = this.createForm();
+  Form: FormGroup;
   @ViewChild('image') imageUploader: ElementRef;
-  imageFile:any;
+  imageFile: any;
   stream1: Subscription;
   stream2: Subscription;
 
-  init = true;
   
   cats = new Categories;
-  pats = new Paths;
+  paths = new Paths;
   categories: string[];
   docPath: string;
   imagePath: string;
@@ -34,19 +33,18 @@ export class ReferenceFormComponent implements OnInit, OnDestroy {
               private controller: CRUDcontrollerService) { }
 
   ngOnInit() {
-    this.stream1 = this.controller.itemToEdit.subscribe(item => {
-      this.assignFormData(item);
-      this.init = false;
-    });
-    this.stream2 = this.controller.triggerProcess.subscribe(() => this.processForm());
-
     this.controller.itemType.subscribe(type => {
       this.type = type;
       this.categories = this.cats[type];
-      this.docPath = this.pats[type][0];
-      this.imagePath = this.pats[type][1];
-      this.Form.controls.Category.patchValue(this.categories[0]);
+      this.docPath = this.paths[type][0];
+      this.imagePath = this.paths[type][1];
     }).unsubscribe();
+
+    this.stream1 = this.controller.itemToEdit
+      .subscribe(item => this.assignFormData(item));
+    
+    this.stream2 = this.controller.triggerProcess
+      .subscribe(() => this.processForm());
   }
 
   ngOnDestroy() {
@@ -66,11 +64,9 @@ export class ReferenceFormComponent implements OnInit, OnDestroy {
   }
 
   assignFormData(editFormData: any) {
+    this.onReset();
     if(editFormData) {
-      this.onReset();
       this.Form = this.controller.quickAssign(this.Form, editFormData);
-    } else if(!this.init) {
-      this.onReset();
     }
   }
 
@@ -80,7 +76,7 @@ export class ReferenceFormComponent implements OnInit, OnDestroy {
       && this.Form.controls.Links.value === '') {
       this.controller.activeFormData.next(["abort",
         `${this.type} files require an image.`]);
-      return;
+      return ;
     }
     
     //Complete Form

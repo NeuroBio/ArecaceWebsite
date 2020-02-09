@@ -7,29 +7,36 @@ import { map } from 'rxjs/operators';
 })
 export class GeneralcollectionService {
 
-  metaData = new BehaviorSubject<any[]>([0]);
+  collectionData = new BehaviorSubject<any[]>([]);
   
   initializeMetaData(meta:any[]){
-    this.metaData.next(meta);
+    this.collectionData.next(meta);
   }
 
 
   returnMetaData(){
-    return this.metaData;
+    return this.collectionData;
   }
 
 
   getMember(ID:string){
-    return this.returnMetaData().pipe(
-      map(members =>
-        members.find(member => member.ID === ID))
-    );
+    if(ID === 'Latest') {
+      return this.returnMetaData().pipe(
+        map(members =>
+          members.reduce((a, b) => a.TimeStampCreated > b.TimeStampCreated ? a : b))
+      );
+    } else {
+      return this.returnMetaData().pipe(
+        map(members =>
+          members.find(member => member.ID === ID))
+      );
+    }
   }
 
-  getReference(ID:string, Ref:string){
-    return this.getMember(ID).pipe(
-      map(member =>
-        member.References.find(member => member.ID === Ref))
-    );
-  }
+  // getReference(ID:string, Ref:string){
+  //   return this.getMember(ID).pipe(
+  //     map(member =>
+  //       member.References.find(member => member.ID === Ref))
+  //   );
+  // }
 }
