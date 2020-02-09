@@ -23,7 +23,7 @@
         <div *ngIf="activeMember.Description" class="textblock"
         [style.height.px]="textHeight"
         [hidden]="loading">
-          <h3>{{ activeMember.Name }}</h3>
+          <h3 [hidden]="loading">{{ activeMember.Name }}</h3>
           {{ activeMember.Date }}<br><br>
           {{ activeMember.Description }}
           <br><br>
