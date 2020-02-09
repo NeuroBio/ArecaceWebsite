@@ -129,7 +129,10 @@ div#Back {
     background-color: rgba(0,0,0,.3);
 }
 
-div#loading {
+div.loading {
+    height: 250px;
+    width: 250px;
     margin: auto;
-    /* align-self: center; */
+    animation: spin 1s ease-in infinite;
+    -webkit-animation: spin 1s ease-in infinite;
 }

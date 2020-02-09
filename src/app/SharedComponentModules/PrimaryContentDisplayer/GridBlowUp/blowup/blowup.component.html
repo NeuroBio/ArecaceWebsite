@@ -13,7 +13,7 @@
     <div id="content" (window:resize)="onResize()">
       <div class="imgcaption" id="aligner"> 
         
-          <div *ngIf="loading" id="loading"></div>
+          <div *ngIf="loading" class="loading"></div>
             <img #bigger id="bigger"
             [hidden]="loading"
             [src]="bigUrl"

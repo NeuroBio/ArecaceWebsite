@@ -16,7 +16,7 @@ export class BlowupmasterComponent implements OnInit {
               private generalcollectserv: GeneralcollectionService) { }
 
   ngOnInit() {
-    this.gridPath = this.route.parent.snapshot.url.join('/');
+    this.gridPath = this.route.snapshot.pathFromRoot[1].url.join('/');
     this.generalcollectserv.returnMetaData().subscribe(collect => 
       this.linksList = collect).unsubscribe();
 
