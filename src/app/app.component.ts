@@ -11,7 +11,7 @@ import { GlobalVarsService}                 from './GlobalServices/global-vars.s
 
 export class AppComponent implements AfterViewInit{
 
-  @ViewChild('flag') flag: ElementRef;
+  @ViewChild('flag', { static: true }) flag: ElementRef;
   title: string = 'Arecace';
   year: number = new Date().getFullYear()
   linkList: string[] = ['home', 'comic', 'story',

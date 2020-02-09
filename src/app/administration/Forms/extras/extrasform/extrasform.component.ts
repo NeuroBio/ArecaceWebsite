@@ -15,8 +15,8 @@ import { ExtrasMetaData }               from 'src/app/Classes/extrasmetadata';
 export class ExtrasFormComponent implements OnInit, OnDestroy {
 
   Form: FormGroup;
-  @ViewChild('Thumb') thumbUploader: ElementRef;
-  @ViewChild('Full') fullUploader: ElementRef;
+  @ViewChild('Thumb', { static: true }) thumbUploader: ElementRef;
+  @ViewChild('Full', { static: true }) fullUploader: ElementRef;
   thumbFile: any;
   fullFile: any;
 

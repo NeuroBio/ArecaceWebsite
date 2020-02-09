@@ -16,7 +16,7 @@ import { PostData }                           from 'src/app/Classes/postdata';
 export class UpdateFormComponent implements OnInit, OnDestroy {
 
   Form: FormGroup;
-  @ViewChild('Image') imageUploader:ElementRef;
+  @ViewChild('Image', { static: true }) imageUploader:ElementRef;
   imageFile: any;
   stream1: Subscription;
   stream2: Subscription;

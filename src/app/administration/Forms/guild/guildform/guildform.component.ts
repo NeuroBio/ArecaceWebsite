@@ -15,7 +15,7 @@ import { CRUDcontrollerService }        from '../../../services/CRUDcontroller.s
 export class GuildFormComponent implements OnInit, OnDestroy {
   
   Form: FormGroup;
-  @ViewChild('insig') imageUploader: ElementRef;
+  @ViewChild('insig', { static: true }) imageUploader: ElementRef;
   imageFile: any;
 
   stream1: Subscription;

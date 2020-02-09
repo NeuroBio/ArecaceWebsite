@@ -24,12 +24,12 @@ export class BlowUpComponent implements OnInit {
   showDescription = true;
   rotation = 0;
 
-  @ViewChild('left') left: ElementRef;
-  @ViewChild('right') right: ElementRef;
-  @ViewChild('bigger') bigger: ElementRef;
+  @ViewChild('left', { static: true }) left: ElementRef;
+  @ViewChild('right', { static: true }) right: ElementRef;
+  @ViewChild('bigger', { static: true }) bigger: ElementRef;
   textHeight: number;
 
-  @ViewChild('back') back: ElementRef;
+  @ViewChild('back', { static: true }) back: ElementRef;
 
   constructor(private router: Router,
               private location: Location,

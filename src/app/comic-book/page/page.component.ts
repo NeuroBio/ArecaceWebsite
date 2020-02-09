@@ -13,7 +13,7 @@ export class PageComponent implements OnInit {
   
   pageUrl: string;
   init: boolean;
-  @ViewChild('main') main:ElementRef;
+  @ViewChild('main', { static: true }) main:ElementRef;
   
   constructor(private route: ActivatedRoute,
               private comicserv: ComicService) { }

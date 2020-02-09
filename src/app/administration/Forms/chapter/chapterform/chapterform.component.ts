@@ -14,7 +14,7 @@ import { ChapterMetaData }                from 'src/app/Classes/chaptermetadata'
 export class ChapterFormComponent implements OnInit, OnDestroy {
 
   Form: FormGroup;
-  @ViewChild('form') formHtml:ElementRef;
+  @ViewChild('form', { static: true }) formHtml:ElementRef;
   
   stream1: Subscription;
   stream2: Subscription;

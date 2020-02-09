@@ -12,8 +12,8 @@ import { OthersArt } from 'src/app/Classes/othersart';
 export class OthersArtFormComponent implements OnInit, OnDestroy {
 
   Form: FormGroup;
-  @ViewChild('Thumb') thumbUploader: ElementRef;
-  @ViewChild('Full') fullUploader: ElementRef;
+  @ViewChild('Thumb', { static: true }) thumbUploader: ElementRef;
+  @ViewChild('Full', { static: true }) fullUploader: ElementRef;
   thumbFile: any;
   fullFile: any;
 
