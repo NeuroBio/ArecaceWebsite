@@ -20,8 +20,9 @@ export class BlowUpComponent implements OnInit {
 
   bigUrl: string;
   activeMember: any;
-  
   loading: boolean;
+  showDescription = true;
+  rotation = 0;
 
   @ViewChild('left') left: ElementRef;
   @ViewChild('right') right: ElementRef;
@@ -43,14 +44,20 @@ export class BlowUpComponent implements OnInit {
 
   onResize(){
     this.loading = false;
-    setTimeout(() =>{
+    setTimeout(() => {
       this.textHeight = this.bigger.nativeElement.offsetHeight - 30;
       if(this.textHeight < 400){
         this.textHeight = 400;
       }
     }, 10)
     
-  }      
+  }
+
+  showHideDescription() {
+    this.showDescription = !this.showDescription;
+    this.showDescription ? this.rotation = 0 : this.rotation = 270;
+    this.onResize();
+  }
 
   onArrow(incre:number){
     this.loading = this.global.ImagesLoadable;

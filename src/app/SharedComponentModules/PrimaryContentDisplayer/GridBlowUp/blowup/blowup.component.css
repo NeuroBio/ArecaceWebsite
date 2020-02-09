@@ -53,9 +53,12 @@ img#bigger {
 }
 
 div.textblock {
-    min-width: 200px;
-    max-width: 400px;
+    max-width: 500px;
     overflow-y: auto;
+}
+
+div#textblockinner {
+    min-width: 200px;
 }
 
 div#othersArt {
@@ -69,6 +72,7 @@ div#othersArt {
 
 h3 {
     text-align: left;
+    margin: 5px 0px 0px 0px;
 }
 
 img#right {
@@ -135,4 +139,14 @@ div.loading {
     margin: auto;
     animation: spin 1s ease-in infinite;
     -webkit-animation: spin 1s ease-in infinite;
+}
+
+img#downUp {
+    float: left;
+    width: 25px;
+    cursor: pointer;
+    position: relative;
+    top: 5.5px;
+    background-color: rgba(0,0,0,.3);
+    margin-right: 8px;
 }
