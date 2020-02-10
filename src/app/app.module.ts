@@ -9,9 +9,6 @@ import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireAuthModule }    from '@angular/fire/auth';
 import { environment }              from '../environments/environment';
 
-import { NgxAudioPlayerModule }     from 'ngx-audio-player';
-import 'hammerjs';
-
 import { AppRoutingModule }         from './app-routing.module';
 
 import { UpdatefeedModule }         from './SharedComponentModules/UpdateFeed/updatefeed.module';
@@ -62,7 +59,6 @@ export function AuthFactory(provider: AuthService) {
     AngularFireStorageModule, // imports firebase/storage only needed for storage features
     AngularFireFunctionsModule, //cloud functions
 
-    NgxAudioPlayerModule,
     AppRoutingModule,//this should always be LAST!!!
 
   ],
