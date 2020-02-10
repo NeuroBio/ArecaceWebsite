@@ -20,6 +20,7 @@ export class AppComponent implements AfterViewInit{
   constructor(private global: GlobalVarsService) { }
 
   ngAfterViewInit() {
+    this.global.phone = this.mobilecheck();
     setTimeout(() => { this.checkLoad() }, 1000);
   }
 
@@ -27,8 +28,8 @@ export class AppComponent implements AfterViewInit{
     if(this.flag.nativeElement.offsetWidth == 1) {
       this.global.ImagesLoadable = true;
     } else {
-      if(this.mobilecheck()) {
-        this.global.ImagesLoadable = true;
+      if(this.global.phone) {
+        this.global.ImagesLoadable = false;
       } else {
         this.global.ImagesLoadable = false;
       }
