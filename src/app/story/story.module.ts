@@ -7,6 +7,7 @@ import { SeriesChooserComponent }   from './serieschooser/serieschooser.componen
 import { StorydisplayComponent }    from './storydisplay/storydisplay.component';
 import { PrimaryContentDisplayModule }             from 'src/app/SharedComponentModules/PrimaryContentDisplayer/primary-content-display.module';
 
+import { NgxAudioPlayerModule }     from 'ngx-audio-player';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { PrimaryContentDisplayModule }             from 'src/app/SharedComponent
   imports: [
     CommonModule,
     PrimaryContentDisplayModule,
+    NgxAudioPlayerModule,
     StoryRoutingModule
   ]
 })

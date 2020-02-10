@@ -12,6 +12,13 @@
             </div>
         </div>
         <div style="clear: both"></div>
+        <div id="audioHolder">
+            <mat-basic-audio-player
+            audioUrl="https://drive.google.com/uc?id=1P8_DwdNobTY1QU8qGcjtLnH1wIVaUevR&authuser=0&export=download"
+            title="" [autoPlay]="false" muted="muted"
+            displayTitle="false" displayVolumeControls="true" ></mat-basic-audio-player>
+        </div>
+        <br>
         <hr>
             
         <div id="maintext" [innerHTML]="story.text"></div>            
