@@ -1,5 +1,5 @@
-import { Component, OnInit, OnDestroy,
-          Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, OnDestroy, OnChanges,
+          Output, EventEmitter, Input } from '@angular/core';
 import { Nomadic, Word } from '../rules';
 import { Subscription } from 'rxjs';
 import { CRUDcontrollerService } from '../../services/CRUDcontroller.service';
@@ -10,15 +10,16 @@ import { Validators, FormBuilder, FormGroup }     from '@angular/forms';
   templateUrl: './generator.component.html',
   styleUrls: [ '../../Forms/Form.css', './generator.component.css']
 })
-export class GeneratorComponent implements OnInit, OnDestroy {
+export class GeneratorComponent implements OnInit, OnDestroy, OnChanges {
 
   Dictionary: Word[];
   Nomadic = new Nomadic;
   newWords: string[];
   stream: Subscription;
-  Form = this.createForm();
+  Form: FormGroup;
   selected: number;
   @Output() wordEmitter: EventEmitter<string> = new EventEmitter();
+  @Input() type: string;
 
   constructor(private controller: CRUDcontrollerService,
               private fb: FormBuilder) { }
@@ -27,6 +28,11 @@ export class GeneratorComponent implements OnInit, OnDestroy {
     this.stream = this.controller.itemList.subscribe(list => {
       this.Dictionary = list;
     });
+    this.Form = this.createForm();
+  }
+
+  ngOnChanges() {
+    this.Form.patchValue({Type: this.type});
   }
 
   ngOnDestroy() {
@@ -35,7 +41,7 @@ export class GeneratorComponent implements OnInit, OnDestroy {
 
   createForm() {
     return this.fb.group({
-      Type: 'Noun',
+      Type: this.type,
       Number: ['10', Validators.pattern("^[0-9]*$")],
       Length: [null, Validators.pattern("^[0-9]*$")]
     })
@@ -58,7 +64,6 @@ export class GeneratorComponent implements OnInit, OnDestroy {
   onSelect(word: string, index: number) {
     this.selected = index;
     this.wordEmitter.emit(word);
-    console.log(word);
   }
 
 }

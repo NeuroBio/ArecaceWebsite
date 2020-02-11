@@ -207,14 +207,14 @@ export class Nomadic {
         return word;
     }
 
-    private getCore (word: string[], type: string) {
+    getCore (word: string[], type: string) {
         switch(type) {
             case 'Noun':
                 return word.join('');
-            case 'Verb':
-                return word.splice(-1,1).join('');
             case 'Adjective':
-                return word.splice(-2,2).join('');
+                return word.slice(0,-1).join('');
+            case 'Verb':
+                return word.splice(0,word.length-2).join('');
         }
     }
 

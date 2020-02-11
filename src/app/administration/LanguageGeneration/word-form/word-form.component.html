@@ -1,0 +1,30 @@
+<form [formGroup]="Form">
+    <div id="mainform">
+        <p>Type:
+            <select formControlName="Type" (change)="updateType()">
+                <option value="Noun">Noun</option>
+                <option value="Verb">Verb</option>
+                <option value="Adjective">Adjective</option>
+                <option value="Misc">Misc</option>
+            </select>
+        </p>
+        
+        <p>English:
+            <input formControlName="English"></p>
+    
+        <p>Indativor:
+            <input formControlName="Indativor"></p>
+        
+        <p>
+            Core: {{ Form.controls.Core.value }}
+        </p>
+    </div>
+
+    <app-generator
+    [type]="activeType"
+    (wordEmitter)="assignGeneratedWord($event)"></app-generator>
+
+    <app-formButtons></app-formButtons>
+</form>
+
+<div style="clear: both;"></div>

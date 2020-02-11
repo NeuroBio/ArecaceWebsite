@@ -35,6 +35,7 @@ import { LooseNotesFormComponent } from './Forms/loosenotes/loose-notes-form/loo
 import { LanguageTableComponent } from './LanguageGeneration/language-table/language-table.component';
 import { LanguageComponent } from './DashBoard/language/language.component';
 import { GeneratorComponent } from './LanguageGeneration/generator/generator.component';
+import { WordFormComponent } from './LanguageGeneration/word-form/word-form.component';
 
 @NgModule({
   declarations: [
@@ -66,7 +67,8 @@ import { GeneratorComponent } from './LanguageGeneration/generator/generator.com
     LooseNotesFormComponent,
     LanguageTableComponent,
     LanguageComponent,
-    GeneratorComponent
+    GeneratorComponent,
+    WordFormComponent
   ],
   imports: [
     CommonModule,
