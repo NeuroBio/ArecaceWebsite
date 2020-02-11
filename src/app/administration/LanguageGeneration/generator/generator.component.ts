@@ -3,7 +3,7 @@ import { Component, OnInit, OnDestroy, OnChanges,
 import { Nomadic, Word } from '../rules';
 import { Subscription } from 'rxjs';
 import { CRUDcontrollerService } from '../../services/CRUDcontroller.service';
-import { Validators, FormBuilder, FormGroup }     from '@angular/forms';
+import { Validators, FormBuilder }     from '@angular/forms';
 
 @Component({
   selector: 'app-generator',
@@ -16,7 +16,7 @@ export class GeneratorComponent implements OnInit, OnDestroy, OnChanges {
   Nomadic = new Nomadic;
   newWords: string[];
   stream: Subscription;
-  Form: FormGroup;
+  Form = this.createForm();
   selected: number;
   @Output() wordEmitter: EventEmitter<string> = new EventEmitter();
   @Input() type: string;
@@ -28,11 +28,10 @@ export class GeneratorComponent implements OnInit, OnDestroy, OnChanges {
     this.stream = this.controller.itemList.subscribe(list => {
       this.Dictionary = list;
     });
-    this.Form = this.createForm();
   }
 
   ngOnChanges() {
-    this.Form.patchValue({Type: this.type});
+      this.Form.patchValue({Type: this.type});
   }
 
   ngOnDestroy() {

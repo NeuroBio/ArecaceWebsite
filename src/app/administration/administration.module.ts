@@ -36,6 +36,7 @@ import { LanguageTableComponent } from './LanguageGeneration/language-table/lang
 import { LanguageComponent } from './DashBoard/language/language.component';
 import { GeneratorComponent } from './LanguageGeneration/generator/generator.component';
 import { WordFormComponent } from './LanguageGeneration/word-form/word-form.component';
+import { ComplexWordFormComponent } from './LanguageGeneration/complex-word-form/complex-word-form.component';
 
 @NgModule({
   declarations: [
@@ -68,7 +69,8 @@ import { WordFormComponent } from './LanguageGeneration/word-form/word-form.comp
     LanguageTableComponent,
     LanguageComponent,
     GeneratorComponent,
-    WordFormComponent
+    WordFormComponent,
+    ComplexWordFormComponent
   ],
   imports: [
     CommonModule,
