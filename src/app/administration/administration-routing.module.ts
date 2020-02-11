@@ -30,7 +30,7 @@ import { PixelformComponent } from './Forms/othersart/pixelform/pixelform.compon
 import { CharacterFormComponent } from '../SharedComponentModules/SharedForms/MakeCharacter/characterform/characterform.component';
 import { SourceAffinityComponent } from './Forms/sourceaffinity/source-affinity/source-affinity.component';
 import { LooseNotesFormComponent } from './Forms/loosenotes/loose-notes-form/loose-notes-form.component';
-import { NomadicComponent } from './LanguageGeneration/nomadic/nomadic.component';
+import { LanguageComponent } from './DashBoard/language/language.component';
 
 const AdminRoutes: Routes = [
   {path: '', component: AdminComponent,
@@ -75,7 +75,7 @@ const AdminRoutes: Routes = [
           {path: 'comic', component: WebsiteTextComponent },
          ]
       },
-      {path: 'Nomadic', component: NomadicComponent},
+      {path: 'Nomadic', component: LanguageComponent},
       {path:'Messages', component: MessageComponent,
         resolve: {MessageresolverService}}
       ]

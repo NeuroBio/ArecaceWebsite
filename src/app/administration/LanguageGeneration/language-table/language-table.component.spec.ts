@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { NomadicComponent } from './nomadic.component';
+import { LanguageTableComponent } from './language-table.component';
 
-describe('NomadicComponent', () => {
-  let component: NomadicComponent;
-  let fixture: ComponentFixture<NomadicComponent>;
+describe('LanguageTableComponent', () => {
+  let component: LanguageTableComponent;
+  let fixture: ComponentFixture<LanguageTableComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ NomadicComponent ]
+      declarations: [ LanguageTableComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(NomadicComponent);
+    fixture = TestBed.createComponent(LanguageTableComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

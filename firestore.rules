@@ -105,6 +105,10 @@ service cloud.firestore {
     		allow read;
     }
 
+    match /Nomadic/{allDocuments} {
+    		allow read;
+    }
+
 		
     
     

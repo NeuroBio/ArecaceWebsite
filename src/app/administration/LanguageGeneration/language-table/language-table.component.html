@@ -1,11 +1,11 @@
 <h3>Nomadic Dictionary</h3>
 <table>
     <tr>
-        <th>English</th>
         <th>Indativor</th>
-        <th>Core</th>
+        <th>English</th>
         <th>Type</th>
         <th>Level</th>
+        <th>Core</th>
         <th>Components</th>
     </tr>
     <tr *ngFor="let word of Dictionary, let i = index">
@@ -18,8 +18,3 @@
         <td><button (click)="loadWord(i)">Edit</button></td>
     </tr>
 </table>
-
-<button (click)="getWords()">Generate Words</button>
-<div *ngFor="let word of newWords">
-    {{ word }}
-</div>
