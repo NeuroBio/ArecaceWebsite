@@ -23,29 +23,40 @@ export class Word {
     Core: string;
     Components: string;
 
+    constructor(inda: string, eng: string, type: string,
+                level: number, core: string, comp: string) {
+        this.Indativor = inda;
+        this.English = eng;
+        this.Type = type;
+        this.Level = level;
+        this.Core = core;
+        this.Components = comp;
+    }
 }
 
 export class Nomadic {
     Alphabet = new Alphabet;
 
-    makeWord(type: string, dictionary: Word[]) {
+    makeWord(type: string, dictionary: Word[], length?: number) {
+        if(length === undefined) {
+            length = this.getWordLength(type);
+        }
         let New = false;
-        const Length = this.getWordLength(type);
         let Word: string[];
         let Core: string;
         
         while(!New){
-            Word = this.getLetters(Length);
+            Word = this.getLetters(length);
             Word = this.typeFit(Word, type);
-            Core = this.getCore(Word, type);
+            Core = this.getCore(Word.slice(0), type);
             New = !dictionary.some(word => word.Core === Core); //if word in dictionary, toss it
         }
 
-        return Word;
+        return Word.join('');
     }
 
 
-    normDist(min, max, skew) { //https://stackoverflow.com/questions/25582882/javascript-math-random-normal-distribution-gaussian-bell-curve
+    private normDist(min, max, skew) { //https://stackoverflow.com/questions/25582882/javascript-math-random-normal-distribution-gaussian-bell-curve
         let u = 0, v = 0;
         while(u === 0) u = Math.random(); //Converting [0,1) to (0,1)
         while(v === 0) v = Math.random();
@@ -59,38 +70,36 @@ export class Nomadic {
         return num;
     }
 
-    getWordLength(type: string) {
+    private getWordLength(type: string) {
         switch(type) {
             case 'Noun':
-                return this.normDist(3, 9, 2);
+                return Math.floor(this.normDist(3, 9, 2));
             case 'Verb':
-                return this.normDist(4, 9, 2);
+                return Math.floor(this.normDist(4, 9, 2));
             case 'Adjective':
-                return this.normDist(4, 10, 2);
+                return Math.floor(this.normDist(3, 10, 2.5));
         }
     }
 
-    getLetters(length: number) {
-        let Word = new Array(length);
-        Word.forEach((letter, i) => {
+    private getLetters(length: number) {
+        let Word = [];
+        for(let i = 0; i < length; i++){
             if(i === 0) {
-                return this.sample(this.Alphabet.characters, this.Alphabet.characterProbability);
-            }
-            const Vowel = this.Alphabet.vowels.indexOf(Word[i-1]);
-            if(Vowel){
-                return this.getPostVowelLetter(Word[i-1], Word[i-2]);
+                Word.push(this.sample(this.Alphabet.characters, this.Alphabet.characterProbability));
             } else {
-                return this.getPostConsonantLetter(Word[i-1]);
+                const Vowel = this.Alphabet.vowels.indexOf(Word[i-1]) > -1;
+                if(Vowel){
+                    Word.push(this.getPostVowelLetter(Word[i-1], Word[i-2]));
+                } else {
+                    Word.push(this.getPostConsonantLetter(Word[i-1]));
+                }    
             }
-        });
+        }
         Word = this.preventOrphans(Word);
         return Word;
     }
 
-    getPostVowelLetter(lastLetter: string, lastLastLetter: string) {
-        console.log("lastlast check")
-        console.log(lastLastLetter);
-
+    private getPostVowelLetter(lastLetter: string, lastLastLetter: string) {
         if(lastLetter === 'a') {
             if(Math.random() < .5){
                 return 'e';
@@ -100,6 +109,7 @@ export class Nomadic {
                 return 'r';
             }
         } else if(lastLetter === 'i') {
+    
             if(Math.random() < .6){
                 return "a";
             } else if(lastLastLetter === 's') {
@@ -109,7 +119,7 @@ export class Nomadic {
         return this.sample(this.Alphabet.consonants);
     }
 
-    getPostConsonantLetter(lastLetter: string) {
+    private getPostConsonantLetter(lastLetter: string) {
         if(lastLetter === 'p') {
             return 'h';
         }  else if (lastLetter === 'g') {
@@ -128,7 +138,7 @@ export class Nomadic {
         return this.sample(this.Alphabet.vowels, this.Alphabet.vowelProbability);
     }
 
-    preventOrphans(word: string[]) {
+    private preventOrphans(word: string[]) {
         if(word[word.length-1] === 'p') {
             word.push('h');
         } else if(word[word.length-1] === 'e'  && word[word.length-2] !== 'a') {
@@ -137,7 +147,7 @@ export class Nomadic {
         return word;
     }
 
-    typeFit(word: string[], type: string) {
+    private typeFit(word: string[], type: string) {
         const lastLetter = word[word.length-1];
         switch(type) {
             case 'Noun':
@@ -149,21 +159,22 @@ export class Nomadic {
         }
     }
 
-    fitNoun(word: string[], lastLetter: string) {
+    private fitNoun(word: string[], lastLetter: string) {
         const lastLastLetter = word[word.length-2];
         if( (lastLetter === 'r' && lastLastLetter !== 'e')
         || this.Alphabet.nounEnd.indexOf(lastLetter) === -1) {
             word.push(this.sample(['a', 'i', 'o']));
         }
-        word.forEach((letter, index) => {
+        word = word.map(letter => {
             if(letter === 'x') {
                 return 'kt';
             }
+            return letter;
         });
         return word.join('').split('');
     }
 
-    fitVerb(word: string[], lastLetter: string) {
+    private fitVerb(word: string[], lastLetter: string) {
         if(lastLetter === 'a') {
             word.push(this.sample(['n', 'hin']));
         } else if(lastLetter === 'i') {
@@ -176,9 +187,9 @@ export class Nomadic {
         return word.join('').split('');
     }
 
-    fitAdjetive(word: string[], lastLetter: string) {
+    private fitAdjetive(word: string[], lastLetter: string) {
         if(this.Alphabet.AdjEnd.indexOf(lastLetter) === -1) {
-            if(this.Alphabet.vowels.indexOf(lastLetter) === -1) { //vowel final letter
+            if(this.Alphabet.vowels.indexOf(lastLetter) > -1) { //vowel final letter
                 word.push(this.sample(this.Alphabet.AdjEnd, this.Alphabet.AdjEndProbability));
             } else {
                 word.push(this.sample(this.Alphabet.vowels, this.Alphabet.vowelProbability));
@@ -196,7 +207,7 @@ export class Nomadic {
         return word;
     }
 
-    getCore (word: string[], type: string) {
+    private getCore (word: string[], type: string) {
         switch(type) {
             case 'Noun':
                 return word.join('');
@@ -207,7 +218,7 @@ export class Nomadic {
         }
     }
 
-    sample(options: any[], probability?: number[]) {
+    private sample(options: any[], probability?: number[]) {
         //when probability is not declared, assume equal chance for all options
         if(probability === undefined){
             probability = [];

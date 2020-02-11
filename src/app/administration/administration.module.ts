@@ -32,6 +32,7 @@ import { PixelformComponent } from './Forms/othersart/pixelform/pixelform.compon
 import { SharedFormsModule } from '../SharedComponentModules/SharedForms/shared-forms.module';
 import { SourceAffinityComponent } from './Forms/sourceaffinity/source-affinity/source-affinity.component';
 import { LooseNotesFormComponent } from './Forms/loosenotes/loose-notes-form/loose-notes-form.component';
+import { NomadicComponent } from './LanguageGeneration/nomadic/nomadic.component';
 
 @NgModule({
   declarations: [
@@ -60,7 +61,8 @@ import { LooseNotesFormComponent } from './Forms/loosenotes/loose-notes-form/loo
     OthersArtFormComponent,
     PixelformComponent,
     SourceAffinityComponent,
-    LooseNotesFormComponent
+    LooseNotesFormComponent,
+    NomadicComponent
   ],
   imports: [
     CommonModule,

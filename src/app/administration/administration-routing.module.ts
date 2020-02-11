@@ -30,7 +30,7 @@ import { PixelformComponent } from './Forms/othersart/pixelform/pixelform.compon
 import { CharacterFormComponent } from '../SharedComponentModules/SharedForms/MakeCharacter/characterform/characterform.component';
 import { SourceAffinityComponent } from './Forms/sourceaffinity/source-affinity/source-affinity.component';
 import { LooseNotesFormComponent } from './Forms/loosenotes/loose-notes-form/loose-notes-form.component';
-
+import { NomadicComponent } from './LanguageGeneration/nomadic/nomadic.component';
 
 const AdminRoutes: Routes = [
   {path: '', component: AdminComponent,
@@ -62,7 +62,7 @@ const AdminRoutes: Routes = [
           { path: 'notes', component: LooseNotesFormComponent}
         ]},
         {path: 'Pages', component:PagesComponent, 
-         children:[
+        children:[
           {path: '', redirectTo: 'home', pathMatch: 'full'},
           {path: 'home', component: WebsiteTextComponent },
           {path: 'about', component: AboutTextComponent },
@@ -75,8 +75,9 @@ const AdminRoutes: Routes = [
           {path: 'comic', component: WebsiteTextComponent },
          ]
       },
-        {path:'Messages', component: MessageComponent,
-          resolve: {MessageresolverService}}
+      {path: 'Nomadic', component: NomadicComponent},
+      {path:'Messages', component: MessageComponent,
+        resolve: {MessageresolverService}}
       ]
   },
 ]}
