@@ -31,6 +31,7 @@ export class LanguageTableComponent implements OnChanges {
     this.controller.assignEditItem(this.currentDict[index]);
   }
   onFilter(style: string) {
+    this.Filter = style;
     switch(style) {
       case 'All':
         this.currentDict = Object.assign([], this.Dictionary);
@@ -48,6 +49,7 @@ export class LanguageTableComponent implements OnChanges {
     this.onSort(this.Sort);
   }
   onSort(style: string) {
+    this.Sort = style;
     switch(style) {
       case 'Alphebetical':
         this.currentDict.sort((a,b) => a.Indativor < b.Indativor ? -1 : 1);
