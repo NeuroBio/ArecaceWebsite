@@ -2,10 +2,15 @@
     <div id="mainform">
         <p>Type:
             <select formControlName="Type" (change)="updateType()">
-                <option value="Noun">Noun</option>
-                <option value="Verb">Verb</option>
-                <option value="Adjective">Adjective</option>
-                <option value="Misc">Misc</option>
+                <option *ngFor="let type of WordTypes.Types"
+                [value]="type">{{ type }}</option>
+            </select>
+        </p>
+
+        <p>Subtype:
+            <select formControlName="Subtype">
+                <option *ngFor="let type of WordTypes.Subtypes"
+                [value]="type">{{ type }}</option>
             </select>
         </p>
         

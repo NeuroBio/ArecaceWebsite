@@ -15,20 +15,31 @@ export class Alphabet {
     AdjEndProbability = [.375, .75, .8125, .875, .9375, 1]
 }
 
+export class WordTypes {
+    Types = ['Noun', 'Verb', 'Adjective', 'Pronoun',
+             'Preposition', 'Determiners', 'Interrogative',
+             'Modifier'];
+    Subtypes = ['None', 'Color/Pattern', 'Amount', 'Fauna', 'Flora',
+                'Body Parts', 'Environment', 'Daily Work', 'People', 'Time',
+                'Temperature'];
+}
+
 export class Word {
     Indativor: string;
     English: string;
     Type: string;
+    Subtype: string;
     Level: number;
     Core: string;
     Components: string;
-    ComponentWords: string;
+    ComponentWords?: string;
 
-    constructor(inda: string, eng: string, type: string,
+    constructor(inda: string, eng: string, type: string, subtype:string,
                 level: number, core: string, comp: string, compwords: string) {
         this.Indativor = inda;
         this.English = eng;
         this.Type = type;
+        this.Subtype =subtype;
         this.Level = level;
         this.Core = core;
         this.Components = comp;
@@ -78,7 +89,7 @@ export class Nomadic {
 
     private getWordLength(type: string) {
         switch(type) {
-            case 'Noun':
+            default:
                 return Math.floor(this.normDist(3, 9, 2));
             case 'Verb':
                 return Math.floor(this.normDist(4, 9, 2));
@@ -156,12 +167,12 @@ export class Nomadic {
     private typeFit(word: string[], type: string) {
         const lastLetter = word[word.length-1];
         switch(type) {
-            case 'Noun':
+            default:
                 return this.fitNoun(word, lastLetter);
             case 'Verb':
                 return this.fitVerb(word, lastLetter);
             case 'Adjective':
-                return this.fitAdjetive(word, lastLetter);
+                return this.fitAdjective(word, lastLetter);
         }
     }
 
@@ -193,7 +204,7 @@ export class Nomadic {
         return word.join('').split('');
     }
 
-    private fitAdjetive(word: string[], lastLetter: string) {
+    private fitAdjective(word: string[], lastLetter: string) {
         if(this.Alphabet.AdjEnd.indexOf(lastLetter) === -1) {
             if(this.Alphabet.vowels.indexOf(lastLetter) > -1) { //vowel final letter
                 word.push(this.sample(this.Alphabet.AdjEnd, this.Alphabet.AdjEndProbability));
@@ -247,9 +258,11 @@ export class Nomadic {
     }
 
     filterByType(dictionary: Word[]) {
-        const sortedDict = { 'Noun': [], 'Verb': [],
-                             'Adjective': [], 'Misc': [] };
+        const sortedDict = {};
         dictionary.forEach(word => {
+            if(!sortedDict[word.Type]) {//make catagoreis on the fly as needed
+                sortedDict[word.Type] = [];
+            }
             sortedDict[word.Type].push(word);
         });
         return sortedDict;
@@ -273,4 +286,5 @@ export class Nomadic {
         cores = cores.map(core => core.join(''))
         return(cores.join(''));
     }
+
 }

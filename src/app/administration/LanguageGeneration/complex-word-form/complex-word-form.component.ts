@@ -3,7 +3,7 @@ import { Validators, FormBuilder, FormGroup, FormArray }     from '@angular/form
 import { Subscription }                           from 'rxjs';
 
 import { CRUDcontrollerService }       from '../../services/CRUDcontroller.service'
-import { Word, Nomadic, CompWord } from '../rules';
+import { Word, Nomadic, CompWord, WordTypes } from '../rules';
 
 @Component({
   selector: 'app-complex-word-form',
@@ -13,6 +13,7 @@ import { Word, Nomadic, CompWord } from '../rules';
 export class ComplexWordFormComponent implements OnInit, OnDestroy {
 
   Nomadic = new Nomadic();
+  WordTypes = new WordTypes();
   Form: FormGroup
   stream1: Subscription;
   stream2: Subscription;
@@ -45,6 +46,7 @@ export class ComplexWordFormComponent implements OnInit, OnDestroy {
       Indativor: '',
       English: ['', Validators.required],
       Type: '',
+      Subtype: 'None',
       Level: '',
       Core: 'NA',
       Components: '',
@@ -62,8 +64,9 @@ export class ComplexWordFormComponent implements OnInit, OnDestroy {
     } else {
       this.addWord(true);
       this.addWord(true);
-      this.pickType("Noun",0);
-      this.pickType("Noun",0);
+      this.pickType('Noun', 0);
+      this.pickType('Noun', 1);
+      this.pickWord();
     }
     this.allowDelete = this.Form.controls.ComponentWords.value.length > 2
   }
@@ -76,7 +79,7 @@ export class ComplexWordFormComponent implements OnInit, OnDestroy {
     }
     //Complete Form   
     const Final:Word = Object.assign({}, this.Form.value);
-    console.log(Final.ComponentWords)
+    Final.Components = this.Form.controls.ComponentWords.value.map(word => word.Word).join(';');
     Final.ComponentWords = JSON.stringify(Final.ComponentWords); 
     this.controller.activeFormData.next([Final,
                                       [],
@@ -96,7 +99,7 @@ export class ComplexWordFormComponent implements OnInit, OnDestroy {
   pickType(type: string, index: number) {
     (<FormArray>this.Form.controls.ComponentWords).at(index)
     .patchValue({Word: this.SortedDictionary[type][0].Indativor});
-    console.log((<FormArray>this.Form.controls.ComponentWords).value)
+    this.handleModifiers();
   }
 
   pickWord() {
@@ -117,6 +120,7 @@ export class ComplexWordFormComponent implements OnInit, OnDestroy {
       this.Form.patchValue({Indativor: newWord, Level: Levels,
                             Components: Components, Type: Type});
     } catch {}
+    this.handleModifiers();
   }
 
   addWord(add: boolean, type: string = 'Noun', word: string = '') {
@@ -127,7 +131,23 @@ export class ComplexWordFormComponent implements OnInit, OnDestroy {
       (<FormArray>this.Form.controls.ComponentWords)
       .removeAt(this.Form.controls.ComponentWords.value.length-1);
     }
-    this.allowDelete = this.Form.controls.ComponentWords.value.length > 2
+    this.allowDelete = this.Form.controls.ComponentWords.value.length > 2;
+    this.handleModifiers();
+  }
+
+  handleModifiers() {
+    const lastWord = (<FormArray>this.Form.controls.ComponentWords)
+      .at(this.Form.controls.ComponentWords.value.length-1).value;
+    switch(lastWord.Word) {
+      case 'sil':
+        this.Form.patchValue({Type: 'Noun'});
+        break;
+      case 'dex':
+        this.Form.patchValue({Type: 'Adjective'});
+        break;
+      default:
+        this.Form.patchValue({Type: lastWord.Type});
+    }
   }
 
 }

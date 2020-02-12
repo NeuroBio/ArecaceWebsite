@@ -8,6 +8,13 @@
 
     <p>English: <input formControlName="English"></p>
 
+    <p>Subtype:
+        <select formControlName="Subtype">
+            <option *ngFor="let type of WordTypes.Subtypes"
+            [value]="type">{{ type }}</option>
+        </select>
+    </p>
+
     <p>Indativor: {{ Form.controls.Indativor.value }} </p>
 
     <p>Level: {{ Form.controls.Level.value }}</p>

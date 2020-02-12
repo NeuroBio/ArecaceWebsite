@@ -3,7 +3,7 @@ import { Validators, FormBuilder, FormGroup }     from '@angular/forms';
 import { Subscription }                           from 'rxjs';
 
 import { CRUDcontrollerService }       from '../../services/CRUDcontroller.service'
-import { Word, Nomadic } from '../rules';
+import { Word, Nomadic, WordTypes } from '../rules';
 
 @Component({
   selector: 'app-word-form',
@@ -13,6 +13,7 @@ import { Word, Nomadic } from '../rules';
 export class WordFormComponent implements OnInit, OnDestroy {
 
   Nomadic = new Nomadic();
+  WordTypes = new WordTypes();
   Form: FormGroup
   stream1: Subscription;
   stream2: Subscription;
@@ -39,6 +40,7 @@ export class WordFormComponent implements OnInit, OnDestroy {
       Indativor: ['', Validators.required],
       English: ['', Validators.required],
       Type: 'Noun',
+      Subtype: 'None',
       Level: 1,
       Core: '',
       Components: 'NA',
@@ -81,16 +83,12 @@ export class WordFormComponent implements OnInit, OnDestroy {
   }
 
   updateType() {
-    let currentType = this.Form.controls.Type.value;
-    if(currentType === 'Misc') {
-      currentType = 'Noun'
-    }
-    this.activeType = currentType;
+    this.activeType = this.Form.controls.Type.value;
     this.updateCore();
   }
 
   updateCore() {
-    const word =this.Form.controls.Indativor.value;
+    const word = this.Form.controls.Indativor.value;
     const Core = this.Nomadic.getCore(word.split(''), this.Form.controls.Type.value).join('');
     this.Form.patchValue({Core: Core});
   }
