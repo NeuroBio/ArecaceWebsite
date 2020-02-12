@@ -12,13 +12,15 @@ export class LanguageTableComponent implements OnInit, OnDestroy {
 
   Dictionary: Word[];
   stream: Subscription;
+  sortOptions = ['All', 'Alphebetical', 'Type', 'Subtype'];
 
   constructor(private controller: CRUDcontrollerService) { }
 
   ngOnInit() {
     this.stream = this.controller.itemList.subscribe(dict => {
       if(dict){
-        this.Dictionary = this.sortDictionary(dict);
+        this.Dictionary = dict;
+        this.onSort('All');
       }
     });
   }
@@ -31,10 +33,25 @@ export class LanguageTableComponent implements OnInit, OnDestroy {
     this.controller.assignEditItem(this.Dictionary[index]);
   }
 
-  sortDictionary(dict: Word[]) {
-    dict.sort((a,b) => a.Indativor < b.Indativor ? -1 : 1);
-    dict.sort((a,b) => a.Subtype < b.Subtype ? -1 :  a.Subtype > b.Subtype ? 1 : 0);
-    dict.sort((a,b) => a.Type < b.Type ? -1 :  a.Type > b.Type ? 1 : 0);
-    return dict;
+  onSort(style: string) {
+    switch(style) {
+      case 'Alphebetical':
+        this.Dictionary.sort((a,b) => a.Indativor < b.Indativor ? -1 : 1);
+        break;
+      case 'SubType':
+        this.Dictionary.sort((a,b) => a.Indativor < b.Indativor ? -1 : 1);
+        this.Dictionary.sort((a,b) => a.Subtype < b.Subtype ? -1 :  a.Subtype > b.Subtype ? 1 : 0);
+        break;
+      case 'Type':
+        this.Dictionary.sort((a,b) => a.Indativor < b.Indativor ? -1 : 1);
+        this.Dictionary.sort((a,b) => a.Type < b.Type ? -1 :  a.Type > b.Type ? 1 : 0);
+        break;
+      case 'All':
+        this.Dictionary.sort((a,b) => a.Indativor < b.Indativor ? -1 : 1);
+        this.Dictionary.sort((a,b) => a.Subtype < b.Subtype ? -1 :  a.Subtype > b.Subtype ? 1 : 0);
+        this.Dictionary.sort((a,b) => a.Type < b.Type ? -1 :  a.Type > b.Type ? 1 : 0);
+        break;
+    }
+
   }
 }

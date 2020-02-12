@@ -22,3 +22,16 @@ button {
     padding: 3px 5px 3px 5px;
     font-size: 14pt;
 }
+
+label {
+    border: 0px;
+    margin: 2px;
+}
+
+div.sortOption {
+    float: left;
+}
+
+div#optionHolder {
+    margin: 5px;
+}

@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy, OnChanges,
           Output, EventEmitter, Input } from '@angular/core';
-import { Nomadic, Word } from '../rules';
+import { Nomadic, Word, WordTypes } from '../rules';
 import { Subscription } from 'rxjs';
 import { CRUDcontrollerService } from '../../services/CRUDcontroller.service';
 import { Validators, FormBuilder }     from '@angular/forms';
@@ -14,6 +14,7 @@ export class GeneratorComponent implements OnInit, OnDestroy, OnChanges {
 
   Dictionary: Word[];
   Nomadic = new Nomadic;
+  WordTypes = new WordTypes();
   newWords: string[];
   stream: Subscription;
   Form = this.createForm();

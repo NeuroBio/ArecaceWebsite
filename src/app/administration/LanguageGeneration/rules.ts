@@ -17,8 +17,8 @@ export class Alphabet {
 
 export class WordTypes {
     Types = ['Noun', 'Verb', 'Adjective', 'Pronoun',
-             'Preposition', 'Determiners', 'Interrogative',
-             'Modifier'];
+             'Preposition', 'Ordinals', 'Interrogative',
+             'Modifier', 'Numerals'];
     Subtypes = ['None', 'Color/Pattern', 'Amount/Size', 'Fauna', 'Flora',
                 'Body Parts', 'Environment', 'Daily Work', 'People', 'Time/Position',
                 'Temperature'];

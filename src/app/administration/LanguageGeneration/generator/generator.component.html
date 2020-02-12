@@ -13,10 +13,9 @@
 <form [formGroup]="Form">
     <p>Type:
         <select formControlName="Type">
-            <option value="Noun">Noun</option>
-            <option value="Verb">Verb</option>
-            <option value="Adjective">Adjective</option>
-        </select>
+            <option *ngFor="let type of WordTypes.Types"
+            [value]="type">{{ type }}</option>
+        </select>    
     </p>
     
     <p>How Many: <input formControlName="Number" type="number" class="short"></p>
