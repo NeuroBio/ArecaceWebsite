@@ -22,7 +22,7 @@
         <div *ngFor="let word of WordArray.controls; let i = index"
         [formGroupName]="i">
             <p>Word {{ i + 1}}:
-                <select formControlName="Type">
+                <select formControlName="Type" (change)="pickType($event.target.value, i)">
                     <option value="Noun">Noun</option>
                     <option value="Verb">Verb</option>
                     <option value="Adjective">Adjective</option>

@@ -25,12 +25,13 @@ export class ComplexWordFormComponent implements OnInit, OnDestroy {
               private controller: CRUDcontrollerService) { }
 
   ngOnInit() {
-    this.stream1 = this.controller.itemToEdit
-      .subscribe(item => this.assignFormData(item));
-    this.stream2 = this.controller.triggerProcess
-      .subscribe(() => this.processForm());
-    this.stream3 = this.controller.itemList.subscribe(list =>
+    this.stream1 = this.controller.itemList.subscribe(list =>
       this.SortedDictionary = this.Nomadic.filterByType(list));
+    this.stream2 = this.controller.itemToEdit
+      .subscribe(item => this.assignFormData(item));
+    this.stream3 = this.controller.triggerProcess
+      .subscribe(() => this.processForm());
+   
   }
 
   ngOnDestroy() {
@@ -61,6 +62,8 @@ export class ComplexWordFormComponent implements OnInit, OnDestroy {
     } else {
       this.addWord(true);
       this.addWord(true);
+      this.pickType("Noun",0);
+      this.pickType("Noun",0);
     }
     this.allowDelete = this.Form.controls.ComponentWords.value.length > 2
   }
@@ -88,6 +91,12 @@ export class ComplexWordFormComponent implements OnInit, OnDestroy {
     this.WordArray = this.fb.array([]);
     this.Form = this.createForm();
     this.controller.message.next('');
+  }
+
+  pickType(type: string, index: number) {
+    (<FormArray>this.Form.controls.ComponentWords).at(index)
+    .patchValue({Word: this.SortedDictionary[type][0].Indativor});
+    console.log((<FormArray>this.Form.controls.ComponentWords).value)
   }
 
   pickWord() {
