@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Word } from '../rules';
 import { Subscription } from 'rxjs';
 import { CRUDcontrollerService } from '../../services/CRUDcontroller.service';
+import { NumberValueAccessor } from '@angular/forms';
 
 @Component({
   selector: 'app-language-table',
@@ -11,6 +12,7 @@ import { CRUDcontrollerService } from '../../services/CRUDcontroller.service';
 export class LanguageTableComponent implements OnInit, OnDestroy {
 
   Dictionary: Word[];
+  CoreWords : Number;
   stream: Subscription;
   sortOptions = ['All', 'Alphebetical', 'Type', 'Subtype'];
 
@@ -21,6 +23,7 @@ export class LanguageTableComponent implements OnInit, OnDestroy {
       if(dict){
         this.Dictionary = dict;
         this.onSort('All');
+        this.CoreWords = this.Dictionary.filter(word => word.Level === 1).length;
       }
     });
   }
@@ -38,7 +41,7 @@ export class LanguageTableComponent implements OnInit, OnDestroy {
       case 'Alphebetical':
         this.Dictionary.sort((a,b) => a.Indativor < b.Indativor ? -1 : 1);
         break;
-      case 'SubType':
+      case 'Subtype':
         this.Dictionary.sort((a,b) => a.Indativor < b.Indativor ? -1 : 1);
         this.Dictionary.sort((a,b) => a.Subtype < b.Subtype ? -1 :  a.Subtype > b.Subtype ? 1 : 0);
         break;

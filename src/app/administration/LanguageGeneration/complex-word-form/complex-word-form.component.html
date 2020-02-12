@@ -40,6 +40,9 @@
                     [value]="word.Indativor">
                         {{ word.English }} / {{ word.Indativor }}</option>
                 </select>
+                <span *ngIf="word.get('Type').value === 'Verb'">
+                    Use core? <input type="checkbox" formControlName="Core">
+                </span>
             </p>
         </div>
     </div>

@@ -1,5 +1,5 @@
 <h3>Nomadic Dictionary</h3>
-
+<div>Core Words: {{ CoreWords }}</div>
 <div *ngFor="let option of sortOptions" id="optionHolder">
     <div class="sortOption">
         <input type="radio" name="sorter"  [id]="option"

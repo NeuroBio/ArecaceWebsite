@@ -60,7 +60,7 @@ export class ComplexWordFormComponent implements OnInit, OnDestroy {
       this.Form = this.controller.quickAssign(this.Form, editFormData);
       const compwords = <CompWord[]>JSON.parse(editFormData.ComponentWords);
       compwords.forEach(word => 
-        this.addWord(true, word.Type, word.Word));
+        this.addWord(true, word.Type, word.Word, word.Core));
     } else {
       this.addWord(true);
       this.addWord(true);
@@ -103,12 +103,15 @@ export class ComplexWordFormComponent implements OnInit, OnDestroy {
   }
 
   pickWord() {
-    try {
       let Components = [];
       let Levels = [];
       const Words = this.Form.controls.ComponentWords.value;
       Words.forEach((word, i) => {
-        Components[i] = word.Word;
+        if(word.Core){
+          Components[i] = word.Word.split('').splice(0,word.Word.length-2).join('');
+        }else {
+          Components[i] = word.Word;
+        }
         const index = this.SortedDictionary[word.Type].map(word =>
           word.Indativor).indexOf(word.Word);
         Levels[i] = this.SortedDictionary[word.Type][index].Level;
@@ -119,14 +122,13 @@ export class ComplexWordFormComponent implements OnInit, OnDestroy {
       Levels = Levels.reduce((a,b) => +a + +b, 0);
       this.Form.patchValue({Indativor: newWord, Level: Levels,
                             Components: Components, Type: Type});
-    } catch {}
     this.handleModifiers();
   }
 
-  addWord(add: boolean, type: string = 'Noun', word: string = '') {
+  addWord(add: boolean, type: string = 'Noun', word: string = '', core: boolean = false) {
     if(add) {
       (<FormArray>this.Form.controls.ComponentWords)
-      .push(this.fb.group({Type: type, Word: word}));
+      .push(this.fb.group({Type: type, Word: word, Core: core}));
     } else {
       (<FormArray>this.Form.controls.ComponentWords)
       .removeAt(this.Form.controls.ComponentWords.value.length-1);
@@ -141,12 +143,21 @@ export class ComplexWordFormComponent implements OnInit, OnDestroy {
     switch(lastWord.Word) {
       case 'sil':
         this.Form.patchValue({Type: 'Noun'});
-        break;
+        return;
       case 'dex':
         this.Form.patchValue({Type: 'Adjective'});
-        break;
+        return;
       default:
-        this.Form.patchValue({Type: lastWord.Type});
+        const firstWord = (<FormArray>this.Form.controls.ComponentWords)
+          .at(this.Form.controls.ComponentWords.value.length-1).value;
+          switch(firstWord.Word) {
+            case 'zalli':
+              this.Form.patchValue({Type: 'Interrogative'});
+            case 'ersi':
+                this.Form.patchValue({Type: 'Noun'});
+            default:
+              this.Form.patchValue({Type: lastWord.Type});
+          }
     }
   }
 

@@ -18,10 +18,10 @@ export class Alphabet {
 export class WordTypes {
     Types = ['Noun', 'Verb', 'Adjective', 'Pronoun',
              'Preposition', 'Ordinals', 'Interrogative',
-             'Modifier', 'Numerals'];
+             'Modifier', 'Numerals', 'Misc', 'Slang', 'False', 'True'];
     Subtypes = ['None', 'Color/Pattern', 'Amount/Size', 'Fauna', 'Flora',
-                'Body Parts', 'Environment', 'Daily Work', 'People', 'Time/Position',
-                'Temperature'];
+                'Body Parts', 'Environment', 'Daily Work', 'Daily Life', 'People',
+                'Time/Position', 'Temperature', 'Senses/Emotion'];
 }
 
 export class Word {
@@ -50,6 +50,7 @@ export class Word {
 export class CompWord {
     Type: string;
     Word: string;
+    Core: boolean;
 }
 
 export class Nomadic {
@@ -283,7 +284,14 @@ export class Nomadic {
                 cores[i].push('i');
             }
         }
-        cores = cores.map(core => core.join(''))
+        if(words[words.length-1].Core === true) {
+            cores[cores.length-1] = this.getCore(cores[cores.length-1], 'Verb');    
+        }
+
+        cores = cores.map(core => core.join(''));
+        if(cores[0] === 'ersi') {
+            cores.push['i'];
+        }
         return(cores.join(''));
     }
 
