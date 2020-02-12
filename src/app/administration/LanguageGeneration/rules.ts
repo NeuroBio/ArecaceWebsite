@@ -22,16 +22,23 @@ export class Word {
     Level: number;
     Core: string;
     Components: string;
+    ComponentWords: string;
 
     constructor(inda: string, eng: string, type: string,
-                level: number, core: string, comp: string) {
+                level: number, core: string, comp: string, compwords: string) {
         this.Indativor = inda;
         this.English = eng;
         this.Type = type;
         this.Level = level;
         this.Core = core;
         this.Components = comp;
+        this.ComponentWords = compwords;
     }
+}
+
+export class CompWord {
+    Type: string;
+    Word: string;
 }
 
 export class Nomadic {
@@ -48,13 +55,12 @@ export class Nomadic {
         while(!New){
             Word = this.getLetters(length);
             Word = this.typeFit(Word, type);
-            Core = this.getCore(Word.slice(0), type);
+            Core = this.getCore(Word.slice(0), type).join('');
             New = !dictionary.some(word => word.Core === Core); //if word in dictionary, toss it
         }
 
         return Word.join('');
     }
-
 
     private normDist(min, max, skew) { //https://stackoverflow.com/questions/25582882/javascript-math-random-normal-distribution-gaussian-bell-curve
         let u = 0, v = 0;
@@ -209,12 +215,12 @@ export class Nomadic {
 
     getCore (word: string[], type: string) {
         switch(type) {
-            case 'Noun':
-                return word.join('');
             case 'Adjective':
-                return word.slice(0,-1).join('');
+                return word.slice(0,-1);
             case 'Verb':
-                return word.splice(0,word.length-2).join('');
+                return word.splice(0,word.length-2);
+            default:
+                return word;
         }
     }
 
@@ -238,5 +244,33 @@ export class Nomadic {
             }
         }
         console.error("Nothing was chosen during sampling!")
+    }
+
+    filterByType(dictionary: Word[]) {
+        const sortedDict = { 'Noun': [], 'Verb': [],
+                             'Adjective': [], 'Misc': [] };
+        dictionary.forEach(word => {
+            sortedDict[word.Type].push(word);
+        });
+        return sortedDict;
+    }
+
+    concatinateWords(words: CompWord[], type: string) {
+        let cores =  [];
+        words.forEach(word => {
+            cores.push(word.Word.split(''));
+        });
+        for(let i = 0; i < cores.length-1; i++) {//remove double letters
+            cores[i] = this.getCore(cores[i], words[i].Type)
+            const lastLastLetter = cores[i][cores[i].length-1]
+            if(lastLastLetter === cores[i+1][0]) {
+                cores[i].pop();
+            } else if (this.Alphabet.vowels.indexOf(lastLastLetter) === -1
+                       && lastLastLetter !== undefined) {
+                cores[i].push('i');
+            }
+        }
+        cores = cores.map(core => core.join(''))
+        return(cores.join(''));
     }
 }

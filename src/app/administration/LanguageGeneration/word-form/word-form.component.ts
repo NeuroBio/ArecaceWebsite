@@ -1,5 +1,4 @@
-import { Component, OnInit,
-  OnDestroy, ElementRef }                  from '@angular/core';
+import { Component, OnInit, OnDestroy}                  from '@angular/core';
 import { Validators, FormBuilder, FormGroup }     from '@angular/forms';
 import { Subscription }                           from 'rxjs';
 
@@ -42,7 +41,8 @@ export class WordFormComponent implements OnInit, OnDestroy {
       Type: 'Noun',
       Level: 1,
       Core: '',
-      Components: 'NA'
+      Components: 'NA',
+      ComponentWords: 'NA'
     });
   }
 
@@ -76,7 +76,7 @@ export class WordFormComponent implements OnInit, OnDestroy {
   }
 
   assignGeneratedWord(word: any) {
-    const Core = this.Nomadic.getCore(word.split(''), this.Form.controls.Type.value);
+    const Core = this.Nomadic.getCore(word.split(''), this.Form.controls.Type.value).join('');
     this.Form.patchValue({Indativor: word, Core: Core});
   }
 

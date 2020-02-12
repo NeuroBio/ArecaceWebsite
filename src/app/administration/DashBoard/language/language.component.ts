@@ -10,6 +10,7 @@ import { Subscription } from 'rxjs';
 export class LanguageComponent implements OnInit, OnDestroy {
 
   simple = true;
+  disableSwitchWord = false;
   stream: Subscription;
 
   constructor(private controller: CRUDcontrollerService) { }
@@ -22,6 +23,9 @@ export class LanguageComponent implements OnInit, OnDestroy {
     this.stream = this.controller.itemToEdit.subscribe(word => {
       if(word) {
         this.simple = word.Level === '1';
+        this.disableSwitchWord = true;
+      } else {
+        this.disableSwitchWord = false;
       }
     }
     )
