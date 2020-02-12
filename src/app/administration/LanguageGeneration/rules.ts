@@ -19,8 +19,8 @@ export class WordTypes {
     Types = ['Noun', 'Verb', 'Adjective', 'Pronoun',
              'Preposition', 'Determiners', 'Interrogative',
              'Modifier'];
-    Subtypes = ['None', 'Color/Pattern', 'Amount', 'Fauna', 'Flora',
-                'Body Parts', 'Environment', 'Daily Work', 'People', 'Time',
+    Subtypes = ['None', 'Color/Pattern', 'Amount/Size', 'Fauna', 'Flora',
+                'Body Parts', 'Environment', 'Daily Work', 'People', 'Time/Position',
                 'Temperature'];
 }
 

@@ -33,6 +33,7 @@ export class LanguageTableComponent implements OnInit, OnDestroy {
 
   sortDictionary(dict: Word[]) {
     dict.sort((a,b) => a.Indativor < b.Indativor ? -1 : 1);
+    dict.sort((a,b) => a.Subtype < b.Subtype ? -1 :  a.Subtype > b.Subtype ? 1 : 0);
     dict.sort((a,b) => a.Type < b.Type ? -1 :  a.Type > b.Type ? 1 : 0);
     return dict;
   }
