@@ -16,8 +16,10 @@ export class LanguageTableComponent implements OnInit, OnDestroy {
   constructor(private controller: CRUDcontrollerService) { }
 
   ngOnInit() {
-    this.stream = this.controller.itemList.subscribe(list => {
-      this.Dictionary = list;
+    this.stream = this.controller.itemList.subscribe(dict => {
+      if(dict){
+        this.Dictionary = this.sortDictionary(dict);
+      }
     });
   }
 
@@ -27,5 +29,11 @@ export class LanguageTableComponent implements OnInit, OnDestroy {
 
   loadWord(index: number) {
     this.controller.assignEditItem(this.Dictionary[index]);
+  }
+
+  sortDictionary(dict: Word[]) {
+    dict.sort((a,b) => a.Indativor < b.Indativor ? -1 : 1);
+    dict.sort((a,b) => a.Type < b.Type ? -1 :  a.Type > b.Type ? 1 : 0);
+    return dict;
   }
 }

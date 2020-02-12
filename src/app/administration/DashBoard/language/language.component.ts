@@ -22,13 +22,12 @@ export class LanguageComponent implements OnInit, OnDestroy {
     this.controller.updateButton('Delete', true);
     this.stream = this.controller.itemToEdit.subscribe(word => {
       if(word) {
-        this.simple = word.Level === '1';
+        this.simple = word.Level === 1;
         this.disableSwitchWord = true;
       } else {
         this.disableSwitchWord = false;
       }
-    }
-    )
+    });
   }
    ngOnDestroy() {
      this.stream.unsubscribe();
