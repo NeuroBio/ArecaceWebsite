@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CRUDcontrollerService } from '../../services/CRUDcontroller.service';
 import { Subscription } from 'rxjs';
+import { Word } from '../../../Classes/rules';
 
 @Component({
   selector: 'app-language',
@@ -11,7 +12,9 @@ export class LanguageComponent implements OnInit, OnDestroy {
 
   simple = true;
   disableSwitchWord = false;
-  stream: Subscription;
+  Dictionary: Word[];
+  stream1: Subscription;
+  stream2: Subscription;
 
   constructor(private controller: CRUDcontrollerService) { }
 
@@ -20,7 +23,7 @@ export class LanguageComponent implements OnInit, OnDestroy {
     this.controller.assignButtons([true, true, true, false]);
     this.controller.assignItemList(this.controller.firePaths.value['Nomadic']);
     this.controller.updateButton('Delete', true);
-    this.stream = this.controller.itemToEdit.subscribe(word => {
+    this.stream1 = this.controller.itemToEdit.subscribe(word => {
       if(word) {
         this.simple = word.Level === 1;
         this.disableSwitchWord = true;
@@ -28,9 +31,11 @@ export class LanguageComponent implements OnInit, OnDestroy {
         this.disableSwitchWord = false;
       }
     });
+    this.stream2 = this.controller.itemList.subscribe(dict => this.Dictionary = dict);
   }
    ngOnDestroy() {
-     this.stream.unsubscribe();
+     this.stream1.unsubscribe();
+     this.stream2.unsubscribe();
    }
 
   pickWordType(simple: boolean) {

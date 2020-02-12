@@ -1,3 +1,6 @@
+h2 {
+    padding-bottom: 20px;
+}
 table {
     border: 1px solid whitesmoke;
     margin: 7px;
@@ -26,12 +29,20 @@ button {
 label {
     border: 0px;
     margin: 2px;
+    cursor: pointer;
 }
 
-div.sortOption {
-    float: left;
-}
-
-div#optionHolder {
+div.optionHolder {
     margin: 5px;
+}
+
+div.Sort {
+    display: flex;
+    padding: 5px;
+    padding-left: 20px;
+    background-color: rgb(49,49,49);
+}
+
+div.SortTag {
+    margin-top: 3px;
 }

@@ -3,7 +3,7 @@ import { Validators, FormBuilder, FormGroup }     from '@angular/forms';
 import { Subscription }                           from 'rxjs';
 
 import { CRUDcontrollerService }       from '../../services/CRUDcontroller.service'
-import { Word, Nomadic, WordTypes } from '../rules';
+import { Word, Nomadic, WordTypes } from '../../../Classes/rules';
 
 @Component({
   selector: 'app-word-form',

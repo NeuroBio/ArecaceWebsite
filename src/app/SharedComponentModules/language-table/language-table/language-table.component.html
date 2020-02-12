@@ -1,0 +1,51 @@
+<div class="container" class="compheader" role="header">
+    <h2 class="compheader"> Nomadic Dictionary
+        <div>Core Words: {{ CoreWords }}</div>
+    </h2>
+</div>
+
+<div class="Sort">
+    <div class="SortTag">Sort By:</div>
+    <div *ngFor="let option of sortOptions" class="optionHolder">
+        <div>
+            <input type="radio" name="sorter"  [id]="option"
+            [checked]="option === 'Type and Subtype'"
+            (click)="onSort(option)">
+            <label [for]="option">{{ option }}</label>    
+        </div>
+    </div>
+</div>
+
+<div class="Sort">
+    <div class="SortTag">Filter By:</div>
+    <div *ngFor="let option of filterOptions" class="optionHolder">
+        <div>
+            <input type="radio" name="filter"  [id]="option"
+            [checked]="option === 'All'"
+            (click)="onFilter(option)">
+            <label [for]="option">{{ option }}</label>    
+        </div>
+    </div>
+</div>
+
+<table>
+    <tr>
+        <th>Indativor</th>
+        <th>English</th>
+        <th>Type</th>
+        <th>Subype</th>
+        <th>Level</th>
+        <th>Core</th>
+        <th>Components</th>
+    </tr>
+    <tr *ngFor="let word of currentDict, let i = index">
+        <td>{{ word.Indativor }}</td>
+        <td>{{ word.English }}</td>
+        <td>{{ word.Type }}</td>
+        <td>{{ word.Subtype }}</td>
+        <td>{{ word.Level }}</td>
+        <td>{{ word.Core }}</td>
+        <td>{{ word.Components }}</td>
+        <td *ngIf="Edit"><button (click)="loadWord(i)">Edit</button></td>
+    </tr>
+</table>
