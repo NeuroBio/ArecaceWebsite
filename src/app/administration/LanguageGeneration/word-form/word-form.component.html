@@ -13,7 +13,7 @@
             <input formControlName="English"></p>
     
         <p>Indativor:
-            <input formControlName="Indativor"></p>
+            <input (change)="updateCore()" formControlName="Indativor"></p>
         
         <p>
             Core: {{ Form.controls.Core.value }}

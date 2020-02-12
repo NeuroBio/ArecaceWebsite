@@ -76,8 +76,8 @@ export class WordFormComponent implements OnInit, OnDestroy {
   }
 
   assignGeneratedWord(word: any) {
-    const Core = this.Nomadic.getCore(word.split(''), this.Form.controls.Type.value).join('');
-    this.Form.patchValue({Indativor: word, Core: Core});
+    this.Form.patchValue({Indativor: word});
+    this.updateCore();
   }
 
   updateType() {
@@ -86,5 +86,12 @@ export class WordFormComponent implements OnInit, OnDestroy {
       currentType = 'Noun'
     }
     this.activeType = currentType;
+    this.updateCore();
+  }
+
+  updateCore() {
+    const word =this.Form.controls.Indativor.value;
+    const Core = this.Nomadic.getCore(word.split(''), this.Form.controls.Type.value).join('');
+    this.Form.patchValue({Core: Core});
   }
 }
