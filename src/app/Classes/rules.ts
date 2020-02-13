@@ -18,10 +18,11 @@ export class Alphabet {
 export class WordTypes {
     Types = ['Noun', 'Verb', 'Adjective', 'Pronoun',
              'Preposition', 'Ordinals', 'Interrogative',
-             'Modifier', 'Numerals', 'Misc', 'Slang', 'False', 'True'];
+             'Modifier', 'Numerals', 'Misc'];
     Subtypes = ['None', 'Color/Pattern', 'Amount/Size', 'Fauna', 'Flora',
                 'Body Parts', 'Environment', 'Daily Work', 'Daily Life', 'People',
-                'Time/Position', 'Temperature', 'Senses/Emotion'];
+                'Time/Position', 'Temperature', 'Senses/Emotion', 'False', 'True',
+                'Slang'];
 }
 
 export class Word {

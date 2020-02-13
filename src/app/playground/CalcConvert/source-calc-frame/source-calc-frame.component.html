@@ -1,6 +1,6 @@
 <select *ngIf="canonSA" (change)="populateForm($event.target.value)">
   <option value="-1" selected="true">
-    Canon Character Builds</option>
+    Canon Builds</option>
   <option *ngFor="let canon of canonSA; let i = index"
     [value]="i">{{ canon.ID }}</option>
 </select>

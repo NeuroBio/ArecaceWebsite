@@ -4,8 +4,23 @@ div.background {
 }
 
 div#date {
-    float: right;
+    position: absolute;
     margin: 7px;
+    right: 0;
+}
+
+div#squishNewest {
+    max-width: calc( 100% - 14px);
+}
+div.compheader {
+    padding-top: 20px;
+    display: flex;
+    justify-content: center;    
+}
+div#maincontent {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
 }
 
 div#quickNav {

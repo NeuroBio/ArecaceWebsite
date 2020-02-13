@@ -5,6 +5,9 @@ div#splatter {
     background-image: url(https://firebasestorage.googleapis.com/v0/b/arecaceworld.appspot.com/o/WebSite%2Fsmear4.png?alt=media&token=fc921624-299c-4470-b40e-a22d256f81dd);
 }
 
+div.textblock {
+    border: 1px solid white;
+}
 
 /*feeeeeeeeeeeeeeed*/
 div#updatefeed {
@@ -12,7 +15,7 @@ div#updatefeed {
     float: left;
     height: 500px;
     width: calc(100% - 20px);
-    max-width: 530px;
+    max-width: 600px;
     border: 1px solid white;
     margin: 10px;
     overflow-y: scroll;
