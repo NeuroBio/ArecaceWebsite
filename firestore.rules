@@ -8,7 +8,7 @@ service cloud.firestore {
      
     match /SurveyStats/{allDocuments} {
         allow read;
-        allow write: if isUser();
+        allow update: if isUser();
         allow create: if isAdmin();
     }
   

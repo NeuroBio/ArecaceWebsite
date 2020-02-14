@@ -5,7 +5,7 @@
       ID: <input type="text" formControlName="ID">
   </p>
 
-  <button (click)="setShowSurveys()">Attach to Survey</button>
+  <button (click)="setShowSurveys()" [disabled]="Old">Attach to Survey</button>
   
   <div *ngIf="showSurveys === true">
     <p *ngFor="let survey of surveys; let i = index">

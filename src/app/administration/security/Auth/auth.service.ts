@@ -48,7 +48,7 @@ export class AuthService {
     .then((credential) =>{
       this.updateUserData(credential.user, true,
                           credential.additionalUserInfo.isNewUser);
-    })
+    });
   }
 
   googleLogin() {
@@ -120,7 +120,6 @@ export class AuthService {
   }
 
   refresh() {
-    console.log("auth refresh")
     this.authState.getIdToken(true);
   }
 
