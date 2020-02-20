@@ -73,6 +73,8 @@ const AdminRoutes: Routes = [
           {path: 'login', component: WebsiteTextComponent },
           {path: 'userdash', component: WebsiteTextComponent },
           {path: 'comic', component: WebsiteTextComponent },
+          {path: 'nomadicintro', component: WebsiteTextComponent },
+          {path: 'nomadicsyntax', component: WebsiteTextComponent },
          ]
       },
       {path: 'Nomadic', component: LanguageComponent},

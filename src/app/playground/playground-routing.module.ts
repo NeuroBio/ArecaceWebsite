@@ -7,7 +7,6 @@ import { BlowupmasterComponent } from '../SharedComponentModules/PrimaryContentD
 import { GeneralmemberresolverService } from '../GlobalServices/generalmemberresolver.service';
 import { DateConverterComponent } from './CalcConvert/date-converter/date-converter.component';
 import { SourceCalcFrameComponent } from './CalcConvert/source-calc-frame/source-calc-frame.component';
-import { NomadicHomeComponent } from './nomadic/nomadic-home/nomadic-home.component';
 
 const playgroundRoutes: Routes = [
   {path: '', component: PlaygroundhomeComponent,
@@ -21,8 +20,7 @@ const playgroundRoutes: Routes = [
     {path: 'notfound', redirectTo: ''},
     {path: ':ExtraID', component: BlowupmasterComponent,
      resolve: {links: GeneralmemberresolverService}},
-  ]},
-  {path: 'nomadic', component: NomadicHomeComponent}
+  ]}
 ];
 
 @NgModule({

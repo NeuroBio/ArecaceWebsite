@@ -1,4 +1,9 @@
-<app-language-table
-[Edit]="false"
-[Dictionary]="Dictionary">
-</app-language-table>
+<div class="toggler" role="navigation">
+    <div *ngFor="let choice of choices, let i = index" class="toggler">
+        <input type="radio" class="toggler" name="topic" [id]="choice"
+        (click)="pickTopic(i)" [checked]="selected === i">
+        <label class="toggler" [for]="choice"  tabindex="0"
+        (keyup.enter)="pickTopic(i)">{{ choice | titlecase }}</label>
+    </div>
+</div>
+<router-outlet></router-outlet>

@@ -1,27 +1,24 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Word } from '../../../Classes/rules';
-import { FireBaseService } from '../../../GlobalServices/firebase.service';
-import { Subscription }                           from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-nomadic-home',
   templateUrl: './nomadic-home.component.html',
   styleUrls: ['./nomadic-home.component.css']
 })
-export class NomadicHomeComponent implements OnInit, OnDestroy {
+export class NomadicHomeComponent implements OnInit {
 
-  Dictionary: Word[];
-  stream: Subscription;
+  choices = ['introduction', 'syntax', 'translate', 'dictionary'];
+  selected = 0;
 
-  constructor(private firebaseserv: FireBaseService) { }
+  constructor(private route: ActivatedRoute,
+              private router: Router) { }
 
   ngOnInit() {
-    this.stream = this.firebaseserv.returnCollect('Nomadic')
-      .subscribe(dict => this.Dictionary = dict);
   }
 
-  ngOnDestroy() {
-    this.stream.unsubscribe();
+  pickTopic(index) {
+    this.router.navigate([`${this.choices[index]}`], {relativeTo: this.route });
   }
 
 }
