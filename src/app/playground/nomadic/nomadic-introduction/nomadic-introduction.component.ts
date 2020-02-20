@@ -14,7 +14,7 @@ export class NomadicIntroductionComponent implements OnInit {
 
   ngOnInit() {
     this.mainText = this.textprovider.WebsiteText.find(member =>
-      member.ID =='nomadicintro');
+      member.ID =='nomadicintro').Text;
   }
 
 }

@@ -14,7 +14,7 @@ export class NomadicSyntaxComponent implements OnInit {
 
   ngOnInit() {
     this.mainText = this.textprovider.WebsiteText.find(member =>
-      member.ID =='nomadicsyntax');
+      member.ID =='nomadicsyntax').Text;
   }
 
 }
