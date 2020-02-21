@@ -291,7 +291,7 @@ export class Nomadic {
 
         cores = cores.map(core => core.join(''));
         if(cores[0] === 'ersi') {
-            cores.push['i'];
+            cores.push('s');
         }
         return(cores.join(''));
     }
