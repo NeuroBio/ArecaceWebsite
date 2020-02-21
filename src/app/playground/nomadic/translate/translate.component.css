@@ -1,0 +1,17 @@
+div.trans {
+    display: inline-block;
+}
+select {
+    margin: 0px 5px 0px 5px;
+}
+
+form {
+    margin: 3px;
+    background-color: rgb(49,49,49);
+    padding: 7px;
+}
+
+textarea {
+    font-size: 16px;
+    margin: 3px;
+}

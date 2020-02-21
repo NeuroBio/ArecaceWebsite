@@ -13,8 +13,9 @@ export class TranslateComponent implements OnInit, OnDestroy {
 
   stream: Subscription;
   transdicts: any;
+  keySets: any;
   keys: string[];
-  translation: string;
+  translation = '';
   Form = this.createForm();
 
 
@@ -25,7 +26,11 @@ export class TranslateComponent implements OnInit, OnDestroy {
     this.stream = this.nomadserv.TranslationDictionary
     .subscribe(dicts => {
       this.transdicts = dicts
-      this.keys = Object.keys(this.transdicts.NtoETrans);
+      this.keySets = {
+        NtoE: Object.keys(this.transdicts.NtoETrans).sort((a,b) => a < b ? -1 : 1),
+        EtoN: Object.keys(this.transdicts.EtoNTrans).sort((a,b) => a < b ? -1 : 1)}
+      this.keys = this.keySets.NtoE;
+      console.log(this.keySets.EtoN)
     });
   }
 
@@ -34,21 +39,53 @@ export class TranslateComponent implements OnInit, OnDestroy {
   }
 
   createForm() {
-    return this.fb.group({RawText: ''})
+    return this.fb.group({
+      RawText: '',
+      NtoE: true
+    });
   }
 
-  translate() {
+  translate(process: boolean = true) {
     const translate = [];
-    const words = this.Form.controls.RawText.value.split(' ');
-    words.forEach(word => {
-      const trans = this.transdicts.NtoETrans[word]
-      if(trans){
-        translate.push(`[${trans}]`);
-      } else {
-        translate.push('[?]')
-      }
-    });
+    let dict = this.Form.controls.NtoE.value === true ? 'NtoETrans' : 'EtoNTrans'
+    const text = this.Form.controls.RawText.value
+      .replace(/[\.,\/#!$%\^&\*;:{}=_`~@\+\?><\[\]\+'"]/g, '');
+    const words = process === true ? this.processText(text) : text.split(' ');
+    
+      words.forEach(word => {
+        const trans = this.transdicts[dict][word]
+        if(trans){
+          translate.push(`[${trans}]`);
+        } else {
+          translate.push('[?]')
+        }
+      });  
+
     this.translation = translate.join(' ');
+  }
+
+  addWord(word: string) {
+    const newText = this.processText(this.Form.controls.RawText.value);
+    newText.push(word);
+
+    this.Form.patchValue({RawText: newText.join(' ')});
+    this.translate();
+  }
+
+  processText(text: string) {
+    const words = text.replace(/\s{2,}/g," ").split(' ');
+
+    for(let i = words.length-1; i > -1; i--) {
+      if(words[i] === '') {
+        words.splice(i, 1);
+      }
+    }
+    return words;
+  }
+
+  switchDict() {
+    const dict = this.Form.controls.NtoE.value === true ? 'NtoE' : 'EtoN';
+    this.keys = this.keySets[dict];
   }
 
 }

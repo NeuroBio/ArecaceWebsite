@@ -1,13 +1,28 @@
-<p>Translation is not yet implemented!</p>
-<select>
-    <option *ngFor="let inda of keys">
-        {{ inda }}
-    </option>
-</select>
-
 <form [formGroup]="Form">
-    <textarea formControlName="RawText" rows=10 cols=40
-    (change)="translate()" (keyup)="translate()"
-    ></textarea>
-    <div [innerHTML]="translation"></div>
+    <!-- Drop downs -->
+    <div class="trans">Translate:</div>
+    <select formControlName="NtoE"  (change)="switchDict()">
+        <option value="true"> Nomadic to English </option>
+        <option value="false"> English to Nomadic </option>
+    </select> <br>
+
+    <div class="trans">Add Word:</div>
+    <select (change)="addWord($event.target.value)">
+        <option *ngFor="let word of keys"
+        [value]="word">
+            {{ word }}
+        </option>
+    </select><br><br>
+
+    <!-- Translation boxes -->
+    <div class="trans">Your Text:<br>
+        <textarea formControlName="RawText" rows=10 cols=40
+        (change)="translate()" (keyup)="translate()"
+        ></textarea>
+    </div>
+
+    <div class="trans">Translation:<br>
+        <textarea rows=10 cols=40 readonly>{{ translation }}</textarea>
+    </div>
+    
 </form>
