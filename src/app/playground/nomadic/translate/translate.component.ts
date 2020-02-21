@@ -30,7 +30,6 @@ export class TranslateComponent implements OnInit, OnDestroy {
         NtoE: Object.keys(this.transdicts.NtoETrans).sort((a,b) => a < b ? -1 : 1),
         EtoN: Object.keys(this.transdicts.EtoNTrans).sort((a,b) => a < b ? -1 : 1)}
       this.keys = this.keySets.NtoE;
-      console.log(this.keySets.EtoN)
     });
   }
 
@@ -41,7 +40,7 @@ export class TranslateComponent implements OnInit, OnDestroy {
   createForm() {
     return this.fb.group({
       RawText: '',
-      NtoE: true
+      NtoE: 'true'
     });
   }
 
@@ -49,17 +48,19 @@ export class TranslateComponent implements OnInit, OnDestroy {
     const translate = [];
     let dict = this.Form.controls.NtoE.value === true ? 'NtoETrans' : 'EtoNTrans'
     const text = this.Form.controls.RawText.value
-      .replace(/[\.,\/#!$%\^&\*;:{}=_`~@\+\?><\[\]\+'"]/g, '');
+      .replace(/[\.,\/#!$%\^&\*;:{}=_`~@\+\?><\[\]\+"]/g, '');
     const words = process === true ? this.processText(text) : text.split(' ');
     
       words.forEach(word => {
-        const trans = this.transdicts[dict][word]
-        if(trans){
-          translate.push(`[${trans}]`);
-        } else {
-          translate.push('[?]')
-        }
-      });  
+        const trans = this.wordChecks(this.Form.controls.NtoE.value, word, dict);
+        translate.push(`[${trans}]`);
+        // const trans = this.transdicts[dict][word]
+        // if(trans){
+        //   translate.push(`[${trans}]`);
+        // } else {
+        //   translate.push(`[${this.posessiveCheck(this.Form.controls.NtoE.value, word, dict)}]`);
+        //   translate.push(`[${this.pluralCheck(this.Form.controls.NtoE.value, word, dict)}]`);
+        });  
 
     this.translation = translate.join(' ');
   }
@@ -84,8 +85,93 @@ export class TranslateComponent implements OnInit, OnDestroy {
   }
 
   switchDict() {
-    const dict = this.Form.controls.NtoE.value === true ? 'NtoE' : 'EtoN';
+    const dict = this.Form.controls.NtoE.value === 'true' ? 'NtoE' : 'EtoN';
     this.keys = this.keySets[dict];
+  }
+
+  wordChecks(NtoE: boolean, word: string, dict: string) {
+    let trans = this.transdicts[dict][word];
+    if(trans) {
+      return(trans);
+    }
+    trans = this.posessiveCheck(NtoE, word, dict);
+    if(trans) {
+        return(trans);
+    }
+    trans = this.pluralCheck(NtoE, word, dict);
+    if(trans) {
+        return(trans);
+    }
+    trans = this.posessiveCheck(NtoE, word, dict);//third function
+    if(trans) {
+      return(trans);
+    }
+    return '?';
+  }
+
+  posessiveCheck(NtoE: boolean, word: string, dict: string){
+    let letters = word.split('');
+    if(NtoE === true) {
+      if(letters[letters.length-1] === 'a') {
+        letters.pop();
+        let trans = this.transdicts[dict][letters.join('')];
+        if(trans) {
+          return this.addSuffixtoAll(trans, '\'s');
+         }
+      }
+    } else if(letters[letters.length-2] === '\''){
+      letters = letters.splice(0, word.length-2);
+      let trans = this.transdicts[dict][letters.join('')];
+      if(trans) {
+        return this.addSuffix(trans, 'a', 'h', ['a']);
+      }
+    }
+    return;
+  }
+
+  pluralCheck(NtoE: boolean, word: string, dict: string) {
+    const letters = word.split('');
+    if(NtoE === true) {
+      if(letters[letters.length-1] === 'i') {//consonant plurals
+        letters.pop();
+        let trans = this.transdicts[dict][letters.join('')];
+        if(trans) {
+          return this.addSuffixtoAll(trans, 's');
+        } else if(letters[letters.length-1] === 'l'){//vowel plurals
+          letters.pop();
+          trans = this.transdicts[dict][letters.join('')];
+          if(trans) {
+            return this.addSuffixtoAll(trans, 's');
+          }
+        }
+      }
+    } else if(letters[letters.length-1] === 's') {//remove plural s
+      letters.pop();
+      const trans = this.transdicts[dict][letters.join('')]
+      if(trans) {//is there was a translation, return plural form
+        return this.addSuffix(trans, 'i', 'l', ['a', 'e', 'i', 'o']);
+      }
+    }
+    return '?';
+  }
+
+  addSuffix(word: string, suffix: string, suffix2?: string, specialcase?: string[]){
+    const trans = word.split('');
+    if(suffix2){
+      const special = specialcase
+        .findIndex(letter => letter === trans[trans.length-1]) > -1;
+      if(special){
+          trans.push(suffix2);
+      }
+    }
+    trans.push(suffix);
+    return trans.join('');
+  }
+
+  addSuffixtoAll(word: string, suffix: string){
+    let trans = Object.assign([], word.split(';'));
+    trans = trans.map(trans => this.addSuffix(trans, suffix));
+    return trans.join(';');
   }
 
 }
