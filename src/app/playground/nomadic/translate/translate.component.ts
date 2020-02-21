@@ -46,20 +46,14 @@ export class TranslateComponent implements OnInit, OnDestroy {
 
   translate(process: boolean = true) {
     const translate = [];
-    let dict = this.Form.controls.NtoE.value === true ? 'NtoETrans' : 'EtoNTrans'
+    let dict = this.Form.controls.NtoE.value === 'true' ? 'NtoETrans' : 'EtoNTrans'
     const text = this.Form.controls.RawText.value
       .replace(/[\.,\/#!$%\^&\*;:{}=_`~@\+\?><\[\]\+"]/g, '');
     const words = process === true ? this.processText(text) : text.split(' ');
     
       words.forEach(word => {
-        const trans = this.wordChecks(this.Form.controls.NtoE.value, word, dict);
+        const trans = this.wordChecks(this.Form.controls.NtoE.value === 'true', word, dict);
         translate.push(`[${trans}]`);
-        // const trans = this.transdicts[dict][word]
-        // if(trans){
-        //   translate.push(`[${trans}]`);
-        // } else {
-        //   translate.push(`[${this.posessiveCheck(this.Form.controls.NtoE.value, word, dict)}]`);
-        //   translate.push(`[${this.pluralCheck(this.Form.controls.NtoE.value, word, dict)}]`);
         });  
 
     this.translation = translate.join(' ');
@@ -68,7 +62,6 @@ export class TranslateComponent implements OnInit, OnDestroy {
   addWord(word: string) {
     const newText = this.processText(this.Form.controls.RawText.value);
     newText.push(word);
-
     this.Form.patchValue({RawText: newText.join(' ')});
     this.translate();
   }
@@ -87,6 +80,7 @@ export class TranslateComponent implements OnInit, OnDestroy {
   switchDict() {
     const dict = this.Form.controls.NtoE.value === 'true' ? 'NtoE' : 'EtoN';
     this.keys = this.keySets[dict];
+    this.translate();
   }
 
   wordChecks(NtoE: boolean, word: string, dict: string) {
@@ -102,7 +96,7 @@ export class TranslateComponent implements OnInit, OnDestroy {
     if(trans) {
         return(trans);
     }
-    trans = this.posessiveCheck(NtoE, word, dict);//third function
+    trans = this.pluralposessiveCheck(NtoE, word, dict);
     if(trans) {
       return(trans);
     }
@@ -119,7 +113,7 @@ export class TranslateComponent implements OnInit, OnDestroy {
           return this.addSuffixtoAll(trans, '\'s');
          }
       }
-    } else if(letters[letters.length-2] === '\''){
+    } else if(letters[letters.length-2] === '\'') {
       letters = letters.splice(0, word.length-2);
       let trans = this.transdicts[dict][letters.join('')];
       if(trans) {
@@ -150,6 +144,35 @@ export class TranslateComponent implements OnInit, OnDestroy {
       const trans = this.transdicts[dict][letters.join('')]
       if(trans) {//is there was a translation, return plural form
         return this.addSuffix(trans, 'i', 'l', ['a', 'e', 'i', 'o']);
+      }
+    }
+    return;
+  }
+
+  pluralposessiveCheck(NtoE: boolean, word: string, dict: string) {
+    let letters = word.split('');
+    if(NtoE === true) {
+      if(letters[letters.length-1] === 'a'
+        && letters[letters.length-2] === 'i') {
+        letters = letters.splice(0, word.length-2);
+        let trans = this.transdicts[dict][letters.join('')];
+        if(trans) {
+          return this.addSuffixtoAll(trans, 's\'');
+        } else if(letters[letters.length-1] === 'l'){//vowel plurals
+          letters.pop();
+          trans = this.transdicts[dict][letters.join('')];
+          if(trans) {
+            return this.addSuffixtoAll(trans, 's\'');
+          }
+        }
+      }
+    } else {
+      if(letters[letters.length-1] === '\''){
+        letters = letters.splice(0, word.length-2);
+        let trans = this.transdicts[dict][letters.join('')];
+        if(trans) {
+          return this.addSuffix(trans, 'ia', 'l', ['a', 'e', 'i', 'o']);
+        }
       }
     }
     return '?';
