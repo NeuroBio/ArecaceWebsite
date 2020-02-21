@@ -1,1 +1,13 @@
 <p>Translation is not yet implemented!</p>
+<select>
+    <option *ngFor="let inda of keys">
+        {{ inda }}
+    </option>
+</select>
+
+<form [formGroup]="Form">
+    <textarea formControlName="RawText" rows=10 cols=40
+    (change)="translate()" (keyup)="translate()"
+    ></textarea>
+    <div [innerHTML]="translation"></div>
+</form>

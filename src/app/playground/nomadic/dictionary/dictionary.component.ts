@@ -17,7 +17,7 @@ export class DictionaryComponent implements OnInit, OnDestroy {
   constructor(private nomadserv: NomadicService) { }
 
   ngOnInit() {
-    this.stream = this.nomadserv.Dictionary
+    this.stream = this.nomadserv.RawDictionary
       .subscribe(dict => this.Dictionary = dict);
   }
 

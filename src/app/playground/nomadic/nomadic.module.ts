@@ -7,6 +7,7 @@ import { NomadicRoutingModule } from './nomadic-routing.module';
 import { NomadicIntroductionComponent } from './nomadic-introduction/nomadic-introduction.component';
 import { NomadicSyntaxComponent } from './nomadic-syntax/nomadic-syntax.component';
 import { TranslateComponent } from './translate/translate.component';
+import { ReactiveFormsModule }          from '@angular/forms';
 
 
 @NgModule({
@@ -19,6 +20,7 @@ import { TranslateComponent } from './translate/translate.component';
   ],
   imports: [
     CommonModule,
+    ReactiveFormsModule,
     LanguageTableModule,
 
     NomadicRoutingModule
