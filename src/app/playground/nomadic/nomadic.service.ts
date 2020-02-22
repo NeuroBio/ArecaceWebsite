@@ -9,6 +9,7 @@ export class NomadicService {
 
   RawDictionary = new BehaviorSubject<Word[]>(null);
   TranslationDictionary = new BehaviorSubject<{}>(null);
+  // activePage = new BehaviorSubject<string>(null);
 
   constructor() { }
 
@@ -29,4 +30,8 @@ export class NomadicService {
     this.TranslationDictionary.next({'NtoETrans': NtoETrans,
                                      'EtoNTrans': EtoNTrans});
   }
+
+  // assignActivePage(page: string) {
+  //   this.activePage.next(page);
+  // }
 }

@@ -9,12 +9,13 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class NomadicHomeComponent implements OnInit {
 
   choices = ['introduction', 'syntax', 'translate', 'dictionary'];
-  selected = 0;
+  selected: string;
 
   constructor(private route: ActivatedRoute,
               private router: Router) { }
 
   ngOnInit() {
+    this.selected = this.route.firstChild.snapshot.url[0].path
   }
 
   pickTopic(index) {
