@@ -67,9 +67,9 @@ export class TranslateComponent implements OnInit, OnDestroy {
                                                     .replace(/\s{2,}/g, ' ');
 
     let Start = true;
-    console.log(finalText.split(' '))
     finalText = finalText.split(' ').map((word, index) => {
-      const quiet = ((/[a-z]/).test(word) || word.match(/\w/g).length === 1);
+      const numLetters = word.match(/\w/g);
+      const quiet = ((/[a-z]/).test(word) || (numLetters && numLetters.length === 1));
       word = word.replace(/\w{1,}/, translate[index]);
       
       if(quiet === false) {
