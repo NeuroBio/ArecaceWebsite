@@ -1,4 +1,4 @@
-<div *ngIf="authorized === false; then authenticated else guest"></div>
+<div *ngIf="authorized === true; then authenticated else guest"></div>
 
 
 <!-- User NOT logged in -->
@@ -21,7 +21,7 @@
             [user]="user"
             ></app-pick-up>
     
-            <app-fan-characters
+            <!-- <app-fan-characters
             [data]="data.Characters"
             title="Your Fan Characters"
             ></app-fan-characters>
@@ -34,7 +34,7 @@
             <app-fan-characters
             [data]="data.Surveys"
             title="Your Survey Data"
-            ></app-fan-characters>
+            ></app-fan-characters> -->
         </div>        
         <hr>
 

@@ -18,21 +18,34 @@ export class LoginToSaveMainComponent implements OnInit, OnDestroy {
   stopClicking: boolean;
   authorized: boolean;
   message: string;
+  OldData: {};
   stream1: Subscription;
+  stream2 = new Subscription();
 
   ngOnInit() {
-    this.stream1 = this.auth.user.subscribe(user => this.authorized = user? true : false);
+    this.stream1 = this.auth.user.subscribe(user => {
+      this.authorized = user? true : false
+      if(user) {
+        this.stream2 = this.firebaseserv.returnDocument(`Users/${this.auth.uid.value}`)
+        .subscribe(data => this.OldData = data)
+      }
+    });
   }
 
   ngOnDestroy() {
     this.stream1.unsubscribe();
+    this.stream2.unsubscribe();
   }
 
   saveUserData() {
     this.stopClicking = true;
     this.message = 'Submitting...';
-    return this.firebaseserv.uploadDocument(this.DatatoSave,
-      `Users/${this.auth.uid.value}/${this.DataType}`)
+    if(this.OldData[this.DataType]) {// old data exists
+      this.OldData[this.DataType].push(this.DatatoSave);
+    } else { //first time this data pushed
+      this.OldData[this.DataType] = [this.DatatoSave];
+    }
+    return this.firebaseserv.editDocument(this.OldData, `Users/`, this.auth.uid.value)
     .then(() => this.message = "Saved!")
     .catch(err => {
         this.message = err;
