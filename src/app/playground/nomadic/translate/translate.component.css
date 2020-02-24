@@ -15,3 +15,11 @@ textarea {
     font-size: 16px;
     margin: 3px;
 }
+
+div#note {
+    font: 12pt;
+    max-width: 600px;
+}
+li {
+    margin: 5px 0px 5px 0px;
+}

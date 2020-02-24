@@ -24,5 +24,17 @@
     <div class="trans">Translation:<br>
         <textarea rows=10 cols=40 readonly>{{ translation }}</textarea>
     </div>
+    <br><br>
+    <div id="note">Notes:
+        <ol>
+            <li>This is a word-for-word translator.  It will not reorganize words into their proper gramatical placement.</li>
+            <li>The translator can handle standard english plurals, possessives, and plural possessives, but unusual plurals (e.g. child to children) will be lost.  Adding an 's' to the singular form can bypass this issue (e.g. childs).</li>
+            <li>Nomadic doesn't have a natural way to include tense, so English verbs are expected to be in their present form.</li>
+            <li>For simplicity, the translation assumes that "to be" words (am, is, are) refer to living things instead of objects.  To refer to objects, add "*" to the end of the word.</li>
+            <li>The translator assumes the pronoun "you" is singular. To use plural you, type "you*".</li>
+            <li>The translator assumes the pronoun "we" is inclusive. To use exclusive we, type "we*".</li>
+            <li>The translator assumes the pronouns "they" and "he/she/it" are familiar. To use unfamiliar forms, add a "*" to the end of the pronoun.</li>
+        </ol>
+    </div>
     
 </form>

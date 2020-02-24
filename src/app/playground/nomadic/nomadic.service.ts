@@ -23,15 +23,11 @@ export class NomadicService {
     let EtoNTrans = {};
     dict.forEach(word => {
       word.English.split(';').forEach(english => {
-        EtoNTrans[english] = word.Indativor;
+        EtoNTrans[english.toLowerCase()] = word.Indativor; 
       });
-      NtoETrans[word.Indativor] = word.English;
+      NtoETrans[word.Indativor.toLowerCase()] = word.English;
     });
     this.TranslationDictionary.next({'NtoETrans': NtoETrans,
                                      'EtoNTrans': EtoNTrans});
   }
-
-  // assignActivePage(page: string) {
-  //   this.activePage.next(page);
-  // }
 }
