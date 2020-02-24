@@ -5,5 +5,8 @@
     <app-login></app-login>
 </ng-template> -->
 <ng-template #guest><!--#authenticated>-->
-    <button (click)="saveUserData()">Save Results</button>
+    <button (click)="saveUserData()"
+    [disabled]="stopClicking"
+    >Save Results</button>
+    <div> {{ message }} </div>
 </ng-template>

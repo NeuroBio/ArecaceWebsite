@@ -11,7 +11,12 @@
         <a class="navver" [routerLink]="results.Outcome.Link">
             {{ results.Outcome.LinkName }}</a>
     </div>
-    <app-login-to-save-main></app-login-to-save-main>
+    <div *ngIf="results">
+      <app-login-to-save-main
+      [DataType]="'Survey'"
+      [DatatoSave]="results"
+      ></app-login-to-save-main>
+    </div>
   </div>
 
 </div>

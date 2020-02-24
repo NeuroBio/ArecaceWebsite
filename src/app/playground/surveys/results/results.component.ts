@@ -10,6 +10,7 @@ import { Subscription } from 'rxjs';
 export class ResultsComponent implements OnInit, OnDestroy {
 
   results: any;
+  SurveyData: string;
   stream1: Subscription;
   showAll = false;
   showStats = false;
