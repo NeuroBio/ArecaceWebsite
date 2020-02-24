@@ -5,14 +5,14 @@ import { UserInfoComponent } from './user-info/user-info.component';
 import { UserDashRoutingModule } from './user-dash-routing.module';
 import { LoginModule } from '../SharedComponentModules/LoginButton/login.module';
 import { PickUpComponent } from './pick-up/pick-up.component';
-import { FanCharactersComponent } from './fan-characters/fan-characters.component';
+import { UserDataComponent } from './user-data/user-data.component';
 
 @NgModule({
   declarations: [
     UserDashComponent,
     UserInfoComponent,
     PickUpComponent,
-    FanCharactersComponent
+    UserDataComponent
   ],
   imports: [
     CommonModule,
