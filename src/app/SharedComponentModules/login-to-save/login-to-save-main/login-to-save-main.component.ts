@@ -19,7 +19,6 @@ export class LoginToSaveMainComponent implements OnInit, OnDestroy {
   authorized: boolean;
   message: string;
   stream1: Subscription;
-  stream2: Subscription;
 
   ngOnInit() {
     this.stream1 = this.auth.user.subscribe(user => this.authorized = user? true : false);
@@ -27,7 +26,6 @@ export class LoginToSaveMainComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.stream1.unsubscribe();
-    this.stream2.unsubscribe();
   }
 
   saveUserData() {
@@ -35,10 +33,10 @@ export class LoginToSaveMainComponent implements OnInit, OnDestroy {
     this.message = 'Submitting...';
     return this.firebaseserv.uploadDocument(this.DatatoSave,
       `Users/${this.auth.uid.value}/${this.DataType}`)
-      .then(() => this.message = "Saved!")
-      .catch(err => {
+    .then(() => this.message = "Saved!")
+    .catch(err => {
         this.message = err;
         this.stopClicking = false;
-      });
+    });
   }
 }

@@ -121,7 +121,7 @@ export class CRUDcontrollerService {
         if("StoryLink" in meta){
           meta.StoryLink = link;
         }
-        this.newestCue.updateCue(meta, this.itemType.value);
+        this.newestCue.updateCue(Object.assign({}, meta), this.itemType.value);
         // meta.TimeStampCreated = this.createTimestamp();
         console.log("meta");
         return this.crud.uploadItem(meta, this.firePaths.value[this.itemType.value]);
