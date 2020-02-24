@@ -8,7 +8,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ResultsComponent } from './results/results.component';
 import { SurveyPartsComponent } from './survey-parts/survey-parts.component';
 import { SurveyStatsComponent } from './survey-stats/survey-stats.component';
-
+import { LoginToSaveModule } from '../../SharedComponentModules/login-to-save/login-to-save.module';
 
 @NgModule({
   declarations: [
@@ -22,6 +22,7 @@ import { SurveyStatsComponent } from './survey-stats/survey-stats.component';
   imports: [
     CommonModule,
     PrimaryContentDisplayModule,
+    LoginToSaveModule,
     ReactiveFormsModule,
 
     SurveyRoutingModule //must be last!

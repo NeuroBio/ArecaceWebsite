@@ -3,7 +3,7 @@ import { AuthService } from 'src/app/administration/security/Auth/auth.service';
 import { TextProvider } from 'src/app/GlobalServices/textprovider.service';
 import { SA } from 'src/app/Classes/SAclass';
 import { CharacterMetaData } from 'src/app/Classes/charactermetadata';
-import { Subscription } from 'rxjs';
+import { Subscription, Observable } from 'rxjs';
 import { FireBaseService } from 'src/app/GlobalServices/firebase.service';
 
 @Component({
@@ -25,17 +25,19 @@ export class UserDashComponent implements OnInit, OnDestroy {
           Comic: '',
           }
   data = {
-    Characters: [new CharacterMetaData],
-    SAs: [new SA],
+    Characters: [new CharacterMetaData()],
+    SAs: [new SA()],
     Surveys: []
   }
+  authorized: boolean;
 
   stream1: Subscription;
-  stream2: Subscription;
+  //stream2: Subscription;
+  //stream3: Subscription;
 
   showAccountInfo = false;
 
-  constructor(public auth: AuthService,
+  constructor(private auth: AuthService,
               private textprovider: TextProvider,
               private firebaseserv: FireBaseService) { }
 
@@ -44,14 +46,16 @@ export class UserDashComponent implements OnInit, OnDestroy {
     .find(member => member.ID =='login').Text;
     this.loggedinText = this.textprovider.WebsiteText
     .find(member => member.ID =='userdash').Text;
-    // this.stream1 = this.auth.user.subscribe(user => this.user = user);
-    // this.stream2 = this.firebaseserv.returnCollect(`Users/${this.auth.uid.value}/Data`)
+    
+    this.stream1 = this.auth.user.subscribe(user => this.authorized = user? true : false);
+    // this.stream2 = this.auth.user.subscribe(user => this.user = user);
+    // this.stream3 = this.firebaseserv.returnCollect(`Users/${this.auth.uid.value}/Data`)
     //   .subscribe(data => this.data = {Characters: JSON.parse(data.Characters),
     //                                   SAs: JSON.parse(data.SAs)})
   }
 
   ngOnDestroy() {
-    // this.stream1.unsubscribe();
+    this.stream1.unsubscribe();
     // this.stream2.unsubscribe();
   }
 

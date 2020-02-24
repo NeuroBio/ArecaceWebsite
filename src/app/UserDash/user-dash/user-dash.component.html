@@ -1,4 +1,4 @@
-<div *ngIf="auth.user | async; then authenticated else guest"></div>
+<div *ngIf="authorized === false; then authenticated else guest"></div>
 
 
 <!-- User NOT logged in -->
@@ -10,7 +10,7 @@
 
 <!-- User logged in -->
 <ng-template #authenticated>
-    <div id="outer" *ngIf="auth.user | async as user">
+    <div id="outer" *ngIf="user">
         <button id="logout" (click)="auth.logout()">Logout</button>
         <h3>Welcome Back, {{ user.userName }}, ID#{{ user.ID }}</h3>
         <div [innerHTML]="loggedinText"></div>

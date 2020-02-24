@@ -1,0 +1,9 @@
+<div *ngIf="authorized === true; then authenticated else guest"></div>
+
+<!-- <ng-template #guest>
+    Log in to save your results:
+    <app-login></app-login>
+</ng-template> -->
+<ng-template #guest><!--#authenticated>-->
+    <button (click)="saveUserData()">Save Results</button>
+</ng-template>
