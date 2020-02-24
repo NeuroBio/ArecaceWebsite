@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AuthService } from 'src/app/administration/security/Auth/auth.service';
 import { TextProvider } from 'src/app/GlobalServices/textprovider.service';
+import { User } from '../../Classes/user';
 import { SA } from 'src/app/Classes/SAclass';
 import { CharacterMetaData } from 'src/app/Classes/charactermetadata';
 import { Subscription, Observable } from 'rxjs';
@@ -15,31 +16,17 @@ export class UserDashComponent implements OnInit, OnDestroy {
 
   loggedoutText: string;
   loggedinText: string;
-  user = {ID: 10,
-          email: "fake@fake.com",
-          userName: "tester",
-          Admin: false,
-          User: true,
-          Narrative: '',
-          Script: '',
-          Comic: '',
-          }
-  data: any; //= {
-    //Characters: [new CharacterMetaData()],
-    //SAs: [new SA()],
-  //  Surveys: []
-  //}
+  user: User;
+  names: [string[],string][];
+  titles: string[];
   authorized: boolean;
 
   stream1: Subscription;
-  stream2: Subscription;
-  stream3: Subscription;
 
   showAccountInfo = false;
 
   constructor(private auth: AuthService,
-              private textprovider: TextProvider,
-              private firebaseserv: FireBaseService) { }
+              private textprovider: TextProvider) { }
 
   ngOnInit() {
     this.loggedoutText = this.textprovider.WebsiteText
@@ -47,23 +34,34 @@ export class UserDashComponent implements OnInit, OnDestroy {
     this.loggedinText = this.textprovider.WebsiteText
     .find(member => member.ID =='userdash').Text;
     
-    this.stream1 = this.auth.user.subscribe(user => this.authorized = user? true : false);
-    this.stream2 = this.auth.user.subscribe(user => this.user = user);
-    //this.stream3 = this.firebaseserv.returnDocument(`Users/${this.auth.uid.value}`)
-    this.stream3 = this.firebaseserv.returnDocument(`Users/${this.auth.uid.value}`)
-       .subscribe(data => {this.data = data;console.log(data)});//{Characters: JSON.parse(data.Characters),
-                                       //SAs: JSON.parse(data.SAs)})
-    // this.stream3 = this.firebaseserv.returnCollect(`Users/${this.auth.uid.value}/Survey`)
-    //                                    .subscribe(data => {console.log(data)})
+    this.stream1 = this.auth.user.subscribe(user => {
+      this.authorized = user? true : false;
+      this.user = user;
+      this.PrepareData();
+    });
   }
 
   ngOnDestroy() {
     this.stream1.unsubscribe();
-    //this.stream2.unsubscribe();
-    this.stream3.unsubscribe();
   }
 
   setShowAccountInfo() {
     this.showAccountInfo = !this.showAccountInfo;
+  }
+
+  PrepareData(){
+    this.names = [];
+    if(this.user.Characters) {
+      this.names.push([this.user.Characters.map(char => `${char.FirstName} ${char.LastName}`),
+      'Your Fan Characters']);
+    }
+    if(this.user.SAcalcs) {
+      this.names.push([this.user.SAcalcs.map(SA => SA.ID),
+        'Your Source Affinity Data']);
+    }
+    if(this.user.Surveys) {
+      this.names.push([this.user.Surveys.map(survey => `${survey.Name} (${survey.UploadTime})`),
+      'Your Survey Data']);
+    }
   }
 }

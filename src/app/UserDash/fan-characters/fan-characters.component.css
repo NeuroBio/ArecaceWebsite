@@ -1,7 +1,7 @@
 div#outer {
     border: white 1px solid;
     background-color: #454545;
-    max-width: 400px;
+    /* max-width: 400px; */
     padding: 7px;
     margin: 7px;
 }
@@ -9,4 +9,28 @@ div#outer {
 h4 {
     padding: 7px;
     margin: 0px;
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+}
+
+li {
+    display: inline-block;
+    padding: 5px;
+    cursor: pointer;
+}
+
+li:hover {
+    background-color: rgb(88,88,88);
+}
+
+li:active {
+    background-color: rgb(150,150,150);
+}
+
+button {
+    padding: 0px 5px 0px 5px;
+    margin: 5px;
 }

@@ -8,7 +8,7 @@ import { CharacterMetaData } from 'src/app/Classes/charactermetadata';
 })
 export class FanCharactersComponent implements OnInit {
 
-  @Input() data: any[];
+  @Input() names: string[];
   @Input() title: string;
 
   constructor() { }
@@ -16,4 +16,7 @@ export class FanCharactersComponent implements OnInit {
   ngOnInit() {
   }
 
+  onClick() {
+    console.log("wired")
+  }
 }

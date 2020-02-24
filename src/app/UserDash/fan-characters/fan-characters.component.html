@@ -1,6 +1,12 @@
 <div id="outer">
   <h4>{{ title }}:</h4>
-  <div *ngFor="let entry of data">
-    {{ entry.ID }}
-  </div>
+  <hr>
+  <ul>
+    <div *ngFor="let name of names">
+      <button>x</button>
+      <li (click)="onClick()">
+        {{ name }}
+      </li>
+    </div>
+  </ul>
 </div>

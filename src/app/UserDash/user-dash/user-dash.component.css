@@ -13,3 +13,8 @@ div#UserComponents {
     align-content: center;
     justify-content: center;
 }
+
+::ng-deep h4 {
+    padding: 7px;
+    margin: 0px;
+}

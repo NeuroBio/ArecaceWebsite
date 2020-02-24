@@ -21,18 +21,28 @@
             [user]="user"
             ></app-pick-up>
     
+            <div *ngFor="let name of names">
+                <app-fan-characters
+                [names]="name[0]"
+                [title]="name[1]"
+                ></app-fan-characters>
+            </div>
+
             <!-- <app-fan-characters
-            [data]="data.Characters"
+            *ngIf="user.Characters"
+            [names]="user.Characters"
             title="Your Fan Characters"
             ></app-fan-characters>
     
             <app-fan-characters
-            [data]="data.SAs"
+            *ngIf="user.SAcalcs"
+            [names]="user.SAcalcs"
             title="Your Source Affinity Data"
             ></app-fan-characters>
     
             <app-fan-characters
-            [data]="data.Surveys"
+            *ngIf="user.Surveys"
+            [names]="user.Surveys"
             title="Your Survey Data"
             ></app-fan-characters> -->
         </div>        

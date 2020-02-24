@@ -1,3 +1,6 @@
+import { CharacterMetaData } from './charactermetadata';
+import { SA } from './SAclass'
+
 export class User {
     email: string;
     ID: number;
@@ -7,6 +10,9 @@ export class User {
     Narrative: string;
     Comic: string;
     Script: string;
+    Surveys?: any[];
+    Characters?: CharacterMetaData[];
+    SAcalcs?: SA[];
 
     constructor(email: string, ID: number) {
         this.email = email;

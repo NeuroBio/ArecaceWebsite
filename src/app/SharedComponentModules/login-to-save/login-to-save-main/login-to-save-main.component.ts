@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { AuthService } from '../../../administration/security/Auth/auth.service';
 import { Subscription } from 'rxjs';
+import { formatDate } from '@angular/common';
 import { FireBaseService } from '../../../GlobalServices/firebase.service';
 @Component({
   selector: 'app-login-to-save-main',
@@ -27,7 +28,7 @@ export class LoginToSaveMainComponent implements OnInit, OnDestroy {
       this.authorized = user? true : false
       if(user) {
         this.stream2 = this.firebaseserv.returnDocument(`Users/${this.auth.uid.value}`)
-        .subscribe(data => this.OldData = data)
+        .subscribe(data => this.OldData = data);
       }
     });
   }
@@ -40,6 +41,7 @@ export class LoginToSaveMainComponent implements OnInit, OnDestroy {
   saveUserData() {
     this.stopClicking = true;
     this.message = 'Submitting...';
+    this.DatatoSave.UploadTime = formatDate(new Date(), 'yyyy-MM-dd, HH:mm:ss', 'en');
     if(this.OldData[this.DataType]) {// old data exists
       this.OldData[this.DataType].push(this.DatatoSave);
     } else { //first time this data pushed
