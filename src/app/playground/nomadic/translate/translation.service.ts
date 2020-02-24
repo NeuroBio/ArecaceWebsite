@@ -82,14 +82,6 @@ export class TranslationService {
     return `[${word}]`;
   }
 
-  comprehensionSwap(word: string, check: string[], replacement: string) {
-    const replace = check.findIndex(tobe => tobe === word) > -1
-    if(replace) {
-      return replacement;
-    }
-    return;
-  }
-
   checkEnding(letters: string[], check: string[], dict: string,
     suffix1: string, suffix2?: string, specialcase?: string[]) {
     const ending = Object.assign([], letters)
