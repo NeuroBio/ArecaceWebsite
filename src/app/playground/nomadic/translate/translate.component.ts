@@ -61,7 +61,7 @@ export class TranslateComponent implements OnInit, OnDestroy {
       translate.push(`${trans}`);
     }); 
     let finalText = this.Form.controls.RawText.value.trim()
-                                                    .replace(/[\*']/g, '')
+                                                    .replace(/[\*'-\(\)]/g, '')
                                                     .replace(/\n/g, '\*')
                                                     .replace(/(\*{1,})/g, ' $1')
                                                     .replace(/\s{2,}/g, ' ');

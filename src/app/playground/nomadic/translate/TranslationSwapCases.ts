@@ -14,7 +14,7 @@ export class SwapCases {
         'his*': 'darta', 'her*': 'darta', 'hers*': 'darta', 'its*': 'darta',
         you: 'hael', 'you*': 'haeli', your: 'haela', yours: 'haela',
         'your*': 'haelia', 'yours*': 'haelia',
-        mine: 'klaea'
+        mine: 'klaea', my: 'klaea'
     }
 
     NtoETrans: {} = {

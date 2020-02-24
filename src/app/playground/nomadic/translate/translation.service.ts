@@ -62,6 +62,14 @@ export class TranslationService {
         }
         return trans;
       }
+      trans =  this.checkEnding(letters, ['l','y'], dict, '');//adjective with ly check
+      if(trans) {
+        return trans;
+      }
+      trans =  this.checkEnding(letters, ['e','s'], dict, 'i', 'l', ['a', 'e', 'i', 'o']);//plural check
+      if(trans) {
+        return trans;
+      }
       trans =  this.checkEnding(letters, ['s', '\''], dict, 'ia', 'l', ['a', 'e', 'i', 'o']);//possessive plural check
       if(trans) {
         return trans;
