@@ -8,7 +8,7 @@ service cloud.firestore {
      
     match /SurveyStats/{allDocuments} {
         allow read;
-        allow write: if isUser();
+        allow update: if isUser();
         allow create: if isAdmin();
     }
   
@@ -102,6 +102,10 @@ service cloud.firestore {
     }
     
     match /WebsiteText/{allDocuments} {
+    		allow read;
+    }
+
+    match /Nomadic/{allDocuments} {
     		allow read;
     }
 

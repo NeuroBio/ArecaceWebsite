@@ -1,0 +1,52 @@
+<form [formGroup]="Form">
+    <!-- <select formControlName="Type">
+        <option value="Noun">Noun</option>
+        <option value="Verb">Verb</option>
+        <option value="Adjective">Adjective</option>
+        <option value="Misc">Misc</option>
+    </select> -->
+
+    <p>English: <input formControlName="English"></p>
+
+    <p>Subtype:
+        <select formControlName="Subtype">
+            <option *ngFor="let type of WordTypes.Subtypes"
+            [value]="type">{{ type }}</option>
+        </select>
+    </p>
+
+    <p>Indativor: {{ Form.controls.Indativor.value }} </p>
+
+    <p>Level: {{ Form.controls.Level.value }}</p>
+
+    <p>Type: {{ Form.controls.Type.value }}   </p>
+
+    <p> Component Words:  <button (click)="addWord(true)">+</button>
+        <button (click)="addWord(false)" [disabled]="!allowDelete">-</button>
+    </p>
+
+    <div formArrayName="ComponentWords">
+        <div *ngFor="let word of WordArray.controls; let i = index"
+        [formGroupName]="i">
+            <p>Word {{ i + 1}}:
+                <select formControlName="Type" (change)="pickType($event.target.value, i)">
+                    <option *ngFor="let type of WordTypes.Types"
+                    [value]="type">{{ type }}</option>
+                </select>
+                <select formControlName="Word"
+                (change)="pickWord()">
+                    <option *ngFor="let word of
+                    SortedDictionary[word.get('Type').value], let i = index"
+                    [value]="word.Indativor">
+                        {{ word.English }} / {{ word.Indativor }}</option>
+                </select>
+                <span *ngIf="word.get('Type').value === 'Verb'">
+                    Use core? <input type="checkbox" formControlName="Core">
+                </span>
+            </p>
+        </div>
+    </div>
+
+    <app-formButtons></app-formButtons>
+</form>
+<div style="clear: both;"></div>

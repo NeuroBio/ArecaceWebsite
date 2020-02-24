@@ -1,7 +1,18 @@
 div#splatter {
+    display: flex;
+    align-items: center;
+    flex-flow: column;
     background-repeat: repeat;
     background-color: rgb(53, 53, 53);
     background-image: url(https://firebasestorage.googleapis.com/v0/b/arecaceworld.appspot.com/o/WebSite%2Fsmear6.png?alt=media&token=b42c567e-c131-4c08-9f95-7858a976060e);
+}
+
+div#storynav {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    background:#454545;
+    border-bottom: 3px solid white;
 }
 
 label {

@@ -1,3 +1,8 @@
+div.compheader {
+    display: flex;
+    justify-content: center;
+}
+
 div#background {
     background-color: rgb(53, 53, 53);
     background-image: url("https://firebasestorage.googleapis.com/v0/b/arecaceworld.appspot.com/o/WebSite%2Fsmear.png?alt=media&token=620e725e-ea44-4670-88a2-210c372066b2");

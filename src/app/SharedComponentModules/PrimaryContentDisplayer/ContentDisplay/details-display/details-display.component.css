@@ -1,3 +1,8 @@
+div.compheader {
+    display: flex;
+    justify-content: center;
+}
+
 div#top {
     min-height:80vh;
 }

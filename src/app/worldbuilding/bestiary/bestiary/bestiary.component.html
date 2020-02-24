@@ -1,18 +1,20 @@
 <!--Header-->
 <div id="background">
   <div class="container" class="compheader" role="header">
-    <h2 class="compheader">Bestiary</h2>
-      <div id="sort">
-        <div *ngFor="let option of sortOptions">
-            <input type="radio" name="sorter"  [id]="option"
-            [checked]="option === 'Biome'"
-            (click)="onSort(option)">
-            <label [for]="option">{{ option }}</label>
-            <br>    
-        </div>
+    <div id="sort">
+      <div *ngFor="let option of sortOptions">
+          <input type="radio" name="sorter"  [id]="option"
+          [checked]="option === 'Biome'"
+          (click)="onSort(option)">
+          <label [for]="option">{{ option }}</label>
+          <br>    
       </div>
-      <h3>Sort</h3>
-      <div style="clear:both"></div>
+    </div>
+    <h3>Sort</h3>
+    <div id="centerheader">
+      <h2 class="compheader">Bestiary</h2>
+    </div>
+    <div style="clear:both"></div>
   </div>
   <hr>
   <br>

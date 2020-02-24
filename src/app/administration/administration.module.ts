@@ -32,7 +32,11 @@ import { PixelformComponent } from './Forms/othersart/pixelform/pixelform.compon
 import { SharedFormsModule } from '../SharedComponentModules/SharedForms/shared-forms.module';
 import { SourceAffinityComponent } from './Forms/sourceaffinity/source-affinity/source-affinity.component';
 import { LooseNotesFormComponent } from './Forms/loosenotes/loose-notes-form/loose-notes-form.component';
-
+import { LanguageComponent } from './DashBoard/language/language.component';
+import { GeneratorComponent } from './LanguageGeneration/generator/generator.component';
+import { WordFormComponent } from './LanguageGeneration/word-form/word-form.component';
+import { ComplexWordFormComponent } from './LanguageGeneration/complex-word-form/complex-word-form.component';
+import { LanguageTableModule } from '../SharedComponentModules/language-table/language-table.module';
 @NgModule({
   declarations: [
     AdminComponent,
@@ -60,11 +64,16 @@ import { LooseNotesFormComponent } from './Forms/loosenotes/loose-notes-form/loo
     OthersArtFormComponent,
     PixelformComponent,
     SourceAffinityComponent,
-    LooseNotesFormComponent
+    LooseNotesFormComponent,
+    LanguageComponent,
+    GeneratorComponent,
+    WordFormComponent,
+    ComplexWordFormComponent
   ],
   imports: [
     CommonModule,
     SharedFormsModule,
+    LanguageTableModule,
     ReactiveFormsModule,
     
     AdministrationRoutingModule

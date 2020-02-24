@@ -14,6 +14,7 @@ import { CalculatorsComponent } from './CalcConvert/calculators/calculators.comp
 import { SourceCalcFrameComponent } from './CalcConvert/source-calc-frame/source-calc-frame.component';
 import { GridBlowupModule } from '../SharedComponentModules/PrimaryContentDisplayer/GridBlowUp/grid-blowup.module';
 import { LooseNotesModule } from './LooseNotes/loose-notes.module';
+import { NomadicModule } from './nomadic/nomadic.module';
 
 @NgModule({
   declarations: [PlaygroundhomeComponent,
@@ -21,8 +22,8 @@ import { LooseNotesModule } from './LooseNotes/loose-notes.module';
     OthersArtComponent,
     PixelArmyComponent,
     CalculatorsComponent,
-    SourceCalcFrameComponent,
-],
+    SourceCalcFrameComponent
+  ],
     
   imports: [
     CommonModule,
@@ -32,6 +33,7 @@ import { LooseNotesModule } from './LooseNotes/loose-notes.module';
     SharedFormsModule,
     ShowNewestModule,
     GridBlowupModule,
+    NomadicModule,
     
     PlaygroundRoutingModule //must be last!
   ]

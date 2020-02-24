@@ -15,19 +15,6 @@ const surveyRoutes: Routes = [
       {path: ':SurveyID', component: SurveyPartsComponent,//SurveyDetailsComponent,
          resolve: { Survey: GeneralmemberresolverService }}
   ]}
-  // {path: 'world/characters', component: CharactersMainComponent,
-  //   resolve: { GeneralcollectionresolverService },
-  //   children:[
-  //     {path: '', component: HomeComponent },
-  //     {path: 'notfound', component: NotFoundComponent },
-  //     {path: ':CharaID', component: CharactersDetailsComponent,
-  //       resolve: { Chara: GeneralmemberresolverService },
-  //       children: [
-  //         {path: ':RefID', component: CharactersBlowupmasterComponent,
-  //           resolve: { links: CBUMResolverService } }
-  //       ]}
-  //   ]
-  // },
 ];
 
 @NgModule({

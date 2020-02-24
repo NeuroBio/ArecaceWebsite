@@ -26,9 +26,11 @@ export class SurveyStatsComponent implements OnInit, AfterContentChecked {
 
   displayData(counts: any) {
     if(counts){
-      delete counts.ID;
-      this.Stats.Keys = Object.keys(counts);
-      this.Stats.Counts = Object.values(counts);
+      const Counts = Object.assign({}, counts);
+      delete Counts.ID;
+      delete Counts.UploadTime;
+      this.Stats.Keys = Object.keys(Counts);
+      this.Stats.Counts = Object.values(Counts);
       this.Stats.Max = this.Stats.Counts.reduce((a,b) => a + b);
       this.Stats.Counts = this.Stats.Counts
         .map(count => count/this.Stats.Max);

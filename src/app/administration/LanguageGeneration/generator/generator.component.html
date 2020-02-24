@@ -1,0 +1,29 @@
+<div id="wordbank">
+    New Words:
+    <hr>
+    <ul class="sidebarlist" *ngFor="let word of newWords, let i = index">
+        <li class="sidebarlist"
+        [class.selected.sidebarlist]="i===selected"
+        (click)="onSelect(word, i)">
+            {{ word }}
+        </li>        
+    </ul>
+</div>
+
+<form [formGroup]="Form">
+    <p>Type:
+        <select formControlName="Type">
+            <option *ngFor="let type of WordTypes.Types"
+            [value]="type">{{ type }}</option>
+        </select>    
+    </p>
+    
+    <p>How Many: <input formControlName="Number" type="number" class="short"></p>
+    
+    <p>Length: <input formControlName="Length" type="number" class="short"></p>
+    
+    
+    <button (click)="getWords()">Generate</button>  
+</form>
+
+<div style="clear: both;"></div>

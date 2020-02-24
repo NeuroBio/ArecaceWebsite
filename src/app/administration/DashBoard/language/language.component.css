@@ -1,0 +1,11 @@
+label.standard {
+    border: 0px;
+    display: inline-block;
+    cursor: pointer;
+    padding:5px;
+}
+
+
+h3 {
+    margin: 5px;
+}

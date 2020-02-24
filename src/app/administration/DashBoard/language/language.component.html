@@ -1,0 +1,32 @@
+<h3>Add/Edit Words</h3>
+<div>
+    <label class="standard" for="Simple">Simple</label>
+    <input id="Simple" type="radio" name="options"
+    checked="true" [disabled]="disableSwitchWord"
+    (click)="pickWordType(true)">
+    
+    <label class="standard" for="Complex">Complex</label>
+    <input id="Complex" type="radio" name="options"
+    [disabled]="disableSwitchWord"
+    (click)="pickWordType(false)"><br>
+</div><br>
+
+<div *ngIf="simple === true; then simpleword else complexword">
+    <!-- template will replace this div -->
+</div>
+
+
+<ng-template #simpleword>
+    <app-word-form></app-word-form>
+</ng-template>
+
+<ng-template #complexword>
+    <app-complex-word-form></app-complex-word-form>
+</ng-template>
+
+<hr>
+
+<app-language-table
+[Dictionary]="Dictionary"
+Edit="true"
+></app-language-table>

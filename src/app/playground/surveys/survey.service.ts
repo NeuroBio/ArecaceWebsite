@@ -18,7 +18,7 @@ export class SurveyService implements OnDestroy {
 
   constructor(private processor: SurveyProcessorService,
               private firebaseserv: FireBaseService) {
-    this.stream1 = this.firebaseserv.returnCollect(`SurveyStats`)
+    this.stream1 = this.firebaseserv.returnCollectionWithKeys(`SurveyStats`)
       .subscribe(surveyStats => this.allSurveyStats.next(surveyStats));
   }
 
@@ -61,7 +61,7 @@ export class SurveyService implements OnDestroy {
         finalScores[key] = 0;
       }
     });
-
+    
     //Processing depending on Form type
     try {
       this.surveyResults.next(this.processor
@@ -75,12 +75,15 @@ export class SurveyService implements OnDestroy {
     return this.updateStatistics(this.surveyResults.value.OutcomeKey);
   }
 
+  
   updateStatistics(match: string) {
     const ID = this.surveyData.value.ID;
-    let surveyStats = this.allSurveyStats.value.find(x => x.ID = ID)
-    surveyStats[match] += 1
+    let surveyStats = Object.assign({}, this.allSurveyStats.value.find(x => x.ID === ID));
+    const key = surveyStats.key;
+    delete surveyStats.key;
+    surveyStats[match] += 1;
     this.currentSurveyStats.next(surveyStats);
-    return this.firebaseserv.editDocument(surveyStats, "SurveyStats", ID);
+    return this.firebaseserv.editDocument(surveyStats, `SurveyStats`, key);
   }
 
 }

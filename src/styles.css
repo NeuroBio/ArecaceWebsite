@@ -211,6 +211,7 @@ button {
   display: inline-block;
   font-size: 20px;
   font-family: 'Courier New', Courier, monospace;
+  cursor: pointer;
 }
 
 button:hover {
@@ -223,6 +224,7 @@ button:active {
 
 button:disabled {
   color: #a5a5a5;
+  cursor: default;
 }
 
 button:disabled:hover {

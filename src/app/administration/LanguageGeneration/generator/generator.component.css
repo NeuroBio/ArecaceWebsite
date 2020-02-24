@@ -1,0 +1,37 @@
+form {
+    width: 250px;
+    float: right;
+}
+
+div#wordbank {
+    border: solid 1px white;
+    width: 150px;
+    float: right;
+    padding: 7px;
+    margin: 3px;
+}
+
+ul.sidebarlist {
+    max-width: 120px;
+    overflow: hidden;
+    background-color: #454545;
+    margin: 1px;
+    padding-left: 35px;
+}
+
+li.sidebarlist {
+    list-style: none;
+    margin-left: -25px;
+}
+
+li.sidebarlist:hover {
+    background-color: #747474;
+}
+
+li.sidebarlist.selected {
+    background-color: #747474;
+}
+
+li.sidebarlist:active {
+    background-color: #232323;
+}

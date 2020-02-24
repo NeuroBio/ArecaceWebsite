@@ -116,7 +116,7 @@ export class CharacterFormComponent implements OnInit, OnDestroy{
       this.Form.controls.Unique.setValue(
         <SourceAbilities[]>JSON.parse(editFormData.Unique));
       
-        const relatives = <Relations[]>JSON.parse(editFormData.Relations);
+      const relatives = <Relations[]>JSON.parse(editFormData.Relations);
       relatives.forEach(relative =>
         this.addRelative(true, relative.RelationName, relative.Relationship));
       if(editFormData.ReferenceIDs){

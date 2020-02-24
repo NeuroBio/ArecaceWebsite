@@ -136,6 +136,7 @@ div#info {
   padding-left: 7px;
   padding-right: 7px;
   border-left: 3px solid white;
+  float: right;
 }
 
 label {

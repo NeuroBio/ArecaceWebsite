@@ -22,11 +22,13 @@ export class ResultsComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.stream1 = this.surveyserv.surveyResults.subscribe(results => {
-      this.results = results;
-      this.showSpecific = [];
-      this.results.AllScores.forEach(() => this.showSpecific.push(false));
-      this.tooLow = this.results.AllScores.findIndex(x => x.Score < this.results.Limit);
-      this.acceptable = this.results.Limit === undefined ? false : true;
+      if(results) {
+        this.results = results;
+        this.showSpecific = [];
+        this.results.AllScores.forEach(() => this.showSpecific.push(false));
+        this.tooLow = this.results.AllScores.findIndex(x => x.Score < this.results.Limit);
+        this.acceptable = this.results.Limit === undefined ? false : true;
+      }
     });
   }
 

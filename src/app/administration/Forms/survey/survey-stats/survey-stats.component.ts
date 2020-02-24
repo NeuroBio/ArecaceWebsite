@@ -14,6 +14,7 @@ export class SurveyStatsComponent implements OnInit , OnDestroy {
   Form: FormGroup;
   outcomes: FormArray;
   showSurveys: boolean;
+  Old: boolean;
   surveys: any[];
 
   stream1: Subscription;
@@ -28,7 +29,7 @@ export class SurveyStatsComponent implements OnInit , OnDestroy {
   
   ngOnInit() {
     this.stream1 = this.controller.itemToEdit
-      .subscribe(item => this.assignFormData(Object.assign({}, item)));
+      .subscribe(item => this.assignFormData(item));
 
     this.stream2 = this.controller.triggerProcess
       .subscribe(() => this.processForm());
@@ -53,20 +54,32 @@ export class SurveyStatsComponent implements OnInit , OnDestroy {
   assignFormData(editFormData: any) {
     this.onReset();
     if(editFormData) {
-      this.controller.quickAssign(this.Form, editFormData);
-      delete editFormData.ID;
-      delete editFormData.key;
-      Object.keys(editFormData).forEach(key => this.addOutcome(true, 0, key));
-      this.Tallies = Object.values(editFormData);
+      const safeCopy = Object.assign({}, editFormData);
+      this.controller.quickAssign(this.Form, safeCopy);
+      delete safeCopy.ID;
+      delete safeCopy.key;
+      delete safeCopy.UploadTime;
+      Object.keys(safeCopy).forEach(key => this.addOutcome(true, 0, key));
+      this.Tallies = Object.values(safeCopy);
+      this.Old = true;
     }
   }
 
   processForm() {
     let Final: any = {};
-    this.outcomes.value.forEach((o, i) => {
-      Final[o.Name] = this.Tallies[i] !== undefined ? this.Tallies[i] : 0;
+    this.outcomes.controls.forEach((o, i) => {
+      if(this.Tallies) {
+        Final[o.value.Name] = this.Tallies[i] !== undefined ? this.Tallies[i] : 0;
+      } else {
+        Final[o.value.Name] = 0;
+      }
     })
     Final.ID = this.Form.value.ID;
+    if(Final.ID === '') {
+      this.controller.activeFormData.next(["abort",
+      "Survey Stats must have at least an ID."]);
+      return ;
+    }
 
     this.controller.activeFormData.next([Final,
                                         [],
@@ -81,9 +94,10 @@ export class SurveyStatsComponent implements OnInit , OnDestroy {
     this.outcomes = this.fb.array([]);
     this.Form = this.createForm();
     this.showSurveys = false;
+    this.Old = false;
   }
 
-  addOutcome(add: boolean, index: number, name: string = '') {
+  addOutcome(add: boolean, index: number, name: string = 'test') {
     if(add){
       this.outcomes.controls.push(this.fb.group({Name: name}));
     } else {

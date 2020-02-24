@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { CRUDcontrollerService } from '../../services/CRUDcontroller.service';
 
 @Component({
   selector: 'app-adminDuties',
