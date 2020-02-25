@@ -14,6 +14,7 @@ import { Bookmark } from '../../Classes/bookmark';
 export class BookmarkService implements OnDestroy {
 
   userData = new BehaviorSubject<User>(null);
+  loggedin = new BehaviorSubject<boolean>(null);
   stream: Subscription;
 
   constructor(private firebaseserv: FireBaseService,

@@ -16,14 +16,16 @@ export class BookmarkComponent implements OnInit, OnChanges {
   @Input() name;
   data: User;
   color: string;
+  hover = false;
+  notLoggedIn: boolean;
 
   constructor(private bookmarkserv: BookmarkService) { }
 
   ngOnInit() {
     this.bookmarkserv.userData.subscribe(data => {
       this.data = data;
+      this.notLoggedIn = data === undefined;
       this.setColors();
-      
     });
   }
 
@@ -53,9 +55,13 @@ export class BookmarkComponent implements OnInit, OnChanges {
   }
 
   setColors(){
-    this.color = this.checkBookmark() < 0
+    if(this.notLoggedIn) {
+      this.color = 'rgb(180,180,180)';
+    } else {
+      this.color = this.checkBookmark() < 0
       ? 'rgba(250,0,0,0)'
       : '#e67e00';
+    }
   }
 
 }

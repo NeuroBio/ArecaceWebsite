@@ -4,14 +4,16 @@ image#bookmark {
     margin: 5px 5px 5px 5px;
 }
 
-div#bookmark {
+button#bookmark {
     height: 100%;
     display: flex;
     align-items: center;
     cursor: pointer;
     border: whitesmoke 1px solid;
+    margin: 0px;
+    padding: 0px;
 }
 
-div#bookmark:hover {
-    background-color: rgb(100,100,100);
+button#bookmark:disabled {
+    cursor: default;
 }

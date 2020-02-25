@@ -1,3 +1,13 @@
-<div id="bookmark" (click)="bookmark()" [style.background-color]="color">
+<button id="bookmark" (click)="bookmark()"
+[disabled]="notLoggedIn"
+[style.background-color]="color"
+(mouseover)="hover=true" (mouseleave)="hover=false"
+[ngStyle]="hover === false ? {'background-color': color}
+                    : notLoggedIn === true
+                        ? {'background-color': color} 
+                        : color === '#e67e00'
+                            ? {'background-color': 'orange'}
+                            : {'background-color': 'rgb(120,120,120)'}"
+>
     <img id="bookmark" src="assets/svgs/bookmark-bar.svg" alt="bookmark">
-</div>
+</button>
