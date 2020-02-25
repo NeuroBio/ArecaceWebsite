@@ -95,6 +95,6 @@ export class SeriesChooserComponent implements OnInit, OnDestroy {
   updatePath(){
     this.path = `story/${this.storyType}/${this.currentSeries}/${this.currentSection}`;
     const Section = this.titlesInSeries.find(sec => sec.ID === this.currentSection)
-    this.name = `${Section.Series}, ${Section.Title}`
+    this.name = `${Section.Series}: ${Section.Title}`
   }
 }

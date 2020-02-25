@@ -67,8 +67,7 @@ export class BookComponent implements OnInit, OnDestroy {
   }
  
   navigate(){
-    console.log("trigger")
-    this.name = `Chapter ${this.currentChapter.ID}, Page ${this.currentPage}`
+    this.name = `Chapter ${this.currentChapter.ID}: Page ${this.currentPage}`
     this.path = `comic/${this.currentChapter.ID}-${this.currentPage}`
     this.router.navigate([this.path]);
   }

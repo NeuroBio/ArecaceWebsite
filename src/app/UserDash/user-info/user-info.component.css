@@ -16,3 +16,12 @@ h4 {
     padding: 7px;
     margin: 0px;
 }
+input {
+    width: 95%;
+    margin: 3px;
+    font-size: 14px;
+}
+button {
+    float: right;
+    margin: 3px;
+}

@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule }      from '@angular/forms';
+
 import { UserDashComponent } from './user-dash/user-dash.component';
 import { UserInfoComponent } from './user-info/user-info.component';
 import { UserDashRoutingModule } from './user-dash-routing.module';
@@ -17,6 +19,7 @@ import { UserDataComponent } from './user-data/user-data.component';
   imports: [
     CommonModule,
     LoginModule,
+    ReactiveFormsModule,
     UserDashRoutingModule
   ]
 })
