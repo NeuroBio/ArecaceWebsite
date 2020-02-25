@@ -14,8 +14,13 @@ export class AppComponent implements AfterViewInit{
   @ViewChild('flag', { static: true }) flag: ElementRef;
   title: string = 'Arecace';
   year: number = new Date().getFullYear()
-  linkList: string[] = ['home', 'comic', 'story',
-                        'world', 'extras', 'dash']
+  linkList: {}[] = [{link:'home', name: 'home'},
+                    {link:'comic', name: 'comic'},
+                    {link:'story', name: 'story'},
+                    {link:'world', name: 'world'},
+                    {link:'playground', name: '*play*'},
+                    {link:'extras', name: 'extras'},
+                    {link:'dash', name: 'dash'}]
 
   constructor(private global: GlobalVarsService) { }
 

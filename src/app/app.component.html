@@ -7,7 +7,7 @@
         <h1 id="title">Arecace</h1>
         <nav id="header" role="navigation">
             <div *ngFor="let link of linkList" class="navver">
-                    <a class="navver" [routerLink]="link">{{ link | titlecase }}</a>
+                    <a class="navver" [routerLink]="link.link">{{ link.name | titlecase }}</a>
             </div>
         </nav>
     </div>

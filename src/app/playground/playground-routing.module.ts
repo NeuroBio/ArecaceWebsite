@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { PlaygroundhomeComponent } from './playgroundhome/playgroundhome.component'
+import { PlaygroundhomeComponent } from './playgroundhome/playgroundhome.component';
+
 
 const playgroundRoutes: Routes = [
   {path: '', component: PlaygroundhomeComponent},
@@ -14,6 +15,8 @@ const playgroundRoutes: Routes = [
     loadChildren: () => import('./LooseNotes/loose-notes.module').then(m => m.LooseNotesModule)},
   {path: 'othersart',
     loadChildren: () => import('./others-art/others-art.module').then(m => m.OthersArtModule)},
+  {path: 'activities',
+    loadChildren: () => import('./activities/activities.module').then(m => m.ActivitiesModule)},
 ];
 
 @NgModule({
