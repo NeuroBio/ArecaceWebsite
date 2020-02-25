@@ -1,5 +1,6 @@
 import { CharacterMetaData } from './charactermetadata';
-import { SA } from './SAclass'
+import { SA } from './SAclass';
+import { Bookmark } from './Bookmark';
 
 export class User {
     email: string;
@@ -7,9 +8,9 @@ export class User {
     userName: string;
     Admin: boolean;
     User: boolean;
-    Narratives?: string[];
-    Comics?: string[];
-    Scripts?: string[];
+    Narratives?: Bookmark[];
+    Comics?: Bookmark[];
+    Scripts?: Bookmark[];
     Surveys?: any[];
     Characters?: CharacterMetaData[];
     SAcalcs?: SA[];

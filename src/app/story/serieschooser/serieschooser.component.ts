@@ -24,6 +24,7 @@ export class SeriesChooserComponent implements OnInit, OnDestroy {
   titlesInSeries: StoryMetaData[];
   storyType: string;
   path: string;
+  name: string;
   localLoading: boolean;
 
   stream1: Subscription;
@@ -45,8 +46,8 @@ export class SeriesChooserComponent implements OnInit, OnDestroy {
       this.seriesNames = Object.values(IDName);
     });
 
-    this.stream2 = this.storyserv.getSeriesData().subscribe(titles =>
-      this.titlesInSeries = titles);
+    this.stream2 = this.storyserv.getSeriesData().subscribe(titles =>{
+      this.titlesInSeries = titles});
 
     this.stream3 = this.storyserv.storyType.subscribe(string => { 
       this.localLoading = true;
@@ -63,7 +64,7 @@ export class SeriesChooserComponent implements OnInit, OnDestroy {
       this.currentSection = sec;
       this.storyserv.updateLoading(true);
       this.localLoading = false;
-      this.path = this.updatePath();
+      this.updatePath();
     });
   }
 
@@ -92,6 +93,8 @@ export class SeriesChooserComponent implements OnInit, OnDestroy {
   }
 
   updatePath(){
-    return `story/${this.storyType}/${this.currentSeries}/${this.currentSection}`;
+    this.path = `story/${this.storyType}/${this.currentSeries}/${this.currentSection}`;
+    const Section = this.titlesInSeries.find(sec => sec.ID === this.currentSection)
+    this.name = `${Section.Series}, ${Section.Title}`
   }
 }

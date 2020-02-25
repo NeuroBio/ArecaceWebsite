@@ -1,29 +1,43 @@
 import { Injectable } from '@angular/core';
 import { FireBaseService } from 'src/app/GlobalServices/firebase.service';
 import { AuthService } from '../../administration/security/Auth/auth.service';
-import { GetRouteSegmentsService } from '../../GlobalServices/getroutesegments.service';
+import { formatDate } from '@angular/common';
 
-import { take } from 'rxjs/operators';
+import { OnDestroy } from '@angular/core';
+import { BehaviorSubject, Subscription } from 'rxjs';
+import { User } from '../../Classes/user';
+import { Bookmark } from '../../Classes/bookmark';
 
 @Injectable({
   providedIn: 'root'
 })
-export class BookmarkService {
+export class BookmarkService implements OnDestroy {
+
+  userData = new BehaviorSubject<User>(null);
+  stream: Subscription;
 
   constructor(private firebaseserv: FireBaseService,
-              private auth: AuthService) { }
+              private auth: AuthService) {
+    this.stream = this.auth.user.subscribe(user => {this.userData.next(user)});
+  }
 
-  bookmark(type: string, path: string) {
-    return this.firebaseserv.returnDocument(`Users/${this.auth.uid.value}`)
-    .pipe(take(1)).toPromise()
-    .then(data => {
+  ngOnDestroy() {
+    this.stream.unsubscribe();
+  }
+
+  addBookmark(type: string, path: string, name: string) {
+    const data = this.userData.value;
       if(data[type]) {
-        data[type].push(path)
+        data[type].push({path: path, time: formatDate(new Date(), 'yyyy-MM-dd, HH:mm', 'en'), name: name})
       } else {
         data[type] = [path]
       }
-      console.log(data[type])
       return this.firebaseserv.editDocument(data, 'Users/', this.auth.uid.value);
-    });
+  }
+
+  removeBookmark(type: string, index: number) {
+    const data = this.userData.value;
+    data[type].splice(index, 1);
+    return this.firebaseserv.editDocument(data, 'Users', this.auth.uid.value);
   }
 }

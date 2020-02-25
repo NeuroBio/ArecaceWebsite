@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnChanges } from '@angular/core';
 import { User } from 'src/app/Classes/user';
 import { UserDataService } from '../user-data.service';
 
@@ -7,31 +7,44 @@ import { UserDataService } from '../user-data.service';
   templateUrl: './pick-up.component.html',
   styleUrls: ['./pick-up.component.css']
 })
-export class PickUpComponent implements OnInit {
+export class PickUpComponent implements OnChanges {
 
   @Input() user: User;
-  data = [];
-  bookmarkTypes = ['Comics', 'Narratives', 'Scripts']
+  data: any[];
+  dataExists: boolean;
+  bookmarkTypes = ['Comics', 'Narratives', 'Scripts']  
   
   constructor(private userdataserv: UserDataService) { }
 
-  ngOnInit() {
-    this.bookmarkTypes.forEach(bmt => {
-      if(this.user[bmt]) {
-        this.data.push(this.processFragments(this.user[bmt]));
-      }
-    });
-  }
-
-  processFragments(data: string[]) {
-    return data.map(link => {
-      const frags = link.split('\/').map(frag =>
-        frag.replace(/[A-Z\d]/g, char => ' ' + char).trim());
-      return {link: link, frags: frags};
-    });
+  ngOnChanges() {
+    this.data = [];
+    this.dataExists = this.checkExistence()
+    if(this.dataExists === true) {
+      this.bookmarkTypes.forEach(bmt => {
+        if(this.user[bmt]) {
+          if(this.user[bmt][0]) {
+            this.data.push({Type: bmt,
+                            Data: this.user[bmt].map(link =>{
+                              return {Link: link.path, Name: link.name};
+            })});
+          }
+        }
+      });  
+    }
   }
 
   onDelete(type: string, index: number) {
     this.userdataserv.deleteEntry(type, index);
+  }
+
+  checkExistence() {
+    for(let bmt of this.bookmarkTypes){
+      if(this.user[bmt]){
+        if(this.user[bmt][0]){
+          return true;
+        };
+      }
+    }
+    return false;
   }
 }

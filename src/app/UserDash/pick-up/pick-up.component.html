@@ -1,18 +1,26 @@
 <div id="outer">
-  <h4>Pick up where you left off!</h4>
+  <h4>Your Bookmarks</h4>
   <hr>
   
-  <p *ngIf="!user.Comics  && !user.Scripts && !user.Narratives">
-    You have not saved your place anywhere.
-  </p>
+  <div *ngIf="dataExists === true; then display else notsaved">
+  </div>
 
-  <p *ngFor="let type of data">
-    <span class="linker" *ngFor="let link of type; let i = index">
-      <button class="Exs" (click)="onDelete('Narratives',i)">x</button>
-      <a [routerLink]="'/'+ link.link">
-          {{ link.frags[2] }}, {{ link.frags[3] }}
-      </a><br>
-    </span>
-  </p>
+  <ng-template #display>
+    <p *ngFor="let type of data">
+      <span>{{ type.Type }}:</span>
+      <span class="linker" *ngFor="let link of type.Data; let i = index">
+        <button class="Exs" (click)="onDelete(type.Type, i)">x</button>
+        <a [routerLink]="'/'+ link.Link">
+            {{ link.Name }}
+        </a><br>
+      </span>
+    </p>
+  </ng-template>
+
+  <ng-template #notsaved>
+    <p>
+      You have not saved your place anywhere.
+    </p>
+  </ng-template>
 
 </div>
