@@ -13,12 +13,13 @@ div#splatter{
 
 /*header components*/
 div#topblock {
-  position: relative;
+    position: relative;
     max-width: 900px;
     background: #454545;
   }
 
   div#chapselect {
+    position: relative;
     float: left;
     margin-left: 10px;
     padding-top: 18px;
@@ -39,11 +40,13 @@ div#topblock {
 
  
   div.break {
-    height: 70px;
-    border-right: 3px solid white;
+    position: absolute;
+    height: 100%;
+    border-left: 3px solid white;
   }
 
   div#viewradio {
+    position: relative;
     display: flex;
     justify-content: flex-end;
     padding-right: 10px;
@@ -51,7 +54,9 @@ div#topblock {
   }
 
   div#radiobox {
+    position: relative;
     padding: 12px;
+    right: 0px;
   }
 
   hr {
@@ -110,7 +115,7 @@ span#help {
   z-index: 0;
   padding-right: 7px;
   position: absolute;
-  right: 0;
+  left: 0;
   bottom: 2px;
   font-size: 12px;
   font-weight: normal;
@@ -134,7 +139,6 @@ div#info {
   padding-left: 7px;
   padding-right: 7px;
   border-left: 3px solid white;
-  float: right;
 }
 
 label {
@@ -143,9 +147,9 @@ label {
 }
 
 div#bookmark {
-  float: left;
   position: absolute;
   top: 0;
   bottom: 0;
+  right: 0;
   height: 100%;
 }
