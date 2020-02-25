@@ -11,11 +11,12 @@
 <!-- User logged in -->
 <ng-template #authenticated>
     <div id="outer" *ngIf="user">
-        <button id="logout" (click)="auth.logout()">Logout</button>
-        <h3>Welcome Back, {{ user.userName }}, ID#{{ user.ID }}</h3>
+        <div class="compheader">
+            <button id="logout" (click)="auth.logout()">Logout</button>
+            <h3 class="compheader">Welcome Back, {{ user.userName }} (ID#{{ user.ID }})</h3>
+        </div>
         <div [innerHTML]="loggedinText"></div>
         <hr>
-
         <div id="UserComponents">
             <app-pick-up
             [user]="user"
