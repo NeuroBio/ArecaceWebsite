@@ -26,7 +26,7 @@ export class StoryResolver3Service implements Resolve<any>{
           take(1),
           flatMap((metaData:StoryMetaData) => {
             if(metaData){
-              this.storyserv.getStory(metaData.ID)
+              this.storyserv.getStory(metaData.ID);
               this.storyserv.changeSection(metaData.ID);
               return this.getText(metaData.StoryLink).pipe(
                 map(text => ({metaData, text}))

@@ -3,8 +3,8 @@
   <hr>
   <ul>
     <div *ngFor="let name of names">
-      <button>x</button>
-      <li (click)="onClick()">
+      <button class="Exs">x</button>
+      <li [routerLink]="link">
         {{ name }}
       </li>
     </div>

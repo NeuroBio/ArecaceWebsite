@@ -6,6 +6,7 @@ import { SA } from 'src/app/Classes/SAclass';
 import { CharacterMetaData } from 'src/app/Classes/charactermetadata';
 import { Subscription, Observable } from 'rxjs';
 import { FireBaseService } from 'src/app/GlobalServices/firebase.service';
+import { UserDataService } from '../user-data.service';
 
 @Component({
   selector: 'app-user-dash',
@@ -17,7 +18,7 @@ export class UserDashComponent implements OnInit, OnDestroy {
   loggedoutText: string;
   loggedinText: string;
   user: User;
-  names: [string[],string][];
+  savedData: any[];
   titles: string[];
   authorized: boolean;
 
@@ -26,7 +27,8 @@ export class UserDashComponent implements OnInit, OnDestroy {
   showAccountInfo = false;
 
   constructor(private auth: AuthService,
-              private textprovider: TextProvider) { }
+              private textprovider: TextProvider,
+              private userdataser: UserDataService) { }
 
   ngOnInit() {
     this.loggedoutText = this.textprovider.WebsiteText
@@ -38,6 +40,7 @@ export class UserDashComponent implements OnInit, OnDestroy {
       this.authorized = user? true : false;
       this.user = user;
       this.PrepareData();
+      this.userdataser.assignUserData(user);
     });
   }
 
@@ -50,18 +53,27 @@ export class UserDashComponent implements OnInit, OnDestroy {
   }
 
   PrepareData(){
-    this.names = [];
+    this.savedData = [];
     if(this.user.Characters) {
-      this.names.push([this.user.Characters.map(char => `${char.FirstName} ${char.LastName}`),
-      'Your Fan Characters']);
+      this.savedData.push({
+        title: 'Your Fan Characters',
+        link: 'char',
+        name: this.user.Characters.map(char => `${char.FirstName} ${char.LastName}`)
+     });
     }
     if(this.user.SAcalcs) {
-      this.names.push([this.user.SAcalcs.map(SA => SA.ID),
-        'Your Source Affinity Data']);
+      this.savedData.push({
+        title: 'Your Source Affinity Data',
+        link: 'sa',
+        name: this.user.SAcalcs.map(SA => SA.ID)
+        });
     }
     if(this.user.Surveys) {
-      this.names.push([this.user.Surveys.map(survey => `${survey.Name} (${survey.UploadTime})`),
-      'Your Survey Data']);
+      this.savedData.push({
+      title: 'Your Survey Data',
+      link: 'survey',
+      name: this.user.Surveys.map(survey => `${survey.Name} (${survey.UploadTime})`)
+    });
     }
   }
 }

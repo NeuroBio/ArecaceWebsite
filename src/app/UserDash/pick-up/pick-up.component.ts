@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { User } from 'src/app/Classes/user';
+import { UserDataService } from '../user-data.service';
 
 @Component({
   selector: 'app-pick-up',
@@ -8,18 +9,29 @@ import { User } from 'src/app/Classes/user';
 })
 export class PickUpComponent implements OnInit {
 
-  comFrag: string[];
-  scriFrag: string[];
-  narFrag: string[];
   @Input() user: User;
+  data = [];
+  bookmarkTypes = ['Comics', 'Narratives', 'Scripts']
   
-  constructor() { }
+  constructor(private userdataserv: UserDataService) { }
 
   ngOnInit() {
-    this.comFrag = this.user.Comic ? this.user.Comic.split('/') : [];
-    this.scriFrag = this.user.Script ? this.user.Script.split('/') : [];
-    this.narFrag = this.user.Narrative ? this.user.Narrative.split('/') : [];
-
+    this.bookmarkTypes.forEach(bmt => {
+      if(this.user[bmt]) {
+        this.data.push(this.processFragments(this.user[bmt]));
+      }
+    });
   }
 
+  processFragments(data: string[]) {
+    return data.map(link => {
+      const frags = link.split('\/').map(frag =>
+        frag.replace(/[A-Z\d]/g, char => ' ' + char).trim());
+      return {link: link, frags: frags};
+    });
+  }
+
+  onDelete(type: string, index: number) {
+    this.userdataserv.deleteEntry(type, index);
+  }
 }

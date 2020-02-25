@@ -1,0 +1,18 @@
+
+image#bookmark {
+    height: 30px;
+    margin: 5px 5px 5px 5px;
+}
+
+div#bookmark {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    margin-left: 10px;
+    border: whitesmoke 1px solid;
+}
+
+div#bookmark:hover {
+    background-color: rgb(100,100,100);
+}

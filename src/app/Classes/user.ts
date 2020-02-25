@@ -7,9 +7,9 @@ export class User {
     userName: string;
     Admin: boolean;
     User: boolean;
-    Narrative: string;
-    Comic: string;
-    Script: string;
+    Narratives?: string[];
+    Comics?: string[];
+    Scripts?: string[];
     Surveys?: any[];
     Characters?: CharacterMetaData[];
     SAcalcs?: SA[];
@@ -19,9 +19,6 @@ export class User {
         this.ID = ID;
         this.userName = 'defaultUserName_2.0';
         this.Admin = false;
-        this.Narrative = '';
-        this.Script = '';
-        this.Comic = '';
     }
 }
   

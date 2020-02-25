@@ -7,9 +7,11 @@ export class GetRouteSegmentsService {
 
   constructor() { }
 
-  fetch(pathtoRoot: any[]) {
+  fetch(pathtoRoot: any[], pop: boolean = true) {
     const Path = [];
-    pathtoRoot.pop(); //remove current final segment
+    if(pop) {
+      pathtoRoot.pop(); //remove current final segment
+    }
     pathtoRoot.forEach((segment, i) => {
       if(i > 0 && segment.url != '') { //ignore root and any weirdness I can't explain
         Path.push(segment.url);

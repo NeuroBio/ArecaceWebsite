@@ -22,6 +22,7 @@ export class StoryResolver2Service implements Resolve<any> {
     if(series in IDname) {
       const orderedSeries = serials[IDname[series]].sort((a,b) => a.Section < b.Section ? -1 : 1)
       this.storyserv.initializeSeriesData(orderedSeries);
+      this.storyserv.changeSeries(series);
       return of (orderedSeries)
     }else{
       this.router.navigate([`story/${type}`]);

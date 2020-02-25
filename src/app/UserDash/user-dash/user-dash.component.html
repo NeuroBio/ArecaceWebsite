@@ -20,11 +20,13 @@
             <app-pick-up
             [user]="user"
             ></app-pick-up>
-    
-            <div *ngFor="let name of names">
+        
+        <!-- The Vast Majority of the Data -->
+        <div *ngFor="let datum of savedData">
                 <app-user-data
-                [names]="name[0]"
-                [title]="name[1]"
+                [names]="datum.name"
+                [title]="datum.title"
+                [link]="datum.link"
                 ></app-user-data>
             </div>
         </div>        

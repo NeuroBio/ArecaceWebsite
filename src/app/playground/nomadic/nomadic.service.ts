@@ -9,7 +9,6 @@ export class NomadicService {
 
   RawDictionary = new BehaviorSubject<Word[]>(null);
   TranslationDictionary = new BehaviorSubject<{}>(null);
-  // activePage = new BehaviorSubject<string>(null);
 
   constructor() { }
 

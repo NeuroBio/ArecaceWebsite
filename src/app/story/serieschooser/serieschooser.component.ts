@@ -23,6 +23,7 @@ export class SeriesChooserComponent implements OnInit, OnDestroy {
   currentSection: string;
   titlesInSeries: StoryMetaData[];
   storyType: string;
+  path: string;
   localLoading: boolean;
 
   stream1: Subscription;
@@ -62,6 +63,7 @@ export class SeriesChooserComponent implements OnInit, OnDestroy {
       this.currentSection = sec;
       this.storyserv.updateLoading(true);
       this.localLoading = false;
+      this.path = this.updatePath();
     });
   }
 
@@ -87,5 +89,9 @@ export class SeriesChooserComponent implements OnInit, OnDestroy {
     }else{
       this.router.navigate([`../../Narratives`], { relativeTo: this.route });
     }
+  }
+
+  updatePath(){
+    return `story/${this.storyType}/${this.currentSeries}/${this.currentSection}`;
   }
 }

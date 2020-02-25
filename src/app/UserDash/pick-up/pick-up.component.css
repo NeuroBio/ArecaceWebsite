@@ -10,3 +10,22 @@ h4 {
     padding: 7px;
     margin: 0px;
 }
+
+a {
+    color: rgb(220,220,220);
+    width: 100%;
+    padding: 0px 5px 0px 5px;
+    margin: 3px;
+}
+
+a:hover {
+    background-color: rgb(100,100,100);
+}
+
+a:active {
+    background-color: rgb(180,180,180);
+}
+
+.linker {
+    display: flex;
+}

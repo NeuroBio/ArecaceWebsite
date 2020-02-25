@@ -9,6 +9,7 @@ export class UserDataComponent implements OnInit {
 
   @Input() names: string[];
   @Input() title: string;
+  @Input() link: string;
 
   constructor() { }
 
