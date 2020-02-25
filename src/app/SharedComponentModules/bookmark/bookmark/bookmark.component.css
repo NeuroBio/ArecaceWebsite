@@ -9,7 +9,6 @@ div#bookmark {
     display: flex;
     align-items: center;
     cursor: pointer;
-    margin-left: 10px;
     border: whitesmoke 1px solid;
 }
 

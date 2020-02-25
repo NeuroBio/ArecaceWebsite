@@ -41,3 +41,7 @@ div.loading {
     height: 33px;
     width: 33px;
 }
+
+app-bookmark {
+    margin-left: 10px;
+}

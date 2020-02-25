@@ -96,16 +96,14 @@ div#footbox {
   text-align: center;
   max-width: 900px;
   padding: 0;
-  padding-top: 7px;
-  padding-bottom: 7px;
   background: #454545;
   color: white;
 }
 
 button {
   z-index: 10;
-  margin-bottom: 10px;
-  margin-top: 10px;
+  margin-bottom: 17px;
+  margin-top: 17px;
 }
 
 span#help {
@@ -142,4 +140,12 @@ div#info {
 label {
   border: 0px;
   padding: 0px;
+}
+
+div#bookmark {
+  float: left;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  height: 100%;
 }

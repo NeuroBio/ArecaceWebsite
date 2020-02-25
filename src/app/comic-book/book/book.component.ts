@@ -25,6 +25,8 @@ export class BookComponent implements OnInit, OnDestroy {
   loading: boolean = false;
   stream: Subscription;
   mainText: string;
+  path: string;
+  name: string;
   
   constructor(private comicserv: ComicService,
               private route: ActivatedRoute,
@@ -38,8 +40,8 @@ export class BookComponent implements OnInit, OnDestroy {
       this.route.firstChild.paramMap.subscribe(path =>
         this.initialVarAssign(path, chap)).unsubscribe()
     ).unsubscribe();
-    this.stream = this.comicserv.loading.subscribe(bool => this.loading = bool);
 
+    this.stream = this.comicserv.loading.subscribe(bool => this.loading = bool);
     this.mainText = this.textprovider.WebsiteText
                         .find(member => member.ID === 'comic').Text;
   }
@@ -61,10 +63,14 @@ export class BookComponent implements OnInit, OnDestroy {
     }
     this.maxChap = chap[chap.length-1].ID;
     this.updatePageIndex();
+    this.navigate();
   }
  
   navigate(){
-    this.router.navigate(['comic/'+this.currentChapter.ID+'-'+this.currentPage]);
+    console.log("trigger")
+    this.name = `Chapter ${this.currentChapter.ID}, Page ${this.currentPage}`
+    this.path = `comic/${this.currentChapter.ID}-${this.currentPage}`
+    this.router.navigate([this.path]);
   }
 
   updatePageIndex(){

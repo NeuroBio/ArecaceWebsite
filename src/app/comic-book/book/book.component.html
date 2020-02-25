@@ -74,6 +74,14 @@
     <!--Comic Footer-->
     <div id="footbox" role="navigation">
 
+        <div id="bookmark">
+            <app-bookmark
+            type="Comics"
+            [path]="path"
+            [name]="name"
+            ></app-bookmark>
+        </div>
+
         <!--buttons-->
         <span>
             <button (click)="onButton(currentPage > 1,-1)"

@@ -5,6 +5,7 @@ import { BookComponent }            from './book/book.component';
 import { PageComponent }            from './page/page.component';
 
 import { ComicBookRoutingModule }   from './comicbook-routing.module';
+import { BookmarkModule } from '../SharedComponentModules/bookmark/bookmark.module';
 
 @NgModule({
   declarations: [
@@ -13,6 +14,7 @@ import { ComicBookRoutingModule }   from './comicbook-routing.module';
   ],
   imports: [
     CommonModule,
+    BookmarkModule,
     ComicBookRoutingModule
   ]
 })
