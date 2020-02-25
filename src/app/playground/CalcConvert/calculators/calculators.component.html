@@ -1,14 +1,16 @@
-<div id="outer">
-  <div id="headerNav">
-      <h3>Calculators and Convertors</h3>
-      <div class="navver" role="nav" id="quickNav" *ngFor="let link of links">
-          <a class="navver" [routerLink]="link.Link">{{ link.Title }}</a>
-      </div>    
-  </div>
-  <hr>
+<div class="background">
+    <div id="outer">
+    <div id="headerNav">
+        <h3>Calculators and Convertors</h3>
+        <div class="navver" role="nav" id="quickNav" *ngFor="let link of links">
+            <a class="navver" [routerLink]="link.Link">{{ link.Title }}</a>
+        </div>    
+    </div>
+    <hr>
 
 
-  <div id="holder">
-      <router-outlet></router-outlet>
-  </div>
+    <div id="holder">
+        <router-outlet></router-outlet>
+    </div>
+    </div>
 </div>

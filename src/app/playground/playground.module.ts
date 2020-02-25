@@ -7,7 +7,8 @@ import { PlaygroundhomeComponent } from './playgroundhome/playgroundhome.compone
 import { ShowNewestModule } from '../SharedComponentModules/ShowNewest/show-newest.module';
 
 @NgModule({
-  declarations: [PlaygroundhomeComponent,
+  declarations: [
+    PlaygroundhomeComponent,
   ],
     
   imports: [

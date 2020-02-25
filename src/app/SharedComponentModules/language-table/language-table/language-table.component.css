@@ -5,6 +5,7 @@ table {
     border: 1px solid whitesmoke;
     margin-bottom: 7px;
     border-collapse: collapse;
+    background-color: rgb(49,49,49);
 }
 
 th {

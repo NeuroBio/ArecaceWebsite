@@ -71,12 +71,12 @@
     </tr>
     <tr *ngFor="let word of currentDict, let i = index">
         <td>{{ word.Indativor }}</td>
-        <td>{{ word.English }}</td>
+        <td>{{ word.English.split(';').join(', ') }}</td>
         <td>{{ word.Type }}</td>
-        <td>{{ word.Subtype }}</td>
+        <td>{{ word.Subtype.split('/').join(', ') }}</td>
         <td>{{ word.Level }}</td>
         <td>{{ word.Core }}</td>
-        <td>{{ word.Components }}</td>
+        <td>{{ word.Components.split(';').join(', ') }}</td>
         <td *ngIf="Edit"><button (click)="loadWord(i)">Edit</button></td>
     </tr>
 </table>
