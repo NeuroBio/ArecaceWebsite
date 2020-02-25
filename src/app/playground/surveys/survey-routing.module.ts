@@ -8,7 +8,7 @@ import { SurveyMainComponent } from './survey-main/survey-main.component';
 import { SurveyPartsComponent } from './survey-parts/survey-parts.component';
 
 const surveyRoutes: Routes = [
-  {path: 'surveys', component: SurveyMainComponent,
+  {path: '', component: SurveyMainComponent,
   resolve: { GeneralcollectionresolverService },
   children:[
       {path: '', redirectTo: 'Guild', pathMatch: 'full'},

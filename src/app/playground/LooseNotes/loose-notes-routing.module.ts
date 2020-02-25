@@ -7,7 +7,7 @@ import { GeneralmemberresolverService } from 'src/app/GlobalServices/generalmemb
 import { GeneralcollectionresolverService } from 'src/app/GlobalServices/generalcollectionresolver.service';
 
 const noteRoutes: Routes = [
-  {path: 'notes', component: MainNotesComponent,
+  {path: '', component: MainNotesComponent,
   resolve: {GeneralcollectionresolverService},
   children: [
     {path: '', redirectTo: 'Latest', pathMatch: 'full'},

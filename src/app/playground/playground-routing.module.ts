@@ -4,7 +4,11 @@ import { PlaygroundhomeComponent } from './playgroundhome/playgroundhome.compone
 
 
 const playgroundRoutes: Routes = [
-  {path: '', component: PlaygroundhomeComponent},
+  {path: '', component: PlaygroundhomeComponent,
+  children: [
+
+  ]
+},
   {path: 'calc',
     loadChildren: () => import('./CalcConvert/calc-convert.module').then(m => m.CalcConvertModule)},
   {path: 'nomadic',

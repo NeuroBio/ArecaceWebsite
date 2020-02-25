@@ -8,7 +8,7 @@ import { TranslateComponent } from './translate/translate.component';
 import { NomadicResolverService } from './nomadic-resolver.service'
 
 const nomadRoutes: Routes = [
-  {path: 'nomadic', component: NomadicHomeComponent,
+  {path: '', component: NomadicHomeComponent,
   resolve: {NomadicResolverService},
   children: [
     {path: '', redirectTo: 'introduction'},

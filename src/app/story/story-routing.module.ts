@@ -21,10 +21,8 @@ const storyRoutes: Routes = [
       {path: '', redirectTo:'First', pathMatch: 'full'},
       {path: ':StoryID',  component:StorydisplayComponent,
       resolve: {Story:StoryResolver3Service}}
-    ]
-  }
-]
-}
+    ]}
+  ]}
 ];
 
 @NgModule({

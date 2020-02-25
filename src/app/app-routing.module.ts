@@ -38,7 +38,7 @@ const routes: Routes = [
     loadChildren: () => import('./SimplePages/sitemap/sitemap.module').then(m => m.SitemapModule)},
   {path: 'world',
     loadChildren: () => import('./worldbuilding/worldbuilding.module').then(m => m.WorldbuildingModule)},
-  
+
   //final catch
   {path: '**', component: PageNotFoundComponent}
 ];

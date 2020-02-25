@@ -4,7 +4,7 @@ import { ActivitieshomeComponent } from './activitieshome/activitieshome.compone
 
 
 const activeRoutes: Routes = [
-  {path: 'activities', component: ActivitieshomeComponent}
+  {path: '', component: ActivitieshomeComponent}
 ];
 
 @NgModule({

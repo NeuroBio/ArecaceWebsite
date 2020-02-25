@@ -6,26 +6,13 @@ import { PlaygroundhomeComponent } from './playgroundhome/playgroundhome.compone
 
 import { ShowNewestModule } from '../SharedComponentModules/ShowNewest/show-newest.module';
 
-import { SurveyModule } from './surveys/survey.module';
-import { LooseNotesModule } from './LooseNotes/loose-notes.module';
-import { NomadicModule } from './nomadic/nomadic.module';
-import { CalcConvertModule } from './CalcConvert/calc-convert.module';
-import { OthersArtModule}  from './others-art/others-art.module';
-import { ActivitiesModule } from './activities/activities.module';
-
 @NgModule({
   declarations: [PlaygroundhomeComponent,
   ],
     
   imports: [
     CommonModule,
-    SurveyModule,
-    LooseNotesModule,
     ShowNewestModule,
-    NomadicModule,
-    CalcConvertModule,
-    OthersArtModule,
-    ActivitiesModule,
     
     PlaygroundRoutingModule //must be last!
   ]

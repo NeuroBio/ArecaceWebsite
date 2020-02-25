@@ -6,7 +6,7 @@ import { SourceCalcFrameComponent } from './source-calc-frame/source-calc-frame.
 
 
 const calcRoutes: Routes = [
-  {path: 'calc', component: CalculatorsComponent, children: [
+  {path: '', component: CalculatorsComponent, children: [
     {path: 'dateconvert', component: DateConverterComponent},
     {path: 'sourceaffinity', component: SourceCalcFrameComponent}
   ]}

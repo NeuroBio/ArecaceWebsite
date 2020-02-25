@@ -7,7 +7,7 @@ import { GeneralmemberresolverService } from '../../GlobalServices/generalmember
 
 
 const routes: Routes = [
-  {path: 'othersart', component: OthersArtComponent,
+  {path: '', component: OthersArtComponent,
   resolve: {GeneralcollectionresolverService},
   children: [
     {path: 'notfound', redirectTo: ''},

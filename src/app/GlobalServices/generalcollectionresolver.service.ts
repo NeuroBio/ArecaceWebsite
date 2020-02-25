@@ -19,10 +19,13 @@ export class GeneralcollectionresolverService implements Resolve<any> {
   
   resolve(route: ActivatedRouteSnapshot){
     let type:string;
+    const url = route['_routerState'].url.split('/');
     if(route.url[0]){
       type = route.url[route.url.length-1].path;
+    } else if (url[url.length-2]){
+      type = url[url.length-2];
     } else {
-      type = 'extras';
+      type = url[url.length-1];
     }
     return this.firebaseserv.returnCollect(this.firePaths[type]).pipe(
       take(1),
