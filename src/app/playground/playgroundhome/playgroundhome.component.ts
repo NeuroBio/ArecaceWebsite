@@ -14,7 +14,8 @@ export class PlaygroundhomeComponent implements OnInit {
   links = [ {Link: 'surveys', Title: 'Surveys'},
             {Link: 'activities', Title: 'Activities (NOT LAUNCHED)'},
             {Link: 'notes', Title: 'Loose Notes'},
-            {Link: 'nomadic', Title: 'Nomadic Dictionary'}
+            {Link: 'nomadic', Title: 'Nomadic Dictionary'},
+            {Link: 'calc', Title: 'Calculators and Converters'}
           ]
 
   constructor() { }

@@ -8,6 +8,16 @@
     <hr>
 
     <div id="maincontent">
+
+    <div>
+        <div class="navver" role="nav" id="quickNav" *ngFor="let link of links">
+            <a class="navver" [routerLink]="link.Link">{{ link.Title }}</a>
+        </div>
+    </div>
+
+    <br>
+
+    <router-outlet></router-outlet>
         <br><br>
         <div id="squishNewest">
             <app-show-newest
@@ -17,14 +27,7 @@
             </app-show-newest>
         </div>
         <br><br>
-        <div>
-            <div class="navver" role="nav" id="quickNav" *ngFor="let link of links">
-                <a class="navver" [routerLink]="link.Link">{{ link.Title }}</a>
-            </div>
-        </div>
 
-        <br><br>
-        <app-calculators></app-calculators>
     </div>
 </div>
 
