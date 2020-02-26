@@ -18,8 +18,8 @@ export class BestiaryComponent implements OnInit {
   beasts$:Observable<BeastMetaData[]>;
   sortOptions: string[] = ['Name', 'Region', 'Biome', 'Phylogeny']
   phyloDict: any = {Porifera:0, Ctenophora:1, Panarthropoda:2, Mollusca:3,
-                Tunicata:4, Ichthyia:5, ReptiliaAmphibia:6, Avia:7,
-                Therapsida:8, Mammalia:9}
+                    Tunicata:4, Ichthyia:5, ReptiliaAmphibia:6, Avia:7,
+                    Therapsida:8, Mammalia:9};
   
   constructor(private generalcollectserv: GeneralcollectionService) { }
 
