@@ -63,6 +63,7 @@ export class WordFormComponent implements OnInit, OnDestroy {
     }
     //Complete Form   
     const Final:Word = Object.assign({}, this.Form.value);
+    Final.ID = Final.Indativor;
     this.controller.activeFormData.next([Final,
                                       [],
                                       [],

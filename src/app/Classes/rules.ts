@@ -26,6 +26,7 @@ export class WordTypes {
 }
 
 export class Word {
+    ID: string;
     Indativor: string;
     English: string;
     Type: string;
