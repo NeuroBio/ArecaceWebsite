@@ -1,7 +1,7 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { BehaviorSubject, Subscription } from 'rxjs';
-import { SurveyData } from '../../Classes/ContentClasses';
-import { SurveyProcessorService } from './survey-processor.service';
+import { SurveyData } from '../../../Classes/ContentClasses';
+import { SurveyProcessorService } from '../survey-processor.service';
 import { FireBaseService } from 'src/app/GlobalServices/firebase.service';
 
 @Injectable({
@@ -35,6 +35,11 @@ export class SurveyService implements OnDestroy {
                           Name: data.Name});
     return this.surveyData.value.Questions;
   }
+
+  assignSurveyResults(results: any) {
+    console.log(results)
+    this.surveyResults.next(results);
+  }
   
   calculateFinalScores(answers: any[]) {
     this.showSurvey.next(false);
@@ -64,11 +69,11 @@ export class SurveyService implements OnDestroy {
     
     //Processing depending on Form type
     try {
-      this.surveyResults.next(this.processor
+      this.assignSurveyResults(this.processor
         [`${surveyData.ID}`](finalScores, surveyData, answers, keys));
     }
     catch {
-      this.surveyResults.next(this.processor
+      this.assignSurveyResults(this.processor
         .standard(finalScores, surveyData, keys));
     }
 

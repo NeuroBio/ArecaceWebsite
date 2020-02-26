@@ -2,9 +2,9 @@
   <h4>{{ title }}:</h4>
   <hr>
   <ul>
-    <div *ngFor="let name of names">
+    <div *ngFor="let name of names; let i = index">
       <button class="Exs">x</button>
-      <li [routerLink]="link">
+      <li (click)="onView(i)">
         {{ name }}
       </li>
     </div>

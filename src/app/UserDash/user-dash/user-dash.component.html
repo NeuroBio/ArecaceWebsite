@@ -24,11 +24,13 @@
         
         <!-- The Vast Majority of the Data -->
         <div *ngFor="let datum of savedData">
-                <app-user-data
+                <app-data-options
                 [names]="datum.name"
                 [title]="datum.title"
                 [link]="datum.link"
-                ></app-user-data>
+                [type]="datum.type"
+                [data]="datum.data"
+                ></app-data-options>
             </div>
         </div>        
         <hr>

@@ -56,21 +56,27 @@ export class UserDashComponent implements OnInit, OnDestroy {
       this.savedData.push({
         title: 'Your Fan Characters',
         link: 'char',
-        name: this.user.Characters.map(char => `${char.FirstName} ${char.LastName}`)
+        name: this.user.Characters.map(char => `${char.FirstName} ${char.LastName}`),
+        type: 'char',
+        data: this.user.Characters
      });
     }
     if(this.user.SAcalcs) {
       this.savedData.push({
         title: 'Your Source Affinity Data',
         link: 'sa',
-        name: this.user.SAcalcs.map(SA => SA.ID)
+        name: this.user.SAcalcs.map(SA => SA.ID),
+        type: 'SA',
+        data: this.user.SAcalcs
         });
     }
     if(this.user.Surveys) {
       this.savedData.push({
       title: 'Your Survey Data',
       link: 'survey',
-      name: this.user.Surveys.map(survey => `${survey.Name} (${survey.UploadTime})`)
+      name: this.user.Surveys.map(survey => `${survey.Name} (${survey.UploadTime})`),
+      type: 'survey',
+      data: this.user.Surveys
     });
     }
   }
