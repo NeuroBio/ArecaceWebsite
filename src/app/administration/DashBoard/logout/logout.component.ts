@@ -1,6 +1,7 @@
 import { Component }          from '@angular/core';
-import { AuthService }        from '../../security/Auth/auth.service';
 import { Router }             from '@angular/router';
+
+import { AuthService }        from '../../security/Auth/auth.service';
 
 @Component({
   selector: 'app-logout',
@@ -13,7 +14,7 @@ export class LogoutComponent {
   constructor(private auth:AuthService,
               private router:Router) { }
 
-  logout(){
+  logout() {
     this.auth.logout();
     this.router.navigate(['/kArAAdministrativeUpload']);
   }

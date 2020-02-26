@@ -1,9 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
-import { Subscription } from 'rxjs';
-import { CRUDcontrollerService } from 'src/app/administration/services/CRUDcontroller.service';
-import { LooseNotesMetaData } from 'src/app/Classes/ContentClasses';
-import { formatDate } from '@angular/common';
+import { formatDate }                   from '@angular/common';
+import { FormGroup, FormBuilder }       from '@angular/forms';
+
+import { Subscription }                 from 'rxjs';
+
+import { CRUDcontrollerService }        from 'src/app/administration/services/CRUDcontroller.service';
+import { LooseNotesMetaData }           from 'src/app/Classes/ContentClasses';
 
 @Component({
   selector: 'app-loose-notes-form',
@@ -58,7 +60,7 @@ export class LooseNotesFormComponent implements OnInit, OnDestroy {
       const Time = formatDate(new Date(), 'HH:mm', 'en');
       Final.Created = `${Today}, ${Time}`;
       Final.ID = `${Final.ShortTitle.split(' ').join('')}-${Today}`
-    }else{
+    } else {
       Final.Modified = formatDate(new Date(), 'yyyy-MM-dd, HH:mm', 'en');
     }
 

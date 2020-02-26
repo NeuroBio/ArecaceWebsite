@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit }  from '@angular/core';
 
-import { CRUD } from '../../services/CRUD.service';
-import { MessageService } from './message.service';
+import { CRUD }               from '../../services/CRUD.service';
+import { MessageService }     from './message.service';
 
 @Component({
   selector: 'app-message',
@@ -24,42 +24,42 @@ export class MessageComponent implements OnInit {
               private uploadserv: CRUD) { }
 
   ngOnInit() {
-    this.messageserv.getNewMessages().subscribe(mess =>{
+    this.messageserv.getNewMessages().subscribe(mess => {
         let final:string[][] = [];
-        for(let cat of this.classes){
+        for(let cat of this.classes) {
           final.push(mess.filter(mess => mess.Reason === cat));
         }
         this.NewMessages = final;
         this.Messages = this.NewMessages;
       });
 
-      this.messageserv.getOldMessages().subscribe(mess =>{
+      this.messageserv.getOldMessages().subscribe(mess => {
           let final:string[][] = [];
-          for(let cat of this.classes){
+          for(let cat of this.classes) {
             final.push(mess.filter(mess => mess.Reason === cat));
           }
           this.OldMessages = final; 
       });
   }
 
-  fetchMessages(classInd: number){
+  fetchMessages(classInd: number) {
     this.currentReason = classInd;
     this.messageBank = this.Messages[classInd];
     this.currentMessage = undefined;
     this.readMessage = undefined;
   }
 
-  openMessage(index: number){
+  openMessage(index: number) {
     this.currentMessage = index;
     this.readMessage = this.messageBank[index];
   }
 
-  onDelete(){
+  onDelete() {
     if(!this.readMessage.key){
-      console.log("You only just moved this.  There is no key. :<")
+      console.log("You only just moved this.  There is no key. :<");
     }else{
-      let location:string;
-      if(this.noSave){
+      let location: string;
+      if(this.noSave) {
         location = 'ContactSaved';
       }else{
         location = 'Contact';
@@ -68,10 +68,10 @@ export class MessageComponent implements OnInit {
       return this.uploadserv.deleteItem([], location, this.readMessage.key)
       .then(() => {
         this.onReset(false)});
-    }   
+    }
   }
 
-  onSave(){
+  onSave() {
     const moveDoc = {Email: this.readMessage.Email,
                       Name: this.readMessage.Name,
                       Date: this.readMessage.Date,
@@ -83,8 +83,8 @@ export class MessageComponent implements OnInit {
       this.onReset(true)});
   }
 
-  getSaved(save:boolean){
-    if(save){
+  getSaved(save:boolean) {
+    if(save) {
       this.Messages = this.OldMessages;
       this.noSave = true;
     }else{
@@ -97,15 +97,15 @@ export class MessageComponent implements OnInit {
     this.readMessage = undefined;
   }
 
-  onReset(save:boolean){
-    if(save){
+  onReset(save:boolean) {
+    if(save) {
       this.NewMessages[this.currentReason].splice(this.readMessage, 1);
       delete this.readMessage.key;
       this.OldMessages[this.currentReason].push(this.readMessage);
-    }else{
+    } else {
       if(this.noSave){
         this.OldMessages[this.currentReason].splice(this.readMessage, 1);
-      }else{
+      } else {
         this.NewMessages[this.currentReason].splice(this.readMessage, 1);
       }
     }

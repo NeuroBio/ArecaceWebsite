@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy }     from '@angular/core';
 import { FormBuilder, FormGroup }           from '@angular/forms';
+
 import { Subscription }                     from 'rxjs';
 
 import { CRUDcontrollerService }            from '../../../services/CRUDcontroller.service';
@@ -50,7 +51,7 @@ export class StoryFormComponent implements OnInit, OnDestroy {
 
   assignFormData(editFormData: any) {
     this.onReset();
-    if(editFormData){
+    if(editFormData) {
       this.Form = this.controller.quickAssign(this.Form, editFormData);
       this.controller.getText(editFormData.StoryLink).subscribe( text =>
         this.Form.controls.Story.setValue(text) );

@@ -1,13 +1,15 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { CRUDcontrollerService } from '../../services/CRUDcontroller.service';
-import { Subscription } from 'rxjs';
-import { Word } from '../../../Classes/NomadicLanguage';
+import { Subscription }                 from 'rxjs';
+
+import { CRUDcontrollerService }        from '../../services/CRUDcontroller.service';
+import { Word }                         from '../../../Classes/NomadicLanguage';
 
 @Component({
   selector: 'app-language',
   templateUrl: './language.component.html',
   styleUrls: ['./language.component.css']
 })
+
 export class LanguageComponent implements OnInit, OnDestroy {
 
   simple = true;

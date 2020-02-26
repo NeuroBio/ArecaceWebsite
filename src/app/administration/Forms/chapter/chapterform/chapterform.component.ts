@@ -14,7 +14,7 @@ import { ChapterMetaData }                from 'src/app/Classes/ContentClasses'
 export class ChapterFormComponent implements OnInit, OnDestroy {
 
   Form: FormGroup;
-  @ViewChild('form', { static: true }) formHtml:ElementRef;
+  @ViewChild('form', { static: true }) formHtml: ElementRef;
   
   stream1: Subscription;
   stream2: Subscription;
@@ -72,23 +72,22 @@ export class ChapterFormComponent implements OnInit, OnDestroy {
                                         undefined,
                                         undefined,
                                         undefined]);
-        // return this.uploadserv.uploadItem(newChap,`Arc${newChap.Arc}Data`);
   }
 
   onReset() {
-      this.Form = this.createForm();
-      this.pageFiles = new Array(10);
-      this.dummy = new Array(10);
-      if(!this.init) {
-        this.formHtml.nativeElement.reset();
-      }
+    this.Form = this.createForm();
+    this.pageFiles = new Array(10);
+    this.dummy = new Array(10);
+    if(!this.init) {
+      this.formHtml.nativeElement.reset();
+    }
   }
 
   addPage(add: boolean) {
-    if(add){
+    if(add) {
       this.pageFiles.push('');
       this.dummy.push('');
-    }else{
+    } else {
       this.pageFiles.pop();
       this.dummy.pop();
     }
@@ -100,7 +99,7 @@ export class ChapterFormComponent implements OnInit, OnDestroy {
 
   getPagePaths(pages: any[], newChap: any) {
     let pagePaths: string[] = [];
-    for(let i = 0; i< pages.length; i++){
+    for(let i = 0; i< pages.length; i++) {
       pagePaths.push(`ComicPages/Arc${newChap.Arc}/${newChap.ID}-${i}`);
     }
     return(pagePaths);

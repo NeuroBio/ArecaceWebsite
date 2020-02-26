@@ -76,7 +76,7 @@ export class ReferenceFormComponent implements OnInit, OnDestroy {
       && this.Form.controls.Links.value === '') {
       this.controller.activeFormData.next(["abort",
         `${this.type} files require an image.`]);
-      return ;
+      return;
     }
     
     //Complete Form

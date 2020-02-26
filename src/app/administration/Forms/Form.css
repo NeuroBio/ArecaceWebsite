@@ -6,69 +6,69 @@ form {
     overflow: auto;
     border: 1px solid white;
     float: left;
-  }
+}
 
-  h2.formstyle {
-    padding: 5px;
-    margin: 0px;
-  }
+h2.formstyle {
+  padding: 5px;
+  margin: 0px;
+}
 
-  input.fileupload {
-    width: 500px;
-  }
+input.fileupload {
+  width: 500px;
+}
 
-  textarea {
-    font-size: 18px;
-    font-family: 'Courier New', Courier, monospace;
-  }
+textarea {
+  font-size: 18px;
+  font-family: 'Courier New', Courier, monospace;
+}
 
-  option {
-    font-size: 18px;  
-  }
-  
-  input {
-    font-size: 18px;
-  }
-  
-  input.short {
-    width:50px;
-    text-align: center;
-  }
-  
-  input.medium {
-    width: 130px;
-  }
+option {
+  font-size: 18px;  
+}
 
-  input.long {
-    width:600px;
-  }
-  
-  input.fileupload {
-    width:500px;
-  }
-  
-  input[type="checkbox"] {
-    width: 25px;
-    height: 25px;
-  }
+input {
+  font-size: 18px;
+}
 
-  button[type="button"] {
-    float:right;
-  }
+input.short {
+  width:50px;
+  text-align: center;
+}
 
-  app-formButtons {
-    padding-bottom: 10px;
-  }
+input.medium {
+  width: 130px;
+}
 
-  div.WYSIWYG {
-    white-space: pre-line;
-    border: 1px solid white;
-    float: left;
-    width: 400px;
-    margin:3px;
-    padding:4px;
-  }
+input.long {
+  width:600px;
+}
 
-  label {
-    border: 0px;
-  }
+input.fileupload {
+  width:500px;
+}
+
+input[type="checkbox"] {
+  width: 25px;
+  height: 25px;
+}
+
+button[type="button"] {
+  float:right;
+}
+
+app-formButtons {
+  padding-bottom: 10px;
+}
+
+div.WYSIWYG {
+  white-space: pre-line;
+  border: 1px solid white;
+  float: left;
+  width: 400px;
+  margin:3px;
+  padding:4px;
+}
+
+label {
+  border: 0px;
+}

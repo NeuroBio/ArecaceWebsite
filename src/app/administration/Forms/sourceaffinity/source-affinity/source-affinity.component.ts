@@ -1,9 +1,11 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy }       from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Subscription } from 'rxjs';
-import { CRUDcontrollerService } from '../../../services/CRUDcontroller.service';
-import { FetchSAService } from '../fetch-sa.service';
-import { take } from 'rxjs/operators';
+
+import { Subscription }                       from 'rxjs';
+import { take }                               from 'rxjs/operators';
+
+import { CRUDcontrollerService }              from '../../../services/CRUDcontroller.service';
+import { FetchSAService }                     from '../fetch-sa.service';
 
 @Component({
   selector: 'app-source-affinity',
@@ -12,8 +14,7 @@ import { take } from 'rxjs/operators';
 })
 export class SourceAffinityComponent implements OnInit, OnDestroy {
 
-  Form: FormGroup
-
+  Form: FormGroup;
   stream1: Subscription;
   stream2: Subscription;
   

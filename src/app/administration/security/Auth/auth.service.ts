@@ -1,10 +1,13 @@
-import { Injectable }         from '@angular/core';
-import { AngularFireAuth }    from '@angular/fire/auth';
-import { auth } from 'firebase/app';
-import { of, BehaviorSubject } from 'rxjs'
-import { switchMap, take } from 'rxjs/operators';
-import { User } from 'src/app/Classes/ContentClasses'; 
-import { FireBaseService } from 'src/app/GlobalServices/firebase.service';
+import { Injectable }             from '@angular/core';
+import { AngularFireAuth }        from '@angular/fire/auth';
+
+import { of, BehaviorSubject }    from 'rxjs';
+import { switchMap, take }        from 'rxjs/operators';
+
+import { auth }                   from 'firebase/app';
+
+import { User }                   from 'src/app/Classes/ContentClasses'; 
+import { FireBaseService }        from 'src/app/GlobalServices/firebase.service';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +19,7 @@ export class AuthService {
   redirectUrl: string;
   
   authState = null;
-  user = new BehaviorSubject<User>(undefined)
+  user = new BehaviorSubject<User>(undefined);
   uid = new BehaviorSubject<string>(undefined);
 
   constructor(private authorize: AngularFireAuth,
@@ -40,7 +43,7 @@ export class AuthService {
     ).subscribe(user => {
       this.user.next(user)
       resolve();
-    }));
+    }) );
   }
 
   anonymousLogin() {
@@ -57,26 +60,22 @@ export class AuthService {
   }
 
   private oAuthLogin(provider) {
-    if(this.authState){ //upgrade anon users
+    if(this.authState) { //upgrade anon users
       this.authorize.auth.currentUser.linkWithPopup(provider)
-      .then((credential) => {
+      .then((credential) =>
         this.updateUserData(credential.user, false,
-                            credential.additionalUserInfo.isNewUser);
-
-      }).catch(err => { //anon user already has an account
+                            credential.additionalUserInfo.isNewUser)
+      ).catch(err => //anon user already has an account
         this.authorize.auth.signInAndRetrieveDataWithCredential(err.credential)
-        .then((credential) => {
-          this.updateUserData(credential.user, false,
-                              credential.additionalUserInfo.isNewUser);
-        });
-      });
+      .then((credential) =>
+        this.updateUserData(credential.user, false,
+                            credential.additionalUserInfo.isNewUser)) );
 
     } else { //simple login!
       return this.authorize.auth.signInWithPopup(provider)
-      .then((credential) => {
+      .then((credential) =>
         this.updateUserData(credential.user, false,
-                            credential.additionalUserInfo.isNewUser);
-      });
+                            credential.additionalUserInfo.isNewUser));
     }
   }
 
@@ -84,18 +83,18 @@ export class AuthService {
     return this.authState.isAnonymous;
   }
 
-  isUser(){
-    if(this.isLoggedIn){
-      if(!this.isAnon){
+  isUser() {
+    if(this.isLoggedIn) {
+      if(!this.isAnon) {
         return this.user.value.User;
       }
     }
     return false;
   }
 
-  isAdmin(){
-    if(this.isLoggedIn){
-      if(!this.isAnon()){
+  isAdmin() {
+    if(this.isLoggedIn) {
+      if(!this.isAnon()) {
         return this.user.value.Admin;
       }
     }
@@ -104,7 +103,7 @@ export class AuthService {
 
   private updateUserData(user: any, anon: boolean, newUser: boolean) {
     let data: User;
-    if(newUser && !anon){
+    if(newUser && !anon) {
       return this.firebaseserv.returnCollectionWithKeys('NumUsers').pipe(take(1))
       .subscribe(ID => {
         data = new User(user.email, ID[0].NumUsers);

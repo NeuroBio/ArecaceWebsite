@@ -3,9 +3,9 @@ import { Component, OnInit, ViewChild,
 import { Validators, FormBuilder, FormGroup }     from '@angular/forms';
 import { Subscription }                           from 'rxjs';
 
-import { CRUDcontrollerService }                  from '../../../services/CRUDcontroller.service'
+import { CRUDcontrollerService }                  from '../../../services/CRUDcontroller.service';
 
-import { BestDropDowns }                          from '../bestdropdowns'
+import { BestDropDowns }                          from '../bestdropdowns';
 import { BeastMetaData }                          from 'src/app/Classes/ContentClasses';
 
 @Component({
@@ -16,7 +16,7 @@ import { BeastMetaData }                          from 'src/app/Classes/ContentC
 export class BeastFormComponent implements OnInit, OnDestroy {
 
   dropDowns = new BestDropDowns();
-  Form: FormGroup
+  Form: FormGroup;
   @ViewChild('Thumb', { static: true }) thumbUploader: ElementRef;
   @ViewChild('Full', { static: true }) fullUploader: ElementRef;
   thumbFile: any;
@@ -65,7 +65,7 @@ export class BeastFormComponent implements OnInit, OnDestroy {
         && this.Form.controls.Links.value === '') {
        this.controller.activeFormData.next(["abort",
        "Bestiary files require a card image and its thumbnail."]);
-       return ;
+       return;
     }
     
     //Complete Form

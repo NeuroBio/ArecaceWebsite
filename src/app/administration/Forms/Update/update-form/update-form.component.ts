@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild,
          ElementRef, OnDestroy }              from '@angular/core';
 import { formatDate }                         from '@angular/common';
 import { FormBuilder, FormGroup }             from '@angular/forms';
+
 import { Subscription }                       from 'rxjs';
 
 import { CRUDcontrollerService }              from 'src/app/administration/services/CRUDcontroller.service';
@@ -16,7 +17,7 @@ import { PostData }                           from 'src/app/Classes/ContentClass
 export class UpdateFormComponent implements OnInit, OnDestroy {
 
   Form: FormGroup;
-  @ViewChild('Image', { static: true }) imageUploader:ElementRef;
+  @ViewChild('Image', { static: true }) imageUploader: ElementRef;
   imageFile: any;
   stream1: Subscription;
   stream2: Subscription;
@@ -33,12 +34,12 @@ export class UpdateFormComponent implements OnInit, OnDestroy {
       .subscribe(() => this.processForm());
   }
   
-  ngOnDestroy(){
+  ngOnDestroy() {
     this.stream1.unsubscribe();
     this.stream2.unsubscribe();
   }
 
-  createForm(){
+  createForm() {
     return this.fb.group({
       Poster: 'kArA',
       Body: '',
@@ -60,23 +61,23 @@ export class UpdateFormComponent implements OnInit, OnDestroy {
   processForm() {
     const Final: PostData = Object.assign({}, this.Form.value);
     let oldImages: string[] = [];
-    let newImages: any[] = []
+    let newImages: any[] = [];
 
     if(!this.oldPost) {
       Final.Date = formatDate(new Date(), 'yyyy-MM-dd', 'en');
       Final.Time = formatDate(new Date(), 'HH:mm', 'en');
       Final.ID = `${Final.Date}, ${Final.Time}`;
-    }else{
+    } else {
       Final.Date = this.oldPost.Date;
       Final.Time = this.oldPost.Time;
       Final.ID = this.oldPost.ID;
       Final.Edited = true;
-      if(this.oldPost.Links){
+      if(this.oldPost.Links) {
         oldImages = this.oldPost.Links;
       }
     }
 
-    if(this.imageFile){
+    if(this.imageFile) {
       newImages = [this.imageFile];
     }
 

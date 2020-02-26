@@ -1,8 +1,10 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { FormGroup, FormBuilder, FormArray } from '@angular/forms';
-import { Subscription } from 'rxjs';
-import { CRUDcontrollerService } from 'src/app/administration/services/CRUDcontroller.service';
-import { SurveyStatsService } from '../survey-stats.service';
+import { Component, OnInit, OnDestroy }       from '@angular/core';
+import { FormGroup, FormBuilder, FormArray }  from '@angular/forms';
+
+import { Subscription }                       from 'rxjs';
+
+import { CRUDcontrollerService }              from 'src/app/administration/services/CRUDcontroller.service';
+import { SurveyStatsService }                 from '../survey-stats.service';
 
 @Component({
   selector: 'app-survey-stats',
@@ -98,7 +100,7 @@ export class SurveyStatsComponent implements OnInit , OnDestroy {
   }
 
   addOutcome(add: boolean, index: number, name: string = 'test') {
-    if(add){
+    if(add) {
       this.outcomes.controls.push(this.fb.group({Name: name}));
     } else {
       this.outcomes.removeAt(index);
@@ -114,8 +116,8 @@ export class SurveyStatsComponent implements OnInit , OnDestroy {
       this.outcomes.removeAt(this.outcomes.length-1));
     this.surveys[index].Outcomes.forEach(o => {
       this.addOutcome(true, 0, o)
-    })
+    });
 
-    this.Form.patchValue({ID: this.surveys[index].ID})
+    this.Form.patchValue({ID: this.surveys[index].ID});
   }
 }

@@ -1,9 +1,9 @@
-import { Component, OnInit, OnDestroy}                  from '@angular/core';
+import { Component, OnInit, OnDestroy}            from '@angular/core';
 import { Validators, FormBuilder, FormGroup }     from '@angular/forms';
 import { Subscription }                           from 'rxjs';
 
-import { CRUDcontrollerService }       from '../../services/CRUDcontroller.service'
-import { Word, Nomadic, WordTypes } from '../../../Classes/NomadicLanguage';
+import { CRUDcontrollerService }                  from '../../services/CRUDcontroller.service';
+import { Word, Nomadic, WordTypes }               from '../../../Classes/NomadicLanguage';
 
 @Component({
   selector: 'app-word-form',
@@ -14,7 +14,7 @@ export class WordFormComponent implements OnInit, OnDestroy {
 
   Nomadic = new Nomadic();
   WordTypes = new WordTypes();
-  Form: FormGroup
+  Form: FormGroup;
   stream1: Subscription;
   stream2: Subscription;
   activeType: string;
@@ -25,8 +25,10 @@ export class WordFormComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.stream1 = this.controller.itemToEdit
       .subscribe(item => this.assignFormData(item));
+
     this.stream2 = this.controller.triggerProcess
       .subscribe(() => this.processForm());
+    
     this.updateType();
   }
 
@@ -59,7 +61,7 @@ export class WordFormComponent implements OnInit, OnDestroy {
     //Incomplete Form
     if(!this.Form.valid) {
       this.controller.activeFormData.next(["abort", "All blanks must be filled."]);
-      return ;
+      return;
     }
     //Complete Form   
     const Final:Word = Object.assign({}, this.Form.value);

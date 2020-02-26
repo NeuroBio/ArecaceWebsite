@@ -38,15 +38,15 @@ export class GuildFormComponent implements OnInit, OnDestroy {
 
   createForm() {
     return this.fb.group({
-    GuildName: '',
-    ID: '',
-    Master: '',
-    Founded: '',
-    Host: '',
-    Description: '',
-    History: '',
-    Links: '',
-    AltText: ''
+      GuildName: '',
+      ID: '',
+      Master: '',
+      Founded: '',
+      Host: '',
+      Description: '',
+      History: '',
+      Links: '',
+      AltText: ''
     });
   }
 
@@ -63,13 +63,13 @@ export class GuildFormComponent implements OnInit, OnDestroy {
       && this.Form.controls.Links.value === '') {
       this.controller.activeFormData.next(["abort",
         "Guild files require an insignia image."]);
-      return ;
+      return;
     }
     
     //Complete Form
     const Final:GuildMetaData = Object.assign({}, this.Form.value);
     Final.ID = Final.GuildName.split(' ')[0];
-    if(Final.ID === 'The'){
+    if(Final.ID === 'The') {
       Final.ID = 'DIA'
     }
     this.controller.activeFormData.next([Final,

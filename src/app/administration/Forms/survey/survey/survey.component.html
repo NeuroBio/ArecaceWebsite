@@ -2,13 +2,10 @@
   <h2 class="formstyle"> Survey Form:</h2>
   <hr>
 
-  <p>
-      Survey ID: <input type="text" formControlName="ID">
-  </p>
+  <p> Survey ID: <input type="text" formControlName="ID"></p>
 
-  <p>
-      Survey Name: <input type="text" formControlName="Name">
-  </p>
+  <p>Survey Name: <input type="text" formControlName="Name"></p>
+
 
   <!-- Outcomes -->
   <form [formGroup]="outcomeForm" id="outcome">
@@ -18,19 +15,24 @@
         (click)="assignOutcomeForm(i)">
           {{ outcome.value.Name }}</button>
     </p>
+
     <p>
         Name: <input type="text" class="medium" formControlName="Name">
     </p>
+
     <p>
         Text:<br>
         <textarea rows=3 cols=40 formControlName="Text"></textarea>    
     </p>
+
     <p>
         RouterLink: <input type="text" class="medium" formControlName="Link">
     </p>
+
     <p>
         RounterLinkName: <input type="text" class="medium" formControlName="LinkName">
     </p>
+    
     <p>
       <button (click)="addOutcome(true)" [disabled]="!outcomeForm.valid">Submit</button>
       <button (click)="addOutcome(false)">Delete</button>

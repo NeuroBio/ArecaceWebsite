@@ -1,8 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
-import { CRUDcontrollerService } from '../../services/CRUDcontroller.service';
-import { Subscription, Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { FormBuilder }                  from '@angular/forms';
+
+import { Subscription, Subject }        from 'rxjs';
+import { takeUntil }                    from 'rxjs/operators';
+
+import { CRUDcontrollerService }        from '../../services/CRUDcontroller.service';
 
 @Component({
   selector: 'app-website-text',
@@ -22,10 +24,8 @@ export class WebsiteTextComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.controller.itemToEdit
-    .pipe(takeUntil(this.stop$))
-    .subscribe(item => {
-      this.assignFormData(item);
-    });
+      .pipe(takeUntil(this.stop$))
+      .subscribe(item => this.assignFormData(item));
 
     this.stream1 = this.controller.triggerProcess.subscribe(() => this.processForm());
   }

@@ -7,19 +7,21 @@
     <div formArrayName="Questions">
         <div *ngFor="let question of QuestionsArray.controls; let i = index"
         [formGroupName]="i">
-            <p>Question {{ i+1 }}: <input class="long" type="text" formControlName="Question"></p>
+            <p>Question {{ i+1 }}: <input class="long" type="text"
+                formControlName="Question"></p>
             
             <p>Answer:<br>
-              <textarea formControlName="Answer" rows="8" cols="66"></textarea></p>
+              <textarea formControlName="Answer" rows="8" cols="66"></textarea>
+            </p>
 
-            <p>Link: <input type="text" formControlName="RouterLink"></p>
+            <p>Link:
+                <input type="text" formControlName="RouterLink">
+            </p>
             <hr>
         </div>
     </div>
 
     <app-formButtons></app-formButtons>
 </form>
-
-<!-- <div class="WYSIWYG"></div> -->
 
 <div style="clear: both"></div>

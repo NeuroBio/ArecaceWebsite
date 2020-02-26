@@ -1,8 +1,11 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Subscription } from 'rxjs';
-import { FormBuilder, FormArray, FormControl, FormGroup, Validators, Form } from '@angular/forms';
-import { CRUDcontrollerService } from 'src/app/administration/services/CRUDcontroller.service';
-import { SurveyQuestion, SurveyOutcome } from 'src/app/Classes/ContentClasses';
+import { Component, OnInit, OnDestroy }         from '@angular/core';
+import { FormBuilder, FormArray, FormControl,
+  FormGroup, Validators }                       from '@angular/forms';
+
+import { Subscription }                         from 'rxjs';
+
+import { CRUDcontrollerService }                from 'src/app/administration/services/CRUDcontroller.service';
+import { SurveyQuestion, SurveyOutcome }        from 'src/app/Classes/ContentClasses';
 
 @Component({
   selector: 'app-survey',
@@ -51,7 +54,7 @@ export class SurveyComponent implements OnInit , OnDestroy {
     });
   }
   
-  createResultsForm(){
+  createResultsForm() {
     return this.fb.group({
       Results: this.results
     });
@@ -73,6 +76,7 @@ export class SurveyComponent implements OnInit , OnDestroy {
       const outcomes: SurveyOutcome[] = JSON.parse(editFormData.Outcomes);
       const questions: SurveyQuestion[] = JSON.parse(editFormData.Questions);
       const results = JSON.parse(editFormData.Results);
+
       outcomes.forEach(o => this.outcomes.push(this.fb.group({Name: o.Name, Text: o.Text,
                                                               Link: o.Link, LinkName: o.LinkName})));
       questions.forEach((q,i) => this.addQuestion(true, q.Question, q.Answers, results[i]));  
@@ -130,7 +134,7 @@ export class SurveyComponent implements OnInit , OnDestroy {
     const formData = Object.assign({}, this.outcomeForm.value);
     const newData: FormArray[] =[];
 
-    if(add){
+    if(add) {
       if(this.editOutcome) { //changing old outcome
         const oldName = this.outcomes.controls[this.editInd].value.Name;
         this.outcomes.controls[this.editInd].setValue({
@@ -140,7 +144,7 @@ export class SurveyComponent implements OnInit , OnDestroy {
           LinkName: formData.LinkName
         });
 
-        if(oldName !== formData.Name){ //old outcome name change
+        if(oldName !== formData.Name) { //old outcome name change
           this.results.controls.forEach((question, i) => {
             let temp = (<FormArray>question.get('Results'))
             temp.controls.map((answer: FormGroup) => {
@@ -183,6 +187,7 @@ export class SurveyComponent implements OnInit , OnDestroy {
     this.onResetOutcomes();
   }
 
+
   addQuestion(add: boolean, question: string = '',
               answers: string[] = [], results: any[] = []) {
     if(add){
@@ -205,7 +210,7 @@ export class SurveyComponent implements OnInit , OnDestroy {
     return newAnswers;
   }
 
-  addAnswer(add: boolean, index: number, answer: string = ''){
+  addAnswer(add: boolean, index: number, answer: string = '') {
     const tempAnswer = <FormArray>this.questions.controls[index].get('Answers');
     const tempResult = <FormArray>this.results.controls[index].get('Results');
     if(add){
@@ -260,16 +265,15 @@ export class SurveyComponent implements OnInit , OnDestroy {
 
   calculateMaxScores(results: object[][], outcomes: SurveyOutcome[]) {
     let maxScores: object = {};
-    outcomes.forEach(o => {
-      maxScores[o.Name] = 0;
-    })
+    outcomes.forEach(o => maxScores[o.Name] = 0)
 
     results.forEach(q =>
-      Object.keys(maxScores).forEach(key =>{
+      Object.keys(maxScores).forEach(key => {
         let temp: number[] = q.map(a => a[key]);
         maxScores[key] += +temp.reduce((a,b) => a > b ? a : b);
-      }) )
-      return maxScores;
+      })
+    );
+    return maxScores;
   }
 
   repopulateResults(newData: FormArray[]) {
@@ -283,7 +287,7 @@ export class SurveyComponent implements OnInit , OnDestroy {
 }
 
 // TEST DATA IN CASE OF CATASTROPHE
-    //--don't delete until you are 100% sure development is complete
+    //--don't delete!
    
     // const questions: SurveyQuestion[] = [{Question: 'testing!', Answers: ['tan', "snek", 'prpr']},
     //                                     {Question: 'FREEEEEEEEEEEEEE?', Answers: ['Tega', "Lizard", 'Chocolate']}]

@@ -1,9 +1,10 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
-import { Subscription, Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { Component, OnInit, OnDestroy }   from '@angular/core';
+import { FormBuilder }                    from '@angular/forms';
 
-import { CRUDcontrollerService } from '../../services/CRUDcontroller.service';
+import { Subscription, Subject }          from 'rxjs';
+import { takeUntil }                      from 'rxjs/operators';
+
+import { CRUDcontrollerService }          from '../../services/CRUDcontroller.service';
 
 @Component({
   selector: 'app-about-text',

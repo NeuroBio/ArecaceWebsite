@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { CRUDcontrollerService } from '../../services/CRUDcontroller.service';
-import { ActivatedRoute } from '@angular/router';
+import { Component, OnInit }      from '@angular/core';
+import { CRUDcontrollerService }  from '../../services/CRUDcontroller.service';
 
 @Component({
   selector: 'app-pages',

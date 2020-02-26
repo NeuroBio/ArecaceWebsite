@@ -2,12 +2,14 @@
     <h2 class="formstyle">Chapter Form:</h2>
     <hr>
 
-    <p>Arc: <select formControlName="Arc">
-      <option *ngFor="let arc of Arcs"
-        [value]="arc">
-        {{ arc }}
-      </option>
-    </select></p>
+    <p>Arc:
+      <select formControlName="Arc">
+        <option *ngFor="let arc of Arcs"
+          [value]="arc">
+          {{ arc }}
+        </option>
+      </select>
+    </p>
 
     <p>Chapter Name: <input type="text" formControlName="Name"></p>
     
@@ -26,5 +28,5 @@
         (change)="updatePage(i, $event)">
     </div>
     
-      <app-formButtons></app-formButtons>
+    <app-formButtons></app-formButtons>
 </form>

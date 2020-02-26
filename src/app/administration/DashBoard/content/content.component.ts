@@ -1,8 +1,8 @@
-import { Component, OnInit }    from '@angular/core';
-import { ActivatedRoute }       from '@angular/router';
+import { Component, OnInit }              from '@angular/core';
+import { ActivatedRoute }                 from '@angular/router';
 
 import { CRUDcontrollerService }          from '../../services/CRUDcontroller.service';
-import { FirebasePaths } from 'src/app/Classes/UploadDownloadPaths';
+import { FirebasePaths }                  from 'src/app/Classes/UploadDownloadPaths';
 
 @Component({
   selector: 'app-content',
@@ -30,10 +30,10 @@ export class ContentComponent implements OnInit {
   }
 
   onAllow(type:number) {
-    if (type===0){
+    if (type === 0) {
       this.controller.updateButton('Delete', false);
       this.controller.updateButton('UpdateAll', false);
-    } else if(type===1) {
+    } else if(type === 1) {
       this.controller.updateButton('Delete', true);
       this.controller.updateButton('UpdateAll', false);
     } else {

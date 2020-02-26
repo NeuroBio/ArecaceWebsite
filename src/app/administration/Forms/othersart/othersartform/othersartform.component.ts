@@ -1,8 +1,11 @@
-import { Component, OnInit, OnDestroy, ElementRef, ViewChild } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
-import { Subscription } from 'rxjs';
-import { CRUDcontrollerService } from 'src/app/administration/services/CRUDcontroller.service';
-import { OthersArt } from 'src/app/Classes/ContentClasses';
+import { Component, OnInit, OnDestroy,
+  ElementRef, ViewChild }             from '@angular/core';
+import { FormGroup, FormBuilder }     from '@angular/forms';
+
+import { Subscription }               from 'rxjs';
+
+import { CRUDcontrollerService }      from 'src/app/administration/services/CRUDcontroller.service';
+import { OthersArt }                  from 'src/app/Classes/ContentClasses';
 
 @Component({
   selector: 'app-othersartform',
@@ -62,8 +65,10 @@ export class OthersArtFormComponent implements OnInit, OnDestroy {
       && this.Form.controls.Links.value === '') {
       this.controller.activeFormData.next(["abort",
         "Others Art files require full and thumb images."]);
-      return ;
+      return;
     }
+
+    //Complete form
     const Final: OthersArt = Object.assign({}, this.Form.value);
     Final.ID = `${this.Form.controls.Name.value.split(' ').join('')}-by-${this.Form.controls.Artist.value.split(' ').join('')}`
     Final.ID = Final.ID.replace('\'', '');
@@ -88,11 +93,11 @@ export class OthersArtFormComponent implements OnInit, OnDestroy {
     this.fullUploader.nativeElement.value = '';
   }
   
-  getThumb(event:any) {
+  getThumb(event: any) {
     this.thumbFile = event;
   }
 
-  getFull(event:any) {
+  getFull(event: any) {
     this.fullFile = event;
   }
 }

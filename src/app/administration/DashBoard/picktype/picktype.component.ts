@@ -9,7 +9,7 @@ import { CRUDcontrollerService }          from '../../services/CRUDcontroller.se
   styleUrls: ['./picktype.component.css']
 })
 
-export class PickTypeComponent implements OnInit, OnDestroy{
+export class PickTypeComponent implements OnInit, OnDestroy {
 
   current: string;
   stream1: Subscription;
@@ -17,14 +17,15 @@ export class PickTypeComponent implements OnInit, OnDestroy{
 
   constructor(private controller: CRUDcontrollerService) { }
   
-  ngOnInit(){
+  ngOnInit() {
     this.stream1 = this.controller.itemType.subscribe(type  => this.current = type);
     this.typeList = Object.keys(this.controller.firePaths.value);
   }
   
-  ngOnDestroy(){
+  ngOnDestroy() {
     this.stream1.unsubscribe();
   }
+  
   onClick(type: string){
     this.controller.assignItemType(type);
     this.current = type;
