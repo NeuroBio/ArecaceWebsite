@@ -81,6 +81,10 @@ service cloud.firestore {
     		allow read;
     }
 
+    match /NewestCue/{allDocuments} {
+    		allow read;
+    }
+
     match /OthersArt/{allDocuments} {
     		allow read;
     }

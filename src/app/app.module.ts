@@ -1,6 +1,8 @@
 import { BrowserModule }            from '@angular/platform-browser';
 import { NgModule, APP_INITIALIZER }                 from '@angular/core';
 import { ReactiveFormsModule }      from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+
 
 import { AngularFireModule }        from '@angular/fire';
 import { AngularFireFunctionsModule } from '@angular/fire/functions';
@@ -24,7 +26,8 @@ import { PageNotFoundComponent }    from './SimplePages/pagenotfound/pagenotfoun
 import { TravelorsGuideComponent }  from './SimplePages/travelorsguide/travelorsguide.component';
 import { TextProvider } from './GlobalServices/textprovider.service';
 import { AuthService } from './administration/security/Auth/auth.service';
-import { HttpClientModule } from '@angular/common/http';
+import { ShowNewestModule } from './SharedComponentModules/ShowNewest/show-newest.module';
+
 
 export function TextFactory(provider: TextProvider) {
   return () => provider.load();
@@ -50,6 +53,7 @@ export function AuthFactory(provider: AuthService) {
     BrowserModule,
     HttpClientModule,
     UpdatefeedModule,
+    ShowNewestModule,
 
     ReactiveFormsModule,
 

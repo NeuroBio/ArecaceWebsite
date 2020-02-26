@@ -14,6 +14,7 @@ export class ShowNewestComponent implements OnInit {
   @Input() contentType: string;
   @Input() collectionName: string;
   @Input() contentLink: string;
+  @Input() footerText: string;
   @ViewChild('items', { static: false }) items: ElementRef;
   @ViewChild('right', { static: true }) right: ElementRef;
   @ViewChild('left', { static: true }) left: ElementRef;
@@ -23,6 +24,7 @@ export class ShowNewestComponent implements OnInit {
   ngOnInit() {
     this.display$ = this.firebaseserv.returnCollect(this.collectionName).pipe(
       map(members => {
+        console.log(members)
         //remove hidden
         members = members.filter(member => member.Allowed !== false);
 

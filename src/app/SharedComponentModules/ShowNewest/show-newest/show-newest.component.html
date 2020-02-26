@@ -1,6 +1,6 @@
 
 <div id="outer">
-  <h3>Newest Posts in {{ contentType | titlecase }}</h3>
+  <h3>{{ contentType }}</h3>
   
   <div id="pickItems">
       <img #left id="left" src="assets/svgs/back.svg"
@@ -19,7 +19,7 @@
   </div>
 
 
-  <a id="seeAll" [routerLink]="contentLink">
-    See all {{ contentType | titlecase }}
+  <a *ngIf="contentLink" id="seeAll" [routerLink]="contentLink">
+    {{ footerText }}
   </a>
 </div>
