@@ -25,34 +25,34 @@ export class StoryResolver3Service implements Resolve<any>{
       flatMap(ID => this.storyserv.getStory(ID).pipe(
           take(1),
           flatMap((metaData:StoryMetaData) => {
-            if(metaData){
+            if(metaData) {
               this.storyserv.getStory(metaData.ID);
               this.storyserv.changeSection(metaData.ID);
               return this.getText(metaData.StoryLink).pipe(
-                map(text => ({metaData, text}))
-              );
-            }else{
+                map(text => ({metaData, text})) );
+
+            } else {
               this.router.navigate([`story/${route.parent.paramMap
-                .get('StoryType')}/${route.parent.paramMap
-                  .get('SeriesID')}`])
-              return EMPTY
+                                    .get('StoryType')}/${route.parent.paramMap
+                                    .get('SeriesID')}`]);
+              return EMPTY;
           }})
       ))
-     )
+     );
   }
 
   
   
-  getText(link:string): Observable<string>{
-    return this.httpclient.get(link, {responseType: 'text'})
+  getText(link:string): Observable<string> {
+    return this.httpclient.get(link, {responseType: 'text'});
   }
   
-  checkUrl(url:string){
-    if(url === 'First'){
+  checkUrl(url:string) {
+    if(url === 'First') {
       return this.storyserv.getSeriesData().pipe(
-        map(serie => serie[0].ID))
-    }else{
-      return of (url)
+        map(serie => serie[0].ID));
+    } else {
+      return of (url);
     }
   }
 }

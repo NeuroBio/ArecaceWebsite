@@ -24,18 +24,18 @@ export class SourceSiphoidMainComponent implements OnInit {
 
   ngOnInit() {
     this.sourceRefs$ = this.generalcollectserv.returnMetaData().pipe(
-      map(refs =>{
+      map(refs => {
         let final:string[][][] = [];
-        for(let cat of this.labels){
-          final.push(refs.filter(ref => ref.Category === cat)
-                          .map(filtered => [filtered.Topic, filtered.ID]));
+        for(let cat of this.labels) {
+          final.push(refs
+               .filter(ref => ref.Category === cat)
+               .map(filtered => [filtered.Topic, filtered.ID]));
         }
         return final; 
       })
     );
 
     this.route.firstChild.paramMap.subscribe(
-      path => this.current = path.get('SourceID')
-    );
+      path => this.current = path.get('SourceID'));
   }
 }

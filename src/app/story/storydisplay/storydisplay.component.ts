@@ -26,24 +26,26 @@ export class StorydisplayComponent implements OnInit {
               private storyserv: StoryService) { }
 
   ngOnInit() {
-    this.route.data.subscribe(data=>{
+    this.route.data.subscribe(data => {
       this.story = data.Story;
       const path = [this.story['metaData'].Type,
                     this.story['metaData'].Series.split(' ').join(''),
                     this.story['metaData'].ID];
+
       this.location.go(`story/${path[0]}s/${path[1]}/${path[2]}`);
       setTimeout(() => this.onResize(), 10);
       this.main.nativeElement.scrollIntoView();
       this.storyserv.updateLoading(false);
     });
+
     this.storyserv.loading.subscribe(load => this.loading = load)
   }
 
-  onResize(){
+  onResize() {
       this.leftspace = this.frame.nativeElement.clientWidth
-      -this.tool.nativeElement.offsetLeft
-      +this.tool.nativeElement.offsetWidth
-      -150;
+      - this.tool.nativeElement.offsetLeft
+      + this.tool.nativeElement.offsetWidth
+      - 150;
   }
 
 }

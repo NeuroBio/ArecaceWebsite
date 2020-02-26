@@ -5,10 +5,11 @@ import { CharactersMainComponent }            from './charactersmain/charactersm
 import { CharactersDetailsComponent }         from './charactersdetails/charactersdetails.component';
 import { HomeComponent }                      from './home/home.component';
 import { NotFoundComponent }                  from 'src/app/SharedComponentModules/PrimaryContentDisplayer/ContentDisplay/notfound/notfound.component'
+import { CharactersBlowupmasterComponent }    from './charactersblowupmaster/charactersblowupmaster.component';
+
 import { GeneralcollectionresolverService }   from 'src/app/GlobalServices/generalcollectionresolver.service';
 import { GeneralmemberresolverService }       from 'src/app/GlobalServices/generalmemberresolver.service';
-import { CharactersBlowupmasterComponent } from './charactersblowupmaster/charactersblowupmaster.component';
-import { CBUMResolverService } from './charactersblowupmaster/cbumresolver.service';
+import { CBUMResolverService }                from './charactersblowupmaster/cbumresolver.service';
 
 const characterRoutes: Routes = [
   {path: 'characters', component: CharactersMainComponent,

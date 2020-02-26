@@ -15,30 +15,30 @@ export class StoryResolver2Service implements Resolve<any> {
 
   //see the story service for notes
   resolve(route:ActivatedRouteSnapshot) {
-    const type = route.parent.paramMap.get("StoryType")
-    const series = this.checkUrl(route.paramMap.get("SeriesID"), type)
+    const type = route.parent.paramMap.get("StoryType");
+    const series = this.checkUrl(route.paramMap.get("SeriesID"), type);
     const serials = this.storyserv.serials.value;
     const IDname = this.storyserv.seriesIDName.value;
     if(series in IDname) {
-      const orderedSeries = serials[IDname[series]].sort((a,b) => a.Section < b.Section ? -1 : 1)
+      const orderedSeries = serials[IDname[series]].sort((a,b) => a.Section < b.Section ? -1 : 1);
       this.storyserv.initializeSeriesData(orderedSeries);
       this.storyserv.changeSeries(series);
-      return of (orderedSeries)
-    }else{
+      return of (orderedSeries);
+    } else {
       this.router.navigate([`story/${type}`]);
       return EMPTY;
     }
   }
 
-  checkUrl(url:string, type:string){
-    if(url === 'First'){
-      if(type === "Scripts"){
-        return "Arc1"
-      }else{
-        return "OneOffs"
+  checkUrl(url:string, type:string) {
+    if(url === 'First') {
+      if(type === "Scripts") {
+        return "Arc1";
+      } else {
+        return "OneOffs";
       }
-    }else{
-      return url
+    } else {
+      return url;
     }
   }
 

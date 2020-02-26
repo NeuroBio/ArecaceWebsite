@@ -1,5 +1,6 @@
 <div>
   
+  <!-- Character image -->
   <div id="Bio">
       <div *ngIf="loading===true" class="loading"></div>
       <img id="BioImage" [hidden]="loading" [src]="char.Links[0]" (load)="loading=false"
@@ -10,6 +11,7 @@
   <br>
   <div id="textblockcontainer">
 
+    <!-- Bio facts -->
       <div class="firstblock">
           <p class="textblock"><b>Class: </b> {{ char.SMClass }}</p>
           <p class="textblock"><b>Occupation: </b> {{ char.Occupation }}</p>
@@ -23,20 +25,21 @@
       <div style="clear: both"></div>
 
       
-
+    <!-- Personality -->
       <div class="textblock">
         <b>Personality: </b>{{ char.Personality }}<br>
       </div>
       <br>
       
 
-
+    <!-- Philo/Motivation/Goals -->
       <div class="textblock">
         <p class="textblock"><b>Philosophy: </b>{{ char.Philosophy }}</p>
         <p class="textblock"><b>Motivations/Goals: </b>{{ char.MotivationsGoals }}</p>
         <p class="textblock"><b>Strengths: </b>{{ char.Strengths }}</p>
         <p class="textblock"><b>Weaknesses: </b>{{ char.Weaknesses }}</p>
-        
+
+    <!-- Family and Source Abilities -->
         <p><b>Source Abilities: </b>{{ char.SourceAbilitiesFormatted }}</p>
 
         <span><b>Family in Story: </b>{{ char.RelationsFormatted }}</span>
@@ -44,7 +47,7 @@
       <br>
       
 
-
+    <!-- Background -->
       <div class="textblock">
         <div *ngIf="char.BriefBackground !== ''" class="toggler">
           <input type="radio" class="toggler" name="abouter" id="Brief"
@@ -68,6 +71,7 @@
       <div style="clear: both"></div>
       <br>
 
+      <!-- MISC References -->
       <div class="textblock" *ngIf="char.Links[2]">
         <b>Other References:</b><br>
         <app-grid

@@ -39,7 +39,7 @@ export class CharactersDetailsComponent implements OnInit {
     refs.map((ref, index) =>
       ref.Links = [this.char.Links[(index+1)*2],
                   this.char.Links[(index+1)*2+1]]);
-    return refs
+    return refs;
   }
 
 }

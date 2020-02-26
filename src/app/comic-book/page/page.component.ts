@@ -24,9 +24,9 @@ export class PageComponent implements OnInit {
         this.pageUrl = data.pageLink);
   }
 
-  loaded(){
+  loaded() {
     this.comicserv.loadingComplete();
-    if(this.init){
+    if(this.init) {
       this.init = false;
     }else{
       window.scroll(0, 120);

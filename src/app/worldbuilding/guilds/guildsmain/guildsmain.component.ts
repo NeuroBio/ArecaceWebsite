@@ -28,6 +28,6 @@ export class GuildsMainComponent implements OnInit {
     );
     
     this.route.firstChild.paramMap.subscribe(
-      path => this.current = path.get('GuildID'))
+      path => this.current = path.get('GuildID'));
   }
 }

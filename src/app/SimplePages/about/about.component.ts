@@ -6,22 +6,21 @@ import { TextProvider } from 'src/app/GlobalServices/textprovider.service';
   templateUrl: './about.component.html',
   styleUrls: ['./about.component.css']
 })
-export class AboutComponent implements OnInit{
+export class AboutComponent implements OnInit {
 
   contentPicker: number = 0;
   choices: string[] = ['The Story', "Me", "The Website"];
   mainText: any;
 
-  constructor(private textprovider: TextProvider) {}
+  constructor(private textprovider: TextProvider) { }
 
-  ngOnInit(){
+  ngOnInit() {
     window.scroll(0,0);
     this.mainText = this.textprovider.WebsiteText
-      .find(member =>
-        member.ID =='about')
+      .find(member => member.ID =='about');
   }
   
-  pickAbout(index: number){
+  pickAbout(index: number) {
     this.contentPicker=index;
   }
 

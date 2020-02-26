@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { TextProvider } from 'src/app/GlobalServices/textprovider.service';
-import { DomSanitizer } from '@angular/platform-browser';
+import { Component, OnInit }  from '@angular/core';
+import { TextProvider }       from 'src/app/GlobalServices/textprovider.service';
+import { DomSanitizer }       from '@angular/platform-browser';
 
 @Component({
   selector: 'app-travelorsguide',
@@ -17,7 +17,7 @@ export class TravelorsGuideComponent implements OnInit {
               "https://firebasestorage.googleapis.com/v0/b/arecaceworld.appspot.com/o/WebSite%2FTraveler'sGuide%2Fpage5.png?alt=media&token=fe4bdacb-1f24-4719-9e32-067330af1742",
               "https://firebasestorage.googleapis.com/v0/b/arecaceworld.appspot.com/o/WebSite%2FTraveler'sGuide%2Fpage6.png?alt=media&token=0e0d504a-c2ea-4285-8a9d-02dd4e80a15b",
               "https://firebasestorage.googleapis.com/v0/b/arecaceworld.appspot.com/o/WebSite%2FTraveler'sGuide%2Fpage7.png?alt=media&token=2c303c8a-b5f6-4b64-a8de-f6e22203cba7"
-             ]
+             ];
   index = 0;
   mainText: string;
 
@@ -32,9 +32,9 @@ export class TravelorsGuideComponent implements OnInit {
 
   nextPage(incre: number) {
     this.index += incre;
-    if(this.index === -1){
+    if(this.index === -1) {
       this.index = 6;
-    }else if(this.index === this.previews.length){
+    } else if(this.index === this.previews.length){
       this.index = 0;
     }
   }

@@ -1,8 +1,8 @@
-import { Component, OnInit, HostListener } from '@angular/core';
-import { TextProvider } from 'src/app/GlobalServices/textprovider.service';
-import { DomSanitizer } from '@angular/platform-browser';
-import { Router } from '@angular/router';
-import { Question } from 'src/app/Classes/WebsiteText';
+import { Component, OnInit }  from '@angular/core';
+import { DomSanitizer }       from '@angular/platform-browser';
+
+import { TextProvider }       from 'src/app/GlobalServices/textprovider.service';
+import { Question }           from 'src/app/Classes/WebsiteText';
 
 @Component({
   selector: 'app-faq',
@@ -14,15 +14,13 @@ export class FAQComponent implements OnInit{
   mainText: Question[];
 
   constructor(private textprovider: TextProvider,
-              public sanitizer: DomSanitizer,
-              private router: Router) {}
+              public sanitizer: DomSanitizer) { }
 
   ngOnInit() {
     window.scroll(0,0);
     this.mainText = JSON.parse(this.textprovider.WebsiteText
                                 .find(member =>
-                                  member.ID =='faq').Questions
-    );
+                                  member.ID =='faq').Questions);
   }
 
   

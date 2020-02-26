@@ -1,5 +1,7 @@
 <div #frame id="bookframe" (window:resize)="onResize()">
     <div [hidden]="loading" role="main" tabindex="0">
+
+<!-- Sub header -->
         <div #main>
             <h3>{{ story.metaData.Title }}</h3>
             <div #tool class="tooltip">Details
@@ -10,10 +12,12 @@
                 </div>
             </div>
         </div>
+
         <div style="clear: both"></div>
         <hr>
-            
-        <div id="maintext" [innerHTML]="story.text"></div>            
+        
+<!-- Text area -->            
+        <div id="maintext" [innerHTML]="story.text"></div>
+    
     </div>
-
 </div>

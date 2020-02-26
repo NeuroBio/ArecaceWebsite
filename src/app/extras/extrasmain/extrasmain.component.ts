@@ -21,8 +21,7 @@ export class ExtrasMainComponent implements OnInit {
   ngOnInit() {
     window.scroll(0,0);
     this.arts$ = this.generalcollectserv.returnMetaData().pipe(
-      map(art => art.sort((a,b) => a.Date > b.Date ? -1 : 1))
-    )
+      map(art => art.sort((a,b) => a.Date > b.Date ? -1 : 1)) );
   }
 
 }

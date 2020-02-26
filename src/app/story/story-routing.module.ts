@@ -1,12 +1,12 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { NgModule }               from '@angular/core';
+import { Routes, RouterModule }   from '@angular/router';
 
 import { SeriesChooserComponent } from './serieschooser/serieschooser.component';
-import { StorydisplayComponent } from './storydisplay/storydisplay.component';
+import { StorydisplayComponent }  from './storydisplay/storydisplay.component';
 
-import { StoryResolver1Service } from './resolvers/storyresolver1.service';
-import { StoryResolver2Service } from './resolvers/storyresolver2.service';
-import { StoryResolver3Service } from './resolvers/storyresolver3.service';
+import { StoryResolver1Service }  from './resolvers/storyresolver1.service';
+import { StoryResolver2Service }  from './resolvers/storyresolver2.service';
+import { StoryResolver3Service }  from './resolvers/storyresolver3.service';
 
 
 const storyRoutes: Routes = [

@@ -6,9 +6,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./pagenotfound.component.css']
 })
 
-export class PageNotFoundComponent implements OnInit{
+export class PageNotFoundComponent implements OnInit {
 
-  ngOnInit(){
+  ngOnInit() {
     window.scroll(0,0);
   }
   

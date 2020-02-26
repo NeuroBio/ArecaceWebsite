@@ -12,19 +12,19 @@ import { ComicService }                     from '../comic.service';
   providedIn: 'root'
 })
 
-export class PageResolverService implements Resolve<string>{
+export class PageResolverService implements Resolve<string> {
 
   constructor(private comicserv: ComicService,
               private router: Router) { }
   
-  resolve(route: ActivatedRouteSnapshot):Observable<string | never>{
-    const FullID = route.paramMap.get('PageID')
+  resolve(route: ActivatedRouteSnapshot):Observable<string | never> {
+    const FullID = route.paramMap.get('PageID');
     return this.comicserv.getPage(FullID).pipe(
       take(1),
       tap(link => {
-        if(link){//page found
+        if(link) {//page found
           return(link);
-        }else{//page not found
+        } else {//page not found
           this.router.navigate(['/comic']);
           return EMPTY;
         }

@@ -1,11 +1,11 @@
 import { Component, OnInit, HostListener, OnDestroy }   from '@angular/core';
-import { ActivatedRoute, Router }                       from '@angular/router'
+import { ActivatedRoute, Router }                       from '@angular/router';
 
-import { Observable, Subscription }                     from 'rxjs'
+import { Observable, Subscription }                     from 'rxjs';
 
 import { ComicService }                                 from '../comic.service';
 import { ChapterMetaData }                              from 'src/app/Classes/ContentClasses';
-import { TextProvider } from 'src/app/GlobalServices/textprovider.service';
+import { TextProvider }                                 from 'src/app/GlobalServices/textprovider.service';
 
 
 
@@ -46,17 +46,17 @@ export class BookComponent implements OnInit, OnDestroy {
                         .find(member => member.ID === 'comic').Text;
   }
 
-  ngOnDestroy(){
+  ngOnDestroy() {
     this.stream.unsubscribe();
   }
   
-  initialVarAssign(path:any, chap:ChapterMetaData[]){
+  initialVarAssign(path: any, chap: ChapterMetaData[]) {
     const route = path.get('PageID');
 
-    if(route === null){//latest
+    if(route === null) {//latest
       this.currentChapter = chap[chap.length-1];
       this.currentPage = this.currentChapter.NumPages;
-    }else{//get specific page
+    } else {//get specific page
       const id = route.split('-');
       this.currentChapter = chap.find(c => c.ID === +id[0]);
       this.currentPage = +id[1];    
@@ -66,30 +66,30 @@ export class BookComponent implements OnInit, OnDestroy {
     this.navigate();
   }
  
-  navigate(){
-    this.name = `Chapter ${this.currentChapter.ID}: Page ${this.currentPage}`
-    this.path = `comic/${this.currentChapter.ID}-${this.currentPage}`
+  navigate( ){
+    this.name = `Chapter ${this.currentChapter.ID}: Page ${this.currentPage}`;
+    this.path = `comic/${this.currentChapter.ID}-${this.currentPage}`;
     this.router.navigate([this.path]);
   }
 
-  updatePageIndex(){
+  updatePageIndex() {
     this.pageIndex = Array(this.currentChapter.NumPages);
   }
 
   //dropdown selectors
-  changePage(newpage:number): void{
+  changePage(newpage:number): void {
     this.loading=true;
     this.currentPage = (+newpage+1);
     this.navigate();
   }
 
-  changeChapter(newchap:string, increase:boolean=true): void{
+  changeChapter(newchap:string, increase:boolean=true): void {
     this.loading=true;
     this.chapterData$.subscribe(chaps => {
       this.currentChapter = chaps[newchap];
-      if(increase){
+      if(increase) {
         this.currentPage = 1;
-      }else{
+      } else {
         this.currentPage = this.currentChapter.NumPages;
       }
       this.updatePageIndex();
@@ -98,25 +98,25 @@ export class BookComponent implements OnInit, OnDestroy {
   }
 
   // buttons
-  onButton(check:boolean, incre:number):void {
-    if(check){
+  onButton(check: boolean, incre :number): void {
+    if(check) {
       this.loading = true;
       this.currentPage += incre;
-    }else{
+    } else {
       this.changeChapter((this.currentChapter.Index+incre).toString(), incre>=1);
     }
     this.navigate();
   }
 
   //Arrow keys (trigger button options)
-  @HostListener('window:keyup', ['$event']) KeyEvent(event: KeyboardEvent){ 
+  @HostListener('window:keyup', ['$event']) KeyEvent(event: KeyboardEvent) { 
     if(event.keyCode === 39 &&//right, next
-      !(this.currentPage == this.currentChapter.NumPages && this.currentChapter.ID == this.maxChap)){//not last page
+      !(this.currentPage == this.currentChapter.NumPages && this.currentChapter.ID == this.maxChap)) {//not last page
       this.onButton(this.currentPage < this.currentChapter.NumPages,1);
     }
 
     if(event.keyCode === 37 &&//left, prev
-      !(this.currentPage == 1 && this.currentChapter.ID == 0)){//not first page
+      !(this.currentPage == 1 && this.currentChapter.ID == 0)) {//not first page
         this.onButton(this.currentPage > 1,-1);
     }
   }

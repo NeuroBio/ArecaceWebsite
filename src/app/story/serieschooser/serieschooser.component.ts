@@ -1,8 +1,7 @@
 import { Component, OnInit, OnDestroy }     from '@angular/core';
 import { ActivatedRoute, Router }           from '@angular/router'
 
-import { Observable, Subscription }         from 'rxjs';
-import { tap }                              from 'rxjs/operators';
+import { Subscription }                     from 'rxjs';
 
 import { StoryService }                     from '../story.service'
 import { StoryMetaData }                    from 'src/app/Classes/ContentClasses'
@@ -46,8 +45,8 @@ export class SeriesChooserComponent implements OnInit, OnDestroy {
       this.seriesNames = Object.values(IDName);
     });
 
-    this.stream2 = this.storyserv.getSeriesData().subscribe(titles =>{
-      this.titlesInSeries = titles});
+    this.stream2 = this.storyserv.getSeriesData().subscribe(titles => 
+      this.titlesInSeries = titles);
 
     this.stream3 = this.storyserv.storyType.subscribe(string => { 
       this.localLoading = true;
@@ -76,25 +75,25 @@ export class SeriesChooserComponent implements OnInit, OnDestroy {
     this.stream5.unsubscribe();
   }
 
-  changeSeries(series:string){
+  changeSeries(series:string) {
     this.router.navigate([`../${series}`], { relativeTo: this.route });
   }
 
-  changeSection(section:string){
+  changeSection(section:string) {
     this.router.navigate([`${section}`], { relativeTo: this.route });
   }
 
   updateType(scripts: string) {
     if(scripts === 'Scripts') {
       this.router.navigate([`../../Scripts`], { relativeTo: this.route });
-    }else{
+    } else {
       this.router.navigate([`../../Narratives`], { relativeTo: this.route });
     }
   }
 
-  updatePath(){
+  updatePath() {
     this.path = `story/${this.storyType}/${this.currentSeries}/${this.currentSection}`;
-    const Section = this.titlesInSeries.find(sec => sec.ID === this.currentSection)
-    this.name = `${Section.Series}: ${Section.Title}`
+    const Section = this.titlesInSeries.find(sec => sec.ID === this.currentSection);
+    this.name = `${Section.Series}: ${Section.Title}`;
   }
 }

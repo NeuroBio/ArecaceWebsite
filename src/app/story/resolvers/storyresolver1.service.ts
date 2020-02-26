@@ -13,23 +13,23 @@ import { StoryMetaData }            from 'src/app/Classes/ContentClasses';
   providedIn: 'root'
 })
 
-export class StoryResolver1Service implements Resolve<any>{
+export class StoryResolver1Service implements Resolve<any> {
 
   constructor(private firebaseserv: FireBaseService,
               private storyserv: StoryService,
               private router:Router) { }
 
   //see the story service for notes
-  resolve(route: ActivatedRouteSnapshot): Observable<StoryMetaData[] | never>{
+  resolve(route: ActivatedRouteSnapshot): Observable<StoryMetaData[] | never> {
     let type = route.paramMap.get('StoryType');
     this.catchErrors(type);
     return this.firebaseserv.returnCollect(type).pipe(
         take(1),
         mergeMap(allStories => {
-          if(allStories[0]){
+          if(allStories[0]) {
             this.storyserv.initializeMetaData(allStories, type);
             return of (allStories);
-          }else{
+          } else {
             this.router.navigate(['/story/Narratives']);
             return EMPTY;
           }

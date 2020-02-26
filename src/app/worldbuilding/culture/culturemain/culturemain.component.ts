@@ -23,18 +23,18 @@ export class CulturemainComponent implements OnInit {
 
   ngOnInit() {
     this.cultureRefs$ = this.generalcollectserv.returnMetaData().pipe(
-      map((refs => {
+      map(refs => {
         let final:string[][][] = [];
-        for(let cat of this.labels){
+        for(let cat of this.labels) {
           final.push(refs.filter(ref => ref.Category === cat)
                           .map(filtered => [filtered.Topic, filtered.ID]));
         }
         return final; 
-      }))
-    )
+      })
+    );
     
     this.route.firstChild.paramMap.subscribe(
-      path => this.current = path.get('CultureID'))
+      path => this.current = path.get('CultureID'));
   }
 
 }

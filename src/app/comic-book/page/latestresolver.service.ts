@@ -10,11 +10,11 @@ import { ComicService }       from '../comic.service';
 @Injectable({
   providedIn: 'root'
 })
-export class LatestResolverService implements Resolve<string>{
+export class LatestResolverService implements Resolve<string> {
 
   constructor(private comicserv: ComicService) { }
   
-  resolve(): Observable<string>{
-    return this.comicserv.getLatest().pipe( take(1) );
+  resolve(): Observable<string> {
+    return this.comicserv.getLatest().pipe(take(1));
   }
 }

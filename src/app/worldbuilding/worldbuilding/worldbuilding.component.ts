@@ -14,7 +14,7 @@ export class WorldbuildingComponent implements OnInit{
                     {link:'culture', text:'Culture'},
                     {link:'maps', text:'Maps'},
                     {link:'source', text:'Source and Siphoid'},
-                    {link:'guilds', text:'The DIA and Guilds'}]
+                    {link:'guilds', text:'The DIA and Guilds'}];
 
   ngOnInit(){
     window.scroll(0,0);

@@ -16,14 +16,13 @@ export class BookResolverService implements Resolve<any> {
   constructor(private firebaseserv: FireBaseService,
               private comicserv: ComicService) { }
 
-  resolve(){
+  resolve() {
     return this.firebaseserv.returnCollect('Arc1Data').pipe(
       take(1),
       map((metaData:ChapterMetaData[]) => {
         metaData.sort((a,b) => a.ID < b.ID ? -1 :1);
-        this.comicserv.initializeMetaData(metaData)
-      })
-    );
+        this.comicserv.initializeMetaData(metaData);
+      }) );
   }
   
 }
