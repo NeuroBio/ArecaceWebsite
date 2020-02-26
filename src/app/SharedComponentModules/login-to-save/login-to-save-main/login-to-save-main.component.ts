@@ -3,6 +3,7 @@ import { AuthService } from '../../../administration/security/Auth/auth.service'
 import { Subscription } from 'rxjs';
 import { formatDate } from '@angular/common';
 import { FireBaseService } from '../../../GlobalServices/firebase.service';
+import { User } from 'src/app/Classes/ContentClasses';
 @Component({
   selector: 'app-login-to-save-main',
   templateUrl: './login-to-save-main.component.html',
@@ -19,7 +20,7 @@ export class LoginToSaveMainComponent implements OnInit, OnDestroy {
   stopClicking: boolean;
   authorized: boolean;
   message: string;
-  OldData: {};
+  OldData: User;
   stream1: Subscription;
   stream2 = new Subscription();
 
@@ -27,8 +28,7 @@ export class LoginToSaveMainComponent implements OnInit, OnDestroy {
     this.stream1 = this.auth.user.subscribe(user => {
       this.authorized = user? true : false
       if(user) {
-        this.stream2 = this.firebaseserv.returnDocument(`Users/${this.auth.uid.value}`)
-        .subscribe(data => this.OldData = data);
+        this.OldData = user;
       }
     });
   }
@@ -42,6 +42,7 @@ export class LoginToSaveMainComponent implements OnInit, OnDestroy {
     this.stopClicking = true;
     this.message = 'Submitting...';
     this.DatatoSave.UploadTime = formatDate(new Date(), 'yyyy-MM-dd, HH:mm:ss', 'en');
+    this.DatatoSave.ID = `${this.OldData.ID}-${this.getUniqueId(2)}`
     if(this.OldData[this.DataType]) {// old data exists
       this.OldData[this.DataType].push(this.DatatoSave);
     } else { //first time this data pushed
@@ -53,5 +54,15 @@ export class LoginToSaveMainComponent implements OnInit, OnDestroy {
         this.message = err;
         this.stopClicking = false;
     });
+  }
+
+  getUniqueId(parts: number): string {
+    const stringArr = [];
+    for(let i = 0; i< parts; i++){
+      const S4 = (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
+      stringArr.push(S4);
+    }
+    return stringArr.join('-');
+    //https://stackoverflow.com/questions/52836247/how-to-generate-uuid-in-angular-6
   }
 }

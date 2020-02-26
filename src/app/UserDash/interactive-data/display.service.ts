@@ -11,6 +11,6 @@ export class DisplayService {
 
   viewData(results){
     console.log("hi?")
-    this.surveyserv.assignSurveyResults(results);
+    //this.surveyserv.assignSurveyResults(results);
   }
 }

@@ -10,7 +10,7 @@ import { GeneralmemberresolverService }     from 'src/app/GlobalServices/general
 const bestiaryRoutes: Routes = [
   {path: 'bestiary', component: BestiaryComponent,
     resolve: {GeneralcollectionresolverService},
-    children:[
+    children: [
       {path: 'notfound', redirectTo: ''},
       {path: ':BeastID', component: BlowupmasterComponent,
       resolve: {links: GeneralmemberresolverService}}

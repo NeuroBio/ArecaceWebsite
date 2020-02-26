@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { DisplayService } from '../display.service';
-
+import { Router, ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-data-options',
   templateUrl: './data-options.component.html',
@@ -14,7 +14,9 @@ export class DataOptionsComponent implements OnInit {
   @Input() type: string;
   @Input() data: string;
 
-  constructor(private displayserv: DisplayService) { }
+  constructor(private displayserv: DisplayService,
+              private route: ActivatedRoute,
+              private router: Router) { }
 
   ngOnInit() {
   }
@@ -24,6 +26,7 @@ export class DataOptionsComponent implements OnInit {
     if(this.type ==='survey') {
       this.displayserv.viewData(this.data[index]);
     }
+    this.router.navigate([`${this.type}`], {relativeTo: this.route})
     console.log("wired")
   }
 }

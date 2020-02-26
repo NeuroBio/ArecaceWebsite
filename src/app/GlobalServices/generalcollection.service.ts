@@ -21,10 +21,11 @@ export class GeneralcollectionService {
 
   getMember(ID:string){
     if(ID === 'Latest') {
-      return this.returnMetaData().pipe(
-        map(members =>
-          members.reduce((a, b) => a.TimeStampCreated > b.TimeStampCreated ? a : b))
-      );
+      return this.returnMetaData();
+      // .pipe(
+      //   map(members =>
+      //     members.reduce((a, b) => a.TimeStampCreated > b.TimeStampCreated ? a : b))
+      // )
     } else {
       return this.returnMetaData().pipe(
         map(members =>

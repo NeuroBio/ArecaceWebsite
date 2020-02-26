@@ -4,9 +4,8 @@
   <ul>
     <div *ngFor="let name of names; let i = index">
       <button class="Exs">x</button>
-      <li (click)="onView(i)">
-        {{ name }}
-      </li>
+      <li>{{ name }}</li>
+      <button class="Exs" (click)="onView(i)">view</button>
     </div>
   </ul>
 </div>

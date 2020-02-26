@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { SurveyService } from '../survey.service';
 import { Subscription } from 'rxjs';
 
@@ -9,6 +9,7 @@ import { Subscription } from 'rxjs';
 })
 export class ResultsComponent implements OnInit, OnDestroy {
 
+  @Input() ViewOnly: boolean = false;
   results: any;
   SurveyData: string;
   stream1: Subscription;

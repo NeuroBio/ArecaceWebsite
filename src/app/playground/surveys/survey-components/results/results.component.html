@@ -11,19 +11,18 @@
         <a class="navver" [routerLink]="results.Outcome.Link">
             {{ results.Outcome.LinkName }}</a>
     </div>
-    <div *ngIf="results">
+    <div *ngIf="results  && ViewOnly === false">
       <app-login-to-save-main
       [DataType]="'Surveys'"
       [DatatoSave]="results"
       ></app-login-to-save-main>
     </div>
   </div>
-
 </div>
 
 <button (click)="setShowAll()">All Scores</button>
 <button (click)="setShowStats()">Stats</button>
-<button (click)="onReset()">Reset Survey</button>
+<button *ngIf="ViewOnly === false" (click)="onReset()">Reset Survey</button>
 
 <div *ngIf="showAll === true" class="outer">
 
