@@ -59,7 +59,7 @@ export class BookmarkComponent implements OnInit, OnChanges {
       this.color = 'rgb(180,180,180)';
     } else {
       this.color = this.checkBookmark() < 0
-      ? 'rgba(250,0,0,0)'
+      ? 'rgb(49,49,49)'
       : '#e67e00';
     }
   }

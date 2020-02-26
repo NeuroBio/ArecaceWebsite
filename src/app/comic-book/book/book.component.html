@@ -43,15 +43,15 @@
 
             
         <!--view Radio-->
-        <div id="viewradio" >
-            <div>
-                <app-bookmark
-                type="Comics"
-                [path]="path"
-                [name]="name"
-                ></app-bookmark>
-            </div>
-            <div class="break"></div>
+        <div id="viewradio">
+            <div style= "display: inline-block">
+        <div id="bookmark1">
+            <app-bookmark
+            type="Comics"
+            [path]="path"
+            [name]="name"
+            ></app-bookmark>
+        </div>
 
             <div id="radiobox">
                 <input type="radio" id="book" name="pagestyle" checked=true value="book">
@@ -59,6 +59,7 @@
                 <input type="radio" id="scroll" name="pagestyle" value="scrolling" disabled="true"> 
                 <label for="scroll" style="color:#8f8f8f">Scrolling</label>
             </div>
+        </div>
         </div>
         <div style="clear:both"></div>
 
@@ -81,7 +82,7 @@
         <!--Comic Footer-->
         <div id="footbox" role="navigation">
 
-            <div id="bookmark">
+            <div id="bookmark2">
                 <app-bookmark
                 type="Comics"
                 [path]="path"
