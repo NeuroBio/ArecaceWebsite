@@ -5,8 +5,7 @@ import { formatDate } from '@angular/common';
 
 import { OnDestroy } from '@angular/core';
 import { BehaviorSubject, Subscription } from 'rxjs';
-import { User } from '../../Classes/user';
-import { Bookmark } from '../../Classes/bookmark';
+import { User, Bookmark } from '../../Classes/ContentClasses';
 
 @Injectable({
   providedIn: 'root'

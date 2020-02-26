@@ -3,7 +3,7 @@ import { Component, OnInit }          from '@angular/core';
 import { Observable }                 from 'rxjs';
 import { map }                        from 'rxjs/operators';
 
-import { BeastMetaData }              from 'src/app/Classes/beastmetadata';
+import { BeastMetaData }              from 'src/app/Classes/ContentClasses';
 import { GeneralcollectionService }   from 'src/app/GlobalServices/generalcollection.service';
 
 

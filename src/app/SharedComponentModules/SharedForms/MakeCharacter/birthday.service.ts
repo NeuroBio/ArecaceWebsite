@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { CRUDcontrollerService } from '../../../administration/services/CRUDcontroller.service';
-import { CharacterMetaData } from 'src/app/Classes/charactermetadata';
+import { CharacterMetaData } from 'src/app/Classes/ContentClasses';
 import { CRUD } from '../../../administration/services/CRUD.service';
 import { FireBaseService } from 'src/app/GlobalServices/firebase.service';
-import { DateInfo } from 'src/app/Classes/datedata';
+import { DateInfo } from 'src/app/Classes/ArecacenDates';
 import { take } from 'rxjs/operators';
 
 @Injectable({

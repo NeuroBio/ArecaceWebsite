@@ -7,7 +7,7 @@ import { take, mergeMap }           from 'rxjs/operators';
 
 import { StoryService }             from '../story.service'
 import { FireBaseService }          from 'src/app/GlobalServices/firebase.service'
-import { StoryMetaData }            from 'src/app/Classes/storymetadata';
+import { StoryMetaData }            from 'src/app/Classes/ContentClasses';
 
 @Injectable({
   providedIn: 'root'

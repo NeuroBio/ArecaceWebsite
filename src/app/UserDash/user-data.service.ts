@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { User } from '../Classes/user';
+import { User } from '../Classes/ContentClasses';
 import { FireBaseService } from '../GlobalServices/firebase.service';
 import { AuthService } from '../administration/security/Auth/auth.service';
 @Injectable({

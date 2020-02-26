@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy, OnChanges,
           Output, EventEmitter, Input } from '@angular/core';
-import { Nomadic, Word, WordTypes } from '../../../Classes/rules';
+import { Nomadic, Word, WordTypes } from '../../../Classes/NomadicLanguage';
 import { Subscription } from 'rxjs';
 import { CRUDcontrollerService } from '../../services/CRUDcontroller.service';
 import { Validators, FormBuilder }     from '@angular/forms';

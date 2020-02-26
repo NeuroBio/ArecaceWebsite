@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { SurveyData, SurveyOutcome } from '../../Classes/surveyclasses';
+import { SurveyData, SurveyOutcome } from '../../Classes/ContentClasses';
 
 @Injectable({
   providedIn: 'root'

@@ -1,7 +1,7 @@
 import { Component, Input, OnChanges } from '@angular/core';
-import { Word } from '../../../Classes/rules';
+import { Word } from '../../../Classes/NomadicLanguage';
 import { CRUDcontrollerService } from '../../../administration/services/CRUDcontroller.service';
-import { WordTypes } from '../../../Classes/rules';
+import { WordTypes } from '../../../Classes/NomadicLanguage';
 import { FormBuilder } from '@angular/forms';
 @Component({
   selector: 'app-language-table',

@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CRUDcontrollerService } from '../../services/CRUDcontroller.service';
 import { Subscription } from 'rxjs';
-import { Word } from '../../../Classes/rules';
+import { Word } from '../../../Classes/NomadicLanguage';
 
 @Component({
   selector: 'app-language',

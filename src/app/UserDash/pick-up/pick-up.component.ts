@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, OnChanges } from '@angular/core';
-import { User } from 'src/app/Classes/user';
+import { User } from 'src/app/Classes/ContentClasses';
 import { UserDataService } from '../user-data.service';
 
 @Component({

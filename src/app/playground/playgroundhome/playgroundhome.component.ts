@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { formatDate } from '@angular/common';
-import { DateInfo } from 'src/app/Classes/datedata';
+import { DateInfo } from 'src/app/Classes/ArecacenDates';
 
 @Component({
   selector: 'app-playgroundhome',

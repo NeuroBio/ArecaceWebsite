@@ -4,7 +4,7 @@ import { ActivatedRoute, Router }                       from '@angular/router'
 import { Observable, Subscription }                     from 'rxjs'
 
 import { ComicService }                                 from '../comic.service';
-import { ChapterMetaData }                              from 'src/app/Classes/chaptermetadata';
+import { ChapterMetaData }                              from 'src/app/Classes/ContentClasses';
 import { TextProvider } from 'src/app/GlobalServices/textprovider.service';
 
 

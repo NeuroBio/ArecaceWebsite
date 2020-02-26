@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, Validators, FormArray, FormGroup } from '@angular/forms';
-import { SurveyQuestion, SurveyData, SurveyOutcome } from '../../../Classes/surveyclasses';
+import { SurveyQuestion, SurveyData, SurveyOutcome } from '../../../Classes/ContentClasses';
 import { Observable, Subscription } from 'rxjs';
 import { FireBaseService } from 'src/app/GlobalServices/firebase.service';
 import { map, take } from 'rxjs/operators';

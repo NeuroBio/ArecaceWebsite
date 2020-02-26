@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Word } from '../../../Classes/rules';
+import { Word } from '../../../Classes/NomadicLanguage';
 import { Subscription }                           from 'rxjs';
 import { NomadicService } from '../nomadic.service';
 

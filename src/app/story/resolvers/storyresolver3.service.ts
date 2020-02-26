@@ -6,7 +6,7 @@ import { Observable, of, EMPTY }                    from 'rxjs';
 import { take, map, flatMap }                       from 'rxjs/operators';
 
 import { StoryService }                             from '../story.service';
-import { StoryMetaData }                            from 'src/app/Classes/storymetadata';
+import { StoryMetaData }                            from 'src/app/Classes/ContentClasses';
 
 @Injectable({
   providedIn: 'root'

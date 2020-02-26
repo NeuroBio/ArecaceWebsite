@@ -5,7 +5,7 @@ import { ViewChild }                    from '@angular/core'
 import { Subscription }                 from 'rxjs';
 
 import { CRUDcontrollerService }        from '../../../services/CRUDcontroller.service'
-import { ExtrasMetaData }               from 'src/app/Classes/extrasmetadata';
+import { ExtrasMetaData }               from 'src/app/Classes/ContentClasses';
 
 @Component({
   selector: 'app-extrasform',

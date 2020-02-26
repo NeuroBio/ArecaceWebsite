@@ -1,6 +1,6 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { BehaviorSubject, Subscription } from 'rxjs';
-import { SurveyData } from '../../Classes/surveyclasses';
+import { SurveyData } from '../../Classes/ContentClasses';
 import { SurveyProcessorService } from './survey-processor.service';
 import { FireBaseService } from 'src/app/GlobalServices/firebase.service';
 

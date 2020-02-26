@@ -1,4 +1,4 @@
-import { DateInfo } from 'src/app/Classes/datedata';
+import { DateInfo } from 'src/app/Classes/ArecacenDates';
 
 export class countryData{
     id:string;

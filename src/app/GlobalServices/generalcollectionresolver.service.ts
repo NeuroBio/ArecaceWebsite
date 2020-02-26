@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { FireBaseService } from './firebase.service';
 import { GeneralcollectionService } from './generalcollection.service';
-import { FirebasePaths } from 'src/app/Classes/FirebasePaths';
+import { FirebasePaths } from 'src/app/Classes/UploadDownloadPaths';
 import { take, tap } from 'rxjs/operators';
 import { ActivatedRouteSnapshot, Resolve, Router } from '@angular/router';
 

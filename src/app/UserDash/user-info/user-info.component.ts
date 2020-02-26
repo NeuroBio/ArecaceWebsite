@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { User } from 'src/app/Classes/user';
+import { User } from 'src/app/Classes/ContentClasses';
 import { FireBaseService } from 'src/app/GlobalServices/firebase.service';
 import { AuthService } from '../../administration/security/Auth/auth.service';
 import { FormBuilder, Validators, ValidationErrors } from '@angular/forms';

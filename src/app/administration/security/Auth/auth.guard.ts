@@ -7,7 +7,7 @@ import { Observable }                     from 'rxjs';
 import { take, map }                      from 'rxjs/operators';
 
 import {AuthService} from './auth.service';
-import { User } from 'src/app/Classes/user';
+import { User } from 'src/app/Classes/ContentClasses';
 
 @Injectable({
   providedIn: 'root'

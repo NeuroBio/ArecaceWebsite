@@ -10,8 +10,10 @@ export class NewestCueService {
 
   constructor(private firebaseserv: FireBaseService) { }
 
-  updateCue(newItem: any, type: string) {
+  updateCue(newItem: any, type: string, link: string) {
     newItem.UploadTime = formatDate(new Date(), 'yyyy-MM-dd, HH:mm', 'en')
+    newItem.UploadType = type;
+    newItem.DirectLink = link;
     this.firebaseserv.returnCollectionWithKeys('NewestCue').pipe(take(1))
     .subscribe(newest => {
       if(newest.length >= 25) {

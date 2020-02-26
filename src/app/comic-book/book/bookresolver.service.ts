@@ -3,7 +3,7 @@ import { Resolve }                from '@angular/router';
 
 import { map, take }              from 'rxjs/operators';
 
-import { ChapterMetaData }        from '../../Classes/chaptermetadata';
+import { ChapterMetaData }        from '../../Classes/ContentClasses';
 import { ComicService }           from '../comic.service';
 import { FireBaseService }        from 'src/app/GlobalServices/firebase.service';
 

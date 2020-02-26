@@ -5,7 +5,7 @@ import { FormBuilder, FormGroup }             from '@angular/forms';
 import { Subscription }                       from 'rxjs';
 
 import { CRUDcontrollerService }              from 'src/app/administration/services/CRUDcontroller.service';
-import { PostData }                           from 'src/app/Classes/postdata';
+import { PostData }                           from 'src/app/Classes/ContentClasses';
 
 @Component({
   selector: 'app-update-form',

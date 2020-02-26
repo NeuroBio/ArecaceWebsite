@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { LooseNotesMetaData } from 'src/app/Classes/notesmetadata';
+import { LooseNotesMetaData } from 'src/app/Classes/ContentClasses';
 
 @Component({
   selector: 'app-details-notes',

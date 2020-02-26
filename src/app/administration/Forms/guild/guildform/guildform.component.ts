@@ -3,7 +3,7 @@ import { Component, OnInit, ViewChild,
 import { FormBuilder, FormGroup }       from '@angular/forms';
 import { Subscription }                 from 'rxjs';
 
-import { GuildMetaData }                from 'src/app/Classes/guildmetadata';
+import { GuildMetaData }                from 'src/app/Classes/ContentClasses';
 import { CRUDcontrollerService }        from '../../../services/CRUDcontroller.service';
 
 @Component({

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TextProvider } from 'src/app/GlobalServices/textprovider.service';
-import { Intro } from 'src/app/Classes/intro';
+import { Intro } from 'src/app/Classes/WebsiteText';
 
 @Component({
   selector: 'app-introduction',

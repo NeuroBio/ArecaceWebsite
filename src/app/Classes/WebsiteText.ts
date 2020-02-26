@@ -5,3 +5,9 @@ export class Intro {
     RouterLinks: string[];
     RouterLinksNames: string[];
 }
+
+export class Question {
+    Question: string;
+    Answer:string;
+    RouterLink: string;
+}

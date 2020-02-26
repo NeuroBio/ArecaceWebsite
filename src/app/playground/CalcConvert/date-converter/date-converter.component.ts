@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { DateInfo } from 'src/app/Classes/datedata';
+import { DateInfo } from 'src/app/Classes/ArecacenDates';
 
 @Component({
   selector: 'app-date-converter',

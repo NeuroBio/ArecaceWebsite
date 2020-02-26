@@ -1,7 +1,7 @@
 import { Component, OnInit}                    from '@angular/core';
 import { ActivatedRoute }                      from '@angular/router';
 
-import { CharacterMetaData}                    from '../../../Classes/charactermetadata';
+import { CharacterMetaData}                    from '../../../Classes/ContentClasses';
 import { GlobalVarsService }                   from 'src/app/GlobalServices/global-vars.service';
 
 @Component({

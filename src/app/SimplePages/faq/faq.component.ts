@@ -2,7 +2,7 @@ import { Component, OnInit, HostListener } from '@angular/core';
 import { TextProvider } from 'src/app/GlobalServices/textprovider.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
-import { Question } from 'src/app/Classes/faq';
+import { Question } from 'src/app/Classes/WebsiteText';
 
 @Component({
   selector: 'app-faq',

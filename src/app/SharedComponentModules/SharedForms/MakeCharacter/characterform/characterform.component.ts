@@ -5,7 +5,7 @@ import { Subscription }                             from 'rxjs';
 
 import { CRUDcontrollerService }                    from '../../../../administration/services/CRUDcontroller.service';
 
-import { CharacterMetaData }                        from 'src/app/Classes/charactermetadata';
+import { CharacterMetaData }                        from 'src/app/Classes/ContentClasses';
 import { SourceAbilities, Relations }               from '../formclasses';
 import { UploadCharacterDrops }                     from '../uploadcharacterdrops';
 import { BirthdayService } from '../birthday.service';

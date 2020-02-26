@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup }         from '@angular/forms';
 import { Subscription }                   from 'rxjs';
 
 import { CRUDcontrollerService }          from '../../../services/CRUDcontroller.service'
-import { Categories, Paths }              from '../../../../Classes/categories'
+import { Categories, Paths }              from '../../../../Classes/UploadDownloadPaths'
 
 
 @Component({

@@ -2,7 +2,7 @@ import { Component, OnInit }    from '@angular/core';
 import { ActivatedRoute }       from '@angular/router';
 
 import { CRUDcontrollerService }          from '../../services/CRUDcontroller.service';
-import { FirebasePaths } from 'src/app/Classes/FirebasePaths';
+import { FirebasePaths } from 'src/app/Classes/UploadDownloadPaths';
 
 @Component({
   selector: 'app-content',

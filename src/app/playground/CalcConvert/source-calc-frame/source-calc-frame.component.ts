@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FireBaseService } from 'src/app/GlobalServices/firebase.service';
 import { Observable } from 'rxjs';
-import { SA } from 'src/app/Classes/SAclass';
+import { SA } from 'src/app/Classes/ContentClasses';
 import { map, take, tap } from 'rxjs/operators';
 import { CRUDcontrollerService } from 'src/app/administration/services/CRUDcontroller.service';
 

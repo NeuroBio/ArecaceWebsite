@@ -4,7 +4,7 @@ import { ActivatedRoute }             from '@angular/router';
 import { Observable }                 from 'rxjs';
 import { map }                        from 'rxjs/operators';
 
-import { Categories }                 from 'src/app/Classes/categories';
+import { Categories }                 from 'src/app/Classes/UploadDownloadPaths';
 import { GeneralcollectionService }   from 'src/app/GlobalServices/generalcollection.service';
 
 @Component({

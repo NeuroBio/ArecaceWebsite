@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { NomadicService } from '../nomadic.service';
 import { SwapCases } from './TranslationSwapCases';
-import { Word } from '../../../Classes/rules';
+import { Word } from '../../../Classes/NomadicLanguage';
 
 @Injectable({
   providedIn: 'root'

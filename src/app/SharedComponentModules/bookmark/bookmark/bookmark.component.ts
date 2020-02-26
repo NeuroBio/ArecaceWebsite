@@ -1,5 +1,5 @@
 import { Component, OnInit, OnChanges, Input } from '@angular/core';
-import { User } from '../../../Classes/user';
+import { User } from '../../../Classes/ContentClasses';
 
 import { BookmarkService } from '../bookmark.service';
 

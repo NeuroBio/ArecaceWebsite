@@ -3,7 +3,7 @@ import { Subscription, Subject } from 'rxjs';
 import { FormBuilder } from '@angular/forms';
 import { CRUDcontrollerService } from '../../services/CRUDcontroller.service';
 import { takeUntil } from 'rxjs/operators';
-import { Question } from 'src/app/Classes/faq';
+import { Question } from 'src/app/Classes/WebsiteText';
 
 @Component({
   selector: 'app-faq-text',

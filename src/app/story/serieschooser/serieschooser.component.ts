@@ -5,7 +5,7 @@ import { Observable, Subscription }         from 'rxjs';
 import { tap }                              from 'rxjs/operators';
 
 import { StoryService }                     from '../story.service'
-import { StoryMetaData }                    from 'src/app/Classes/storymetadata'
+import { StoryMetaData }                    from 'src/app/Classes/ContentClasses'
 
 @Component({
   selector: 'app-serieschooser',

@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy, ElementRef, ViewChild } from '@angular/co
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { CRUDcontrollerService } from 'src/app/administration/services/CRUDcontroller.service';
-import { OthersArt } from 'src/app/Classes/othersart';
+import { OthersArt } from 'src/app/Classes/ContentClasses';
 
 @Component({
   selector: 'app-othersartform',

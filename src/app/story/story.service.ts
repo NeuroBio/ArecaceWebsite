@@ -3,7 +3,7 @@ import { Injectable }                       from '@angular/core';
 import { BehaviorSubject, Observable, of }  from 'rxjs';
 import { map, tap }                         from 'rxjs/operators';
 
-import { StoryMetaData }                    from 'src/app/Classes/storymetadata'
+import { StoryMetaData }                    from 'src/app/Classes/ContentClasses'
 
 @Injectable({
   providedIn: 'root'

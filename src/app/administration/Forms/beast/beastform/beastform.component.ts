@@ -6,7 +6,7 @@ import { Subscription }                           from 'rxjs';
 import { CRUDcontrollerService }                  from '../../../services/CRUDcontroller.service'
 
 import { BestDropDowns }                          from '../bestdropdowns'
-import { BeastMetaData }                          from 'src/app/Classes/beastmetadata';
+import { BeastMetaData }                          from 'src/app/Classes/ContentClasses';
 
 @Component({
   selector: 'app-beastform',

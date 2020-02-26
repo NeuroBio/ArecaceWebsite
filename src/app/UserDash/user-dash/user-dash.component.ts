@@ -1,9 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AuthService } from 'src/app/administration/security/Auth/auth.service';
 import { TextProvider } from 'src/app/GlobalServices/textprovider.service';
-import { User } from '../../Classes/user';
-import { SA } from 'src/app/Classes/SAclass';
-import { CharacterMetaData } from 'src/app/Classes/charactermetadata';
+import { User, SA, CharacterMetaData } from 'src/app/Classes/ContentClasses';
 import { Subscription, Observable } from 'rxjs';
 import { FireBaseService } from 'src/app/GlobalServices/firebase.service';
 import { UserDataService } from '../user-data.service';

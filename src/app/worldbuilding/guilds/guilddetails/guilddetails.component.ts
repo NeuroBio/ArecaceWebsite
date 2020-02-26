@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { GuildMetaData } from 'src/app/Classes/guildmetadata';
+import { GuildMetaData } from 'src/app/Classes/ContentClasses';
 import { GlobalVarsService } from 'src/app/GlobalServices/global-vars.service';
 
 @Component({

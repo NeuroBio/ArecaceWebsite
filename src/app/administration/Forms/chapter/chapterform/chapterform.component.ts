@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup }         from '@angular/forms';
 import { Subscription }                   from 'rxjs';
 
 import { CRUDcontrollerService }          from '../../../services/CRUDcontroller.service';
-import { ChapterMetaData }                from 'src/app/Classes/chaptermetadata'
+import { ChapterMetaData }                from 'src/app/Classes/ContentClasses'
 
 @Component({
   selector: 'app-chapterform',
