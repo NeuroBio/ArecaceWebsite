@@ -5,11 +5,13 @@ import { InteractHomeComponent } from './interactive-data/interact-home/interact
 import { ViewDetailsComponent } from './interactive-data/view-details/view-details.component';
 import { AuthResolverService } from './interactive-data/auth-resolver.service';
 import { GeneralmemberresolverService } from 'src/app/GlobalServices/generalmemberresolver.service';
+import { UserGuardGuard } from './user-guard.guard';
 
 const userRoutes: Routes = [
-  {path: '', component: UserDashComponent},
+  {path: '', component: UserDashComponent,},
   {path: 'SurveyResults', component: InteractHomeComponent,
-    resolve: { AuthResolverService },
+  canActivate: [UserGuardGuard],
+  resolve: { AuthResolverService },
     children: [
       {path: '', redirectTo: 'notfound'},
       {path: 'notfound', redirectTo: ''},

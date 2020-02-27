@@ -23,10 +23,6 @@ export class GeneralcollectionService {
   getMember(ID:string){
     if(ID === 'Latest') {
       return this.returnMetaData();
-      // .pipe(
-      //   map(members =>
-      //     members.reduce((a, b) => a.TimeStampCreated > b.TimeStampCreated ? a : b))
-      // )
     } else {
       return this.returnMetaData().pipe(
         map(members =>
@@ -34,11 +30,4 @@ export class GeneralcollectionService {
       );
     }
   }
-
-  // getReference(ID:string, Ref:string){
-  //   return this.getMember(ID).pipe(
-  //     map(member =>
-  //       member.References.find(member => member.ID === Ref))
-  //   );
-  // }
 }

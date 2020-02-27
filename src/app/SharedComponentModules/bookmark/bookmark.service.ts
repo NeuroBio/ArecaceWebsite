@@ -13,10 +13,11 @@ export class BookmarkService {
 
   userData = new BehaviorSubject<User>(null);
   loggedin = new BehaviorSubject<boolean>(null);
+  stream: Subscription;
 
   constructor(private firebaseserv: FireBaseService,
               private auth: AuthService) {
-    this.auth.user.subscribe(user => {this.userData.next(user)});
+    this.stream = this.auth.user.subscribe(user => this.userData.next(user));
   }
 
   addBookmark(type: string, path: string, name: string) {
@@ -33,5 +34,9 @@ export class BookmarkService {
     const data = this.userData.value;
     data[type].splice(index, 1);
     return this.firebaseserv.editDocument(data, 'Users', this.auth.uid.value);
+  }
+
+  disposal() {
+    this.stream.unsubscribe();
   }
 }

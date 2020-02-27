@@ -1,4 +1,4 @@
-import { Component, OnInit, OnChanges, Input } from '@angular/core';
+import { Component, OnInit, OnChanges, Input, OnDestroy } from '@angular/core';
 import { User } from '../../../Classes/ContentClasses';
 
 import { BookmarkService } from '../bookmark.service';
@@ -9,7 +9,7 @@ import { BookmarkService } from '../bookmark.service';
   styleUrls: ['./bookmark.component.css']
 })
 
-export class BookmarkComponent implements OnInit, OnChanges {
+export class BookmarkComponent implements OnInit, OnChanges, OnDestroy {
 
   @Input() path;
   @Input() type;
@@ -33,6 +33,10 @@ export class BookmarkComponent implements OnInit, OnChanges {
     if(this.data) {
       this.setColors();
     }
+  }
+
+  ngOnDestroy() {
+    this.bookmarkserv.disposal();
   }
 
   bookmark() {
