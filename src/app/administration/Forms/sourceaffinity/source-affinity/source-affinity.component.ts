@@ -5,7 +5,7 @@ import { Subscription }                       from 'rxjs';
 import { take }                               from 'rxjs/operators';
 
 import { CRUDcontrollerService }              from '../../../services/CRUDcontroller.service';
-import { FetchService }                     from '../fetch.service';
+import { FetchService }                     from '../../../../GlobalServices/fetch.service';
 import { QuickAssign } from 'src/app/GlobalServices/commonfunctions.service';
 
 @Component({

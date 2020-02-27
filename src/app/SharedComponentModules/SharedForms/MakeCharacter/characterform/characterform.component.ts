@@ -3,13 +3,11 @@ import { Component, ViewChild, OnInit,
 import { FormBuilder, FormArray, FormGroup}         from '@angular/forms';
 import { Subscription }                             from 'rxjs';
 
-import { CRUDcontrollerService }                    from '../../../../administration/services/CRUDcontroller.service';
-
 import { CharacterMetaData }                        from 'src/app/Classes/ContentClasses';
 import { SourceAbilities, Relations }               from '../formclasses';
 import { UploadCharacterDrops }                     from '../uploadcharacterdrops';
-import { BirthdayService }                          from '../birthday.service';
 import { QuickAssign }                              from 'src/app/GlobalServices/commonfunctions.service';
+import { FetchService }                             from 'src/app/GlobalServices/fetch.service';
 
 
 
@@ -47,19 +45,13 @@ export class CharacterFormComponent implements OnInit, OnDestroy{
   imageFolderPath: string;
 
   constructor(private fb: FormBuilder,
-              private controller: CRUDcontrollerService,
-              private birthday: BirthdayService,
+              private fetcher: FetchService,
               private qa: QuickAssign) {}
 
   ngOnInit() {
-    if(this.controller.itemType.value === 'Character') {
-      this.imageFolderPath = "CharacterBios"
-    } else {
-      this.imageFolderPath = "UserFCs"
-    }
-    this.stream1 = this.controller.itemToEdit
+    this.stream1 = this.fetcher.itemToEdit
       .subscribe(item => this.assignFormData(item));
-    this.stream2 = this.controller.triggerProcess
+    this.stream2 = this.fetcher.processData
       .subscribe(() => this.processForm());
   }
 
@@ -136,12 +128,12 @@ export class CharacterFormComponent implements OnInit, OnDestroy{
     if((this.biopicFullFile === undefined
       || this.biopicThumbFile === undefined)
       && this.Form.controls.Links.value === '') {
-       this.controller.activeFormData.next(["abort",
+       this.fetcher.assignActiveFormData(["abort",
        "Bio files require a bio image."]);
        return ;
     }
 
-    const Final:CharacterMetaData = Object.assign({}, this.Form.value); 
+    const Final: CharacterMetaData = Object.assign({}, this.Form.value); 
     Final.SourceAbilitiesFormatted = this.FormatSA(Final);
     Final.RelationsFormatted = this.FormatRelat(Final);
     Final.SourceAbilities = JSON.stringify(Final.SourceAbilities);
@@ -150,18 +142,14 @@ export class CharacterFormComponent implements OnInit, OnDestroy{
     Final.ID = Final.FirstName.split(' ').join('');
     Final.References = this.createReference(Final.ReferenceIDs, Final.FirstName);
 
-    const imagePaths = [`${this.imageFolderPath}/${Final.FirstName}-Thumb`,
-                        `${this.imageFolderPath}/${Final.FirstName}-Full`
+    const imagePaths = [`CharacterBios/${Final.FirstName}-Thumb`,
+                        `CharacterBios/${Final.FirstName}-Full`
                         ].concat(this.refNames(this.fullFiles, Final.FirstName));
     
     const imageEvents = [this.biopicThumbFile, this.biopicFullFile]
       .concat(this.combineLinks(this.fullFiles, this.thumbFiles));
     
-    if(this.imageFolderPath === 'CharacterBios') {
-      this.birthday.updateBirthdayData(Final);
-    }
-
-    this.controller.activeFormData.next([Final,
+    this.fetcher.assignActiveFormData([Final,
                                         imagePaths,
                                         imageEvents,
                                         Final.Links,

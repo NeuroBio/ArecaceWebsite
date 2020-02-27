@@ -5,6 +5,7 @@ import { Subscription }                 from 'rxjs';
 
 import { GuildMetaData }                from 'src/app/Classes/ContentClasses';
 import { CRUDcontrollerService }        from '../../../services/CRUDcontroller.service';
+import { QuickAssign }                  from 'src/app/GlobalServices/commonfunctions.service';
 
 @Component({
   selector: 'app-guildform',
@@ -22,7 +23,8 @@ export class GuildFormComponent implements OnInit, OnDestroy {
   stream2: Subscription;
 
   constructor(private fb: FormBuilder,
-              private controller: CRUDcontrollerService) { }
+              private controller: CRUDcontrollerService,
+              private qa: QuickAssign) { }
 
   ngOnInit() {
     this.stream1 = this.controller.itemToEdit

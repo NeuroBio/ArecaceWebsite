@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { FormGroup } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +21,13 @@ export class GetRouteSegmentsService {
     return Path.join('/');
   }
 }
+
+
+import { FormGroup } from '@angular/forms';
+
+@Injectable({
+  providedIn: 'root'
+})
 
 export class QuickAssign {
   assign(Form: FormGroup, edit: any): FormGroup {

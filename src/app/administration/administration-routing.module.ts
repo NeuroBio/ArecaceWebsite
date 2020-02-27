@@ -9,7 +9,7 @@ import { AdminComponent }           from './DashBoard/admin/admin.component';
 import { AdminDutiesComponent }     from './DashBoard/adminDuties/adminDuties.component';
 import { BeastFormComponent }       from './Forms/beast/beastform/beastform.component';
 import { ChapterFormComponent }     from './Forms/chapter/chapterform/chapterform.component'
-import { CharacterFormComponent }   from '../SharedComponentModules/SharedForms/MakeCharacter/characterform/characterform.component';
+import { CharacterComponent }       from './Forms/character/characterform/character.component';
 import { ContentComponent }         from './DashBoard/content/content.component';
 import { ExtrasFormComponent }      from './Forms/extras/extrasform/extrasform.component';
 import { FaqTextComponent }         from './Forms/faq-text/faq-text.component';
@@ -42,7 +42,7 @@ const AdminRoutes: Routes = [
         {path: 'Content', component:ContentComponent, 
         children:[
           { path: '', redirectTo: 'characters', pathMatch: 'full'},
-          { path: 'characters', component: CharacterFormComponent },
+          { path: 'characters', component: CharacterComponent },
           { path: 'bestiary', component: BeastFormComponent },
           { path: 'arc1', component: ChapterFormComponent },
           { path: 'arc2', component: ChapterFormComponent },

@@ -6,6 +6,7 @@ import { takeUntil }                    from 'rxjs/operators';
 
 import { CRUDcontrollerService }        from '../../services/CRUDcontroller.service';
 import { Intro }                        from 'src/app/Classes/WebsiteText';
+import { QuickAssign }                  from 'src/app/GlobalServices/commonfunctions.service';
 
 @Component({
   selector: 'app-intro-text',
@@ -22,7 +23,8 @@ export class IntroTextComponent implements OnInit, OnDestroy {
   oldLinks: string[] = [];
 
   constructor(private fb: FormBuilder,
-              private controller: CRUDcontrollerService) { }
+              private controller: CRUDcontrollerService,
+              private qa: QuickAssign) { }
 
   ngOnInit() {
     this.controller.itemToEdit

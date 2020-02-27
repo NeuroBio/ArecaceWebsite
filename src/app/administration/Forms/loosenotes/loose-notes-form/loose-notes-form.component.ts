@@ -6,6 +6,7 @@ import { Subscription }                 from 'rxjs';
 
 import { CRUDcontrollerService }        from 'src/app/administration/services/CRUDcontroller.service';
 import { LooseNotesMetaData }           from 'src/app/Classes/ContentClasses';
+import { QuickAssign }                  from 'src/app/GlobalServices/commonfunctions.service';
 
 @Component({
   selector: 'app-loose-notes-form',
@@ -21,6 +22,7 @@ export class LooseNotesFormComponent implements OnInit, OnDestroy {
 
 
   constructor(private fb: FormBuilder,
+              private qa: QuickAssign,
               private controller: CRUDcontrollerService) { }
 
   ngOnInit() {

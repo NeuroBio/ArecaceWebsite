@@ -6,6 +6,7 @@ import { Subscription }                 from 'rxjs';
 
 import { CRUDcontrollerService }        from '../../../services/CRUDcontroller.service'
 import { ExtrasMetaData }               from 'src/app/Classes/ContentClasses';
+import { QuickAssign }                  from 'src/app/GlobalServices/commonfunctions.service';
 
 @Component({
   selector: 'app-extrasform',
@@ -24,7 +25,8 @@ export class ExtrasFormComponent implements OnInit, OnDestroy {
   stream2: Subscription;
 
   constructor(private fb: FormBuilder,
-              private controller: CRUDcontrollerService) { }
+              private controller: CRUDcontrollerService,
+              private qa: QuickAssign) { }
 
   ngOnInit() {
     this.stream1 = this.controller.itemToEdit

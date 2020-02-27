@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { SourceAbilityCalculatorService } from '../source-ability-calculator.service';
 import { AbilityData, AbilityMastery, AbilityNames } from '../SourceAbilityData';
 import { FormBuilder, FormArray, FormGroup } from '@angular/forms';
-import { FetchService } from 'src/app/administration/Forms/sourceaffinity/fetch.service';
+import { FetchService } from 'src/app/GlobalServices/fetch.service';
 import { Subscription } from 'rxjs';
 import { QuickAssign } from 'src/app/GlobalServices/commonfunctions.service';
 

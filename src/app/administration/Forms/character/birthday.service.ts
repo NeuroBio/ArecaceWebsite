@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { CRUDcontrollerService } from '../../../administration/services/CRUDcontroller.service';
+import { CRUDcontrollerService } from '../../services/CRUDcontroller.service';
 import { CharacterMetaData } from 'src/app/Classes/ContentClasses';
-import { CRUD } from '../../../administration/services/CRUD.service';
+import { CRUD } from '../../services/CRUD.service';
 import { FireBaseService } from 'src/app/GlobalServices/firebase.service';
 import { DateInfo } from 'src/app/Classes/ArecacenDates';
 import { take } from 'rxjs/operators';
@@ -18,7 +18,6 @@ export class BirthdayService {
               private firebaseserv: FireBaseService) { }
 
   updateBirthdayData(char: CharacterMetaData) {
-    // let charList = this.controller.itemList.value;
     this.firebaseserv.returnDocument('CloudData/Birthdays')
     .pipe(take(1)).subscribe(birthdays => {
       birthdays = JSON.parse(birthdays.Birthdays);
