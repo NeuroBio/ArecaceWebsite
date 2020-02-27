@@ -7,15 +7,15 @@ import { ResultsComponent } from 'src/app/playground/surveys/survey-components/r
 import { AuthResolverService } from './interactive-data/auth-resolver.service';
 import { GeneralmemberresolverService } from 'src/app/GlobalServices/generalmemberresolver.service';
 
-const userRoutes:Routes = [
+const userRoutes: Routes = [
   {path: '', component: UserDashComponent},
-  {path: 'survey', component: ViewHomeComponent,
+  {path: 'SurveyResults', component: ViewHomeComponent,
     resolve: { AuthResolverService },
     children: [
-      // {path: '', redirectTo: 'firs'},
+      {path: '', redirectTo: 'notfound'},
       {path: 'notfound', redirectTo: ''},
       {path: ':surveyID', component: ResultsComponent,
-      resolve: {links: GeneralmemberresolverService}}
+        resolve: {Survey: GeneralmemberresolverService}}
     ]
   }
 

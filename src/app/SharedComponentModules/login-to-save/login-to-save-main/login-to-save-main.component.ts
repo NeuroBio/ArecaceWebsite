@@ -42,7 +42,7 @@ export class LoginToSaveMainComponent implements OnInit, OnDestroy {
     this.stopClicking = true;
     this.message = 'Submitting...';
     this.DatatoSave.UploadTime = formatDate(new Date(), 'yyyy-MM-dd, HH:mm:ss', 'en');
-    this.DatatoSave.ID = `${this.OldData.ID}-${this.getUniqueId(2)}`
+    this.DatatoSave.ID = `${this.OldData.ID}-${this.getUniqueId(4)}`
     if(this.OldData[this.DataType]) {// old data exists
       this.OldData[this.DataType].push(this.DatatoSave);
     } else { //first time this data pushed

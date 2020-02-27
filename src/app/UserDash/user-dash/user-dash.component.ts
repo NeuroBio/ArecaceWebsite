@@ -52,31 +52,31 @@ export class UserDashComponent implements OnInit, OnDestroy {
 
   PrepareData(){
     this.savedData = [];
-    if(this.user.Characters) {
+    if(this.user.FanCharacters) {
       this.savedData.push({
         title: 'Your Fan Characters',
-        link: 'char',
-        name: this.user.Characters.map(char => `${char.FirstName} ${char.LastName}`),
-        type: 'char',
-        data: this.user.Characters
+        link: 'fancharacters',
+        name: this.user.FanCharacters.map(char => `${char.FirstName} ${char.LastName}`),
+        type: 'Characters',
+        data: this.user.FanCharacters
      });
     }
-    if(this.user.SAcalcs) {
+    if(this.user.SAcalculations) {
       this.savedData.push({
         title: 'Your Source Affinity Data',
-        link: 'sa',
-        name: this.user.SAcalcs.map(SA => SA.ID),
-        type: 'SA',
-        data: this.user.SAcalcs
+        link: 'sacalculations',
+        name: this.user.SAcalculations.map(SA => SA.ID),
+        type: 'SAcalcs',
+        data: this.user.SAcalculations
         });
     }
-    if(this.user.Surveys) {
+    if(this.user.SurveyResults) {
       this.savedData.push({
       title: 'Your Survey Data',
-      link: 'survey',
-      name: this.user.Surveys.map(survey => `${survey.Name} (${survey.UploadTime})`),
-      type: 'survey',
-      data: this.user.Surveys
+      link: 'surveyresults',
+      name: this.user.SurveyResults.map(survey => `${survey.Name} (${survey.UploadTime})`),
+      type: 'SurveyResults',
+      data: this.user.SurveyResults
     });
     }
   }

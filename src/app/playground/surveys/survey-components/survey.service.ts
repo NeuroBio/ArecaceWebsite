@@ -37,7 +37,6 @@ export class SurveyService implements OnDestroy {
   }
 
   assignSurveyResults(results: any) {
-    console.log(results)
     this.surveyResults.next(results);
   }
   

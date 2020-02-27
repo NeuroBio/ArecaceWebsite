@@ -10,7 +10,6 @@ export class DisplayService {
   constructor(private surveyserv: SurveyService) { }
 
   viewData(results){
-    console.log("hi?")
-    //this.surveyserv.assignSurveyResults(results);
+    this.surveyserv.assignSurveyResults(results);
   }
 }

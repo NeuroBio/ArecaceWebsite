@@ -18,9 +18,6 @@ export class UserDataService {
   }
 
   deleteEntry(type: string, index: number) {
-    console.log(type)
-    console.log(index)
-    console.log(this.userData.value)
     const data = this.userData.value;
     data[type].splice(index,1);
     return this.firebaseserv.editDocument(data, 'Users', this.auth.uid.value);

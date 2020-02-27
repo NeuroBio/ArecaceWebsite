@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { DisplayService } from '../display.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { UserDataService } from '../../user-data.service';
 @Component({
   selector: 'app-data-options',
   templateUrl: './data-options.component.html',
@@ -12,9 +13,10 @@ export class DataOptionsComponent implements OnInit {
   @Input() title: string;
   @Input() link: string;
   @Input() type: string;
-  @Input() data: string;
+  @Input() data: any;
 
   constructor(private displayserv: DisplayService,
+              private userdataser: UserDataService,
               private route: ActivatedRoute,
               private router: Router) { }
 
@@ -22,11 +24,13 @@ export class DataOptionsComponent implements OnInit {
   }
 
   onView(index: number) {
-    console.log(this.type)
-    if(this.type ==='survey') {
+    if(this.type ==='SurveyResults') {
       this.displayserv.viewData(this.data[index]);
     }
-    this.router.navigate([`${this.type}`], {relativeTo: this.route})
-    console.log("wired")
+    this.router.navigate([`${this.type}/${this.data[index].ID}`], {relativeTo: this.route})
+  }
+
+  onDelete(index: number) {
+    this.userdataser.deleteEntry(this.type, index)
   }
 }

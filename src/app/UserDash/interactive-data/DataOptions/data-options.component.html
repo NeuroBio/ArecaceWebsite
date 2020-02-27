@@ -3,7 +3,7 @@
   <hr>
   <ul>
     <div *ngFor="let name of names; let i = index">
-      <button class="Exs">x</button>
+      <button class="Exs" (click)="onDelete(i)">x</button>
       <li>{{ name }}</li>
       <button class="Exs" (click)="onView(i)">view</button>
     </div>

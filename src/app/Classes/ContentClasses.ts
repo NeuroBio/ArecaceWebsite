@@ -198,9 +198,9 @@ export class User {
     Narratives?: Bookmark[];
     Comics?: Bookmark[];
     Scripts?: Bookmark[];
-    Surveys?: any[];
-    Characters?: CharacterMetaData[];
-    SAcalcs?: SA[];
+    SurveyResults?: any[];
+    FanCharacters?: CharacterMetaData[];
+    SAcalculations?: SA[];
     accountCreated: string;
 
     constructor(email: string, ID: number) {
