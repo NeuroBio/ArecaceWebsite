@@ -13,6 +13,7 @@ import { SurveyService } from 'src/app/playground/surveys/survey-components/surv
 export class InteractHomeComponent implements OnInit, OnDestroy {
 
   type: string;
+  displayType: string;
   current: string;
   userData$: Observable<string[][][]>;
 
@@ -23,8 +24,9 @@ export class InteractHomeComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.userData$ = this.generalcollectionserv.returnMetaData().pipe(
       map(userdata => userdata.map(datum => [datum.DisplayName, datum.ID])));
-    this.current = this.route.snapshot.firstChild.url[0].path
-    this.type = this.route.snapshot.url[0].path
+    this.current = this.route.snapshot.firstChild.url[0].path;
+    this.type = this.route.snapshot.url[0].path;
+    this.displayType = this.type.replace(/[A-Z]/g, char => ` ${char}`);
   }
 
   ngOnDestroy() {
