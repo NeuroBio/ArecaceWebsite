@@ -5,7 +5,7 @@ import { Subscription }                       from 'rxjs';
 import { take }                               from 'rxjs/operators';
 
 import { CRUDcontrollerService }              from '../../../services/CRUDcontroller.service';
-import { FetchSAService }                     from '../fetch-sa.service';
+import { FetchService }                     from '../fetch.service';
 
 @Component({
   selector: 'app-source-affinity',
@@ -20,7 +20,7 @@ export class SourceAffinityComponent implements OnInit, OnDestroy {
   
   constructor(private fb: FormBuilder,
               private controller: CRUDcontrollerService,
-              private fetcher: FetchSAService) { }
+              private fetcher: FetchService) { }
 
   ngOnInit() {
     this.stream1 = this.controller.itemToEdit
@@ -44,11 +44,12 @@ export class SourceAffinityComponent implements OnInit, OnDestroy {
     this.onReset();
     if(editFormData) {
       this.Form = this.controller.quickAssign(this.Form, editFormData);
+      this.fetcher.assignIntemtoEdit(editFormData);
     }
   }
 
   processForm() {
-    this.fetcher.fetchSAData();
+    this.fetcher.fetchData();
 
     return this.fetcher.activeFormData.pipe(take(1))
       .subscribe(Final => {

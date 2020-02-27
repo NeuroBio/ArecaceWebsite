@@ -1,4 +1,4 @@
-import { AbilityMastery } from '../SharedComponentModules/SharedForms/SourceAffinityCalculator/sourceclasses';
+import { AbilityMastery } from '../SharedComponentModules/SharedForms/SourceAffinityCalculator/SourceAbilityData';
 import { formatDate } from '@angular/common'
 
 

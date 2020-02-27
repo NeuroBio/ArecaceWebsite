@@ -1,8 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { CalculatorService } from '../calculator.service';
-import { AbilityData, AbilityMastery, AbilityNames } from '../sourceclasses';
+import { SourceAbilityCalculatorService } from '../source-ability-calculator.service';
+import { AbilityData, AbilityMastery, AbilityNames } from '../SourceAbilityData';
 import { FormBuilder, FormArray, FormGroup } from '@angular/forms';
-import { FetchSAService } from 'src/app/administration/Forms/sourceaffinity/fetch-sa.service';
+import { FetchService } from 'src/app/administration/Forms/sourceaffinity/fetch.service';
 import { Subscription } from 'rxjs';
 import { CRUDcontrollerService } from 'src/app/administration/services/CRUDcontroller.service';
 
@@ -27,13 +27,13 @@ export class SourceAffinityCalculatorComponent implements OnInit, OnDestroy {
   stream1: Subscription;
   stream2: Subscription;
 
-  constructor(private SAserv: CalculatorService,
+  constructor(private SAserv: SourceAbilityCalculatorService,
               private fb: FormBuilder,
-              private fetcher: FetchSAService,
+              private fetcher: FetchService,
               private controller: CRUDcontrollerService) { }
 
   ngOnInit() {
-    this.stream1 = this.controller.itemToEdit
+    this.stream1 = this.fetcher.itemToEdit
       .subscribe(item => this.assignData(item));
     this.stream2 = this.fetcher.processData
       .subscribe(() => this.onSubmit());
@@ -81,7 +81,7 @@ export class SourceAffinityCalculatorComponent implements OnInit, OnDestroy {
       this.error = err;
     }
     this.rank = this.getRank(this.result, eGenes);
-    this.fetcher.activeFormData.next({ Build: JSON.stringify(build),
+    this.fetcher.assignActiveFormData({ Build: JSON.stringify(build),
                                        EsarianGenes: eGenes,
                                        ConnectionGenes: cGenes,
                                        Cost: this.result,

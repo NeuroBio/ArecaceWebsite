@@ -25,10 +25,8 @@ export class FaqTextComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.controller.itemToEdit
-    .pipe(takeUntil(this.stop$))
-    .subscribe(item => {
-      this.assignFormData(item);
-    });
+      .pipe(takeUntil(this.stop$))
+      .subscribe(item => this.assignFormData(item));
 
     this.stream1 = this.controller.triggerProcess.subscribe(() => this.processForm());
   }

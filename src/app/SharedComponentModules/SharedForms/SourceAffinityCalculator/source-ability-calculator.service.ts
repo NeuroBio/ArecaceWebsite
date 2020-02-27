@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
-import { RelatednessMatrix, AbilityData, AbilityMastery, Ability } from './sourceclasses';
+import { RelatednessMatrix, AbilityData, AbilityMastery } from './SourceAbilityData';
 
 @Injectable({
   providedIn: 'root'
 })
-export class CalculatorService {
+
+export class SourceAbilityCalculatorService {
 
   Related = new RelatednessMatrix ();
   SAData = new AbilityData ();

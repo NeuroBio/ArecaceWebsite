@@ -1,5 +1,4 @@
 import { Injectable }                           from '@angular/core';
-import { formatDate }                           from '@angular/common';
 import { FormGroup }                            from '@angular/forms';
 
 import { map, take }                            from 'rxjs/operators';
@@ -15,15 +14,14 @@ import { NewestCueService }                     from './newest-cue.service';
 })
 
 export class CRUDcontrollerService {
-
+  
   firePaths = new BehaviorSubject<any>(undefined);
-  
-  showButtons = new BehaviorSubject<ButtonController>(undefined);
-  allowButtons = new BehaviorSubject<ButtonController>(new ButtonController([true, true, false, false]));
-  
   itemType = new BehaviorSubject<string>('');
   itemToEdit = new BehaviorSubject<any>(undefined);
   itemList = new BehaviorSubject<any[]>(undefined);
+  
+  showButtons = new BehaviorSubject<ButtonController>(undefined);
+  allowButtons = new BehaviorSubject<ButtonController>(new ButtonController([true, true, false, false]));
 
   //activeFormData is: form data[0], new image paths[1], new images[2],
   //old image paths[3], text path[4], new text[5], old  text path [6]
@@ -35,15 +33,13 @@ export class CRUDcontrollerService {
   constructor(private firebaseserv: FireBaseService,
               private crud: CRUD,
               private newestCue: NewestCueService) { }
+
   
+            
   //Data fetching functions
   assignFirePaths(paths: any, itemType: string = '') {
     this.firePaths.next(paths);
     this.itemType.next(itemType);
-  }
-
-  assignButtons(states: boolean[]) {
-    this.showButtons.next(new ButtonController(states));
   }
 
   assignItemType(itemType: string) {
@@ -87,8 +83,6 @@ export class CRUDcontrollerService {
   getText(link: string) {
     return this.crud.getText(link);
   }
-
-
 
 
   //Key upload/download functions
@@ -234,19 +228,6 @@ export class CRUDcontrollerService {
     }
   }
 
-  throwError(err: any, button: ButtonController) {
-    this.message.next(`Execution Failed
-                      Stage: ${err.stage}
-                      Error: ${err.message}`);
-    this.allowButtons.next(button);
-  }
-
-  updateButton(which: string, to: boolean) {
-    const buttonState = this.allowButtons.value;
-    buttonState[which] = to;
-    this.allowButtons.next(buttonState);
-  }
-
   checkLinks(meta: any, links: string[]) {
     if("Links" in meta) {
       if(links[0]) {
@@ -258,7 +239,23 @@ export class CRUDcontrollerService {
     return(meta);
   }
 
-  createTimestamp() {
-    return formatDate(new Date(), 'yyyy-MM-dd, HH:mm', 'en');
+  throwError(err: any, button: ButtonController) {
+    this.message.next(`Execution Failed
+                      Stage: ${err.stage}
+                      Error: ${err.message}`);
+    this.allowButtons.next(button);
   }
+
+
+  // Button control functions
+  assignButtons(states: boolean[]) {
+    this.showButtons.next(new ButtonController(states));
+  }
+  updateButton(which: string, to: boolean) {
+    const buttonState = this.allowButtons.value;
+    buttonState[which] = to;
+    this.allowButtons.next(buttonState);
+  }
+
+
 }
