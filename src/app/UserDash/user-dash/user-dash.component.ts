@@ -56,7 +56,7 @@ export class UserDashComponent implements OnInit, OnDestroy {
       this.savedData.push({
         title: 'Your Fan Characters',
         link: 'fancharacters',
-        name: this.user.FanCharacters.map(char => `${char.FirstName} ${char.LastName}`),
+        name: this.user.FanCharacters.map(char => char.DisplayName),
         type: 'Characters',
         data: this.user.FanCharacters
      });
@@ -65,7 +65,7 @@ export class UserDashComponent implements OnInit, OnDestroy {
       this.savedData.push({
         title: 'Your Source Affinity Data',
         link: 'sacalculations',
-        name: this.user.SAcalculations.map(SA => SA.ID),
+        name: this.user.SAcalculations.map(sa => sa.DisplayName),
         type: 'SAcalcs',
         data: this.user.SAcalculations
         });
@@ -74,7 +74,7 @@ export class UserDashComponent implements OnInit, OnDestroy {
       this.savedData.push({
       title: 'Your Survey Data',
       link: 'surveyresults',
-      name: this.user.SurveyResults.map(survey => `${survey.Name} (${survey.UploadTime})`),
+      name: this.user.SurveyResults.map(survey => survey.DisplayName),
       type: 'SurveyResults',
       data: this.user.SurveyResults
     });

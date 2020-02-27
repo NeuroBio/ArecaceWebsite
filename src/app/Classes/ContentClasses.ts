@@ -111,6 +111,7 @@ export class CharacterMetaData {
     Links: string[] = [];
     ReferenceIDs: string[] = [];
     References: any[] = [];
+    DisplayName?: string;
 }
 
 export class PostData {
@@ -140,6 +141,7 @@ export class SA {
     ID: string;
     Name: string;
     Rank: string;
+    DisplayName?: string;
 }
 
 export class StoryMetaData {

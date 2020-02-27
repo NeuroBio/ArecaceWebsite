@@ -17,6 +17,7 @@ export class LoginToSaveMainComponent implements OnInit, OnDestroy {
 
   @Input() DatatoSave: any = {Test: 'Testing Data!'};
   @Input() DataType: string = "Type";
+  @Input() NameTokens: string[];
   stopClicking: boolean;
   authorized: boolean;
   message: string;
@@ -40,14 +41,19 @@ export class LoginToSaveMainComponent implements OnInit, OnDestroy {
 
   saveUserData() {
     this.stopClicking = true;
-    this.message = 'Submitting...';
+    this.message = 'Processing...';
     this.DatatoSave.UploadTime = formatDate(new Date(), 'yyyy-MM-dd, HH:mm:ss', 'en');
-    this.DatatoSave.ID = `${this.OldData.ID}-${this.getUniqueId(4)}`
+    this.DatatoSave.UploadTimeShort = formatDate(new Date(), 'yy/MM/dd', 'en');
+    this.DatatoSave.ID = `${this.OldData.ID}_${this.getUniqueId(4)}`
+    this.DatatoSave.DisplayName = this.makeDisplayName();
+    console.log(this.DatatoSave.DisplayName);
+
     if(this.OldData[this.DataType]) {// old data exists
       this.OldData[this.DataType].push(this.DatatoSave);
     } else { //first time this data pushed
       this.OldData[this.DataType] = [this.DatatoSave];
     }
+    this.message = 'Submitting...';
     return this.firebaseserv.editDocument(this.OldData, `Users/`, this.auth.uid.value)
     .then(() => this.message = "Saved!")
     .catch(err => {
@@ -64,5 +70,12 @@ export class LoginToSaveMainComponent implements OnInit, OnDestroy {
     }
     return stringArr.join('-');
     //https://stackoverflow.com/questions/52836247/how-to-generate-uuid-in-angular-6
+  }
+
+  makeDisplayName() {
+    const displayName: string[] = [];
+    this.NameTokens.forEach(token => 
+      displayName.push(this.DatatoSave[token]));
+    return displayName.join(' ');
   }
 }

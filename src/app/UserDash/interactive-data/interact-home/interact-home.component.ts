@@ -22,13 +22,12 @@ export class InteractHomeComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.userData$ = this.generalcollectionserv.returnMetaData().pipe(
-      map(userdata => userdata.map(datum => ['fu', datum.ID])));
+      map(userdata => userdata.map(datum => [datum.DisplayName, datum.ID])));
     this.current = this.route.snapshot.firstChild.url[0].path
     this.type = this.route.snapshot.url[0].path
   }
 
   ngOnDestroy() {
-    console.log(this.current)
     if(this.type === 'SurveyResults') {
         this.surveyserv.mainDisposal();
     }
