@@ -31,7 +31,7 @@ export class GeneralcollectionresolverService implements Resolve<any> {
       take(1),
       tap(collect =>{
         if(collect[0]){
-          this.generalcollectionserv.initializeMetaData(collect);
+          this.generalcollectionserv.initializeMetaData(collect, type);
         }else{
           this.router.navigate(["badservice"])
         }

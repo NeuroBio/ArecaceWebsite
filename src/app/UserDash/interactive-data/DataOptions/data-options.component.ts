@@ -24,9 +24,9 @@ export class DataOptionsComponent implements OnInit {
   }
 
   onView(index: number) {
-    if(this.type ==='SurveyResults') {
-      this.displayserv.viewData(this.data[index]);
-    }
+    // if(this.type ==='SurveyResults') {
+    //   this.displayserv.viewData(this.data[index]);
+    // }
     this.router.navigate([`${this.type}/${this.data[index].ID}`], {relativeTo: this.route})
   }
 

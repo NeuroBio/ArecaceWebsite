@@ -1,4 +1,4 @@
-import { Injectable, OnDestroy } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { BehaviorSubject, Subscription } from 'rxjs';
 import { SurveyData } from '../../../Classes/ContentClasses';
 import { SurveyProcessorService } from '../survey-processor.service';
@@ -7,23 +7,20 @@ import { FireBaseService } from 'src/app/GlobalServices/firebase.service';
 @Injectable({
   providedIn: 'root'
 })
-export class SurveyService implements OnDestroy {
+export class SurveyService {
 
   surveyData = new BehaviorSubject<SurveyData>(undefined);
   surveyResults = new BehaviorSubject<any>(undefined);
   showSurvey = new BehaviorSubject<boolean>(true);
   allSurveyStats = new BehaviorSubject<any>(undefined);
   currentSurveyStats = new BehaviorSubject<any>(undefined);
-  stream1: Subscription;
-
+  mainStream = new Subscription;
+  subStream = new Subscription;
+  
   constructor(private processor: SurveyProcessorService,
               private firebaseserv: FireBaseService) {
-    this.stream1 = this.firebaseserv.returnCollectionWithKeys(`SurveyStats`)
+    this.mainStream = this.firebaseserv.returnCollectionWithKeys(`SurveyStats`)
       .subscribe(surveyStats => this.allSurveyStats.next(surveyStats));
-  }
-
-  ngOnDestroy() {
-    this.stream1.unsubscribe();
   }
 
   assignSurveyData(data: any){
@@ -37,7 +34,16 @@ export class SurveyService implements OnDestroy {
   }
 
   assignSurveyResults(results: any) {
-    this.surveyResults.next(results);
+    return this.surveyResults.next(results);
+  }
+
+  assignSurveyStats(ID: string) {
+    this.subStream.unsubscribe();
+    this. subStream = this.allSurveyStats.subscribe(all => {
+      if(all) {
+        this.currentSurveyStats.next(all.find(x => x.ID === ID))
+      }
+    } );
   }
   
   calculateFinalScores(answers: any[]) {
@@ -82,12 +88,21 @@ export class SurveyService implements OnDestroy {
   
   updateStatistics(match: string) {
     const ID = this.surveyData.value.ID;
-    let surveyStats = Object.assign({}, this.allSurveyStats.value.find(x => x.ID === ID));
+    this.assignSurveyStats(ID);
+
+    let surveyStats = Object.assign({}, this.currentSurveyStats.value);
     const key = surveyStats.key;
     delete surveyStats.key;
     surveyStats[match] += 1;
-    this.currentSurveyStats.next(surveyStats);
     return this.firebaseserv.editDocument(surveyStats, `SurveyStats`, key);
+  }
+
+  subDisposal() {
+    this.subStream.unsubscribe();
+  }
+
+  mainDisposal() {
+    this.mainStream.unsubscribe();
   }
 
 }

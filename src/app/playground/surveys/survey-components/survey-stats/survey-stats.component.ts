@@ -1,4 +1,5 @@
-import { Component, OnInit, ViewChild, ElementRef, HostListener, AfterContentChecked } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, ElementRef, AfterContentChecked } from '@angular/core';
+import { Subscription } from 'rxjs'; 
 import { SurveyService } from '../survey.service';
 
 @Component({
@@ -6,22 +7,31 @@ import { SurveyService } from '../survey.service';
   templateUrl: './survey-stats.component.html',
   styleUrls: ['./survey-stats.component.css']
 })
-export class SurveyStatsComponent implements OnInit, AfterContentChecked {
+export class SurveyStatsComponent implements OnInit, AfterContentChecked, OnDestroy {
 
   Stats: any = {};
   @ViewChild('holder', { static: true }) Holder: ElementRef;
   width = 500;
   height: number;
+  stream: Subscription;
   
   constructor(private surveyserv: SurveyService) { }
 
   ngOnInit() {
-    this.surveyserv.currentSurveyStats.subscribe(counts =>
-      this.displayData(counts));
+    this.stream = this.surveyserv.currentSurveyStats.subscribe(counts => {
+      if(counts) {
+        this.displayData(counts)
+      }
+    });
   }
 
   ngAfterContentChecked(){
     setTimeout(() => { this.onResize()}, 10);
+  }
+
+  ngOnDestroy() {
+    this.stream.unsubscribe();
+    this.surveyserv.subDisposal();
   }
 
   displayData(counts: any) {
@@ -29,6 +39,7 @@ export class SurveyStatsComponent implements OnInit, AfterContentChecked {
       const Counts = Object.assign({}, counts);
       delete Counts.ID;
       delete Counts.UploadTime;
+      delete Counts.key;
       this.Stats.Keys = Object.keys(Counts);
       this.Stats.Counts = Object.values(Counts);
       this.Stats.Max = this.Stats.Counts.reduce((a,b) => a + b);

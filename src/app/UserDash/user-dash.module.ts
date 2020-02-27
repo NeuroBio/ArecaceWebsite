@@ -12,7 +12,8 @@ import { UserDashComponent } from './user-dash/user-dash.component';
 import { UserInfoComponent } from './user-info/user-info.component';
 import { PickUpComponent } from './pick-up/pick-up.component';
 import { DataOptionsComponent } from './interactive-data/DataOptions/data-options.component';
-import { ViewHomeComponent } from './interactive-data/view-home/view-home.component';
+import { InteractHomeComponent } from './interactive-data/interact-home/interact-home.component';
+import { ViewDetailsComponent } from './interactive-data/view-details/view-details.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { ViewHomeComponent } from './interactive-data/view-home/view-home.compon
     UserInfoComponent,
     PickUpComponent,
     DataOptionsComponent,
-    ViewHomeComponent
+    InteractHomeComponent,
+    ViewDetailsComponent
   ],
   imports: [
     CommonModule,

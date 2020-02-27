@@ -1,21 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Observable } from 'rxjs';
 import { GeneralcollectionService } from 'src/app/GlobalServices/generalcollection.service';
 import { ActivatedRoute } from '@angular/router';
 import { map } from 'rxjs/operators';
 import { AuthService } from 'src/app/administration/security/Auth/auth.service';
-
+import { SurveyService } from '../survey.service';
 @Component({
   selector: 'app-survey-main',
   templateUrl: './survey-main.component.html',
   styleUrls: ['./survey-main.component.css']
 })
-export class SurveyMainComponent implements OnInit {
+export class SurveyMainComponent implements OnInit, OnDestroy {
 
   current: string;
   surveys$: Observable<string[]>;
 
   constructor(private generalcollectserv: GeneralcollectionService,
+              private surveyserv: SurveyService,
               private route: ActivatedRoute,
               private auth: AuthService) { }
 
@@ -26,7 +27,7 @@ export class SurveyMainComponent implements OnInit {
         return surveys.sort((a,b) => a[0] < b[0] ? -1 : 1)
       })
     )
-    
+
     this.route.firstChild.paramMap.subscribe(
       path => this.current = path.get('SurveyID')
     );
@@ -34,6 +35,10 @@ export class SurveyMainComponent implements OnInit {
     if(!this.auth.isLoggedIn) {
       this.auth.anonymousLogin();
     }
+  }
+
+  ngOnDestroy() {
+    this.surveyserv.mainDisposal();
   }
 
 }

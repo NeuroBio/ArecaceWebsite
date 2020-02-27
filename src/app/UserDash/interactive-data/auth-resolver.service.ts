@@ -20,12 +20,7 @@ export class AuthResolverService implements Resolve<any> {
     return this.auth.user.pipe(
       take(1),
       tap(user => {
-        this.generalcollectionserv.initializeMetaData(user[type]);
-        if(type === 'SurveyResults') {
-          const ID = path[path.length-1];
-          this.surveyserv.assignSurveyResults(user[type]
-            .find(survey => survey.ID === ID));
-        }
+        this.generalcollectionserv.initializeMetaData(user[type], type);
       }) );
   }
 }
