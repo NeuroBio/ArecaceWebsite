@@ -50,7 +50,7 @@ export class IntroTextComponent implements OnInit, OnDestroy {
   assignFormData(editFormData: any) {
     if(editFormData) {
       this.onReset();
-      this.Form = this.controller.quickAssign(this.Form, editFormData);
+      this.Form = this.qa.assign(this.Form, editFormData);
       
       const Intros = <any[]>JSON.parse(editFormData.Intros);
       Intros.forEach(intro => {

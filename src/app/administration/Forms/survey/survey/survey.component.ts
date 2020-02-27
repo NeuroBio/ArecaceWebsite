@@ -6,6 +6,7 @@ import { Subscription }                         from 'rxjs';
 
 import { CRUDcontrollerService }                from 'src/app/administration/services/CRUDcontroller.service';
 import { SurveyQuestion, SurveyOutcome }        from 'src/app/Classes/ContentClasses';
+import { QuickAssign }                          from 'src/app/GlobalServices/commonfunctions.service';
 
 @Component({
   selector: 'app-survey',
@@ -31,7 +32,8 @@ export class SurveyComponent implements OnInit , OnDestroy {
   editInd: number;
    
   constructor(private fb: FormBuilder,
-              private controller: CRUDcontrollerService) { }
+              private controller: CRUDcontrollerService,
+              private qa: QuickAssign) { }
   
   ngOnInit() {
     this.stream1 = this.controller.itemToEdit
@@ -72,7 +74,7 @@ export class SurveyComponent implements OnInit , OnDestroy {
   assignFormData(editFormData: any) {
     this.onReset();
     if(editFormData) {
-      this.mainForm = this.controller.quickAssign(this.mainForm, editFormData);
+      this.mainForm = this.qa.assign(this.mainForm, editFormData);
       const outcomes: SurveyOutcome[] = JSON.parse(editFormData.Outcomes);
       const questions: SurveyQuestion[] = JSON.parse(editFormData.Questions);
       const results = JSON.parse(editFormData.Results);
@@ -86,7 +88,7 @@ export class SurveyComponent implements OnInit , OnDestroy {
   assignOutcomeForm(index: number) {
     this.editInd = index;
     this.editOutcome = true;
-    this.controller.quickAssign(this.outcomeForm,
+    this.qa.assign(this.outcomeForm,
                                 this.outcomes.controls[index].value);
   }
   

@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { GetRouteSegmentsService } from './getroutesegments.service';
+import { GetRouteSegmentsService } from './commonfunctions.service';
 
 describe('GetRouteSegmentsService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));

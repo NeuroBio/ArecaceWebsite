@@ -53,7 +53,7 @@ export class GuildFormComponent implements OnInit, OnDestroy {
   assignFormData(editFormData: any) {
     this.onReset();
     if(editFormData) {
-      this.Form = this.controller.quickAssign(this.Form, editFormData);
+      this.Form = this.qa.assign(this.Form, editFormData);
     }
   }
 

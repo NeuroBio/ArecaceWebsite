@@ -4,7 +4,7 @@ import { AbilityData, AbilityMastery, AbilityNames } from '../SourceAbilityData'
 import { FormBuilder, FormArray, FormGroup } from '@angular/forms';
 import { FetchService } from 'src/app/administration/Forms/sourceaffinity/fetch.service';
 import { Subscription } from 'rxjs';
-import { CRUDcontrollerService } from 'src/app/administration/services/CRUDcontroller.service';
+import { QuickAssign } from 'src/app/GlobalServices/commonfunctions.service';
 
 @Component({
   selector: 'app-source-affinity-calculator',
@@ -30,7 +30,7 @@ export class SourceAffinityCalculatorComponent implements OnInit, OnDestroy {
   constructor(private SAserv: SourceAbilityCalculatorService,
               private fb: FormBuilder,
               private fetcher: FetchService,
-              private controller: CRUDcontrollerService) { }
+              private qa: QuickAssign) { }
 
   ngOnInit() {
     this.stream1 = this.fetcher.itemToEdit
@@ -56,7 +56,7 @@ export class SourceAffinityCalculatorComponent implements OnInit, OnDestroy {
     this.onReset();
     if(editFormData){
       this.removeAbility(0);
-      this.controller.quickAssign(this.Form, editFormData);
+      this.qa.assign(this.Form, editFormData);
       const Build = JSON.parse(editFormData.Build);
       Build.forEach(abimas => this.addAbility(abimas.Ability, abimas.Mastery));
       this.rank = editFormData.Rank;

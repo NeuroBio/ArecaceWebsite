@@ -3,7 +3,7 @@ import { GeneralcollectionService } from 'src/app/GlobalServices/generalcollecti
 import { Router, Resolve, ActivatedRouteSnapshot } from '@angular/router';
 import { take, mergeMap } from 'rxjs/operators';
 import { of, EMPTY } from 'rxjs';
-import { GetRouteSegmentsService } from 'src/app/GlobalServices/getroutesegments.service';
+import { GetRouteSegmentsService } from 'src/app/GlobalServices/commonfunctions.service';
 
 @Injectable({
   providedIn: 'root'

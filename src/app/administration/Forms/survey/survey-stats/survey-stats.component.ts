@@ -5,6 +5,7 @@ import { Subscription }                       from 'rxjs';
 
 import { CRUDcontrollerService }              from 'src/app/administration/services/CRUDcontroller.service';
 import { SurveyStatsService }                 from '../survey-stats.service';
+import { QuickAssign } from 'src/app/GlobalServices/commonfunctions.service';
 
 @Component({
   selector: 'app-survey-stats',
@@ -27,7 +28,8 @@ export class SurveyStatsComponent implements OnInit , OnDestroy {
   
   constructor(private fb: FormBuilder,
               private controller: CRUDcontrollerService,
-              private statsserv: SurveyStatsService) { }
+              private statsserv: SurveyStatsService,
+              private qa: QuickAssign) { }
   
   ngOnInit() {
     this.stream1 = this.controller.itemToEdit
@@ -57,7 +59,7 @@ export class SurveyStatsComponent implements OnInit , OnDestroy {
     this.onReset();
     if(editFormData) {
       const safeCopy = Object.assign({}, editFormData);
-      this.controller.quickAssign(this.Form, safeCopy);
+      this.qa.assign(this.Form, safeCopy);
       delete safeCopy.ID;
       delete safeCopy.key;
       delete safeCopy.UploadTime;

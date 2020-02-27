@@ -5,6 +5,7 @@ import { Subscription, Subject }        from 'rxjs';
 import { takeUntil }                    from 'rxjs/operators';
 
 import { CRUDcontrollerService }        from '../../services/CRUDcontroller.service';
+import { QuickAssign }                  from 'src/app/GlobalServices/commonfunctions.service';
 
 @Component({
   selector: 'app-website-text',
@@ -20,7 +21,8 @@ export class WebsiteTextComponent implements OnInit, OnDestroy {
   key: string;
 
   constructor(private fb: FormBuilder,
-              private controller: CRUDcontrollerService) { }
+              private controller: CRUDcontrollerService,
+              private qa: QuickAssign) { }
 
   ngOnInit() {
     this.controller.itemToEdit
@@ -46,7 +48,7 @@ export class WebsiteTextComponent implements OnInit, OnDestroy {
     if(editFormData) {
       this.onReset();
       this.key = editFormData.key;
-      this.Form = this.controller.quickAssign(this.Form, editFormData);
+      this.Form = this.qa.assign(this.Form, editFormData);
       this.stop$.next(true);
     }
   }

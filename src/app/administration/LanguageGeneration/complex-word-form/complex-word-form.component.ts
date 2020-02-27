@@ -5,6 +5,7 @@ import { Subscription }                           from 'rxjs';
 
 import { CRUDcontrollerService }                  from '../../services/CRUDcontroller.service';
 import { Word, Nomadic, CompWord, WordTypes }     from '../../../Classes/NomadicLanguage';
+import { QuickAssign }                            from 'src/app/GlobalServices/commonfunctions.service';
 
 @Component({
   selector: 'app-complex-word-form',
@@ -25,7 +26,8 @@ export class ComplexWordFormComponent implements OnInit, OnDestroy {
   allowDelete: boolean;
   
   constructor(private fb: FormBuilder,
-              private controller: CRUDcontrollerService) { }
+              private controller: CRUDcontrollerService,
+              private qa: QuickAssign) { }
 
   ngOnInit() {
     this.stream1 = this.controller.itemList.subscribe(list =>
@@ -61,7 +63,7 @@ export class ComplexWordFormComponent implements OnInit, OnDestroy {
   assignFormData(editFormData: any) {
     this.onReset();
     if(editFormData) {
-      this.Form = this.controller.quickAssign(this.Form, editFormData);
+      this.Form = this.qa.assign(this.Form, editFormData);
       const compwords = <CompWord[]>JSON.parse(editFormData.ComponentWords);
       compwords.forEach(word => 
         this.addWord(true, word.Type, word.Word, word.Core));

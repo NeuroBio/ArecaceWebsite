@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class GetRouteSegmentsService {
 
   constructor() { }
@@ -18,5 +20,20 @@ export class GetRouteSegmentsService {
       }
     });
     return Path.join('/');
+  }
+}
+
+export class QuickAssign {
+  assign(Form: FormGroup, edit: any): FormGroup {
+    Object.keys(Form.controls).forEach(key => {
+      if(typeof(Form.controls[key].value) !== "object") {
+        if(edit[key] !== undefined) {
+          Form.controls[key].patchValue(edit[key]);
+        } else {
+          Form.controls[key].patchValue('');
+        }
+      }
+    });
+    return Form;
   }
 }

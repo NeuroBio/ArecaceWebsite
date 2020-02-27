@@ -56,19 +56,6 @@ export class CRUDcontrollerService {
     });
   }
 
-  quickAssign(Form: FormGroup, edit: any): FormGroup {
-    Object.keys(Form.controls).forEach(key => {
-      if(typeof(Form.controls[key].value) !== "object") {
-        if(edit[key] !== undefined) {
-          Form.controls[key].patchValue(edit[key]);
-        } else {
-          Form.controls[key].patchValue('');
-        }
-      }
-    });
-    return Form;
-  }
-
   getItemType() {
     return this.itemType;
   }

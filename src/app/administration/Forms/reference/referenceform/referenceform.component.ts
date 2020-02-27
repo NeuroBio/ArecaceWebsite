@@ -5,6 +5,7 @@ import { Subscription }                   from 'rxjs';
 
 import { CRUDcontrollerService }          from '../../../services/CRUDcontroller.service'
 import { Categories, Paths }              from '../../../../Classes/UploadDownloadPaths'
+import { QuickAssign }                    from 'src/app/GlobalServices/commonfunctions.service';
 
 
 @Component({
@@ -30,7 +31,8 @@ export class ReferenceFormComponent implements OnInit, OnDestroy {
   type: string;
 
   constructor(private fb: FormBuilder,
-              private controller: CRUDcontrollerService) { }
+              private controller: CRUDcontrollerService,
+              private qa: QuickAssign) { }
 
   ngOnInit() {
     this.controller.itemType.subscribe(type => {
@@ -66,7 +68,7 @@ export class ReferenceFormComponent implements OnInit, OnDestroy {
   assignFormData(editFormData: any) {
     this.onReset();
     if(editFormData) {
-      this.Form = this.controller.quickAssign(this.Form, editFormData);
+      this.Form = this.qa.assign(this.Form, editFormData);
     }
   }
 

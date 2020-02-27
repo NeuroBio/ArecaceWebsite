@@ -4,6 +4,7 @@ import { Subscription }                           from 'rxjs';
 
 import { CRUDcontrollerService }                  from '../../services/CRUDcontroller.service';
 import { Word, Nomadic, WordTypes }               from '../../../Classes/NomadicLanguage';
+import { QuickAssign }                            from 'src/app/GlobalServices/commonfunctions.service';
 
 @Component({
   selector: 'app-word-form',
@@ -20,7 +21,8 @@ export class WordFormComponent implements OnInit, OnDestroy {
   activeType: string;
   
   constructor(private fb: FormBuilder,
-              private controller: CRUDcontrollerService) { }
+              private controller: CRUDcontrollerService,
+              private qa: QuickAssign) { }
 
   ngOnInit() {
     this.stream1 = this.controller.itemToEdit
@@ -53,7 +55,7 @@ export class WordFormComponent implements OnInit, OnDestroy {
   assignFormData(editFormData: any) {
     this.onReset();
     if(editFormData) {
-      this.Form = this.controller.quickAssign(this.Form, editFormData);
+      this.Form = this.qa.assign(this.Form, editFormData);
     }
   }
 

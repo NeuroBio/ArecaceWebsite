@@ -6,6 +6,7 @@ import { take }                               from 'rxjs/operators';
 
 import { CRUDcontrollerService }              from '../../../services/CRUDcontroller.service';
 import { FetchService }                     from '../fetch.service';
+import { QuickAssign } from 'src/app/GlobalServices/commonfunctions.service';
 
 @Component({
   selector: 'app-source-affinity',
@@ -20,7 +21,8 @@ export class SourceAffinityComponent implements OnInit, OnDestroy {
   
   constructor(private fb: FormBuilder,
               private controller: CRUDcontrollerService,
-              private fetcher: FetchService) { }
+              private fetcher: FetchService,
+              private qa: QuickAssign) { }
 
   ngOnInit() {
     this.stream1 = this.controller.itemToEdit
@@ -43,7 +45,7 @@ export class SourceAffinityComponent implements OnInit, OnDestroy {
   assignFormData(editFormData: any) {
     this.onReset();
     if(editFormData) {
-      this.Form = this.controller.quickAssign(this.Form, editFormData);
+      this.Form = this.qa.assign(this.Form, editFormData);
       this.fetcher.assignIntemtoEdit(editFormData);
     }
   }

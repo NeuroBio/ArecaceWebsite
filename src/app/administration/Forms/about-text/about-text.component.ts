@@ -5,6 +5,7 @@ import { Subscription, Subject }          from 'rxjs';
 import { takeUntil }                      from 'rxjs/operators';
 
 import { CRUDcontrollerService }          from '../../services/CRUDcontroller.service';
+import { QuickAssign } from 'src/app/GlobalServices/commonfunctions.service';
 
 @Component({
   selector: 'app-about-text',
@@ -18,7 +19,8 @@ export class AboutTextComponent implements OnInit, OnDestroy {
   stop$ = new Subject<boolean>();
 
   constructor(private fb: FormBuilder,
-              private controller: CRUDcontrollerService) { }
+              private controller: CRUDcontrollerService,
+              private qa: QuickAssign) { }
 
   ngOnInit() {
     this.controller.itemToEdit
@@ -48,7 +50,7 @@ export class AboutTextComponent implements OnInit, OnDestroy {
   assignFormData(editFormData: any) {
     if(editFormData) {
       this.onReset();
-      this.Form = this.controller.quickAssign(this.Form, editFormData);
+      this.Form = this.qa.assign(this.Form, editFormData);
       this.stop$.next(true);
     }
   }

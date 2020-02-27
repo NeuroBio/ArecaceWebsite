@@ -8,7 +8,8 @@ import { CRUDcontrollerService }                    from '../../../../administra
 import { CharacterMetaData }                        from 'src/app/Classes/ContentClasses';
 import { SourceAbilities, Relations }               from '../formclasses';
 import { UploadCharacterDrops }                     from '../uploadcharacterdrops';
-import { BirthdayService } from '../birthday.service';
+import { BirthdayService }                          from '../birthday.service';
+import { QuickAssign }                              from 'src/app/GlobalServices/commonfunctions.service';
 
 
 
@@ -47,7 +48,8 @@ export class CharacterFormComponent implements OnInit, OnDestroy{
 
   constructor(private fb: FormBuilder,
               private controller: CRUDcontrollerService,
-              private birthday: BirthdayService) {}
+              private birthday: BirthdayService,
+              private qa: QuickAssign) {}
 
   ngOnInit() {
     if(this.controller.itemType.value === 'Character') {
@@ -108,7 +110,7 @@ export class CharacterFormComponent implements OnInit, OnDestroy{
   assignFormData(editFormData: any) {
     this.onReset();
     if(editFormData) {
-      this.Form = this.controller.quickAssign(this.Form, editFormData);
+      this.Form = this.qa.assign(this.Form, editFormData);
       
       this.Form.controls.SourceAbilities.setValue(
         <SourceAbilities[]>JSON.parse(editFormData.SourceAbilities));

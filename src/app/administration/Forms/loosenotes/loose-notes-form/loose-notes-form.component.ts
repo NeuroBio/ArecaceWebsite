@@ -49,7 +49,7 @@ export class LooseNotesFormComponent implements OnInit, OnDestroy {
     this.onReset();
     if(editFormData) {
       this.oldNote = true;
-      this.Form = this.controller.quickAssign(this.Form, editFormData);
+      this.Form = this.qa.assign(this.Form, editFormData);
     }
   }
 

@@ -6,6 +6,7 @@ import { Subscription }               from 'rxjs';
 
 import { CRUDcontrollerService }      from 'src/app/administration/services/CRUDcontroller.service';
 import { OthersArt }                  from 'src/app/Classes/ContentClasses';
+import { QuickAssign }                from 'src/app/GlobalServices/commonfunctions.service';
 
 @Component({
   selector: 'app-othersartform',
@@ -24,7 +25,8 @@ export class OthersArtFormComponent implements OnInit, OnDestroy {
   stream2: Subscription;
 
   constructor(private fb: FormBuilder,
-              private controller: CRUDcontrollerService) { }
+              private controller: CRUDcontrollerService,
+              private qa: QuickAssign) { }
 
   ngOnInit() {
     this.stream1 = this.controller.itemToEdit
@@ -53,7 +55,7 @@ export class OthersArtFormComponent implements OnInit, OnDestroy {
   assignFormData(editFormData: any) {
     this.onReset();
     if(editFormData) {
-      this.Form = this.controller.quickAssign(this.Form, editFormData);
+      this.Form = this.qa.assign(this.Form, editFormData);
       this.Form.patchValue({Allowed: editFormData.Allowed === true ? 'true' : 'false'});
     }
   }

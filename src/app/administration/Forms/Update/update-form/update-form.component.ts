@@ -7,6 +7,7 @@ import { Subscription }                       from 'rxjs';
 
 import { CRUDcontrollerService }              from 'src/app/administration/services/CRUDcontroller.service';
 import { PostData }                           from 'src/app/Classes/ContentClasses';
+import { QuickAssign }                        from 'src/app/GlobalServices/commonfunctions.service';
 
 @Component({
   selector: 'app-update-form',
@@ -25,7 +26,8 @@ export class UpdateFormComponent implements OnInit, OnDestroy {
 
 
   constructor(private fb: FormBuilder,
-              private controller: CRUDcontrollerService) { }
+              private controller: CRUDcontrollerService,
+              private qa: QuickAssign) { }
 
   ngOnInit() {
     this.stream1 = this.controller.itemToEdit
@@ -54,7 +56,7 @@ export class UpdateFormComponent implements OnInit, OnDestroy {
   assignFormData(editFormData) {
     this.onReset();
     if(editFormData) {
-      this.Form = this.controller.quickAssign(this.Form, editFormData);
+      this.Form = this.qa.assign(this.Form, editFormData);
     }
   }
 

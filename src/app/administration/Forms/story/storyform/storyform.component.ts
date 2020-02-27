@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup }           from '@angular/forms';
 import { Subscription }                     from 'rxjs';
 
 import { CRUDcontrollerService }            from '../../../services/CRUDcontroller.service';
+import { QuickAssign }                      from 'src/app/GlobalServices/commonfunctions.service';
 
 @Component({
   selector: 'app-storyform',
@@ -21,7 +22,8 @@ export class StoryFormComponent implements OnInit, OnDestroy {
   type: string;
 
   constructor(private controller: CRUDcontrollerService,
-              private fb: FormBuilder) { }
+              private fb: FormBuilder,
+              private qa: QuickAssign) { }
 
   ngOnInit() {
     this.stream1 = this.controller.itemToEdit
@@ -52,7 +54,7 @@ export class StoryFormComponent implements OnInit, OnDestroy {
   assignFormData(editFormData: any) {
     this.onReset();
     if(editFormData) {
-      this.Form = this.controller.quickAssign(this.Form, editFormData);
+      this.Form = this.qa.assign(this.Form, editFormData);
       this.controller.getText(editFormData.StoryLink).subscribe( text =>
         this.Form.controls.Story.setValue(text) );
         this.oldText = editFormData.StoryLink;
