@@ -18,6 +18,7 @@ export class LoginToSaveMainComponent implements OnInit, OnDestroy {
   @Input() DatatoSave: any = {Test: 'Testing Data!'};
   @Input() DataType: string = "Type";
   @Input() NameTokens: string[];
+  @Input() Disabled: boolean = false;
   stopClicking: boolean;
   authorized: boolean;
   message: string;
@@ -45,8 +46,8 @@ export class LoginToSaveMainComponent implements OnInit, OnDestroy {
     this.message = 'Processing...';
     this.DatatoSave.UploadTime = formatDate(new Date(), 'yyyy-MM-dd, HH:mm:ss', 'en');
     this.DatatoSave.UploadTimeShort = formatDate(new Date(), 'yy/MM/dd', 'en');
-    this.DatatoSave.ID = `${this.OldData.ID}_${this.getUniqueId(4)}`
     this.DatatoSave.DisplayName = this.makeDisplayName();
+    this.DatatoSave.ID = `${this.OldData.ID}_${this.getUniqueId(4)}`
     console.log(this.DatatoSave);
 
     if(this.OldData[this.DataType]) {// old data exists

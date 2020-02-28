@@ -17,6 +17,7 @@ export class SourceCalcFrameComponent implements OnInit {
   DatatoSave: any;
   canonSA: SA[]
   loggedIn: boolean;
+  notValid: boolean;
 
   constructor(private generalcollectserv: GeneralcollectionService,
               private fetcher: FetchService,
@@ -27,9 +28,11 @@ export class SourceCalcFrameComponent implements OnInit {
       this.loggedIn = this.auth.isLoggedIn})//.isUser());
     this.canonSA = this.generalcollectserv.collectionData.value
       .sort((a,b) => a.ID > b.ID ? 1 : -1);
-      this.fetcher.activeFormData.subscribe(userData => { console.log(userData);
-        this.DatatoSave = userData[0]});
-    this.fetcher.activeFormData.subscribe(x => console.log(x))
+    this.fetcher.activeFormData.subscribe(userData => {
+      this.notValid = (!userData || userData[0] === 'abort');
+      if(userData)
+        this.DatatoSave = userData[0];
+    });
   }
 
   populateForm(index: number) {

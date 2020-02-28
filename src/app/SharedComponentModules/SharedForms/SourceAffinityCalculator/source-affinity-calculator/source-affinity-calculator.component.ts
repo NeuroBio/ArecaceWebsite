@@ -67,6 +67,11 @@ export class SourceAffinityCalculatorComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
+    
+    if(this.Form.valid !== true) {
+      return this.fetcher.activeFormData.next(['abort', 'Name is required!'])
+    }
+
     this.result = undefined;
     this.rank = undefined;
     this.error = undefined;
@@ -75,15 +80,13 @@ export class SourceAffinityCalculatorComponent implements OnInit, OnDestroy {
       build.push(new AbilityMastery(abimas.value.Ability, +abimas.value.Mastery)));
     const eGenes = this.Form.controls.EsarianGenes.value;
     const cGenes = this.Form.controls.ConnectionGenes.value;
-
     try {
       this.result = this.SAserv.calculateAffinity(build, eGenes, cGenes);
     }
     catch(err) {
       this.error = err;
+      return this.fetcher.activeFormData.next(['abort', 'Calculation failed!']);
     }
-
-    this.fetcher.checkvalidity(this.Form.valid);
     
     this.rank = this.getRank(this.result, eGenes);
     const Final = {Build: JSON.stringify(build),
@@ -95,12 +98,12 @@ export class SourceAffinityCalculatorComponent implements OnInit, OnDestroy {
                     ID: ''}
     Final.ID = `${Final.Name.split(' ').join('-')}-(${Final.Cost})`;
     return this.fetcher.assignActiveFormData([Final,
-                                             [],
-                                             [],
-                                             [],
-                                             undefined,
-                                             undefined,
-                                             undefined]);
+                                              [],
+                                              [],
+                                              [],
+                                              undefined,
+                                              undefined,
+                                              undefined]);
   }
 
   onReset() {

@@ -30,6 +30,10 @@ export class DataOptionsComponent implements OnInit {
     this.router.navigate([`${this.type}/${this.data[index].ID}`], {relativeTo: this.route})
   }
 
+  onEdit() {
+    console.log("not wired")
+  }
+
   onDelete(index: number) {
     this.userdataser.deleteEntry(this.type, index)
   }

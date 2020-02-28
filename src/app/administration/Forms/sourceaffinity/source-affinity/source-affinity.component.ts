@@ -41,11 +41,7 @@ export class SourceAffinityComponent implements OnInit, OnDestroy {
   processForm() {
     this.fetcher.fetchData();
     return this.fetcher.activeFormData.pipe(take(1))
-      .subscribe(Final =>
-        this.fetcher.valid.value
-        ? this.controller.activeFormData.next(Final)
-        : this.controller.activeFormData.next(['abort', 'Name data is required!'])
-    );
+      .subscribe(Final => this.controller.activeFormData.next(Final));
   }
   
   onReset() {

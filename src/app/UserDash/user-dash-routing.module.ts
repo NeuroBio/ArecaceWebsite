@@ -18,6 +18,16 @@ const userRoutes: Routes = [
       {path: ':surveyID', component: ViewDetailsComponent,
         resolve: {UserData: GeneralmemberresolverService}}
     ]
+  },
+  {path: 'SAcalculations', component: InteractHomeComponent,
+  canActivate: [UserGuardGuard],
+  resolve: { AuthResolverService },
+    children: [
+      {path: '', redirectTo: 'notfound'},
+      {path: 'notfound', redirectTo: ''},
+      {path: ':surveyID', component: ViewDetailsComponent,
+        resolve: {UserData: GeneralmemberresolverService}}
+    ]
   }
 
 ];
