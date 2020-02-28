@@ -2,7 +2,7 @@ import { NgModule }                 from '@angular/core';
 import { Routes, RouterModule }     from '@angular/router';
 import { UserDashComponent } from './user-dash/user-dash.component';
 import { InteractHomeComponent } from './interactive-data/interact-home/interact-home.component';
-import { ViewDetailsComponent } from './interactive-data/view-details/view-details.component';
+import { InteractDetailsSwitchComponent } from './interactive-data/interact-details-switch/interact-details-switch.component';
 import { AuthResolverService } from './interactive-data/auth-resolver.service';
 import { GeneralmemberresolverService } from 'src/app/GlobalServices/generalmemberresolver.service';
 import { UserGuardGuard } from './user-guard.guard';
@@ -15,7 +15,7 @@ const userRoutes: Routes = [
     children: [
       {path: '', redirectTo: 'notfound'},
       {path: 'notfound', redirectTo: ''},
-      {path: ':surveyID', component: ViewDetailsComponent,
+      {path: ':surveyID', component: InteractDetailsSwitchComponent,
         resolve: {UserData: GeneralmemberresolverService}}
     ]
   },
@@ -25,7 +25,7 @@ const userRoutes: Routes = [
     children: [
       {path: '', redirectTo: 'notfound'},
       {path: 'notfound', redirectTo: ''},
-      {path: ':surveyID', component: ViewDetailsComponent,
+      {path: ':SAcalcID', component: InteractDetailsSwitchComponent,
         resolve: {UserData: GeneralmemberresolverService}}
     ]
   }

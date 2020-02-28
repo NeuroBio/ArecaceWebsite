@@ -30,7 +30,7 @@ export class SourceCalcFrameComponent implements OnInit {
       .sort((a,b) => a.ID > b.ID ? 1 : -1);
     this.fetcher.activeFormData.subscribe(userData => {
       this.notValid = (!userData || userData[0] === 'abort');
-      if(userData)
+      if(userData) 
         this.DatatoSave = userData[0];
     });
   }

@@ -15,6 +15,7 @@ import { QuickAssign } from 'src/app/GlobalServices/commonfunctions.service';
 export class SourceAffinityCalculatorComponent implements OnInit, OnDestroy {
 
   @Input() showName: boolean = true;
+  @Input() viewOnly: boolean = false;
   result: any;
   rank: string;
   abilitiesArray: FormArray;
@@ -69,7 +70,8 @@ export class SourceAffinityCalculatorComponent implements OnInit, OnDestroy {
   onSubmit() {
     
     if(this.Form.valid !== true) {
-      return this.fetcher.activeFormData.next(['abort', 'Name is required!'])
+      this.error ='Name is required!'
+      return this.fetcher.activeFormData.next(['abort', this.error])
     }
 
     this.result = undefined;

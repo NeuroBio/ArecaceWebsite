@@ -7,13 +7,14 @@ import { UserDashRoutingModule } from './user-dash-routing.module';
 import { LoginModule } from '../SharedComponentModules/LoginButton/login.module';
 import { SurveyComponentsModule } from '../playground/surveys/survey-components/survey-components.module';
 import { PrimaryContentDisplayModule } from 'src/app/SharedComponentModules/PrimaryContentDisplayer/primary-content-display.module';
+import { SharedFormsModule } from 'src/app/SharedComponentModules/SharedForms/shared-forms.module';
 
 import { UserDashComponent } from './user-dash/user-dash.component';
 import { UserInfoComponent } from './user-info/user-info.component';
 import { PickUpComponent } from './pick-up/pick-up.component';
 import { DataOptionsComponent } from './interactive-data/DataOptions/data-options.component';
 import { InteractHomeComponent } from './interactive-data/interact-home/interact-home.component';
-import { ViewDetailsComponent } from './interactive-data/view-details/view-details.component';
+import { InteractDetailsSwitchComponent } from './interactive-data/interact-details-switch/interact-details-switch.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,7 @@ import { ViewDetailsComponent } from './interactive-data/view-details/view-detai
     PickUpComponent,
     DataOptionsComponent,
     InteractHomeComponent,
-    ViewDetailsComponent
+    InteractDetailsSwitchComponent,
   ],
   imports: [
     CommonModule,
@@ -30,6 +31,7 @@ import { ViewDetailsComponent } from './interactive-data/view-details/view-detai
     ReactiveFormsModule,
     SurveyComponentsModule,
     PrimaryContentDisplayModule,
+    SharedFormsModule,
     
     UserDashRoutingModule
   ]

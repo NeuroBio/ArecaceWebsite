@@ -59,16 +59,19 @@ export class UserDashComponent implements OnInit, OnDestroy {
         link: 'fancharacters',
         name: this.user.FanCharacters.map(char => char.DisplayName),
         type: 'Characters',
-        data: this.user.FanCharacters
+        data: this.user.FanCharacters,
+        edit: true
      });
     }
     if(this.user.SAcalculations) {
       this.savedData.push({
         title: 'Your Source Affinity Data',
         link: 'sacalculations',
-        name: this.user.SAcalculations.map(sa => sa.DisplayName),
+        name: this.user.SAcalculations.map(sa =>
+          sa.DisplayName.split('-').join(' ')),
         type: 'SAcalculations',
-        data: this.user.SAcalculations
+        data: this.user.SAcalculations,
+        edit: true
         });
     }
     if(this.user.SurveyResults) {
@@ -77,7 +80,8 @@ export class UserDashComponent implements OnInit, OnDestroy {
       link: 'surveyresults',
       name: this.user.SurveyResults.map(survey => survey.DisplayName),
       type: 'SurveyResults',
-      data: this.user.SurveyResults
+      data: this.user.SurveyResults,
+      edit: false
     });
     }
   }

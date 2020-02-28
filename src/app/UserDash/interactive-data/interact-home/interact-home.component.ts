@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { GeneralcollectionService } from 'src/app/GlobalServices/generalcollection.service';
 import { SurveyService } from 'src/app/playground/surveys/survey-components/survey.service';
-
+import { FetchService } from 'src/app/GlobalServices/fetch.service';
 @Component({
   selector: 'app-interact-home',
   templateUrl: './interact-home.component.html',
@@ -19,19 +19,25 @@ export class InteractHomeComponent implements OnInit, OnDestroy {
 
   constructor(private generalcollectionserv: GeneralcollectionService,
               private surveyserv: SurveyService,
+              private fetcher: FetchService,
               private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.userData$ = this.generalcollectionserv.returnMetaData().pipe(
-      map(userdata => userdata.map(datum => [datum.DisplayName, datum.ID])));
+      map(userdata => userdata.map(datum => [datum.DisplayName.split('-').join(' '), datum.ID])));
     this.current = this.route.snapshot.firstChild.url[0].path;
     this.type = this.route.snapshot.url[0].path;
     this.displayType = this.type.replace(/[A-Z]/g, char => ` ${char}`);
   }
 
   ngOnDestroy() {
-    if(this.type === 'SurveyResults') {
-        this.surveyserv.mainDisposal();
+    switch(this.type) {
+      case 'SurveyResults':
+        return this.surveyserv.mainDisposal();
+      
+      case 'SAcalculations':
+        this.fetcher.assignActiveFormData(undefined);
+        return this.fetcher.assignIntemtoEdit(undefined);
     }
   }
 

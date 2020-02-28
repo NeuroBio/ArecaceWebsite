@@ -14,6 +14,7 @@ export class DataOptionsComponent implements OnInit {
   @Input() link: string;
   @Input() type: string;
   @Input() data: any;
+  @Input() edit: any;
 
   constructor(private displayserv: DisplayService,
               private userdataser: UserDataService,

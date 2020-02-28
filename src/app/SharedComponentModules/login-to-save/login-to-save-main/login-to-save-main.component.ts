@@ -1,9 +1,9 @@
 import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { AuthService } from '../../../administration/security/Auth/auth.service';
 import { Subscription } from 'rxjs';
-import { formatDate } from '@angular/common';
-import { FireBaseService } from '../../../GlobalServices/firebase.service';
 import { User } from 'src/app/Classes/ContentClasses';
+import { LoginToSaveService } from '../login-to-save.service';
+
 @Component({
   selector: 'app-login-to-save-main',
   templateUrl: './login-to-save-main.component.html',
@@ -13,7 +13,7 @@ import { User } from 'src/app/Classes/ContentClasses';
 export class LoginToSaveMainComponent implements OnInit, OnDestroy {
 
   constructor(private auth: AuthService,
-              private firebaseserv: FireBaseService) { }
+              private logintosaveserv: LoginToSaveService) { }
 
   @Input() DatatoSave: any = {Test: 'Testing Data!'};
   @Input() DataType: string = "Type";
@@ -24,7 +24,8 @@ export class LoginToSaveMainComponent implements OnInit, OnDestroy {
   message: string;
   OldData: User;
   stream1: Subscription;
-  stream2 = new Subscription();
+  stream2: Subscription;
+  stream3: Subscription;
 
   ngOnInit() {
     this.stream1 = this.auth.user.subscribe(user => {
@@ -33,51 +34,22 @@ export class LoginToSaveMainComponent implements OnInit, OnDestroy {
         this.OldData = user;
       }
     });
+    this.stream2 = this.logintosaveserv.stopClick
+      .subscribe(click => this.stopClicking = click);
+    this.stream3 = this.logintosaveserv.message
+      .subscribe(message => this.message = message);
   }
 
   ngOnDestroy() {
     this.stream1.unsubscribe();
     this.stream2.unsubscribe();
+    this.stream3.unsubscribe();
   }
 
   saveUserData() {
-    console.log(this.DatatoSave);
-    this.stopClicking = true;
-    this.message = 'Processing...';
-    this.DatatoSave.UploadTime = formatDate(new Date(), 'yyyy-MM-dd, HH:mm:ss', 'en');
-    this.DatatoSave.UploadTimeShort = formatDate(new Date(), 'yy/MM/dd', 'en');
-    this.DatatoSave.DisplayName = this.makeDisplayName();
-    this.DatatoSave.ID = `${this.OldData.ID}_${this.getUniqueId(4)}`
-    console.log(this.DatatoSave);
-
-    if(this.OldData[this.DataType]) {// old data exists
-      this.OldData[this.DataType].push(this.DatatoSave);
-    } else { //first time this data pushed
-      this.OldData[this.DataType] = [this.DatatoSave];
-    }
-    this.message = 'Submitting...';
-    return this.firebaseserv.editDocument(this.OldData, `Users/`, this.auth.uid.value)
-    .then(() => this.message = "Saved!")
-    .catch(err => {
-        this.message = err;
-        this.stopClicking = false;
-    });
+    return this.logintosaveserv.processForm(this.OldData, this.DatatoSave,
+                                            this.NameTokens, this.DatatoSave);
   }
 
-  getUniqueId(parts: number): string {
-    const stringArr = [];
-    for(let i = 0; i< parts; i++){
-      const S4 = (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
-      stringArr.push(S4);
-    }
-    return stringArr.join('-');
-    //https://stackoverflow.com/questions/52836247/how-to-generate-uuid-in-angular-6
-  }
 
-  makeDisplayName() {
-    const displayName: string[] = [];
-    this.NameTokens.forEach(token => 
-      displayName.push(this.DatatoSave[token]));
-    return displayName.join(' ');
-  }
 }

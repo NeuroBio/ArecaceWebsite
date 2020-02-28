@@ -19,7 +19,6 @@ export class GeneralcollectionService {
     return this.collectionData;
   }
 
-
   getMember(ID:string){
     if(ID === 'Latest') {
       return this.returnMetaData();

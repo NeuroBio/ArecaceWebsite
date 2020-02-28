@@ -5,7 +5,8 @@
   <hr id="top">
 
   <form [formGroup]="Form">
-    <button (click)="onShow()">Info</button>
+    <button *ngIf="viewOnly === false"
+    (click)="onShow()">Info</button>
     <div *ngIf="show">
       <ul>
         <li> Only include one copy of each Source Ability.
@@ -20,11 +21,12 @@
     
       
     <p *ngIf="showName">
-      Name: <input type="text" formControlName="Name">
+      Name: <input type="text" [readOnly]="viewOnly === true" formControlName="Name">
     </p>
     
     <p>
-        <button type="button" (click)="addAbility()">Add Ability</button>
+        <button type="button" *ngIf="viewOnly === false"
+        (click)="addAbility()">Add Ability</button>
     </p>
     
     <div formArrayName="Abilities">
@@ -32,7 +34,7 @@
         [formGroupName]="i">
         <div class="stayTogether">
             Ability: 
-            <select formControlName="Ability">
+            <select formControlName="Ability" [attr.disabled]="viewOnly === true">
                 <option *ngFor="let ability of abilityKeys; let i = index"
                 [value]="ability">
                     {{ abilityNames[i] }}
@@ -41,13 +43,14 @@
         </div>
         <div class="stayTogether">
             &nbsp; Mastery:
-            <select formControlName="Mastery">
+            <select formControlName="Mastery" [attr.disabled]="viewOnly === true">
               <option *ngFor="let master of mastery; let j = index" [value]="j">
                 {{ master }}
               </option>
             </select>
 
-            <button type="button" (click)="removeAbility(i)">-</button>
+            <button type="button" *ngIf="viewOnly === false"
+            (click)="removeAbility(i)">-</button>
         </div>
         <br><br>
       </div>
@@ -58,19 +61,23 @@
     <div class="stayTogether">
         Esarian Genetics:
         <input class="short" formControlName="EsarianGenes"
+        [readOnly]="viewOnly === true"
         type="number" min="0" max="1" step=".05">&nbsp;
     </div>
   
     <div class="stayTogether">
         Connection Genetics:
         <input class="short" formControlName="ConnectionGenes"
+        [readOnly]="viewOnly === true"
         type="number" min="0" max="1" step=".05">
     </div>
     <br>
 
     <p>
-      <button type="button" (click)=onSubmit()>Submit</button>&nbsp;
-      <button type="button" (click)=onReset()>Reset</button>
+      <button type="button" *ngIf="viewOnly === false"
+      (click)=onSubmit()>Submit</button>&nbsp;
+      <button type="button" *ngIf="viewOnly === false"
+      (click)=onReset()>Reset</button>
     </p>
   
   </form>
@@ -79,7 +86,7 @@
 <!-- SA info -->
   <div id="bottom">
     <div id="Error" *ngIf="error">{{ error }}</div>
-    <div id="Results" *ngIf="result">
+    <div id="Results" *ngIf="result && !error">
         Source Affinity Cost: {{ result }} <br>
         Source Magician Status: {{ rank }}
     </div>
