@@ -40,13 +40,14 @@ export class LoginToSaveMainComponent implements OnInit, OnDestroy {
   }
 
   saveUserData() {
+    console.log(this.DatatoSave);
     this.stopClicking = true;
     this.message = 'Processing...';
     this.DatatoSave.UploadTime = formatDate(new Date(), 'yyyy-MM-dd, HH:mm:ss', 'en');
     this.DatatoSave.UploadTimeShort = formatDate(new Date(), 'yy/MM/dd', 'en');
     this.DatatoSave.ID = `${this.OldData.ID}_${this.getUniqueId(4)}`
     this.DatatoSave.DisplayName = this.makeDisplayName();
-    console.log(this.DatatoSave.DisplayName);
+    console.log(this.DatatoSave);
 
     if(this.OldData[this.DataType]) {// old data exists
       this.OldData[this.DataType].push(this.DatatoSave);

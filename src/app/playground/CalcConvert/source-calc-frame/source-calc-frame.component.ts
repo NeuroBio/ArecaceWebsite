@@ -3,7 +3,9 @@ import { FireBaseService } from 'src/app/GlobalServices/firebase.service';
 import { Observable } from 'rxjs';
 import { SA } from 'src/app/Classes/ContentClasses';
 import { map, take, tap } from 'rxjs/operators';
-import { CRUDcontrollerService } from 'src/app/administration/services/CRUDcontroller.service';
+import { AuthService } from 'src/app/administration/security/Auth/auth.service';
+import { FetchService } from 'src/app/GlobalServices/fetch.service';
+import { GeneralcollectionService } from 'src/app/GlobalServices/generalcollection.service';
 
 @Component({
   selector: 'app-source-calc-frame',
@@ -12,20 +14,25 @@ import { CRUDcontrollerService } from 'src/app/administration/services/CRUDcontr
 })
 export class SourceCalcFrameComponent implements OnInit {
 
+  DatatoSave: any;
   canonSA: SA[]
-  constructor(private firebaseserv: FireBaseService,
-              private controller: CRUDcontrollerService) { }
+  loggedIn: boolean;
+
+  constructor(private generalcollectserv: GeneralcollectionService,
+              private fetcher: FetchService,
+              private auth: AuthService) { }
 
   ngOnInit() {
-    this.firebaseserv.returnCollect('SourceAffinities')
-      .pipe(take(1)).subscribe(SAs => {
-        SAs = SAs.sort((a,b) => a.ID > b.ID ? 1 : -1);
-        this.canonSA = SAs;
-    })
+    this.auth.user.subscribe(() => {console.log(this.auth.isLoggedIn);
+      this.loggedIn = this.auth.isLoggedIn})//.isUser());
+    this.canonSA = this.generalcollectserv.collectionData.value
+      .sort((a,b) => a.ID > b.ID ? 1 : -1);
+      this.fetcher.activeFormData.subscribe(userData => { console.log(userData);
+        this.DatatoSave = userData[0]});
   }
 
   populateForm(index: number) {
-    this.controller.assignEditItem(this.canonSA[index]);
+    this.fetcher.assignIntemtoEdit(this.canonSA[index]);
   }
 
 }

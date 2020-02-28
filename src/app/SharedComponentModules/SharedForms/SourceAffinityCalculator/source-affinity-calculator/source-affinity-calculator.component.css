@@ -4,9 +4,13 @@ Form {
     max-width: 800px;
 }
 
+input {
+    font-size: 18px;
+
+}
+
 input.short {
     width: 50px;
-    font-size: 18px;
 }
 
 div#header {

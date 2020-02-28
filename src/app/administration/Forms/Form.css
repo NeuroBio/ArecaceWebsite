@@ -8,6 +8,15 @@ form {
     float: left;
 }
 
+div.form {
+  margin:3px;
+    padding:4px;
+    width: 740px;
+    overflow: auto;
+    border: 1px solid white;
+    float: left;
+}
+
 h2.formstyle {
   padding: 5px;
   margin: 0px;

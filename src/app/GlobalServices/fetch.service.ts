@@ -10,6 +10,7 @@ export class FetchService {
   processData = new Subject();
   activeFormData = new BehaviorSubject<any>(undefined);
   itemToEdit = new BehaviorSubject<any>(undefined);
+  valid = new BehaviorSubject<boolean>(undefined);
 
   constructor() { }
 
@@ -23,5 +24,9 @@ export class FetchService {
 
   fetchData() {
     return this.processData.next();
+  }
+
+  checkvalidity(valid: boolean) {
+    return this.valid.next(valid);
   }
 }

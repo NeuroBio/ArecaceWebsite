@@ -5,9 +5,10 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { CalculatorsComponent } from './calculators/calculators.component'
 import { DateConverterComponent } from './date-converter/date-converter.component'
 import { SourceCalcFrameComponent } from './source-calc-frame/source-calc-frame.component';
-import { CalcConvertRoutingModule } from './calc-convert-routing.module';
 
+import { CalcConvertRoutingModule } from './calc-convert-routing.module';
 import { SharedFormsModule } from '../../SharedComponentModules/SharedForms/shared-forms.module';
+import { LoginToSaveModule } from 'src/app/SharedComponentModules/login-to-save/login-to-save.module';
 
 
 @NgModule({
@@ -20,6 +21,8 @@ import { SharedFormsModule } from '../../SharedComponentModules/SharedForms/shar
     CommonModule,
     ReactiveFormsModule,
     SharedFormsModule,
+    LoginToSaveModule,
+    
     CalcConvertRoutingModule
   ],
   exports: [

@@ -52,6 +52,7 @@ export class UserDashComponent implements OnInit, OnDestroy {
 
   PrepareData(){
     this.savedData = [];
+    console.log(this.user)
     if(this.user.FanCharacters) {
       this.savedData.push({
         title: 'Your Fan Characters',
@@ -66,7 +67,7 @@ export class UserDashComponent implements OnInit, OnDestroy {
         title: 'Your Source Affinity Data',
         link: 'sacalculations',
         name: this.user.SAcalculations.map(sa => sa.DisplayName),
-        type: 'SAcalcs',
+        type: 'SAcalculations',
         data: this.user.SAcalculations
         });
     }

@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { SourceAbilityCalculatorService } from '../source-ability-calculator.service';
 import { AbilityData, AbilityMastery, AbilityNames } from '../SourceAbilityData';
 import { FormBuilder, FormArray, FormGroup } from '@angular/forms';
@@ -14,6 +14,7 @@ import { QuickAssign } from 'src/app/GlobalServices/commonfunctions.service';
 
 export class SourceAffinityCalculatorComponent implements OnInit, OnDestroy {
 
+  @Input() showName: boolean = true;
   result: any;
   rank: string;
   abilitiesArray: FormArray;
@@ -48,7 +49,8 @@ export class SourceAffinityCalculatorComponent implements OnInit, OnDestroy {
     return this.fb.group({
       EsarianGenes: '0',
       ConnectionGenes: '0',
-      Abilities: this.abilitiesArray
+      Abilities: this.abilitiesArray,
+      Name: ''
     });
   }
 
@@ -80,12 +82,23 @@ export class SourceAffinityCalculatorComponent implements OnInit, OnDestroy {
     catch(err) {
       this.error = err;
     }
+
     this.rank = this.getRank(this.result, eGenes);
-    this.fetcher.assignActiveFormData({ Build: JSON.stringify(build),
-                                       EsarianGenes: eGenes,
-                                       ConnectionGenes: cGenes,
-                                       Cost: this.result,
-                                       Rank: this.rank});
+    const Final = {Build: JSON.stringify(build),
+                    EsarianGenes: eGenes,
+                    ConnectionGenes: cGenes,
+                    Cost: this.result,
+                    Rank: this.rank,
+                    Name: this.Form.value.Name,
+                    ID: ''}
+    Final.ID = `${Final.Name.split(' ').join('-')}-(${Final.Cost})`;
+    return this.fetcher.assignActiveFormData([Final,
+                                             [],
+                                             [],
+                                             [],
+                                             undefined,
+                                             undefined,
+                                             undefined]);
   }
 
   onReset() {
