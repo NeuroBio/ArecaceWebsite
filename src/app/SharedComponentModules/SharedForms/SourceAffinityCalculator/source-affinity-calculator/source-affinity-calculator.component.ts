@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { SourceAbilityCalculatorService } from '../source-ability-calculator.service';
 import { AbilityData, AbilityMastery, AbilityNames } from '../SourceAbilityData';
-import { FormBuilder, FormArray, FormGroup } from '@angular/forms';
+import { FormBuilder, FormArray, FormGroup, Validators } from '@angular/forms';
 import { FetchService } from 'src/app/GlobalServices/fetch.service';
 import { Subscription } from 'rxjs';
 import { QuickAssign } from 'src/app/GlobalServices/commonfunctions.service';
@@ -50,7 +50,7 @@ export class SourceAffinityCalculatorComponent implements OnInit, OnDestroy {
       EsarianGenes: '0',
       ConnectionGenes: '0',
       Abilities: this.abilitiesArray,
-      Name: ''
+      Name: ['', Validators.required]
     });
   }
 
@@ -83,6 +83,8 @@ export class SourceAffinityCalculatorComponent implements OnInit, OnDestroy {
       this.error = err;
     }
 
+    this.fetcher.checkvalidity(this.Form.valid);
+    
     this.rank = this.getRank(this.result, eGenes);
     const Final = {Build: JSON.stringify(build),
                     EsarianGenes: eGenes,
@@ -108,6 +110,7 @@ export class SourceAffinityCalculatorComponent implements OnInit, OnDestroy {
     this.result = undefined;
     this.rank = undefined;
     this.error = undefined;
+    this.fetcher.checkvalidity(this.Form.valid);
   }
 
   onShow() {

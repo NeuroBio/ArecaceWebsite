@@ -29,6 +29,7 @@ export class SourceCalcFrameComponent implements OnInit {
       .sort((a,b) => a.ID > b.ID ? 1 : -1);
       this.fetcher.activeFormData.subscribe(userData => { console.log(userData);
         this.DatatoSave = userData[0]});
+    this.fetcher.activeFormData.subscribe(x => console.log(x))
   }
 
   populateForm(index: number) {
