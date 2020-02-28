@@ -11,37 +11,6 @@ export class GeneralMetaData {
     Links: string[];
 }
 
-export class GuildMetaData {
-    ID: string;
-    GuildName: string;
-    Master: string;
-    Founded: number;
-    Host: string;
-    Description: string;
-    History: string;
-    Links: string[];
-    AltText: string;
-}
-
-export class OthersArt {
-    Name: string;
-    ID: string;
-    Links: string[];
-    Date: number;
-    Artist: string;
-    ArtistLink: string;
-    Allowed: boolean;
-}
-
-export class LooseNotesMetaData {
-    Title: string;
-    ShortTitle: string;
-    Text: string;
-    ID: string;
-    Created: string;
-    Modified: string;
-}
-
 export class BeastMetaData {
     Name: string;
     ID: string;
@@ -51,7 +20,6 @@ export class BeastMetaData {
     Links: string[];
     AltText: string;
 }
-
 
 export class Bookmark {
     Link: string;
@@ -114,6 +82,45 @@ export class CharacterMetaData {
     DisplayName?: string;
 }
 
+export class ExtrasMetaData {
+    Name: string;
+    ID: string;
+    Links: string[];
+    Description: string;
+    Date: string;
+}
+
+export class GuildMetaData {
+    ID: string;
+    GuildName: string;
+    Master: string;
+    Founded: number;
+    Host: string;
+    Description: string;
+    History: string;
+    Links: string[];
+    AltText: string;
+}
+
+export class LooseNotesMetaData {
+    Title: string;
+    ShortTitle: string;
+    Text: string;
+    ID: string;
+    Created: string;
+    Modified: string;
+}
+
+export class OthersArt {
+    Name: string;
+    ID: string;
+    Links: string[];
+    Date: number;
+    Artist: string;
+    ArtistLink: string;
+    Allowed: boolean;
+}
+
 export class PostData {
     ID: string;
     Body: string;
@@ -123,14 +130,6 @@ export class PostData {
     Links?: string[];
     AltText: string;
     Edited: boolean;
-}
-
-export class ExtrasMetaData {
-    Name: string;
-    ID: string;
-    Links: string[];
-    Description: string;
-    Date: string;
 }
 
 export class SA {
