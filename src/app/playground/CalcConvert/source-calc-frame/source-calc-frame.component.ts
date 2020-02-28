@@ -6,7 +6,7 @@ import { map, take, tap } from 'rxjs/operators';
 import { AuthService } from 'src/app/administration/security/Auth/auth.service';
 import { FetchService } from 'src/app/GlobalServices/fetch.service';
 import { GeneralcollectionService } from 'src/app/GlobalServices/generalcollection.service';
-
+import { LoginToSaveService } from 'src/app/SharedComponentModules/login-to-save/login-to-save.service';
 @Component({
   selector: 'app-source-calc-frame',
   templateUrl: './source-calc-frame.component.html',
@@ -20,6 +20,7 @@ export class SourceCalcFrameComponent implements OnInit {
   notValid: boolean;
 
   constructor(private generalcollectserv: GeneralcollectionService,
+              private logintosaveserv: LoginToSaveService,
               private fetcher: FetchService,
               private auth: AuthService) { }
 
@@ -29,11 +30,14 @@ export class SourceCalcFrameComponent implements OnInit {
     this.canonSA = this.generalcollectserv.collectionData.value
       .sort((a,b) => a.ID > b.ID ? 1 : -1);
     this.fetcher.activeFormData.subscribe(userData => {
-      // this.notValid = (!userData || userData[0] === 'abort');
       if(userData) 
         this.DatatoSave = userData[0];
     });
     this.fetcher.valid.subscribe(valid => this.notValid = !valid);
+    this.logintosaveserv.reset.subscribe(() => {
+      this.fetcher.assignIntemtoEdit(undefined);
+      this.logintosaveserv.assignStopClick(false);
+    });
   }
 
   populateForm(index: number) {

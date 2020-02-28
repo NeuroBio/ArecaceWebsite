@@ -36,12 +36,14 @@ export class SourceAffinityCalculatorComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.stream1 = this.fetcher.itemToEdit
-      .subscribe(item => this.assignData(item));
+      .subscribe(item => {
+        this.assignData(item)
+        if(this.viewOnly) {
+          this.Form.get('Abilities').disable();
+        }
+      });
     this.stream2 = this.fetcher.processData
       .subscribe(() => this.onSubmit());
-      if(this.viewOnly) {
-        this.Form.get('Abilities').disable();
-      }
     this.Form.valueChanges.subscribe(() => this.fetcher.assignvalidity(false));
   }
 

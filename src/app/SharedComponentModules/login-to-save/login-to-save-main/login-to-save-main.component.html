@@ -7,7 +7,7 @@
 
 <ng-template #authenticated>
     <button (click)="saveUserData()"
-    [disabled]="stopClicking  || Disabled"
+    [disabled]="stopClicking === true || Disabled === true"
     >Save Results</button>
     <div> {{ message }} </div>
 </ng-template>

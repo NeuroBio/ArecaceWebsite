@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs'
+import { BehaviorSubject, Subject } from 'rxjs'
 import { AuthService } from '../../administration/security/Auth/auth.service';
 import { formatDate } from '@angular/common';
 import { FireBaseService } from '../../GlobalServices/firebase.service';
@@ -11,32 +11,39 @@ export class LoginToSaveService {
 
   message = new BehaviorSubject<string>(undefined);
   stopClick = new BehaviorSubject<boolean>(undefined);
+  reset = new Subject();
 
   constructor(private auth: AuthService,
               private firebaseserv: FireBaseService) { }
 
   processForm (oldData: any, dataToSave: any, nameTokens: string[],
     dataType: string, ) {
-    console.log(dataToSave);
-    this.stopClick.next(true);
+    // console.log(dataToSave);
+    this.assignStopClick(true);
     this.message.next('Processing...');
     dataToSave.UploadTime = formatDate(new Date(), 'yyyy-MM-dd, HH:mm:ss', 'en');
     dataToSave.UploadTimeShort = formatDate(new Date(), 'yy/MM/dd', 'en');
     dataToSave.DisplayName = this.makeDisplayName(nameTokens, dataToSave);
     dataToSave.ID = `${oldData.ID}_${this.getUniqueId(4)}`
-    console.log(dataToSave);
+    // console.log(dataToSave);
 
+    
     if(oldData[dataType]) {// old data exists
       oldData[dataType].push(dataToSave);
     } else { //first time this data pushed
       oldData[dataType] = [dataToSave];
     }
+
+
     this.message.next('Submitting...');
     return this.firebaseserv.editDocument(oldData, `Users/`, this.auth.uid.value)
-    .then(() => this.message.next("Saved!"))
+    .then(() => {
+      this.message.next("Saved!");
+      this.reset.next();
+    })
     .catch(err => {
         this.message = err;
-        this.stopClick.next(false);
+        this.assignStopClick(false);
     });
   }
 
@@ -55,5 +62,9 @@ export class LoginToSaveService {
     nameTokens.forEach(token => 
       displayName.push(dataToSave[token]));
     return displayName.join(' ');
+  }
+
+  assignStopClick(click: boolean) {
+    return this.stopClick.next(click);
   }
 }

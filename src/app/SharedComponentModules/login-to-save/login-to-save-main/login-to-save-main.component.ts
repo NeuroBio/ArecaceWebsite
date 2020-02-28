@@ -48,7 +48,7 @@ export class LoginToSaveMainComponent implements OnInit, OnDestroy {
 
   saveUserData() {
     return this.logintosaveserv.processForm(this.OldData, this.DatatoSave,
-                                            this.NameTokens, this.DatatoSave);
+                                            this.NameTokens, this.DataType);
   }
 
 
