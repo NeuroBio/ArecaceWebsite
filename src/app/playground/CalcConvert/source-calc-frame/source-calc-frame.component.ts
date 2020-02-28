@@ -24,15 +24,16 @@ export class SourceCalcFrameComponent implements OnInit {
               private auth: AuthService) { }
 
   ngOnInit() {
-    this.auth.user.subscribe(() => {console.log(this.auth.isLoggedIn);
-      this.loggedIn = this.auth.isLoggedIn})//.isUser());
+    this.auth.user.subscribe(() => 
+      this.loggedIn = this.auth.isLoggedIn)//.isUser());
     this.canonSA = this.generalcollectserv.collectionData.value
       .sort((a,b) => a.ID > b.ID ? 1 : -1);
     this.fetcher.activeFormData.subscribe(userData => {
-      this.notValid = (!userData || userData[0] === 'abort');
+      // this.notValid = (!userData || userData[0] === 'abort');
       if(userData) 
         this.DatatoSave = userData[0];
     });
+    this.fetcher.valid.subscribe(valid => this.notValid = !valid);
   }
 
   populateForm(index: number) {

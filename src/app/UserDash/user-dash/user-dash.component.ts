@@ -52,7 +52,6 @@ export class UserDashComponent implements OnInit, OnDestroy {
 
   PrepareData(){
     this.savedData = [];
-    console.log(this.user)
     if(this.user.FanCharacters) {
       this.savedData.push({
         title: 'Your Fan Characters',

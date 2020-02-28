@@ -34,7 +34,7 @@
         [formGroupName]="i">
         <div class="stayTogether">
             Ability: 
-            <select formControlName="Ability" [attr.disabled]="viewOnly === true">
+            <select formControlName="Ability">
                 <option *ngFor="let ability of abilityKeys; let i = index"
                 [value]="ability">
                     {{ abilityNames[i] }}
@@ -43,7 +43,7 @@
         </div>
         <div class="stayTogether">
             &nbsp; Mastery:
-            <select formControlName="Mastery" [attr.disabled]="viewOnly === true">
+            <select formControlName="Mastery">
               <option *ngFor="let master of mastery; let j = index" [value]="j">
                 {{ master }}
               </option>

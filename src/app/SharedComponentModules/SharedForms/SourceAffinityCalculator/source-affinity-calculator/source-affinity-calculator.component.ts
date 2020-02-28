@@ -39,6 +39,10 @@ export class SourceAffinityCalculatorComponent implements OnInit, OnDestroy {
       .subscribe(item => this.assignData(item));
     this.stream2 = this.fetcher.processData
       .subscribe(() => this.onSubmit());
+      if(this.viewOnly) {
+        this.Form.get('Abilities').disable();
+      }
+    this.Form.valueChanges.subscribe(() => this.fetcher.assignvalidity(false));
   }
 
   ngOnDestroy() {
@@ -99,6 +103,7 @@ export class SourceAffinityCalculatorComponent implements OnInit, OnDestroy {
                     Name: this.Form.value.Name,
                     ID: ''}
     Final.ID = `${Final.Name.split(' ').join('-')}-(${Final.Cost})`;
+    this.fetcher.assignvalidity(true);
     return this.fetcher.assignActiveFormData([Final,
                                               [],
                                               [],
@@ -115,7 +120,7 @@ export class SourceAffinityCalculatorComponent implements OnInit, OnDestroy {
     this.result = undefined;
     this.rank = undefined;
     this.error = undefined;
-    this.fetcher.checkvalidity(this.Form.valid);
+    this.fetcher.assignvalidity(this.Form.valid);
   }
 
   onShow() {
@@ -144,7 +149,7 @@ export class SourceAffinityCalculatorComponent implements OnInit, OnDestroy {
       this.abilitiesArray.push(this.fb.group({
         Ability: ability,
         Mastery: mastery
-      }));
+    }));
   }
 
   removeAbility(index: number) {

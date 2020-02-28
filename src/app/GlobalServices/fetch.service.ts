@@ -26,7 +26,7 @@ export class FetchService {
     return this.processData.next();
   }
 
-  checkvalidity(valid: boolean) {
+  assignvalidity(valid: boolean) {
     return this.valid.next(valid);
   }
 }
