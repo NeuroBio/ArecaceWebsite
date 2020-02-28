@@ -1,5 +1,7 @@
-import { Component, OnInit }              from '@angular/core';
+import { Component, OnInit, OnDestroy }   from '@angular/core';
 import { ActivatedRoute }                 from '@angular/router';
+
+import {Subscription}                     from 'rxjs';
 
 import { CRUDcontrollerService }          from '../../services/CRUDcontroller.service';
 import { FirebasePaths }                  from 'src/app/Classes/UploadDownloadPaths';
@@ -10,19 +12,23 @@ import { FirebasePaths }                  from 'src/app/Classes/UploadDownloadPa
   styleUrls: ['./content.component.css']
 })
 
-export class ContentComponent implements OnInit {
+export class ContentComponent implements OnInit, OnDestroy {
 
   edit = false;
-  
+  stream: Subscription;
   constructor(private route: ActivatedRoute,
               private controller: CRUDcontrollerService) { }
 
   ngOnInit() {
     this.controller.assignFirePaths(new FirebasePaths());
     this.controller.assignButtons([true, true, true, true]);
-    this.route.firstChild.url.subscribe(path =>
+    this.stream = this.route.firstChild.url.subscribe(path =>
         this.controller.assignItemType(path[path.length-1].toString())
     );
+  }
+
+  ngOnDestroy() {
+    this.stream.unsubscribe();
   }
   
   onEditCheck(edit:boolean) {

@@ -5,7 +5,7 @@ import { Subscription, Subject }          from 'rxjs';
 import { takeUntil }                      from 'rxjs/operators';
 
 import { CRUDcontrollerService }          from '../../services/CRUDcontroller.service';
-import { QuickAssign } from 'src/app/GlobalServices/commonfunctions.service';
+import { QuickAssign }                    from 'src/app/GlobalServices/commonfunctions.service';
 
 @Component({
   selector: 'app-about-text',

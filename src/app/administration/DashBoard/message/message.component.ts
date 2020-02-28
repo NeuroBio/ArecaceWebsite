@@ -1,7 +1,8 @@
-import { Component, OnInit }  from '@angular/core';
+import { Component, OnInit, OnDestroy }   from '@angular/core';
+import { Subscription }                   from 'rxjs';
 
-import { CRUD }               from '../../services/CRUD.service';
-import { MessageService }     from './message.service';
+import { CRUD }                           from '../../services/CRUD.service';
+import { MessageService }                 from './message.service';
 
 @Component({
   selector: 'app-message',
@@ -9,7 +10,7 @@ import { MessageService }     from './message.service';
   styleUrls: ['./message.component.css']
 })
 
-export class MessageComponent implements OnInit {
+export class MessageComponent implements OnInit, OnDestroy {
   classes: string[] = ["Use", "Issue", "QorC", "Typo", "Other"];
   NewMessages: any[][];
   OldMessages: any[][];
@@ -19,12 +20,14 @@ export class MessageComponent implements OnInit {
   currentMessage: number;
   readMessage: any;
   noSave: boolean;
+  stream1: Subscription;
+  stream2: Subscription;
 
   constructor(private messageserv: MessageService,
               private uploadserv: CRUD) { }
 
   ngOnInit() {
-    this.messageserv.getNewMessages().subscribe(mess => {
+    this.stream1 = this.messageserv.getNewMessages().subscribe(mess => {
         let final:string[][] = [];
         for(let cat of this.classes) {
           final.push(mess.filter(mess => mess.Reason === cat));
@@ -33,13 +36,18 @@ export class MessageComponent implements OnInit {
         this.Messages = this.NewMessages;
       });
 
-      this.messageserv.getOldMessages().subscribe(mess => {
+    this.stream2 = this.messageserv.getOldMessages().subscribe(mess => {
           let final:string[][] = [];
           for(let cat of this.classes) {
             final.push(mess.filter(mess => mess.Reason === cat));
           }
           this.OldMessages = final; 
       });
+  }
+
+  ngOnDestroy() {
+    this.stream1.unsubscribe();
+    this.stream2.unsubscribe();
   }
 
   fetchMessages(classInd: number) {

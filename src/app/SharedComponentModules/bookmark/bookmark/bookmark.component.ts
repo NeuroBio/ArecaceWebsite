@@ -2,6 +2,7 @@ import { Component, OnInit, OnChanges, Input, OnDestroy } from '@angular/core';
 import { User } from '../../../Classes/ContentClasses';
 
 import { BookmarkService } from '../bookmark.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-bookmark',
@@ -18,11 +19,12 @@ export class BookmarkComponent implements OnInit, OnChanges, OnDestroy {
   color: string;
   hover = false;
   notLoggedIn: boolean;
+  stream: Subscription;
 
   constructor(private bookmarkserv: BookmarkService) { }
 
   ngOnInit() {
-    this.bookmarkserv.userData.subscribe(data => {
+    this.stream = this.bookmarkserv.userData.subscribe(data => {
       this.data = data;
       this.notLoggedIn = data === undefined;
       this.setColors();
@@ -36,6 +38,7 @@ export class BookmarkComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   ngOnDestroy() {
+    this.stream.unsubscribe();
     this.bookmarkserv.disposal();
   }
 
