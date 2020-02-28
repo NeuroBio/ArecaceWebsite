@@ -58,7 +58,7 @@ const AdminRoutes: Routes = [
           { path: 'surveystats', component: SurveyStatsComponent },
           { path: 'othersart', component: OthersArtFormComponent },
           { path: 'pixels', component: PixelformComponent },
-          { path: 'SAs', component: SourceAffinityComponent},
+          { path: 'sourceaffinity', component: SourceAffinityComponent},
           { path: 'notes', component: LooseNotesFormComponent}
         ]},
         {path: 'Pages', component:PagesComponent, 
