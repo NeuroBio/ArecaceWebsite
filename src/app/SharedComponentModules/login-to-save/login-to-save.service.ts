@@ -67,4 +67,9 @@ export class LoginToSaveService {
   assignStopClick(click: boolean) {
     return this.stopClick.next(click);
   }
+
+  disposal() {
+    this.message.next('');
+    this.assignStopClick(false);
+  }
 }

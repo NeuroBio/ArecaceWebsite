@@ -12,6 +12,9 @@ export class FetchService {
   itemToEdit = new BehaviorSubject<any>(undefined);
   valid = new BehaviorSubject<boolean>(undefined);
 
+  nameTokens: string[];
+  type: string;
+
   constructor() { }
 
   assignIntemtoEdit(item: any) {
@@ -28,5 +31,10 @@ export class FetchService {
 
   assignvalidity(valid: boolean) {
     return this.valid.next(valid);
+  }
+
+  assignUserDataInfo (tokens: string[], type: string) {
+    this.nameTokens = tokens;
+    this.type = type;
   }
 }

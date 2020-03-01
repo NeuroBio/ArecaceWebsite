@@ -3,7 +3,7 @@ import { AuthService } from '../../../administration/security/Auth/auth.service'
 import { Subscription } from 'rxjs';
 import { User } from 'src/app/Classes/ContentClasses';
 import { LoginToSaveService } from '../login-to-save.service';
-
+import { FetchService } from 'src/app/GlobalServices/fetch.service';
 @Component({
   selector: 'app-login-to-save-main',
   templateUrl: './login-to-save-main.component.html',
@@ -13,12 +13,13 @@ import { LoginToSaveService } from '../login-to-save.service';
 export class LoginToSaveMainComponent implements OnInit, OnDestroy {
 
   constructor(private auth: AuthService,
-              private logintosaveserv: LoginToSaveService) { }
+              private logintosaveserv: LoginToSaveService,
+              private fetcher: FetchService) { }
 
-  @Input() DatatoSave: any = {Test: 'Testing Data!'};
-  @Input() DataType: string = "Type";
-  @Input() NameTokens: string[];
-  @Input() Disabled: boolean = false;
+  DatatoSave: any;
+  DataType: string;
+  NameTokens: string[];
+  Disabled: boolean;
   stopClicking: boolean;
   authorized: boolean;
   message: string;
@@ -26,6 +27,8 @@ export class LoginToSaveMainComponent implements OnInit, OnDestroy {
   stream1: Subscription;
   stream2: Subscription;
   stream3: Subscription;
+  stream4: Subscription;
+  stream5: Subscription;
 
   ngOnInit() {
     this.stream1 = this.auth.user.subscribe(user => {
@@ -34,16 +37,27 @@ export class LoginToSaveMainComponent implements OnInit, OnDestroy {
         this.OldData = user;
       }
     });
+
     this.stream2 = this.logintosaveserv.stopClick
       .subscribe(click => this.stopClicking = click);
     this.stream3 = this.logintosaveserv.message
       .subscribe(message => this.message = message);
+    
+    this.stream4 = this.fetcher.valid
+      .subscribe(valid => this.Disabled = !valid);
+    this.stream5 = this.fetcher.activeFormData
+      .subscribe(data => this.DatatoSave = data[0]);
+    this.NameTokens = this.fetcher.nameTokens;
+    this.DataType = this.fetcher.type;
   }
 
   ngOnDestroy() {
     this.stream1.unsubscribe();
     this.stream2.unsubscribe();
     this.stream3.unsubscribe();
+    this.stream4.unsubscribe();
+    this.stream5.unsubscribe();
+    this.logintosaveserv.disposal();
   }
 
   saveUserData() {

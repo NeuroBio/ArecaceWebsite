@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { SurveyService } from '../survey.service';
 import { Subscription } from 'rxjs';
+import { FetchService } from 'src/app/GlobalServices/fetch.service';
 
 @Component({
   selector: 'app-results',
@@ -20,11 +21,15 @@ export class ResultsComponent implements OnInit, OnDestroy {
   tooLow: number;
   acceptable: boolean;
 
-  constructor(private surveyserv: SurveyService) { }
+  constructor(private surveyserv: SurveyService,
+              private fetcher: FetchService) { }
 
   ngOnInit() {
+    this.fetcher.assignUserDataInfo(['Name', 'UploadTimeShort'], 'SurveyResults');
+    this.fetcher.assignvalidity(true);
     this.stream1 = this.surveyserv.surveyResults.subscribe(results => {
       if(results) {
+        this.fetcher.assignActiveFormData([results]);
         this.results = results;
         this.showSpecific = [];
         this.results.AllScores.forEach(() => this.showSpecific.push(false));

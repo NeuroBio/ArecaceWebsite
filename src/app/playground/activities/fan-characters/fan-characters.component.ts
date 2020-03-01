@@ -15,22 +15,14 @@ import { CharacterMetaData } from 'src/app/Classes/ContentClasses';
 export class FanCharactersComponent implements OnInit, OnDestroy {
 
   DatatoSave: CharacterMetaData;
-  notValid: boolean;
-
   stream1: Subscription;
-  stream2: Subscription;
-  stream3: Subscription;
 
   constructor(private logintosaveserv: LoginToSaveService,
               private fetcher: FetchService) { }
 
   ngOnInit() {
-    this.stream1 = this.fetcher.activeFormData.subscribe(userData => {
-      if(userData) 
-        this.DatatoSave = userData[0];
-    });
-    this.stream2 = this.fetcher.valid.subscribe(valid => this.notValid = !valid);
-    this.stream3 =this.logintosaveserv.reset.subscribe(() => {
+    this.fetcher.assignUserDataInfo(['FirstName', 'LastName'], 'FanCharacters');
+    this.stream1 = this.logintosaveserv.reset.subscribe(() => {
       this.fetcher.assignIntemtoEdit(undefined);
       this.logintosaveserv.assignStopClick(false);
     });
@@ -38,8 +30,6 @@ export class FanCharactersComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.stream1.unsubscribe();
-    this.stream2.unsubscribe();
-    this.stream3.unsubscribe();
   }
 
 }
