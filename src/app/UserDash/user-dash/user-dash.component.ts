@@ -57,7 +57,7 @@ export class UserDashComponent implements OnInit, OnDestroy {
         title: 'Your Fan Characters',
         link: 'fancharacters',
         name: this.user.FanCharacters.map(char => char.DisplayName),
-        type: 'Characters',
+        type: 'FanCharacters',
         data: this.user.FanCharacters,
         edit: true
      });
