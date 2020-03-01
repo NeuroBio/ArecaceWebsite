@@ -29,7 +29,7 @@ export class InteractDetailsSwitchComponent implements OnInit {
           return this.surveyserv.assignSurveyStats(this.userData.Name);
 
         case 'SAcalculations':
-          this.fetcher.assignIntemtoEdit(this.userData);
+          return this.fetcher.assignIntemtoEdit(this.userData);
       }
     });
   }

@@ -28,6 +28,16 @@ const userRoutes: Routes = [
       {path: ':SAcalcID', component: InteractDetailsSwitchComponent,
         resolve: {UserData: GeneralmemberresolverService}}
     ]
+  },
+  {path: 'FanCharacters', component: InteractHomeComponent,
+  canActivate: [UserGuardGuard],
+  resolve: { AuthResolverService },
+    children: [
+      {path: '', redirectTo: 'notfound'},
+      {path: 'notfound', redirectTo: ''},
+      {path: ':CharaID', component: InteractDetailsSwitchComponent,
+        resolve: {Chara: GeneralmemberresolverService}}
+    ]
   }
 
 ];
