@@ -129,6 +129,7 @@ export class CharacterFormComponent implements OnInit, OnDestroy {
   }
   
   processForm() {
+    console.log("triggered")
     //Invalid Form
     //Incomplete Form
     if((this.biopicFullFile === undefined

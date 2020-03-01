@@ -16,39 +16,24 @@ export class LoginToSaveMainComponent implements OnInit, OnDestroy {
               private logintosaveserv: LoginToSaveService,
               private fetcher: FetchService) { }
 
-  DatatoSave: any;
-  DataType: string;
-  NameTokens: string[];
   Disabled: boolean;
   stopClicking: boolean;
   authorized: boolean;
   message: string;
-  OldData: User;
   stream1: Subscription;
   stream2: Subscription;
   stream3: Subscription;
   stream4: Subscription;
-  stream5: Subscription;
 
   ngOnInit() {
-    this.stream1 = this.auth.user.subscribe(user => {
-      this.authorized = user? true : false
-      if(user) {
-        this.OldData = user;
-      }
-    });
-
+    this.stream1 = this.auth.user.subscribe(user =>
+      this.authorized = user? true : false);
     this.stream2 = this.logintosaveserv.stopClick
       .subscribe(click => this.stopClicking = click);
     this.stream3 = this.logintosaveserv.message
-      .subscribe(message => this.message = message);
-    
+      .subscribe(message => this.message = message);    
     this.stream4 = this.fetcher.valid
       .subscribe(valid => this.Disabled = !valid);
-    this.stream5 = this.fetcher.activeFormData
-      .subscribe(data => this.DatatoSave = data[0]);
-    this.NameTokens = this.fetcher.nameTokens;
-    this.DataType = this.fetcher.type;
   }
 
   ngOnDestroy() {
@@ -56,13 +41,11 @@ export class LoginToSaveMainComponent implements OnInit, OnDestroy {
     this.stream2.unsubscribe();
     this.stream3.unsubscribe();
     this.stream4.unsubscribe();
-    this.stream5.unsubscribe();
     this.logintosaveserv.disposal();
   }
 
   saveUserData() {
-    return this.logintosaveserv.processForm(this.OldData, this.DatatoSave,
-                                            this.NameTokens, this.DataType);
+    return this.logintosaveserv.saveData();
   }
 
 

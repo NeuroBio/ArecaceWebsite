@@ -3,7 +3,9 @@ import { BehaviorSubject, Subject } from 'rxjs'
 import { AuthService } from '../../administration/security/Auth/auth.service';
 import { formatDate } from '@angular/common';
 import { FireBaseService } from '../../GlobalServices/firebase.service';
-
+import { FetchService } from 'src/app/GlobalServices/fetch.service';
+import { take } from 'rxjs/operators';
+import { User } from 'src/app/Classes/ContentClasses';
 @Injectable({
   providedIn: 'root'
 })
@@ -12,13 +14,35 @@ export class LoginToSaveService {
   message = new BehaviorSubject<string>(undefined);
   stopClick = new BehaviorSubject<boolean>(undefined);
   reset = new Subject();
+  autoTrigger = new BehaviorSubject<boolean>(false);
 
   constructor(private auth: AuthService,
-              private firebaseserv: FireBaseService) { }
+              private firebaseserv: FireBaseService,
+              private fetcher: FetchService) { }
 
-  processForm (oldData: any, dataToSave: any, nameTokens: string[],
-    dataType: string, ) {
+
+  saveData() {
+    if(this.autoTrigger.value === true) {
+      this.fetcher.fetchData();
+      return this.fetcher.activeFormData.pipe(take(1))
+      .subscribe(data => {
+        this.processForm(data)
+      });
+    } else {
+      return this.processForm(this.fetcher.activeFormData.value);
+    }
+  }
+
+  processForm (dataToSave: any) {
     console.log(dataToSave);
+    if(dataToSave[0] === "abort") {
+      return this.message.next(dataToSave[1])
+    }
+    dataToSave = dataToSave[0];
+    const oldData = this.auth.user.value;
+    const nameTokens = this.fetcher.nameTokens;
+    const dataType = this.fetcher.type;
+
     this.assignStopClick(true);
     this.message.next('Processing...');
     dataToSave.UploadTime = formatDate(new Date(), 'yyyy-MM-dd, HH:mm:ss', 'en');
@@ -68,8 +92,12 @@ export class LoginToSaveService {
     return this.stopClick.next(click);
   }
 
+  assignAutoTrigger(trigger: boolean) {
+    this.autoTrigger.next(trigger);
+  }
   disposal() {
     this.message.next('');
     this.assignStopClick(false);
+    this.assignAutoTrigger(false);
   }
 }
