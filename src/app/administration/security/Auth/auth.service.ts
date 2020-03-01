@@ -48,7 +48,7 @@ export class AuthService {
 
   anonymousLogin() {
     return this.authorize.auth.signInAnonymously()
-    .then((credential) =>{
+    .then((credential) => {
       this.updateUserData(credential.user, true,
                           credential.additionalUserInfo.isNewUser);
     });
@@ -56,12 +56,14 @@ export class AuthService {
 
   googleLogin() {
     const provider = new auth.GoogleAuthProvider();
-    return this.oAuthLogin(provider);
+    return this.oAuthLogin(provider, true);
   }
 
-  private oAuthLogin(provider) {
+  private oAuthLogin(provider: any, local: boolean) {
+    const sessionType = local === true ? 'local' : 'session'; 
     if(this.authState) { //upgrade anon users
-      this.authorize.auth.currentUser.linkWithPopup(provider)
+      return this.authorize.auth.setPersistence(sessionType)
+      .then(() => {return this.authorize.auth.currentUser.linkWithPopup(provider)})
       .then((credential) =>
         this.updateUserData(credential.user, false,
                             credential.additionalUserInfo.isNewUser)
