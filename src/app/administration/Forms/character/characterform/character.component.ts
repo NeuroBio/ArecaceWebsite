@@ -8,7 +8,7 @@ import { take } from 'rxjs/operators';
 @Component({
   selector: 'app-character',
   templateUrl: './character.component.html',
-  styleUrls: ['./character.component.css']
+  styleUrls: ['./character.component.css', '../../Form.css']
 })
 export class CharacterComponent implements OnInit {
 
