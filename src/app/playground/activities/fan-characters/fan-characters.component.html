@@ -1,3 +1,14 @@
+<div class="compheader">
+    <h2 class="compheader">Make a Fan Character</h2>
+</div>
+<hr>
 <app-characterform
 ></app-characterform>
 <div style="clear: both;"></div>
+
+<app-login-to-save-main
+[DataType]="'FanCharacters'"
+[DatatoSave]="DatatoSave"
+[NameTokens]="['FirstName', 'LastName']"
+[Disabled]="notValid"
+></app-login-to-save-main>

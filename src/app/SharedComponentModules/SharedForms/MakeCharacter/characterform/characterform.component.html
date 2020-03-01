@@ -1,7 +1,4 @@
-<form [formGroup]="Form">
-<h2 class="formstyle">Character Form:</h2>
-<hr>  
-    
+<form [formGroup]="Form">   
     <p>Name:<br>&nbsp;&nbsp;&nbsp;&nbsp;
     First <input class="medium" formControlName="FirstName" type="text">
     Last <input class="medium"  formControlName="LastName" type="text"></p>
@@ -176,5 +173,4 @@
             (change)="uploadThumb($event, i)"><br><br>
         </div>
     </div>
-    <app-formButtons></app-formButtons>
 </form>

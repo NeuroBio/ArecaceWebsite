@@ -28,6 +28,7 @@ export class SourceAffinityCalculatorComponent implements OnInit, OnDestroy {
 
   stream1: Subscription;
   stream2: Subscription;
+  stream3: Subscription;
 
   constructor(private SAserv: SourceAbilityCalculatorService,
               private fb: FormBuilder,
@@ -44,12 +45,14 @@ export class SourceAffinityCalculatorComponent implements OnInit, OnDestroy {
       });
     this.stream2 = this.fetcher.processData
       .subscribe(() => this.onSubmit());
-    this.Form.valueChanges.subscribe(() => this.fetcher.assignvalidity(false));
+    this.stream3 = this.Form.valueChanges.subscribe(() =>
+      this.fetcher.assignvalidity(false));
   }
 
   ngOnDestroy() {
     this.stream1.unsubscribe();
     this.stream2.unsubscribe();
+    this.stream3.unsubscribe();
   }
 
   createForm() {

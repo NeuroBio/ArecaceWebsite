@@ -18,14 +18,14 @@ export class LoginToSaveService {
 
   processForm (oldData: any, dataToSave: any, nameTokens: string[],
     dataType: string, ) {
-    // console.log(dataToSave);
+    console.log(dataToSave);
     this.assignStopClick(true);
     this.message.next('Processing...');
     dataToSave.UploadTime = formatDate(new Date(), 'yyyy-MM-dd, HH:mm:ss', 'en');
     dataToSave.UploadTimeShort = formatDate(new Date(), 'yy/MM/dd', 'en');
     dataToSave.DisplayName = this.makeDisplayName(nameTokens, dataToSave);
     dataToSave.ID = `${oldData.ID}_${this.getUniqueId(4)}`
-    // console.log(dataToSave);
+    console.log(dataToSave);
 
     
     if(oldData[dataType]) {// old data exists

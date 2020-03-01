@@ -35,7 +35,7 @@ export class SourceCalcFrameComponent implements OnInit, OnDestroy {
     .sort((a,b) => a.ID > b.ID ? 1 : -1);
 
     this.stream1 = this.auth.user.subscribe(() => 
-      this.loggedIn = this.auth.isLoggedIn)//.isUser());
+      this.loggedIn = this.auth.isUser());
     this.stream2 = this.fetcher.activeFormData.subscribe(userData => {
       if(userData) 
         this.DatatoSave = userData[0];

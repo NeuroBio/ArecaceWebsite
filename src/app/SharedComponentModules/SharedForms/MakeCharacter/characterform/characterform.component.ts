@@ -1,6 +1,8 @@
 import { Component, ViewChild, OnInit,
          OnDestroy, ElementRef }                    from '@angular/core';
-import { FormBuilder, FormArray, FormGroup}         from '@angular/forms';
+import { FormBuilder, FormArray,
+         FormGroup, Validators}                     from '@angular/forms';
+
 import { Subscription }                             from 'rxjs';
 
 import { CharacterMetaData }                        from 'src/app/Classes/ContentClasses';
@@ -14,7 +16,7 @@ import { FetchService }                             from 'src/app/GlobalServices
 @Component({
   selector: 'app-characterform',
   templateUrl: './characterform.component.html',
-  styleUrls: ['../../../../administration/Forms/Form.css']
+  styleUrls: ['../../../../administration/Forms/Form.css', './characterform.component.css']
 })
 
 export class CharacterFormComponent implements OnInit, OnDestroy {
@@ -32,6 +34,7 @@ export class CharacterFormComponent implements OnInit, OnDestroy {
 
   stream1: Subscription;
   stream2: Subscription;
+  stream3: Subscription;
   
   SourceAbilitiesArray = this.populateSAbilities();
   RelationsArray: FormArray;
@@ -51,19 +54,22 @@ export class CharacterFormComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.stream1 = this.fetcher.itemToEdit
       .subscribe(item => this.assignFormData(item));
-    // this.stream2 = this.fetcher.processData
-    //   .subscribe(() => this.processForm());
+    this.stream2 = this.fetcher.processData
+      .subscribe(() => this.processForm());
+    this.stream3 = this.Form.valueChanges.subscribe(valid =>
+      this.fetcher.assignvalidity(valid));
   }
 
   ngOnDestroy() {
     this.stream1.unsubscribe();
     this.stream2.unsubscribe();
+    this.stream3.unsubscribe();
   }
 
   createForm() {
     return this.fb.group({
-      FirstName: '',
-      LastName: '',
+      FirstName: ['', Validators.required],
+      LastName: ['', Validators.required],
       SMClass: 'Source Magician',
       Occupation: '',
       Country: 'Escholzian',
@@ -122,41 +128,41 @@ export class CharacterFormComponent implements OnInit, OnDestroy {
     }
   }
   
-  // processForm() {
-  //   //Invalid Form
-  //   //Incomplete Form
-  //   if((this.biopicFullFile === undefined
-  //     || this.biopicThumbFile === undefined)
-  //     && this.Form.controls.Links.value === '') {
-  //      this.fetcher.assignActiveFormData(["abort",
-  //      "Bio files require a bio image."]);
-  //      return ;
-  //   }
+  processForm() {
+    //Invalid Form
+    //Incomplete Form
+    if((this.biopicFullFile === undefined
+      || this.biopicThumbFile === undefined)
+      && this.Form.controls.Links.value === '') {
+       this.fetcher.assignActiveFormData(["abort",
+       "Bio files require a bio image."]);
+       return ;
+    }
 
-  //   const Final: CharacterMetaData = Object.assign({}, this.Form.value); 
-  //   Final.SourceAbilitiesFormatted = this.FormatSA(Final);
-  //   Final.RelationsFormatted = this.FormatRelat(Final);
-  //   Final.SourceAbilities = JSON.stringify(Final.SourceAbilities);
-  //   Final.Relations = JSON.stringify(Final.Relations);
-  //   Final.Unique = JSON.stringify(Final.Unique);
-  //   Final.ID = Final.FirstName.split(' ').join('');
-  //   Final.References = this.createReference(Final.ReferenceIDs, Final.FirstName);
+    const Final: CharacterMetaData = Object.assign({}, this.Form.value); 
+    Final.SourceAbilitiesFormatted = this.FormatSA(Final);
+    Final.RelationsFormatted = this.FormatRelat(Final);
+    Final.SourceAbilities = JSON.stringify(Final.SourceAbilities);
+    Final.Relations = JSON.stringify(Final.Relations);
+    Final.Unique = JSON.stringify(Final.Unique);
+    Final.ID = Final.FirstName.split(' ').join('');
+    Final.References = this.createReference(Final.ReferenceIDs, Final.FirstName);
 
-  //   const imagePaths = [`CharacterBios/${Final.FirstName}-Thumb`,
-  //                       `CharacterBios/${Final.FirstName}-Full`
-  //                       ].concat(this.refNames(this.fullFiles, Final.FirstName));
+    const imagePaths = [`CharacterBios/${Final.FirstName}-Thumb`,
+                        `CharacterBios/${Final.FirstName}-Full`
+                        ].concat(this.refNames(this.fullFiles, Final.FirstName));
     
-  //   const imageEvents = [this.biopicThumbFile, this.biopicFullFile]
-  //     .concat(this.combineLinks(this.fullFiles, this.thumbFiles));
+    const imageEvents = [this.biopicThumbFile, this.biopicFullFile]
+      .concat(this.combineLinks(this.fullFiles, this.thumbFiles));
     
-  //   this.fetcher.assignActiveFormData([Final,
-  //                                       imagePaths,
-  //                                       imageEvents,
-  //                                       Final.Links,
-  //                                       undefined,
-  //                                       undefined,
-  //                                       undefined]);
-  // }
+    this.fetcher.assignActiveFormData([Final,
+                                        imagePaths,
+                                        imageEvents,
+                                        Final.Links,
+                                        undefined,
+                                        undefined,
+                                        undefined]);
+  }
 
   onReset() {
     this.RelationsArray = this.fb.array([]);
@@ -173,21 +179,21 @@ export class CharacterFormComponent implements OnInit, OnDestroy {
     this.showUnique = false;
   }
 
-  // uploadBioPicFull(event: any) {
-  //   this.biopicFullFile = event;
-  // }
+  uploadBioPicFull(event: any) {
+    this.biopicFullFile = event;
+  }
 
-  // uploadBioPicThumb(event: any) {
-  //   this.biopicThumbFile = event;
-  // }
+  uploadBioPicThumb(event: any) {
+    this.biopicThumbFile = event;
+  }
 
-  // uploadFull(event: any, index: number) {
-  //   this.fullFiles[index] = event;
-  // }
+  uploadFull(event: any, index: number) {
+    this.fullFiles[index] = event;
+  }
 
-  // uploadThumb(event: any, index: number) {
-  //   this.thumbFiles[index] = event;
-  // }
+  uploadThumb(event: any, index: number) {
+    this.thumbFiles[index] = event;
+  }
 
   //Processing functions
   populateSAbilities() {
@@ -254,85 +260,85 @@ export class CharacterFormComponent implements OnInit, OnDestroy {
     return final;
   }
 
-  // combineLinks(full: string[], thumb: string[]) {
-  //   if(thumb.length > 0){
-  //     return thumb.map((thumb,i) => [thumb, full[i]])
-  //       .reduce(function(a,b) {
-  //         return a.concat(b); });
-  //   }else{
-  //     return [];
-  //   }
-  // }
+  combineLinks(full: string[], thumb: string[]) {
+    if(thumb.length > 0){
+      return thumb.map((thumb,i) => [thumb, full[i]])
+        .reduce(function(a,b) {
+          return a.concat(b); });
+    }else{
+      return [];
+    }
+  }
 
-  // refNames(imageEvents: any[], name:string) {
-  //   let imgNames: string[] = [];
-  //   for(let event in imageEvents) {
-  //     imgNames.push(`CharacterBios/${name}-Ref${event}-thumb`);
-  //     imgNames.push(`CharacterBios/${name}-Ref${event}-full`);
-  //   }
-  //   return imgNames;
-  // }
+  refNames(imageEvents: any[], name:string) {
+    let imgNames: string[] = [];
+    for(let event in imageEvents) {
+      imgNames.push(`CharacterBios/${name}-Ref${event}-thumb`);
+      imgNames.push(`CharacterBios/${name}-Ref${event}-full`);
+    }
+    return imgNames;
+  }
 
-  // createReference(ids: any[], name: string) {
-  //   if(name.endsWith('s')) {
-  //     name = name.concat("'");
-  //   } else {
-  //     name = name.concat("'s");
-  //   }
+  createReference(ids: any[], name: string) {
+    if(name.endsWith('s')) {
+      name = name.concat("'");
+    } else {
+      name = name.concat("'s");
+    }
 
-  //   let references: any[] = [];
-  //   for(let index in ids){
-  //     references.push({
-  //       ID: ids[index].Ref.split(' ').join(''),
-  //       Name: `${name} ${ids[index].Ref}`,
-  //       AltText: `${name} ${ids[index].Ref}`,
-  //     });
-  //   }
-  //   return(references);
-  // }
+    let references: any[] = [];
+    for(let index in ids){
+      references.push({
+        ID: ids[index].Ref.split(' ').join(''),
+        Name: `${name} ${ids[index].Ref}`,
+        AltText: `${name} ${ids[index].Ref}`,
+      });
+    }
+    return(references);
+  }
 
 
 
   //display functions
-  // updateColor(select: string, which: number) {
-  //   if(which === 1) {
-  //     this.toneColor1 = this.DropDowns.Ethnicity
-  //       .filter(x => select === x.id)[0].hex;
-  //   } else {
-  //     this.toneColor2 = this.DropDowns.Ethnicity
-  //       .filter(x => select === x.id)[0].hex;
-  //   }
-  // }
+  updateColor(select: string, which: number) {
+    if(which === 1) {
+      this.toneColor1 = this.DropDowns.Ethnicity
+        .filter(x => select === x.id)[0].hex;
+    } else {
+      this.toneColor2 = this.DropDowns.Ethnicity
+        .filter(x => select === x.id)[0].hex;
+    }
+  }
 
-  // allowUnique(check: boolean) {
-  //   this.showUnique = check;
-  // }
+  allowUnique(check: boolean) {
+    this.showUnique = check;
+  }
 
-  // updateTerritory(nation: string) {
-  //   this.activeRegion = this.DropDowns.countries
-  //     .filter(x => nation === x.id)[0].terr;
-  //   this.Form.patchValue({Territory: this.activeRegion[0]});
-  // }
+  updateTerritory(nation: string) {
+    this.activeRegion = this.DropDowns.countries
+      .filter(x => nation === x.id)[0].terr;
+    this.Form.patchValue({Territory: this.activeRegion[0]});
+  }
 
-  // updateAge(chosenQT: string) {
-  //   const index = this.DropDowns.Quartrits.findIndex(QT => chosenQT === QT);
-  //   this.daysArray = new Array(this.DropDowns.Months[index]);
-  //   this.Form.patchValue({ Zodiac: this.DropDowns.Zodiacs[index], Day: 1 })
-  // }
+  updateAge(chosenQT: string) {
+    const index = this.DropDowns.Quartrits.findIndex(QT => chosenQT === QT);
+    this.daysArray = new Array(this.DropDowns.Months[index]);
+    this.Form.patchValue({ Zodiac: this.DropDowns.Zodiacs[index], Day: 1 })
+  }
 
-  // updateCM() {
-  //   const inches: number = this.Form.controls.Ft.value*12
-  //                         + this.Form.controls.Inch.value;
-  //   this.Form.patchValue({ Cm:(inches*2.54).toFixed(2) });
-  // }
+  updateCM() {
+    const inches: number = this.Form.controls.Ft.value*12
+                          + this.Form.controls.Inch.value;
+    this.Form.patchValue({ Cm:(inches*2.54).toFixed(2) });
+  }
 
-  // updateFtIn() {
-  //   const inches = this.Form.controls.Cm.value*.393701;
-  //   this.Form.patchValue({
-  //     Inch: (inches%12).toFixed(2),
-  //     Ft: Math.floor(inches/12)
-  //   });
-  // }
+  updateFtIn() {
+    const inches = this.Form.controls.Cm.value*.393701;
+    this.Form.patchValue({
+      Inch: (inches%12).toFixed(2),
+      Ft: Math.floor(inches/12)
+    });
+  }
 
   getDropData(group:string, id: string, formvalue: string, desired: string) {
     return this.DropDowns[group].find(member =>
