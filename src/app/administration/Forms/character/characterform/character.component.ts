@@ -3,7 +3,7 @@ import { BirthdayService } from 'src/app/administration/Forms/character/birthday
 import { CRUDcontrollerService }        from '../../../services/CRUDcontroller.service'
 import { FetchService }                             from 'src/app/GlobalServices/fetch.service';
 import { Subscription } from 'rxjs';
-import { take } from 'rxjs/operators';
+import { take, skip } from 'rxjs/operators';
 
 @Component({
   selector: 'app-character',
@@ -42,7 +42,8 @@ export class CharacterComponent implements OnInit {
     //Invalid Form
     this.fetcher.fetchData();
 
-    return this.fetcher.activeFormData.pipe(take(1)).subscribe(Final => {
+    return this.fetcher.activeFormData.pipe(skip(1), take(1)).subscribe(Final => {
+      console.log("frame")
       this.controller.activeFormData.next(Final);
       if(Final[0] !== 'abort') {
           this.birthday.updateBirthdayData(Final[0]);

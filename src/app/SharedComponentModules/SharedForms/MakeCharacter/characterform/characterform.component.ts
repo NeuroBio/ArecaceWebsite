@@ -10,6 +10,7 @@ import { SourceAbilities, Relations }               from '../formclasses';
 import { UploadCharacterDrops }                     from '../uploadcharacterdrops';
 import { QuickAssign }                              from 'src/app/GlobalServices/commonfunctions.service';
 import { FetchService }                             from 'src/app/GlobalServices/fetch.service';
+import { ImageResizerService } from 'src/app/administration/services/image-resizer.service';
 
 
 
@@ -49,7 +50,8 @@ export class CharacterFormComponent implements OnInit, OnDestroy {
 
   constructor(private fb: FormBuilder,
               private fetcher: FetchService,
-              private qa: QuickAssign) {}
+              private qa: QuickAssign,
+              private resizeserv: ImageResizerService) {}
 
   ngOnInit() {
     this.stream1 = this.fetcher.itemToEdit
@@ -129,9 +131,8 @@ export class CharacterFormComponent implements OnInit, OnDestroy {
   }
   
   processForm() {
-    console.log("triggered")
-    //Invalid Form
-    //Incomplete Form
+    // Invalid Form
+    // Incomplete Form
     if((this.biopicFullFile === undefined
       || this.biopicThumbFile === undefined)
       && this.Form.controls.Links.value === '') {
@@ -149,20 +150,23 @@ export class CharacterFormComponent implements OnInit, OnDestroy {
     Final.ID = Final.FirstName.split(' ').join('');
     Final.References = this.createReference(Final.ReferenceIDs, Final.FirstName);
 
-    const imagePaths = [`CharacterBios/${Final.FirstName}-Thumb`,
-                        `CharacterBios/${Final.FirstName}-Full`
+    const imagePaths = [`hell/${Final.FirstName}-Thumb`,
+                        `hell/${Final.FirstName}-Full`
                         ].concat(this.refNames(this.fullFiles, Final.FirstName));
     
-    const imageEvents = [this.biopicThumbFile, this.biopicFullFile]
+    return this.resizeserv.resizeImage(this.biopicFullFile, 450, 450)
+    .then(resizedBlob => {
+      console.log('form!');
+      const imageEvents = [{target: {files: [resizedBlob]}}, this.biopicFullFile]
       .concat(this.combineLinks(this.fullFiles, this.thumbFiles));
-    
-    this.fetcher.assignActiveFormData([Final,
-                                        imagePaths,
-                                        imageEvents,
-                                        Final.Links,
-                                        undefined,
-                                        undefined,
-                                        undefined]);
+      return this.fetcher.assignActiveFormData([Final,
+        imagePaths,
+        imageEvents,
+        Final.Links,
+        undefined,
+        undefined,
+        undefined]);
+    });
   }
 
   onReset() {

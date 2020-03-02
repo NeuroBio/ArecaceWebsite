@@ -1,7 +1,7 @@
 import { Injectable }                           from '@angular/core';
 import { FormGroup }                            from '@angular/forms';
 
-import { map, take }                            from 'rxjs/operators';
+import { map, take, skip }                            from 'rxjs/operators';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 
 import { FireBaseService }                      from 'src/app/GlobalServices/firebase.service';
@@ -74,13 +74,15 @@ export class CRUDcontrollerService {
 
   //Key upload/download functions
   onSubmit() {
+    console.log("start")
     const buttonState = this.allowButtons.value;
     this.allowButtons.next(new ButtonController([false, false, false, false]));
 
     this.message.next("Processing...");
     this.triggerProcess.next();
-    this.activeFormData.pipe(take(1)).subscribe(data => {
-  
+    return this.activeFormData.pipe(
+      skip(1), take(1)).subscribe(data => {
+      console.log("CRUDcontroller")
       //submit button hit with invalid form.
       if(data[0] === "abort") {
         this.message.next(data[1]);
