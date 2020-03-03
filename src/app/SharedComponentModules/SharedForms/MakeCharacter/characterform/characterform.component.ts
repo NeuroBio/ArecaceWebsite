@@ -47,6 +47,7 @@ export class CharacterFormComponent implements OnInit, OnDestroy {
   daysArray: number[];
   showUnique: boolean;
   imageFolderPath: string;
+  imgUrl: string;
 
   constructor(private fb: FormBuilder,
               private fetcher: FetchService,
@@ -154,19 +155,19 @@ export class CharacterFormComponent implements OnInit, OnDestroy {
                         `hell/${Final.FirstName}-Full`
                         ].concat(this.refNames(this.fullFiles, Final.FirstName));
     
-    return this.resizeserv.resizeImage(this.biopicFullFile, 450, 450)
-    .then(resizedBlob => {
-      console.log('form!');
-      const imageEvents = [{target: {files: [resizedBlob]}}, this.biopicFullFile]
-      .concat(this.combineLinks(this.fullFiles, this.thumbFiles));
-      return this.fetcher.assignActiveFormData([Final,
-        imagePaths,
-        imageEvents,
-        Final.Links,
-        undefined,
-        undefined,
-        undefined]);
-    });
+    // return this.resizeserv.resizeImage(this.biopicFullFile.target.files[0], 450, 450, true)
+    // .then(resizedBlob => {
+    //   console.log('form!');
+    //   const imageEvents = [{target: {files: [resizedBlob]}}, this.biopicFullFile]
+    //   .concat(this.combineLinks(this.fullFiles, this.thumbFiles));
+    //   return this.fetcher.assignActiveFormData([Final,
+    //     imagePaths,
+    //     imageEvents,
+    //     Final.Links,
+    //     undefined,
+    //     undefined,
+    //     undefined]);
+    // });
   }
 
   onReset() {
@@ -185,7 +186,12 @@ export class CharacterFormComponent implements OnInit, OnDestroy {
   }
 
   uploadBioPicFull(event: any) {
+    console.log("trigger")
     this.biopicFullFile = event;
+    this.resizeserv.resizeImage(event.target.files[0], 450, 450, false)
+    .then((resized: string) => {
+       this.imgUrl = resized;
+    });
   }
 
   uploadBioPicThumb(event: any) {

@@ -148,13 +148,16 @@
     <textarea formControlName="FullBackground" rows="6" cols="65"></textarea></p>    
 
 
+    <p>Bio Picture Main: <br><input class="fileupload"  #bioPicFull type="file"
+        (change)="uploadBioPicFull($event)"
+    accept=".png,.jpg"></p>
+
     <p>Bio Picture Thumb: <br><input class="fileupload"  #bioPicThumb type="file"
         (change)="uploadBioPicThumb($event)"
     accept=".png,.jpg"></p>
 
-    <p>Bio Picture Full: <br><input class="fileupload"  #bioPicFull type="file"
-        (change)="uploadBioPicFull($event)"
-    accept=".png,.jpg"></p>
+    <img *ngIf="imgUrl" [src]="imgUrl" alt="Bio thumb preview..." charset=UTF-8>
+        {{ imgUrl }}
 
     <p>Other References:<br>
         <button type="button" (click)="addRef(true)">+</button>
