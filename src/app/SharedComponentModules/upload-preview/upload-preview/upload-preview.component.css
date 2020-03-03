@@ -1,0 +1,9 @@
+div#holdon {
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    justify-items: center;
+    align-items: center;
+    align-content: center;
+    background-color: rgb(49,49,49);
+}

@@ -1,5 +1,5 @@
 import { Component, ViewChild, OnInit,
-         OnDestroy, ElementRef }                    from '@angular/core';
+         OnDestroy, ElementRef, ChangeDetectorRef }                    from '@angular/core';
 import { FormBuilder, FormArray,
          FormGroup, Validators}                     from '@angular/forms';
 
@@ -191,14 +191,17 @@ export class CharacterFormComponent implements OnInit, OnDestroy {
 
   makeThumb(event: any, makeinfo: MakeThumbInfo) {
     if(makeinfo.Generate === true) {
+      makeinfo.Loading = true; //view doesn't update for this
       this.fetcher.assignLoading(true);
+      //async function that returns a promise
       this.resizeserv.resizeImage(event.target.files[0], 450, 450, false)
       .then((resized: string) => {
         makeinfo.ImgUrl = resized;
+        makeinfo.Loading = false;
         this.fetcher.assignLoading(false);
-      })
-      .catch(err => {
+      }).catch(err => {
         console.log(err);
+        makeinfo.Loading = false;
         this.fetcher.assignLoading(false);
       });
     }
