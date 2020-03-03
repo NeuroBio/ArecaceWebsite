@@ -1,0 +1,13 @@
+<div *ngIf="neverLoading===false; then noImages, else Images"></div>
+
+<ng-template #Images>
+    <div *ngIf="loading===true" class="loading"></div>
+    <img *ngIf="loading===false && imgUrl"
+    [src]="imgUrl" charset=UTF-8
+    [alt]="'Image preview for ' + name">
+</ng-template>
+
+<ng-template #noImages>
+    <div *ngIf="loading===true">Generating Preview</div>
+    <div *ngIf="loading===false"></div>
+</ng-template>

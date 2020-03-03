@@ -11,30 +11,35 @@ export class FetchService {
   activeFormData = new BehaviorSubject<any>(undefined);
   itemToEdit = new BehaviorSubject<any>(undefined);
   valid = new BehaviorSubject<boolean>(undefined);
+  loading = new BehaviorSubject<boolean>(false);
 
   nameTokens: string[];
   type: string;
 
   constructor() { }
 
-  assignIntemtoEdit(item: any) {
-    return this.itemToEdit.next(item);
+  assignIntemtoEdit(item: any): void {
+    this.itemToEdit.next(item);
   }
   
-  assignActiveFormData(activeform: any) {
-    return this.activeFormData.next(activeform);
+  assignActiveFormData(activeform: any): void {
+    this.activeFormData.next(activeform);
   }
 
-  fetchData() {
-    return this.processData.next();
+  fetchData(): void {
+    this.processData.next();
   }
 
-  assignvalidity(valid: boolean) {
-    return this.valid.next(valid);
+  assignvalidity(valid: boolean): void {
+    this.valid.next(valid);
   }
 
-  assignUserDataInfo (tokens: string[], type: string) {
+  assignUserDataInfo (tokens: string[], type: string): void {
     this.nameTokens = tokens;
     this.type = type;
+  }
+
+  assignLoading(load: boolean): void {
+    this.loading.next(load);
   }
 }

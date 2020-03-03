@@ -39,6 +39,7 @@ export class AppComponent implements AfterViewInit{
         this.global.ImagesLoadable = false;
       }
     }
+    console.log('images = '+this.global.ImagesLoadable)
   }
   
   mobilecheck () {

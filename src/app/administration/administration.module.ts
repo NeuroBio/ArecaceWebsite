@@ -4,6 +4,7 @@ import { ReactiveFormsModule }          from '@angular/forms';
 
 
 import { AdministrationRoutingModule }  from './administration-routing.module';
+import { CharacterFormModule }          from '../SharedComponentModules/SharedForms/MakeCharacter/character-form.module';
 import { SharedFormsModule }            from '../SharedComponentModules/SharedForms/shared-forms.module';
 import { LanguageTableModule }          from '../SharedComponentModules/language-table/language-table.module';
 
@@ -14,7 +15,7 @@ import { AdminComponent }               from './DashBoard/admin/admin.component'
 import { AdminDutiesComponent }         from './DashBoard/adminDuties/adminDuties.component';
 import { BeastFormComponent }           from './Forms/beast/beastform/beastform.component';
 import { ChapterFormComponent }         from './Forms/chapter/chapterform/chapterform.component';
-import { CharacterComponent }       from './Forms/character/characterform/character.component';
+import { CharacterComponent }           from './Forms/character/characterform/character.component';
 import { ComplexWordFormComponent }     from './LanguageGeneration/complex-word-form/complex-word-form.component';
 import { ContentComponent }             from './DashBoard/content/content.component'
 import { EditListComponent }            from './DashBoard/editlist/editlist.component';
@@ -77,6 +78,7 @@ import { WordFormComponent }            from './LanguageGeneration/word-form/wor
   ],
   imports: [
     CommonModule,
+    CharacterFormModule,
     SharedFormsModule,
     LanguageTableModule,
     ReactiveFormsModule,

@@ -6,7 +6,7 @@ import { FormBuilder, FormArray,
 import { Subscription }                             from 'rxjs';
 
 import { CharacterMetaData }                        from 'src/app/Classes/ContentClasses';
-import { SourceAbilities, Relations }               from '../formclasses';
+import { SourceAbilities, Relations, MakeThumbInfo }               from '../formclasses';
 import { UploadCharacterDrops }                     from '../uploadcharacterdrops';
 import { QuickAssign }                              from 'src/app/GlobalServices/commonfunctions.service';
 import { FetchService }                             from 'src/app/GlobalServices/fetch.service';
@@ -30,6 +30,7 @@ export class CharacterFormComponent implements OnInit, OnDestroy {
   @ViewChild('bioPicFull', { static: true }) biopicFullUploader: ElementRef;
   biopicThumbFile: any;
   biopicFullFile: any;
+  biopicThumbData = new MakeThumbInfo('Bio Pic', undefined, false, true);
   fullFiles: any[];
   thumbFiles: any[];
 
@@ -46,10 +47,8 @@ export class CharacterFormComponent implements OnInit, OnDestroy {
   activeRegion: string[];
   daysArray: number[];
   showUnique: boolean;
-  imageFolderPath: string;
-  imgUrl: string;
-
-  constructor(private fb: FormBuilder,
+  
+    constructor(private fb: FormBuilder,
               private fetcher: FetchService,
               private qa: QuickAssign,
               private resizeserv: ImageResizerService) {}
@@ -186,12 +185,27 @@ export class CharacterFormComponent implements OnInit, OnDestroy {
   }
 
   uploadBioPicFull(event: any) {
-    console.log("trigger")
     this.biopicFullFile = event;
-    this.resizeserv.resizeImage(event.target.files[0], 450, 450, false)
-    .then((resized: string) => {
-       this.imgUrl = resized;
-    });
+    this.makeThumb(event, this.biopicThumbData);
+  }
+
+  makeThumb(event: any, makeinfo: MakeThumbInfo) {
+    if(makeinfo.Generate === true) {
+      this.fetcher.assignLoading(true);
+      this.resizeserv.resizeImage(event.target.files[0], 450, 450, false)
+      .then((resized: string) => {
+        makeinfo.ImgUrl = resized;
+        this.fetcher.assignLoading(false);
+      })
+      .catch(err => {
+        console.log(err);
+        this.fetcher.assignLoading(false);
+      });
+    }
+  }
+
+  switchAutoGenerate(makeinfo: MakeThumbInfo) {
+    makeinfo.Generate = !makeinfo.Generate;
   }
 
   uploadBioPicThumb(event: any) {
