@@ -127,7 +127,8 @@
 
     <p>Family in Story:
         <button type="button" (click)="addRelative(true)">+</button>
-        <button type="button" (click)="addRelative(false)">-</button></p>
+        <button type="button" [disabled]="noFamily"
+        (click)="addRelative(false)">-</button></p>
     <div formArrayName="Relations">
         <div *ngFor="let relative of RelationsArray.controls; let i = index"
         [formGroupName]="i">
@@ -163,7 +164,8 @@
 
     <p>Other References:<br>
         <button type="button" (click)="addRef(true)">+</button>
-        <button type="button" (click)="addRef(false)">-</button></p>
+        <button type="button" [disabled]="noReferences"
+        (click)="addRef(false)">-</button></p>
     <div formArrayName="ReferenceIDs">
         <div *ngFor="let refs of ReferencesArray.controls; let i = index"
         [formGroupName]="i">

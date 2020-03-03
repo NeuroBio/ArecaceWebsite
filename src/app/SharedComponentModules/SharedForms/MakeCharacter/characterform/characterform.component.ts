@@ -33,6 +33,8 @@ export class CharacterFormComponent implements OnInit, OnDestroy {
   biopicThumbData = new MakeThumbInfo('Bio Pic', undefined, false, true);
   fullFiles: any[];
   thumbFiles: any[];
+  noReferences: boolean;
+  noFamily: boolean;
 
   stream1: Subscription;
   stream2: Subscription;
@@ -182,6 +184,8 @@ export class CharacterFormComponent implements OnInit, OnDestroy {
     this.fullFiles = [];
     this.thumbFiles = [];
     this.showUnique = false;
+    this.noReferences = true;
+    this.noFamily = true;
   }
 
   uploadBioPicFull(event: any) {
@@ -233,12 +237,16 @@ export class CharacterFormComponent implements OnInit, OnDestroy {
   }
 
   addRelative(add: boolean, name: string = '', ship: string = '') {
-    if(add){
+    if(add) {
       (<FormArray>this.Form.controls.Relations)
       .push(this.fb.group({RelationName: name, Relationship:ship}));
-    }else{
+      this.noFamily = false;
+    } else {
       (<FormArray>this.Form.controls.Relations)
       .removeAt(this.Form.controls.Relations.value.length-1);
+      if(this.Form.controls.Relations.value.length === 0) {
+        this.noFamily = true;
+      }
     }
   }
 
@@ -248,11 +256,15 @@ export class CharacterFormComponent implements OnInit, OnDestroy {
         .push(this.fb.group({ Ref: ref }));
       this.fullFiles.push('');
       this.thumbFiles.push('');
-    }else{
+      this.noReferences = false;
+    } else {
       (<FormArray>this.Form.controls.ReferenceIDs)
         .removeAt(this.Form.controls.ReferenceIDs.value.length-1);
       this.fullFiles.pop();
       this.thumbFiles.pop();
+      if(this.thumbFiles.length === 0) {
+        this.noReferences = true;
+      }
     }
   }
 
