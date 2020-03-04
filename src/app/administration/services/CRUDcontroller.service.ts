@@ -87,8 +87,7 @@ export class CRUDcontrollerService {
 
   //Key upload/download functions
   onSubmit() {
-    const buttonState = this.allowButtons.value;
-    this.allowButtons.next(new ButtonController([false, false, false, false]));
+    this.deActivateButtons()
 
     this.message.next("Processing...");
     this.triggerProcess.next();
@@ -97,7 +96,7 @@ export class CRUDcontrollerService {
       //submit button hit with invalid form.
       if(data[0] === "abort") {
         this.message.next(data[1]);
-        this.allowButtons.next(buttonState);
+        this.reActivateButtons()
         return;
       }
 
@@ -131,6 +130,7 @@ export class CRUDcontrollerService {
       }).catch(err => {
         console.log(meta)
         this.throwError(err);
+        this.reActivateButtons();
       });
     });
   }
@@ -258,10 +258,12 @@ export class CRUDcontrollerService {
 
   deActivateButtons() {
     this.ButtonSavedState.next(this.allowButtons.value);
+    console.log("here")
     this.allowButtons.next(new ButtonController([false, false, false, false]));
   }
 
   reActivateButtons() {
+    console.log(this.ButtonSavedState.value)
     this.allowButtons.next(this.ButtonSavedState.value);
   }
 

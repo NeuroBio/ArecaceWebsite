@@ -21,7 +21,6 @@ export class CRUD {
 
       let links = new Array<string>(paths.length);
       return Promise.all(images.map((event,index) => {//upload each image
-        console.log(event)
         return this.firebaseserv.uploadImage(paths[index], event)
         .then(() => {
           return this.firebaseserv.returnImage(paths[index]).toPromise() //return download link

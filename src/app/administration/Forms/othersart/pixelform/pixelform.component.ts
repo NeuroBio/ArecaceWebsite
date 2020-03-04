@@ -1,12 +1,14 @@
-import { Component, OnInit, OnDestroy,
-  ViewChild, ElementRef }             from '@angular/core';
-import { FormGroup, FormBuilder }     from '@angular/forms';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { FormGroup, FormBuilder }       from '@angular/forms';
 
-import { Subscription }               from 'rxjs';
+import { Subscription }                 from 'rxjs';
 
-import { CRUDcontrollerService }      from 'src/app/administration/services/CRUDcontroller.service';
-import { OthersArt }                  from 'src/app/Classes/ContentClasses';
-import { QuickAssign }                from 'src/app/GlobalServices/commonfunctions.service';
+import { CRUDcontrollerService }        from 'src/app/administration/services/CRUDcontroller.service';
+import { OthersArt }                    from 'src/app/Classes/ContentClasses';
+import { QuickAssign }                  from 'src/app/GlobalServices/commonfunctions.service';
+import { UploadPreviewService }         from 'src/app/SharedComponentModules/upload-preview/upload-preview.service';
+import { UploadPreviewSettings }        from 'src/app/SharedComponentModules/upload-preview/uploadpreviewclass';
+import { FetchService }                 from 'src/app/GlobalServices/fetch.service';
 
 @Component({
   selector: 'app-pixelform',
@@ -16,15 +18,15 @@ import { QuickAssign }                from 'src/app/GlobalServices/commonfunctio
 export class PixelformComponent implements OnInit, OnDestroy {
 
   Form: FormGroup;
-  @ViewChild('File', { static: true }) fileUploader: ElementRef;
-  file: any;
-
+  imageSettings = new UploadPreviewSettings([[250, 250, '100KB'], [undefined, undefined, '300KB']]);
   stream1: Subscription;
   stream2: Subscription;
 
   constructor(private fb: FormBuilder,
               private controller: CRUDcontrollerService,
-              private qa: QuickAssign) { }
+              private qa: QuickAssign,
+              private uploadpreviewserv: UploadPreviewService,
+              private fetcher: FetchService) { }
 
   ngOnInit() {
     this.stream1 = this.controller.itemToEdit
@@ -37,6 +39,7 @@ export class PixelformComponent implements OnInit, OnDestroy {
     this.stream1.unsubscribe();
     this.stream2.unsubscribe();
     this.controller.disposal();
+    this.fetcher.disposal();
   }
 
   createForm() {
@@ -59,9 +62,10 @@ export class PixelformComponent implements OnInit, OnDestroy {
     }
   }
 
-  processForm() {
+  processForm() {    
+    const mainFile = this.uploadpreviewserv.mainsData[0];
     //Incomplete Form
-    if((this.file === undefined)
+    if((mainFile === undefined)
       && this.Form.controls.Links.value === '') {
       this.controller.activeFormData.next(["abort",
         "Pixel files require images."]);
@@ -77,7 +81,7 @@ export class PixelformComponent implements OnInit, OnDestroy {
 
     this.controller.activeFormData.next([Final,
                                         [`OthersArt/${Final.ID}-pixel`],
-                                        [this.file],
+                                        [mainFile],
                                         Final.Links,
                                         undefined,
                                         undefined,
@@ -86,12 +90,8 @@ export class PixelformComponent implements OnInit, OnDestroy {
 
   onReset() {
     this.Form = this.createForm();
-    this.file = undefined;
-    this.fileUploader.nativeElement.value = '';
-  }
-  
-  getFile(event: any) {
-    this.file = event;
+    this.uploadpreviewserv.reset.next();
+    this.uploadpreviewserv.erase(0);
   }
 
 }

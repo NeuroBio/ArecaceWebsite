@@ -184,8 +184,8 @@ export class CharacterFormComponent implements OnInit, OnDestroy {
     Final.ID = Final.FirstName.split(' ').join('');
     
 
-    const imagePaths = [`hell/${Final.FirstName}-Full`,
-                        `hell/${Final.FirstName}-Thumb`]
+    const imagePaths = [`CharacterBios/${Final.FirstName}-Full`,
+                        `CharacterBios/${Final.FirstName}-Thumb`]
       .concat(this.refNames(RefsMain, Final.FirstName));
 
     const imageEvents = [BioPicMain, BioPicThumb]
