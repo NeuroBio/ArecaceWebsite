@@ -30,6 +30,7 @@ export class CharacterComponent implements OnInit {
   ngOnDestroy() {
     this.stream1.unsubscribe();
     this.stream2.unsubscribe();
+    this.controller.disposal();
   }
   
   processForm() {

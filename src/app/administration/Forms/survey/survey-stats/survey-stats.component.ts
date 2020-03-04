@@ -46,6 +46,7 @@ export class SurveyStatsComponent implements OnInit , OnDestroy {
     this.stream1.unsubscribe();
     this.stream2.unsubscribe();
     this.stream3.unsubscribe();
+    this.controller.disposal();
   }
 
   createForm() {

@@ -45,13 +45,14 @@ export class BeastFormComponent implements OnInit, OnDestroy {
     this.stream1.unsubscribe();
     this.stream2.unsubscribe();
     this.fetcher.disposal();
+    this.controller.disposal();
   }
 
   createForm() {
     return this.fb.group({
       Name: ['', Validators.required],
       Phylo: 'Mammalia',
-      Region: 'Escholzia',    
+      Region: 'Escholzia',
       Biome: 'Plains',
       Links: '',
       AltText: ''

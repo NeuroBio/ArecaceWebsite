@@ -1,22 +1,23 @@
 export class FirebasePaths {
-    bestiary = 'Bestiary';
     arc1 = 'Arc1Data';
     arc2 = 'Arc2Data';
+    bestiary = 'Bestiary';
     characters = 'CharacterBios';
     culture = 'CultureInfo';
+    extras = 'MiscArt';
     guilds = 'Guilds';
     maps = 'Maps';
-    extras = 'MiscArt';
-    scripts = 'Scripts';
     narratives = 'Narratives';
-    source = 'SourceInfo';
-    update = 'Inanity';
-    surveys = 'Surveys';
-    surveystats = 'SurveyStats';
+    notes = "LooseNotes"
     othersart = 'OthersArt';
     pixels = 'Pixels';
+    scripts = 'Scripts';
     sourceaffinity = 'SourceAffinities';
-    notes = "LooseNotes"
+    source = 'SourceInfo';
+    surveys = 'Surveys';
+    surveystats = 'SurveyStats';
+    update = 'Inanity';
+
 }
 
 export class Categories {

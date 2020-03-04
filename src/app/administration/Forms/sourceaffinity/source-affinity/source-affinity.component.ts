@@ -29,6 +29,7 @@ export class SourceAffinityComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.stream1.unsubscribe();
     this.stream2.unsubscribe();
+    this.controller.disposal();
   }
 
   assignFormData(editFormData: any) {

@@ -35,6 +35,7 @@ export class WebsiteTextComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.stop$.next(true);
     this.stream1.unsubscribe();
+    this.controller.disposal();
   }
 
   createForm() {

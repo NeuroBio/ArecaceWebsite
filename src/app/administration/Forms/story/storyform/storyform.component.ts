@@ -37,6 +37,7 @@ export class StoryFormComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.stream1.unsubscribe();
     this.stream2.unsubscribe();
+    this.controller.disposal();
   }
 
   createForm() {
