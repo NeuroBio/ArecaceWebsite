@@ -1,7 +1,6 @@
 import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { AuthService } from '../../../administration/security/Auth/auth.service';
 import { Subscription } from 'rxjs';
-import { User } from 'src/app/Classes/ContentClasses';
 import { LoginToSaveService } from '../login-to-save.service';
 import { FetchService } from 'src/app/GlobalServices/fetch.service';
 @Component({
@@ -27,7 +26,8 @@ export class LoginToSaveMainComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.stream1 = this.auth.user.subscribe(user =>
-      this.authorized = user? true : false);
+      this.authorized = user? true : false//this.auth.isUser()
+      );
     this.stream2 = this.logintosaveserv.stopClick
       .subscribe(click => this.stopClicking = click);
     this.stream3 = this.logintosaveserv.message

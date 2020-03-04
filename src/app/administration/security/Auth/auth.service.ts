@@ -41,7 +41,7 @@ export class AuthService {
         }
       })
     ).subscribe(user => {
-      this.user.next(user)
+      this.user.next(user);
       resolve();
     }) );
   }

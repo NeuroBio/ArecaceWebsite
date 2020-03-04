@@ -34,7 +34,6 @@ export class LoginToSaveService {
   }
 
   processForm (dataToSave: any) {
-    console.log(dataToSave);
     if(dataToSave[0] === "abort") {
       return this.message.next(dataToSave[1])
     }
@@ -49,7 +48,6 @@ export class LoginToSaveService {
     dataToSave.UploadTimeShort = formatDate(new Date(), 'yy/MM/dd', 'en');
     dataToSave.DisplayName = this.makeDisplayName(nameTokens, dataToSave);
     dataToSave.ID = `${oldData.ID}_${this.getUniqueId(4)}`
-    console.log(dataToSave);
 
     
     if(oldData[dataType]) {// old data exists

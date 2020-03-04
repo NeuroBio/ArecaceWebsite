@@ -20,12 +20,17 @@ export class MainNotesComponent implements OnInit {
   ngOnInit() {
     this.notes$ = this.generalcollectserv.returnMetaData().pipe(
       map((notes) => {
-        notes.sort((a,b) => a.TimeStampCreated < b.TimeStampCreated ? 1 : -1);
+        notes.sort((a,b) => a.Created < b.Created ? 1 : -1);
         return notes.map(note => [note.ShortTitle, note.ID]);
       })
     );
     
-    this.route.firstChild.paramMap.subscribe(
-      path => this.current = path.get('NotesID'));
-  }
+    this.route.firstChild.paramMap.subscribe(path => {
+        this.current = path.get('NotesID')
+        if(this.current === 'Latest') {
+          return this.notes$.subscribe(all => this.current = all[0][1].toString()
+          ).unsubscribe();
+        }
+      });
+    }
 }

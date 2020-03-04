@@ -1,9 +1,9 @@
 /*Form styling*/
 form {
-    margin:3px;
-    padding:4px;
+    margin: 3px;
+    padding: 7px;
     width: 800px;
-    overflow: auto;
+    overflow: visible;
     border: 1px solid white;
     float: left;
 }

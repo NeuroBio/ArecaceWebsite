@@ -13,7 +13,8 @@ const routes: Routes = [
     {path: 'notfound', redirectTo: ''},
     {path: ':ExtraID', component: BlowupmasterComponent,
      resolve: {links: GeneralmemberresolverService}},
-  ]},
+  ]
+  }
 ];
 
 @NgModule({

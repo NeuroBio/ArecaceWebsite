@@ -17,24 +17,26 @@ export class GeneralcollectionresolverService implements Resolve<any> {
               private generalcollectionserv: GeneralcollectionService,
               private router: Router) { }
   
-  resolve(route: ActivatedRouteSnapshot){
+  resolve(route: ActivatedRouteSnapshot) {
     let type:string;
     const url = route['_routerState'].url.split('/');
     if(route.url[0]){
+      //for characters, also catches more common cases
       type = route.url[route.url.length-1].path;
-    } else if (url[url.length-2]){
+    } else if (route.firstChild) {
+      //this and else catch lazyloaded module weirdness
       type = url[url.length-2];
     } else {
       type = url[url.length-1];
     }
     return this.firebaseserv.returnCollect(this.firePaths[type]).pipe(
       take(1),
-      tap(collect =>{
-        if(collect[0]){
+      tap(collect => {
+        if(collect[0]) {
           this.generalcollectionserv.initializeMetaData(collect, type);
         }else{
           this.router.navigate(["badservice"])
         }
-    }))
+    }));
   }
 }

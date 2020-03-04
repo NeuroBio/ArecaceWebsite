@@ -3,6 +3,7 @@ import { User } from '../../../Classes/ContentClasses';
 
 import { BookmarkService } from '../bookmark.service';
 import { Subscription } from 'rxjs';
+import { AuthService } from 'src/app/administration/security/Auth/auth.service';
 
 @Component({
   selector: 'app-bookmark',
@@ -21,12 +22,13 @@ export class BookmarkComponent implements OnInit, OnChanges, OnDestroy {
   notLoggedIn: boolean;
   stream: Subscription;
 
-  constructor(private bookmarkserv: BookmarkService) { }
+  constructor(private bookmarkserv: BookmarkService,
+              private auth: AuthService) { }
 
   ngOnInit() {
     this.stream = this.bookmarkserv.userData.subscribe(data => {
       this.data = data;
-      this.notLoggedIn = data === undefined;
+      this.notLoggedIn = !this.auth.isUser();
       this.setColors();
     });
   }
@@ -39,12 +41,11 @@ export class BookmarkComponent implements OnInit, OnChanges, OnDestroy {
 
   ngOnDestroy() {
     this.stream.unsubscribe();
-    this.bookmarkserv.disposal();
   }
 
   bookmark() {
     const index = this.checkBookmark();
-    if(index < 0) {    
+    if(index < 0) {
       this.bookmarkserv.addBookmark(this.type, this.path, this.name);
     } else {
       this.bookmarkserv.removeBookmark(this.type, index);

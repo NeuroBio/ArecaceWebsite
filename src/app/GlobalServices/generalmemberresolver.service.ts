@@ -15,7 +15,7 @@ export class GeneralmemberresolverService implements Resolve<any>{
               private getrouteserv: GetRouteSegmentsService) { }
   
   resolve(route: ActivatedRouteSnapshot) {
-    const ID = route.url[0].path;
+    const ID = this.checkLatest(route.url[0].path);
     return this.generalcollectserv.getMember(ID).pipe(
       take(1),
       tap(member => {
@@ -27,5 +27,13 @@ export class GeneralmemberresolverService implements Resolve<any>{
         }
       })
     )
+  }
+
+  checkLatest(ID: string) {
+    if(ID === 'Latest') {
+      ID = this.generalcollectserv.collectionData.value
+      .sort((a,b) => a.Created > b.Created ? -1 : 1)[0].ID
+    }
+    return ID;
   }
 }

@@ -112,7 +112,6 @@ export class UploadMainComponent implements OnInit, OnDestroy {
       this.thumbImg.Loading = false;
       this.fetcher.assignLoading(false);
     }).catch(err => {
-      console.log(err);
       this.thumbImg.Loading = false;
       this.fetcher.assignLoading(false);
     });

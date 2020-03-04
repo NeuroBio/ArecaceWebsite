@@ -29,7 +29,7 @@ input[type="radio"].toggler:checked + label {
 }
 
 input[type="radio"].toggler:not(:checked) + label {
-  background-color: #707070;
+  background-color: #616161;
 }
 
 label {
