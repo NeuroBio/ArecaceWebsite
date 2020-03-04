@@ -163,9 +163,9 @@
     ></app-upload-preview> -->
     <app-upload-main
     name="Bio Picture"
-    ID="1"
+    ID="0"
     [hasThumb]="true"
-    [Settings]="imageSettings"
+    [Settings]="imageBioPicSettings"
     ></app-upload-main>
 
     <p>Other References:<br>
@@ -176,14 +176,20 @@
         <div *ngFor="let refs of ReferencesArray.controls; let i = index"
         [formGroupName]="i">
             Reference {{ i+1 }}:<br>
-            ID: <br>
+            ID:
             <input type="text" formControlName="Ref" class="long"><br>
-            Main:<br>
+            <app-upload-main
+            name=""
+            [ID]="i+1"
+            [hasThumb]="true"
+            [Settings]="imageRefSettings"
+            ></app-upload-main>
+            <!-- Main:<br>
             <input class="fileupload" type="file"
             (change)="uploadFull($event, i)"><br>
             Thumb:<br>
             <input class="fileupload" type="file"
-            (change)="uploadThumb($event, i)"><br><br>
+            (change)="uploadThumb($event, i)"><br><br> -->
         </div>
     </div>
 </form>

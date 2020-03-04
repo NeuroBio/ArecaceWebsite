@@ -20,9 +20,6 @@ export class ImageResizerService {
 
   private resizer(file: any, maxH: number, maxW: number) {
     return new Promise((resolve) => {
-      //var canvas = document.createElement('canvas');
-      // var context = canvas.getContext('2d');
-
       const canvas = document.createElement('canvas');
       const ctx1 = canvas.getContext('2d');
 
@@ -38,7 +35,6 @@ export class ImageResizerService {
           const iwScaled = img.width * scale;
           const ihScaled = img.height * scale;
 
-          console.log('part 1')
           const width_source = canvas.width;
           const height_source = canvas.height;
           const width = Math.round(iwScaled);
@@ -54,7 +50,6 @@ export class ImageResizerService {
           const img2 = ctx.createImageData(width, height);
           const data = imgold.data;
           const data2 = img2.data;
-          console.log('part 2')
 
           for (let j = 0; j < height; j++) {
             for (let i = 0; i < width; i++) {
@@ -103,7 +98,6 @@ export class ImageResizerService {
                 data2[x2 + 3] = gx_a / weights_alpha;
               }
             }
-            console.log('part 3')
             canvas.width = width;
             canvas.height = height;
 
@@ -123,17 +117,20 @@ export class ImageResizerService {
 
 
 
-  private b64toBlob(dataURI) {
-    var byteString = atob(dataURI.split(',')[1]);
-    var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0]
+  b64toBlob(dataURI) {
+    const byteString = atob(dataURI.split(',')[1]);
+    const mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0]
 
-    var ab = new ArrayBuffer(byteString.length);
-    var ia = new Uint8Array(ab);
+    const ab = new ArrayBuffer(byteString.length);
+    const ia = new Uint8Array(ab);
 
-    for (var i = 0; i < byteString.length; i++) {
+    for (let i = 0; i < byteString.length; i++) {
         ia[i] = byteString.charCodeAt(i);
     }
-    var blob = new Blob([ab], {type: mimeString});
+    const blob = new Blob([ab], {type: mimeString});
+    blob['lastModified'] = '';
+    blob['name'] = 'resized';
+    blob['lastModifiedDate'] = '';
     return blob;
     //https://stackoverflow.com/questions/12168909/blob-from-dataurl
   }

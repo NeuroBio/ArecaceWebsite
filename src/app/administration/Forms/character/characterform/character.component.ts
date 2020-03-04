@@ -42,13 +42,13 @@ export class CharacterComponent implements OnInit {
     //Invalid Form
     this.fetcher.fetchData();
 
-    return this.fetcher.activeFormData.pipe(skip(1), take(1)).subscribe(Final => {
-      console.log("frame")
-      this.controller.activeFormData.next(Final);
-      if(Final[0] !== 'abort') {
-          this.birthday.updateBirthdayData(Final[0]);
-      }
-    });
+    // return this.fetcher.activeFormData.pipe(skip(1), take(1)).subscribe(Final => {
+    //   console.log("frame")
+    //   this.controller.activeFormData.next(Final);
+    //   if(Final[0] !== 'abort') {
+    //       this.birthday.updateBirthdayData(Final[0]);
+    //   }
+    // });
   }
 
 }

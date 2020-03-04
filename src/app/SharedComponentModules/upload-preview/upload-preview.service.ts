@@ -1,15 +1,19 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
-import { ImageSettings } from './uploadpreviewclass';
+import { Injectable }         from '@angular/core';
+
+import { Subject }            from 'rxjs';
+
+import { ImageSettings }      from './uploadpreviewclass';
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class UploadPreviewService {
 
   thumbsData = [];
   mainsData = [];
   allowed = ['image/png', 'image/jpeg', 'image/gif'];
+  reset = new Subject();
 
   constructor() { }
 
@@ -22,8 +26,8 @@ export class UploadPreviewService {
   }
 
   add() {
-    this.thumbsData.push();
-    this.mainsData.push();
+    this.thumbsData.push(undefined);
+    this.mainsData.push(undefined);
   }
 
   remove(index:number) {
@@ -42,7 +46,6 @@ export class UploadPreviewService {
     return new Promise((resolve, reject) => {
       const found = this.allowed.findIndex(x => x === event.target.files[0].type)
       if(found === -1) {
-        console.log(event.target.files[0].type)
         return reject([false, `Image must be of type jpeg, gif, or png.`]);
       }
       return this.getFileInfo(event)

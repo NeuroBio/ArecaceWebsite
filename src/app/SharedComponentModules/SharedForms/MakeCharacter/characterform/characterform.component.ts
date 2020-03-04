@@ -1,18 +1,17 @@
-import { Component, ViewChild, OnInit,
-         OnDestroy, ElementRef, ChangeDetectorRef }                    from '@angular/core';
+import { Component, OnInit, OnDestroy }             from '@angular/core';
 import { FormBuilder, FormArray,
          FormGroup, Validators}                     from '@angular/forms';
 
 import { Subscription }                             from 'rxjs';
 
+import { QuickAssign }                              from 'src/app/GlobalServices/commonfunctions.service';
+import { FetchService }                             from 'src/app/GlobalServices/fetch.service';
+import { UploadPreviewService }                     from 'src/app/SharedComponentModules/upload-preview/upload-preview.service';
+
+import { UploadPreviewSettings }                    from 'src/app/SharedComponentModules/upload-preview/uploadpreviewclass';
 import { CharacterMetaData }                        from 'src/app/Classes/ContentClasses';
 import { SourceAbilities, Relations }               from '../formclasses';
 import { UploadCharacterDrops }                     from '../uploadcharacterdrops';
-import { QuickAssign }                              from 'src/app/GlobalServices/commonfunctions.service';
-import { FetchService }                             from 'src/app/GlobalServices/fetch.service';
-import { ImageResizerService } from 'src/app/administration/services/image-resizer.service';
-import { UploadPreviewService }from 'src/app/SharedComponentModules/upload-preview/upload-preview.service';
-import { UploadPreviewSettings } from 'src/app/SharedComponentModules/upload-preview/uploadpreviewclass';
 
 
 
@@ -24,19 +23,8 @@ import { UploadPreviewSettings } from 'src/app/SharedComponentModules/upload-pre
 
 export class CharacterFormComponent implements OnInit, OnDestroy {
 
-//form generator vals
   DropDowns = new UploadCharacterDrops;
   Form: FormGroup;
-
-  // @ViewChild('bioPicThumb', { static: true }) biopicThumbUploader: ElementRef;
-  // @ViewChild('bioPicFull', { static: true }) biopicFullUploader: ElementRef;
-  biopicThumbFile: any;
-  biopicFullFile: any;
-  // biopicThumbData = new MakeThumbInfo('Bio Pic', undefined, false, true);
-  fullFiles: any[];
-  thumbFiles: any[];
-  noReferences: boolean;
-  noFamily: boolean;
 
   stream1: Subscription;
   stream2: Subscription;
@@ -50,13 +38,17 @@ export class CharacterFormComponent implements OnInit, OnDestroy {
   toneColor2: string;
   activeRegion: string[];
   daysArray: number[];
+
   showUnique: boolean;
-  imageSettings = new UploadPreviewSettings([[undefined, undefined, '100MB'], [450, 450, '300KB']]);
-  
+  noReferences: boolean;
+  noFamily: boolean;
+
+  imageBioPicSettings = new UploadPreviewSettings([[undefined, undefined, '100MB'], [450, 450, '300KB']]);
+  imageRefSettings = new UploadPreviewSettings([[undefined, undefined, '100MB'], [250, 250, '300KB']]);
+
     constructor(private fb: FormBuilder,
               private fetcher: FetchService,
               private qa: QuickAssign,
-              private resizeserv: ImageResizerService,
               private uploadpreviewserv: UploadPreviewService) {}
 
   ngOnInit() {
@@ -138,14 +130,19 @@ export class CharacterFormComponent implements OnInit, OnDestroy {
   }
   
   processForm() {
+    const BioPicMain = this.uploadpreviewserv.mainsData[0];
+    const BioPicThumb = this.uploadpreviewserv.thumbsData[0];
+    const RefsMain = Object.assign([], this.uploadpreviewserv.mainsData).splice(0,1);
+    const RefsThumb = Object.assign([], this.uploadpreviewserv.thumbsData).splice(0,1);
+    
     // Invalid Form
     // Incomplete Form
-    if((this.biopicFullFile === undefined
-      || this.biopicThumbFile === undefined)
+    if((BioPicMain === undefined
+      ||  BioPicThumb === undefined)
       && this.Form.controls.Links.value === '') {
        this.fetcher.assignActiveFormData(["abort",
        "Bio files require a bio image."]);
-       return ;
+       return;
     }
 
     const Final: CharacterMetaData = Object.assign({}, this.Form.value); 
@@ -157,23 +154,22 @@ export class CharacterFormComponent implements OnInit, OnDestroy {
     Final.ID = Final.FirstName.split(' ').join('');
     Final.References = this.createReference(Final.ReferenceIDs, Final.FirstName);
 
-    const imagePaths = [`hell/${Final.FirstName}-Thumb`,
-                        `hell/${Final.FirstName}-Full`
-                        ].concat(this.refNames(this.fullFiles, Final.FirstName));
-    
-    // return this.resizeserv.resizeImage(this.biopicFullFile.target.files[0], 450, 450, true)
-    // .then(resizedBlob => {
-    //   console.log('form!');
-    //   const imageEvents = [{target: {files: [resizedBlob]}}, this.biopicFullFile]
-    //   .concat(this.combineLinks(this.fullFiles, this.thumbFiles));
-    //   return this.fetcher.assignActiveFormData([Final,
-    //     imagePaths,
-    //     imageEvents,
-    //     Final.Links,
-    //     undefined,
-    //     undefined,
-    //     undefined]);
-    // });
+    const imagePaths = [`hell/${Final.FirstName}-Full`,
+                        `hell/${Final.FirstName}-Thumb`]
+      .concat(this.refNames(RefsMain, Final.FirstName));
+
+    const imageEvents = [BioPicMain, BioPicThumb]
+      .concat(this.combineEvents(RefsMain, RefsThumb));
+
+      console.log(imageEvents)
+      console.log(imagePaths)
+    return this.fetcher.assignActiveFormData([Final,
+      imagePaths,
+      imageEvents,
+      Final.Links,
+      undefined,
+      undefined,
+      undefined]);
   }
 
   onReset() {
@@ -182,57 +178,16 @@ export class CharacterFormComponent implements OnInit, OnDestroy {
     this.Form = this.createForm();
     this.daysArray = new Array(30);
     this.setdisplayValues();
-    //this.biopicFullUploader.nativeElement.value = '';
-    this.biopicFullFile = undefined;
-    //this.biopicThumbUploader.nativeElement.value = '';
-    this.biopicThumbFile = undefined;
-    this.fullFiles = [];
-    this.thumbFiles = [];
     this.showUnique = false;
     this.noReferences = true;
     this.noFamily = true;
-  }
-
-  uploadBioPicFull(event: any) {
-    this.biopicFullFile = event;
-    // this.makeThumb(event, this.biopicThumbData);
-  }
-
-  makeThumb(event: any, makeinfo: any) {
-    if(makeinfo.Generate === true) {
-      makeinfo.Loading = true; //view doesn't update for this
-      this.fetcher.assignLoading(true);
-      //async function that returns a promise
-      this.resizeserv.resizeImage(event.target.files[0], 450, 450, false)
-      .then((resized: string) => {
-        makeinfo.ImgUrl = resized;
-        makeinfo.Loading = false;
-        this.fetcher.assignLoading(false);
-      }).catch(err => {
-        console.log(err);
-        makeinfo.Loading = false;
-        this.fetcher.assignLoading(false);
-      });
-    }
-  }
-
-
-  uploadBioPicThumb(event: any) {
-    this.biopicThumbFile = event;
-  }
-
-  uploadFull(event: any, index: number) {
-    this.fullFiles[index] = event;
-  }
-
-  uploadThumb(event: any, index: number) {
-    this.thumbFiles[index] = event;
+    this.uploadpreviewserv.reset.next();
   }
 
   //Processing functions
   populateSAbilities() {
     let abilityArray:FormArray = new FormArray([]);
-    for(let ability of this.DropDowns.SAbilities){
+    for(let ability of this.DropDowns.SAbilities) {
     abilityArray.push( this.fb.group({Ability: ability, Known: false}) );
     }
     return abilityArray;
@@ -256,17 +211,13 @@ export class CharacterFormComponent implements OnInit, OnDestroy {
     if(add){
       (<FormArray>this.Form.controls.ReferenceIDs)
         .push(this.fb.group({ Ref: ref }));
-      this.fullFiles.push('');
-      this.thumbFiles.push('');
       this.uploadpreviewserv.add();
       this.noReferences = false;
     } else {
       (<FormArray>this.Form.controls.ReferenceIDs)
         .removeAt(this.Form.controls.ReferenceIDs.value.length-1);
-      this.fullFiles.pop();
-      this.thumbFiles.pop();
       this.uploadpreviewserv.remove(this.Form.controls.ReferenceIDs.value.length-1);
-      if(this.thumbFiles.length === 0) {
+      if(this.uploadpreviewserv.mainsData.length === 1) {
         this.noReferences = true;
       }
     }
@@ -304,7 +255,7 @@ export class CharacterFormComponent implements OnInit, OnDestroy {
     return final;
   }
 
-  combineLinks(full: string[], thumb: string[]) {
+  combineEvents(full: string[], thumb: string[]) {
     if(thumb.length > 0){
       return thumb.map((thumb,i) => [thumb, full[i]])
         .reduce(function(a,b) {

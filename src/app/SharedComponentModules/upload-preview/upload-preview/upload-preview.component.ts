@@ -1,7 +1,8 @@
-import { Component, OnInit, Input, OnChanges, OnDestroy } from '@angular/core';
-import { GlobalVarsService } from 'src/app/GlobalServices/global-vars.service';
-import { FetchService } from 'src/app/GlobalServices/fetch.service';
-import { Subscription } from 'rxjs';
+import { Component, OnInit, Input, OnDestroy }  from '@angular/core';
+
+import { Subscription }                         from 'rxjs';
+
+import { GlobalVarsService }                    from 'src/app/GlobalServices/global-vars.service';
 
 @Component({
   selector: 'app-upload-preview',
@@ -9,7 +10,7 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./upload-preview.component.css']
 })
 
-export class UploadPreviewComponent implements OnInit, OnChanges, OnDestroy {
+export class UploadPreviewComponent implements OnInit, OnDestroy {
 
   @Input() name: string;
   @Input() imgUrl: string;
@@ -21,14 +22,10 @@ export class UploadPreviewComponent implements OnInit, OnChanges, OnDestroy {
 
   ngOnInit() {
     this.stream1 = this.global.ImagesLoadable.subscribe(load => this.neverLoading = !load);
-
   }
+  
   ngOnDestroy() {
     this.stream1.unsubscribe();
-  }
-
-  ngOnChanges() {
-    console.log("tick!")
   }
 
 }

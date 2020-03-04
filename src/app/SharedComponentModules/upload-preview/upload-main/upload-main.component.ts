@@ -1,16 +1,22 @@
-import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
-import { UploadPreviewInfo, UploadPreviewSettings } from '../uploadpreviewclass';
-import { UploadPreviewService } from '../upload-preview.service';
-import { FetchService } from 'src/app/GlobalServices/fetch.service';
-import { ImageResizerService } from 'src/app/administration/services/image-resizer.service';
+import { Component, OnInit, Input, ViewChild,
+         ElementRef, OnDestroy }                from '@angular/core';
 
+import { Subscription }                         from 'rxjs';
+
+import { UploadPreviewService }                 from '../upload-preview.service';
+import { FetchService }                         from 'src/app/GlobalServices/fetch.service';
+import { ImageResizerService }                  from 'src/app/administration/services/image-resizer.service';
+
+import { UploadPreviewInfo,
+         UploadPreviewSettings }                from '../uploadpreviewclass';
 
 @Component({
   selector: 'app-upload-main',
   templateUrl: './upload-main.component.html',
   styleUrls: ['../../../administration/Forms/Form.css', './upload-main.component.css']
 })
-export class UploadMainComponent implements OnInit {
+
+export class UploadMainComponent implements OnInit, OnDestroy {
 
   @Input() name: string;
   @Input() ID: number;
@@ -26,6 +32,7 @@ export class UploadMainComponent implements OnInit {
   mainRequirements: string;
   thumbRequirements: string;
 
+  stream1: Subscription;
   autoGenerate = true;
 
   constructor(private previewserv: UploadPreviewService,
@@ -37,6 +44,11 @@ export class UploadMainComponent implements OnInit {
     this.thumbImg = new UploadPreviewInfo(`${this.name}-thumb`, undefined, false, undefined);
     this.mainRequirements = this.setReq(this.Settings.main, 'Main');
     this.thumbRequirements = this.setReq(this.Settings.thumb, 'Thumb');
+    this.stream1 = this.previewserv.reset.subscribe(() => this.onReset());
+  }
+
+  ngOnDestroy() {
+    this.stream1.unsubscribe();
   }
 
   setReq(settings: any, type: string) {
@@ -63,12 +75,10 @@ export class UploadMainComponent implements OnInit {
   uploadImage(event: any, imgType: string) {
     switch(imgType) {
       case 'thumb':
-        console.log(imgType);
         return this.CheckandAssign(event, imgType)
         .catch(error => alert(error[1]));
 
       case 'main':
-        console.log(imgType);
         return this.CheckandAssign(event, imgType)
         .then(() => {
           if(this.autoGenerate === true && this.hasThumb === true) {
@@ -86,14 +96,13 @@ export class UploadMainComponent implements OnInit {
   makeThumb(event: any) {
     this.thumbImg.Loading = true;
     this.fetcher.assignLoading(true);
-    //async function that returns a promise
     this.resizeserv.resizeImage(event.target.files[0],
                                 this.Settings.thumb.MaxHeight,
                                 this.Settings.thumb.MaxWidth, false)
     .then((resized: string) => {
-      this.thumbImg.ImgUrl = resized;
+      const phauxEvent = {target: {files: [this.resizeserv.b64toBlob(resized)]}}
+      this.loadImage('thumb', phauxEvent, resized)
       this.thumbImg.Loading = false;
-      this.previewserv.assignThumb(this.ID, {target: {files: [resized]}});
       this.fetcher.assignLoading(false);
     }).catch(err => {
       console.log(err);
@@ -104,13 +113,11 @@ export class UploadMainComponent implements OnInit {
 
   CheckandAssign(event: any, type: string) {
     return new Promise((resolve, reject) => {
-      console.log(this.Settings[type])
       this.previewserv.checkFile(event, this.Settings[type])
       .then(() => {
         this.previewserv.quickFiletob64(event)
           .then((url: string) => resolve(this.loadImage(type, event, url)));
       }).catch(error => {
-        console.log("rejecting")
         return reject(error)
         //this.thumbUploader.nativeElement.value = '';
       })
