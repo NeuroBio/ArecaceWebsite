@@ -6,11 +6,13 @@ import { FormBuilder, FormArray,
 import { Subscription }                             from 'rxjs';
 
 import { CharacterMetaData }                        from 'src/app/Classes/ContentClasses';
-import { SourceAbilities, Relations, MakeThumbInfo }               from '../formclasses';
+import { SourceAbilities, Relations }               from '../formclasses';
 import { UploadCharacterDrops }                     from '../uploadcharacterdrops';
 import { QuickAssign }                              from 'src/app/GlobalServices/commonfunctions.service';
 import { FetchService }                             from 'src/app/GlobalServices/fetch.service';
 import { ImageResizerService } from 'src/app/administration/services/image-resizer.service';
+import { UploadPreviewService }from 'src/app/SharedComponentModules/upload-preview/upload-preview.service';
+import { UploadPreviewSettings } from 'src/app/SharedComponentModules/upload-preview/uploadpreviewclass';
 
 
 
@@ -26,11 +28,11 @@ export class CharacterFormComponent implements OnInit, OnDestroy {
   DropDowns = new UploadCharacterDrops;
   Form: FormGroup;
 
-  @ViewChild('bioPicThumb', { static: true }) biopicThumbUploader: ElementRef;
-  @ViewChild('bioPicFull', { static: true }) biopicFullUploader: ElementRef;
+  // @ViewChild('bioPicThumb', { static: true }) biopicThumbUploader: ElementRef;
+  // @ViewChild('bioPicFull', { static: true }) biopicFullUploader: ElementRef;
   biopicThumbFile: any;
   biopicFullFile: any;
-  biopicThumbData = new MakeThumbInfo('Bio Pic', undefined, false, true);
+  // biopicThumbData = new MakeThumbInfo('Bio Pic', undefined, false, true);
   fullFiles: any[];
   thumbFiles: any[];
   noReferences: boolean;
@@ -49,11 +51,13 @@ export class CharacterFormComponent implements OnInit, OnDestroy {
   activeRegion: string[];
   daysArray: number[];
   showUnique: boolean;
+  imageSettings = new UploadPreviewSettings([[undefined, undefined, '1024MB'], [450, 450, '500KB']]);
   
     constructor(private fb: FormBuilder,
               private fetcher: FetchService,
               private qa: QuickAssign,
-              private resizeserv: ImageResizerService) {}
+              private resizeserv: ImageResizerService,
+              private uploadpreviewserv: UploadPreviewService) {}
 
   ngOnInit() {
     this.stream1 = this.fetcher.itemToEdit
@@ -62,6 +66,7 @@ export class CharacterFormComponent implements OnInit, OnDestroy {
       .subscribe(() => this.processForm());
     this.stream3 = this.Form.valueChanges.subscribe(valid =>
       this.fetcher.assignvalidity(valid));
+    this.uploadpreviewserv.add();
   }
 
   ngOnDestroy() {
@@ -177,9 +182,9 @@ export class CharacterFormComponent implements OnInit, OnDestroy {
     this.Form = this.createForm();
     this.daysArray = new Array(30);
     this.setdisplayValues();
-    this.biopicFullUploader.nativeElement.value = '';
+    //this.biopicFullUploader.nativeElement.value = '';
     this.biopicFullFile = undefined;
-    this.biopicThumbUploader.nativeElement.value = '';
+    //this.biopicThumbUploader.nativeElement.value = '';
     this.biopicThumbFile = undefined;
     this.fullFiles = [];
     this.thumbFiles = [];
@@ -190,10 +195,10 @@ export class CharacterFormComponent implements OnInit, OnDestroy {
 
   uploadBioPicFull(event: any) {
     this.biopicFullFile = event;
-    this.makeThumb(event, this.biopicThumbData);
+    // this.makeThumb(event, this.biopicThumbData);
   }
 
-  makeThumb(event: any, makeinfo: MakeThumbInfo) {
+  makeThumb(event: any, makeinfo: any) {
     if(makeinfo.Generate === true) {
       makeinfo.Loading = true; //view doesn't update for this
       this.fetcher.assignLoading(true);
@@ -211,9 +216,6 @@ export class CharacterFormComponent implements OnInit, OnDestroy {
     }
   }
 
-  switchAutoGenerate(makeinfo: MakeThumbInfo) {
-    makeinfo.Generate = !makeinfo.Generate;
-  }
 
   uploadBioPicThumb(event: any) {
     this.biopicThumbFile = event;
@@ -256,12 +258,14 @@ export class CharacterFormComponent implements OnInit, OnDestroy {
         .push(this.fb.group({ Ref: ref }));
       this.fullFiles.push('');
       this.thumbFiles.push('');
+      this.uploadpreviewserv.add();
       this.noReferences = false;
     } else {
       (<FormArray>this.Form.controls.ReferenceIDs)
         .removeAt(this.Form.controls.ReferenceIDs.value.length-1);
       this.fullFiles.pop();
       this.thumbFiles.pop();
+      this.uploadpreviewserv.remove(this.Form.controls.ReferenceIDs.value.length-1);
       if(this.thumbFiles.length === 0) {
         this.noReferences = true;
       }

@@ -7,7 +7,7 @@ export class ImageResizerService {
 
   constructor() { }
 
-  resizeImage(file: any, maxwidth: number, maxheight: number, Blob: boolean) {
+  resizeImage(file: any, maxheight: number, maxwidth: number, Blob: boolean) {
     return this.resizer(file, maxwidth, maxheight)
     .then(urlString => {
         if(Blob) {
@@ -18,7 +18,7 @@ export class ImageResizerService {
     });
   }
 
-  private resizer(file: any, maxW: number, maxH: number) {
+  private resizer(file: any, maxH: number, maxW: number) {
     return new Promise((resolve) => {
       //var canvas = document.createElement('canvas');
       // var context = canvas.getContext('2d');

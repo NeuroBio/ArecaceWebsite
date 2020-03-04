@@ -1,8 +1,8 @@
-<div *ngIf="neverLoading===false; then noImages, else Images"></div>
+<div *ngIf="neverLoading===true; then noImages, else Images"></div>
 
 <ng-template #Images>
     <div id="holdon" *ngIf="loading===true">
-        This can take a while for large images!<br>
+        <p>Large images can take a while to convert into thumbnails!</p>
         <div class="loading"></div>
     </div>
     <img *ngIf="loading===false && imgUrl"

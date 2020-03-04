@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { GeneralMetaData } from 'src/app/Classes/ContentClasses';
 import { GlobalVarsService } from 'src/app/GlobalServices/global-vars.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-details-display',
@@ -9,10 +10,11 @@ import { GlobalVarsService } from 'src/app/GlobalServices/global-vars.service';
   styleUrls: ['./details-display.component.css']
 })
 
-export class DetailsDisplayComponent implements OnInit {
+export class DetailsDisplayComponent implements OnInit, OnDestroy {
 
   loading: boolean;
   ref: GeneralMetaData;
+  stream1: Subscription;
 
   constructor(private route: ActivatedRoute,
               private global: GlobalVarsService) { }
@@ -20,9 +22,12 @@ export class DetailsDisplayComponent implements OnInit {
   ngOnInit() {
     this.route.data.subscribe((data: {Ref: GeneralMetaData})=>{
       window.scroll(0,0);
-      this.loading = this.global.ImagesLoadable;
+      this.stream1 = this.global.ImagesLoadable.subscribe(load => this.loading = load);
       this.ref = data.Ref;
     });
   }
 
+  ngOnDestroy() {
+    this.stream1.unsubscribe();
+  }
 }

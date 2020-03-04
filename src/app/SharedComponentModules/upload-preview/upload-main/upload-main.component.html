@@ -1,0 +1,56 @@
+<p>{{ name }}</p>
+<p>Main: <input class="fileupload"  #main type="file"
+    (change)="uploadImage($event, 'main')" accept=".png,.jpg.,.gif"></p>
+
+<div *ngIf="hasThumb===true; then thumb, else noThumb">
+   
+</div>
+
+
+
+<ng-template #thumb>
+
+    <p>Autogenerate Thumbnail:
+        <input type="checkbox"
+        (change)="switchThumbType()"
+        checked="true">
+    </p>
+
+    <span *ngIf="autoGenerate===false">
+        <!-- Show preview of the main -->
+        <app-upload-preview
+        [name]="mainImg.Name"
+        [imgUrl]="mainImg.ImgUrl"
+        [loading]="mainImg.Loading"
+        ></app-upload-preview>
+    </span>
+
+    <p>Thumbnail:
+        <!-- Allow user uploaded Thumb -->
+        <span *ngIf="autoGenerate===false">
+            <input class="fileupload"  #thumb type="file"
+            (change)="uploadImage($event, 'thumb')" accept=".png,.jpg.,.gif">
+        </span>
+    </p>
+
+    <!-- Thumb -->
+    <app-upload-preview
+    [name]="thumbImg.Name"
+    [imgUrl]="thumbImg.ImgUrl"
+    [loading]="thumbImg.Loading"
+    ></app-upload-preview>
+</ng-template>
+
+
+
+
+
+<ng-template #noThumb>
+    <p>HERE</p>
+    <!-- Show preview of the main -->
+    <app-upload-preview
+    [name]="mainImg.Name"
+    [imgUrl]="mainImg.ImgUrl"
+    [loading]="mainImg.Loading"
+    ></app-upload-preview>
+</ng-template>

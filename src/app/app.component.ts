@@ -31,12 +31,12 @@ export class AppComponent implements AfterViewInit{
 
   checkLoad() {
     if(this.flag.nativeElement.offsetWidth == 1) {
-      this.global.ImagesLoadable = true;
+      this.global.ImagesLoadable.next(true);
     } else {
       if(this.global.phone) {
-        this.global.ImagesLoadable = false;
+        this.global.ImagesLoadable.next(false);
       } else {
-        this.global.ImagesLoadable = false;
+        this.global.ImagesLoadable.next(false);
       }
     }
     console.log('images = '+this.global.ImagesLoadable)

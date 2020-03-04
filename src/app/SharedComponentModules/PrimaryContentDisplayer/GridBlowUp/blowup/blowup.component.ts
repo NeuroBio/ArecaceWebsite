@@ -38,7 +38,7 @@ export class BlowUpComponent implements OnInit {
   ngOnInit() {
     this.activeMember = this.linksList[this.index];
     this.bigUrl = this.activeMember.Links[1];
-    this.loading = this.global.ImagesLoadable;
+    this.loading = this.global.ImagesLoadable.value;
     setTimeout(() => { this.onResize() }, 10);
   }
 
@@ -60,7 +60,7 @@ export class BlowUpComponent implements OnInit {
   }
 
   onArrow(incre:number){
-    this.loading = this.global.ImagesLoadable;
+    this.loading = this.global.ImagesLoadable.value;
     this.index += incre;
     if(this.index === -1){
       this.index = this.linksList.length-1;
