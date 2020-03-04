@@ -163,7 +163,7 @@
         <button type="button" (click)="addRef(true)">+</button>
         <button type="button" [disabled]="noReferences"
         (click)="addRef(false)">-</button></p>
-    <div formArrayName="ReferenceIDs">
+    <div formArrayName="ReferenceIDs" >
         <div *ngFor="let refs of ReferencesArray.controls; let i = index"
         [formGroupName]="i">
             Reference {{ i+1 }}:<br>
