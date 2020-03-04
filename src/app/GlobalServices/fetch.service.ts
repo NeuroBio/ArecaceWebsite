@@ -11,7 +11,7 @@ export class FetchService {
   activeFormData = new BehaviorSubject<any>(undefined);
   itemToEdit = new BehaviorSubject<any>(undefined);
   valid = new BehaviorSubject<boolean>(undefined);
-  loading = new BehaviorSubject<boolean>(false);
+  loading = new BehaviorSubject<boolean>(undefined);
 
   nameTokens: string[];
   type: string;
@@ -41,5 +41,9 @@ export class FetchService {
 
   assignLoading(load: boolean): void {
     this.loading.next(load);
+  }
+
+  disposal() {
+    this.assignLoading(undefined);
   }
 }

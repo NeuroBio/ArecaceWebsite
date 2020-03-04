@@ -8,6 +8,7 @@ import { FireBaseService }                      from 'src/app/GlobalServices/fir
 import { CRUD }                                 from './CRUD.service';
 import { ButtonController }                     from '../../SharedComponentModules/SharedForms/Buttons/buttoncontroller';
 import { NewestCueService }                     from './newest-cue.service';
+import { FetchService } from 'src/app/GlobalServices/fetch.service';
 
 @Injectable({
   providedIn: 'root'
@@ -22,17 +23,29 @@ export class CRUDcontrollerService {
   
   showButtons = new BehaviorSubject<ButtonController>(undefined);
   allowButtons = new BehaviorSubject<ButtonController>(new ButtonController([true, true, false, false]));
+  ButtonSavedState = new BehaviorSubject<ButtonController>(undefined);
 
+
+  activeFormData = new BehaviorSubject<any>(undefined);
   //activeFormData is: form data[0], new image paths[1], new images[2],
   //old image paths[3], text path[4], new text[5], old  text path [6]
-  activeFormData = new BehaviorSubject<any>(undefined);
   
   message = new BehaviorSubject<string>(undefined);
   triggerProcess = new Subject<any>();
 
   constructor(private firebaseserv: FireBaseService,
               private crud: CRUD,
-              private newestCue: NewestCueService) { }
+              private newestCue: NewestCueService,
+              private fetcher: FetchService) {
+    this.fetcher.loading.subscribe(load => {
+      if(load === true) {
+       this.deActivateButtons();
+      } else if(load === false) {
+        this.reActivateButtons();
+      }
+    })
+  
+  }
 
   
             
@@ -113,18 +126,18 @@ export class CRUDcontrollerService {
       }).then(() => {
         this.itemToEdit.next(undefined);
         this.message.next("Submitted!");
-        this.allowButtons.next(buttonState);
+        this.reActivateButtons();
 //ERRORS
       }).catch(err => {
         console.log(meta)
-        this.throwError(err, buttonState);
+        this.throwError(err);
       });
     });
   }
 
   async onEdit(all: boolean = false): Promise<any> {
-    const buttonState = this.allowButtons.value;
-    this.allowButtons.next(new ButtonController([false, false, false, false]));
+    this.deActivateButtons();
+
     let meta: any;
     let story: any[];
     let images: any[];
@@ -162,10 +175,10 @@ export class CRUDcontrollerService {
         this.itemToEdit.next(undefined);
       }
       this.message.next("Edit successful!");
-      this.allowButtons.next(buttonState);
+      this.reActivateButtons()
 //ERRORS
     }).catch(err => {
-      this.throwError(err, buttonState);
+      this.throwError(err);
       console.log(meta)
       if(all){
         return Promise.reject();
@@ -174,8 +187,7 @@ export class CRUDcontrollerService {
   }
 
   onDelete() {
-    const buttonState = this.allowButtons.value;
-    this.allowButtons.next(new ButtonController([false, false, false, false]));
+    this.deActivateButtons()
     this.message.next('Hold on, deleting...');
     const item = this.itemToEdit.value;
     
@@ -192,20 +204,19 @@ export class CRUDcontrollerService {
     .then(() => {
         this.itemToEdit.next(undefined);
         this.message.next('Delete successful!')
-        this.allowButtons.next(buttonState);
+        this.reActivateButtons();
     }).catch(err => {
-        this.throwError(err, buttonState);
+        this.throwError(err);
     });
   }
 
   onUpdateAll() {
-    const buttonState = this.allowButtons.value;
-    this.allowButtons.next(new ButtonController([false, false, false, false]));
+    this.deActivateButtons();
 
     return this.updateLoop(this.itemList.value).then(() => {
       this.message.next("All entries updated!");
-      this.allowButtons.next(buttonState);
-      }).catch(() => this.allowButtons.next(buttonState));
+      this.reActivateButtons();
+      }).catch(() => this.reActivateButtons());
   }
 
   async updateLoop(collect: any[]) {
@@ -226,11 +237,11 @@ export class CRUDcontrollerService {
     return(meta);
   }
 
-  throwError(err: any, button: ButtonController) {
+  throwError(err: any) {
     this.message.next(`Execution Failed
                       Stage: ${err.stage}
                       Error: ${err.message}`);
-    this.allowButtons.next(button);
+    this.reActivateButtons();
   }
 
 
@@ -238,11 +249,19 @@ export class CRUDcontrollerService {
   assignButtons(states: boolean[]) {
     this.showButtons.next(new ButtonController(states));
   }
+
   updateButton(which: string, to: boolean) {
     const buttonState = this.allowButtons.value;
     buttonState[which] = to;
     this.allowButtons.next(buttonState);
   }
 
+  deActivateButtons() {
+    this.ButtonSavedState.next(this.allowButtons.value);
+    this.allowButtons.next(new ButtonController([false, false, false, false]));
+  }
 
+  reActivateButtons() {
+    this.allowButtons.next(this.ButtonSavedState.value);
+  }
 }

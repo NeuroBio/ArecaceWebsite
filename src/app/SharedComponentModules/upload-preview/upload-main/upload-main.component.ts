@@ -72,8 +72,6 @@ export class UploadMainComponent implements OnInit, OnDestroy {
   }
 
   uploadImage(event: any, imgType: string) {
-    console.log(this.mainUploader)
-    console.log(this.thumbUploader)
     switch(imgType) {
       case 'thumb':
         return this.CheckandAssign(event, imgType)
