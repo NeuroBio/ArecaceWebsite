@@ -4,9 +4,12 @@
 
     <p> Piece Name: <input type="text" formControlName="Name"></p>
 
-    <p>Thumb: <input #Thumb type="file" class="fileupload" (change)="getThumb($event)"></p>
-
-    <p>FullImage: <input #Full type="file" class="fileupload" (change)="getFull($event)"></p>
+    <app-upload-main
+    name="Other's Art"
+    [ID]="0"
+    [hasThumb]="true"
+    [Settings]="imageSettings"
+    ></app-upload-main>
 
     <p>Date (YYYY): <input type="text" formControlName="Date"></p>
 

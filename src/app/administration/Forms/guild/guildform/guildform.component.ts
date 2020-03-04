@@ -6,6 +6,9 @@ import { Subscription }                 from 'rxjs';
 import { GuildMetaData }                from 'src/app/Classes/ContentClasses';
 import { CRUDcontrollerService }        from '../../../services/CRUDcontroller.service';
 import { QuickAssign }                  from 'src/app/GlobalServices/commonfunctions.service';
+import { UploadPreviewService }         from 'src/app/SharedComponentModules/upload-preview/upload-preview.service';
+import { UploadPreviewSettings }        from 'src/app/SharedComponentModules/upload-preview/uploadpreviewclass';
+import { FetchService }                 from 'src/app/GlobalServices/fetch.service';
 
 @Component({
   selector: 'app-guildform',
@@ -16,15 +19,15 @@ import { QuickAssign }                  from 'src/app/GlobalServices/commonfunct
 export class GuildFormComponent implements OnInit, OnDestroy {
   
   Form: FormGroup;
-  @ViewChild('insig', { static: true }) imageUploader: ElementRef;
-  imageFile: any;
-
+  imageSettings = new UploadPreviewSettings([[undefined, undefined, '100MB'], [200, 600, '300KB']]);
   stream1: Subscription;
   stream2: Subscription;
 
   constructor(private fb: FormBuilder,
               private controller: CRUDcontrollerService,
-              private qa: QuickAssign) { }
+              private qa: QuickAssign,
+              private uploadpreviewserv: UploadPreviewService,
+              private fetcher: FetchService) { }
 
   ngOnInit() {
     this.stream1 = this.controller.itemToEdit
@@ -37,6 +40,7 @@ export class GuildFormComponent implements OnInit, OnDestroy {
     this.stream1.unsubscribe();
     this.stream2.unsubscribe();
     this.controller.disposal();
+    this.fetcher.disposal();
   }
 
   createForm() {
@@ -61,8 +65,9 @@ export class GuildFormComponent implements OnInit, OnDestroy {
   }
 
   processForm() {
+    const imageFile = this.uploadpreviewserv.mainsData[0];
     //Incomplete Form
-    if(this.imageFile === undefined
+    if(imageFile === undefined
       && this.Form.controls.Links.value === '') {
       this.controller.activeFormData.next(["abort",
         "Guild files require an insignia image."]);
@@ -77,21 +82,17 @@ export class GuildFormComponent implements OnInit, OnDestroy {
     }
     this.controller.activeFormData.next([Final,
                                       [`GuildInsig/${Final.ID}`],
-                                      [this.imageFile],
+                                      [imageFile],
                                       Final.Links,
                                       undefined,
                                       undefined,
                                       undefined]);
   }
 
-  onFile(event:any) {
-    this.imageFile = event;
-  }
-
   onReset() {
     this.Form = this.createForm();
-    this.imageUploader.nativeElement.value = '';
-    this.imageFile = undefined;
     this.controller.message.next('');
+    this.uploadpreviewserv.reset.next();
+    this.uploadpreviewserv.erase(0);
   }
 }

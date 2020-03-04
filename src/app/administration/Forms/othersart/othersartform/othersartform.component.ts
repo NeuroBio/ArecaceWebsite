@@ -1,12 +1,14 @@
-import { Component, OnInit, OnDestroy,
-  ElementRef, ViewChild }             from '@angular/core';
-import { FormGroup, FormBuilder }     from '@angular/forms';
+import { Component, OnInit, OnDestroy}  from '@angular/core';
+import { FormGroup, FormBuilder }       from '@angular/forms';
 
-import { Subscription }               from 'rxjs';
+import { Subscription }                 from 'rxjs';
 
-import { CRUDcontrollerService }      from 'src/app/administration/services/CRUDcontroller.service';
-import { OthersArt }                  from 'src/app/Classes/ContentClasses';
-import { QuickAssign }                from 'src/app/GlobalServices/commonfunctions.service';
+import { CRUDcontrollerService }        from 'src/app/administration/services/CRUDcontroller.service';
+import { OthersArt }                    from 'src/app/Classes/ContentClasses';
+import { QuickAssign }                  from 'src/app/GlobalServices/commonfunctions.service';
+import { UploadPreviewService }         from 'src/app/SharedComponentModules/upload-preview/upload-preview.service';
+import { UploadPreviewSettings }        from 'src/app/SharedComponentModules/upload-preview/uploadpreviewclass';
+import { FetchService }                 from 'src/app/GlobalServices/fetch.service';
 
 @Component({
   selector: 'app-othersartform',
@@ -16,17 +18,15 @@ import { QuickAssign }                from 'src/app/GlobalServices/commonfunctio
 export class OthersArtFormComponent implements OnInit, OnDestroy {
 
   Form: FormGroup;
-  @ViewChild('Thumb', { static: true }) thumbUploader: ElementRef;
-  @ViewChild('Full', { static: true }) fullUploader: ElementRef;
-  thumbFile: any;
-  fullFile: any;
-
+  imageSettings = new UploadPreviewSettings([[undefined, undefined, '100MB'], [200, 600, '300KB']]);
   stream1: Subscription;
   stream2: Subscription;
 
   constructor(private fb: FormBuilder,
               private controller: CRUDcontrollerService,
-              private qa: QuickAssign) { }
+              private qa: QuickAssign,
+              private uploadpreviewserv: UploadPreviewService,
+              private fetcher: FetchService) { }
 
   ngOnInit() {
     this.stream1 = this.controller.itemToEdit
@@ -39,6 +39,7 @@ export class OthersArtFormComponent implements OnInit, OnDestroy {
     this.stream1.unsubscribe();
     this.stream2.unsubscribe();
     this.controller.disposal();
+    this.fetcher.disposal();
   }
 
   createForm() {
@@ -62,9 +63,12 @@ export class OthersArtFormComponent implements OnInit, OnDestroy {
   }
 
   processForm() {
+    const mainFile = this.uploadpreviewserv.mainsData[0];
+    const thumbFile = this.uploadpreviewserv.thumbsData[0];
+
     //Incomplete Form
-    if((this.thumbFile === undefined
-        || this.fullFile === undefined)
+    if((thumbFile === undefined
+        || mainFile === undefined)
       && this.Form.controls.Links.value === '') {
       this.controller.activeFormData.next(["abort",
         "Others Art files require full and thumb images."]);
@@ -81,7 +85,7 @@ export class OthersArtFormComponent implements OnInit, OnDestroy {
     this.controller.activeFormData.next([Final,
                                         [`OthersArt/${Final.ID}-thumb`,
                                         `OthersArt/${Final.ID}-full`],
-                                        [this.thumbFile, this.fullFile],
+                                        [thumbFile, mainFile],
                                         Final.Links,
                                         undefined,
                                         undefined,
@@ -90,17 +94,8 @@ export class OthersArtFormComponent implements OnInit, OnDestroy {
 
   onReset() {
     this.Form = this.createForm();
-    this.thumbFile = undefined;
-    this.fullFile = undefined;
-    this.thumbUploader.nativeElement.value = '';
-    this.fullUploader.nativeElement.value = '';
+    this.uploadpreviewserv.reset.next();
+    this.uploadpreviewserv.erase(0);
   }
   
-  getThumb(event: any) {
-    this.thumbFile = event;
-  }
-
-  getFull(event: any) {
-    this.fullFile = event;
-  }
 }
