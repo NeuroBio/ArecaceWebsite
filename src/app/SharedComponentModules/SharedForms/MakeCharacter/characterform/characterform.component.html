@@ -48,9 +48,9 @@
     
     <p>Age:<br>&nbsp;&nbsp;&nbsp;&nbsp;
 
-    Years: <input formControlName="Age" class="short" type="number">, 
+    Years <input formControlName="Age" class="short" type="number">, 
 
-    Birth Date: <input formControlName="Year" class="short" type="number">
+    Birth Date <input formControlName="Year" class="short" type="number">
 
     <select formControlName="Era">
         <option *ngFor="let era of DropDowns.Era"
@@ -66,7 +66,7 @@
     <select formControlName="Day">
         <option *ngFor="let day of daysArray; let i = index"
         [value]="i+1">{{ i+1 }}</option>
-    </select>({{ Form.controls.Zodiac.value }})</p>
+    </select>&nbsp;({{ Form.controls.Zodiac.value }})</p>
 
 
     <p>Height:<br>&nbsp;&nbsp;&nbsp;&nbsp;

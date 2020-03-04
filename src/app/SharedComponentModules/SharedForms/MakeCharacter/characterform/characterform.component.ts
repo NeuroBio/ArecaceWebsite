@@ -51,7 +51,7 @@ export class CharacterFormComponent implements OnInit, OnDestroy {
   activeRegion: string[];
   daysArray: number[];
   showUnique: boolean;
-  imageSettings = new UploadPreviewSettings([[undefined, undefined, '1024MB'], [450, 450, '500KB']]);
+  imageSettings = new UploadPreviewSettings([[undefined, undefined, '100MB'], [450, 450, '300KB']]);
   
     constructor(private fb: FormBuilder,
               private fetcher: FetchService,

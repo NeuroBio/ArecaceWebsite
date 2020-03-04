@@ -68,7 +68,7 @@ export class UploadPreviewService {
   getFileInfo(event: any) {
     return new Promise((resolve: any) => {
       const File = event.target.files[0];
-      const Size = Math.round(File.size/1024);
+      const Size = File.size;
       let Width: number;
       let Height: number
       const reader = new FileReader();

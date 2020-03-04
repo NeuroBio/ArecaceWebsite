@@ -23,6 +23,8 @@ export class UploadMainComponent implements OnInit {
   @ViewChild('thumb', { static: true }) thumbUploader: ElementRef;
   mainImg: UploadPreviewInfo;
   thumbImg: UploadPreviewInfo;
+  mainRequirements: string;
+  thumbRequirements: string;
 
   autoGenerate = true;
 
@@ -33,6 +35,17 @@ export class UploadMainComponent implements OnInit {
   ngOnInit() {
     this.mainImg = new UploadPreviewInfo(`${this.name}-main`, undefined, false, undefined);
     this.thumbImg = new UploadPreviewInfo(`${this.name}-thumb`, undefined, false, undefined);
+    this.mainRequirements = this.setReq(this.Settings.main, 'Main');
+    this.thumbRequirements = this.setReq(this.Settings.thumb, 'Thumb');
+  }
+
+  setReq(settings: any, type: string) {
+    const maxHeight = settings.MaxHeight === undefined ? 'none': `${settings.MaxHeight}px`;
+    const maxWidth = settings.MaxHeight === undefined ? 'none': `${settings.MaxWidth}px`;
+    return `${type} images must be of type jpeg, png, or gif.
+    \nMax Height: ${maxHeight}
+    \nMax Width: ${maxWidth}
+    \nMax Size: ${settings.MaxSizeRead}`
   }
 
   switchThumbType() {
