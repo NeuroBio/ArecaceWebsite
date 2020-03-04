@@ -80,9 +80,11 @@ export class UploadMainComponent implements OnInit, OnDestroy {
 
       case 'main':
         return this.CheckandAssign(event, imgType)
-        .then(() => {
+        .then((url: string) => {
           if(this.autoGenerate === true && this.hasThumb === true) {
-            this.makeThumb(event);
+              return this.previewserv.checkFile(event, this.Settings.thumb)
+              .then(() => this.loadImage('thumb', event, url))
+              .catch(() => this.makeThumb(event));
           }
         }).catch(error => alert(error[1]));
 
@@ -116,7 +118,10 @@ export class UploadMainComponent implements OnInit, OnDestroy {
       this.previewserv.checkFile(event, this.Settings[type])
       .then(() => {
         this.previewserv.quickFiletob64(event)
-          .then((url: string) => resolve(this.loadImage(type, event, url)));
+          .then((url: string) => {
+            this.loadImage(type, event, url);
+            return resolve(url);
+          });
       }).catch(error => {
         return reject(error)
         //this.thumbUploader.nativeElement.value = '';

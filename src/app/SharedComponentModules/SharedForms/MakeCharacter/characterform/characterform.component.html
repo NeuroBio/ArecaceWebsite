@@ -148,25 +148,16 @@
     <p>Background in Full: <br>
     <textarea formControlName="FullBackground" rows="6" cols="65"></textarea></p>
 
-    <!-- <p>Bio Picture Main: <br><input class="fileupload"  #bioPicFull type="file"
-        (change)="uploadBioPicFull($event)"
-    accept=".png,.jpg.,.gif"></p>
 
-    <p>Bio Picture Thumb: <br><input class="fileupload"  #bioPicThumb type="file"
-        (change)="uploadBioPicThumb($event)"
-    accept=".png,.jpg,.gif"></p>
-
-    <app-upload-preview
-    [name]="biopicThumbData.Name"
-    [imgUrl]="biopicThumbData.ImgUrl"
-    [loading]="biopicThumbData.Loading"
-    ></app-upload-preview> -->
+    
     <app-upload-main
     name="Bio Picture"
     ID="0"
     [hasThumb]="true"
     [Settings]="imageBioPicSettings"
     ></app-upload-main>
+
+
 
     <p>Other References:<br>
         <button type="button" (click)="addRef(true)">+</button>
@@ -184,12 +175,6 @@
             [hasThumb]="true"
             [Settings]="imageRefSettings"
             ></app-upload-main>
-            <!-- Main:<br>
-            <input class="fileupload" type="file"
-            (change)="uploadFull($event, i)"><br>
-            Thumb:<br>
-            <input class="fileupload" type="file"
-            (change)="uploadThumb($event, i)"><br><br> -->
         </div>
     </div>
 </form>

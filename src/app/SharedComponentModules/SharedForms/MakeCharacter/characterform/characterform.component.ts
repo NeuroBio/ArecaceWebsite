@@ -130,29 +130,59 @@ export class CharacterFormComponent implements OnInit, OnDestroy {
   }
   
   processForm() {
-    const BioPicMain = this.uploadpreviewserv.mainsData[0];
-    const BioPicThumb = this.uploadpreviewserv.thumbsData[0];
-    const RefsMain = Object.assign([], this.uploadpreviewserv.mainsData).splice(0,1);
-    const RefsThumb = Object.assign([], this.uploadpreviewserv.thumbsData).splice(0,1);
+    const MainImageData = this.uploadpreviewserv.mainsData;
+    const ThumbImageData = this.uploadpreviewserv.thumbsData;
     
-    // Invalid Form
-    // Incomplete Form
-    if((BioPicMain === undefined
-      ||  BioPicThumb === undefined)
-      && this.Form.controls.Links.value === '') {
-       this.fetcher.assignActiveFormData(["abort",
-       "Bio files require a bio image."]);
-       return;
+    for(let i = 0; i < MainImageData.length; i++) {
+      if(MainImageData[i] === undefined) {
+        if(i === 0) {
+          return this.fetcher.assignActiveFormData(["abort",
+          "A main bio image is required!"]);
+        } else {
+          return this.fetcher.assignActiveFormData(["abort",
+          `At least one of your references (${i}) lacks a main image.`]);
+        }
+      }
+      if(ThumbImageData[i] === undefined) {
+        if(i === 0) {
+          return this.fetcher.assignActiveFormData(["abort",
+          "A bio image thumb is required!"]);
+        } else {
+          return this.fetcher.assignActiveFormData(["abort",
+          `At least one of your references (${i}) lacks an image thumb.`]);
+        }
+      }
+    }
+    const Final: CharacterMetaData = Object.assign({}, this.Form.value);
+    if(!Final.FirstName || !Final.LastName) {
+      return this.fetcher.assignActiveFormData(["abort",
+      "Characters require a first and last name!"]);
+    }
+    
+    Final.References = this.createReference(Final.ReferenceIDs, Final.FirstName);
+
+    for(let i = 0; i < Final.References.length; i++) {
+      if(!Final.References[i].ID) {
+        return this.fetcher.assignActiveFormData(["abort",
+          `At least one of your references (${i+1}) lacks a name.`]);
+      }
     }
 
-    const Final: CharacterMetaData = Object.assign({}, this.Form.value); 
+
+    const BioPicMain = this.uploadpreviewserv.mainsData[0];
+    const BioPicThumb = this.uploadpreviewserv.thumbsData[0];
+    const RefsMain = Object.assign([], this.uploadpreviewserv.mainsData)
+    RefsMain.splice(0,1);
+    const RefsThumb = Object.assign([], this.uploadpreviewserv.thumbsData)
+    RefsThumb.splice(0,1);    
+
     Final.SourceAbilitiesFormatted = this.FormatSA(Final);
     Final.RelationsFormatted = this.FormatRelat(Final);
     Final.SourceAbilities = JSON.stringify(Final.SourceAbilities);
     Final.Relations = JSON.stringify(Final.Relations);
     Final.Unique = JSON.stringify(Final.Unique);
     Final.ID = Final.FirstName.split(' ').join('');
-    Final.References = this.createReference(Final.ReferenceIDs, Final.FirstName);
+    
 
     const imagePaths = [`hell/${Final.FirstName}-Full`,
                         `hell/${Final.FirstName}-Thumb`]
@@ -161,8 +191,6 @@ export class CharacterFormComponent implements OnInit, OnDestroy {
     const imageEvents = [BioPicMain, BioPicThumb]
       .concat(this.combineEvents(RefsMain, RefsThumb));
 
-      console.log(imageEvents)
-      console.log(imagePaths)
     return this.fetcher.assignActiveFormData([Final,
       imagePaths,
       imageEvents,
