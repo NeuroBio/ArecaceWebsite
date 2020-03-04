@@ -8,7 +8,7 @@ export class ImageResizerService {
   constructor() { }
 
   resizeImage(file: any, maxheight: number, maxwidth: number, Blob: boolean) {
-    return this.resizer(file, maxwidth, maxheight)
+    return this.resizer(file, maxheight, maxwidth)
     .then(urlString => {
         if(Blob) {
             return this.b64toBlob(urlString);

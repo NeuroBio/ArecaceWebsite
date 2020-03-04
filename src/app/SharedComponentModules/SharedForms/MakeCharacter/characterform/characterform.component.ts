@@ -44,7 +44,7 @@ export class CharacterFormComponent implements OnInit, OnDestroy {
   noFamily: boolean;
 
   imageBioPicSettings = new UploadPreviewSettings([[undefined, undefined, '100MB'], [450, 450, '300KB']]);
-  imageRefSettings = new UploadPreviewSettings([[undefined, undefined, '100MB'], [250, 250, '300KB']]);
+  imageRefSettings = new UploadPreviewSettings([[undefined, undefined, '100MB'], [200, 600, '300KB']]);
 
     constructor(private fb: FormBuilder,
               private fetcher: FetchService,

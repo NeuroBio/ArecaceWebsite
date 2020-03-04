@@ -22,8 +22,7 @@ export class BeastFormComponent implements OnInit, OnDestroy {
 
   dropDowns = new BestDropDowns();
   Form: FormGroup;
-  imageSettings = new UploadPreviewSettings([[undefined, undefined, '100MB'], [250, 250, '300KB']]);
-
+  imageSettings = new UploadPreviewSettings([[undefined, undefined, '100MB'], [200, 600, '300KB']]);
 
   stream1: Subscription;
   stream2: Subscription;
