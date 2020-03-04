@@ -1,11 +1,13 @@
-import { Component, OnInit, ViewChild,
-         ElementRef, OnDestroy }          from '@angular/core';
+import { Component, OnInit, OnDestroy }   from '@angular/core';
 import { FormBuilder, FormGroup }         from '@angular/forms';
 import { Subscription }                   from 'rxjs';
 
 import { CRUDcontrollerService }          from '../../../services/CRUDcontroller.service'
 import { Categories, Paths }              from '../../../../Classes/UploadDownloadPaths'
 import { QuickAssign }                    from 'src/app/GlobalServices/commonfunctions.service';
+import { UploadPreviewService }           from 'src/app/SharedComponentModules/upload-preview/upload-preview.service';
+import { UploadPreviewSettings }          from 'src/app/SharedComponentModules/upload-preview/uploadpreviewclass';
+import { FetchService }                   from 'src/app/GlobalServices/fetch.service';
 
 
 @Component({
@@ -17,10 +19,9 @@ import { QuickAssign }                    from 'src/app/GlobalServices/commonfun
 export class ReferenceFormComponent implements OnInit, OnDestroy {
   
   Form: FormGroup;
-  @ViewChild('image', { static: true }) imageUploader: ElementRef;
-  imageFile: any;
   stream1: Subscription;
   stream2: Subscription;
+  imageSettings = new UploadPreviewSettings([[undefined, undefined, '100MB'], [200, 600, '300KB']]);
 
   
   cats = new Categories;
@@ -32,7 +33,9 @@ export class ReferenceFormComponent implements OnInit, OnDestroy {
 
   constructor(private fb: FormBuilder,
               private controller: CRUDcontrollerService,
-              private qa: QuickAssign) { }
+              private qa: QuickAssign,
+              private uploadpreviewserv: UploadPreviewService,
+              private fetcher: FetchService) { }
 
   ngOnInit() {
     this.controller.itemType.subscribe(type => {
@@ -53,6 +56,7 @@ export class ReferenceFormComponent implements OnInit, OnDestroy {
     this.stream1.unsubscribe();
     this.stream2.unsubscribe();
     this.controller.disposal();
+    this.fetcher.disposal();
   }
 
   createForm() {
@@ -74,8 +78,10 @@ export class ReferenceFormComponent implements OnInit, OnDestroy {
   }
 
   processForm() {
+    const imageFile = this.uploadpreviewserv.mainsData[0];
+
      //Incomplete Form
-     if(this.imageFile === undefined
+     if(imageFile === undefined
       && this.Form.controls.Links.value === '') {
       this.controller.activeFormData.next(["abort",
         `${this.type} files require an image.`]);
@@ -88,7 +94,7 @@ export class ReferenceFormComponent implements OnInit, OnDestroy {
 
     this.controller.activeFormData.next([Final,
                                       [`${this.imagePath}/${Final.ID}`],
-                                      [this.imageFile],
+                                      [imageFile],
                                       Final.Links,
                                       undefined,
                                       undefined,
@@ -98,12 +104,8 @@ export class ReferenceFormComponent implements OnInit, OnDestroy {
   onReset() {
     this.Form = this.createForm();
     this.Form.controls.Category.patchValue(this.categories[0]);
-    this.imageFile = undefined;
-    this.imageUploader.nativeElement.value = '';
-  }
-
-  getImage(event:any) {
-    this.imageFile = event;
+    this.uploadpreviewserv.reset.next();
+    this.uploadpreviewserv.erase(0);
   }
 
 }

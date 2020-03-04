@@ -1,5 +1,4 @@
-import { Component, OnInit, ViewChild,
-         ElementRef, OnDestroy }              from '@angular/core';
+import { Component, OnInit, OnDestroy }       from '@angular/core';
 import { formatDate }                         from '@angular/common';
 import { FormBuilder, FormGroup }             from '@angular/forms';
 
@@ -8,6 +7,9 @@ import { Subscription }                       from 'rxjs';
 import { CRUDcontrollerService }              from 'src/app/administration/services/CRUDcontroller.service';
 import { PostData }                           from 'src/app/Classes/ContentClasses';
 import { QuickAssign }                        from 'src/app/GlobalServices/commonfunctions.service';
+import { UploadPreviewService }               from 'src/app/SharedComponentModules/upload-preview/upload-preview.service';
+import { UploadPreviewSettings }              from 'src/app/SharedComponentModules/upload-preview/uploadpreviewclass';
+import { FetchService }                       from 'src/app/GlobalServices/fetch.service';
 
 @Component({
   selector: 'app-update-form',
@@ -18,8 +20,7 @@ import { QuickAssign }                        from 'src/app/GlobalServices/commo
 export class UpdateFormComponent implements OnInit, OnDestroy {
 
   Form: FormGroup;
-  @ViewChild('Image', { static: true }) imageUploader: ElementRef;
-  imageFile: any;
+  imageSettings = new UploadPreviewSettings([[600, 600, '100MB'], [undefined, undefined, '300KB']]);
   stream1: Subscription;
   stream2: Subscription;
   oldPost: any;
@@ -27,7 +28,9 @@ export class UpdateFormComponent implements OnInit, OnDestroy {
 
   constructor(private fb: FormBuilder,
               private controller: CRUDcontrollerService,
-              private qa: QuickAssign) { }
+              private qa: QuickAssign,
+              private uploadpreviewserv: UploadPreviewService,
+              private fetcher: FetchService) { }
 
   ngOnInit() {
     this.stream1 = this.controller.itemToEdit
@@ -40,6 +43,7 @@ export class UpdateFormComponent implements OnInit, OnDestroy {
     this.stream1.unsubscribe();
     this.stream2.unsubscribe();
     this.controller.disposal();
+    this.fetcher.disposal();
   }
 
   createForm() {
@@ -65,6 +69,7 @@ export class UpdateFormComponent implements OnInit, OnDestroy {
     const Final: PostData = Object.assign({}, this.Form.value);
     let oldImages: string[] = [];
     let newImages: any[] = [];
+    const imageFile = this.uploadpreviewserv.mainsData[0];
 
     if(!this.oldPost) {
       Final.Date = formatDate(new Date(), 'yyyy-MM-dd', 'en');
@@ -80,8 +85,8 @@ export class UpdateFormComponent implements OnInit, OnDestroy {
       }
     }
 
-    if(this.imageFile) {
-      newImages = [this.imageFile];
+    if(imageFile) {
+      newImages = [imageFile];
     }
 
     this.controller.activeFormData.next([Final,
@@ -95,12 +100,9 @@ export class UpdateFormComponent implements OnInit, OnDestroy {
 
   onReset() {
     this.Form = this.createForm();
-    this.imageUploader.nativeElement.value = '';
-    this.imageFile = undefined;
     this.oldPost = undefined;
+    this.uploadpreviewserv.reset.next();
+    this.uploadpreviewserv.erase(0);
   }
 
-  onFile(event: any) {
-    this.imageFile = event;
-  }
 }

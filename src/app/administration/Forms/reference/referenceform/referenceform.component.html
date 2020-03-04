@@ -9,7 +9,12 @@
     
     <p>Topic: <input type="text" formControlName="Topic"></p>
     
-    <p>Image: <input #image type="file" class="fileupload" (change)="getImage($event)"></p>
+    <app-upload-main
+    name="Reference Image"
+    [ID]="0"
+    [hasThumb]="false"
+    [Settings]="imageSettings"
+    ></app-upload-main>
 
     <p>Image Caption:<br/>
     <textarea formControlName="Caption" rows="4" cols="66"></textarea></p>
