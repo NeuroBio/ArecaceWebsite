@@ -74,14 +74,12 @@ export class CRUDcontrollerService {
 
   //Key upload/download functions
   onSubmit() {
-    console.log("start")
     const buttonState = this.allowButtons.value;
     this.allowButtons.next(new ButtonController([false, false, false, false]));
 
     this.message.next("Processing...");
     this.triggerProcess.next();
-    return this.activeFormData.pipe(
-      skip(1), take(1)).subscribe(data => {
+    return this.activeFormData.pipe(take(1)).subscribe(data => {
       console.log("CRUDcontroller")
       //submit button hit with invalid form.
       if(data[0] === "abort") {

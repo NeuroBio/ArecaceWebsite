@@ -18,7 +18,7 @@ export class FetchService {
 
   constructor() { }
 
-  assignIntemtoEdit(item: any): void {
+  assignItemtoEdit(item: any): void {
     this.itemToEdit.next(item);
   }
   

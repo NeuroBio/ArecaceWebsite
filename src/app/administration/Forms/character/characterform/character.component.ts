@@ -34,7 +34,7 @@ export class CharacterComponent implements OnInit {
 
   assignFormData(editFormData: any) {
     if(editFormData) {
-      this.fetcher.assignIntemtoEdit(editFormData);
+      this.fetcher.assignItemtoEdit(editFormData);
     }
   }
   
@@ -43,11 +43,10 @@ export class CharacterComponent implements OnInit {
     this.fetcher.fetchData();
 
     return this.fetcher.activeFormData.pipe(take(1)).subscribe(Final => {
-      console.log(Final)
-      // this.controller.activeFormData.next(Final);
-      // if(Final[0] !== 'abort') {
-      //     this.birthday.updateBirthdayData(Final[0]);
-      // }
+      this.controller.activeFormData.next(Final);
+      if(Final[0] !== 'abort') {
+          this.birthday.updateBirthdayData(Final[0]);
+      }
     });
   }
 

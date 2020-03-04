@@ -35,7 +35,7 @@ export class SourceCalcFrameComponent implements OnInit, OnDestroy {
     this.stream1 = this.auth.user.subscribe(() => 
       this.loggedIn = this.auth.isUser());  
     this.stream2 =this.logintosaveserv.reset.subscribe(() => {
-      this.fetcher.assignIntemtoEdit(undefined);
+      this.fetcher.assignItemtoEdit(undefined);
       this.logintosaveserv.assignStopClick(false);
     });
   }
@@ -46,7 +46,7 @@ export class SourceCalcFrameComponent implements OnInit, OnDestroy {
   }
 
   populateForm(index: number) {
-    this.fetcher.assignIntemtoEdit(this.canonSA[index]);
+    this.fetcher.assignItemtoEdit(this.canonSA[index]);
   }
 
 }

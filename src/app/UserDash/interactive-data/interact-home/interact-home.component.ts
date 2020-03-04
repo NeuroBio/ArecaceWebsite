@@ -37,7 +37,7 @@ export class InteractHomeComponent implements OnInit, OnDestroy {
       
       case 'SAcalculations':
         this.fetcher.assignActiveFormData(undefined);
-        return this.fetcher.assignIntemtoEdit(undefined);
+        return this.fetcher.assignItemtoEdit(undefined);
     }
   }
 

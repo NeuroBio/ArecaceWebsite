@@ -54,11 +54,11 @@ export class CharacterFormComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.stream1 = this.fetcher.itemToEdit
       .subscribe(item => this.assignFormData(item));
+
     this.stream2 = this.fetcher.processData
       .subscribe(() => this.processForm());
     this.stream3 = this.Form.valueChanges.subscribe(valid =>
       this.fetcher.assignvalidity(valid));
-    this.uploadpreviewserv.add();
   }
 
   ngOnDestroy() {
@@ -201,6 +201,7 @@ export class CharacterFormComponent implements OnInit, OnDestroy {
   }
 
   onReset() {
+    console.log("you should trigger")
     this.RelationsArray = this.fb.array([]);
     this.ReferencesArray = this.fb.array([]);
     this.Form = this.createForm();
@@ -210,6 +211,7 @@ export class CharacterFormComponent implements OnInit, OnDestroy {
     this.noReferences = true;
     this.noFamily = true;
     this.uploadpreviewserv.reset.next();
+    this.uploadpreviewserv.add();
   }
 
   //Processing functions

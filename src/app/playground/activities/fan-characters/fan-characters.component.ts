@@ -24,7 +24,7 @@ export class FanCharactersComponent implements OnInit, OnDestroy {
     this.fetcher.assignUserDataInfo(['FirstName', 'LastName'], 'FanCharacters');
     this.logintosaveserv.assignAutoTrigger(true);
     this.stream1 = this.logintosaveserv.reset.subscribe(() => {
-      this.fetcher.assignIntemtoEdit(undefined);
+      this.fetcher.assignItemtoEdit(undefined);
       this.logintosaveserv.assignStopClick(false);
     });
   }

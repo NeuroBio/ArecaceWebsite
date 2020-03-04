@@ -34,7 +34,7 @@ export class SourceAffinityComponent implements OnInit, OnDestroy {
   assignFormData(editFormData: any) {
     this.onReset();
     if(editFormData) {
-      this.fetcher.assignIntemtoEdit(editFormData);
+      this.fetcher.assignItemtoEdit(editFormData);
     }
   }
 
@@ -45,7 +45,7 @@ export class SourceAffinityComponent implements OnInit, OnDestroy {
   }
   
   onReset() {
-    this.fetcher.assignIntemtoEdit(undefined);
+    this.fetcher.assignItemtoEdit(undefined);
     this.controller.message.next('');
   }
   
