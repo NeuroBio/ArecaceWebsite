@@ -4,31 +4,35 @@ import { Validators, FormBuilder, FormGroup }     from '@angular/forms';
 import { Subscription }                           from 'rxjs';
 
 import { CRUDcontrollerService }                  from '../../../services/CRUDcontroller.service';
+import { UploadPreviewService }                   from 'src/app/SharedComponentModules/upload-preview/upload-preview.service';
 
 import { BestDropDowns }                          from '../bestdropdowns';
 import { BeastMetaData }                          from 'src/app/Classes/ContentClasses';
 import { QuickAssign }                            from 'src/app/GlobalServices/commonfunctions.service';
+import { UploadPreviewSettings }                  from 'src/app/SharedComponentModules/upload-preview/uploadpreviewclass';
+import { FetchService }                           from 'src/app/GlobalServices/fetch.service';
 
 @Component({
   selector: 'app-beastform',
   templateUrl: './beastform.component.html',
   styleUrls: ['../../Form.css']
 })
+
 export class BeastFormComponent implements OnInit, OnDestroy {
 
   dropDowns = new BestDropDowns();
   Form: FormGroup;
-  @ViewChild('Thumb', { static: true }) thumbUploader: ElementRef;
-  @ViewChild('Full', { static: true }) fullUploader: ElementRef;
-  thumbFile: any;
-  fullFile: any;
+  imageSettings = new UploadPreviewSettings([[undefined, undefined, '100MB'], [250, 250, '300KB']]);
+
 
   stream1: Subscription;
   stream2: Subscription;
   
   constructor(private fb: FormBuilder,
               private controller: CRUDcontrollerService,
-              private qa: QuickAssign) { }
+              private qa: QuickAssign,
+              private uploadpreviewserv: UploadPreviewService,
+              private fetcher: FetchService) { }
 
   ngOnInit() {
     this.stream1 = this.controller.itemToEdit
@@ -40,6 +44,7 @@ export class BeastFormComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.stream1.unsubscribe();
     this.stream2.unsubscribe();
+    this.fetcher.disposal();
   }
 
   createForm() {
@@ -61,9 +66,11 @@ export class BeastFormComponent implements OnInit, OnDestroy {
   }
 
   processForm() {
+    const mainFile = this.uploadpreviewserv.mainsData[0];
+    const thumbFile = this.uploadpreviewserv.thumbsData[0];
     //Incomplete Form
-     if((this.thumbFile === undefined
-          || this.fullFile === undefined)
+     if((thumbFile === undefined
+          || mainFile === undefined)
         && this.Form.controls.Links.value === '') {
        this.controller.activeFormData.next(["abort",
        "Bestiary files require a card image and its thumbnail."]);
@@ -77,7 +84,7 @@ export class BeastFormComponent implements OnInit, OnDestroy {
     this.controller.activeFormData.next([Final,
                                       [`Bestiary/${Final.ID}-thumb`,
                                       `Bestiary/${Final.ID}-full`],
-                                      [this.thumbFile, this.fullFile],
+                                      [thumbFile, mainFile],
                                       Final.Links,
                                       undefined,
                                       undefined,
@@ -86,19 +93,9 @@ export class BeastFormComponent implements OnInit, OnDestroy {
   
   onReset() {
     this.Form = this.createForm();
-    this.thumbFile = undefined;
-    this.fullFile = undefined;
-    this.thumbUploader.nativeElement.value = '';
-    this.fullUploader.nativeElement.value = '';
     this.controller.message.next('');
+    this.uploadpreviewserv.reset.next();
+    this.uploadpreviewserv.erase(0);
   }
   
-  getThumb(event:any) {
-    this.thumbFile = event;
-  }
-
-  getFull(event:any) {
-    this.fullFile = event;
-  }
-
 }

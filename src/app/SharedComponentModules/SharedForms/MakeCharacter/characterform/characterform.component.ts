@@ -54,7 +54,6 @@ export class CharacterFormComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.stream1 = this.fetcher.itemToEdit
       .subscribe(item => this.assignFormData(item));
-
     this.stream2 = this.fetcher.processData
       .subscribe(() => this.processForm());
     this.stream3 = this.Form.valueChanges.subscribe(valid =>
