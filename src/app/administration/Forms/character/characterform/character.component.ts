@@ -22,7 +22,7 @@ export class CharacterComponent implements OnInit {
 
   ngOnInit() {
     this.stream1 = this.controller.itemToEdit
-      .subscribe(item => this.assignFormData(item));
+      .subscribe(item => this.fetcher.assignItemtoEdit(item));
     this.stream2 = this.controller.triggerProcess
       .subscribe(() => this.processForm());
   }
@@ -30,12 +30,6 @@ export class CharacterComponent implements OnInit {
   ngOnDestroy() {
     this.stream1.unsubscribe();
     this.stream2.unsubscribe();
-  }
-
-  assignFormData(editFormData: any) {
-    if(editFormData) {
-      this.fetcher.assignItemtoEdit(editFormData);
-    }
   }
   
   processForm() {

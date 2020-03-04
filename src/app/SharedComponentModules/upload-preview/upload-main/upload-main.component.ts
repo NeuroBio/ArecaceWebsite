@@ -25,25 +25,24 @@ export class UploadMainComponent implements OnInit, OnDestroy {
   new UploadPreviewSettings([[undefined, undefined, undefined],
                             [undefined, undefined, undefined]]);
   
-  @ViewChild('main', { static: true }) mainUploader: ElementRef;
-  @ViewChild('thumb', { static: true }) thumbUploader: ElementRef;
+  @ViewChild('mainInput', { static: true }) mainUploader: ElementRef;
+  @ViewChild('thumbInput', { static: false }) thumbUploader: ElementRef;
   mainImg: UploadPreviewInfo;
   thumbImg: UploadPreviewInfo;
   mainRequirements: string;
   thumbRequirements: string;
 
   stream1: Subscription;
-  autoGenerate = true;
+  autoGenerate;
 
   constructor(private previewserv: UploadPreviewService,
               private resizeserv: ImageResizerService,
               private fetcher: FetchService) { }
 
   ngOnInit() {
-    this.mainImg = new UploadPreviewInfo(`${this.name}-main`, undefined, false, undefined);
-    this.thumbImg = new UploadPreviewInfo(`${this.name}-thumb`, undefined, false, undefined);
     this.mainRequirements = this.setReq(this.Settings.main, 'Main');
     this.thumbRequirements = this.setReq(this.Settings.thumb, 'Thumb');
+    this.onReset();
     this.stream1 = this.previewserv.reset.subscribe(() => this.onReset());
   }
 
@@ -73,10 +72,15 @@ export class UploadMainComponent implements OnInit, OnDestroy {
   }
 
   uploadImage(event: any, imgType: string) {
+    console.log(this.mainUploader)
+    console.log(this.thumbUploader)
     switch(imgType) {
       case 'thumb':
         return this.CheckandAssign(event, imgType)
-        .catch(error => alert(error[1]));
+        .catch(error => {
+          this.thumbUploader.nativeElement.value = '';
+          alert(error[1])
+        });
 
       case 'main':
         return this.CheckandAssign(event, imgType)
@@ -86,7 +90,10 @@ export class UploadMainComponent implements OnInit, OnDestroy {
               .then(() => this.loadImage('thumb', event, url))
               .catch(() => this.makeThumb(event));
           }
-        }).catch(error => alert(error[1]));
+        }).catch(error => {
+          this.mainUploader.nativeElement.value = '';
+          alert(error[1])
+        });
 
       case 'auto':
         this.makeThumb(event);
@@ -114,7 +121,7 @@ export class UploadMainComponent implements OnInit, OnDestroy {
   }
 
   CheckandAssign(event: any, type: string) {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve, reject) => 
       this.previewserv.checkFile(event, this.Settings[type])
       .then(() => {
         this.previewserv.quickFiletob64(event)
@@ -122,11 +129,8 @@ export class UploadMainComponent implements OnInit, OnDestroy {
             this.loadImage(type, event, url);
             return resolve(url);
           });
-      }).catch(error => {
-        return reject(error)
-        //this.thumbUploader.nativeElement.value = '';
-      })
-    });
+      }).catch(error => { return reject(error); })
+      );
   }
 
   loadImage(type: string, event: any, url: string) {
@@ -141,7 +145,10 @@ export class UploadMainComponent implements OnInit, OnDestroy {
 
  onReset() {
     this.mainUploader.nativeElement.value = '';
-    this.thumbUploader.nativeElement.value = '';
+    if(this.thumbUploader) {
+      this.thumbUploader.nativeElement.value = '';
+    }
+    this.autoGenerate = true;
     this.previewserv.erase(this.ID);
     this.mainImg = new UploadPreviewInfo(`${this.name}-main`, undefined, false, undefined);
     this.thumbImg = new UploadPreviewInfo(`${this.name}-thumb`, undefined, false, undefined);

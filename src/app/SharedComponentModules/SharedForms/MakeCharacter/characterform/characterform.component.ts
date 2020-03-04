@@ -201,7 +201,6 @@ export class CharacterFormComponent implements OnInit, OnDestroy {
   }
 
   onReset() {
-    console.log("you should trigger")
     this.RelationsArray = this.fb.array([]);
     this.ReferencesArray = this.fb.array([]);
     this.Form = this.createForm();
@@ -211,6 +210,7 @@ export class CharacterFormComponent implements OnInit, OnDestroy {
     this.noReferences = true;
     this.noFamily = true;
     this.uploadpreviewserv.reset.next();
+    this.uploadpreviewserv.clear()
     this.uploadpreviewserv.add();
   }
 

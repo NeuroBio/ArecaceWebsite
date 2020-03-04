@@ -25,6 +25,11 @@ export class UploadPreviewService {
     this.mainsData[index] = data;
   }
 
+  clear() {
+    this.thumbsData = [];
+    this.mainsData = [];
+  }
+  
   add() {
     this.thumbsData.push(undefined);
     this.mainsData.push(undefined);
