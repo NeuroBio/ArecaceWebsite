@@ -1,7 +1,7 @@
 div.compheader {
     position: relative;
     display: flex;
-    justify-content: center;
+    justify-content: stretch;
 }
 
 div#top {
@@ -39,9 +39,14 @@ p.caption {
     box-sizing: border-box;
 }
 
+div#compstretcher {
+    margin-right: 7px;
+    display: flex;
+    flex-grow: 1;
+    justify-content: center;
+}
+
 app-bookmark {
-    position: absolute;
-    float: right;
-    right: 0;
-    height: 100%;
+    align-self: stretch;
+    flex-grow: 0;
 }

@@ -13,6 +13,19 @@
 
     <!-- Bio facts -->
       <div class="firstblock">
+
+        <!-- Mini header -->
+          <div class="compheader">
+            <h2 class="compheader">{{ char.FirstName }} {{ char.LastName }}</h2>
+              <app-bookmark
+              [path]="path"
+              type="Favorites"
+              [name]="name"
+              [bookmarkImage]="false"
+              ></app-bookmark>
+          </div>
+
+        <!-- actual deets -->
           <p class="textblock"><b>Class: </b> {{ char.SMClass }}</p>
           <p class="textblock"><b>Occupation: </b> {{ char.Occupation }}</p>
           <p class="textblock"><b>Nationality: </b>{{ char.Country }}, {{ char.Territory }} Territory</p>

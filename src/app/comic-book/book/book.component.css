@@ -47,7 +47,7 @@ div#viewradio {
   position: relative;
   display: flex;
   justify-content: flex-end;
-  min-width: 170px;
+  min-width: 175px;
 }
 
 div#radiobox {

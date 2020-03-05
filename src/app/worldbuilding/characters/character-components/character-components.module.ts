@@ -9,7 +9,7 @@ import { PrimaryContentDisplayModule }      from 'src/app/SharedComponentModules
 import { CharactersMainComponent }          from './charactersmain/charactersmain.component';
 import { CharactersDetailsComponent }       from './charactersdetails/charactersdetails.component';
 import { CharactersBlowupmasterComponent }  from './charactersblowupmaster/charactersblowupmaster.component';
-
+import { BookmarkModule }                   from 'src/app/SharedComponentModules/bookmark/bookmark.module';
 
 @NgModule({
   declarations: [
@@ -21,6 +21,7 @@ import { CharactersBlowupmasterComponent }  from './charactersblowupmaster/chara
     CommonModule,
     GridBlowupModule,
     PrimaryContentDisplayModule,
+    BookmarkModule,
     RouterModule
   ],
   exports: [
