@@ -1,5 +1,4 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { DisplayService } from '../display.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { UserDataService } from '../../user-data.service';
 @Component({
@@ -16,8 +15,7 @@ export class DataOptionsComponent implements OnInit {
   @Input() data: any;
   @Input() edit: any;
 
-  constructor(private displayserv: DisplayService,
-              private userdataser: UserDataService,
+  constructor(private userdataserv: UserDataService,
               private route: ActivatedRoute,
               private router: Router) { }
 
@@ -36,6 +34,6 @@ export class DataOptionsComponent implements OnInit {
   }
 
   onDelete(index: number) {
-    this.userdataser.deleteEntry(this.type, index)
+    this.userdataserv.deleteEntry(this.type, index)
   }
 }
