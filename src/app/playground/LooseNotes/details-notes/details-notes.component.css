@@ -4,6 +4,10 @@ hr {
     margin-bottom: 7px;
 }
 
+div#header {
+    display: flex;
+    justify-content: space-between;
+}
 
 h3 {
     margin: 0px;
@@ -21,6 +25,10 @@ div.textblock {
 
 div#outer {
     max-width: 700px;
+}
+
+app-bookmark {
+    float: right;
 }
 
 ::ng-deep div#outer hr {

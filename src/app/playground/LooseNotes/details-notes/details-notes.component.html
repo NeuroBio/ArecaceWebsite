@@ -1,5 +1,15 @@
 <div  id="outer" class="textblock">
-    <h3>{{ note.Title }}</h3>
+    <div id="header">
+        <h3>{{ note.Title }}</h3>
+        <app-bookmark
+        [path]="path"
+        type="Favorites"
+        [name]="name"
+        [bookmarkImage]="false"
+        ></app-bookmark>
+    </div>
+
+
     <hr>
     <div class="textblock" [innerHTML]="note.Text"></div>
     <hr>
