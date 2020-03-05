@@ -17,7 +17,7 @@ export class BookmarkService {
 
   constructor(private firebaseserv: FireBaseService,
               private auth: AuthService) {
-    this.stream = this.auth.user.subscribe(user => {console.log("fetched");this.userData.next(user)});
+    this.stream = this.auth.user.subscribe(user => this.userData.next(user));
   }
 
   addBookmark(type: string, path: string, name: string) {

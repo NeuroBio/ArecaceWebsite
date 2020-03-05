@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { SurveyService } from '../survey.service';
 import { Subscription } from 'rxjs';
 import { FetchService } from 'src/app/GlobalServices/fetch.service';
+import { LoginToSaveService } from 'src/app/SharedComponentModules/login-to-save/login-to-save.service';
 
 @Component({
   selector: 'app-results',
@@ -22,10 +23,11 @@ export class ResultsComponent implements OnInit, OnDestroy {
   acceptable: boolean;
 
   constructor(private surveyserv: SurveyService,
-              private fetcher: FetchService) { }
+              private fetcher: FetchService,
+              private logintosaveserv: LoginToSaveService) { }
 
   ngOnInit() {
-    this.fetcher.assignUserDataInfo(['Name', 'UploadTimeShort'], 'SurveyResults');
+    this.logintosaveserv.assignUserDataInfo(['Name', 'UploadTimeShort'], 'SurveyResults');
     this.fetcher.assignvalidity(true);
     this.stream1 = this.surveyserv.surveyResults.subscribe(results => {
       if(results) {

@@ -13,9 +13,6 @@ export class FetchService {
   valid = new BehaviorSubject<boolean>(undefined);
   loading = new BehaviorSubject<boolean>(undefined);
 
-  nameTokens: string[];
-  type: string;
-
   constructor() { }
 
   assignItemtoEdit(item: any): void {
@@ -32,11 +29,6 @@ export class FetchService {
 
   assignvalidity(valid: boolean): void {
     this.valid.next(valid);
-  }
-
-  assignUserDataInfo (tokens: string[], type: string): void {
-    this.nameTokens = tokens;
-    this.type = type;
   }
 
   assignLoading(load: boolean): void {

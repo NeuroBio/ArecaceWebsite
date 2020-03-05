@@ -4,7 +4,7 @@ import { AuthService } from '../../administration/security/Auth/auth.service';
 import { formatDate } from '@angular/common';
 import { FireBaseService } from '../../GlobalServices/firebase.service';
 import { FetchService } from 'src/app/GlobalServices/fetch.service';
-import { take } from 'rxjs/operators';
+import { take, skip } from 'rxjs/operators';
 import { User } from 'src/app/Classes/ContentClasses';
 @Injectable({
   providedIn: 'root'
@@ -13,17 +13,27 @@ export class LoginToSaveService {
 
   message = new BehaviorSubject<string>(undefined);
   stopClick = new BehaviorSubject<boolean>(undefined);
+  trigger = new Subject();
   reset = new Subject();
-  autoTrigger = new BehaviorSubject<boolean>(false);
+  autoTrigger: boolean = false;
+
+  nameTokens: string[];
+  type: string;
 
   constructor(private auth: AuthService,
               private firebaseserv: FireBaseService,
               private fetcher: FetchService) { }
 
 
+  assignUserDataInfo (tokens: string[], type: string): void {
+    this.nameTokens = tokens;
+    this.type = type;
+  }
+
   saveData() {
-    if(this.autoTrigger.value === true) {
+    if(this.autoTrigger === true) {
       this.fetcher.fetchData();
+      this.trigger.next();
       return this.fetcher.activeFormData.pipe(take(1))
       .subscribe(data => {
         this.processForm(data)
@@ -39,21 +49,19 @@ export class LoginToSaveService {
     }
     dataToSave = dataToSave[0];
     const oldData = this.auth.user.value;
-    const nameTokens = this.fetcher.nameTokens;
-    const dataType = this.fetcher.type;
 
     this.assignStopClick(true);
     this.message.next('Processing...');
     dataToSave.UploadTime = formatDate(new Date(), 'yyyy-MM-dd, HH:mm:ss', 'en');
     dataToSave.UploadTimeShort = formatDate(new Date(), 'yy/MM/dd', 'en');
-    dataToSave.DisplayName = this.makeDisplayName(nameTokens, dataToSave);
+    dataToSave.DisplayName = this.makeDisplayName(this.nameTokens, dataToSave);
     dataToSave.ID = `${oldData.ID}_${this.getUniqueId(4)}`
 
     
-    if(oldData[dataType]) {// old data exists
-      oldData[dataType].push(dataToSave);
+    if(oldData[this.type]) {// old data exists
+      oldData[this.type].push(dataToSave);
     } else { //first time this data pushed
-      oldData[dataType] = [dataToSave];
+      oldData[this.type] = [dataToSave];
     }
 
 
@@ -91,7 +99,7 @@ export class LoginToSaveService {
   }
 
   assignAutoTrigger(trigger: boolean) {
-    this.autoTrigger.next(trigger);
+    this.autoTrigger = trigger;
   }
   disposal() {
     this.message.next('');
