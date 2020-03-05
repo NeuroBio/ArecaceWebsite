@@ -8,18 +8,18 @@ service cloud.firestore {
      
     match /SurveyStats/{allDocuments} {
         allow read;
-        allow update: if isUser();
+        allow update: if isLoggedIn();
         allow create: if isAdmin();
     }
   
     match /Contact/{allDocuments} {
         allow read, write: if isAdmin();
-        allow create: if isUser();
+        allow create: if isLoggedIn();
     }
 
-    match /Users/{userID} {
-        allow read, write: if isOwner(userID);
-    }
+    // match /Users/{userID} {
+    //     allow read, write: if isOwner(userID);
+    // }
 
     match /Users/{userID}/{document=**} {
         allow read, write: if isOwner(userID);
@@ -128,12 +128,16 @@ service cloud.firestore {
         return get(/databases/$(database)/documents/Users/$(request.auth.uid)).data.Admin == true;
       }
 
-    function isUser() {
+    function isLoggedIn() {
         return request.auth != null;
     }
 
+    function isUser() {
+        return request.auth.token.sign_in_provider != 'anonymous';
+    }
+
     function isOwner(userID) {
-        return request.auth.uid == userID;
+        return (request.auth.uid == userID && isUser());
     }
   }
   

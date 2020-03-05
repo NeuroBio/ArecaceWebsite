@@ -37,6 +37,7 @@ export class UserDashComponent implements OnInit, OnDestroy {
     this.stream1 = this.auth.user.subscribe(user => {
       this.authorized = user? true : false;
       this.user = user;
+      console.log(user)
       if(user) {
         this.PrepareData();
         this.userdataser.assignUserData(user);

@@ -227,6 +227,7 @@ export class User {
     Narratives?: Bookmark[];
     Comics?: Bookmark[];
     Scripts?: Bookmark[];
+    Favorites?: Bookmark[];
     SurveyResults?: any[];
     FanCharacters?: CharacterMetaData[];
     SAcalculations?: SA[];

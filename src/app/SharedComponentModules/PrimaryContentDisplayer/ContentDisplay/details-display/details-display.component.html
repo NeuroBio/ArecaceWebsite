@@ -4,6 +4,13 @@
     <header>
         <div class="compheader" role="header">
             <h2 class="compheader">{{ ref.Topic }}</h2>
+            
+            <app-bookmark
+            [path]="path"
+            type="Favorites"
+            [name]="name"
+            [bookmarkImage]="false"
+            ></app-bookmark>
         </div>
     </header>
     <hr>

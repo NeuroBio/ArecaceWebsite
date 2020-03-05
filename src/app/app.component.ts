@@ -30,9 +30,7 @@ export class AppComponent implements AfterViewInit{
   }
 
   checkLoad() {
-    if(this.flag.nativeElement.offsetWidth == 1) {
-      this.global.ImagesLoadable.next(true);
-    } else {
+    if(this.flag.nativeElement.offsetWidth !== 1) {
       if(this.global.phone) {
         this.global.ImagesLoadable.next(false);
       } else {

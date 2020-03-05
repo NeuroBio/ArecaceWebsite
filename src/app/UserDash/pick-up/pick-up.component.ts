@@ -12,7 +12,7 @@ export class PickUpComponent implements OnChanges {
   @Input() user: User;
   data: any[];
   dataExists: boolean;
-  bookmarkTypes = ['Comics', 'Narratives', 'Scripts']  
+  bookmarkTypes = ['Comics', 'Narratives', 'Scripts', 'Favorites']  
   
   constructor(private userdataserv: UserDataService) { }
 

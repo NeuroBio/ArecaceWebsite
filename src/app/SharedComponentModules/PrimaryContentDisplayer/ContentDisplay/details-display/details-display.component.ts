@@ -1,8 +1,10 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { GeneralMetaData } from 'src/app/Classes/ContentClasses';
-import { GlobalVarsService } from 'src/app/GlobalServices/global-vars.service';
-import { Subscription } from 'rxjs';
+import { Component, OnInit }          from '@angular/core';
+import { ActivatedRoute }             from '@angular/router';
+
+import { GlobalVarsService }          from 'src/app/GlobalServices/global-vars.service';
+import { GetRouteSegmentsService }    from 'src/app/GlobalServices/commonfunctions.service';
+
+import { GeneralMetaData }            from 'src/app/Classes/ContentClasses';
 
 @Component({
   selector: 'app-details-display',
@@ -10,24 +12,26 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./details-display.component.css']
 })
 
-export class DetailsDisplayComponent implements OnInit, OnDestroy {
+export class DetailsDisplayComponent implements OnInit {
 
   loading: boolean;
   ref: GeneralMetaData;
-  stream1: Subscription;
+  path: string;
+  name: string;
 
   constructor(private route: ActivatedRoute,
-              private global: GlobalVarsService) { }
+              private global: GlobalVarsService,
+              private getsegserv: GetRouteSegmentsService) { }
 
   ngOnInit() {
+    const mainPath = this.getsegserv.fetch(this.route.snapshot.pathFromRoot);
     this.route.data.subscribe((data: {Ref: GeneralMetaData})=>{
+      this.loading = this.global.ImagesLoadable.value;
       window.scroll(0,0);
-      this.stream1 = this.global.ImagesLoadable.subscribe(load => this.loading = load);
       this.ref = data.Ref;
+      this.name = this.ref.Topic;
+      this.path = `/${mainPath}/${this.ref.ID}`;
     });
   }
 
-  ngOnDestroy() {
-    this.stream1.unsubscribe();
-  }
 }

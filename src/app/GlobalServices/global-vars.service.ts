@@ -6,7 +6,7 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class GlobalVarsService {
   
-  ImagesLoadable = new BehaviorSubject<boolean>(false);
+  ImagesLoadable = new BehaviorSubject<boolean>(true);
   phone: boolean;
 
   constructor() { }

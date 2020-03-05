@@ -16,10 +16,12 @@ export class BookmarkComponent implements OnInit, OnChanges, OnDestroy {
   @Input() path;
   @Input() type;
   @Input() name;
+  @Input() bookmarkImage: boolean = true;
   data: User;
   color: string;
-  hover = false;
+  hover: boolean = false;
   notLoggedIn: boolean;
+  marksrc: string;
   stream: Subscription;
 
   constructor(private bookmarkserv: BookmarkService,
@@ -28,9 +30,14 @@ export class BookmarkComponent implements OnInit, OnChanges, OnDestroy {
   ngOnInit() {
     this.stream = this.bookmarkserv.userData.subscribe(data => {
       this.data = data;
-      this.notLoggedIn = !this.auth.isUser();
+      this.notLoggedIn = !this.auth.isLoggedIn;//!this.auth.isUser();
       this.setColors();
     });
+    if(this.bookmarkImage) {
+      this.marksrc = 'assets/svgs/bookmark-bar.svg';
+    } else {
+      this.marksrc ='assets/svgs/star.svg';
+    }
   }
 
   ngOnChanges() {
