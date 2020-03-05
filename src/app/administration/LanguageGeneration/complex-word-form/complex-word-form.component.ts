@@ -1,11 +1,14 @@
 import { Component, OnInit, OnDestroy}            from '@angular/core';
 import { Validators, FormBuilder,
   FormGroup, FormArray }                          from '@angular/forms';
+
 import { Subscription }                           from 'rxjs';
 
 import { CRUDcontrollerService }                  from '../../services/CRUDcontroller.service';
-import { Word, Nomadic, CompWord, WordTypes }     from '../../../Classes/NomadicLanguage';
 import { QuickAssign }                            from 'src/app/GlobalServices/commonfunctions.service';
+
+import { Word, Nomadic, CompWord, WordTypes }     from '../../../Classes/NomadicLanguage';
+import { CRUDdata }                               from 'src/app/Classes/ContentClasses';
 
 @Component({
   selector: 'app-complex-word-form',
@@ -80,20 +83,15 @@ export class ComplexWordFormComponent implements OnInit, OnDestroy {
   processForm() {
     //Incomplete Form
     if(!this.Form.valid) {
-      this.controller.activeFormData.next(["abort", "All blanks must be filled."]);
-      return;
+      return this.controller.activeFormData.next(
+        new CRUDdata(true, 'All blanks must be filled.'));
     }
     //Complete Form   
     const Final:Word = Object.assign({}, this.Form.value);
     Final.Components = this.Form.controls.ComponentWords.value.map(word => word.Word).join(';');
     Final.ComponentWords = JSON.stringify(Final.ComponentWords); 
-    this.controller.activeFormData.next([Final,
-                                      [],
-                                      [],
-                                      undefined,
-                                      undefined,
-                                      undefined,
-                                      undefined]);
+    return this.controller.activeFormData.next(
+      new CRUDdata(false, '', Final));
   }
   
   onReset() {

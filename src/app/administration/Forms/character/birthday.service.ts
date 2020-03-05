@@ -13,8 +13,7 @@ export class BirthdayService {
 
   DateInfo = new DateInfo();
 
-  constructor(private controller: CRUDcontrollerService,
-              private crud: CRUD,
+  constructor(private crud: CRUD,
               private firebaseserv: FireBaseService) { }
 
   updateBirthdayData(char: CharacterMetaData) {

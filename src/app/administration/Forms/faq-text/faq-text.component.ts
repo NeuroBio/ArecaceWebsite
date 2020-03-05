@@ -6,6 +6,7 @@ import { takeUntil }                    from 'rxjs/operators';
 
 import { CRUDcontrollerService }        from '../../services/CRUDcontroller.service';
 import { Question }                     from 'src/app/Classes/WebsiteText';
+import { CRUDdata }                     from 'src/app/Classes/ContentClasses';
 
 @Component({
   selector: 'app-faq-text',
@@ -58,13 +59,8 @@ export class FaqTextComponent implements OnInit, OnDestroy {
   processForm() {
     const Final = Object.assign({}, this.Form.value);
     Final.Questions = JSON.stringify(Final.Questions);
-    this.controller.activeFormData.next([Final,
-                                         [],
-                                         [],
-                                         [],
-                                         undefined,
-                                         undefined,
-                                         undefined]);
+    this.controller.activeFormData.next(
+      new CRUDdata(false, '', Final));
   }
 
   onReset() {

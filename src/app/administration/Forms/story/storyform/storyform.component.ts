@@ -6,6 +6,8 @@ import { Subscription }                     from 'rxjs';
 import { CRUDcontrollerService }            from '../../../services/CRUDcontroller.service';
 import { QuickAssign }                      from 'src/app/GlobalServices/commonfunctions.service';
 
+import { CRUDdata }                         from 'src/app/Classes/ContentClasses';
+
 @Component({
   selector: 'app-storyform',
   templateUrl: './storyform.component.html',
@@ -77,13 +79,12 @@ export class StoryFormComponent implements OnInit, OnDestroy {
     Final.ID = `${Final.Title.replace(/\s/g, "")}`;
     var newText = new Blob([text], {type: 'text/plain'});
     
-    this.controller.activeFormData.next([Final,
-                                        [],
-                                        [],
-                                        undefined,
-                                        `${Final.Type}/${Final.ID}`,
-                                        newText,
-                                        oldText]);
+    return this.controller.activeFormData.next(
+      new CRUDdata(false, '', Final,
+                  undefined, undefined, undefined,
+                  `${Final.Type}/${Final.ID}`,
+                  newText,
+                  oldText));
   }
 
   onReset() {

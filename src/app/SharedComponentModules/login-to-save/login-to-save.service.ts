@@ -1,15 +1,20 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject, Subject } from 'rxjs'
-import { AuthService } from '../../administration/security/Auth/auth.service';
-import { formatDate } from '@angular/common';
-import { FireBaseService } from '../../GlobalServices/firebase.service';
-import { FetchService } from 'src/app/GlobalServices/fetch.service';
-import { take, skip } from 'rxjs/operators';
-import { User } from 'src/app/Classes/ContentClasses';
-import { CRUD } from 'src/app/administration/services/CRUD.service';
+import { Injectable }               from '@angular/core';
+import { formatDate }               from '@angular/common';
+
+import { BehaviorSubject, Subject } from 'rxjs';
+import { take }                     from 'rxjs/operators';
+
+import { AuthService }              from '../../administration/security/Auth/auth.service';
+import { FireBaseService }          from '../../GlobalServices/firebase.service';
+import { FetchService }             from 'src/app/GlobalServices/fetch.service';
+import { CRUD }                     from 'src/app/administration/services/CRUD.service';
+
+import { CRUDdata }                 from 'src/app/Classes/ContentClasses';
+
 @Injectable({
   providedIn: 'root'
 })
+
 export class LoginToSaveService {
 
   message = new BehaviorSubject<string>(undefined);
@@ -44,16 +49,16 @@ export class LoginToSaveService {
     }
   }
 
-  processForm (uploadInfo: any) {
+  processForm (uploadInfo: CRUDdata) {
 
     //quit if data invalid
-    if(uploadInfo[0] === "abort") {
+    if(uploadInfo.Abort === true) {
       this.assignStopClick(false);
-      return this.message.next(uploadInfo[1])
+      return this.message.next(uploadInfo.AbortMessage);
     }
 
     //Still processing
-    const dataToSave = uploadInfo[0];
+    const dataToSave = uploadInfo.MetaData;
     const oldData = this.auth.user.value;
 
     dataToSave.UploadTime = formatDate(new Date(), 'yyyy-MM-dd, HH:mm:ss', 'en');
@@ -61,14 +66,14 @@ export class LoginToSaveService {
     dataToSave.DisplayName = this.makeDisplayName(this.nameTokens, dataToSave);
     dataToSave.ID = `${oldData.ID}_${this.getUniqueId(4)}`
     
-    if(uploadInfo[1][0]) {
+    if(uploadInfo.NewImageLinks[0]) {
       console.log("sensed links!")
-      uploadInfo[1] = this.correctLinks(uploadInfo[1], dataToSave.ID);
+      uploadInfo.NewImageLinks = this.correctLinks(uploadInfo.NewImageLinks, dataToSave.ID);
     }
 
     //upload images if any
     this.message.next('Submitting...');
-    return this.CRUD.uploadImages(uploadInfo[1], uploadInfo[2])
+    return this.CRUD.uploadImages(uploadInfo.NewImageLinks, uploadInfo.ImageBlobs)
     .then(links => {
 
       if(links[0]) {

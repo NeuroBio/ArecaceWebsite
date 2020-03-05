@@ -1,6 +1,8 @@
 import { Injectable }                 from '@angular/core';
+
 import { Subject, BehaviorSubject }   from 'rxjs';
 
+import { CRUDdata }                   from 'src/app/Classes/ContentClasses';
 @Injectable({
   providedIn: 'root'
 })
@@ -8,7 +10,7 @@ import { Subject, BehaviorSubject }   from 'rxjs';
 export class FetchService {
 
   processData = new Subject();
-  activeFormData = new BehaviorSubject<any>(undefined);
+  activeFormData = new BehaviorSubject<CRUDdata>(undefined);
   itemToEdit = new BehaviorSubject<any>(undefined);
   valid = new BehaviorSubject<boolean>(undefined);
   loading = new BehaviorSubject<boolean>(undefined);

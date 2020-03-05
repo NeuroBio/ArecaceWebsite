@@ -82,6 +82,34 @@ export class CharacterMetaData {
     DisplayName?: string;
 }
 
+export class CRUDdata {
+    Abort: boolean;
+    AbortMessage: string;
+    MetaData: any;
+    NewImageLinks: string[];
+    ImageBlobs: any[];
+    OldImageLinks: string[];
+    NewTextPath: string;
+    TextBlob: any;
+    OldTextPath: string;
+
+    constructor(abort: boolean, abortMessage: string = '', meta: any = undefined,
+                newImgLinks: string[] = [], imageBlobs: any[] = [],
+                oldImgLinks: string[] = [], newTextPath: string = undefined,
+                textBlob: any = undefined, oldTextpath: string = undefined) {
+
+        this.Abort = abort;
+        this.AbortMessage = abortMessage;
+        this.MetaData = meta;
+        this.NewImageLinks = newImgLinks;
+        this.ImageBlobs = imageBlobs;
+        this.OldImageLinks = oldImgLinks;
+        this.NewTextPath = newTextPath;
+        this.TextBlob = textBlob;
+        this.OldTextPath = oldTextpath;
+    }
+}
+
 export class ExtrasMetaData {
     Name: string;
     ID: string;

@@ -6,11 +6,13 @@ import { Subscription }                           from 'rxjs';
 import { CRUDcontrollerService }                  from '../../../services/CRUDcontroller.service';
 import { UploadPreviewService }                   from 'src/app/SharedComponentModules/upload-preview/upload-preview.service';
 
-import { BestDropDowns }                          from '../bestdropdowns';
-import { BeastMetaData }                          from 'src/app/Classes/ContentClasses';
 import { QuickAssign }                            from 'src/app/GlobalServices/commonfunctions.service';
 import { UploadPreviewSettings }                  from 'src/app/SharedComponentModules/upload-preview/uploadpreviewclass';
 import { FetchService }                           from 'src/app/GlobalServices/fetch.service';
+
+import { BestDropDowns }                          from '../bestdropdowns';
+import { BeastMetaData }                          from 'src/app/Classes/ContentClasses';
+import { CRUDdata }                               from 'src/app/Classes/ContentClasses';
 
 @Component({
   selector: 'app-beastform',
@@ -72,23 +74,20 @@ export class BeastFormComponent implements OnInit, OnDestroy {
      if((thumbFile === undefined
           || mainFile === undefined)
         && this.Form.controls.Links.value === '') {
-       this.controller.activeFormData.next(["abort",
-       "Bestiary files require a card image and its thumbnail."]);
-       return;
+      return this.controller.activeFormData.next(
+        new CRUDdata(true, 'Bestiary files require a card image and its thumbnail.'));
     }
     
     //Complete Form
     const Final:BeastMetaData = Object.assign({}, this.Form.value);
     Final.ID = Final.Name.split(' ').join('');
     
-    this.controller.activeFormData.next([Final,
-                                      [`Bestiary/${Final.ID}-thumb`,
-                                      `Bestiary/${Final.ID}-full`],
-                                      [thumbFile, mainFile],
-                                      Final.Links,
-                                      undefined,
-                                      undefined,
-                                      undefined]);
+    return this.controller.activeFormData.next(
+      new CRUDdata(false, '', Final,
+                  [`Bestiary/${Final.ID}-thumb`,
+                  `Bestiary/${Final.ID}-full`],
+                  [thumbFile, mainFile],
+                  Final.Links))
   }
   
   onReset() {

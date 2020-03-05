@@ -5,13 +5,17 @@ import { Subscription }                       from 'rxjs';
 
 import { CRUDcontrollerService }              from 'src/app/administration/services/CRUDcontroller.service';
 import { SurveyStatsService }                 from '../survey-stats.service';
-import { QuickAssign } from 'src/app/GlobalServices/commonfunctions.service';
+import { QuickAssign }                        from 'src/app/GlobalServices/commonfunctions.service';
+
+
+import { CRUDdata }                           from 'src/app/Classes/ContentClasses';
 
 @Component({
   selector: 'app-survey-stats',
   templateUrl: './survey-stats.component.html',
   styleUrls: ['../../Form.css']
 })
+
 export class SurveyStatsComponent implements OnInit , OnDestroy {
 
   Form: FormGroup;
@@ -81,18 +85,12 @@ export class SurveyStatsComponent implements OnInit , OnDestroy {
     })
     Final.ID = this.Form.value.ID;
     if(Final.ID === '') {
-      this.controller.activeFormData.next(["abort",
-      "Survey Stats must have at least an ID."]);
-      return ;
+      return this.controller.activeFormData.next(
+        new CRUDdata(true, 'Survey Stats must have at least an ID.'));
     }
 
-    this.controller.activeFormData.next([Final,
-                                        [],
-                                        [],
-                                        [],
-                                        undefined,
-                                        undefined,
-                                        undefined]);
+    return this.controller.activeFormData.next(
+      new CRUDdata(false, '', Final));
   }
 
   onReset() {

@@ -4,13 +4,14 @@ import { Subscription }                       from 'rxjs';
 import { take }                               from 'rxjs/operators';
 
 import { CRUDcontrollerService }              from '../../../services/CRUDcontroller.service';
-import { FetchService }                     from '../../../../GlobalServices/fetch.service';
+import { FetchService }                       from '../../../../GlobalServices/fetch.service';
 
 @Component({
   selector: 'app-source-affinity',
   templateUrl: './source-affinity.component.html',
   styleUrls: ['../../Form.css']
 })
+
 export class SourceAffinityComponent implements OnInit, OnDestroy {
 
   stream1: Subscription;

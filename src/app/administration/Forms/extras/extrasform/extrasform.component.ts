@@ -8,7 +8,7 @@ import { QuickAssign }                  from 'src/app/GlobalServices/commonfunct
 import { UploadPreviewService }         from 'src/app/SharedComponentModules/upload-preview/upload-preview.service';
 import { UploadPreviewSettings }        from 'src/app/SharedComponentModules/upload-preview/uploadpreviewclass';
 import { FetchService }                 from 'src/app/GlobalServices/fetch.service';
-
+import { CRUDdata }                     from 'src/app/Classes/ContentClasses';
 @Component({
   selector: 'app-extrasform',
   templateUrl: './extrasform.component.html',
@@ -63,24 +63,22 @@ export class ExtrasFormComponent implements OnInit, OnDestroy {
 
     //Incomplete Form
     if((thumbFile === undefined
-        || mainFile === undefined)
+      || mainFile === undefined)
       && this.Form.controls.Links.value === '') {
-      this.controller.activeFormData.next(["abort",
-        "Misc files require full and thumb images."]);
-      return ;
+      return this.controller.activeFormData.next(
+        new CRUDdata(true, 'Misc files require full and thumb images.'));
     }
+
     const Final:ExtrasMetaData = Object.assign({}, this.Form.value);
     Final.ID = this.Form.controls.Name.value.split(' ').join('');
     Final.ID = Final.ID.replace('\'', '');
 
-    this.controller.activeFormData.next([Final,
-                                        [`MiscArt/${Final.ID}-thumb`,
-                                        `MiscArt/${Final.ID}-full`],
-                                        [thumbFile, mainFile],
-                                        Final.Links,
-                                        undefined,
-                                        undefined,
-                                        undefined]);
+    return this.controller.activeFormData.next(
+      new CRUDdata(false, '', Final,
+                   [`MiscArt/${Final.ID}-thumb`,
+                   `MiscArt/${Final.ID}-full`],
+                   [thumbFile, mainFile],
+                   Final.Links));
   }
 
   onReset() {

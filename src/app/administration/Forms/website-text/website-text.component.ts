@@ -7,6 +7,8 @@ import { takeUntil }                    from 'rxjs/operators';
 import { CRUDcontrollerService }        from '../../services/CRUDcontroller.service';
 import { QuickAssign }                  from 'src/app/GlobalServices/commonfunctions.service';
 
+import { CRUDdata }                     from 'src/app/Classes/ContentClasses';
+
 @Component({
   selector: 'app-website-text',
   templateUrl: './website-text.component.html',
@@ -56,13 +58,8 @@ export class WebsiteTextComponent implements OnInit, OnDestroy {
 
   processForm() {
     const Final = Object.assign({}, this.Form.value);
-    this.controller.activeFormData.next([Final,
-                                         [],
-                                         [],
-                                         [],
-                                         undefined,
-                                         undefined,
-                                         undefined]);
+    return this.controller.activeFormData.next(
+      new CRUDdata(false, '', Final));
   }
 
   onReset() {

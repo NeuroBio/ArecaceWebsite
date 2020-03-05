@@ -5,8 +5,10 @@ import { FormBuilder, FormArray, FormControl,
 import { Subscription }                         from 'rxjs';
 
 import { CRUDcontrollerService }                from 'src/app/administration/services/CRUDcontroller.service';
-import { SurveyQuestion, SurveyOutcome }        from 'src/app/Classes/ContentClasses';
 import { QuickAssign }                          from 'src/app/GlobalServices/commonfunctions.service';
+
+import { SurveyQuestion, SurveyOutcome }        from 'src/app/Classes/ContentClasses';
+import { CRUDdata }                             from 'src/app/Classes/ContentClasses';
 
 @Component({
   selector: 'app-survey',
@@ -108,14 +110,8 @@ export class SurveyComponent implements OnInit , OnDestroy {
                    ID: ID,
                    Name: Name};
 
-    this.controller.activeFormData.next([Final,
-                                        [],
-                                        [],
-                                        [],
-                                        undefined,
-                                        undefined,
-                                        undefined]);
-  
+    return this.controller.activeFormData.next(
+      new CRUDdata(false, '', Final));
   }
 
   onReset() {

@@ -1,14 +1,15 @@
 import { Injectable }                           from '@angular/core';
-import { FormGroup }                            from '@angular/forms';
 
-import { map, take, skip }                            from 'rxjs/operators';
+import { map, take }                            from 'rxjs/operators';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 
 import { FireBaseService }                      from 'src/app/GlobalServices/firebase.service';
 import { CRUD }                                 from './CRUD.service';
 import { ButtonController }                     from '../../SharedComponentModules/SharedForms/Buttons/buttoncontroller';
 import { NewestCueService }                     from './newest-cue.service';
-import { FetchService } from 'src/app/GlobalServices/fetch.service';
+import { FetchService }                         from 'src/app/GlobalServices/fetch.service';
+
+import { CRUDdata }                             from 'src/app/Classes/ContentClasses';
 
 @Injectable({
   providedIn: 'root'
@@ -25,10 +26,7 @@ export class CRUDcontrollerService {
   allowButtons = new BehaviorSubject<ButtonController>(new ButtonController([true, true, false, false]));
   ButtonSavedState = new BehaviorSubject<ButtonController>(undefined);
 
-
-  activeFormData = new BehaviorSubject<any>(undefined);
-  //activeFormData is: form data[0], new image paths[1], new images[2],
-  //old image paths[3], text path[4], new text[5], old  text path [6]
+  activeFormData = new BehaviorSubject<CRUDdata>(undefined);
   
   message = new BehaviorSubject<string>(undefined);
   triggerProcess = new Subject<any>();
@@ -88,85 +86,74 @@ export class CRUDcontrollerService {
   //Key upload/download functions
   onSubmit() {
     this.deActivateButtons()
-
     this.message.next("Processing...");
+
     this.triggerProcess.next();
-    return this.activeFormData.pipe(take(1)).subscribe(data => {
-      console.log("CRUDcontroller")
+    return this.activeFormData.pipe(take(1))
+    .subscribe((data:CRUDdata) => {
+      
       //submit button hit with invalid form.
-      if(data[0] === "abort") {
-        this.message.next(data[1]);
-        this.reActivateButtons()
-        return;
+      if(data.Abort) {
+        return this.throwError({stage: 'Processing', message: data.AbortMessage})
       }
 
-      this.message.next("Submitting...");
-      let meta = data[0];
-      const images = [data[1], data[2], data[3]];
-      const story = [data[4], data[5], data[6]];
-
+      this.message.next("Submitting...");console.log("images");
 //IMAGES
-      console.log("images");
-      this.crud.uploadImages(images[0], images[1])
+      this.crud.uploadImages(data.NewImageLinks, data.ImageBlobs)
 //TEXT
-      .then(links => {
-        meta = this.checkLinks(meta, links);
-        console.log("Text");
-        return this.crud.uploadStory(story[0], story[1])       
+      .then(links => {console.log("Text");
+        data.MetaData = this.checkLinks(data.MetaData, links);
+        return this.crud.uploadStory(data.NewTextPath, data.TextBlob)       
 //META DATA
-      }).then(link => {
-        if("StoryLink" in meta) {
-          meta.StoryLink = link;
+      }).then(link => {console.log("meta");
+        if("StoryLink" in data.MetaData) {
+          data.MetaData.StoryLink = link;
         }
-        this.newestCue.updateCue(Object.assign({}, meta), this.itemType.value, 'NOT READY YET');
-        console.log("meta");
-        return this.crud.uploadItem(meta, this.firePaths.value[this.itemType.value]);
+        this.newestCue.updateCue(
+          Object.assign({}, data.MetaData),
+          this.itemType.value, 'NOT READY YET');
+        return this.crud.uploadItem(data.MetaData, this.firePaths.value[this.itemType.value]);
 //POST UPLOAD
       }).then(() => {
         this.itemToEdit.next(undefined);
         this.message.next("Submitted!");
         this.reActivateButtons();
 //ERRORS
-      }).catch(err => {
-        console.log(meta)
+      }).catch(err => {console.log(data.MetaData);
         this.throwError(err);
-        this.reActivateButtons();
       });
     });
   }
 
   async onEdit(all: boolean = false): Promise<any> {
     this.deActivateButtons();
-
-    let meta: any;
-    let story: any[];
-    let images: any[];
-
     this.message.next("Processing...");
-    this.triggerProcess.next();
+    let CRUDdata: CRUDdata;
 
+    this.triggerProcess.next();
     return this.activeFormData.pipe(take(1)).toPromise()
-//IMAGES
-    .then(data => {
-      this.message.next("Editing...");
-      console.log(data);
-      meta = data[0];
-      images = [data[1], data[2], data[3]];
-      story = [data[4], data[5], data[6]];
-      console.log("images");
-      return this.crud.editImages(images[0], images[1], images[2])
-//TEXT
-    }).then(links => {
-      meta = this.checkLinks(meta, links);
-      console.log("text");
-      return this.crud.editStory(story[0], story[1], story[2])       
-//META DATA
-    }).then(link =>{
-      if("StoryLink" in meta){
-        meta.StoryLink = link;
+    .then(data => {console.log("images");
+      if(data.Abort) {
+        this.throwError({stage: 'Processing', message: data.AbortMessage});
+        return Promise.reject();
       }
-      console.log("meta");
-      return this.crud.editItem(meta,
+
+//IMAGES
+      this.message.next("Editing...");
+      CRUDdata = data;
+      return this.crud.editImages(CRUDdata.NewImageLinks,
+        CRUDdata.ImageBlobs, CRUDdata.OldImageLinks);
+//TEXT
+    }).then(links => {console.log("text");
+      CRUDdata.MetaData = this.checkLinks(CRUDdata.MetaData, links);
+      return this.crud.editStory(CRUDdata.NewTextPath,
+        CRUDdata.TextBlob, CRUDdata.OldTextPath);      
+//META DATA
+    }).then(link =>{console.log("meta");
+      if("StoryLink" in CRUDdata.MetaData){
+        CRUDdata.MetaData.StoryLink = link;
+      }
+      return this.crud.editItem(CRUDdata.MetaData,
               this.firePaths.value[this.itemType.value],
               this.itemToEdit.value.key);
 //POST UPLOAD
@@ -175,12 +162,11 @@ export class CRUDcontrollerService {
         this.itemToEdit.next(undefined);
       }
       this.message.next("Edit successful!");
-      this.reActivateButtons()
+      this.reActivateButtons();
 //ERRORS
-    }).catch(err => {
+    }).catch(err => {console.log(CRUDdata.MetaData)
       this.throwError(err);
-      console.log(meta)
-      if(all){
+      if(all) {
         return Promise.reject();
       }
     });

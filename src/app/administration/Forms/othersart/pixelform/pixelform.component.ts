@@ -4,11 +4,13 @@ import { FormGroup, FormBuilder }       from '@angular/forms';
 import { Subscription }                 from 'rxjs';
 
 import { CRUDcontrollerService }        from 'src/app/administration/services/CRUDcontroller.service';
-import { OthersArt }                    from 'src/app/Classes/ContentClasses';
 import { QuickAssign }                  from 'src/app/GlobalServices/commonfunctions.service';
 import { UploadPreviewService }         from 'src/app/SharedComponentModules/upload-preview/upload-preview.service';
-import { UploadPreviewSettings }        from 'src/app/SharedComponentModules/upload-preview/uploadpreviewclass';
 import { FetchService }                 from 'src/app/GlobalServices/fetch.service';
+
+import { UploadPreviewSettings }        from 'src/app/SharedComponentModules/upload-preview/uploadpreviewclass';
+import { OthersArt }                    from 'src/app/Classes/ContentClasses';
+import { CRUDdata }                     from 'src/app/Classes/ContentClasses';
 
 @Component({
   selector: 'app-pixelform',
@@ -67,9 +69,8 @@ export class PixelformComponent implements OnInit, OnDestroy {
     //Incomplete Form
     if((mainFile === undefined)
       && this.Form.controls.Links.value === '') {
-      this.controller.activeFormData.next(["abort",
-        "Pixel files require images."]);
-      return ;
+      return this.controller.activeFormData.next(
+        new CRUDdata(true, 'Pixel files require images.'));
     }
     
     //complete form
@@ -79,13 +80,11 @@ export class PixelformComponent implements OnInit, OnDestroy {
     
     Final.Allowed = this.Form.value.Allowed === "true";
 
-    this.controller.activeFormData.next([Final,
-                                        [`OthersArt/${Final.ID}-pixel`],
-                                        [mainFile],
-                                        Final.Links,
-                                        undefined,
-                                        undefined,
-                                        undefined]);
+    return this.controller.activeFormData.next(
+      new CRUDdata(false, '', Final,
+                  [`OthersArt/${Final.ID}-pixel`],
+                  [mainFile],
+                  Final.Links));
   }
 
   onReset() {

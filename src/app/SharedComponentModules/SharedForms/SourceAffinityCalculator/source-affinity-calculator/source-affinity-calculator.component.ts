@@ -1,11 +1,16 @@
-import { Component, OnInit, OnDestroy, Input } from '@angular/core';
-import { SourceAbilityCalculatorService } from '../source-ability-calculator.service';
-import { AbilityData, AbilityMastery, AbilityNames } from '../SourceAbilityData';
-import { FormBuilder, FormArray, FormGroup, Validators } from '@angular/forms';
-import { FetchService } from 'src/app/GlobalServices/fetch.service';
-import { Subscription } from 'rxjs';
-import { QuickAssign } from 'src/app/GlobalServices/commonfunctions.service';
+import { Component, OnInit, OnDestroy, Input }  from '@angular/core';
+import { FormBuilder, FormArray,
+         FormGroup, Validators }                from '@angular/forms';
 
+import { Subscription }                         from 'rxjs';
+
+import { SourceAbilityCalculatorService }       from '../source-ability-calculator.service';
+import { FetchService }                         from 'src/app/GlobalServices/fetch.service';
+import { QuickAssign }                          from 'src/app/GlobalServices/commonfunctions.service';
+
+import { AbilityData, AbilityMastery,
+         AbilityNames }                         from '../SourceAbilityData';
+import { CRUDdata }                             from 'src/app/Classes/ContentClasses';
 @Component({
   selector: 'app-source-affinity-calculator',
   templateUrl: './source-affinity-calculator.component.html',
@@ -80,7 +85,8 @@ export class SourceAffinityCalculatorComponent implements OnInit, OnDestroy {
     
     if(this.Form.valid !== true) {
       this.error ='Name is required!'
-      return this.fetcher.activeFormData.next(['abort', this.error])
+      return this.fetcher.activeFormData.next(
+        new CRUDdata(true, this.error));
     }
 
     this.result = undefined;
@@ -96,7 +102,8 @@ export class SourceAffinityCalculatorComponent implements OnInit, OnDestroy {
     }
     catch(err) {
       this.error = err;
-      return this.fetcher.activeFormData.next(['abort', 'Calculation failed!']);
+      return this.fetcher.activeFormData.next(
+        new CRUDdata(true, 'Calculation failed!'));
     }
     
     this.rank = this.getRank(this.result, eGenes);
@@ -109,13 +116,7 @@ export class SourceAffinityCalculatorComponent implements OnInit, OnDestroy {
                     ID: ''}
     Final.ID = `${Final.Name.split(' ').join('-')}-(${Final.Cost})`;
     this.fetcher.assignvalidity(true);
-    return this.fetcher.assignActiveFormData([Final,
-                                              [],
-                                              [],
-                                              [],
-                                              undefined,
-                                              undefined,
-                                              undefined]);
+    return this.fetcher.assignActiveFormData(new CRUDdata(false, '', Final));
   }
 
   onReset() {

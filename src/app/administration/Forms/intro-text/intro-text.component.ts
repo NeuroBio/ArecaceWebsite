@@ -5,14 +5,17 @@ import { Subscription, Subject }        from 'rxjs';
 import { takeUntil }                    from 'rxjs/operators';
 
 import { CRUDcontrollerService }        from '../../services/CRUDcontroller.service';
-import { Intro }                        from 'src/app/Classes/WebsiteText';
 import { QuickAssign }                  from 'src/app/GlobalServices/commonfunctions.service';
+
+import { Intro }                        from 'src/app/Classes/WebsiteText';
+import { CRUDdata }                     from 'src/app/Classes/ContentClasses';
 
 @Component({
   selector: 'app-intro-text',
   templateUrl: './intro-text.component.html',
   styleUrls: ['../Form.css']
 })
+
 export class IntroTextComponent implements OnInit, OnDestroy {
 
   Form = this.createForm();
@@ -83,13 +86,11 @@ export class IntroTextComponent implements OnInit, OnDestroy {
       this.oldLinks.push('');
     }
    
-    this.controller.activeFormData.next([Final,
-                                         paths,
-                                         this.ImageEvents,
-                                         this.oldLinks,
-                                         undefined,
-                                         undefined,
-                                         undefined]);
+    return this.controller.activeFormData.next(
+      new CRUDdata(false, '', Final,
+                  paths,
+                  this.ImageEvents,
+                  this.oldLinks))
   }
 
   onReset() {

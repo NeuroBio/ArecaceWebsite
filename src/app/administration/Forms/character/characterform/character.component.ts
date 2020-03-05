@@ -39,8 +39,8 @@ export class CharacterComponent implements OnInit {
 
     return this.fetcher.activeFormData.pipe(take(1)).subscribe(Final => {
       this.controller.activeFormData.next(Final);
-      if(Final[0] !== 'abort') {
-          this.birthday.updateBirthdayData(Final[0]);
+      if(Final.Abort === false) {
+          this.birthday.updateBirthdayData(Final.MetaData);
       }
     });
   }

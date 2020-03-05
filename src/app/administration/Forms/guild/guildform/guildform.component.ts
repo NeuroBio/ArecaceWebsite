@@ -3,12 +3,14 @@ import { Component, OnInit, ViewChild,
 import { FormBuilder, FormGroup }       from '@angular/forms';
 import { Subscription }                 from 'rxjs';
 
-import { GuildMetaData }                from 'src/app/Classes/ContentClasses';
 import { CRUDcontrollerService }        from '../../../services/CRUDcontroller.service';
 import { QuickAssign }                  from 'src/app/GlobalServices/commonfunctions.service';
 import { UploadPreviewService }         from 'src/app/SharedComponentModules/upload-preview/upload-preview.service';
-import { UploadPreviewSettings }        from 'src/app/SharedComponentModules/upload-preview/uploadpreviewclass';
 import { FetchService }                 from 'src/app/GlobalServices/fetch.service';
+
+import { UploadPreviewSettings }        from 'src/app/SharedComponentModules/upload-preview/uploadpreviewclass';
+import { GuildMetaData }                from 'src/app/Classes/ContentClasses';
+import { CRUDdata }                     from 'src/app/Classes/ContentClasses';
 
 @Component({
   selector: 'app-guildform',
@@ -69,9 +71,8 @@ export class GuildFormComponent implements OnInit, OnDestroy {
     //Incomplete Form
     if(imageFile === undefined
       && this.Form.controls.Links.value === '') {
-      this.controller.activeFormData.next(["abort",
-        "Guild files require an insignia image."]);
-      return;
+      return this.controller.activeFormData.next(
+        new CRUDdata(true, 'Guild files require an insignia image.'));
     }
     
     //Complete Form
@@ -80,13 +81,11 @@ export class GuildFormComponent implements OnInit, OnDestroy {
     if(Final.ID === 'The') {
       Final.ID = 'DIA'
     }
-    this.controller.activeFormData.next([Final,
-                                      [`GuildInsig/${Final.ID}`],
-                                      [imageFile],
-                                      Final.Links,
-                                      undefined,
-                                      undefined,
-                                      undefined]);
+    return this.controller.activeFormData.next(
+      new CRUDdata(false, '', Final,
+                  [`GuildInsig/${Final.ID}`],
+                  [imageFile],
+                  Final.Links));
   }
 
   onReset() {

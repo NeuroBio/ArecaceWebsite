@@ -3,9 +3,10 @@ import { Validators, FormBuilder, FormGroup }     from '@angular/forms';
 import { Subscription }                           from 'rxjs';
 
 import { CRUDcontrollerService }                  from '../../services/CRUDcontroller.service';
-import { Word, Nomadic, WordTypes }               from '../../../Classes/NomadicLanguage';
 import { QuickAssign }                            from 'src/app/GlobalServices/commonfunctions.service';
 
+import { Word, Nomadic, WordTypes }               from '../../../Classes/NomadicLanguage';
+import { CRUDdata }                               from 'src/app/Classes/ContentClasses';
 @Component({
   selector: 'app-word-form',
   templateUrl: './word-form.component.html',
@@ -62,19 +63,14 @@ export class WordFormComponent implements OnInit, OnDestroy {
   processForm() {
     //Incomplete Form
     if(!this.Form.valid) {
-      this.controller.activeFormData.next(["abort", "All blanks must be filled."]);
-      return;
+      return this.controller.activeFormData.next(
+        new CRUDdata(true, 'All blanks must be filled.'));
     }
     //Complete Form   
     const Final:Word = Object.assign({}, this.Form.value);
     Final.ID = Final.Indativor;
-    this.controller.activeFormData.next([Final,
-                                      [],
-                                      [],
-                                      undefined,
-                                      undefined,
-                                      undefined,
-                                      undefined]);
+    return this.controller.activeFormData.next(
+      new CRUDdata(false, '', Final));
   }
   
   onReset() {

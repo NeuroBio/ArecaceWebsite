@@ -6,6 +6,7 @@ import { Subscription }                   from 'rxjs';
 import { CRUDcontrollerService }          from '../../../services/CRUDcontroller.service';
 import { ChapterMetaData }                from 'src/app/Classes/ContentClasses'
 import { QuickAssign }                    from 'src/app/GlobalServices/commonfunctions.service';
+import { CRUDdata }                       from 'src/app/Classes/ContentClasses';
 
 @Component({
   selector: 'app-chapterform',
@@ -68,13 +69,9 @@ export class ChapterFormComponent implements OnInit, OnDestroy {
     const Final: ChapterMetaData = Object.assign({}, this.Form.value);
     Final.NumPages = this.pageFiles.length;
     const pagePaths: string[] = this.getPagePaths(this.pageFiles, Final);
-    this.controller.activeFormData.next([Final,
-                                        pagePaths,
-                                        this.pageFiles,
-                                        Final.Links,
-                                        undefined,
-                                        undefined,
-                                        undefined]);
+    return this.controller.activeFormData.next(
+      new CRUDdata(false, '', Final,
+                    pagePaths, this.pageFiles, Final.Links));
   }
 
   onReset() {

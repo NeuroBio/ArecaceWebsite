@@ -5,11 +5,13 @@ import { FormBuilder, FormGroup }             from '@angular/forms';
 import { Subscription }                       from 'rxjs';
 
 import { CRUDcontrollerService }              from 'src/app/administration/services/CRUDcontroller.service';
-import { PostData }                           from 'src/app/Classes/ContentClasses';
 import { QuickAssign }                        from 'src/app/GlobalServices/commonfunctions.service';
 import { UploadPreviewService }               from 'src/app/SharedComponentModules/upload-preview/upload-preview.service';
-import { UploadPreviewSettings }              from 'src/app/SharedComponentModules/upload-preview/uploadpreviewclass';
 import { FetchService }                       from 'src/app/GlobalServices/fetch.service';
+
+import { PostData }                           from 'src/app/Classes/ContentClasses';
+import { UploadPreviewSettings }              from 'src/app/SharedComponentModules/upload-preview/uploadpreviewclass';
+import { CRUDdata }                           from 'src/app/Classes/ContentClasses';
 
 @Component({
   selector: 'app-update-form',
@@ -89,13 +91,11 @@ export class UpdateFormComponent implements OnInit, OnDestroy {
       newImages = [imageFile];
     }
 
-    this.controller.activeFormData.next([Final,
-                                        [`Inanity/${Final.ID}`],
-                                        newImages,
-                                        oldImages,
-                                        undefined,
-                                        undefined,
-                                        undefined]);
+    this.controller.activeFormData.next(
+      new CRUDdata(false, '', Final,
+                  [`Inanity/${Final.ID}`],
+                  newImages,
+                  oldImages));
   }
 
   onReset() {

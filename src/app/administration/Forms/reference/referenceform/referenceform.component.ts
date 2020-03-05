@@ -8,7 +8,7 @@ import { QuickAssign }                    from 'src/app/GlobalServices/commonfun
 import { UploadPreviewService }           from 'src/app/SharedComponentModules/upload-preview/upload-preview.service';
 import { UploadPreviewSettings }          from 'src/app/SharedComponentModules/upload-preview/uploadpreviewclass';
 import { FetchService }                   from 'src/app/GlobalServices/fetch.service';
-
+import { CRUDdata }                       from 'src/app/Classes/ContentClasses';
 
 @Component({
   selector: 'app-referenceform',
@@ -83,22 +83,20 @@ export class ReferenceFormComponent implements OnInit, OnDestroy {
      //Incomplete Form
      if(imageFile === undefined
       && this.Form.controls.Links.value === '') {
-      this.controller.activeFormData.next(["abort",
-        `${this.type} files require an image.`]);
-      return;
+      return this.controller.activeFormData.next(
+        new CRUDdata(true, `${this.type} files require an image.`));
     }
     
     //Complete Form
     const Final = Object.assign({}, this.Form.value);
     Final.ID = this.Form.controls.Topic.value.split(' ').join('');
 
-    this.controller.activeFormData.next([Final,
-                                      [`${this.imagePath}/${Final.ID}`],
-                                      [imageFile],
-                                      Final.Links,
-                                      undefined,
-                                      undefined,
-                                      undefined]);
+    return this.controller.activeFormData.next(
+      new CRUDdata(false, '', Final,
+                  [`${this.imagePath}/${Final.ID}`],
+                  [imageFile],
+                  Final.Links
+      ));
   }
 
   onReset() {

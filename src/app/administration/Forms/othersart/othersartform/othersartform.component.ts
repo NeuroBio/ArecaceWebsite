@@ -4,11 +4,13 @@ import { FormGroup, FormBuilder }       from '@angular/forms';
 import { Subscription }                 from 'rxjs';
 
 import { CRUDcontrollerService }        from 'src/app/administration/services/CRUDcontroller.service';
-import { OthersArt }                    from 'src/app/Classes/ContentClasses';
 import { QuickAssign }                  from 'src/app/GlobalServices/commonfunctions.service';
 import { UploadPreviewService }         from 'src/app/SharedComponentModules/upload-preview/upload-preview.service';
-import { UploadPreviewSettings }        from 'src/app/SharedComponentModules/upload-preview/uploadpreviewclass';
 import { FetchService }                 from 'src/app/GlobalServices/fetch.service';
+
+import { OthersArt }                    from 'src/app/Classes/ContentClasses';
+import { UploadPreviewSettings }        from 'src/app/SharedComponentModules/upload-preview/uploadpreviewclass';
+import { CRUDdata }                     from 'src/app/Classes/ContentClasses';
 
 @Component({
   selector: 'app-othersartform',
@@ -68,11 +70,10 @@ export class OthersArtFormComponent implements OnInit, OnDestroy {
 
     //Incomplete Form
     if((thumbFile === undefined
-        || mainFile === undefined)
+      || mainFile === undefined)
       && this.Form.controls.Links.value === '') {
-      this.controller.activeFormData.next(["abort",
-        "Others Art files require full and thumb images."]);
-      return;
+      return this.controller.activeFormData.next(
+        new CRUDdata(true, 'Other\'s Art files require full and thumb images.'));
     }
 
     //Complete form
@@ -82,14 +83,11 @@ export class OthersArtFormComponent implements OnInit, OnDestroy {
     
     Final.Allowed = this.Form.value.Allowed === "true";
 
-    this.controller.activeFormData.next([Final,
-                                        [`OthersArt/${Final.ID}-thumb`,
-                                        `OthersArt/${Final.ID}-full`],
-                                        [thumbFile, mainFile],
-                                        Final.Links,
-                                        undefined,
-                                        undefined,
-                                        undefined]);
+    this.controller.activeFormData.next(
+      new CRUDdata(false, '', Final,
+                  [`OthersArt/${Final.ID}-thumb`, `OthersArt/${Final.ID}-full`],
+                  [thumbFile, mainFile],
+                  Final.Links));
   }
 
   onReset() {
