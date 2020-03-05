@@ -7,7 +7,7 @@ div.sidebarlab {
     cursor: pointer;
 }
 
-div#outer {
+div#outerdrop {
     background-color:  #454545;
 }
 
@@ -17,4 +17,8 @@ img#downUp {
     position: relative;
     top: 5.5px;
     background-color:  #454545;
+}
+
+div#hider {
+    width: calc(100vw - 40px);
 }
