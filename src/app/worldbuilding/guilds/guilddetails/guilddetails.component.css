@@ -3,8 +3,10 @@ div#holder {
 }
 
 div.compheader {
-    text-align: center;
-    padding-top: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
 }
 
 h2 {
@@ -35,3 +37,12 @@ div.textblock {
     min-width: 300px;
     float: none;
 }
+
+
+app-bookmark {
+    position: absolute;
+    float: right;
+    right: 0;
+    height: 100%;
+}
+

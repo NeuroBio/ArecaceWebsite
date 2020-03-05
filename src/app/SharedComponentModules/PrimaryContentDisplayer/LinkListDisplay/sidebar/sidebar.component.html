@@ -13,7 +13,7 @@
           <hr *ngIf="i!==0">
           <div class="sidebarlab">{{ labels[i] }}</div>
           <hr>
-            <ul class="sidebarlist">
+            <ul class="sidebarlist" style="max-width: 250px;">
               <li class="sidebarlist" *ngFor="let namelink of list"
               [class.selected.sidebarlist]="namelink[1] === current"
               (click)="onSelect(namelink[1])">

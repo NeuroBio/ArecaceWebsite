@@ -47,22 +47,28 @@ ul.sidebarlist {
   margin-top: 0px;
   padding-top: 3px;
   padding-left: 31px;
+  height: 100%;
 }
 
 li {
-  white-space: nowrap;
+  border: 0px;
+  border-bottom: 2px solid rgb(82, 82, 82);
+  margin: 1px 0px 1px 0px;
 }
 
 li.sidebarlist:hover {
   background-color: #8b8b8b;
+  border-bottom: 2px solid #8b8b8b;
 }
 
 li.selected.sidebarlist {
   background-color: #8b8b8b;
+  border-bottom: 2px solid #8b8b8b;
 }
 
 li.sidebarlist:active {
   background-color: #242424;
+  border-bottom: 2px solid #242424;;
 }
 
 a {
@@ -70,11 +76,12 @@ a {
   height: inherit;
   width: inherit;
   color: white;
-  padding-top: 3px;
-  padding-bottom: 3px;
+  padding-top: 6px;
+  padding-bottom: 6px;
   padding-left: 11px;
   padding-right: 4px;
   margin: -3px;
+
 }
 
 hr {

@@ -6,7 +6,7 @@ import { GuildDetailsComponent }        from './guilddetails/guilddetails.compon
 
 import { GuildsRoutingModule }          from './guilds-routing.module';
 import { PrimaryContentDisplayModule }  from 'src/app/SharedComponentModules/PrimaryContentDisplayer/primary-content-display.module';
-
+import { BookmarkModule }               from 'src/app/SharedComponentModules/bookmark/bookmark.module';
 @NgModule({
   declarations: [
     GuildsMainComponent,
@@ -15,6 +15,7 @@ import { PrimaryContentDisplayModule }  from 'src/app/SharedComponentModules/Pri
   imports: [
     CommonModule,
     PrimaryContentDisplayModule,
+    BookmarkModule,
     GuildsRoutingModule
   ]
 })

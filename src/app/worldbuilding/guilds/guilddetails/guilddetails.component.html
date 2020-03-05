@@ -5,6 +5,13 @@
         <header>
             <div class="compheader">
                 <h2>{{ guild.GuildName }}</h2>
+
+                <app-bookmark
+                [path]="path"
+                type="Favorites"
+                [name]="name"
+                [bookmarkImage]="false"
+                ></app-bookmark>
             </div>
             <hr>
         </header>
