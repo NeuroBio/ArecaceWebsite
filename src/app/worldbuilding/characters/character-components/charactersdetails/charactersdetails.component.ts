@@ -17,6 +17,7 @@ export class CharactersDetailsComponent implements OnInit {
   FullBio = false;
   name: string;
   path: string;
+  real: boolean;
   
   constructor(private route: ActivatedRoute,
               private global: GlobalVarsService,
@@ -27,9 +28,11 @@ export class CharactersDetailsComponent implements OnInit {
     this.route.data.subscribe((data: {Chara: CharacterMetaData}) => {
         window.scroll(0,0);
         this.loading = this.global.ImagesLoadable.value;
+        const frags = mainPath.split('/')
+        this.real = frags[frags.length-1] === 'FanCharacters' ? false : true;
         this.char = data.Chara;
         this.name = `${this.char.FirstName} ${this.char.LastName}`
-        this.path = `/${mainPath}/${this.char.FirstName}`
+        this.path = `/${mainPath}/${this.char.ID}`
         this.char.References = this.blowupReorganization(this.char.References);
         this.FullBio = (this.char.BriefBackground === '');
    });

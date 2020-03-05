@@ -17,7 +17,7 @@
         <!-- Mini header -->
           <div class="compheader">
             <h2 class="compheader">{{ char.FirstName }} {{ char.LastName }}</h2>
-              <app-bookmark
+              <app-bookmark *ngIf="real"
               [path]="path"
               type="Favorites"
               [name]="name"
