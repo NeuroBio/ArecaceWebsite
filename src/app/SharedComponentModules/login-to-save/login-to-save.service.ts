@@ -6,6 +6,7 @@ import { FireBaseService } from '../../GlobalServices/firebase.service';
 import { FetchService } from 'src/app/GlobalServices/fetch.service';
 import { take, skip } from 'rxjs/operators';
 import { User } from 'src/app/Classes/ContentClasses';
+import { CRUD } from 'src/app/administration/services/CRUD.service';
 @Injectable({
   providedIn: 'root'
 })
@@ -13,7 +14,6 @@ export class LoginToSaveService {
 
   message = new BehaviorSubject<string>(undefined);
   stopClick = new BehaviorSubject<boolean>(undefined);
-  trigger = new Subject();
   reset = new Subject();
   autoTrigger: boolean = false;
 
@@ -22,7 +22,8 @@ export class LoginToSaveService {
 
   constructor(private auth: AuthService,
               private firebaseserv: FireBaseService,
-              private fetcher: FetchService) { }
+              private fetcher: FetchService,
+              private CRUD: CRUD) { }
 
 
   assignUserDataInfo (tokens: string[], type: string): void {
@@ -31,49 +32,70 @@ export class LoginToSaveService {
   }
 
   saveData() {
+    this.assignStopClick(true);
+    this.message.next('Processing...');
+
     if(this.autoTrigger === true) {
       this.fetcher.fetchData();
-      this.trigger.next();
       return this.fetcher.activeFormData.pipe(take(1))
-      .subscribe(data => {
-        this.processForm(data)
-      });
+      .subscribe(data => this.processForm(data));
     } else {
       return this.processForm(this.fetcher.activeFormData.value);
     }
   }
 
-  processForm (dataToSave: any) {
-    if(dataToSave[0] === "abort") {
-      return this.message.next(dataToSave[1])
+  processForm (uploadInfo: any) {
+
+    //quit if data invalid
+    if(uploadInfo[0] === "abort") {
+      this.assignStopClick(false);
+      return this.message.next(uploadInfo[1])
     }
-    dataToSave = dataToSave[0];
+
+    //Still processing
+    const dataToSave = uploadInfo[0];
     const oldData = this.auth.user.value;
 
-    this.assignStopClick(true);
-    this.message.next('Processing...');
     dataToSave.UploadTime = formatDate(new Date(), 'yyyy-MM-dd, HH:mm:ss', 'en');
     dataToSave.UploadTimeShort = formatDate(new Date(), 'yy/MM/dd', 'en');
     dataToSave.DisplayName = this.makeDisplayName(this.nameTokens, dataToSave);
     dataToSave.ID = `${oldData.ID}_${this.getUniqueId(4)}`
-
     
-    if(oldData[this.type]) {// old data exists
-      oldData[this.type].push(dataToSave);
-    } else { //first time this data pushed
-      oldData[this.type] = [dataToSave];
+    if(uploadInfo[1][0]) {
+      console.log("sensed links!")
+      uploadInfo[1] = this.correctLinks(uploadInfo[1], dataToSave.ID);
     }
 
-
+    //upload images if any
     this.message.next('Submitting...');
-    return this.firebaseserv.editDocument(oldData, `Users/`, this.auth.uid.value)
-    .then(() => {
+    return this.CRUD.uploadImages(uploadInfo[1], uploadInfo[2])
+    .then(links => {
+
+      if(links[0]) {
+        dataToSave.Links = links;
+      }
+      
+      if(oldData[this.type]) {// old data exists
+        oldData[this.type].push(dataToSave);
+      } else { //first time this data pushed
+        oldData[this.type] = [dataToSave];
+      }
+
+      //finally upload the metadata
+      return this.firebaseserv.editDocument(oldData, `Users/`, this.auth.uid.value)
+    }).then(() => {
       this.message.next("Saved!");
       this.reset.next();
-    })
-    .catch(err => {
+    }).catch(err => {
         this.message = err;
         this.assignStopClick(false);
+
+        //remove any uploaded images
+        if(dataToSave.Links) {
+          dataToSave.Links.forEach(link =>{
+            this.firebaseserv.deleteImage(link);
+          });
+        }
     });
   }
 
@@ -92,6 +114,15 @@ export class LoginToSaveService {
     nameTokens.forEach(token => 
       displayName.push(dataToSave[token]));
     return displayName.join(' ');
+  }
+
+  correctLinks(links: string[], ID: string) {
+    return links.map(link => {
+      const fragments = link.split('/');
+      const keyFrag = fragments[fragments.length-1];
+      return `UserData/${this.auth.uid.value}/${this.type}/${keyFrag}-${ID}`;
+    });
+
   }
 
   assignStopClick(click: boolean) {

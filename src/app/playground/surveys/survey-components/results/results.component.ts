@@ -31,7 +31,7 @@ export class ResultsComponent implements OnInit, OnDestroy {
     this.fetcher.assignvalidity(true);
     this.stream1 = this.surveyserv.surveyResults.subscribe(results => {
       if(results) {
-        this.fetcher.assignActiveFormData([results]);
+        this.fetcher.assignActiveFormData([results, [], []]);
         this.results = results;
         this.showSpecific = [];
         this.results.AllScores.forEach(() => this.showSpecific.push(false));

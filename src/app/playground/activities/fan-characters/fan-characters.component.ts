@@ -25,9 +25,6 @@ export class FanCharactersComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.logintosaveserv.assignUserDataInfo(['FirstName', 'LastName'], 'FanCharacters');
     this.logintosaveserv.assignAutoTrigger(true);
-    this.logintosaveserv.trigger.subscribe(() => {
-      this.fixLinks();
-    });
     this.stream1 = this.logintosaveserv.reset.subscribe(() => {
       this.fetcher.assignItemtoEdit(undefined);
       this.logintosaveserv.assignStopClick(false);
@@ -38,12 +35,4 @@ export class FanCharactersComponent implements OnInit, OnDestroy {
     this.stream1.unsubscribe();
   }
 
-
-  fixLinks() {
-    return this.fetcher.activeFormData.pipe(take(1)).subscribe(FanChar => {
-      FanChar[1] = FanChar[1].map(link =>
-        `UserData/${this.auth.uid.value}/${link.split('/')[1]}`);
-      this.fetcher.assignActiveFormData(FanChar);
-    });
-  }
 }
