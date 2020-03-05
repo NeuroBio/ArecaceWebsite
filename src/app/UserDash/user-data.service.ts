@@ -19,7 +19,16 @@ export class UserDataService {
 
   deleteEntry(type: string, index: number) {
     const data = this.userData.value;
+
+    //kill images
+    if(data[type][index].Links) {
+      data[type][index].Links.forEach(link => {
+        this.firebaseserv.deleteImage(link);
+      })
+    }
     data[type].splice(index,1);
+
+    //remove from user data
     return this.firebaseserv.editDocument(data, 'Users', this.auth.uid.value);
   }
 }

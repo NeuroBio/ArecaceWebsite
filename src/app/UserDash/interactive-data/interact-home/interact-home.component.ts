@@ -20,6 +20,9 @@ export class InteractHomeComponent implements OnInit, OnDestroy {
   displayType: string;
   current: string;
   userData$: Observable<string[][][]>;
+  displayTypes = {FanCharacters: 'Fan Characters',
+                SAcalculations: 'SA Calculations',
+                SurveyResults: 'Survey Results'};
 
   constructor(private generalcollectionserv: GeneralcollectionService,
               private surveyserv: SurveyService,
@@ -31,7 +34,7 @@ export class InteractHomeComponent implements OnInit, OnDestroy {
       map(userdata => userdata.map(datum => [datum.DisplayName.split('-').join(' '), datum.ID])));
     this.current = this.route.snapshot.firstChild.url[0].path;
     this.type = this.route.snapshot.url[0].path;
-    this.displayType = this.type.replace(/[A-Z]/g, char => ` ${char}`);
+    this.displayType = this.displayTypes[this.type];
   }
 
   ngOnDestroy() {
