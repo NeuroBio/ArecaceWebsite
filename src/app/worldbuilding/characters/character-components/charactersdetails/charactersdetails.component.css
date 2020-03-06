@@ -12,8 +12,8 @@ img#BioImage {
     max-height: 450px;
 }
 
-div.textblock {
-    max-width: 1000px;
+div#textblockcontainer {
+    max-width: 900px;
 }
 
 div.compheader {

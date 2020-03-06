@@ -29,10 +29,10 @@ div.textblockcontainer {
     position: relative;
     display: block;
     float: left;
+    max-width: 780px;
 }
 
 div.textblock {
-    max-width: 1000px;
     display: block;
     min-width: 300px;
     float: none;

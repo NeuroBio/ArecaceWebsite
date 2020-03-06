@@ -1,8 +1,5 @@
 div#outer {
-    position: relative;
-    margin: 10px;
-    width: 500px;
-    max-width: calc(100vw - 70px);
+    margin: 7px;
     overflow: hidden;
     border: 1px solid white;
     background-color: rgb(23, 23, 23);

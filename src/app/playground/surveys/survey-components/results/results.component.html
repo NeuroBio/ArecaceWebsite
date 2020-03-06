@@ -11,11 +11,14 @@
         <a class="navver" [routerLink]="results.Outcome.Link">
             {{ results.Outcome.LinkName }}</a>
     </div>
+    
     <div *ngIf="results  && ViewOnly === false">
       <app-login-to-save-main
       ></app-login-to-save-main>
     </div>
+    
   </div>
+
 </div>
 
 <button (click)="setShowAll()">All Scores</button>
@@ -38,6 +41,6 @@
 
 </div>
 
-<div *ngIf="showStats === true">
-    <app-survey-stats></app-survey-stats>
-</div>
+<app-survey-stats
+*ngIf="showStats === true"
+></app-survey-stats>

@@ -1,11 +1,7 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormArray, FormGroup } from '@angular/forms';
-import { SurveyQuestion, SurveyData, SurveyOutcome } from '../../../../Classes/ContentClasses';
-import { Observable, Subscription } from 'rxjs';
-import { FireBaseService } from 'src/app/GlobalServices/firebase.service';
-import { map, take } from 'rxjs/operators';
+import { SurveyQuestion, SurveyOutcome } from '../../../../Classes/ContentClasses';
 import { SurveyService } from '../survey.service';
-import { Route } from '@angular/compiler/src/core';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
