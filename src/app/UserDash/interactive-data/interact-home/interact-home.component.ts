@@ -30,9 +30,14 @@ export class InteractHomeComponent implements OnInit, OnDestroy {
               private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.userData$ = this.generalcollectionserv.returnMetaData().pipe(
-      map(userdata => userdata.map(datum => [datum.DisplayName.split('-').join(' '), datum.ID])));
-    this.current = this.route.snapshot.firstChild.url[0].path;
+    this.userData$ = this.generalcollectionserv.returnMetaData()
+      .pipe(map(userdata =>
+      userdata.map(datum => [datum.DisplayName.split('-').join(' '), datum.ID])
+    ));
+
+    if(this.route.snapshot.firstChild) {
+      this.current = this.route.snapshot.firstChild.url[0].path;
+    }
     this.type = this.route.snapshot.url[0].path;
     this.displayType = this.displayTypes[this.type];
   }

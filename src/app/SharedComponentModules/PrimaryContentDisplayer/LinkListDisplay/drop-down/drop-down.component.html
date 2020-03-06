@@ -19,7 +19,9 @@
         <li class="sidebarlist" *ngFor="let namelink of list"
         [class.selected.sidebarlist]="namelink[1] === current"
         (click)="onSelect(namelink[1])">
-          <a [routerLink]="[namelink[1]]">{{ namelink[0] }}</a>
+          <a [routerLink]="[namelink[1]]"
+          queryParamsHandling="merge">
+            {{ namelink[0] }}</a>
         </li>
       </ul>  
     </div>

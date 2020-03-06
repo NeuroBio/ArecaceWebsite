@@ -12,6 +12,7 @@ import { FetchService } from 'src/app/GlobalServices/fetch.service';
 export class InteractDetailsSwitchComponent implements OnInit {
 
   type: string;
+  view: string;
   userData: any;
   constructor(private route: ActivatedRoute,
               private generalcollectionserv: GeneralcollectionService,
@@ -30,8 +31,12 @@ export class InteractDetailsSwitchComponent implements OnInit {
 
         case 'SAcalculations':
           return this.fetcher.assignItemtoEdit(this.userData);
+
+        case 'FanCharacters':
+          return this.fetcher.assignItemtoEdit(this.userData);
       }
     });
+    this.route.queryParams.subscribe(query => this.view = query.Action);
   }
 
 }

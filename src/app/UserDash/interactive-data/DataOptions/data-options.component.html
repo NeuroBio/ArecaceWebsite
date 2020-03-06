@@ -1,9 +1,9 @@
 <div id="outer" *ngIf="names[0]">
-  <h4>{{ title }}:</h4>
+  <h4>{{ title }}</h4>
   <hr>
   <ul>
     <div *ngFor="let name of names; let i = index">
-      <button class="Exs" (click)="onDelete(i)">x</button>
+      <!-- <button class="Exs" (click)="onDelete(i)">x</button> -->
       <li>{{ name }}</li>
       <button class="Exs" (click)="onView(i)">view</button>
       <button class="Exs"

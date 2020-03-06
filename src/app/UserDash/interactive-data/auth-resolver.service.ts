@@ -16,7 +16,12 @@ export class AuthResolverService implements Resolve<any> {
 
   resolve(route: ActivatedRouteSnapshot) {
     const path =  route['_routerState'].url.split('/');
-    const type = path[path.length-2];
+    let type;
+    if(route.firstChild) {
+      type = path[path.length-2];
+    } else {
+      type = path[path.length-1];
+    }
     return this.auth.user.pipe(
       take(1),
       tap(user => {

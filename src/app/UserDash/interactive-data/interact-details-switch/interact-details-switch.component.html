@@ -1,16 +1,23 @@
 <!-- SURVEYS -->
-<app-results
-*ngIf="type === 'SurveyResults'"
-[ViewOnly]="true"
-></app-results>
+<div *ngIf="type === 'SurveyResults'">
+    <app-results
+    [ViewOnly]="true"
+    ></app-results>
+</div>
 
 <!-- Source Affinity -->
-<app-source-affinity-calculator
-*ngIf="type === 'SAcalculations'"
-[viewOnly]="true"
-></app-source-affinity-calculator>
+<div *ngIf="type === 'SAcalculations'">
+    <app-source-affinity-calculator
+    [viewOnly]="view !== 'edit'"
+    ></app-source-affinity-calculator>
+
+</div>
+
 
 <!-- Characters -->
-<app-charactersdetails
-*ngIf="type === 'FanCharacters'"
-></app-charactersdetails>
+<div *ngIf="type === 'FanCharacters'">
+    <app-charactersdetails
+    *ngIf="view !== 'edit'"
+    ></app-charactersdetails>
+</div>
+
