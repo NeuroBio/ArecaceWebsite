@@ -16,6 +16,7 @@ import { PickUpComponent } from './pick-up/pick-up.component';
 import { DataOptionsComponent } from './interactive-data/DataOptions/data-options.component';
 import { InteractHomeComponent } from './interactive-data/interact-home/interact-home.component';
 import { InteractDetailsSwitchComponent } from './interactive-data/interact-details-switch/interact-details-switch.component';
+import { DashButtonsComponent } from './interactive-data/dash-buttons/dash-buttons.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { InteractDetailsSwitchComponent } from './interactive-data/interact-deta
     DataOptionsComponent,
     InteractHomeComponent,
     InteractDetailsSwitchComponent,
+    DashButtonsComponent,
   ],
   imports: [
     CommonModule,

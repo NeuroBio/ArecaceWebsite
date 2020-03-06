@@ -21,6 +21,7 @@ export class SourceAffinityCalculatorComponent implements OnInit, OnDestroy {
 
   @Input() showName: boolean = true;
   @Input() viewOnly: boolean = false;
+  @Input() new: boolean = true;
   result: any;
   rank: string;
   abilitiesArray: FormArray;
@@ -82,12 +83,6 @@ export class SourceAffinityCalculatorComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
-    
-    if(this.Form.valid !== true) {
-      this.error ='Name is required!'
-      return this.fetcher.activeFormData.next(
-        new CRUDdata(true, this.error));
-    }
 
     this.result = undefined;
     this.rank = undefined;
@@ -99,24 +94,42 @@ export class SourceAffinityCalculatorComponent implements OnInit, OnDestroy {
     const cGenes = this.Form.controls.ConnectionGenes.value;
     try {
       this.result = this.SAserv.calculateAffinity(build, eGenes, cGenes);
-    }
-    catch(err) {
+    } catch(err) {
       this.error = err;
       return this.fetcher.activeFormData.next(
         new CRUDdata(true, 'Calculation failed!'));
     }
-    
+
     this.rank = this.getRank(this.result, eGenes);
-    const Final = {Build: JSON.stringify(build),
-                    EsarianGenes: eGenes,
-                    ConnectionGenes: cGenes,
-                    Cost: this.result,
-                    Rank: this.rank,
-                    Name: this.Form.value.Name,
-                    ID: ''}
-    Final.ID = `${Final.Name.split(' ').join('-')}-(${Final.Cost})`;
-    this.fetcher.assignvalidity(true);
-    return this.fetcher.assignActiveFormData(new CRUDdata(false, '', Final));
+    
+    if(this.showName === true) {//submissions are allowed
+
+      if(this.Form.valid !== true) {
+        this.error ='Name is required!'
+        return this.fetcher.activeFormData.next(
+          new CRUDdata(true, this.error));
+      }
+  
+      const Final = {Build: JSON.stringify(build),
+                      EsarianGenes: eGenes,
+                      ConnectionGenes: cGenes,
+                      Cost: this.result,
+                      Rank: this.rank,
+                      Name: this.Form.value.Name,
+                      ID: ''}
+      Final.ID = `${Final.Name.split(' ').join('-')}-(${Final.Cost})`;
+      this.fetcher.assignvalidity(true);
+      return this.fetcher.assignActiveFormData(new CRUDdata(false, '', Final));
+    }
+  }
+
+  
+  resetForm() {
+    if(this.new === true) {
+      this.fetcher.assignItemtoEdit(undefined);
+    } else {
+      this.fetcher.assignItemtoEdit(this.fetcher.itemToEdit.value);
+    }
   }
 
   onReset() {
