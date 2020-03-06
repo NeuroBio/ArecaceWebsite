@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { UserDataService } from '../../user-data.service';
+import { DashCRUDService } from '../../dash-CRUD.service';
 @Component({
   selector: 'app-data-options',
   templateUrl: './data-options.component.html',
@@ -15,7 +15,7 @@ export class DataOptionsComponent implements OnInit {
   @Input() data: any;
   @Input() edit: any;
 
-  constructor(private userdataserv: UserDataService,
+  constructor(private crud: DashCRUDService,
               private route: ActivatedRoute,
               private router: Router) { }
 
@@ -23,9 +23,6 @@ export class DataOptionsComponent implements OnInit {
   }
 
   onView(index: number) {
-    // if(this.type ==='SurveyResults') {
-    //   this.displayserv.viewData(this.data[index]);
-    // }
     this.router.navigate([`${this.type}/${this.data[index].ID}`], {relativeTo: this.route})
   }
 
@@ -34,6 +31,6 @@ export class DataOptionsComponent implements OnInit {
   }
 
   onDelete(index: number) {
-    this.userdataserv.deleteEntry(this.type, index)
+    this.crud.deleteEntry(this.type, index)
   }
 }

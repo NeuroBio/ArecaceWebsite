@@ -1,10 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { AuthService } from 'src/app/administration/security/Auth/auth.service';
-import { TextProvider } from 'src/app/GlobalServices/textprovider.service';
-import { User, SA, CharacterMetaData } from 'src/app/Classes/ContentClasses';
-import { Subscription, Observable } from 'rxjs';
-import { FireBaseService } from 'src/app/GlobalServices/firebase.service';
-import { UserDataService } from '../user-data.service';
+import { Subscription }                 from 'rxjs';
+
+import { AuthService }                  from 'src/app/administration/security/Auth/auth.service';
+import { TextProvider }                 from 'src/app/GlobalServices/textprovider.service';
+import { User }                         from 'src/app/Classes/ContentClasses';
 
 @Component({
   selector: 'app-user-dash',
@@ -25,21 +24,18 @@ export class UserDashComponent implements OnInit, OnDestroy {
   showAccountInfo = false;
 
   constructor(private auth: AuthService,
-              private textprovider: TextProvider,
-              private userdataser: UserDataService) { }
+              private textprovider: TextProvider) { }
 
   ngOnInit() {
     this.loggedoutText = this.textprovider.WebsiteText
     .find(member => member.ID =='login').Text;
     this.loggedinText = this.textprovider.WebsiteText
     .find(member => member.ID =='userdash').Text;
-    
     this.stream1 = this.auth.user.subscribe(user => {
       this.authorized = user? true : false;
       this.user = user;
       if(user) {
         this.PrepareData();
-        this.userdataser.assignUserData(user);
       }
     });
   }

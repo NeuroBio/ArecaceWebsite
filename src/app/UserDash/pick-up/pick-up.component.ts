@@ -1,6 +1,6 @@
-import { Component, OnInit, Input, OnChanges } from '@angular/core';
+import { Component, Input, OnChanges } from '@angular/core';
 import { User } from 'src/app/Classes/ContentClasses';
-import { UserDataService } from '../user-data.service';
+import { DashCRUDService } from '../dash-CRUD.service';
 
 @Component({
   selector: 'app-pick-up',
@@ -14,7 +14,7 @@ export class PickUpComponent implements OnChanges {
   dataExists: boolean;
   bookmarkTypes = ['Comics', 'Narratives', 'Scripts', 'Favorites']  
   
-  constructor(private userdataserv: UserDataService) { }
+  constructor(private crud: DashCRUDService) { }
 
   ngOnChanges() {
     this.data = [];
@@ -34,7 +34,7 @@ export class PickUpComponent implements OnChanges {
   }
 
   onDelete(type: string, index: number) {
-    this.userdataserv.deleteEntry(type, index);
+    this.crud.deleteEntry(type, index);
   }
 
   checkExistence() {

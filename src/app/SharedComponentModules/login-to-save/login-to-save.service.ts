@@ -7,8 +7,9 @@ import { take }                     from 'rxjs/operators';
 import { AuthService }              from '../../administration/security/Auth/auth.service';
 import { FireBaseService }          from '../../GlobalServices/firebase.service';
 import { FetchService }             from 'src/app/GlobalServices/fetch.service';
-import { CRUD }                     from 'src/app/administration/services/CRUD.service';
+//import { CRUD }                     from 'src/app/administration/services/CRUD.service';
 
+import { DashCRUDService }          from 'src/app/UserDash/dash-CRUD.service';
 import { CRUDdata }                 from 'src/app/Classes/ContentClasses';
 
 @Injectable({
@@ -28,7 +29,7 @@ export class LoginToSaveService {
   constructor(private auth: AuthService,
               private firebaseserv: FireBaseService,
               private fetcher: FetchService,
-              private CRUD: CRUD) { }
+              private crud: DashCRUDService) { }
 
 
   assignUserDataInfo (tokens: string[], type: string): void {
@@ -58,49 +59,20 @@ export class LoginToSaveService {
     }
 
     //Still processing
-    const dataToSave = uploadInfo.MetaData;
-    const oldData = this.auth.user.value;
-
-    dataToSave.UploadTime = formatDate(new Date(), 'yyyy-MM-dd, HH:mm:ss', 'en');
-    dataToSave.UploadTimeShort = formatDate(new Date(), 'yy/MM/dd', 'en');
-    dataToSave.DisplayName = this.makeDisplayName(this.nameTokens, dataToSave);
-    dataToSave.ID = `${oldData.ID}_${this.getUniqueId(4)}`
+    uploadInfo.MetaData.UploadTime = formatDate(new Date(), 'yyyy-MM-dd, HH:mm:ss', 'en');
+    uploadInfo.MetaData.UploadTimeShort = formatDate(new Date(), 'yy/MM/dd', 'en');
+    uploadInfo.MetaData.DisplayName = this.makeDisplayName(this.nameTokens, uploadInfo.MetaData);
+    uploadInfo.MetaData.ID = `${this.auth.user.value.ID}_${this.getUniqueId(4)}`
     
-    if(uploadInfo.NewImageLinks[0]) {
-      console.log("sensed links!")
-      uploadInfo.NewImageLinks = this.correctLinks(uploadInfo.NewImageLinks, dataToSave.ID);
-    }
 
-    //upload images if any
     this.message.next('Submitting...');
-    return this.CRUD.uploadImages(uploadInfo.NewImageLinks, uploadInfo.ImageBlobs)
-    .then(links => {
-
-      if(links[0]) {
-        dataToSave.Links = links;
-      }
-      
-      if(oldData[this.type]) {// old data exists
-        oldData[this.type].push(dataToSave);
-      } else { //first time this data pushed
-        oldData[this.type] = [dataToSave];
-      }
-
-      //finally upload the metadata
-      return this.firebaseserv.editDocument(oldData, `Users/`, this.auth.uid.value)
-    }).then(() => {
+    return this.crud.createEntry(uploadInfo, this.type)
+    .then(() => {
       this.message.next("Saved!");
       this.reset.next();
     }).catch(err => {
-        this.message = err;
-        this.assignStopClick(false);
-
-        //remove any uploaded images
-        if(dataToSave.Links) {
-          dataToSave.Links.forEach(link =>{
-            this.firebaseserv.deleteImage(link);
-          });
-        }
+      this.message = err;
+      this.assignStopClick(false);
     });
   }
 
@@ -119,15 +91,6 @@ export class LoginToSaveService {
     nameTokens.forEach(token => 
       displayName.push(dataToSave[token]));
     return displayName.join(' ');
-  }
-
-  correctLinks(links: string[], ID: string) {
-    return links.map(link => {
-      const fragments = link.split('/');
-      const keyFrag = fragments[fragments.length-1];
-      return `UserData/${this.auth.uid.value}/${this.type}/${keyFrag}-${ID}`;
-    });
-
   }
 
   assignStopClick(click: boolean) {
