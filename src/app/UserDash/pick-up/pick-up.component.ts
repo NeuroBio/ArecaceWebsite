@@ -34,13 +34,13 @@ export class PickUpComponent implements OnChanges {
   }
 
   onDelete(type: string, index: number) {
-    this.crud.deleteEntry(type, index);
+    this.crud.deleteBookmark(index, type);
   }
 
   checkExistence() {
-    for(let bmt of this.bookmarkTypes){
-      if(this.user[bmt]){
-        if(this.user[bmt][0]){
+    for(let bmt of this.bookmarkTypes) {
+      if(this.user[bmt]) {
+        if(this.user[bmt][0]) {
           return true;
         };
       }

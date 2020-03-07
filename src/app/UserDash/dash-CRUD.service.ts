@@ -113,9 +113,10 @@ export class DashCRUDService {
     })
   }
 
-  deleteEntry(ID: string) {
+  deleteEntry(ID: any) {
     const data = this.auth.user.value;
-    const typeindex = this.getIDandType(ID);
+    let typeindex: any;
+      typeindex = this.getIDandType(ID);
 
     //kill images
     if(data[typeindex.Type][typeindex.Index].Links) {
@@ -136,6 +137,13 @@ export class DashCRUDService {
         this.router.navigate(['/dash']);
       }
     }).catch(err => this.message.next(err));
+  }
+
+  deleteBookmark(index: number, type: string) {
+    const data = this.auth.user.value;
+    //remove from user data
+    data[type].splice(index,1);
+    return this.firebaseserv.editDocument(data, 'Users', this.auth.uid.value);
   }
 
   deleteImages(Links: string[]) {
