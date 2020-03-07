@@ -77,6 +77,7 @@ export class DashCRUDService {
   }
 
   editEntry(ID: string) {
+    this.message.next('Processing...');
     this.fetcher.assignLoading(true);
     this.fetcher.fetchData();
     return this.fetcher.activeFormData.pipe(take(1))
@@ -97,6 +98,7 @@ export class DashCRUDService {
                                                      typeindex.Type);
       }
 
+      this.message.next('Editing...')
       return this.CRUD.editImages(uploadInfo.NewImageLinks,
         uploadInfo.ImageBlobs, uploadInfo.OldImageLinks)
       .then(links => {
@@ -120,6 +122,7 @@ export class DashCRUDService {
   }
 
   deleteEntry(ID: any) {
+    this.message.next('Deleting...')
     this.fetcher.assignLoading(true);
     const data = this.auth.user.value;
     let typeindex: any;
