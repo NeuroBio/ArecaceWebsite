@@ -23,7 +23,7 @@ export class FanCharactersComponent implements OnInit, OnDestroy {
               private auth: AuthService) { }
 
   ngOnInit() {
-    this.logintosaveserv.assignUserDataInfo(['FirstName', 'LastName'], 'FanCharacters');
+    this.logintosaveserv.assignType('FanCharacters');
     this.logintosaveserv.assignAutoTrigger(true);
     this.stream1 = this.logintosaveserv.reset.subscribe(() => {
       this.fetcher.assignItemtoEdit(undefined);

@@ -21,8 +21,8 @@ export class InteractHomeComponent implements OnInit, OnDestroy {
   current: string;
   userData$: Observable<string[][][]>;
   displayTypes = {FanCharacters: 'Fan Characters',
-                SAcalculations: 'SA Calculations',
-                SurveyResults: 'Survey Results'};
+                  SAcalculations: 'SA Calculations',
+                  SurveyResults: 'Survey Results'};
 
   constructor(private generalcollectionserv: GeneralcollectionService,
               private surveyserv: SurveyService,
@@ -47,9 +47,8 @@ export class InteractHomeComponent implements OnInit, OnDestroy {
       case 'SurveyResults':
         return this.surveyserv.mainDisposal();
       
-      case 'SAcalculations':
-        this.fetcher.assignActiveFormData(undefined);
-        return this.fetcher.assignItemtoEdit(undefined);
+      default:
+        return this.fetcher.disposal();
     }
   }
 

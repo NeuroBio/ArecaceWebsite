@@ -30,7 +30,7 @@ export class SourceCalcFrameComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.canonSA = this.generalcollectserv.collectionData.value
     .sort((a,b) => a.ID > b.ID ? 1 : -1);
-    this.logintosaveserv.assignUserDataInfo(['ID'], 'SAcalculations');
+    this.logintosaveserv.assignType('SAcalculations');
 
     this.stream1 = this.auth.user.subscribe(() => 
       this.loggedIn = this.auth.isUser());  

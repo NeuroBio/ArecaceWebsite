@@ -59,3 +59,9 @@ export class SiteMap {
         [['Extras', '/extras'],
         ['Playground','/playground']]
 }
+
+export class NameTokens {
+    FanCharacters = ['FirstName', 'LastName'];
+    SurveyResults = ['Name', 'UploadTimeShort'];
+    SAcalculations = ['ID'];
+}

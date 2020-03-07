@@ -32,7 +32,7 @@ export class ResultsComponent implements OnInit, OnDestroy {
               private logintosaveserv: LoginToSaveService) { }
 
   ngOnInit() {
-    this.logintosaveserv.assignUserDataInfo(['Name', 'UploadTimeShort'], 'SurveyResults');
+    this.logintosaveserv.assignType('SurveyResults');
     this.fetcher.assignvalidity(true);
     this.stream1 = this.surveyserv.surveyResults.subscribe(results => {
       if(results) {

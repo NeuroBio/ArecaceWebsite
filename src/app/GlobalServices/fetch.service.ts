@@ -38,6 +38,8 @@ export class FetchService {
   }
 
   disposal() {
+    this.assignItemtoEdit(undefined);
+    this.assignActiveFormData(undefined);
     this.assignLoading(undefined);
   }
 }
