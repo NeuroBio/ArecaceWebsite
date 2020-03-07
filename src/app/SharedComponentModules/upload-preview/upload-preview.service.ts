@@ -14,7 +14,7 @@ export class UploadPreviewService {
   mainsData = [];
   allowed = ['image/png', 'image/jpeg', 'image/gif'];
   reset = new Subject();
-
+  oldLinks = [];
   constructor() { }
 
   assignThumb(index:number, data: any) {
@@ -25,9 +25,14 @@ export class UploadPreviewService {
     this.mainsData[index] = data;
   }
 
+  assignOldLinks(links: string[]) {
+    this.oldLinks = links;
+  }
+
   clear() {
     this.thumbsData = [];
     this.mainsData = [];
+    this.oldLinks = [];
   }
   
   add() {
@@ -44,8 +49,6 @@ export class UploadPreviewService {
     this.thumbsData[index] = undefined;
     this.mainsData[index] = undefined;
   }
-
-  
 
   checkFile(event: any, settings: ImageSettings) {
     return new Promise((resolve, reject) => {

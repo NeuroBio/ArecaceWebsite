@@ -126,6 +126,7 @@ export class CharacterFormComponent implements OnInit, OnDestroy {
 
       this.showUnique = this.Form.controls.Unique.value.Known;
       this.setdisplayValues();
+      this.uploadpreviewserv.assignOldLinks(this.Form.controls.Links.value);
     }
   }
   
@@ -134,7 +135,7 @@ export class CharacterFormComponent implements OnInit, OnDestroy {
     const ThumbImageData = this.uploadpreviewserv.thumbsData;
     const Final: CharacterMetaData = Object.assign({}, this.Form.value);
     for(let i = 0; i < MainImageData.length; i++) {
-      if(MainImageData[i] === undefined && !Final.Links[i*2]) {
+      if(MainImageData[i] === undefined && !Final.Links[i*2+1]) {
         if(i === 0) {
           return this.fetcher.assignActiveFormData(
             new CRUDdata(true, 'A main bio image is required!'));
@@ -143,7 +144,7 @@ export class CharacterFormComponent implements OnInit, OnDestroy {
             new CRUDdata(true, `At least one of your references (${i}) lacks a main image.`));
         }
       }
-      if(ThumbImageData[i] === undefined && !Final.Links[i*2+1]) {
+      if(ThumbImageData[i] === undefined && !Final.Links[i*2]) {
         if(i === 0) {
           return this.fetcher.assignActiveFormData(
             new CRUDdata(true, 'A bio image thumb is required!'));

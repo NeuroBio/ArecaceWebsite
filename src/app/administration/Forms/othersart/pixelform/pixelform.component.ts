@@ -61,6 +61,7 @@ export class PixelformComponent implements OnInit, OnDestroy {
     if(editFormData) {
       this.Form = this.qa.assign(this.Form, editFormData);
       this.Form.patchValue({Allowed: editFormData.Allowed === true ? 'true' : 'false'});
+      this.uploadpreviewserv.assignOldLinks(this.Form.controls.Links.value);
     }
   }
 

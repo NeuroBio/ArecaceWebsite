@@ -64,6 +64,7 @@ export class BeastFormComponent implements OnInit, OnDestroy {
     this.onReset();
     if(editFormData) {
       this.Form = this.qa.assign(this.Form, editFormData);
+      this.uploadpreviewserv.assignOldLinks(this.Form.controls.Links.value);
     }
   }
 

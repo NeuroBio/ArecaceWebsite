@@ -31,6 +31,8 @@ export class UploadMainComponent implements OnInit, OnDestroy {
   thumbImg: UploadPreviewInfo;
   mainRequirements: string;
   thumbRequirements: string;
+  oldThumb: string;
+  oldMain: string;
 
   stream1: Subscription;
   autoGenerate;
@@ -61,13 +63,13 @@ export class UploadMainComponent implements OnInit, OnDestroy {
 
   switchThumbType() {
     this.autoGenerate = !this.autoGenerate;
+    this.thumbImg.ImgUrl = undefined;
     if(this.autoGenerate === true) {
       if(this.mainImg.ImgUrl) {
         this.uploadImage(this.previewserv.mainsData[this.ID], 'auto')
       }
     } else {
       this.previewserv.assignThumb(this.ID, undefined);
-      this.thumbImg.ImgUrl = undefined;
     }
   }
 
@@ -149,5 +151,7 @@ export class UploadMainComponent implements OnInit, OnDestroy {
     this.previewserv.erase(this.ID);
     this.mainImg = new UploadPreviewInfo(`${this.name}-main`, undefined, false, undefined);
     this.thumbImg = new UploadPreviewInfo(`${this.name}-thumb`, undefined, false, undefined);
+    this.oldMain = this.previewserv.oldLinks[this.ID*2+1];
+    this.oldThumb = this.previewserv.oldLinks[this.ID*2];
   }
 }
