@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { DashCRUDService } from '../../dash-CRUD.service';
 import { ActivatedRoute } from '@angular/router'
 import { Subscription } from 'rxjs';
+import { FetchService } from 'src/app/GlobalServices/fetch.service';
 
 @Component({
   selector: 'app-dash-buttons',
@@ -12,16 +13,22 @@ import { Subscription } from 'rxjs';
 export class DashButtonsComponent implements OnInit, OnDestroy {
 
   message: string;
-  stream: Subscription;
+  disabled: boolean;
+  stream1: Subscription;
+  stream2: Subscription;
+  
   constructor(private route: ActivatedRoute,
-              private crud: DashCRUDService) { }
+              private crud: DashCRUDService,
+              private fetcher: FetchService) { }
 
   ngOnInit() {
-    this.stream = this.crud.message.subscribe(mess => this.message = mess);
+    this.stream1 = this.crud.message.subscribe(mess => this.message = mess);
+    this.stream2 = this.fetcher.loading.subscribe(load => this.disabled = load);
   }
 
   ngOnDestroy() {
-    this.stream.unsubscribe();
+    this.stream1.unsubscribe();
+    this.stream2.unsubscribe();
   }
   
   onEdit() {

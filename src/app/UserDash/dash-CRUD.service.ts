@@ -77,6 +77,7 @@ export class DashCRUDService {
   }
 
   editEntry(ID: string) {
+    this.fetcher.assignLoading(true);
     this.fetcher.fetchData();
     return this.fetcher.activeFormData.pipe(take(1))
     .subscribe(uploadInfo => {
@@ -106,18 +107,20 @@ export class DashCRUDService {
         OldData[typeindex.Type][typeindex.Index] = uploadInfo.MetaData; 
         return this.firebaseserv.editDocument(OldData, `Users/`, this.auth.uid.value)
       }).then(() => {
-        this.gencollectserv.initializeMetaData(OldData[typeindex.Type],
-          typeindex.Type);//reset in list
+        this.gencollectserv.initializeMetaData(OldData[typeindex.Type], typeindex.Type);//reset in list
         this.fetcher.assignItemtoEdit(OldData[typeindex.Type][typeindex.Index]);//reset active data
-        this.message.next('Edit successful!')
+        this.message.next('Edit successful!');
+        this.fetcher.assignLoading(false);
         return Promise.resolve();
       }).catch(err => {
+        this.fetcher.assignLoading(false);
         return Promise.reject(err);
       });
     })
   }
 
   deleteEntry(ID: any) {
+    this.fetcher.assignLoading(true);
     const data = this.auth.user.value;
     let typeindex: any;
       typeindex = this.getIDandType(ID);
@@ -140,7 +143,11 @@ export class DashCRUDService {
       } else { //no members remain
         this.router.navigate(['/dash']);
       }
-    }).catch(err => this.message.next(err));
+      this.fetcher.assignLoading(false);
+    }).catch(err => {
+      this.fetcher.assignLoading(false);
+      this.message.next(err);
+    });
   }
 
   deleteBookmark(index: number, type: string) {

@@ -1,5 +1,9 @@
 <div id="buttonholder">
-    <button (click)="onEdit()">Edit</button>
-    <button id="del" (click)="onDelete()">Delete</button>
+    <button (click)="onEdit()"
+    [disabled]="disabled === true"
+    >Edit</button>
+    <button id="del" (click)="onDelete()"
+    [disabled]="disabled === true"
+    >Delete</button>
     <div>{{ message }}</div>
 </div>
