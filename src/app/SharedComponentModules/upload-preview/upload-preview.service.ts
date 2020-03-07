@@ -1,6 +1,6 @@
 import { Injectable }         from '@angular/core';
 
-import { Subject }            from 'rxjs';
+import { Subject, BehaviorSubject }            from 'rxjs';
 
 import { ImageSettings }      from './uploadpreviewclass';
 
@@ -14,7 +14,7 @@ export class UploadPreviewService {
   mainsData = [];
   allowed = ['image/png', 'image/jpeg', 'image/gif'];
   reset = new Subject();
-  oldLinks = [];
+  oldLinks = new BehaviorSubject<string[]>([]);
   constructor() { }
 
   assignThumb(index:number, data: any) {
@@ -26,13 +26,13 @@ export class UploadPreviewService {
   }
 
   assignOldLinks(links: string[]) {
-    this.oldLinks = links;
+    this.oldLinks.next(links);
   }
 
   clear() {
     this.thumbsData = [];
     this.mainsData = [];
-    this.oldLinks = [];
+    this.oldLinks.next([]);
   }
   
   add() {

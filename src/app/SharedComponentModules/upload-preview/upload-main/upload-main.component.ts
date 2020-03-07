@@ -35,6 +35,7 @@ export class UploadMainComponent implements OnInit, OnDestroy {
   oldMain: string;
 
   stream1: Subscription;
+  stream2: Subscription;
   autoGenerate;
 
   constructor(private previewserv: UploadPreviewService,
@@ -46,10 +47,15 @@ export class UploadMainComponent implements OnInit, OnDestroy {
     this.thumbRequirements = this.setReq(this.Settings.thumb, 'Thumb');
     this.onReset();
     this.stream1 = this.previewserv.reset.subscribe(() => this.onReset());
+    this.stream2 = this.previewserv.oldLinks.subscribe(links => {
+      this.oldMain = links[this.ID*2+1];
+      this.oldThumb = links[this.ID*2];
+    });
   }
 
   ngOnDestroy() {
     this.stream1.unsubscribe();
+    this.stream2.unsubscribe();
   }
 
   setReq(settings: any, type: string) {
@@ -151,7 +157,5 @@ export class UploadMainComponent implements OnInit, OnDestroy {
     this.previewserv.erase(this.ID);
     this.mainImg = new UploadPreviewInfo(`${this.name}-main`, undefined, false, undefined);
     this.thumbImg = new UploadPreviewInfo(`${this.name}-thumb`, undefined, false, undefined);
-    this.oldMain = this.previewserv.oldLinks[this.ID*2+1];
-    this.oldThumb = this.previewserv.oldLinks[this.ID*2];
   }
 }
