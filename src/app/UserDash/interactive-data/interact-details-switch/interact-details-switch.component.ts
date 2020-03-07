@@ -14,6 +14,8 @@ export class InteractDetailsSwitchComponent implements OnInit {
   type: string;
   view: string;
   userData: any;
+  editable: boolean
+
   constructor(private route: ActivatedRoute,
               private generalcollectionserv: GeneralcollectionService,
               private surveyserv: SurveyService,
@@ -24,8 +26,10 @@ export class InteractDetailsSwitchComponent implements OnInit {
     this.route.data.subscribe((data: {UserData: any}) => {
       window.scroll(0,0);
       this.userData = data.UserData
+      this.editable = true;
       switch(this.type) {
         case 'SurveyResults':
+          this.editable = false;
           this.surveyserv.assignSurveyResults(this.userData);
           return this.surveyserv.assignSurveyStats(this.userData.Name);
 

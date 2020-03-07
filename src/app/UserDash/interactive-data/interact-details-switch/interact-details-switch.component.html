@@ -21,5 +21,7 @@
     ></app-charactersdetails>
 </div>
 
-<app-dash-buttons></app-dash-buttons>    
+<app-dash-buttons
+*ngIf="view === 'edit'  && editable === true"
+></app-dash-buttons>    
 

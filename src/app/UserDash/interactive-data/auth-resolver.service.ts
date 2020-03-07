@@ -22,10 +22,11 @@ export class AuthResolverService implements Resolve<any> {
     } else {
       type = path[path.length-1];
     }
+    type = type.split('\?')[0]; //remove query params
+
     return this.auth.user.pipe(
       take(1),
-      tap(user => {
-        this.generalcollectionserv.initializeMetaData(user[type], type);
-      }) );
+      tap(user => 
+        this.generalcollectionserv.initializeMetaData(user[type], type)) );
   }
 }

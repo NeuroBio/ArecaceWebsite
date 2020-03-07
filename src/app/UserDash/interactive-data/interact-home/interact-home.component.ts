@@ -32,7 +32,7 @@ export class InteractHomeComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.userData$ = this.generalcollectionserv.returnMetaData()
       .pipe(map(userdata =>
-      userdata.map(datum => [datum.DisplayName.split('-').join(' '), datum.ID])
+      userdata.map(datum => [datum.DisplayName, datum.ID])
     ));
 
     if(this.route.snapshot.firstChild) {
