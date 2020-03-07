@@ -23,21 +23,19 @@ export class InteractDetailsSwitchComponent implements OnInit {
 
   ngOnInit() {
     this.type = this.generalcollectionserv.type.value;
-    this.route.data.subscribe((data: {UserData: any}) => {
+    this.route.data.subscribe((data: {Data: any}) => {
       window.scroll(0,0);
-      this.userData = data.UserData
-      this.editable = true;
       switch(this.type) {
         case 'SurveyResults':
+          this.userData = data.Data
           this.editable = false;
           this.surveyserv.assignSurveyResults(this.userData);
           return this.surveyserv.assignSurveyStats(this.userData.Name);
 
-        case 'SAcalculations':
-          return this.fetcher.assignItemtoEdit(this.userData);
-
-        case 'FanCharacters':
-          return this.fetcher.assignItemtoEdit(this.userData);
+        default :
+          this.userData = data.Data
+          this.editable = true;
+          this.fetcher.assignItemtoEdit(this.userData);
       }
     });
     this.route.queryParams.subscribe(query => this.view = query.Action);

@@ -19,6 +19,12 @@
     <app-charactersdetails
     *ngIf="view !== 'edit'"
     ></app-charactersdetails>
+
+    <div class="formholder"
+    *ngIf="view === 'edit'">
+        <app-characterform></app-characterform>
+    </div>
+
 </div>
 
 <app-dash-buttons

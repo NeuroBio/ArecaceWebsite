@@ -17,6 +17,7 @@ import { DataOptionsComponent } from './interactive-data/DataOptions/data-option
 import { InteractHomeComponent } from './interactive-data/interact-home/interact-home.component';
 import { InteractDetailsSwitchComponent } from './interactive-data/interact-details-switch/interact-details-switch.component';
 import { DashButtonsComponent } from './interactive-data/dash-buttons/dash-buttons.component';
+import { CharacterFormModule } from 'src/app/SharedComponentModules/SharedForms/MakeCharacter/character-form.module';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { DashButtonsComponent } from './interactive-data/dash-buttons/dash-butto
     PrimaryContentDisplayModule,
     SharedFormsModule,
     CharacterComponentsModule,
+    CharacterFormModule,
     
     UserDashRoutingModule
   ]

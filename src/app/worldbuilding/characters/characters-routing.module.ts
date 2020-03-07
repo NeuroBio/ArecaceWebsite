@@ -18,7 +18,7 @@ const characterRoutes: Routes = [
       {path: '', component: HomeComponent },
       {path: 'notfound', component: NotFoundComponent },
       {path: ':CharaID', component: CharactersDetailsComponent,
-        resolve: { Chara: GeneralmemberresolverService },
+        resolve: { Data: GeneralmemberresolverService },
         children: [
           {path: ':RefID', component: CharactersBlowupmasterComponent,
             resolve: { links: CBUMResolverService } }

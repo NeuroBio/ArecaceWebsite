@@ -17,7 +17,7 @@ const userRoutes: Routes = [
     children: [
       {path: 'notfound', redirectTo: ''},
       {path: ':surveyID', component: InteractDetailsSwitchComponent,
-        resolve: {UserData: GeneralmemberresolverService},
+        resolve: {Data: GeneralmemberresolverService},
       children: [{path: '**', redirectTo: ''}]}
   ]},
 
@@ -28,7 +28,7 @@ const userRoutes: Routes = [
     children: [
       {path: 'notfound', redirectTo: ''},
       {path: ':SAcalcID', component: InteractDetailsSwitchComponent,
-        resolve: {UserData: GeneralmemberresolverService}}
+        resolve: {Data: GeneralmemberresolverService}}
   ]},
 
   
@@ -38,7 +38,7 @@ const userRoutes: Routes = [
     children: [
       {path: 'notfound', redirectTo: ''},
       {path: ':CharaID', component: InteractDetailsSwitchComponent,
-        resolve: {Chara: GeneralmemberresolverService}}
+        resolve: {Data: GeneralmemberresolverService}}
   ]}
 
 

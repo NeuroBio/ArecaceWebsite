@@ -80,6 +80,10 @@ export class DashCRUDService {
     this.fetcher.fetchData();
     return this.fetcher.activeFormData.pipe(take(1))
     .subscribe(uploadInfo => {
+      
+      if(uploadInfo.Abort) {
+        return this.message.next(uploadInfo.AbortMessage);
+      }
       const OldData = this.auth.user.value;
       const typeindex = this.getIDandType(ID);
 
