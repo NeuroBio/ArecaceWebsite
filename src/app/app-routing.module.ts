@@ -9,6 +9,7 @@ import { FAQComponent }             from './SimplePages/faq/faq.component';
 import { HomeComponent }            from './SimplePages/home/home.component';
 import { PageNotFoundComponent }    from './SimplePages/pagenotfound/pagenotfound.component';
 import { TravelorsGuideComponent }  from './SimplePages/travelorsguide/travelorsguide.component';
+import { UploadLogComponent }       from './SimplePages/upload-log/upload-log.component';
 
 const routes: Routes = [
   //simple pages
@@ -19,7 +20,8 @@ const routes: Routes = [
   {path: 'faq', component: FAQComponent},
   {path: 'faq/copyright', component: CopyrightComponent},
   {path: 'guide', component: TravelorsGuideComponent},
-  {path: 'home', component: HomeComponent}, 
+  {path: 'home', component: HomeComponent},
+  {path: 'changelog', component: UploadLogComponent}, 
 
   //modules
   {path: 'comic',
