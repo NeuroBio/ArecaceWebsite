@@ -56,6 +56,7 @@ export class ReferenceFormComponent implements OnInit, OnDestroy {
     this.stream2.unsubscribe();
     this.controller.disposal();
     this.fetcher.disposal();
+    this.uploadpreviewserv.clear();
   }
 
   createForm() {

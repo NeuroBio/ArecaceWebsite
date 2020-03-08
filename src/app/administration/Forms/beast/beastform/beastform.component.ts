@@ -47,6 +47,7 @@ export class BeastFormComponent implements OnInit, OnDestroy {
     this.stream2.unsubscribe();
     this.fetcher.disposal();
     this.controller.disposal();
+    this.uploadpreviewserv.clear();
   }
 
   createForm() {

@@ -65,6 +65,7 @@ export class CharacterFormComponent implements OnInit, OnDestroy {
     this.stream2.unsubscribe();
     this.stream3.unsubscribe();
     this.fetcher.disposal();
+    this.uploadpreviewserv.clear();
   }
 
   createForm() {
