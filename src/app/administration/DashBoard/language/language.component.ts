@@ -33,9 +33,11 @@ export class LanguageComponent implements OnInit, OnDestroy {
     });
     this.stream2 = this.controller.itemList.subscribe(dict => this.Dictionary = dict);
   }
+
    ngOnDestroy() {
      this.stream1.unsubscribe();
      this.stream2.unsubscribe();
+     this.controller.assignItemList(undefined);
    }
 
   pickWordType(simple: boolean) {

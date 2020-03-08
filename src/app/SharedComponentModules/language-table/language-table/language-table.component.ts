@@ -12,6 +12,7 @@ export class LanguageTableComponent implements OnChanges {
 
   @Input() Dictionary: Word[];
   @Input() Edit: boolean;
+
   wordTypes = new WordTypes();
   currentDict: Word[];
   CoreWords : Number;

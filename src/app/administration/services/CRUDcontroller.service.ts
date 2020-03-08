@@ -58,9 +58,13 @@ export class CRUDcontrollerService {
   }
 
   assignItemList(path: string) {
-    return this.getEditableCollection(path).subscribe(collect => {
-      this.itemList.next(collect);
-    });
+    if(path) {
+      return this.getEditableCollection(path).subscribe(collect => {
+        this.itemList.next(collect);
+      });
+    } else {
+      this.itemList.next(undefined);
+    }
   }
 
   getItemType() {

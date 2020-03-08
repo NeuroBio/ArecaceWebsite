@@ -27,6 +27,7 @@ export class ContentComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.stream.unsubscribe();
+    this.controller.assignItemList(undefined);
   }
   
   onEditCheck(edit:boolean) {

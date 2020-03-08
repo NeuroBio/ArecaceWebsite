@@ -62,7 +62,7 @@ const AdminRoutes: Routes = [
           { path: 'notes', component: LooseNotesFormComponent}
         ]},
         {path: 'Pages', component:PagesComponent, 
-        children:[
+        children: [
           {path: '', redirectTo: 'home', pathMatch: 'full'},
           {path: 'home', component: WebsiteTextComponent },
           {path: 'about', component: AboutTextComponent },
