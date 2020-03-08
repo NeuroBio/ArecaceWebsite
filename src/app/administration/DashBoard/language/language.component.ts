@@ -21,10 +21,8 @@ export class LanguageComponent implements OnInit, OnDestroy {
   constructor(private controller: CRUDcontrollerService) { }
 
   ngOnInit() {
-    this.controller.assignFirePaths({Nomadic: 'Nomadic'}, 'Nomadic');
     this.controller.assignButtons([true, true, true, false]);
-    this.controller.assignItemList(this.controller.firePaths.value['Nomadic']);
-    this.controller.updateButton('Delete', true);
+    this.controller.assignItemList('Nomadic');
     this.stream1 = this.controller.itemToEdit.subscribe(word => {
       if(word) {
         this.simple = word.Level === 1;

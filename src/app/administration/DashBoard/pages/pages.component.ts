@@ -11,7 +11,7 @@ export class PagesComponent implements OnInit {
   constructor(private controller: CRUDcontrollerService) { }
 
   ngOnInit() {
-    this.controller.assignFirePaths({Website: 'WebsiteText'}, 'Website');
+    this.controller.assignItemType('website');
     this.controller.assignButtons([true, false, false, false]);
   }
 

@@ -19,11 +19,12 @@ import { AppComponent }               from './app.component';
 import { AboutComponent }             from './SimplePages/about/about.component';
 import { BadserviceComponent }        from './SimplePages/badservice/badservice.component';
 import { ContactComponent }           from './SimplePages/contact/contact.component';
-import { FAQComponent }               from './SimplePages/faq/faq.component';
 import { CopyrightComponent }         from './SimplePages/copyright/copyright.component';
+import { FAQComponent }               from './SimplePages/faq/faq.component';
 import { HomeComponent }              from './SimplePages/home/home.component';
 import { PageNotFoundComponent }      from './SimplePages/pagenotfound/pagenotfound.component';
 import { TravelorsGuideComponent }    from './SimplePages/travelorsguide/travelorsguide.component';
+import { UploadLogComponent }         from './SimplePages/upload-log/upload-log.component';
 
 import { AuthService }                from './administration/security/Auth/auth.service';
 import { TextProvider }               from './GlobalServices/textprovider.service';
@@ -46,7 +47,8 @@ export function AuthFactory(provider: AuthService) {
     CopyrightComponent,
     PageNotFoundComponent,
     BadserviceComponent,
-    ContactComponent
+    ContactComponent,
+    UploadLogComponent
     ],
 
   imports: [

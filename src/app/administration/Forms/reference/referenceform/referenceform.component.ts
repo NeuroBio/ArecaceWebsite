@@ -1,14 +1,14 @@
-import { Component, OnInit, OnDestroy }   from '@angular/core';
-import { FormBuilder, FormGroup }         from '@angular/forms';
-import { Subscription }                   from 'rxjs';
+import { Component, OnInit, OnDestroy }         from '@angular/core';
+import { FormBuilder, FormGroup }               from '@angular/forms';
+import { Subscription }                         from 'rxjs';
 
-import { CRUDcontrollerService }          from '../../../services/CRUDcontroller.service'
-import { Categories, Paths }              from '../../../../Classes/UploadDownloadPaths'
-import { QuickAssign }                    from 'src/app/GlobalServices/commonfunctions.service';
-import { UploadPreviewService }           from 'src/app/SharedComponentModules/upload-preview/upload-preview.service';
-import { UploadPreviewSettings }          from 'src/app/SharedComponentModules/upload-preview/uploadpreviewclass';
-import { FetchService }                   from 'src/app/GlobalServices/fetch.service';
-import { CRUDdata }                       from 'src/app/Classes/ContentClasses';
+import { CRUDcontrollerService }                from '../../../services/CRUDcontroller.service'
+import { ReferenceCategories, AllPathInfo }   from '../../../../Classes/UploadDownloadPaths'
+import { QuickAssign }                          from 'src/app/GlobalServices/commonfunctions.service';
+import { UploadPreviewService }                 from 'src/app/SharedComponentModules/upload-preview/upload-preview.service';
+import { UploadPreviewSettings }                from 'src/app/SharedComponentModules/upload-preview/uploadpreviewclass';
+import { FetchService }                         from 'src/app/GlobalServices/fetch.service';
+import { CRUDdata }                             from 'src/app/Classes/ContentClasses';
 
 @Component({
   selector: 'app-referenceform',
@@ -24,11 +24,11 @@ export class ReferenceFormComponent implements OnInit, OnDestroy {
   imageSettings = new UploadPreviewSettings([[undefined, undefined, '100MB'], [200, 600, '300KB']]);
 
   
-  cats = new Categories;
-  paths = new Paths;
+  cats = new ReferenceCategories;
+  paths = new AllPathInfo;
   categories: string[];
   docPath: string;
-  imagePath: string;
+  imagePath: 'Refs';
   type: string;
 
   constructor(private fb: FormBuilder,
@@ -41,8 +41,7 @@ export class ReferenceFormComponent implements OnInit, OnDestroy {
     this.controller.itemType.subscribe(type => {
       this.type = type;
       this.categories = this.cats[type];
-      this.docPath = this.paths[type][0];
-      this.imagePath = this.paths[type][1];
+      this.docPath = this.paths[type].Fire;
     }).unsubscribe();
 
     this.stream1 = this.controller.itemToEdit
@@ -97,7 +96,7 @@ export class ReferenceFormComponent implements OnInit, OnDestroy {
                   [`${this.imagePath}/${Final.ID}`],
                   [imageFile],
                   Final.Links
-      ));
+    ));
   }
 
   onReset() {

@@ -31,7 +31,8 @@ export class EditListComponent implements OnInit, OnDestroy {
       this.type = type;
       this.controller.assignEditItem(undefined);
       this.loading = true;
-      this.controller.assignItemList(this.controller.firePaths.value[type]);
+      //fix?
+      this.controller.assignItemList(this.controller.firePaths[type].Fire);
     });
 
     this.stream2 = this.controller.itemList.subscribe(list => {
@@ -49,14 +50,14 @@ export class EditListComponent implements OnInit, OnDestroy {
 
   onSelect(selected: string, ind: number) {
       this.selected = selected;
-      if(this.type === "Website") {
+      if(this.type === "website") {
         this.router.navigate([`./${this.selected}`], {relativeTo: this.route})
       }
       this.controller.assignEditItem(this.selectable[ind]);
   }
 
   forPagesInit() {
-    if(this.type === "Website"  && this.selectable) {
+    if(this.type === "website"  && this.selectable) {
       const access = this.route.snapshot.firstChild.url.toString();
       this.controller.assignEditItem(this.selectable.find(element =>
         element.ID === access));

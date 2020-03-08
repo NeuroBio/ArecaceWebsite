@@ -1,0 +1,16 @@
+<table>
+    <tr>
+        <th>Date</th>
+        <th>Change</th>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Link</th>
+    </tr>
+    <tr *ngFor="let entry of changes, let i = index">
+        <td>{{ entry.UploadTime }}</td>
+        <td>{{ entry.UploadChange }}</td>
+        <td>{{ entry.UploadType }}</td>
+        <td>{{ entry.ID }}</td>
+        <td><a [routerLink]="entry.DirectLink">[Link]</a></td>
+    </tr>
+</table>

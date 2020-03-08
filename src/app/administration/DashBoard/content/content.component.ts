@@ -4,7 +4,6 @@ import { ActivatedRoute }                 from '@angular/router';
 import {Subscription}                     from 'rxjs';
 
 import { CRUDcontrollerService }          from '../../services/CRUDcontroller.service';
-import { FirebasePaths }                  from 'src/app/Classes/UploadDownloadPaths';
 
 @Component({
   selector: 'app-content',
@@ -20,7 +19,6 @@ export class ContentComponent implements OnInit, OnDestroy {
               private controller: CRUDcontrollerService) { }
 
   ngOnInit() {
-    this.controller.assignFirePaths(new FirebasePaths());
     this.controller.assignButtons([true, true, true, true]);
     this.stream = this.route.firstChild.url.subscribe(path =>
         this.controller.assignItemType(path[path.length-1].toString())

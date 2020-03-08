@@ -8,7 +8,7 @@ import { FireBaseService }            from './firebase.service';
 import { GeneralcollectionService }   from './generalcollection.service';
 import { CacheService }               from './cache.service';
 
-import { FirebasePaths }              from 'src/app/Classes/UploadDownloadPaths';
+import { AllPathInfo }              from 'src/app/Classes/UploadDownloadPaths';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +16,7 @@ import { FirebasePaths }              from 'src/app/Classes/UploadDownloadPaths'
 
 export class GeneralcollectionresolverService implements Resolve<any> {
   
-  firePaths = new FirebasePaths;
+  firePaths = new AllPathInfo;
 
   constructor(private firebaseserv: FireBaseService,
               private generalcollectionserv: GeneralcollectionService,
@@ -39,8 +39,8 @@ export class GeneralcollectionresolverService implements Resolve<any> {
       return this.generalcollectionserv.initializeMetaData(this.cache.Cache[type], type);
       
     } else {
-      this.cache.addSubscription(type, this.firebaseserv.returnCollect(this.firePaths[type]))
-      return this.firebaseserv.returnCollect(this.firePaths[type]).pipe(
+      this.cache.addSubscription(type, this.firebaseserv.returnCollect(this.firePaths[type].Fire))
+      return this.firebaseserv.returnCollect(this.firePaths[type].Fire).pipe(
         take(1),
         tap(collect => {
           if(collect[0]) {

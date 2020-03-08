@@ -12,7 +12,7 @@ import { GeneralcollectionService } from '../GlobalServices/generalcollection.se
 import { FetchService }             from 'src/app/GlobalServices/fetch.service';
 
 import { CRUDdata }                 from 'src/app/Classes/ContentClasses';
-import {NameTokens}                 from 'src/app/Classes/UploadDownloadPaths';
+import { UserDataNameTokens }       from 'src/app/Classes/UploadDownloadPaths';
 @Injectable({
   providedIn: 'root'
 })
@@ -20,7 +20,7 @@ import {NameTokens}                 from 'src/app/Classes/UploadDownloadPaths';
 export class DashCRUDService {
 
   message = new BehaviorSubject<string>(undefined);
-  NameTokens = new NameTokens();
+  NameTokens = new UserDataNameTokens();
 
   constructor(private firebaseserv: FireBaseService,
               private auth: AuthService,

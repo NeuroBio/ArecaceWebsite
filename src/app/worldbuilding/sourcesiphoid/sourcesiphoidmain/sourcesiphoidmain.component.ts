@@ -4,7 +4,7 @@ import { ActivatedRoute }               from '@angular/router';
 import { Observable }                   from 'rxjs';
 import { map }                          from 'rxjs/operators';
 
-import { Categories }                   from 'src/app/Classes/UploadDownloadPaths';
+import { ReferenceCategories }          from 'src/app/Classes/UploadDownloadPaths';
 import { GeneralcollectionService }     from 'src/app/GlobalServices/generalcollection.service';
 
 @Component({
@@ -14,7 +14,7 @@ import { GeneralcollectionService }     from 'src/app/GlobalServices/generalcoll
 
 export class SourceSiphoidMainComponent implements OnInit {
 
-  cats: Categories = new Categories;
+  cats: ReferenceCategories = new ReferenceCategories;
   labels: string[] = this.cats.source;
   current: string;
   sourceRefs$: Observable<string[][][]>;

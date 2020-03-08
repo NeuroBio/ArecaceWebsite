@@ -9,10 +9,13 @@ import { SiteMap } from '../../../Classes/UploadDownloadPaths';
 export class SiteMapComponent implements OnInit{
 
   SiteMap = new SiteMap();
-  keys = Object.keys(this.SiteMap);
-  linkList = this.keys.map(key => this.SiteMap[key]);
+  keys: string[];
+  linkList: string[][];
 
-  ngOnInit(){
+  ngOnInit() {
+    delete this.SiteMap.PathInfo;
+    this.keys = Object.keys(this.SiteMap);
+    this.linkList = this.keys.map(key => this.SiteMap[key]);
     window.scroll(0,0);
   }
 

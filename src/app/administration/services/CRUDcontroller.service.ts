@@ -10,6 +10,7 @@ import { NewestCueService }                     from './newest-cue.service';
 import { FetchService }                         from 'src/app/GlobalServices/fetch.service';
 
 import { CRUDdata }                             from 'src/app/Classes/ContentClasses';
+import { AllPathInfo } from 'src/app/Classes/UploadDownloadPaths';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,7 @@ import { CRUDdata }                             from 'src/app/Classes/ContentCla
 
 export class CRUDcontrollerService {
   
-  firePaths = new BehaviorSubject<any>(undefined);
+  firePaths = new AllPathInfo();
   itemType = new BehaviorSubject<string>('');
   itemToEdit = new BehaviorSubject<any>(undefined);
   itemList = new BehaviorSubject<any[]>(undefined);
@@ -48,11 +49,6 @@ export class CRUDcontrollerService {
   
             
   //Data fetching functions
-  assignFirePaths(paths: any, itemType: string = '') {
-    this.firePaths.next(paths);
-    this.itemType.next(itemType);
-  }
-
   assignItemType(itemType: string) {
     return this.itemType.next(itemType);
   }
@@ -111,8 +107,8 @@ export class CRUDcontrollerService {
         }
         this.newestCue.updateCue(
           Object.assign({}, data.MetaData),
-          this.itemType.value, 'NOT READY YET');
-        return this.crud.uploadItem(data.MetaData, this.firePaths.value[this.itemType.value]);
+          this.itemType.value, 'Created');
+        return this.crud.uploadItem(data.MetaData, this.firePaths[this.itemType.value].Fire);
 //POST UPLOAD
       }).then(() => {
         this.itemToEdit.next(undefined);
@@ -153,8 +149,11 @@ export class CRUDcontrollerService {
       if("StoryLink" in CRUDdata.MetaData){
         CRUDdata.MetaData.StoryLink = link;
       }
+      this.newestCue.updateCue(
+        Object.assign({}, CRUDdata.MetaData),
+        this.itemType.value, 'Edited');
       return this.crud.editItem(CRUDdata.MetaData,
-              this.firePaths.value[this.itemType.value],
+              this.firePaths[this.itemType.value].Fire,
               this.itemToEdit.value.key);
 //POST UPLOAD
     }).then(() => {
@@ -186,7 +185,10 @@ export class CRUDcontrollerService {
       links.push(item.StoryLink);
     }
 
-    this.crud.deleteItem(links, this.firePaths.value[this.itemType.value], item.key)
+    this.newestCue.updateCue(
+      Object.assign({}, this.itemToEdit.value),
+      this.itemType.value, 'Deleted');
+    this.crud.deleteItem(links, this.firePaths[this.itemType.value].Fire, item.key)
     .then(() => {
         this.itemToEdit.next(undefined);
         this.message.next('Delete successful!')

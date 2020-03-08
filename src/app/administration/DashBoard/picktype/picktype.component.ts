@@ -19,7 +19,9 @@ export class PickTypeComponent implements OnInit, OnDestroy {
   
   ngOnInit() {
     this.stream1 = this.controller.itemType.subscribe(type  => this.current = type);
-    this.typeList = Object.keys(this.controller.firePaths.value);
+    this.typeList = Object.keys(this.controller.firePaths);
+    this.typeList = this.typeList.filter(type =>
+      this.controller.firePaths[type].SpecialUpload === false);
   }
   
   ngOnDestroy() {
