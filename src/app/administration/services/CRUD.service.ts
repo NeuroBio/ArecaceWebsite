@@ -61,7 +61,7 @@ export class CRUD {
     if(link) {
       return this.firebaseserv.deleteImage(link);
     } else {
-      return Promise.resolve(undefined)
+      return Promise.resolve();
     }
   }
 

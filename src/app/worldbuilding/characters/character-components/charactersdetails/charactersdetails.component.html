@@ -4,7 +4,7 @@
       <div *ngIf="loading===true" class="loading"></div>
       <img id="BioImage" [hidden]="loading" [src]="char.Links[0]" (load)="loading=false"
       [alt]="char.FirstName+' '+char.LastName">
-      <a [hidden]="loading" [href]="char.Links[1]" target="_blank">download larger version</a>
+      <a [hidden]="loading" [routerLink]="['/download']" (click)="viewFull()">View Full Size</a>
   </div>
 
   <br>

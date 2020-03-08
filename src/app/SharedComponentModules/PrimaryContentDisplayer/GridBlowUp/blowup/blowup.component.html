@@ -54,7 +54,9 @@
 
       <!-- Link out to full image -->
       <div id="SeeFull">
-          <a [href]="bigUrl" target="_blank">Download</a>
+          <a (click)="onDownload()"
+          [routerLink]="['/download']"
+          >Full Size</a>
       </div>
 
     </div>

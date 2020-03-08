@@ -4,6 +4,7 @@ import { Router }           from '@angular/router';
 import { Location }                         from '@angular/common';
 
 import { GlobalVarsService }                from 'src/app/GlobalServices/global-vars.service';
+import { DownloadPageService } from 'src/app/SimplePages/downloadpage/download-page.service';
 
 @Component({
   selector: 'app-blowup',
@@ -33,7 +34,8 @@ export class BlowUpComponent implements OnInit {
 
   constructor(private router: Router,
               private location: Location,
-              private global: GlobalVarsService) { }
+              private global: GlobalVarsService,
+              private downloadserv:DownloadPageService) { }
 
   ngOnInit() {
     this.activeMember = this.linksList[this.index];
@@ -88,6 +90,10 @@ export class BlowUpComponent implements OnInit {
     if(event.keyCode == 27){//escape
       this.router.navigate([`${this.gridPath}`]);
     }
+  }
+
+  onDownload() {
+    this.downloadserv.assignImgUrl(this.bigUrl);
   }
 
 }

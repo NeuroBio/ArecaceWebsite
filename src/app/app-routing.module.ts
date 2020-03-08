@@ -38,6 +38,8 @@ const routes: Routes = [
     loadChildren: () => import('./SimplePages/sitemap/sitemap.module').then(m => m.SitemapModule)},
   {path: 'world',
     loadChildren: () => import('./worldbuilding/worldbuilding.module').then(m => m.WorldbuildingModule)},
+  {path: 'download',
+    loadChildren: () => import('./SimplePages/downloadpage/download-page.module').then(m => m.DownloadPageModule)},
 
   //final catch
   {path: '**', component: PageNotFoundComponent}

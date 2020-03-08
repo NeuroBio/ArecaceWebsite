@@ -1,9 +1,10 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
-import { BlowUpComponent } from './blowup/blowup.component';
-import { BlowupmasterComponent } from './blowupmaster/blowupmaster.component';
-import { GridComponent } from './grid/grid.component';
+import { NgModule }               from '@angular/core';
+import { CommonModule }           from '@angular/common';
+import { RouterModule }           from '@angular/router';
+
+import { BlowUpComponent }        from './blowup/blowup.component';
+import { BlowupmasterComponent }  from './blowupmaster/blowupmaster.component';
+import { GridComponent }          from './grid/grid.component';
 
 @NgModule({
   declarations: [
@@ -21,4 +22,5 @@ import { GridComponent } from './grid/grid.component';
     GridComponent
   ]
 })
+
 export class GridBlowupModule { }

@@ -1,0 +1,9 @@
+img {
+    background-color: rgb(116, 116, 116);
+}
+
+div#imageHolder {
+    display: flex;
+    align-self: stretch;
+    overflow-x: auto;
+}

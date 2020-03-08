@@ -46,7 +46,7 @@ export function AuthFactory(provider: AuthService) {
     CopyrightComponent,
     PageNotFoundComponent,
     BadserviceComponent,
-    ContactComponent,
+    ContactComponent
     ],
 
   imports: [

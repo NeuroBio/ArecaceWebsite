@@ -68,7 +68,7 @@ export class ContactComponent implements OnInit {
       this.dropdownInfo = "Make sure you have read list items 4-7 in the FAQ!  There's a link in the footer.";
       this.tempDisable = false;
     } else if(reason === "I want to tell you about my story!") {
-      this.dropdownInfo = "Your enthusiasm for story craft is awesome, but this isn't the place for that.  Please wait until I have the playground set up!";
+      this.dropdownInfo = "Your enthusiasm for story craft is awesome, but this isn't the place for that.  Please wait until I have the playground's forum (development phase 4) set up!";
       this.tempDisable = true;
     } else {
       this.dropdownInfo = undefined;

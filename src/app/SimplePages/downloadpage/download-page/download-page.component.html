@@ -1,0 +1,11 @@
+<div *ngIf="imgUrl">
+    <div id="imageHolder">
+        <img [src]="imgUrl">
+    </div>
+</div>
+
+<div *ngIf="!imgUrl">
+    <p>
+        You did not select an image for full view!
+    </p>
+</div>

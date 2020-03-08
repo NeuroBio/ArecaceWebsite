@@ -1,9 +1,11 @@
 import { Component, OnInit }                    from '@angular/core';
-import { ActivatedRoute }                      from '@angular/router';
+import { ActivatedRoute }                       from '@angular/router';
 
-import { CharacterMetaData}                    from '../../../../Classes/ContentClasses';
-import { GlobalVarsService }                   from 'src/app/GlobalServices/global-vars.service';
-import { GetRouteSegmentsService } from 'src/app/GlobalServices/commonfunctions.service';
+import { CharacterMetaData}                     from '../../../../Classes/ContentClasses';
+import { GlobalVarsService }                    from 'src/app/GlobalServices/global-vars.service';
+import { GetRouteSegmentsService }              from 'src/app/GlobalServices/commonfunctions.service';
+import { DownloadPageService }                  from 'src/app/SimplePages/downloadpage/download-page.service';
+
 @Component({
   selector: 'app-charactersdetails',
   templateUrl: './charactersdetails.component.html',
@@ -21,6 +23,7 @@ export class CharactersDetailsComponent implements OnInit {
   
   constructor(private route: ActivatedRoute,
               private global: GlobalVarsService,
+              private downloadserv: DownloadPageService,
               private getsegserv: GetRouteSegmentsService) { }
 
   ngOnInit() {
@@ -42,13 +45,15 @@ export class CharactersDetailsComponent implements OnInit {
     this.FullBio = toggle;
   }
 
-  //consequence of reoganization the uploads such that links can only be packages one way.
-  //If this is too horrible, character references may need their own edit form.
   blowupReorganization(refs: any[]) {
     refs.map((ref, index) =>
       ref.Links = [this.char.Links[(index+1)*2],
                   this.char.Links[(index+1)*2+1]]);
     return refs;
+  }
+
+  viewFull() {
+    this.downloadserv.assignImgUrl(this.char.Links[1])
   }
 
 }

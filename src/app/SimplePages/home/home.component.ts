@@ -32,20 +32,5 @@ export class HomeComponent implements OnInit {
               'See Latest Page',
               'Playgound (under construction!)'];
     }
-  }  
-    /*Finish implementing this later
-    import { FireBaseService } from 'src/app/GlobalServices/firebase.service';
-    import { tap } from 'rxjs/operators';
-    
-    noService:boolean;
-    private firebaseserv: FireBaseService
-    this.firebaseserv.returnCollect('ConnectionTest')
-    .subscribe(x =>{
-      console.log(x);
-      this.noService = false
-    })
-    
-    <div *ngIf="noService">test</div>
-    */   
-
+  }
 }
