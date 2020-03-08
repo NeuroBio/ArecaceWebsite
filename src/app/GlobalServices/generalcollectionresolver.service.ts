@@ -37,6 +37,7 @@ export class GeneralcollectionresolverService implements Resolve<any> {
     }
     if(this.cache.Cache[type]){
       return this.generalcollectionserv.initializeMetaData(this.cache.Cache[type], type);
+      
     } else {
       this.cache.addSubscription(type, this.firebaseserv.returnCollect(this.firePaths[type]))
       return this.firebaseserv.returnCollect(this.firePaths[type]).pipe(

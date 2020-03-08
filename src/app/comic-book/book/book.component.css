@@ -12,10 +12,14 @@ div#splatter{
 }
 
 /*header components*/
-div#topblock {
+div#fullblock {
   position: relative;
   max-width: 900px;
   background: #454545;
+}
+
+div#topblock {
+  padding-left: 7px;
 }
 
 div#chapselect {
@@ -65,7 +69,6 @@ div#bookmark1 {
   right: 0;
   height: 100%;
 }
-
 
 hr {
   max-width: 898px;
@@ -121,7 +124,7 @@ span#help {
   z-index: 0;
   padding-right: 7px;
   position: absolute;
-  left: 0;
+  left: 7px;
   bottom: 2px;
   font-size: 12px;
   font-weight: normal;

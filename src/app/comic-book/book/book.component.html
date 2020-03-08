@@ -1,67 +1,68 @@
 <div id="splatter">
 
     <!--Comic Header-->
-    <div id="topblock" role="navigation">
-
-        <div id="chapselect">
-            <!--chapters-->
-            <div class="dropdowns">
-                Arc 1: 
-                <select id="chap" *ngIf="chapterData$ | async as chapter"
-                (change)="changeChapter($event.target.value)">
-                    <option *ngFor="let chap of chapter"
-                    [value]="chap.Index"
-                    [selected]="chap.ID==currentChapter.ID">
-                        {{ chap.Name }}
-                    </option>
-                </select> &nbsp;
-            </div>
-            
-            <!--Pages-->
-            <div class="dropdowns">
-                Page:
-                <select *ngIf="chapterData$ | async"
-                (change)="changePage($event.target.value)">
-                    <option *ngFor="let empty of pageIndex; let ind = index"
-                        [value]="ind"
-                        [selected]="ind==currentPage-1">
-                            {{ ind+1 }}
-                    </option>
-                </select>
-            </div>
-
-            <div style="clear:both"></div>
-
-
-            <!--notes-->
-            <span id="notes" *ngIf="chapterData$ | async">
-                Notes--{{ currentChapter.Message }}
-            </span>
-        </div>
+    <div id="fullblock" role="navigation">
+        <div id="topblock">
+            <div id="chapselect">
+                <!--chapters-->
+                <div class="dropdowns">
+                    Arc 1: 
+                    <select id="chap" *ngIf="chapterData$ | async as chapter"
+                    (change)="changeChapter($event.target.value)">
+                        <option *ngFor="let chap of chapter"
+                        [value]="chap.Index"
+                        [selected]="chap.ID==currentChapter.ID">
+                            {{ chap.Name }}
+                        </option>
+                    </select> &nbsp;
+                </div>
+                
+                <!--Pages-->
+                <div class="dropdowns">
+                    Page:
+                    <select *ngIf="chapterData$ | async"
+                    (change)="changePage($event.target.value)">
+                        <option *ngFor="let empty of pageIndex; let ind = index"
+                            [value]="ind"
+                            [selected]="ind==currentPage-1">
+                                {{ ind+1 }}
+                        </option>
+                    </select>
+                </div>
     
-
-
-            
-        <!--view Radio-->
-        <div id="viewradio">
-            <div style= "display: inline-block">
-        <div id="bookmark1">
-            <app-bookmark
-            type="Comics"
-            [path]="path"
-            [name]="name"
-            ></app-bookmark>
-        </div>
-
-            <div id="radiobox">
-                <input type="radio" id="book" name="pagestyle" checked=true value="book">
-                <label for="book">Pages</label><br/>
-                <input type="radio" id="scroll" name="pagestyle" value="scrolling" disabled="true"> 
-                <label for="scroll" style="color:#8f8f8f">Scrolling</label>
+                <div style="clear:both"></div>
+    
+    
+                <!--notes-->
+                <span id="notes" *ngIf="chapterData$ | async">
+                    Notes--{{ currentChapter.Message }}
+                </span>
             </div>
+        
+    
+    
+                
+            <!--view Radio-->
+            <div id="viewradio">
+                <div style= "display: inline-block">
+            <div id="bookmark1">
+                <app-bookmark
+                type="Comics"
+                [path]="path"
+                [name]="name"
+                ></app-bookmark>
+            </div>
+    
+                <div id="radiobox">
+                    <input type="radio" id="book" name="pagestyle" checked=true value="book">
+                    <label for="book">Pages</label><br/>
+                    <input type="radio" id="scroll" name="pagestyle" value="scrolling" disabled="true"> 
+                    <label for="scroll" style="color:#8f8f8f">Scrolling</label>
+                </div>
+            </div>
+            </div>
+            <div style="clear:both"></div>
         </div>
-        </div>
-        <div style="clear:both"></div>
 
         <hr>
 
