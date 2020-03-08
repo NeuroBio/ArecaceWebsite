@@ -3,7 +3,6 @@ import { Router, Resolve, ActivatedRouteSnapshot } from '@angular/router';
 import { AuthService } from '../../administration/security/Auth/auth.service';
 import { GeneralcollectionService } from '../../GlobalServices/generalcollection.service';
 import { take, tap } from 'rxjs/operators';
-import { SurveyService } from '../../playground/surveys/survey-components/survey.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,8 +10,7 @@ import { SurveyService } from '../../playground/surveys/survey-components/survey
 export class AuthResolverService implements Resolve<any> {
 
   constructor(private auth: AuthService,
-              private generalcollectionserv: GeneralcollectionService,
-              private surveyserv: SurveyService) { }
+              private generalcollectionserv: GeneralcollectionService) { }
 
   resolve(route: ActivatedRouteSnapshot) {
     const path =  route['_routerState'].url.split('/');
