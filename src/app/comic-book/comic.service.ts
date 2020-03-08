@@ -12,12 +12,11 @@ import { ChapterMetaData }                from '../Classes/ContentClasses';
 export class ComicService {
 
   ChapterData = new BehaviorSubject<ChapterMetaData[]>(new ChapterMetaData()[0]);
-  loadingSource = new BehaviorSubject<boolean>(false);
-  loading: Observable<boolean> = this.loadingSource;
-
+  loading = new BehaviorSubject<boolean>(false);
   
-  loadingComplete() {
-    this.loadingSource.next(false);
+  
+  setloading(load: boolean) {
+    this.loading.next(load);
   }
 
   initializeMetaData(meta: ChapterMetaData[]) {
@@ -46,9 +45,10 @@ export class ComicService {
     );
   }
 
-  getLatest(): Observable<string> {
-    return this.getMetaData().pipe(
-      map(meta => meta[meta.length-1].Links[meta[meta.length-1].Links.length-1]) );
+  getLatest(): string {
+    const chaps = this.ChapterData.value;
+    const lastchapindex = chaps.length-1 ;
+    return `${chaps[lastchapindex].ID}-${chaps[lastchapindex].Links.length}`;
   }
 
 }

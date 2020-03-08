@@ -19,6 +19,10 @@ export class PageResolverService implements Resolve<string> {
   
   resolve(route: ActivatedRouteSnapshot):Observable<string | never> {
     const FullID = route.paramMap.get('PageID');
+    if(FullID === 'latest') {//no specific page
+      this.router.navigate([`comic/${this.comicserv.getLatest()}`]);
+      return EMPTY;
+    }
     return this.comicserv.getPage(FullID).pipe(
       take(1),
       tap(link => {
@@ -29,7 +33,7 @@ export class PageResolverService implements Resolve<string> {
           return EMPTY;
         }
       })
-    );
+    );  
   }
   
 }

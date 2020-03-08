@@ -2,14 +2,17 @@
   <h3>Well, this isn't good...</h3>
  
   <p *ngIf="service === undefined">Checking your connection...!</p>
-  <p *ngIf="service !== undefined">TegaBot tested whether you could connect to the server and found that
+  <p *ngIf="online === false">
+    The app is currently functioning in offline mode, so server requests cannot be completed.  You will need to get back online to go to the page you requested.
+  </p>
+  <p *ngIf="service !== undefined && online === true">TegaBot tested whether you could connect to the server and found that
     <span *ngIf="service===true"> your connection was fine.</span>
     <span *ngIf="service===false"> a connection could not be established.</span><br>
     <button (click)="checkAgain()">Test again?</button>
   </p>
   <br><br>
  
-  <p>If your connection to the server is faulty, the problem could be your internet connection.  If that is fine, then google's servers may be having an issue (feel free to contact me).  If your connection to the server is fine, you may have discovered a bug in my code.  Definitely contact me in this case!</p>
+  <p>If your connection to the server is faulty, the problem could be your internet connection, or google's servers may be having an issue (feel free to contact me).  If your connection to the server is fine, try try to go to the page you requested again.  If you end up back here, you may have discovered a bug in my code.  Definitely contact me!</p>
 
   <p><a routerLink="/contact">Contact Me About Navigation/Connection Issues</a><br>
     <span id="info">Please tell me what page you tried

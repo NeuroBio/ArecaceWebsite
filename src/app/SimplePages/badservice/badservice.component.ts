@@ -10,9 +10,10 @@ import { Subscription } from 'rxjs';
 export class BadserviceComponent implements OnInit, OnDestroy {
 
   stream1: Subscription;
-  // stream2: Subscription;
+  stream2: Subscription;
   service: boolean;
-  error: string;
+  online: boolean;
+  // error: string;
 
   constructor(private checkconnectserv: CheckConnectionService) { }
 
@@ -22,15 +23,15 @@ export class BadserviceComponent implements OnInit, OnDestroy {
       .subscribe(service => {
         this.service = service
       });
-    // this.stream2 = this.checkconnectserv.error
-    //   .subscribe(err => this.error = err);
+    this.stream2 = this.checkconnectserv.online
+       .subscribe(online => this.online = online);
     
     this.checkconnectserv.testConnection();
   }
   
   ngOnDestroy() {
     this.stream1.unsubscribe();
-    // this.stream2.unsubscribe();
+    this.stream2.unsubscribe();
     this.checkconnectserv.clear();
   }
 

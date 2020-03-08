@@ -1,6 +1,5 @@
 import { Component, OnInit, ElementRef, ViewChild }      from '@angular/core';
 import { ActivatedRoute }         from '@angular/router'
-
 import { ComicService }           from '../comic.service'
 
 @Component({
@@ -20,12 +19,14 @@ export class PageComponent implements OnInit {
   
   ngOnInit() {
     this.init = true;
-    this.route.data.subscribe((data: {pageLink: string}) =>
-        this.pageUrl = data.pageLink);
+    this.route.data.subscribe((data: {pageLink: string}) => {
+        this.comicserv.setloading(true)
+        this.pageUrl = data.pageLink
+    });
   }
 
   loaded() {
-    this.comicserv.loadingComplete();
+    this.comicserv.setloading(false);
     if(this.init) {
       this.init = false;
     }else{

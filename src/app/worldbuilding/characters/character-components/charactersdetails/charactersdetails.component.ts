@@ -29,7 +29,7 @@ export class CharactersDetailsComponent implements OnInit {
   ngOnInit() {
     const mainPath = this.getsegserv.fetch(this.route.snapshot.pathFromRoot);
     this.route.data.subscribe((data: {Data: CharacterMetaData}) => {
-        window.scroll(0,0);
+        // this.main.nativeElement.scrollIntoView();
         this.loading = this.global.ImagesLoadable.value;
         const frags = mainPath.split('/')
         this.real = frags[frags.length-1] === 'FanCharacters' ? false : true;

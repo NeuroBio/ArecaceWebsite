@@ -22,7 +22,7 @@ export class BookComponent implements OnInit, OnDestroy {
   currentChapter: ChapterMetaData;
   currentPage: number;
   maxChap: number;
-  loading: boolean = false;
+  loading: boolean;
   stream: Subscription;
   mainText: string;
   path: string;
@@ -41,7 +41,7 @@ export class BookComponent implements OnInit, OnDestroy {
         this.initialVarAssign(path, chap)).unsubscribe()
     ).unsubscribe();
 
-    this.stream = this.comicserv.loading.subscribe(bool => this.loading = bool);
+    this.stream = this.comicserv.loading.subscribe(bool => setTimeout(() => {this.loading = bool}, 10));
     this.mainText = this.textprovider.WebsiteText
                         .find(member => member.ID === 'comic').Text;
   }

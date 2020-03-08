@@ -1,9 +1,14 @@
-import { Injectable } from '@angular/core';
-import { FireBaseService } from './firebase.service';
-import { GeneralcollectionService } from './generalcollection.service';
-import { FirebasePaths } from 'src/app/Classes/UploadDownloadPaths';
-import { take, tap } from 'rxjs/operators';
-import { ActivatedRouteSnapshot, Resolve, Router } from '@angular/router';
+import { Injectable }                 from '@angular/core';
+import { ActivatedRouteSnapshot,
+         Resolve, Router }            from '@angular/router';
+
+import { take, tap }                  from 'rxjs/operators';
+
+import { FireBaseService }            from './firebase.service';
+import { GeneralcollectionService }   from './generalcollection.service';
+import { CacheService }               from './cache.service';
+
+import { FirebasePaths }              from 'src/app/Classes/UploadDownloadPaths';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +20,7 @@ export class GeneralcollectionresolverService implements Resolve<any> {
 
   constructor(private firebaseserv: FireBaseService,
               private generalcollectionserv: GeneralcollectionService,
+              private cache: CacheService,
               private router: Router) { }
   
   resolve(route: ActivatedRouteSnapshot) {
@@ -29,14 +35,19 @@ export class GeneralcollectionresolverService implements Resolve<any> {
     } else {
       type = url[url.length-1];
     }
-    return this.firebaseserv.returnCollect(this.firePaths[type]).pipe(
-      take(1),
-      tap(collect => {
-        if(collect[0]) {
-          this.generalcollectionserv.initializeMetaData(collect, type);
-        }else{
-          this.router.navigate(["badservice"])
-        }
-    }));
+    if(this.cache.Cache[type]){
+      return this.generalcollectionserv.initializeMetaData(this.cache.Cache[type], type);
+    } else {
+      this.cache.addSubscription(type, this.firebaseserv.returnCollect(this.firePaths[type]))
+      return this.firebaseserv.returnCollect(this.firePaths[type]).pipe(
+        take(1),
+        tap(collect => {
+          if(collect[0]) {
+            this.generalcollectionserv.initializeMetaData(collect, type);
+          }else{
+            this.router.navigate(["badservice"])
+          }
+      }));
+    }
   }
 }

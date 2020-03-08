@@ -9,13 +9,16 @@ import { catchError, tap, take } from 'rxjs/operators'
 export class CheckConnectionService {
 
   service = new BehaviorSubject<boolean>(undefined);
+  online = new BehaviorSubject<boolean>(undefined)
   // error = new BehaviorSubject<string>(undefined);
 
   constructor(private firebaseserv: FireBaseService) { }
 
   testConnection() {
     this.service.next(undefined);
-    return this.firebaseserv.returnCollect('ConnectionTest')
+    this.online.next(navigator.onLine);
+    if(navigator.onLine === true) {
+      return this.firebaseserv.returnCollect('ConnectionTest')
       .pipe(take(1))
       .subscribe(response => {
         if(response[0]) {
@@ -24,6 +27,10 @@ export class CheckConnectionService {
           this.service.next(false);
         }
       });
+    } else {
+      this.service.next(false);
+    }
+
     }
 
   clear() {

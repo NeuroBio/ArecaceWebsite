@@ -6,16 +6,13 @@ import { PageComponent }            from './page/page.component';
 
 import { BookResolverService }      from './book/bookresolver.service';
 import { PageResolverService }      from './page/pageresolver.service';
-import { LatestResolverService }    from './page/latestresolver.service';
 
 
 const comicbookRoutes: Routes = [
   {path: '', component: BookComponent,
   resolve: {BookResolverService},
   children: [
-      {path: '', redirectTo: 'latest', pathMatch: 'prefix'},
-      {path: "latest",  component: PageComponent,
-          resolve: {pageLink: LatestResolverService}},
+      {path: '', redirectTo: 'latest'},
       {path: ":PageID",  component: PageComponent,
           resolve: {pageLink: PageResolverService}}
     ]
