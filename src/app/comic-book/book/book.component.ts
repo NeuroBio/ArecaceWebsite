@@ -48,6 +48,7 @@ export class BookComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.stream.unsubscribe();
+    this.comicserv.disposal();
   }
   
   initialVarAssign(path: any, chap: ChapterMetaData[]) {

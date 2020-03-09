@@ -1,6 +1,7 @@
 import { Injectable }                     from '@angular/core';
 
-import { BehaviorSubject, Observable }    from 'rxjs';
+import { BehaviorSubject, Observable,
+         Subscription }                   from 'rxjs';
 import { map }                            from 'rxjs/operators';
 
 import { ChapterMetaData }                from '../Classes/ContentClasses';
@@ -13,14 +14,15 @@ export class ComicService {
 
   ChapterData = new BehaviorSubject<ChapterMetaData[]>(new ChapterMetaData()[0]);
   loading = new BehaviorSubject<boolean>(false);
-  
+  stream: Subscription;
   
   setloading(load: boolean) {
     this.loading.next(load);
   }
 
-  initializeMetaData(meta: ChapterMetaData[]) {
-    this.ChapterData.next(meta);
+  initializeMetaData(meta: Observable<ChapterMetaData[]>) {
+    return this.stream = meta.subscribe(data =>
+      this.ChapterData.next(data.sort((a,b) => a.ID < b.ID? -1 : 1)));
   }
 
   getMetaData() {
@@ -51,4 +53,9 @@ export class ComicService {
     return `${chaps[lastchapindex].ID}-${chaps[lastchapindex].Links.length}`;
   }
 
+  disposal() {
+    if(this.stream) {
+      this.stream.unsubscribe();
+    }
+  }
 }
