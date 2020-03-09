@@ -22,6 +22,7 @@ export class LanguageComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.controller.assignButtons([true, true, true, false]);
+    this.controller.assignItemType('nomadic');
     this.controller.assignItemList('Nomadic');
     this.stream1 = this.controller.itemToEdit.subscribe(word => {
       if(word) {
