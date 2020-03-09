@@ -16,7 +16,8 @@ export class DashButtonsComponent implements OnInit, OnDestroy {
   disabled: boolean;
   stream1: Subscription;
   stream2: Subscription;
-  
+  stream3: Subscription;
+
   constructor(private route: ActivatedRoute,
               private crud: DashCRUDService,
               private fetcher: FetchService) { }
@@ -24,11 +25,13 @@ export class DashButtonsComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.stream1 = this.crud.message.subscribe(mess => this.message = mess);
     this.stream2 = this.fetcher.loading.subscribe(load => this.disabled = load);
+    this.stream3 = this.fetcher.valid.subscribe(valid => this.disabled = !valid);
   }
 
   ngOnDestroy() {
     this.stream1.unsubscribe();
     this.stream2.unsubscribe();
+    this.stream3.unsubscribe();
   }
   
   onEdit() {

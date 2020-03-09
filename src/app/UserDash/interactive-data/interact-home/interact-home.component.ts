@@ -1,13 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute }               from '@angular/router';
 
 import { Observable }                   from 'rxjs';
 import { map }                          from 'rxjs/operators';
 
-import { GeneralcollectionService }     from 'src/app/GlobalServices/generalcollection.service';
 import { SurveyService }                from 'src/app/playground/surveys/survey-components/survey.service';
 import { FetchService }                 from 'src/app/GlobalServices/fetch.service';
-import { AuthService } from 'src/app/administration/security/Auth/auth.service';
+import { DisplayService } from '../display.service';
 
 @Component({
   selector: 'app-interact-home',
@@ -25,22 +23,16 @@ export class InteractHomeComponent implements OnInit, OnDestroy {
                   SAcalculations: 'SA Calculations',
                   SurveyResults: 'Survey Results'};
 
-  constructor(private auth: AuthService,
+  constructor(private displayserv: DisplayService,
               private surveyserv: SurveyService,
-              private fetcher: FetchService,
-              private route: ActivatedRoute) { }
+              private fetcher: FetchService) { }
 
   ngOnInit() {
-    if(this.route.snapshot.firstChild) {
-      this.current = this.route.snapshot.firstChild.url[0].path;
-    }
-    this.type = this.route.snapshot.url[0].path;
+    this.current = this.displayserv.currentID.value;
+    this.type = this.displayserv.currentDataType.value
     this.displayType = this.displayTypes[this.type];
-
-    this.userData$ = this.auth.user
-      .pipe(map(user =>
-        user[this.type].map(datum =>
-          [datum.DisplayName, datum.ID])
+    this.userData$ = this.displayserv.currentUserData
+      .pipe(map(list => list.map(datum => [datum.DisplayName, datum.ID])
     ));
   }
 

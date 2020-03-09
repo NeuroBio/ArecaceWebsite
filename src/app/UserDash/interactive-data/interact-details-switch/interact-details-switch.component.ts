@@ -1,45 +1,58 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+
+import { Subscription } from 'rxjs';
+
 import { SurveyService } from 'src/app/playground/surveys/survey-components/survey.service';
-import { GeneralcollectionService } from 'src/app/GlobalServices/generalcollection.service';
 import { FetchService } from 'src/app/GlobalServices/fetch.service';
-import { AuthService } from 'src/app/administration/security/Auth/auth.service';
+import { DisplayService } from '../display.service';
 
 @Component({
   selector: 'app-interact-details-switch',
   templateUrl: './interact-details-switch.component.html',
   styleUrls: ['./interact-details-switch.component.css']
 })
-export class InteractDetailsSwitchComponent implements OnInit {
+export class InteractDetailsSwitchComponent implements OnInit, OnDestroy {
 
   type: string;
   view: string;
   userData: any;
   editable: boolean
+  stream: Subscription;
 
   constructor(private route: ActivatedRoute,
-              private auth: AuthService,
               private surveyserv: SurveyService,
+              private displayserv: DisplayService,
               private fetcher: FetchService) { }
 
   ngOnInit() {
     this.type = this.route.snapshot.parent.url[0].path;
     this.route.data.subscribe((data: {Data: any}) => {
       window.scroll(0,0);
+      this.userData = data.Data;
       switch(this.type) {
         case 'SurveyResults':
-          this.userData = data.Data
           this.editable = false;
           this.surveyserv.assignSurveyResults(this.userData);
           return this.surveyserv.assignSurveyStats(this.userData.Name);
 
         default :
-          this.userData = data.Data
+          if(this.stream) {
+            this.stream.unsubscribe();
+          }
           this.editable = true;
-          this.fetcher.assignItemtoEdit(this.userData);
+          this.stream = this.displayserv.currentUserDatum
+          .subscribe(datum => this.fetcher.assignItemtoEdit(datum));
       }
     });
+
     this.route.queryParams.subscribe(query => this.view = query.Action);
+  }
+
+  ngOnDestroy() {
+    if(this.stream) {
+      this.stream.unsubscribe();
+    }
   }
 
 }

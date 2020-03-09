@@ -8,11 +8,11 @@ import { take }                     from 'rxjs/operators';
 import { FireBaseService }          from '../GlobalServices/firebase.service';
 import { AuthService }              from '../administration/security/Auth/auth.service';
 import { CRUD }                     from 'src/app/administration/services/CRUD.service';
-//import { GeneralcollectionService } from '../GlobalServices/generalcollection.service';
 import { FetchService }             from 'src/app/GlobalServices/fetch.service';
 
 import { CRUDdata }                 from 'src/app/Classes/ContentClasses';
 import { UserDataNameTokens }       from 'src/app/Classes/UploadDownloadPaths';
+import { DisplayService } from './interactive-data/display.service';
 @Injectable({
   providedIn: 'root'
 })
@@ -24,7 +24,7 @@ export class DashCRUDService {
 
   constructor(private firebaseserv: FireBaseService,
               private auth: AuthService,
-  //            private gencollectserv: GeneralcollectionService,
+              private displayserv: DisplayService,
               private router: Router,
               private fetcher: FetchService,
               private CRUD: CRUD) { }
@@ -87,15 +87,16 @@ export class DashCRUDService {
         return this.message.next(uploadInfo.AbortMessage);
       }
       const OldData = this.auth.user.value;
-      const typeindex = this.getIDandType(ID);
+      const type = this.displayserv.currentDataType.value;
+      const index = OldData[type].findIndex(x => x.ID === ID);
 
       uploadInfo.MetaData = this.replaceUserValues(uploadInfo.MetaData,
-        OldData[typeindex.Type][typeindex.Index], typeindex.Type);
+        OldData[type][index], type);
       
       if(uploadInfo.NewImageLinks[0]) {
         uploadInfo.NewImageLinks = this.correctLinks(uploadInfo.NewImageLinks,
                                                      uploadInfo.MetaData.ID,
-                                                     typeindex.Type);
+                                                     type);
       }
 
       this.message.next('Editing...')
@@ -106,11 +107,10 @@ export class DashCRUDService {
           uploadInfo.MetaData.Links = links;
         }
         //load in edited data
-        OldData[typeindex.Type][typeindex.Index] = uploadInfo.MetaData; 
+        OldData[type][index] = uploadInfo.MetaData; 
         return this.firebaseserv.editDocument(OldData, `Users/`, this.auth.uid.value)
       }).then(() => {
-    //    this.gencollectserv.initializeMetaData(OldData[typeindex.Type], typeindex.Type);//reset in list
-        this.fetcher.assignItemtoEdit(OldData[typeindex.Type][typeindex.Index]);//reset active data
+        this.fetcher.assignItemtoEdit(OldData[type][index]);//reset active data
         this.message.next('Edit successful!');
         this.fetcher.assignLoading(false);
         return Promise.resolve();
@@ -125,24 +125,22 @@ export class DashCRUDService {
     this.message.next('Deleting...')
     this.fetcher.assignLoading(true);
     const data = this.auth.user.value;
-    let typeindex: any;
-      typeindex = this.getIDandType(ID);
+    const type = this.displayserv.currentDataType.value;
+    const index = data[type].findIndex(x =>
+      x.ID === ID);
 
-    //kill images
-    if(data[typeindex.Type][typeindex.Index].Links) {
-      this.deleteImages(data[typeindex.Type][typeindex.Index]);
+    if(data[type][index].Links) {//kill images
+      this.deleteImages(data[type][index]);
     }
 
-    //remove from user data
-    data[typeindex.Type].splice(typeindex.Index,1);
+    data[type].splice(index,1);//remove from user data
     return this.firebaseserv.editDocument(data, 'Users', this.auth.uid.value)
     .then(() => {
-    //  this.gencollectserv.initializeMetaData(data[typeindex.Type] , typeindex.Type);
 
-      if(data[typeindex.Type][0]) {
-        this.router.navigate([`/dash/${typeindex.Type}`],
+      if(data[type][0]) {
+        this.router.navigate([`/dash/${type}`],
           {queryParamsHandling: "merge"});
-        this.message.next('')
+        this.message.next('');
       } else { //no members remain
         this.router.navigate(['/dash']);
       }
@@ -155,22 +153,14 @@ export class DashCRUDService {
 
   deleteBookmark(index: number, type: string) {
     const data = this.auth.user.value;
-    //remove from user data
-    data[type].splice(index,1);
+    data[type].splice(index,1);//remove from user data
     return this.firebaseserv.editDocument(data, 'Users', this.auth.uid.value);
   }
 
   deleteImages(Links: string[]) {
-    Links.forEach(link => {
+    return Links.forEach(link => {
       this.firebaseserv.deleteImage(link);
     });
-  }
-
-  getIDandType(ID: string) {
-    //const type = this.gencollectserv.type.value;
-    //const index = this.gencollectserv.collectionData.value
-    //  .findIndex(dex => dex.ID === ID);
-    return({Type: '', Index: 0});
   }
 
   replaceUserValues(newData: any, oldData: any, type: string) {
