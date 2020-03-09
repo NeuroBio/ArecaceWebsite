@@ -34,14 +34,15 @@ export class CRUDcontrollerService {
   message = new BehaviorSubject<string>(undefined);
   triggerProcess = new Subject<any>();
 
-  stream: Subscription;
+  stream1: Subscription;
+  stream2: Subscription;
 
   constructor(private firebaseserv: FireBaseService,
               private crud: CRUD,
               private newestCue: NewestCueService,
               private fetcher: FetchService,
               private cache: CacheService) {
-    this.stream = this.fetcher.loading.subscribe(load => {
+    this.stream1 = this.fetcher.loading.subscribe(load => {
       if(load === true) {
        this.deActivateButtons();
       } else if(load === false) {
@@ -60,14 +61,20 @@ export class CRUDcontrollerService {
   }
 
   assignItemList(path: string) {
+    if(this.stream2) {
+      this.stream2.unsubscribe();
+    }
+
     if(path) {
       if(this.cache.Cache[`${this.itemType.value}-edit`]) {
         this.cache.Cache[`${this.itemType.value}-edit`]
         .subscribe(list => this.itemList.next(list));
       } else {
-        // this.cache.addSubscription(`${this.itemType.value}-edit`, this.getEditableCollection(path));
-        return this.getEditableCollection(path).subscribe(collect => {
-          this.itemList.next(collect);
+        return this.cache.addEditSubscription(this.itemType.value,
+          this.firePaths[this.itemType.value].Fire)
+        .then(() => {
+          this.stream2 = this.cache.Cache[`${this.itemType.value}-edit`]
+            .subscribe(list => this.itemList.next(list));
         });
       }
     } else {
@@ -270,8 +277,11 @@ export class CRUDcontrollerService {
   }
 
   shutDown() {
-    if(this.stream) {
-      this.stream.unsubscribe();
+    if(this.stream1) {
+      this.stream1.unsubscribe();
+    }
+    if(this.stream2) {
+      this.stream2.unsubscribe();
     }
   }
 }

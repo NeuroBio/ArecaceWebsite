@@ -16,8 +16,12 @@ export class CacheService {
 
   addEditSubscription(type: string, path: string) {
     this.Cache[`${type}-edit`] = new BehaviorSubject<any[]>(undefined);
-    return this.firebaseserv.returnCollectionWithKeys(path)
-      .subscribe(collect => this.Cache[`${type}-edit`].next(collect));
+    return new Promise ((resolve) => {
+      return this.firebaseserv.returnCollectionWithKeys(path)
+        .subscribe(collect => {
+          console.log(`updating ${type} cache!`)
+          resolve(this.Cache[`${type}-edit`].next(collect))});
+    });
   }
 
   addSubscription(type: string, path: string) {
