@@ -17,10 +17,10 @@ export class NomadicResolverService implements Resolve<any>{
 
   resolve() {
     if(this.cache.Cache['Nomadic']) {
-      this.nomadserv.initializeDictionary(this.cache.Cache['Nomadic']);
+      this.nomadserv.initializeDictionary(this.cache.Cache['Nomadic'].value);
       
     } else {
-      this.cache.addSubscription('Nomadic', this.firebaseserv.returnCollect('Nomadic'));
+      // this.cache.addSubscription('Nomadic', this.firebaseserv.returnCollect('Nomadic'));
       return this.firebaseserv.returnCollect('Nomadic').pipe(
         take(1),
         tap(dict => {

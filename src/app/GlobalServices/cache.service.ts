@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs'
+import { Observable, BehaviorSubject } from 'rxjs'
+import {FireBaseService } from 'src/app/GlobalServices/firebase.service';
+import { tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -9,13 +11,24 @@ export class CacheService {
 
   Cache = {};
 
-  constructor() { }
+  constructor(private firebaseserv: FireBaseService) { }
 
-  addSubscription(type: string, collection: Observable<any[]>) {
-    collection.subscribe(collect => {
-      console.log(`updating ${type} cache!`)
-      this.Cache[type] = collect;
-    }
-    );
+
+  addEditSubscription(type: string, path: string) {
+    this.Cache[`${type}-edit`] = new BehaviorSubject<any[]>(undefined);
+    return this.firebaseserv.returnCollectionWithKeys(path)
+      .subscribe(collect => this.Cache[`${type}-edit`].next(collect));
   }
+
+  addSubscription(type: string, path: string) {
+    this.Cache[type] = new BehaviorSubject<any[]>(undefined);
+    return new Promise ((resolve) => {
+      return this.firebaseserv.returnCollect(path)
+        .subscribe(collect => {
+          console.log(`updating ${type} cache!`)
+          resolve(this.Cache[type].next(collect));
+      });
+    });
+  }
+
 }

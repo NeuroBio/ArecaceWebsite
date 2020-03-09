@@ -34,13 +34,13 @@ import { WebsiteTextComponent }     from './Forms/website-text/website-text.comp
 
 const AdminRoutes: Routes = [
   {path: '', component: AdminComponent,
-    children:[
+    children: [
       {path: '', component: ForbiddenComponent},
       {path: 'Dash', component: AdminDutiesComponent, 
       canActivate: [AuthGuard],
-      children:[
+      children: [
         {path: 'Content', component:ContentComponent, 
-        children:[
+        children: [
           { path: '', redirectTo: 'characters', pathMatch: 'full'},
           { path: 'characters', component: CharacterComponent },
           { path: 'bestiary', component: BeastFormComponent },

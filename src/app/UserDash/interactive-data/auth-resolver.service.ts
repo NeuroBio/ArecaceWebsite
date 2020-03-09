@@ -10,6 +10,7 @@ import { take, tap } from 'rxjs/operators';
 export class AuthResolverService implements Resolve<any> {
 
   constructor(private auth: AuthService,
+              private router: Router,
               private generalcollectionserv: GeneralcollectionService) { }
 
   resolve(route: ActivatedRouteSnapshot) {
@@ -24,7 +25,13 @@ export class AuthResolverService implements Resolve<any> {
 
     return this.auth.user.pipe(
       take(1),
-      tap(user => 
-        this.generalcollectionserv.initializeMetaData(user[type], type)) );
-  }
+      tap(user => {
+        if(user[type]){
+          if(user[type][0]) {
+            return;
+          }
+        }
+        this.router.navigate(['/dash'])
+      }));
+    }
 }

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 @Injectable({
@@ -9,17 +9,18 @@ export class GeneralcollectionService {
 
   collectionData = new BehaviorSubject<any[]>([]);
   type = new BehaviorSubject<string>(null);
+  stream: Subscription;
   
-  initializeMetaData(meta:any[], type: string){
-    this.collectionData.next(meta);
+  initializeMetaData(meta: BehaviorSubject<any[]>, type: string){
+    this.stream = meta.subscribe(data => {console.log(`resub ${type}`);this.collectionData.next(data)});
     this.type.next(type);
   }
 
-  returnMetaData(){
+  returnMetaData() {
     return this.collectionData;
   }
 
-  getMember(ID:string){
+  getMember(ID:string) {
     if(ID === 'Latest') {
       return this.returnMetaData();
     } else {
@@ -27,6 +28,12 @@ export class GeneralcollectionService {
         map(members =>
           members.find(member => member.ID === ID))
       );
+    }
+  }
+
+  dispose() {
+    if(this.stream) {
+      this.stream.unsubscribe();
     }
   }
 }

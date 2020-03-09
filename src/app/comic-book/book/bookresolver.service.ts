@@ -20,13 +20,13 @@ export class BookResolverService implements Resolve<any> {
 
   resolve() {
     if(this.cache.Cache['Arc1Data']) {
-      return this.comicserv.initializeMetaData(this.cache.Cache['Arc1Data']);
+      return this.comicserv.initializeMetaData(this.cache.Cache['Arc1Data'].value);
     } else {
       
-      this.cache.addSubscription('Arc1Data', this.firebaseserv.returnCollect('Arc1Data')
-        .pipe( map((metaData:ChapterMetaData[]) => 
-          metaData.sort((a,b) => a.ID < b.ID ? -1 :1))
-      ));
+      // this.cache.addSubscription('Arc1Data', this.firebaseserv.returnCollect('Arc1Data')
+      //   .pipe( map((metaData:ChapterMetaData[]) => 
+      //     metaData.sort((a,b) => a.ID < b.ID ? -1 :1))
+      // ));
       return this.firebaseserv.returnCollect('Arc1Data').pipe(
         take(1),
         map((metaData:ChapterMetaData[]) => {

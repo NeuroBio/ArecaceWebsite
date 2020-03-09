@@ -7,6 +7,7 @@ import { map }                          from 'rxjs/operators';
 import { GeneralcollectionService }     from 'src/app/GlobalServices/generalcollection.service';
 import { SurveyService }                from 'src/app/playground/surveys/survey-components/survey.service';
 import { FetchService }                 from 'src/app/GlobalServices/fetch.service';
+import { AuthService } from 'src/app/administration/security/Auth/auth.service';
 
 @Component({
   selector: 'app-interact-home',
@@ -24,22 +25,23 @@ export class InteractHomeComponent implements OnInit, OnDestroy {
                   SAcalculations: 'SA Calculations',
                   SurveyResults: 'Survey Results'};
 
-  constructor(private generalcollectionserv: GeneralcollectionService,
+  constructor(private auth: AuthService,
               private surveyserv: SurveyService,
               private fetcher: FetchService,
               private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.userData$ = this.generalcollectionserv.returnMetaData()
-      .pipe(map(userdata =>
-      userdata.map(datum => [datum.DisplayName, datum.ID])
-    ));
-
     if(this.route.snapshot.firstChild) {
       this.current = this.route.snapshot.firstChild.url[0].path;
     }
     this.type = this.route.snapshot.url[0].path;
     this.displayType = this.displayTypes[this.type];
+
+    this.userData$ = this.auth.user
+      .pipe(map(user =>
+        user[this.type].map(datum =>
+          [datum.DisplayName, datum.ID])
+    ));
   }
 
   ngOnDestroy() {

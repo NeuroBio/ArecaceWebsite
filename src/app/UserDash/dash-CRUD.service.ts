@@ -8,7 +8,7 @@ import { take }                     from 'rxjs/operators';
 import { FireBaseService }          from '../GlobalServices/firebase.service';
 import { AuthService }              from '../administration/security/Auth/auth.service';
 import { CRUD }                     from 'src/app/administration/services/CRUD.service';
-import { GeneralcollectionService } from '../GlobalServices/generalcollection.service';
+//import { GeneralcollectionService } from '../GlobalServices/generalcollection.service';
 import { FetchService }             from 'src/app/GlobalServices/fetch.service';
 
 import { CRUDdata }                 from 'src/app/Classes/ContentClasses';
@@ -24,7 +24,7 @@ export class DashCRUDService {
 
   constructor(private firebaseserv: FireBaseService,
               private auth: AuthService,
-              private gencollectserv: GeneralcollectionService,
+  //            private gencollectserv: GeneralcollectionService,
               private router: Router,
               private fetcher: FetchService,
               private CRUD: CRUD) { }
@@ -109,7 +109,7 @@ export class DashCRUDService {
         OldData[typeindex.Type][typeindex.Index] = uploadInfo.MetaData; 
         return this.firebaseserv.editDocument(OldData, `Users/`, this.auth.uid.value)
       }).then(() => {
-        this.gencollectserv.initializeMetaData(OldData[typeindex.Type], typeindex.Type);//reset in list
+    //    this.gencollectserv.initializeMetaData(OldData[typeindex.Type], typeindex.Type);//reset in list
         this.fetcher.assignItemtoEdit(OldData[typeindex.Type][typeindex.Index]);//reset active data
         this.message.next('Edit successful!');
         this.fetcher.assignLoading(false);
@@ -137,7 +137,7 @@ export class DashCRUDService {
     data[typeindex.Type].splice(typeindex.Index,1);
     return this.firebaseserv.editDocument(data, 'Users', this.auth.uid.value)
     .then(() => {
-      this.gencollectserv.initializeMetaData(data[typeindex.Type] , typeindex.Type);
+    //  this.gencollectserv.initializeMetaData(data[typeindex.Type] , typeindex.Type);
 
       if(data[typeindex.Type][0]) {
         this.router.navigate([`/dash/${typeindex.Type}`],
@@ -167,8 +167,8 @@ export class DashCRUDService {
   }
 
   getIDandType(ID: string) {
-    const type = this.gencollectserv.type.value;
-    const index = this.gencollectserv.collectionData.value
+    //const type = this.gencollectserv.type.value;
+    //const index = this.gencollectserv.collectionData.value
       .findIndex(dex => dex.ID === ID);
     return({Type: type, Index: index});
   }

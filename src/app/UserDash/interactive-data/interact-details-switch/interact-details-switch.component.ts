@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { SurveyService } from 'src/app/playground/surveys/survey-components/survey.service';
 import { GeneralcollectionService } from 'src/app/GlobalServices/generalcollection.service';
 import { FetchService } from 'src/app/GlobalServices/fetch.service';
+import { AuthService } from 'src/app/administration/security/Auth/auth.service';
 
 @Component({
   selector: 'app-interact-details-switch',
@@ -17,12 +18,12 @@ export class InteractDetailsSwitchComponent implements OnInit {
   editable: boolean
 
   constructor(private route: ActivatedRoute,
-              private generalcollectionserv: GeneralcollectionService,
+              private auth: AuthService,
               private surveyserv: SurveyService,
               private fetcher: FetchService) { }
 
   ngOnInit() {
-    this.type = this.generalcollectionserv.type.value;
+    this.type = this.route.snapshot.parent.url[0].path;
     this.route.data.subscribe((data: {Data: any}) => {
       window.scroll(0,0);
       switch(this.type) {

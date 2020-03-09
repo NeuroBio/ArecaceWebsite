@@ -27,11 +27,11 @@ export class StoryResolver1Service implements Resolve<any> {
     this.catchErrors(type);
 
     if(this.cache.Cache[type]) {
-      this.storyserv.initializeMetaData(this.cache.Cache[type], type);
+      this.storyserv.initializeMetaData(this.cache.Cache[type].value, type);
       return EMPTY
 
     } else {
-      this.cache.addSubscription(type, this.firebaseserv.returnCollect(type));
+      // this.cache.addSubscription(type, this.firebaseserv.returnCollect(type));
 
       return this.firebaseserv.returnCollect(type).pipe(
         take(1),

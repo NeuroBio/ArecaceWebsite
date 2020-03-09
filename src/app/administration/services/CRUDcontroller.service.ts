@@ -1,16 +1,18 @@
 import { Injectable }                           from '@angular/core';
 
 import { map, take }                            from 'rxjs/operators';
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { BehaviorSubject, Observable, Subject,
+         Subscription}                          from 'rxjs';
 
 import { FireBaseService }                      from 'src/app/GlobalServices/firebase.service';
 import { CRUD }                                 from './CRUD.service';
 import { ButtonController }                     from '../../SharedComponentModules/SharedForms/Buttons/buttoncontroller';
 import { NewestCueService }                     from './newest-cue.service';
 import { FetchService }                         from 'src/app/GlobalServices/fetch.service';
+import { CacheService }                         from 'src/app/GlobalServices/cache.service';
 
 import { CRUDdata }                             from 'src/app/Classes/ContentClasses';
-import { AllPathInfo } from 'src/app/Classes/UploadDownloadPaths';
+import { AllPathInfo }                          from 'src/app/Classes/UploadDownloadPaths';
 
 @Injectable({
   providedIn: 'root'
@@ -32,22 +34,22 @@ export class CRUDcontrollerService {
   message = new BehaviorSubject<string>(undefined);
   triggerProcess = new Subject<any>();
 
+  stream: Subscription;
+
   constructor(private firebaseserv: FireBaseService,
               private crud: CRUD,
               private newestCue: NewestCueService,
-              private fetcher: FetchService) {
-    this.fetcher.loading.subscribe(load => {
+              private fetcher: FetchService,
+              private cache: CacheService) {
+    this.stream = this.fetcher.loading.subscribe(load => {
       if(load === true) {
        this.deActivateButtons();
       } else if(load === false) {
         this.reActivateButtons();
       }
     })
-  
   }
 
-  
-            
   //Data fetching functions
   assignItemType(itemType: string) {
     return this.itemType.next(itemType);
@@ -59,9 +61,15 @@ export class CRUDcontrollerService {
 
   assignItemList(path: string) {
     if(path) {
-      return this.getEditableCollection(path).subscribe(collect => {
-        this.itemList.next(collect);
-      });
+      if(this.cache.Cache[`${this.itemType.value}-edit`]) {
+        this.cache.Cache[`${this.itemType.value}-edit`]
+        .subscribe(list => this.itemList.next(list));
+      } else {
+        // this.cache.addSubscription(`${this.itemType.value}-edit`, this.getEditableCollection(path));
+        return this.getEditableCollection(path).subscribe(collect => {
+          this.itemList.next(collect);
+        });
+      }
     } else {
       this.itemList.next(undefined);
     }
@@ -250,16 +258,20 @@ export class CRUDcontrollerService {
 
   deActivateButtons() {
     this.ButtonSavedState.next(this.allowButtons.value);
-    console.log("here")
     this.allowButtons.next(new ButtonController([false, false, false, false]));
   }
 
   reActivateButtons() {
-    console.log(this.ButtonSavedState.value)
     this.allowButtons.next(this.ButtonSavedState.value);
   }
 
   disposal() {
     this.message.next('');
+  }
+
+  shutDown() {
+    if(this.stream) {
+      this.stream.unsubscribe();
+    }
   }
 }
