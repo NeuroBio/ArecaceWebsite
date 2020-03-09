@@ -11,25 +11,24 @@ import { CacheService } from 'src/app/GlobalServices/cache.service';
 export class NomadicResolverService implements Resolve<any>{
 
   constructor(private router: Router,
-              private firebaseserv: FireBaseService,
               private cache: CacheService,
               private nomadserv: NomadicService) { }
 
   resolve() {
-    if(this.cache.Cache['Nomadic']) {
-      this.nomadserv.initializeDictionary(this.cache.Cache['Nomadic'].value);
+    if(this.cache.Cache['nomadic']) {
+      this.nomadserv.initializeDictionary(this.cache.Cache['nomadic']);
       
     } else {
       // this.cache.addSubscription('Nomadic', this.firebaseserv.returnCollect('Nomadic'));
-      return this.firebaseserv.returnCollect('Nomadic').pipe(
-        take(1),
-        tap(dict => {
-          if(dict[0]){
-            this.nomadserv.initializeDictionary(dict);
+      return this.cache.addSubscription('nomadic', 'Nomadic')
+        .then(() => {
+          if(this.cache.Cache['nomadic'].value[0]) {
+            this.nomadserv.initializeDictionary(this.cache.Cache['nomadic']);
           } else {
+            delete this.cache.Cache['nomadic'];
             this.router.navigate(["badservice"]);
           }
-      }) );
+      });
     }
   }
 }

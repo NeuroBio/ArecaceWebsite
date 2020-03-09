@@ -34,6 +34,7 @@ export class GeneralcollectionService {
   dispose() {
     if(this.stream) {
       this.stream.unsubscribe();
+      console.log(`unsub ${this.type.value}`)
     }
   }
 }

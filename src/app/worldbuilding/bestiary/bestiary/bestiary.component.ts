@@ -1,4 +1,4 @@
-import { Component, OnInit }          from '@angular/core';
+import { Component, OnInit, OnDestroy }          from '@angular/core';
 
 import { Observable }                 from 'rxjs';
 import { map }                        from 'rxjs/operators';
@@ -13,7 +13,7 @@ import { GeneralcollectionService }   from 'src/app/GlobalServices/generalcollec
   styleUrls: ['./bestiary.component.css']
 })
 
-export class BestiaryComponent implements OnInit {
+export class BestiaryComponent implements OnInit, OnDestroy {
 
   beasts$:Observable<BeastMetaData[]>;
   sortOptions: string[] = ['Name', 'Region', 'Biome', 'Phylogeny']
@@ -28,9 +28,12 @@ export class BestiaryComponent implements OnInit {
       map(beasts => {
         beasts.sort((a,b) => a.ID < b.ID ? -1 : 1);
         return beasts.sort((a,b) => a.Biome < b.Biome ? -1 : a.Biome > b.Biome ? 1 : 0);
-      }));
-    }
+    }));
+  }
 
+  ngOnDestroy() {
+    this.generalcollectserv.dispose();
+  }
 
   onSort(style: string) {
     if(style !== "Phylogeny") {

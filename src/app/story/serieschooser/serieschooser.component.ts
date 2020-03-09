@@ -73,6 +73,7 @@ export class SeriesChooserComponent implements OnInit, OnDestroy {
     this.stream3.unsubscribe();
     this.stream4.unsubscribe();
     this.stream5.unsubscribe();
+    this.storyserv.dispose();
   }
 
   changeSeries(series:string) {
@@ -84,10 +85,13 @@ export class SeriesChooserComponent implements OnInit, OnDestroy {
   }
 
   updateType(scripts: string) {
-    if(scripts === 'Scripts') {
-      this.router.navigate([`../../Scripts`], { relativeTo: this.route });
-    } else {
-      this.router.navigate([`../../Narratives`], { relativeTo: this.route });
+    if(scripts !== this.storyType) {
+      this.storyserv.dispose();
+      if(scripts === 'Scripts') {
+        this.router.navigate([`../../Scripts`], { relativeTo: this.route });
+      } else {
+        this.router.navigate([`../../Narratives`], { relativeTo: this.route });
+      }
     }
   }
 

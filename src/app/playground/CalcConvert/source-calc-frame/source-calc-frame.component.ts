@@ -43,6 +43,7 @@ export class SourceCalcFrameComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.stream1.unsubscribe();
     this.stream2.unsubscribe();
+    this.generalcollectserv.dispose();
   }
 
   populateForm(index: number) {

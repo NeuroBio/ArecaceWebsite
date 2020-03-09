@@ -169,8 +169,8 @@ export class DashCRUDService {
   getIDandType(ID: string) {
     //const type = this.gencollectserv.type.value;
     //const index = this.gencollectserv.collectionData.value
-      .findIndex(dex => dex.ID === ID);
-    return({Type: type, Index: index});
+    //  .findIndex(dex => dex.ID === ID);
+    return({Type: '', Index: 0});
   }
 
   replaceUserValues(newData: any, oldData: any, type: string) {

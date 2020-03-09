@@ -1,6 +1,7 @@
 import { Injectable }                       from '@angular/core';
 
-import { BehaviorSubject, Observable, of }  from 'rxjs';
+import { BehaviorSubject, Observable, of,
+Subscription }                              from 'rxjs';
 import { map, tap }                         from 'rxjs/operators';
 
 import { StoryMetaData }                    from 'src/app/Classes/ContentClasses'
@@ -24,16 +25,19 @@ export class StoryService {
   serials = new BehaviorSubject<any>(undefined);
   seriesIDName = new BehaviorSubject<object>({});
   seriesTitles = new BehaviorSubject<StoryMetaData[]>(new StoryMetaData()[0]);
-  storyType = new BehaviorSubject<string>("Scripts");
+  storyType = new BehaviorSubject<string>('Scripts');
   currentSeries = new BehaviorSubject<string>('');
   currentSection = new BehaviorSubject<string>('');
   loading = new BehaviorSubject<boolean>(true);
+  stream: Subscription;
 
   constructor() { }
 
-  initializeMetaData(metaData: StoryMetaData[], type: string): void {
+  initializeMetaData(metaData: Observable<StoryMetaData[]>, type: string) {
     this.storyType.next(type);
-    return this.serials.next(this.serialize(metaData));
+    return this.stream = metaData.subscribe(stories => {
+      return this.serials.next(this.serialize(stories))
+    });
   }
 
   serialize(stories: StoryMetaData[]) {
@@ -97,5 +101,11 @@ export class StoryService {
 
   updateLoading(change: boolean) {
     this.loading.next(change);
+  }
+
+  dispose() {
+    if(this.stream) {
+      this.stream.unsubscribe();
+    }
   }
 }

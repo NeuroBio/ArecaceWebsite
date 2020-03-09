@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs'
+import { BehaviorSubject, Subscription } from 'rxjs'
 import { Word } from '../../Classes/NomadicLanguage'
 
 @Injectable({
@@ -9,12 +9,14 @@ export class NomadicService {
 
   RawDictionary = new BehaviorSubject<Word[]>(null);
   TranslationDictionary = new BehaviorSubject<{}>(null);
-
+  stream: Subscription;
   constructor() { }
 
-  initializeDictionary(dict: Word[]) {
-    this.RawDictionary.next(dict);
-    this.initializeTranslations(dict);
+  initializeDictionary(dict: BehaviorSubject<Word[]>) {
+    return this.stream = dict.subscribe(dict => {
+      this.RawDictionary.next(dict);
+      this.initializeTranslations(dict);
+    });
   }
 
   initializeTranslations(dict: Word[]) {
@@ -28,5 +30,11 @@ export class NomadicService {
     });
     this.TranslationDictionary.next({'NtoETrans': NtoETrans,
                                      'EtoNTrans': EtoNTrans});
+  }
+
+  dispose() {
+    if(this.stream) {
+      this.stream.unsubscribe();
+    }
   }
 }
