@@ -1,21 +1,50 @@
 import { Injectable } from '@angular/core';
 
-import { map } from 'rxjs/operators';
+import { map }          from 'rxjs/operators';
 
-import { FireBaseService } from 'src/app/GlobalServices/firebase.service';
+import { CacheService } from 'src/app/GlobalServices/cache.service';
+
+import { PostData }     from 'src/app/Classes/ContentClasses';
+import { BehaviorSubject, Subscription } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UpdateService {
 
-  constructor(private firebaseserv: FireBaseService) { }
+  posts = new BehaviorSubject<PostData[]>(undefined);
+  message = new BehaviorSubject<string>(undefined);
+  stream: Subscription;
 
-  getPosts(){
-    return this.firebaseserv.returnCollect('Inanity').pipe(map(posts =>
-      posts.sort((a,b) => a.Date > b.Date ? -1 :
-        a.Date !== b.Date ? 1 : a.Time < b.Time ? 1 : -1)
-    ));
+  constructor(private cache: CacheService) { }
+
+  getPosts() {
+    if(this.cache.Cache['updates']) {
+      return this.assignPosts();
+    } else {
+      this.message.next(undefined);
+      return this.cache.addSubscription('updates', 'Inanity')
+      .then(() => { return this.assignPosts();
+      }).catch(() => {
+        delete this.cache.Cache['updates'];
+        this.message.next('Updates could not be retrieved. :<');
+      });
+    }
+  }
+
+  assignPosts() {
+    this.stream = this.cache.Cache['updates']
+    .pipe(map((posts: PostData[]) =>
+        posts.sort((a,b) => a.Date > b.Date ? -1
+        : a.Date !== b.Date ? 1
+        : a.Time < b.Time ? 1
+        : -1) )
+    ).subscribe(posts => this.posts.next(posts));
   }
  
+  dispose() {
+    if(this.stream) {
+      this.stream.unsubscribe();
+    }
+  }
 }
