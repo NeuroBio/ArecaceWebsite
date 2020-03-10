@@ -16,7 +16,10 @@ export class StoryResolver2Service implements Resolve<any> {
   //see the story service for notes
   resolve(route:ActivatedRouteSnapshot) {
     const type = route.parent.paramMap.get("StoryType");
-    const series = this.checkUrl(route.paramMap.get("SeriesID"), type);
+    const series = route.paramMap.get("SeriesID")
+    if(this.checkUrl(series, type) === true) {
+      return;
+    }
     const serials = this.storyserv.serials.value;
     const IDname = this.storyserv.seriesIDName.value;
     if(series in IDname) {
@@ -30,15 +33,17 @@ export class StoryResolver2Service implements Resolve<any> {
     }
   }
 
-  checkUrl(url:string, type:string) {
+  checkUrl(url: string, type: string) {
     if(url === 'First') {
       if(type === "Scripts") {
-        return "Arc1";
+        this.router.navigate([`story/${type}/Arc1`]);
+        return true;
       } else {
-        return "OneOffs";
+        this.router.navigate([`story/${type}/OneOffs`]);
+        return true;
       }
     } else {
-      return url;
+      return false
     }
   }
 

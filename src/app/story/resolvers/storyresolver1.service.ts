@@ -21,8 +21,9 @@ export class StoryResolver1Service implements Resolve<any> {
   //see the story service for notes
   resolve(route: ActivatedRouteSnapshot) {
     let type = route.paramMap.get('StoryType');
-    this.catchErrors(type);
-
+    if(this.catchErrors(type) === true) {
+      return;
+    }
     if(this.cache.Cache[type]) {
       return this.storyserv.initializeMetaData(this.cache.Cache[type], type);
     } else {
@@ -41,11 +42,12 @@ export class StoryResolver1Service implements Resolve<any> {
   catchErrors(type: string) {
     if(type === 'Script') {
       this.router.navigate(['/story/Scripts']);
-      return EMPTY;
+      return true;
     }
     if(type !== 'Scripts' && type !== 'Narratives') {
       this.router.navigate(['/story/Narratives']);
-      return EMPTY;
+      return true;
     }
+    return false
   }
 }

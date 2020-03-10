@@ -32,11 +32,6 @@ export class StorydisplayComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.route.data.subscribe(data => {
       this.story = data.Story;
-      const path = [this.story['metaData'].Type,
-                    this.story['metaData'].Series.split(' ').join(''),
-                    this.story['metaData'].ID];
-
-      this.location.go(`story/${path[0]}s/${path[1]}/${path[2]}`);
       setTimeout(() => this.onResize(), 10);
       this.main.nativeElement.scrollIntoView();
       this.storyserv.updateLoading(false);
