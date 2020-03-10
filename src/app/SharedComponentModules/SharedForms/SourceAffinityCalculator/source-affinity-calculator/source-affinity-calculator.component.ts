@@ -117,7 +117,7 @@ export class SourceAffinityCalculatorComponent implements OnInit, OnDestroy {
                       Rank: this.rank,
                       Name: this.Form.value.Name,
                       ID: ''}
-      Final.ID = `${Final.Name.split(' ').join('-')}-(${Final.Cost})`;
+      Final.ID = `${Final.Name}-(${Final.Cost})`;
       this.fetcher.assignvalidity(true);
       return this.fetcher.assignActiveFormData(new CRUDdata(false, '', Final));
     }
