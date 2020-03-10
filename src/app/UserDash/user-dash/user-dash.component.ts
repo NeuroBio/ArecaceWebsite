@@ -32,7 +32,7 @@ export class UserDashComponent implements OnInit, OnDestroy {
     this.loggedinText = this.textprovider.WebsiteText
     .find(member => member.ID =='userdash').Text;
     this.stream1 = this.auth.user.subscribe(user => {
-      this.authorized = user? true : false;
+      this.authorized = this.auth.isUser();
       this.user = user;
       if(user) {
         this.PrepareData();
