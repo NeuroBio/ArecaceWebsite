@@ -18,9 +18,8 @@ export class CacheService {
     this.Cache[`${type}-edit`] = new BehaviorSubject<any[]>(undefined);
     return new Promise ((resolve) => {
       return this.firebaseserv.returnCollectionWithKeys(path)
-        .subscribe(collect => {
-          console.log(`updating ${type} cache!`)
-          resolve(this.Cache[`${type}-edit`].next(collect))});
+        .subscribe(collect =>
+          resolve(this.Cache[`${type}-edit`].next(collect)));
     });
   }
 
@@ -28,10 +27,8 @@ export class CacheService {
     this.Cache[type] = new BehaviorSubject<any[]>(undefined);
     return new Promise ((resolve) => {
       return this.firebaseserv.returnCollect(path)
-        .subscribe(collect => {
-          console.log(`updating ${type} cache!`)
-          resolve(this.Cache[type].next(collect));
-      });
+        .subscribe(collect => 
+          resolve(this.Cache[type].next(collect)) );
     });
   }
 

@@ -70,12 +70,11 @@ export class CRUDcontrollerService {
         this.cache.Cache[`${this.itemType.value}-edit`]
         .subscribe(list => this.itemList.next(list));
       } else {
-        console.log(this.itemType.value)
         return this.cache.addEditSubscription(this.itemType.value,
           this.firePaths[this.itemType.value].Fire)
         .then(() => {
           this.stream2 = this.cache.Cache[`${this.itemType.value}-edit`]
-            .subscribe(list => {console.log(list);this.itemList.next(list)});
+            .subscribe(list => this.itemList.next(list));
         });
       }
     } else {

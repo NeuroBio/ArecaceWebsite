@@ -12,7 +12,7 @@ export class GeneralcollectionService {
   stream: Subscription;
   
   initializeMetaData(meta: BehaviorSubject<any[]>, type: string){
-    this.stream = meta.subscribe(data => {console.log(`resub ${type}`);this.collectionData.next(data)});
+    this.stream = meta.subscribe(data => this.collectionData.next(data));
     this.type.next(type);
   }
 
@@ -26,15 +26,13 @@ export class GeneralcollectionService {
     } else {
       return this.returnMetaData().pipe(
         map(members =>
-          members.find(member => member.ID === ID))
-      );
+          members.find(member => member.ID === ID)) );
     }
   }
 
   dispose() {
     if(this.stream) {
       this.stream.unsubscribe();
-      console.log(`unsub ${this.type.value}`)
     }
   }
 }
