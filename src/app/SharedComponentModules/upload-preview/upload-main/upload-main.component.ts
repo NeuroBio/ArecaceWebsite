@@ -48,8 +48,8 @@ export class UploadMainComponent implements OnInit, OnDestroy {
     this.onReset();
     this.stream1 = this.previewserv.reset.subscribe(() => this.onReset());
     this.stream2 = this.previewserv.oldLinks.subscribe(links => {
-      this.oldMain = links[this.ID*2+1];
-      this.oldThumb = links[this.ID*2];
+      this.oldMain = links[this.ID*2];
+      this.oldThumb = links[this.ID*2+1];
     });
   }
 
