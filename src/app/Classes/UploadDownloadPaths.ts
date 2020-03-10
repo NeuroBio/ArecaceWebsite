@@ -45,25 +45,25 @@ export class LocalPaths {
 }
 
 export class AllPathInfo {
-    arc1 = new PathInfo('Arc1Data', '/comics', []);
-    arc2 = new PathInfo('Arc2Data', '/comics', []);
-    bestiary = new PathInfo('Bestiary', '/world/bestiary', []);
-    characters = new PathInfo('CharacterBios', '/world/characters', []);
-    culture = new PathInfo('CultureInfo', '/world/culture', []);
-    extras = new PathInfo('MiscArt', '/extras', []);
-    guilds = new PathInfo('Guilds', '/world/guilds', []);
-    maps = new PathInfo('Maps', '/world/maps', []);
-    narratives = new PathInfo('Narratives', '/story/Narratives', []);
-    notes = new PathInfo('LooseNotes', '/playground/notes', []);
-    othersart = new PathInfo('OthersArt', '/playground/otherart',[])
-    pixels = new PathInfo('Pixels', '/playground/otherart', []);
-    scripts = new PathInfo('Scripts', '/story/Scripts', []);
-    sourceaffinity = new PathInfo('SourceAffinities', '/playground/calc/sourceaffinity', []);
-    source = new PathInfo('SourceInfo', '/world/source', []);
-    surveys = new PathInfo('Surveys', '/playground/surveys', []);
-    surveystats = new PathInfo('SurveyStats', '', []);
-    update = new PathInfo('Inanity', '', []);
-    nomadic = new PathInfo('Nomadic', '/playground/nomadic/dictionary', [], true);
+    arc1 = new PathInfo('Arc1Data', '/comics', ['Name', 'NumPages']);
+    arc2 = new PathInfo('Arc2Data', '/comics', ['Name', 'NumPages']);
+    bestiary = new PathInfo('Bestiary', '/world/bestiary', ['Name']);
+    characters = new PathInfo('CharacterBios', '/world/characters', ['FirstName', 'LastName']);
+    culture = new PathInfo('CultureInfo', '/world/culture', ['Topic']);
+    extras = new PathInfo('MiscArt', '/extras', ['Name']);
+    guilds = new PathInfo('Guilds', '/world/guilds', ['Guild Name']);
+    maps = new PathInfo('Maps', '/world/maps', ['Topic']);
+    narratives = new PathInfo('Narratives', '/story/Narratives', ['Series', 'Title']);
+    notes = new PathInfo('LooseNotes', '/playground/notes', ['ShortTitle']);
+    othersart = new PathInfo('OthersArt', '/playground/otherart',[], true)
+    pixels = new PathInfo('Pixels', '/playground/otherart', [], true);
+    scripts = new PathInfo('Scripts', '/story/Scripts', ['Series', 'Title']);
+    sourceaffinity = new PathInfo('SourceAffinities', '/playground/calc/sourceaffinity', ['ID']);
+    source = new PathInfo('SourceInfo', '/world/source', ['Topic']);
+    surveys = new PathInfo('Surveys', '/playground/surveys', ['Name']);
+    surveystats = new PathInfo('SurveyStats', '', [], true);
+    update = new PathInfo('Inanity', '', [], true);
+    nomadic = new PathInfo('Nomadic', '/playground/nomadic/dictionary', ['Indativor']);
     website = new PathInfo('WebsiteText', '', [], true);
 }
 
@@ -71,13 +71,14 @@ export class PathInfo {
     Fire: string;
     Local: string;
     NameTokens: string[];
-    SpecialUpload: boolean;
+    NewestExclude: boolean
 
-    constructor(fire: string, local: string, nameTokens: string[], special: boolean = false) {
+    constructor(fire: string, local: string, nameTokens: string[],
+        exclude: boolean = false) {
         this.Fire = fire;
         this.Local = local;
         this.NameTokens = nameTokens;
-        this.SpecialUpload = special;
+        this.NewestExclude = exclude;
     }
 } 
 
