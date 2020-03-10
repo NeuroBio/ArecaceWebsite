@@ -48,8 +48,13 @@ export class UploadMainComponent implements OnInit, OnDestroy {
     this.onReset();
     this.stream1 = this.previewserv.reset.subscribe(() => this.onReset());
     this.stream2 = this.previewserv.oldLinks.subscribe(links => {
-      this.oldMain = links[this.ID*2];
-      this.oldThumb = links[this.ID*2+1];
+      if(links.length > 1) {
+        this.oldMain = links[this.ID*2+1];
+        this.oldThumb = links[this.ID*2];
+      } else {
+        this.oldMain = links[this.ID];
+      }
+
     });
   }
 
@@ -72,7 +77,7 @@ export class UploadMainComponent implements OnInit, OnDestroy {
     this.thumbImg.ImgUrl = undefined;
     if(this.autoGenerate === true) {
       if(this.mainImg.ImgUrl) {
-        this.uploadImage(this.previewserv.mainsData[this.ID], 'auto')
+        this.uploadImage(this.previewserv.mainsData[this.ID], 'auto');
       }
     } else {
       this.previewserv.assignThumb(this.ID, undefined);
