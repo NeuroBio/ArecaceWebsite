@@ -29,7 +29,6 @@ export class UserGuardGuard implements CanActivate {
     return this.auth.user.pipe(
       take(1),
       map((user:User) => {
-        return true;
         if(user) {
             if(user.User){return true};
         }

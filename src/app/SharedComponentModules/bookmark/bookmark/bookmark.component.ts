@@ -28,9 +28,9 @@ export class BookmarkComponent implements OnInit, OnChanges, OnDestroy {
               private auth: AuthService) { }
 
   ngOnInit() {
-    this.stream = this.bookmarkserv.userData.subscribe(data => {
+    this.stream = this.auth.user.subscribe(data => {
       this.data = data;
-      this.notLoggedIn = !this.auth.isLoggedIn;//!this.auth.isUser();
+      this.notLoggedIn = !this.auth.isUser();
       this.setColors();
     });
     if(this.bookmarkImage) {
