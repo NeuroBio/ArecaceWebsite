@@ -24,13 +24,13 @@ export class HomeComponent implements OnInit {
 
   @HostListener('window:resize')
   setButtonText() {
-    if(window.innerWidth < 560){
+    if(window.innerWidth < 485){
       this.buttonText = ['Intro', 'Scripts','Comic','Play- ground'];
     }else{
       this.buttonText = ['Full Introduction',
               'Start Comic Scripts',
               'See Latest Page',
-              'Playgound (under construction!)'];
+              'Playgound under construction!'];
     }
   }
 }
