@@ -25,9 +25,8 @@ export class LoginToSaveMainComponent implements OnInit, OnDestroy {
   stream4: Subscription;
 
   ngOnInit() {
-    this.stream1 = this.auth.user.subscribe(user =>
-      this.authorized = user? true : false//this.auth.isUser()
-      );
+    this.stream1 = this.auth.user.subscribe(() =>
+      this.authorized = this.auth.isUser() );
     this.stream2 = this.logintosaveserv.stopClick
       .subscribe(click => this.stopClicking = click);
     this.stream3 = this.logintosaveserv.message
