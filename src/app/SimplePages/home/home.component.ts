@@ -30,7 +30,7 @@ export class HomeComponent implements OnInit {
       this.buttonText = ['Full Introduction',
               'Start Comic Scripts',
               'See Latest Page',
-              'Playgound under construction!'];
+              'Playground under construction!'];
     }
   }
 }
