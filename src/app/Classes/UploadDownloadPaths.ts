@@ -63,8 +63,8 @@ export class AllPathInfo {
     surveys = new PathInfo('Survey', 'Surveys', '/playground/surveys', ['Name']);
     surveystats = new PathInfo('Survey Stats', 'SurveyStats', '', [], undefined,  true);
     update = new PathInfo('Update', 'Inanity', '', [], undefined, true);
-    nomadic = new PathInfo('Nomadic Word', 'Nomadic', '/playground/nomadic/dictionary', ['Indativor']);
-    website = new PathInfo('Website Text', 'WebsiteText', '', [], undefined, true);
+    nomadic = new PathInfo('Nomadic Word', 'Nomadic', '/playground/nomadic/dictionary', ['Indativor'], '', false, true);
+    website = new PathInfo('Website Text', 'WebsiteText', '', [], undefined, true, true);
 }
 
 export class PathInfo {
@@ -74,15 +74,17 @@ export class PathInfo {
     ExtraPath: string;
     NameTokens: string[];
     NewestExclude: boolean
+    SpecialUpload: boolean;
 
     constructor(type: string, fire: string, local: string, nameTokens: string[],
-        extraPath: string = undefined, exclude: boolean = false) {
+        extraPath: string = undefined, exclude: boolean = false, special: boolean = false) {
         this.Type = type;
         this.Fire = fire;
         this.Local = local;
         this.ExtraPath = extraPath;
         this.NameTokens = nameTokens;
         this.NewestExclude = exclude;
+        this.SpecialUpload = special;
     }
 } 
 
