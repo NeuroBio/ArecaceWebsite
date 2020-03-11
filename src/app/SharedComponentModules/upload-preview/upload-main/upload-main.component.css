@@ -18,7 +18,7 @@ img.help {
 
 .tooltip .tooltiptext {
     visibility: hidden;
-    width: 120px;
+    width: 150px;
     background-color: black;
     color: whitesmoke;
     text-align: center;
@@ -29,7 +29,8 @@ img.help {
     /* Position the tooltip */
     position: absolute;
     z-index: 1;
-    left: 105%; 
+    top: 102%;
+    left: -150%;
 }
 
 .tooltip:hover .tooltiptext {

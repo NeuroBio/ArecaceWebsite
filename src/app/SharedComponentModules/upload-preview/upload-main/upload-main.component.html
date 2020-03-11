@@ -41,19 +41,19 @@
     </span>
 
     <p>
-        <span class="align">
-            <span *ngIf="autoGenerate===false || thumbImg.ImgUrl">Thumbnail:&nbsp;</span>
+        <span *ngIf="autoGenerate===true && (thumbImg.ImgUrl || oldThumb)">
+            Thumbnail:&nbsp;
+        </span>
+        <span class="align" *ngIf="autoGenerate===false">
+            <span>Thumbnail:&nbsp;</span>
             <!-- Allow user uploaded Thumb -->
-            <span *ngIf="autoGenerate===false">
-                <input class="fileupload"  #thumbInput type="file"
-                (change)="uploadImage($event, 'thumb')" accept=".png,.jpg.,.gif">
-            </span>
-            <div class="tooltip" *ngIf="autoGenerate===false">
+            <input class="fileupload"  #thumbInput type="file"
+            (change)="uploadImage($event, 'thumb')" accept=".png,.jpg.,.gif">
+            <div class="tooltip">
                 <img class="help" src="assets/svgs/help.svg">
                 <span class="tooltiptext">{{ thumbRequirements }}</span>
             </div>
-            <br>
-        </span>
+        </span><br>
 
         <!-- Thumb -->
         <app-upload-preview
