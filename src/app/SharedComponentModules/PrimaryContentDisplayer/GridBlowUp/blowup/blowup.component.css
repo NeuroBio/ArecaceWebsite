@@ -43,7 +43,7 @@ div#aligner {
 img#bigger {
     margin: auto;
     max-width: calc(100vw - 350px);
-    max-height: 95vh;
+    max-height: calc(95vh - 15px);
     padding: 0px;
     align-self: center;
     justify-self: center;
