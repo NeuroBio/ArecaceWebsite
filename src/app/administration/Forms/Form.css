@@ -1,19 +1,21 @@
 /*Form styling*/
 form {
+    position: relative;
     margin: 3px;
     padding: 7px;
     width: 800px;
+    max-width: calc(100vw - 60px);
     overflow: visible;
     border: 1px solid white;
     float: left;
 }
 
 div.form {
-  margin:3px;
-    padding:4px;
-    overflow: auto;
-    border: 1px solid white;
-    float: left;
+  max-width: 100%;
+  margin: 3px;
+  padding: 4px;
+  border: 1px solid white;
+  float: left;
 }
 
 h2.formstyle {
@@ -22,12 +24,14 @@ h2.formstyle {
 }
 
 input.fileupload {
-  width: 500px;
+  width: 400px;
+  max-width: calc(100% - 200px);
 }
 
 textarea {
   font-size: 18px;
   font-family: 'Courier New', Courier, monospace;
+  max-width: calc(100% - 7px);
 }
 
 option {
@@ -39,7 +43,7 @@ input {
 }
 
 input.short {
-  width:50px;
+  width: 50px;
   text-align: center;
 }
 
@@ -48,11 +52,8 @@ input.medium {
 }
 
 input.long {
-  width:600px;
-}
-
-input.fileupload {
-  width:500px;
+  max-width: 600px;
+  width: 200px;
 }
 
 input[type="checkbox"] {
@@ -61,7 +62,7 @@ input[type="checkbox"] {
 }
 
 button[type="button"] {
-  float:right;
+  float: right;
 }
 
 app-formButtons {
@@ -73,6 +74,7 @@ div.WYSIWYG {
   border: 1px solid white;
   float: left;
   width: 400px;
+  max-width: 100%;
   margin:3px;
   padding:4px;
 }
