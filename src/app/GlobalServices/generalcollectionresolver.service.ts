@@ -20,17 +20,8 @@ export class GeneralcollectionresolverService implements Resolve<any> {
               private router: Router) { }
   
   resolve(route: ActivatedRouteSnapshot) {
-    let type:string;
     const url = route['_routerState'].url.split('/');
-
-    if(route.url[0]){//for characters, also catches more common cases
-      type = route.url[route.url.length-1].path;
-    } else if (route.firstChild) {//this and else catch lazyloaded module weirdness
-      type = url[url.length-2];
-    } else {
-      type = url[url.length-1];
-    }
-
+    const type = url[this.backstep(url)];
 
     if(this.cache.Cache[type]){
       return this.generalcollectionserv.initializeMetaData(this.cache.Cache[type], type);
@@ -45,6 +36,14 @@ export class GeneralcollectionresolverService implements Resolve<any> {
             this.router.navigate(["badservice"]);
           }
       });
+    }
+  }
+
+  backstep(url: string[]) {
+    for(let i = url.length -1; i > 0; i--) {
+      if(this.firePaths[url[i]]) {
+        return i;
+      }
     }
   }
 }
