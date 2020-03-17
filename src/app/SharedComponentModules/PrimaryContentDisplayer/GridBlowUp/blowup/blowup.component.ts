@@ -58,6 +58,7 @@ export class BlowUpComponent implements OnInit {
   }
 
   onArrow(incre:number){
+    const startIndex = this.index;
     this.loading = this.global.ImagesLoadable.value;
     this.index += incre;
     if(this.index === -1){
@@ -65,10 +66,13 @@ export class BlowUpComponent implements OnInit {
     }else if(this.index === this.linksList.length){
       this.index = 0;
     }
-
-    this.activeMember = this.linksList[this.index]    
-    this.bigUrl = this.activeMember.Links[1];
-    this.router.navigate([`${this.gridPath}/${this.activeMember.ID}`]);
+    if(this.index === startIndex) {
+      this.loading = false;
+    } else {
+      this.activeMember = this.linksList[this.index]    
+      this.bigUrl = this.activeMember.Links[1];
+      this.router.navigate([`${this.gridPath}/${this.activeMember.ID}`]);
+    }
   }
 
   //Arrow keys (trigger arrow options)
