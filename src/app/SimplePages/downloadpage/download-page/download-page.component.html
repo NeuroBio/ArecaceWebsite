@@ -1,7 +1,11 @@
 <div id="background">
     <div *ngIf="ImageData">
         <div id="imageHolder">
-            <img [src]="ImageData.Links[1]">
+            <img [src]="ImageData.Links[1]"
+            (click)="switchView()"
+            [style.max-width]="full === true ? 'none' : '100%'"
+            [style.cursor]="full === true ? 'zoom-out' : 'zoom-in'"
+            >
         </div>
 
         <div *ngIf="ImageData.Artist">

@@ -16,6 +16,7 @@ export class DownloadPageComponent implements OnInit, OnDestroy {
   name: string;
   path: string;
   stream: Subscription;
+  full = false;
 
   constructor(private download: DownloadPageService,
               private route: ActivatedRoute,
@@ -23,14 +24,19 @@ export class DownloadPageComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     const mainPath = this.getsegserv.fetch(this.route.snapshot.pathFromRoot);
-    this.path = mainPath.join('/')
+    this.path = mainPath.join('/');
     this.stream = this.download.ImageData
       .subscribe(data => this.ImageData = data);
-    this.name = this.ImageData.Name ? this.ImageData.Name
+    this.name = this.ImageData.Name
+      ? this.ImageData.Name
       : `${this.ImageData.FirstName} ${this.ImageData.LastName}`;
   }
 
   ngOnDestroy() {
     this.stream.unsubscribe();
+  }
+
+  switchView(){
+    this.full = !this.full;
   }
 }
