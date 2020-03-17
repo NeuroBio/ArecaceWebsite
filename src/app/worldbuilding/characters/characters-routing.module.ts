@@ -14,9 +14,11 @@ import { CBUMResolverService }                from './character-components/chara
 const characterRoutes: Routes = [
   {path: 'characters', component: CharactersMainComponent,
     resolve: { GeneralcollectionresolverService },
-    children:[
+    children: [
       {path: '', component: HomeComponent },
       {path: 'notfound', component: NotFoundComponent },
+      {path: ':CharaID/Download', 
+            loadChildren: () => import('src/app/SimplePages/downloadpage/download-page.module').then(m => m.DownloadPageModule)},
       {path: ':CharaID', component: CharactersDetailsComponent,
         resolve: { Data: GeneralmemberresolverService },
         children: [

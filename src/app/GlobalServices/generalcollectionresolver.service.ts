@@ -2,9 +2,6 @@ import { Injectable }                 from '@angular/core';
 import { ActivatedRouteSnapshot,
          Resolve, Router }            from '@angular/router';
 
-import { take, tap }                  from 'rxjs/operators';
-
-import { FireBaseService }            from './firebase.service';
 import { GeneralcollectionService }   from './generalcollection.service';
 import { CacheService }               from './cache.service';
 
@@ -18,8 +15,7 @@ export class GeneralcollectionresolverService implements Resolve<any> {
   
   firePaths = new AllPathInfo;
 
-  constructor(private firebaseserv: FireBaseService,
-              private generalcollectionserv: GeneralcollectionService,
+  constructor(private generalcollectionserv: GeneralcollectionService,
               private cache: CacheService,
               private router: Router) { }
   

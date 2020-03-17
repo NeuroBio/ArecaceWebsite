@@ -18,7 +18,8 @@ export class BlowupmasterComponent implements OnInit {
               private getrouteserv: GetRouteSegmentsService) { }
 
   ngOnInit() {
-    this.gridPath = this.getrouteserv.fetch(this.route.snapshot.pathFromRoot);
+    this.gridPath = this.getrouteserv
+      .fetch(this.route.snapshot.pathFromRoot).join('/');
     this.generalcollectserv.returnMetaData().subscribe(collect => 
       this.linksList = collect).unsubscribe();
 

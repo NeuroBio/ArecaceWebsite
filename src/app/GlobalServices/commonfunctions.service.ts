@@ -8,17 +8,17 @@ export class GetRouteSegmentsService {
 
   constructor() { }
 
-  fetch(pathtoRoot: any[], pop: boolean = true) {
+  fetch(pathtoRoot: any[], pop: boolean = true): string[] {
     const Path = [];
     if(pop) {
       pathtoRoot.pop(); //remove current final segment
     }
     pathtoRoot.forEach((segment, i) => {
       if(i > 0 && segment.url != '') { //ignore root and any weirdness I can't explain
-        Path.push(segment.url);
+      segment.url.forEach(subseg => Path.push(subseg))
       }
     });
-    return Path.join('/');
+    return Path.join('/').split('/');
   }
 }
 

@@ -1,5 +1,5 @@
 import { NgModule }                 from '@angular/core';
-import { Routes, RouterModule }     from '@angular/router';
+import { Routes, RouterModule, UrlSegment }     from '@angular/router';
 
 import { AboutComponent }           from './SimplePages/about/about.component';
 import { BadserviceComponent }      from './SimplePages/badservice/badservice.component';
@@ -10,6 +10,11 @@ import { HomeComponent }            from './SimplePages/home/home.component';
 import { PageNotFoundComponent }    from './SimplePages/pagenotfound/pagenotfound.component';
 import { TravelorsGuideComponent }  from './SimplePages/travelorsguide/travelorsguide.component';
 import { UploadLogComponent }       from './SimplePages/upload-log/upload-log.component';
+
+
+export function downloadImages(url: UrlSegment[]) {
+  return url[url.length-1].path === 'Download' ? ({consumed: url}) : null;
+}
 
 const routes: Routes = [
   //simple pages
@@ -40,7 +45,7 @@ const routes: Routes = [
     loadChildren: () => import('./SimplePages/sitemap/sitemap.module').then(m => m.SitemapModule)},
   {path: 'world',
     loadChildren: () => import('./worldbuilding/worldbuilding.module').then(m => m.WorldbuildingModule)},
-  {path: 'download',
+  {matcher:  downloadImages,
     loadChildren: () => import('./SimplePages/downloadpage/download-page.module').then(m => m.DownloadPageModule)},
 
   //final catch

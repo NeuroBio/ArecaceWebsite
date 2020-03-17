@@ -31,7 +31,7 @@
             <h3 [hidden]="loading">{{ activeMember.Name }}</h3><br>
             {{ activeMember.Date }}<br><br>
             {{ activeMember.Description }}
-            <br><br>  
+            <br><br>
           </div>
         </div>
 
@@ -54,8 +54,7 @@
 
       <!-- Link out to full image -->
       <div id="SeeFull">
-          <a (click)="onDownload()"
-          [routerLink]="['/download']"
+          <a [routerLink]="['Download']"
           >Full Size</a>
       </div>
 

@@ -1,9 +1,54 @@
-img {
-    background-color: rgb(116, 116, 116);
+
+div#background {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    background-color: rgb(53, 53, 53);
+    background-image: url("https://firebasestorage.googleapis.com/v0/b/arecaceworld.appspot.com/o/WebSite%2Fsmear.png?alt=media&token=620e725e-ea44-4670-88a2-210c372066b2");
 }
 
 div#imageHolder {
     display: flex;
     align-self: stretch;
+    max-width: calc(100vw - 33px);
     overflow-x: auto;
+}
+
+img {
+    background-color: rgb(116, 116, 116);
+}
+
+div.textblock {
+    width: 700px;
+    max-width: calc(100vw - 55px);
+}
+
+app-bookmark {
+    float: right;
+    align-self: stretch;
+}
+
+h3 {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0px;
+}
+
+span#date {
+    font-size: 18px;
+}
+
+div#othersArt {
+    padding: 3px;
+    background-color: #2b2b2b;
+    text-align: center;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+hr {
+    border: 1px solid white;
 }

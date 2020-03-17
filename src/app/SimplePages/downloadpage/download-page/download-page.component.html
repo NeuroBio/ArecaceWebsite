@@ -1,11 +1,39 @@
-<div *ngIf="imgUrl">
-    <div id="imageHolder">
-        <img [src]="imgUrl">
-    </div>
-</div>
+<div id="background">
+    <div *ngIf="ImageData">
+        <div id="imageHolder">
+            <img [src]="ImageData.Links[1]">
+        </div>
 
-<div *ngIf="!imgUrl">
-    <p>
-        You did not select an image for full view!
-    </p>
+        <div *ngIf="ImageData.Artist">
+        
+            <div *ngIf="ImageData.ArtistLink" id="othersArt">
+                <a [href]="ImageData.ArtistLink" target="_blank">
+                    Artist: {{ ImageData.Artist }}, {{ ImageData.Date }}</a>  
+            </div>
+            <div *ngIf="!ImageData.ArtistLink" id="othersArt">
+                Artist: {{ ImageData.Artist }}, {{ ImageData.Date }}
+            </div>
+    
+          </div>
+    </div>
+
+
+    <div class="textblock" *ngIf="ImageData.Description">
+        <h3>
+            <span>
+                {{ ImageData.Name }}<br>
+                <span id="date">{{ ImageData.Date }}</span>
+            </span>
+            <app-bookmark
+            [path]="path"
+            type="Favorites"
+            [name]="name"
+            [bookmarkImage]="false"
+            ></app-bookmark>
+        </h3>
+        <hr><br>
+        {{ ImageData.Description }}<br>
+    </div>
+
+    
 </div>

@@ -21,13 +21,13 @@ export class GeneralcollectionService {
   }
 
   getMember(ID:string) {
-    if(ID === 'Latest') {
-      return this.returnMetaData();
-    } else {
+    // if(ID === 'Latest') {
+    //   return this.returnMetaData();
+    // } else {
       return this.returnMetaData().pipe(
         map(members =>
           members.find(member => member.ID === ID)) );
-    }
+    // }
   }
 
   dispose() {

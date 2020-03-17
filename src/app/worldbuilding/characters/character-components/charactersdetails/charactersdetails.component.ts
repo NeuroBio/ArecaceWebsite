@@ -23,19 +23,17 @@ export class CharactersDetailsComponent implements OnInit {
   
   constructor(private route: ActivatedRoute,
               private global: GlobalVarsService,
-              private downloadserv: DownloadPageService,
               private getsegserv: GetRouteSegmentsService) { }
 
   ngOnInit() {
-    const mainPath = this.getsegserv.fetch(this.route.snapshot.pathFromRoot);
+    const frags = this.getsegserv.fetch(this.route.snapshot.pathFromRoot);
     this.route.data.subscribe((data: {Data: CharacterMetaData}) => {
         // this.main.nativeElement.scrollIntoView();
         this.loading = this.global.ImagesLoadable.value;
-        const frags = mainPath.split('/')
         this.real = frags[frags.length-1] === 'FanCharacters' ? false : true;
         this.char = data.Data;
         this.name = `${this.char.FirstName} ${this.char.LastName}`
-        this.path = `/${mainPath}/${this.char.ID}`
+        this.path = `/${frags.join('/')}/${this.char.ID}`
         this.char.References = this.blowupReorganization(this.char.References);
         this.FullBio = (this.char.BriefBackground === '');
    });
@@ -50,10 +48,6 @@ export class CharactersDetailsComponent implements OnInit {
       ref.Links = [this.char.Links[(index+1)*2],
                   this.char.Links[(index+1)*2+1]]);
     return refs;
-  }
-
-  viewFull() {
-    this.downloadserv.assignImgUrl(this.char.Links[1])
   }
 
 }
