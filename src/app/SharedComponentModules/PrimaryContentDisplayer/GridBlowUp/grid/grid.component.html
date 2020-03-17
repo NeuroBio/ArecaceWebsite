@@ -1,7 +1,7 @@
 <div id="outer">
   <a class="item"
   *ngFor="let member of collect"
-  [routerLink] = member.ID
+  [routerLink]="preview === true ? member.ID : member.ID+'/Download'"
   role="button">
     <div id="imageholder">
         <img class="thumb" [src]="member.Links[0]" alt=""><br>

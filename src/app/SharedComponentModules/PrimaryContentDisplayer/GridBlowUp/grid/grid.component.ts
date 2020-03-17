@@ -8,5 +8,6 @@ import { Component, Input } from '@angular/core';
 export class GridComponent {
 
   @Input() collect: any[];
+  @Input() preview: boolean = true;
   
 }
