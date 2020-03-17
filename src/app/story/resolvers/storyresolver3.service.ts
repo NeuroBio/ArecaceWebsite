@@ -52,7 +52,6 @@ export class StoryResolver3Service implements Resolve<any>{
   checkUrl(ID: string, route: ActivatedRouteSnapshot) {
     if(ID === 'First') {
       const serie = this.storyserv.getSeriesData().value;
-      console.log(`story/${serie[0].Type}/${serie[0].Series.split(' ').join('')}/${serie[0].ID}`)
       this.router.navigate([`story/${route.parent.paramMap
                             .get('StoryType')}/${route.parent.paramMap
                             .get('SeriesID')}/${serie[0].ID}`]);

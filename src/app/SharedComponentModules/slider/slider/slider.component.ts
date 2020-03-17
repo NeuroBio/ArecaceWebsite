@@ -16,7 +16,6 @@ export class SliderComponent implements OnInit {
 
   ngOnInit() {
     this.preview = this.sliderserv.getPreview();
-    console.log(this.preview)
   }
 
   changeView() {
