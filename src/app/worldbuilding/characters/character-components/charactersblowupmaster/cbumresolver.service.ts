@@ -25,7 +25,7 @@ export class CBUMResolverService implements Resolve<any> {
         if(reference) {
           return of (reference);
         } else {
-          this.router.navigate([this.getrouteserv.fetch(route.pathFromRoot)]);
+          this.router.navigate([this.getrouteserv.fetch(route.pathFromRoot).join('/')]);
           return of (EMPTY);
         }
       })

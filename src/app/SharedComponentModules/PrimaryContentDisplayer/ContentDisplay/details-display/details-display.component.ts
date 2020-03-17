@@ -30,7 +30,7 @@ export class DetailsDisplayComponent implements OnInit {
       window.scroll(0,0);
       this.ref = data.Ref;
       this.name = this.ref.Topic;
-      this.path = `/${mainPath}/${this.ref.ID}`;
+      this.path = `/${mainPath.join('/')}/${this.ref.ID}`;
     });
   }
 

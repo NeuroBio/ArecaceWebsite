@@ -28,7 +28,7 @@ export class GuildDetailsComponent implements OnInit {
       this.loading = this.global.ImagesLoadable.value;
       this.guild = data.Guild;
       this.name = this.guild.GuildName;
-      this.path = `/${mainPath}/${this.guild.ID}`;
+      this.path = `/${mainPath.join('/')}/${this.guild.ID}`;
 
     });
   }

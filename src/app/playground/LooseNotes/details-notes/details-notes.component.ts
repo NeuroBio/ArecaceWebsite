@@ -22,7 +22,7 @@ export class DetailsNotesComponent implements OnInit {
       window.scroll(0,0);
       this.note = data.Note;
       this.name = this.note.ShortTitle;
-      this.path = `/${mainPath}/${this.note.ID}`
+      this.path = `/${mainPath.join('/')}/${this.note.ID}`
     });
   }
 }

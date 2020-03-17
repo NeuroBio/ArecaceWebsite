@@ -22,7 +22,7 @@ export class GeneralmemberresolverService implements Resolve<any>{
         if(member){
           return of (member);
         }else{
-          this.router.navigate([`${this.getrouteserv.fetch(route.pathFromRoot)}/notfound`]);
+          this.router.navigate([`${this.getrouteserv.fetch(route.pathFromRoot).join('/')}/notfound`]);
           return of (EMPTY);
         }
       })
