@@ -1,0 +1,8 @@
+<section *ngIf="preview !== undefined">
+    <span id="slideTwoText">{{ name }}</span>
+    <div class="slideTwo">  
+      <input type="checkbox" value="None" id="slideTwo"
+      name="check" [checked]="preview === true" (click)="changeView()">
+      <label for="slideTwo"></label>
+    </div>
+</section>

@@ -1,5 +1,6 @@
 import { AbilityMastery } from '../SharedComponentModules/SharedForms/SourceAffinityCalculator/SourceAbilityData';
 import { formatDate } from '@angular/common'
+import { SliderService } from 'src/app/SharedComponentModules/slider/slider.service';
 
 
 export class GeneralMetaData {
@@ -232,6 +233,7 @@ export class User {
     FanCharacters?: CharacterMetaData[];
     SAcalculations?: SA[];
     accountCreated: string;
+    showPreview: boolean;
 
     constructor(email: string, ID: number) {
         this.email = email;
