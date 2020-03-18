@@ -7,6 +7,15 @@ div#background {
     background-image: url("https://firebasestorage.googleapis.com/v0/b/arecaceworld.appspot.com/o/WebSite%2Fsmear.png?alt=media&token=620e725e-ea44-4670-88a2-210c372066b2");
 }
 
+div#everFave {
+    display: flex;
+    background-color: #2b2b2b;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 15px;
+    font-family: 'Courier New', Courier, monospace;
+}
+
 div#imageHolder {
     position: relative;
     display: flex;

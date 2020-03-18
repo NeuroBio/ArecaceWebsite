@@ -1,6 +1,6 @@
 <nav id="biggerouter">
     <div #back id="biggerback" [routerLink]="['../']"></div>
-   
+    
     <!-- Left and Right arrow "buttons" -->
     <img #left id="left" src="assets/svgs/back.svg" alt="Prev"
     (click)="onArrow(-1)" tabindex="0" role="button">
@@ -8,36 +8,55 @@
     <img #right id="right" src="assets/svgs/back.svg" alt="Next"
     (click)="onArrow(1)" tabindex="0" role="button">
 
+    <!-- Bookmark when not special -->
+    <div id="vanillaFave"
+          *ngIf="!activeMember.Description && !activeMember.Artist && !loading">
+            <app-bookmark
+            [path]="path"
+            type="Favorites"
+            [name]="activeMember.Name"
+            [bookmarkImage]="false"
+            ></app-bookmark>
+          </div>
+
     <!-- Image and Text -->  
     <div id="content" (window:resize)="onResize()">
-      <div class="imgcaption" id="aligner"> 
-        
-          <div *ngIf="loading" class="loading"></div>
-            <img #bigger id="bigger"
-            [hidden]="loading"
-            [src]="bigUrl"
-            [alt]="activeMember.AltText ? activeMember.AltText : ''"
-            (load)="onResize()">    
 
-        <div *ngIf="activeMember.Description" class="textblock"
-        [style.height.px]="textHeight"
-        [hidden]="loading">
+      <div class="imgcaption" id="aligner"> 
+          <div *ngIf="loading" class="loading"></div>
+          <img #bigger id="bigger"
+          [hidden]="loading"
+          [src]="bigUrl"
+          [alt]="activeMember.AltText ? activeMember.AltText : ''"
+          (load)="onResize()">
+
+          <div *ngIf="activeMember.Description && !loading" class="textblock"
+          [style.height.px]="textHeight">
+
         <!--Show/hide info-->
-          <img [hidden]="loading"
+          <img *ngIf="!loading"
           id="downUp" src="assets/svgs/back.svg" alt=""
           [style.transform]="'rotate(' + rotation + 'deg)'"
           (click)="showHideDescription()">
-          <div id="textblockinner" [hidden]="loading" [style.display]="this.showDescription ? 'block' : 'none'">
-            <h3 [hidden]="loading">{{ activeMember.Name }}</h3><br>
+          <div id="textblockinner" *ngIf="!loading" [style.display]="this.showDescription ? 'block' : 'none'">
+            <h3>
+              <app-bookmark
+              [path]="path"
+              type="Favorites"
+              [name]="activeMember.Name"
+              [bookmarkImage]="false"
+              ></app-bookmark>
+              {{ activeMember.Name }}
+            </h3><br>
             {{ activeMember.Date }}<br><br>
             {{ activeMember.Description }}
             <br><br>
           </div>
+          
         </div>
 
       </div>
       <div *ngIf="activeMember.Artist">
-        
         <div *ngIf="activeMember.ArtistLink" id="othersArt">
             <a [href]="activeMember.ArtistLink" target="_blank">
                 Artist: {{ activeMember.Artist }}, {{ activeMember.Date }}</a>  

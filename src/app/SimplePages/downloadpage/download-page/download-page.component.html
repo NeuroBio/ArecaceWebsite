@@ -1,5 +1,15 @@
 <div id="background">
     <div *ngIf="ImageData">
+
+        <div id="everFave" *ngIf="!ImageData.Artist  && !ImageData.Description">
+            {{ name }}
+            <app-bookmark
+            [path]="path"
+            type="Favorites"
+            [name]="name"
+            [bookmarkImage]="false"
+            ></app-bookmark>
+        </div>
         <div id="imageHolder" #image (window:resize)="onResize()">
             <div class="loading" *ngIf="loading===true"></div>
             <img [src]="ImageData.Links[1]"

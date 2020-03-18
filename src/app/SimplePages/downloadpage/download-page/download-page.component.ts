@@ -35,7 +35,7 @@ export class DownloadPageComponent implements OnInit, OnDestroy {
       .subscribe(data => this.ImageData = data);
     this.name = this.ImageData.Name
       ? this.ImageData.Name
-      : `${this.ImageData.FirstName} ${this.ImageData.LastName}`;
+      : `${this.ImageData.FirstName} ${this.ImageData.LastName}'s Bio Pic`;
     this.loading = this.global.ImagesLoadable.value;
   }
 
@@ -49,9 +49,9 @@ export class DownloadPageComponent implements OnInit, OnDestroy {
 
   onLoad() {
     this.loading = false;
-    console.log("trig")
     this.onResize();
   }
+
   onResize() {
     if(this.Image.nativeElement.offsetWidth + 33 < window.innerWidth) {
       this.maxed = true

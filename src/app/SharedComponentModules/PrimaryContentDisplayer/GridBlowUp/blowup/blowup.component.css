@@ -82,7 +82,7 @@ img#right {
     min-width: 0;
     min-height: 0;
     top: 50%;
-    right: 0%;
+    right: 10px;
     cursor: pointer;
     -webkit-transform: rotate(-90deg);
     transform: rotate(-90deg);
@@ -96,15 +96,21 @@ img#left {
     min-width: 0;
     min-height: 0;
     top: 50%;
-    left: 0%;
+    left: 8px;
     cursor: pointer;
     -webkit-transform: rotate(90deg);
     transform: rotate(90deg);
     background-color: rgba(0,0,0,.3);
 }
+img#left:hover {
+    background-color: rgba(0,0,0,.6);
+}
+img#right:hover {
+    background-color: rgba(0,0,0,.6);
+}
 
 img:focus {
-    outline: 2px dotted white;
+    outline: 2px dashed orange;
 }
 
 /* div#help {
@@ -149,4 +155,17 @@ img#downUp {
     top: 5.5px;
     background-color: rgba(0,0,0,.3);
     margin-right: 8px;
+}
+
+app-bookmark {
+    display: block;
+    float: right;
+    float: top;
+}
+
+div#vanillaFave {
+    position: absolute;
+    right:30px;
+    top: 20px;
+    z-index: 15;
 }

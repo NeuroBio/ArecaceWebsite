@@ -1,8 +1,9 @@
 import { Component, OnInit, HostListener,
           ViewChild, ElementRef, Input }    from '@angular/core';
-import { Router }                           from '@angular/router';
+import { Router, ActivatedRoute }                           from '@angular/router';
 
 import { GlobalVarsService }                from 'src/app/GlobalServices/global-vars.service';
+import { GetRouteSegmentsService } from 'src/app/GlobalServices/commonfunctions.service';
 
 @Component({
   selector: 'app-blowup',
@@ -22,6 +23,7 @@ export class BlowUpComponent implements OnInit {
   loading: boolean;
   showDescription = true;
   rotation = 0;
+  path: string;
 
   @ViewChild('left', { static: true }) left: ElementRef;
   @ViewChild('right', { static: true }) right: ElementRef;
@@ -31,6 +33,8 @@ export class BlowUpComponent implements OnInit {
   @ViewChild('back', { static: true }) back: ElementRef;
 
   constructor(private router: Router,
+              private route: ActivatedRoute,
+              private getsegserv: GetRouteSegmentsService,
               private global: GlobalVarsService) { }
 
   ngOnInit() {
@@ -38,6 +42,7 @@ export class BlowUpComponent implements OnInit {
     this.bigUrl = this.activeMember.Links[1];
     this.loading = this.global.ImagesLoadable.value;
     setTimeout(() => { this.onResize() }, 10);
+    this.setPath();
   }
 
   onResize(){
@@ -57,7 +62,12 @@ export class BlowUpComponent implements OnInit {
     this.onResize();
   }
 
-  onArrow(incre:number){
+  setPath() {
+    const mainPath = this.getsegserv.fetch(this.route.snapshot.pathFromRoot);
+    this.path = `${mainPath.join('/')}/${this.activeMember.ID}/Download`;
+  }
+
+  onArrow(incre: number){
     const startIndex = this.index;
     this.loading = this.global.ImagesLoadable.value;
     this.index += incre;
@@ -72,6 +82,7 @@ export class BlowUpComponent implements OnInit {
       this.activeMember = this.linksList[this.index]    
       this.bigUrl = this.activeMember.Links[1];
       this.router.navigate([`${this.gridPath}/${this.activeMember.ID}`]);
+      this.setPath();
     }
   }
 
