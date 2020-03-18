@@ -12,38 +12,41 @@ import { CBUMResolverService }            from '../worldbuilding/characters/char
 import { CharactersBlowupmasterComponent } from '../worldbuilding/characters/character-components/charactersblowupmaster/charactersblowupmaster.component';
 
 const userRoutes: Routes = [
-  {path: '', component: UserDashComponent,},
-  {path: 'SurveyResults', component: InteractHomeComponent,
+  { path: '', component: UserDashComponent },
+  { path: 'SurveyResults', component: InteractHomeComponent,
   canActivate: [UserGuardGuard],
   resolve: { UserdataMainResolverService },
     children: [
-      {path: 'notfound', redirectTo: ''},
-      {path: ':surveyID', component: InteractDetailsSwitchComponent,
-        resolve: {Data: UserdataDetailsResolverService},
-      children: [{path: '**', redirectTo: ''}]}
+      { path: 'notfound', redirectTo: '' },
+      { path: ':surveyID', component: InteractDetailsSwitchComponent,
+        resolve: { Data: UserdataDetailsResolverService },
+      children: [{ path: '**', redirectTo: '' }]}
   ]},
 
 
-  {path: 'SAcalculations', component: InteractHomeComponent,
-  canActivate: [UserGuardGuard],
-  resolve: { UserdataMainResolverService },
+  { path: 'SAcalculations', component: InteractHomeComponent,
+    canActivate: [UserGuardGuard],
+    resolve: { UserdataMainResolverService },
     children: [
-      {path: 'notfound', redirectTo: ''},
-      {path: ':SAcalcID', component: InteractDetailsSwitchComponent,
-        resolve: {Data: UserdataDetailsResolverService}}
+      { path: 'notfound', redirectTo: '' },
+      { path: ':SAcalcID', component: InteractDetailsSwitchComponent,
+        resolve: { Data: UserdataDetailsResolverService } }
   ]},
 
-  {path: 'FanCharacters/:CharaID/Download'},
-  {path: 'FanCharacters/:CharaID/:RefID/Download'},
-  {path: 'FanCharacters', component: InteractHomeComponent,
+  { path: 'FanCharacters/:CharaID/Download',
+    loadChildren: () => import('src/app/SimplePages/downloadpage/download-page.module').then(m => m.DownloadPageModule)},
+  { path: 'FanCharacters/:CharaID/:RefID/Download',
+    loadChildren: () => import('src/app/SimplePages/downloadpage/download-page.module').then(m => m.DownloadPageModule)},
+
+  { path: 'FanCharacters', component: InteractHomeComponent,
   canActivate: [UserGuardGuard],
   resolve: { UserdataMainResolverService },
     children: [
-      {path: 'notfound', redirectTo: ''},
-      {path: ':CharaID', component: InteractDetailsSwitchComponent,
+      { path: 'notfound', redirectTo: ''},
+      { path: ':CharaID', component: InteractDetailsSwitchComponent,
         resolve: {Data: UserdataDetailsResolverService},
         children: [
-          {path: ':RefID', component: CharactersBlowupmasterComponent,
+          { path: ':RefID', component: CharactersBlowupmasterComponent,
             resolve: { links: CBUMResolverService } }
         ]}
   ]}

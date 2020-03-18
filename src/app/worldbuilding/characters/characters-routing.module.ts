@@ -10,15 +10,12 @@ import { CharactersBlowupmasterComponent }    from './character-components/chara
 import { GeneralcollectionresolverService }   from 'src/app/GlobalServices/generalcollectionresolver.service';
 import { GeneralmemberresolverService }       from 'src/app/GlobalServices/generalmemberresolver.service';
 import { CBUMResolverService }                from './character-components/charactersblowupmaster/cbumresolver.service';
-import { DownloadResolverService } from 'src/app/SimplePages/downloadpage/download-resolver.service';
 
 const characterRoutes: Routes = [
   {path: 'characters/:CharaID/Download',
-    resolve: { DownloadResolverService },
     loadChildren: () => import('src/app/SimplePages/downloadpage/download-page.module').then(m => m.DownloadPageModule)},
   
   {path: 'characters/:CharaID/:RefID/Download',
-    resolve: { DownloadResolverService },
     loadChildren: () => import('src/app/SimplePages/downloadpage/download-page.module').then(m => m.DownloadPageModule)},
 
   {path: 'characters', component: CharactersMainComponent,

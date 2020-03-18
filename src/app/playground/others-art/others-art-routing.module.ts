@@ -6,12 +6,10 @@ import { BlowupmasterComponent } from '../../SharedComponentModules/PrimaryConte
 
 import { GeneralcollectionresolverService } from 'src/app/GlobalServices/generalcollectionresolver.service'
 import { GeneralmemberresolverService } from '../../GlobalServices/generalmemberresolver.service';
-import { DownloadResolverService }          from 'src/app/SimplePages/downloadpage/download-resolver.service';
 
 
 const routes: Routes = [
   {path: ':OtherID/Download',
-  resolve: { DownloadResolverService },
   loadChildren: () => import('src/app/SimplePages/downloadpage/download-page.module').then(m => m.DownloadPageModule)},
   
   {path: '', component: OthersArtComponent,
