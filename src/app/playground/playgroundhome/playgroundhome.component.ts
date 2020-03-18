@@ -14,8 +14,7 @@ export class PlaygroundhomeComponent implements OnInit {
   links = [ {Link: 'activities', Name: 'Activities', Src: '../../assets/svgs/survey.svg'},
             {Link: 'notes', Name: 'Loose Notes', Src: '../../assets/svgs/notepad.svg'},
             {Link: 'nomadic', Name: 'Nomadic Dictionary', Src: '../../assets/svgs/dict.svg'},
-            {Link: 'forum', Name: 'Forum (not launched!)', Src: '../../assets/svgs/forum.svg'}
-          ]
+            {Link: 'forum', Name: 'Forum (not launched!)', Src: '../../assets/svgs/forum.svg'} ]
 
   constructor() { }
 
