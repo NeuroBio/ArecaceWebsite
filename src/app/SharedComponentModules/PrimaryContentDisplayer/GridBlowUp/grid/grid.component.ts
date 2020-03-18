@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { SliderService } from 'src/app/SharedComponentModules/slider/slider.service';
+import { SliderService } from 'src/app/SharedComponentModules/SmallComponents/slider/slider.service';
 
 @Component({
   selector: 'app-grid',

@@ -7,7 +7,7 @@ import { MainDisplayComponent }       from './ContentDisplay/main-display/main-d
 import { NotFoundComponent }          from './ContentDisplay/notfound/notfound.component';
 import { LinkListModule }             from './LinkListDisplay/linklist.module'
 import { GridBlowupModule }           from './GridBlowUp/grid-blowup.module';
-import { BookmarkModule }             from '../bookmark/bookmark.module';
+import { BookmarkModule }             from '../SmallComponents/bookmark/bookmark.module';
 
 
 @NgModule({

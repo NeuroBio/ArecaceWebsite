@@ -6,11 +6,11 @@ import { Subscription }                       from 'rxjs';
 
 import { CRUDcontrollerService }              from 'src/app/administration/services/CRUDcontroller.service';
 import { QuickAssign }                        from 'src/app/GlobalServices/commonfunctions.service';
-import { UploadPreviewService }               from 'src/app/SharedComponentModules/upload-preview/upload-preview.service';
+import { UploadPreviewService }               from 'src/app/SharedComponentModules/SmallComponents/upload-preview/upload-preview.service';
 import { FetchService }                       from 'src/app/GlobalServices/fetch.service';
 
 import { PostData }                           from 'src/app/Classes/ContentClasses';
-import { UploadPreviewSettings }              from 'src/app/SharedComponentModules/upload-preview/uploadpreviewclass';
+import { UploadPreviewSettings }              from 'src/app/SharedComponentModules/SmallComponents/upload-preview/uploadpreviewclass';
 import { CRUDdata }                           from 'src/app/Classes/ContentClasses';
 
 @Component({

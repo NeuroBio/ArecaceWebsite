@@ -10,8 +10,8 @@
     <nav id="world">
       <div class="imagebutton" *ngFor="let section of navInfo"
       [id]="section.link">
-        <a class="proxy" [routerLink]="section.link">
-          <span class="strokeme">{{ section.text }}</span>
+        <a class="imagebutton" [routerLink]="section.link">
+          <span class="strokeme imagebutton">{{ section.text }}</span>
         </a>
       </div>
     </nav>

@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { GetRouteSegmentsService } from 'src/app/GlobalServices/commonfunctions.service';
 import { Subscription } from 'rxjs';
 import { GlobalVarsService } from 'src/app/GlobalServices/global-vars.service';
-import { BookmarkService } from 'src/app/SharedComponentModules/bookmark/bookmark.service';
+import { BookmarkService } from 'src/app/SharedComponentModules/SmallComponents/bookmark/bookmark.service';
 
 @Component({
   selector: 'app-download-page',

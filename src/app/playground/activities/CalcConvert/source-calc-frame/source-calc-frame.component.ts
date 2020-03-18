@@ -6,7 +6,7 @@ import { SA }                           from 'src/app/Classes/ContentClasses';
 import { AuthService }                  from 'src/app/administration/security/Auth/auth.service';
 import { FetchService }                 from 'src/app/GlobalServices/fetch.service';
 import { GeneralcollectionService }     from 'src/app/GlobalServices/generalcollection.service';
-import { LoginToSaveService }           from 'src/app/SharedComponentModules/login-to-save/login-to-save.service';
+import { LoginToSaveService }           from 'src/app/SharedComponentModules/SmallComponents/login-to-save/login-to-save.service';
 
 @Component({
   selector: 'app-source-calc-frame',

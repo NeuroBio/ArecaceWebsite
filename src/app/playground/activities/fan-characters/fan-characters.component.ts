@@ -4,7 +4,7 @@ import { Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
 
 import { FetchService } from 'src/app/GlobalServices/fetch.service';
-import { LoginToSaveService } from 'src/app/SharedComponentModules/login-to-save/login-to-save.service';
+import { LoginToSaveService } from 'src/app/SharedComponentModules/SmallComponents/login-to-save/login-to-save.service';
 
 import { CharacterMetaData } from 'src/app/Classes/ContentClasses';
 import { AuthService } from 'src/app/administration/security/Auth/auth.service';

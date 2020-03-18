@@ -2,7 +2,7 @@ import { NgModule }                 from '@angular/core';
 import { CommonModule }             from '@angular/common';
 
 import { ComicBookRoutingModule }   from './comicbook-routing.module';
-import { BookmarkModule }           from '../SharedComponentModules/bookmark/bookmark.module';
+import { BookmarkModule }           from '../SharedComponentModules/SmallComponents/bookmark/bookmark.module';
 
 import { BookComponent }            from './book/book.component';
 import { PageComponent }            from './page/page.component';

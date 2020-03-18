@@ -7,7 +7,7 @@ import { AdministrationRoutingModule }  from './administration-routing.module';
 import { CharacterFormModule }          from '../SharedComponentModules/SharedForms/MakeCharacter/character-form.module';
 import { SharedFormsModule }            from '../SharedComponentModules/SharedForms/shared-forms.module';
 import { LanguageTableModule }          from '../SharedComponentModules/language-table/language-table.module';
-import { UploadPreviewModule }          from 'src/app/SharedComponentModules/upload-preview/upload-preview.module';
+import { UploadPreviewModule }          from 'src/app/SharedComponentModules/SmallComponents/upload-preview/upload-preview.module';
 
 
 import { AboutTextComponent }           from './Forms/about-text/about-text.component';

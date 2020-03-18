@@ -13,7 +13,7 @@ import { UploadPreviewInfo,
 @Component({
   selector: 'app-upload-main',
   templateUrl: './upload-main.component.html',
-  styleUrls: ['../../../administration/Forms/Form.css', './upload-main.component.css']
+  styleUrls: ['../../../../administration/Forms/Form.css', './upload-main.component.css']
 })
 
 export class UploadMainComponent implements OnInit, OnDestroy {

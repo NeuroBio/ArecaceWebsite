@@ -8,7 +8,7 @@ import { SourceCalcFrameComponent } from './source-calc-frame/source-calc-frame.
 
 import { CalcConvertRoutingModule } from './calc-convert-routing.module';
 import { SharedFormsModule } from '../../../SharedComponentModules/SharedForms/shared-forms.module';
-import { LoginToSaveModule } from 'src/app/SharedComponentModules/login-to-save/login-to-save.module';
+import { LoginToSaveModule } from 'src/app/SharedComponentModules/SmallComponents/login-to-save/login-to-save.module';
 
 
 @NgModule({

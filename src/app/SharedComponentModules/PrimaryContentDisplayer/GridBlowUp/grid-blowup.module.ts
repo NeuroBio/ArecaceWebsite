@@ -5,7 +5,7 @@ import { RouterModule }           from '@angular/router';
 import { BlowUpComponent }        from './blowup/blowup.component';
 import { BlowupmasterComponent }  from './blowupmaster/blowupmaster.component';
 import { GridComponent }          from './grid/grid.component';
-import { BookmarkModule }         from '../../bookmark/bookmark.module';
+import { BookmarkModule }         from '../../SmallComponents/bookmark/bookmark.module';
 @NgModule({
   declarations: [
     BlowUpComponent,

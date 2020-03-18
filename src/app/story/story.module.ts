@@ -1,7 +1,7 @@
 import { NgModule }                     from '@angular/core';
 import { CommonModule }                 from '@angular/common';
 
-import { BookmarkModule }               from '../SharedComponentModules/bookmark/bookmark.module';
+import { BookmarkModule }               from '../SharedComponentModules/SmallComponents/bookmark/bookmark.module';
 import { StoryRoutingModule }           from './story-routing.module';
 import { PrimaryContentDisplayModule }  from 'src/app/SharedComponentModules/PrimaryContentDisplayer/primary-content-display.module';
 

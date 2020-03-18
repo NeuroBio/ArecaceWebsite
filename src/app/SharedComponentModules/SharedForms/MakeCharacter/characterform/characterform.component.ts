@@ -6,9 +6,9 @@ import { Subscription }                             from 'rxjs';
 
 import { QuickAssign }                              from 'src/app/GlobalServices/commonfunctions.service';
 import { FetchService }                             from 'src/app/GlobalServices/fetch.service';
-import { UploadPreviewService }                     from 'src/app/SharedComponentModules/upload-preview/upload-preview.service';
+import { UploadPreviewService }                     from 'src/app/SharedComponentModules/SmallComponents/upload-preview/upload-preview.service';
 
-import { UploadPreviewSettings }                    from 'src/app/SharedComponentModules/upload-preview/uploadpreviewclass';
+import { UploadPreviewSettings }                    from 'src/app/SharedComponentModules/SmallComponents/upload-preview/uploadpreviewclass';
 import { CharacterMetaData }                        from 'src/app/Classes/ContentClasses';
 import { SourceAbilities, Relations }               from '../formclasses';
 import { UploadCharacterDrops }                     from '../uploadcharacterdrops';

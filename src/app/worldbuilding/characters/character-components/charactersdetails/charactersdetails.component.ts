@@ -4,7 +4,7 @@ import { ActivatedRoute }                       from '@angular/router';
 import { CharacterMetaData}                     from '../../../../Classes/ContentClasses';
 import { GlobalVarsService }                    from 'src/app/GlobalServices/global-vars.service';
 import { GetRouteSegmentsService }              from 'src/app/GlobalServices/commonfunctions.service';
-import { BookmarkService } from 'src/app/SharedComponentModules/bookmark/bookmark.service';
+import { BookmarkService } from 'src/app/SharedComponentModules/SmallComponents/bookmark/bookmark.service';
 
 @Component({
   selector: 'app-charactersdetails',

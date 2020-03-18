@@ -4,7 +4,7 @@ import { RouterModule }                 from '@angular/router';
 
 import { ReactiveFormsModule }          from '@angular/forms';
 import { PrimaryContentDisplayModule }  from 'src/app/SharedComponentModules/PrimaryContentDisplayer/primary-content-display.module';
-import { LoginToSaveModule }            from '../../../../SharedComponentModules/login-to-save/login-to-save.module';
+import { LoginToSaveModule }            from '../../../../SharedComponentModules/SmallComponents/login-to-save/login-to-save.module';
 
 import { SurveyMainComponent }          from './survey-main/survey-main.component';
 import { SurveyDisplayComponent }       from './survey-display/survey-display.component';

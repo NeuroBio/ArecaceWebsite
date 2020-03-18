@@ -1,6 +1,6 @@
 import { AbilityMastery } from '../SharedComponentModules/SharedForms/SourceAffinityCalculator/SourceAbilityData';
 import { formatDate } from '@angular/common'
-import { SliderService } from 'src/app/SharedComponentModules/slider/slider.service';
+import { SliderService } from 'src/app/SharedComponentModules/SmallComponents/slider/slider.service';
 
 
 export class GeneralMetaData {

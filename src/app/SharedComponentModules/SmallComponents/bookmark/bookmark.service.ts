@@ -4,7 +4,7 @@ import { formatDate } from '@angular/common';
 import { Subscription, BehaviorSubject } from 'rxjs';
 
 import { FireBaseService } from 'src/app/GlobalServices/firebase.service';
-import { AuthService } from '../../administration/security/Auth/auth.service';
+import { AuthService } from '../../../administration/security/Auth/auth.service';
 
 @Injectable({
   providedIn: 'root'

@@ -10,7 +10,7 @@ const activeRoutes: Routes = [
   {path: 'calc',
     loadChildren: () => import('./CalcConvert/calc-convert.module').then(m => m.CalcConvertModule)},
   {path: 'surveys',
-    loadChildren: () => import('./surveys/survey.module').then(m => m.SurveyModule)},
+    loadChildren: () => import('./Surveys/survey.module').then(m => m.SurveyModule)},
 ];
 
 @NgModule({

@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, Input } from '@angular/core';
-import { AuthService } from '../../../administration/security/Auth/auth.service';
+import { AuthService } from '../../../../administration/security/Auth/auth.service';
 import { Subscription } from 'rxjs';
 import { LoginToSaveService } from '../login-to-save.service';
 import { FetchService } from 'src/app/GlobalServices/fetch.service';

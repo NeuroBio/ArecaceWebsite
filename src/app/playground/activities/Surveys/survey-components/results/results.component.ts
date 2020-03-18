@@ -4,7 +4,7 @@ import { Subscription }                         from 'rxjs';
 
 import { SurveyService }                        from '../survey.service';
 import { FetchService }                         from 'src/app/GlobalServices/fetch.service';
-import { LoginToSaveService }                   from 'src/app/SharedComponentModules/login-to-save/login-to-save.service';
+import { LoginToSaveService }                   from 'src/app/SharedComponentModules/SmallComponents/login-to-save/login-to-save.service';
 
 import { CRUDdata }                             from 'src/app/Classes/ContentClasses';
 

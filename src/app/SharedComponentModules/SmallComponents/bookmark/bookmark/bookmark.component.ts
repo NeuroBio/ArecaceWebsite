@@ -1,5 +1,5 @@
 import { Component, OnInit, OnChanges, Input, OnDestroy } from '@angular/core';
-import { User } from '../../../Classes/ContentClasses';
+import { User } from '../../../../Classes/ContentClasses';
 
 import { BookmarkService } from '../bookmark.service';
 import { Subscription } from 'rxjs';

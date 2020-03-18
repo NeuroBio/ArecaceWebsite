@@ -44,7 +44,7 @@ div.imagebutton {
 }
 
 
-span {
+span.imagebutton {
     padding: 10px;
     font-size: 24px;
     font-weight: bold;
@@ -56,17 +56,17 @@ span {
     border: 3px solid #a7a7a7;
 }
 
-.proxy {
+a.imagebutton {
     display: block;
     height: inherit;
     width: inherit;
 }
 
-.proxy:hover {
+a.imagebutton:hover {
     background-color: rgba(255,255,255,.5);
 }
 
-.proxy:active {
+a.imagebutton:active {
     background-color: rgba(0,0,0,.2);
 }
 
