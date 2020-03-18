@@ -7,6 +7,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ActivitieshomeComponent implements OnInit {
 
+  links = [ {Link: 'surveys', Title: 'Surveys'},
+            {Link: 'calc', Title: 'Calculators and Converters'},
+            {Link: 'makefancharacter', Title: 'Make Character'}]
+
   constructor() { }
 
   ngOnInit() {

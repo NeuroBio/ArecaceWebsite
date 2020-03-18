@@ -7,7 +7,7 @@ import { DateConverterComponent } from './date-converter/date-converter.componen
 import { SourceCalcFrameComponent } from './source-calc-frame/source-calc-frame.component';
 
 import { CalcConvertRoutingModule } from './calc-convert-routing.module';
-import { SharedFormsModule } from '../../SharedComponentModules/SharedForms/shared-forms.module';
+import { SharedFormsModule } from '../../../SharedComponentModules/SharedForms/shared-forms.module';
 import { LoginToSaveModule } from 'src/app/SharedComponentModules/login-to-save/login-to-save.module';
 
 

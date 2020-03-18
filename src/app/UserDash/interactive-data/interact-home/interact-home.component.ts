@@ -3,7 +3,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Observable }                   from 'rxjs';
 import { map }                          from 'rxjs/operators';
 
-import { SurveyService }                from 'src/app/playground/surveys/survey-components/survey.service';
+import { SurveyService }                from 'src/app/playground/activities/Surveys/survey-components/survey.service';
 import { FetchService }                 from 'src/app/GlobalServices/fetch.service';
 import { DisplayService } from '../display.service';
 

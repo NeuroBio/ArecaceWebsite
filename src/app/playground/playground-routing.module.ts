@@ -10,11 +10,11 @@ const playgroundRoutes: Routes = [
   ]
 },
   {path: 'calc',
-    loadChildren: () => import('./CalcConvert/calc-convert.module').then(m => m.CalcConvertModule)},
+    loadChildren: () => import('./activities/CalcConvert/calc-convert.module').then(m => m.CalcConvertModule)},
   {path: 'nomadic',
     loadChildren: () => import('./nomadic/nomadic.module').then(m => m.NomadicModule)},
   {path: 'surveys',
-    loadChildren: () => import('./surveys/survey.module').then(m => m.SurveyModule)},
+    loadChildren: () => import('./activities/Surveys/survey.module').then(m => m.SurveyModule)},
   {path: 'notes',
     loadChildren: () => import('./LooseNotes/loose-notes.module').then(m => m.LooseNotesModule)},
   {path: 'othersart',

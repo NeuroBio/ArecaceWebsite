@@ -4,5 +4,11 @@
     </div>
     <hr>
     <p>The activities page is still a work in progress!</p>
-    <a [routerLink]="'makefancharacter'">Characters</a>
+
+    <div>
+        <div class="navver" role="nav" id="quickNav" *ngFor="let link of links">
+            <a class="navver" [routerLink]="link.Link">{{ link.Title }}</a>
+        </div>
+    </div>
+    <!-- <a class="navver" [routerLink]="'makefancharacter'">Characters</a> -->
 </div>

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Subscription } from 'rxjs';
-import { SurveyData } from '../../../Classes/ContentClasses';
+import { SurveyData } from 'src/app/Classes/ContentClasses';
 import { SurveyProcessorService } from '../survey-processor.service';
 import { FireBaseService } from 'src/app/GlobalServices/firebase.service';
 

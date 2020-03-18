@@ -5,7 +5,7 @@ import { ReactiveFormsModule }      from '@angular/forms';
 
 import { UserDashRoutingModule } from './user-dash-routing.module';
 import { LoginModule } from '../SharedComponentModules/LoginButton/login.module';
-import { SurveyComponentsModule } from '../playground/surveys/survey-components/survey-components.module';
+import { SurveyComponentsModule } from '../playground/activities/Surveys/survey-components/survey-components.module';
 import { PrimaryContentDisplayModule } from 'src/app/SharedComponentModules/PrimaryContentDisplayer/primary-content-display.module';
 import { SharedFormsModule } from 'src/app/SharedComponentModules/SharedForms/shared-forms.module';
 import { CharacterComponentsModule } from 'src/app/worldbuilding/characters/character-components/character-components.module';

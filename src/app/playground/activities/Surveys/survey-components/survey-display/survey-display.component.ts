@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormArray, FormGroup } from '@angular/forms';
-import { SurveyQuestion, SurveyOutcome } from '../../../../Classes/ContentClasses';
+import { SurveyQuestion, SurveyOutcome } from 'src/app/Classes/ContentClasses';
 import { SurveyService } from '../survey.service';
 import { ActivatedRoute } from '@angular/router';
 
