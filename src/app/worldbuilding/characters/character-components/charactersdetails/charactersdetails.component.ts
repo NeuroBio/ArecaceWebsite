@@ -1,4 +1,5 @@
-import { Component, OnInit, OnDestroy }                    from '@angular/core';
+import { Component, OnInit, OnDestroy,
+         ViewChild, ElementRef }                from '@angular/core';
 import { ActivatedRoute }                       from '@angular/router';
 
 import { CharacterMetaData}                     from '../../../../Classes/ContentClasses';
@@ -14,6 +15,7 @@ import { BookmarkService } from 'src/app/SharedComponentModules/SmallComponents/
 
 export class CharactersDetailsComponent implements OnInit, OnDestroy {
 
+  @ViewChild('top', {static: true}) top: ElementRef
   char: CharacterMetaData;
   loading: boolean;
   FullBio = false;
@@ -28,7 +30,7 @@ export class CharactersDetailsComponent implements OnInit, OnDestroy {
   ngOnInit() {
     const frags = this.getsegserv.fetch(this.route.snapshot.pathFromRoot);
     this.route.data.subscribe((data: {Data: CharacterMetaData}) => {
-        // this.main.nativeElement.scrollIntoView();
+        this.top.nativeElement.scrollIntoView();
         this.loading = this.global.ImagesLoadable.value;
         const real = frags[frags.length-1] === 'FanCharacters' ? false : true;
         this.bookmarkserv.real.next(real);
