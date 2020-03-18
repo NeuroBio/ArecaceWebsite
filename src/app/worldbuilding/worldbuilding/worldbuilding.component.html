@@ -8,12 +8,17 @@
   <div id="mapped" role="navigation">
 
     <nav id="world">
-      <div class="imagebutton" *ngFor="let section of navInfo"
+      <app-image-button *ngFor="let section of navInfo"
+      [Link]="section.link"
+      [Name]="section.name"
+      [Src]="section.src"
+      ></app-image-button>
+      <!-- <div class="imagebutton" *ngFor="let section of navInfo"
       [id]="section.link">
         <a class="imagebutton" [routerLink]="section.link">
           <span class="strokeme imagebutton">{{ section.text }}</span>
         </a>
-      </div>
+      </div> -->
     </nav>
     
   </div>
