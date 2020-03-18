@@ -10,6 +10,7 @@ import { AuthService } from 'src/app/administration/security/Auth/auth.service';
 export class DownloadPageService {
 
   ImageData = new BehaviorSubject<any>(undefined);
+  real: boolean;
   private stream: Subscription;
 
   constructor(private cache: CacheService,
@@ -20,9 +21,11 @@ export class DownloadPageService {
       this.stream.unsubscribe();
     }
     if(user === true) {
+      this.real = false;
       return this.stream = this.auth.user.subscribe((data: User) =>
         this.assignData(data[type], index, refIndex) );
     }
+    this.real = true;
     return this.stream = this.cache.Cache[type].subscribe((data: any[]) => 
       this.assignData(data, index, refIndex) );
   }

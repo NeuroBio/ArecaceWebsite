@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { GetRouteSegmentsService } from 'src/app/GlobalServices/commonfunctions.service';
 import { Subscription } from 'rxjs';
 import { GlobalVarsService } from 'src/app/GlobalServices/global-vars.service';
+import { BookmarkService } from 'src/app/SharedComponentModules/bookmark/bookmark.service';
 
 @Component({
   selector: 'app-download-page',
@@ -22,25 +23,28 @@ export class DownloadPageComponent implements OnInit, OnDestroy {
   maxed: boolean;
   @ViewChild('image', {static: false}) Image: ElementRef;
 
-  constructor(private download: DownloadPageService,
+  constructor(private downloadserv: DownloadPageService,
               private route: ActivatedRoute,
               private getsegserv: GetRouteSegmentsService,
-              private global: GlobalVarsService) { }
+              private global: GlobalVarsService,
+              private bookmarkserv: BookmarkService) { }
 
   ngOnInit() {
     window.scroll(0,0);
     const mainPath = this.getsegserv.fetch(this.route.snapshot.pathFromRoot);
     this.path = mainPath.join('/');
-    this.stream = this.download.ImageData
+    this.stream = this.downloadserv.ImageData
       .subscribe(data => this.ImageData = data);
     this.name = this.ImageData.Name
       ? this.ImageData.Name
       : `${this.ImageData.FirstName} ${this.ImageData.LastName}'s Bio Pic`;
     this.loading = this.global.ImagesLoadable.value;
+    this.bookmarkserv.real.next(this.downloadserv.real)
   }
 
   ngOnDestroy() {
     this.stream.unsubscribe();
+    this.bookmarkserv.dispose();
   }
 
   switchView(){
