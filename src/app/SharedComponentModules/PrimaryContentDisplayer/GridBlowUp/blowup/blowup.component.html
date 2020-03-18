@@ -28,7 +28,7 @@
           [hidden]="loading"
           [src]="bigUrl"
           [alt]="activeMember.AltText ? activeMember.AltText : ''"
-          (load)="onResize()">
+          (load)="onResize();onLoad()">
 
           <div *ngIf="activeMember.Description && !loading" class="textblock"
           [style.height.px]="textHeight">

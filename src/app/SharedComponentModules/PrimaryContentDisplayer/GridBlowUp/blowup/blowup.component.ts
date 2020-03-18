@@ -46,14 +46,16 @@ export class BlowUpComponent implements OnInit {
   }
 
   onResize(){
-    this.loading = false;
     setTimeout(() => {
       this.textHeight = this.bigger.nativeElement.offsetHeight - 30;
       if(this.textHeight < 400){
         this.textHeight = 400;
       }
     }, 10)
-    
+  }
+
+  onLoad() {
+    this.loading = false;
   }
 
   showHideDescription() {
