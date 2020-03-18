@@ -8,10 +8,12 @@ div#background {
 }
 
 div#imageHolder {
+    position: relative;
     display: flex;
     align-self: stretch;
     max-width: calc(100vw - 33px);
     overflow-x: auto;
+    align-items: center;
 }
 
 img {
@@ -52,4 +54,15 @@ div#othersArt {
 
 hr {
     border: 1px solid white;
+}
+
+div.loading {
+    position: absolute;
+    margin: auto;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    height: 200px;
+    width: 200px;
 }
