@@ -49,6 +49,18 @@ label.toggler:focus {
   border: 1px solid white;
 }
 
+select {
+  cursor: pointer;
+}
+
+input[type="checkbox"] {
+  cursor: pointer;
+}
+
+input[type="file"] {
+  cursor: pointer;
+}
+
 
 
 /*buttons with a fancy outline*/
