@@ -23,7 +23,7 @@ div.textblock {
     margin: 10px;
 }
 
-div#outer {
+div#looseNotes {
     max-width: 700px;
 }
 
@@ -31,18 +31,18 @@ app-bookmark {
     float: right;
 }
 
-::ng-deep div#outer hr {
+::ng-deep div#looseNotes hr {
     border: 1px solid white;
     margin-top: 7px;
     margin-bottom: 7px;
 }
 
-::ng-deep div#outer h3 {
+::ng-deep div#looseNotes h3 {
     margin: 0px;
     padding-top: 7px;
     padding-bottom: 7px;
 }
 
-::ng-deep div#outer h4 {
+::ng-deep div#looseNotes h4 {
     text-decoration: underline;
 }

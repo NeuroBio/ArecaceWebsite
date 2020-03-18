@@ -10,5 +10,6 @@ export class ImageButtonComponent {
   @Input() Link: string;
   @Input() Src: string;
   @Input() Name: string;
+  @Input() Size: number;
 
 }

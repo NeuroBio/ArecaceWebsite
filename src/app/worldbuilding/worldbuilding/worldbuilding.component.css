@@ -23,5 +23,8 @@ div#mapped {
 
 /* Navigation */
 nav#world {
-    max-width:700px;
+    max-width: 700px;
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: wrap;
 }

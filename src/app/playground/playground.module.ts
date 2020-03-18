@@ -5,6 +5,7 @@ import { PlaygroundRoutingModule } from './playground-routing.module';
 import { PlaygroundhomeComponent } from './playgroundhome/playgroundhome.component';
 
 import { ShowNewestModule } from '../SharedComponentModules/ShowNewest/show-newest.module';
+import { ImageButtonModule } from 'src/app/SharedComponentModules/SmallComponents/image-button/image-button.module';
 
 @NgModule({
   declarations: [
@@ -14,6 +15,7 @@ import { ShowNewestModule } from '../SharedComponentModules/ShowNewest/show-newe
   imports: [
     CommonModule,
     ShowNewestModule,
+    ImageButtonModule,
     
     PlaygroundRoutingModule //must be last!
   ]

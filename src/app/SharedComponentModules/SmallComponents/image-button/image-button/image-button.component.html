@@ -1,5 +1,10 @@
-    <div class="imagebutton" [style.background-image]="'url(' + Src + ')'">
+    <div class="imagebutton"
+    [style.background-image]="'url(' + Src + ')'"
+    [style.height]="Size + 'px'"
+    [style.width]="Size + 'px'"
+    [style.background-size]="Size + 'px'"
+    >
       <a class="imagebutton" [routerLink]="Link">
-        <span class="strokeme imagebutton">{{ Text }}</span>
+        <span class="strokeme imagebutton">{{ Name }}</span>
       </a>
     </div>

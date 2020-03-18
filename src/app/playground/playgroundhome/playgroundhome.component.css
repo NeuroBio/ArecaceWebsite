@@ -23,7 +23,11 @@ div#maincontent {
     align-items: center;
 }
 
-div#quickNav {
+nav#quickNav {
+    min-width: 370px;
     margin: 10px;
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: wrap;
 }
 

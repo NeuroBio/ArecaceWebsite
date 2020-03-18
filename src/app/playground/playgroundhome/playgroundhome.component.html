@@ -9,11 +9,15 @@
 
     <div id="maincontent">
 
-    <div>
-        <div class="navver" role="nav" id="quickNav" *ngFor="let link of links">
-            <a class="navver" [routerLink]="link.Link">{{ link.Title }}</a>
-        </div>
-    </div>
+    <nav id="quickNav">
+        <app-image-button
+        *ngFor="let section of links"
+        [Size]="170"
+        [Link]="section.Link"
+        [Name]="section.Name"
+        [Src]="section.Src"
+        ></app-image-button>
+    </nav>
 
     <br>
 
