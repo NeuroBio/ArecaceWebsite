@@ -40,6 +40,7 @@ app-slider {
     display: flex;
     align-content: stretch;
     border-right: 2px white solid;
+    border-left: 2px solid white;
 }
 
 label {

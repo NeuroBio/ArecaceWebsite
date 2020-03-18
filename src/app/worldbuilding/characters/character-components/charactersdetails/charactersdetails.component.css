@@ -36,3 +36,18 @@ h2.compheader {
 app-bookmark {
     align-self: stretch;
 }
+
+div#refs {
+    padding: 0px;
+}
+
+div#refs b {
+    position: absolute;
+    margin: 15px;
+}
+
+app-slider {
+    display: flex;
+    justify-content: center;
+    background-color: rgb(89, 89, 89);
+}

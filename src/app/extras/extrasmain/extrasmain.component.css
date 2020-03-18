@@ -16,6 +16,7 @@ div#background {
 }
 
 app-slider {
+    border-left: 2px solid white;
     display: flex;
     float: right;
     align-content: stretch;

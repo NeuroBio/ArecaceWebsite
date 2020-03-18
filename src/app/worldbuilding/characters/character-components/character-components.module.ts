@@ -10,7 +10,7 @@ import { CharactersMainComponent }          from './charactersmain/charactersmai
 import { CharactersDetailsComponent }       from './charactersdetails/charactersdetails.component';
 import { CharactersBlowupmasterComponent }  from './charactersblowupmaster/charactersblowupmaster.component';
 import { BookmarkModule }                   from 'src/app/SharedComponentModules/bookmark/bookmark.module';
-
+import { SliderModule }                     from 'src/app/SharedComponentModules/slider/slider.module';
 @NgModule({
   declarations: [
     CharactersMainComponent,
@@ -22,6 +22,7 @@ import { BookmarkModule }                   from 'src/app/SharedComponentModules
     GridBlowupModule,
     PrimaryContentDisplayModule,
     BookmarkModule,
+    SliderModule,
     RouterModule
   ],
   exports: [

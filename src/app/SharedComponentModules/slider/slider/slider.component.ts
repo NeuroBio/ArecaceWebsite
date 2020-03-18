@@ -10,6 +10,8 @@ import { take } from 'rxjs/operators';
 export class SliderComponent implements OnInit {
 
   @Input() name: string;
+  @Input() flow: string = 'column';
+  @Input() width: number = 90;
   preview: boolean;
 
   constructor(private sliderserv: SliderService) { }

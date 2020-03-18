@@ -84,11 +84,17 @@
       <br>
 
       <!-- MISC References -->
-      <div class="textblock" *ngIf="char.Links[2]">
-        <b>Other References:</b><br>
+      <div class="textblock" id="refs" *ngIf="char.Links[2]">
+        <b>Other References:</b><br><br>
         <app-grid
         [collect]="char.References"
         ></app-grid>
+        <hr>
+        <app-slider
+        [name]="'Show Preview'"
+        [flow]="'row'"
+        [width]="270"
+        ></app-slider>
       </div><br>
 
 <router-outlet></router-outlet>
