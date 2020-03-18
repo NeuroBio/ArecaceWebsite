@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { AuthService } from 'src/app/administration/security/Auth/auth.service';
+import { GeneralcollectionService } from 'src/app/GlobalServices/generalcollection.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,8 @@ export class DisplayService {
   currentUserDatum = new BehaviorSubject<any>(undefined);
   stream: Subscription;
 
-  constructor(private auth: AuthService) { }
+  constructor(private auth: AuthService,
+              private generalcollectserv: GeneralcollectionService) { }
 
   assignData(type: string) {
     this.currentDataType.next(type);
@@ -23,6 +25,7 @@ export class DisplayService {
         this.updateCurrentUserDatum(this.currentID.value);
       }
     })
+    this.generalcollectserv.initializeMetaData(this.currentUserData, this.currentDataType.value)
   }
 
   updateCurrentUserDatum(ID: string) {
@@ -43,5 +46,6 @@ export class DisplayService {
     if(this.stream) {
       this.stream.unsubscribe();
     }
+    this.generalcollectserv.dispose();
   }
 }
