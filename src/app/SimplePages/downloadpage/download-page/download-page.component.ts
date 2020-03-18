@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
 import { DownloadPageService } from '../download-page.service';
 import { ActivatedRoute } from '@angular/router';
 import { GetRouteSegmentsService } from 'src/app/GlobalServices/commonfunctions.service';
@@ -19,6 +19,8 @@ export class DownloadPageComponent implements OnInit, OnDestroy {
   stream: Subscription;
   full = false;
   loading: boolean;
+  maxed: boolean;
+  @ViewChild('image', {static: false}) Image: ElementRef;
 
   constructor(private download: DownloadPageService,
               private route: ActivatedRoute,
@@ -43,6 +45,19 @@ export class DownloadPageComponent implements OnInit, OnDestroy {
 
   switchView(){
     this.full = !this.full;
+  }
+
+  onLoad() {
+    this.loading = false;
+    console.log("trig")
+    this.onResize();
+  }
+  onResize() {
+    if(this.Image.nativeElement.offsetWidth + 33 < window.innerWidth) {
+      this.maxed = true
+    } else {
+      this.maxed = false;
+    }
   }
 
 }

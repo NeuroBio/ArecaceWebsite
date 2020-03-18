@@ -1,12 +1,14 @@
 <div id="background">
     <div *ngIf="ImageData">
-        <div id="imageHolder">
-            <div class="loading" *ngIf="loading === true"></div>
+        <div id="imageHolder" #image (window:resize)="onResize()">
+            <div class="loading" *ngIf="loading===true"></div>
             <img [src]="ImageData.Links[1]"
             (click)="switchView()"
-            (load)="loading=false"
+            (load)="onLoad()"
             [style.max-width]="full === true ? 'none' : '100%'"
-            [style.cursor]="full === true ? 'zoom-out' : 'zoom-in'"
+            [style.cursor]="maxed === true ? 'default'
+                            : full === true ? 'zoom-out'
+                            : 'zoom-in'"
             >
         </div>
 
