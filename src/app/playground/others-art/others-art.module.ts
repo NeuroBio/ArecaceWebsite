@@ -6,6 +6,7 @@ import { OthersArtComponent } from '../others-art/main/others-art.component';
 import { PixelArmyComponent } from '../others-art/pixel-army/pixel-army.component';
 
 import { OthersArtRoutingModule } from './others-art-routing.module';
+import { SliderModule } from 'src/app/SharedComponentModules/slider/slider.module';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { OthersArtRoutingModule } from './others-art-routing.module';
   imports: [
     CommonModule,
     GridBlowupModule,
+    SliderModule,
     OthersArtRoutingModule
   ]
 })
