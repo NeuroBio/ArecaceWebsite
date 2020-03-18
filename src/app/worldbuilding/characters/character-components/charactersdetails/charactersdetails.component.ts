@@ -1,10 +1,10 @@
-import { Component, OnInit }                    from '@angular/core';
+import { Component, OnInit, OnDestroy }                    from '@angular/core';
 import { ActivatedRoute }                       from '@angular/router';
 
 import { CharacterMetaData}                     from '../../../../Classes/ContentClasses';
 import { GlobalVarsService }                    from 'src/app/GlobalServices/global-vars.service';
 import { GetRouteSegmentsService }              from 'src/app/GlobalServices/commonfunctions.service';
-import { DownloadPageService }                  from 'src/app/SimplePages/downloadpage/download-page.service';
+import { BookmarkService } from 'src/app/SharedComponentModules/bookmark/bookmark.service';
 
 @Component({
   selector: 'app-charactersdetails',
@@ -12,31 +12,36 @@ import { DownloadPageService }                  from 'src/app/SimplePages/downlo
   styleUrls: ['./charactersdetails.component.css']
 })
 
-export class CharactersDetailsComponent implements OnInit {
+export class CharactersDetailsComponent implements OnInit, OnDestroy {
 
   char: CharacterMetaData;
   loading: boolean;
   FullBio = false;
   name: string;
   path: string;
-  real: boolean;
   
   constructor(private route: ActivatedRoute,
               private global: GlobalVarsService,
-              private getsegserv: GetRouteSegmentsService) { }
+              private getsegserv: GetRouteSegmentsService,
+              private bookmarkserv: BookmarkService) { }
 
   ngOnInit() {
     const frags = this.getsegserv.fetch(this.route.snapshot.pathFromRoot);
     this.route.data.subscribe((data: {Data: CharacterMetaData}) => {
         // this.main.nativeElement.scrollIntoView();
         this.loading = this.global.ImagesLoadable.value;
-        this.real = frags[frags.length-1] === 'FanCharacters' ? false : true;
+        const real = frags[frags.length-1] === 'FanCharacters' ? false : true;
+        this.bookmarkserv.real.next(real);
         this.char = data.Data;
         this.name = `${this.char.FirstName} ${this.char.LastName}`
         this.path = `/${frags.join('/')}/${this.char.ID}`
         this.char.References = this.blowupReorganization(this.char.References);
         this.FullBio = (this.char.BriefBackground === '');
    });
+  }
+
+  ngOnDestroy() {
+    this.bookmarkserv.dispose();
   }
 
   changeBio(toggle: boolean) {

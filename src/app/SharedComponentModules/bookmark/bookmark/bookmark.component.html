@@ -1,4 +1,5 @@
-<button id="bookmark" (click)="bookmark()"
+<button id="bookmark" *ngIf="real === true"
+(click)="bookmark()"
 [disabled]="notLoggedIn"
 [style.background-color]="color"
 (mouseover)="hover=true" (mouseleave)="hover=false"
