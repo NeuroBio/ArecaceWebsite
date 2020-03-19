@@ -1,14 +1,15 @@
-<div id="outer" *ngIf="names[0]">
-  <h4>{{ title }}</h4>
-  <hr>
-  <ul>
+  <app-scroll-frame
+  *ngIf="names[0]"
+  [Title]="title">
+  
+  <ul id="outer">
     <div *ngFor="let name of names; let i = index">
-      <!-- <button class="Exs" (click)="onDelete(i)">x</button> -->
       <li>{{ name }}</li>
-      <button class="Exs" (click)="onView(i)">view</button>
+        <button class="Exs" (click)="onView(i)">view</button>
       <button class="Exs"
       *ngIf="edit === true"
       (click)="onEdit(i)">edit</button>
     </div>
   </ul>
-</div>
+
+</app-scroll-frame>

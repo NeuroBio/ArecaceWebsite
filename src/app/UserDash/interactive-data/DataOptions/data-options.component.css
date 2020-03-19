@@ -1,9 +1,7 @@
-div#outer {
-    border: white 1px solid;
+ul#outer {
     background-color: hsl(0, 0%, 27%);
     width: 400px;
     padding: 7px;
-    margin: 7px;
 }
 
 h4 {

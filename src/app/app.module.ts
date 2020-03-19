@@ -14,6 +14,7 @@ import { environment }                from '../environments/environment';
 import { AppRoutingModule }           from './app-routing.module';
 import { UpdatefeedModule }           from './SharedComponentModules/UpdateFeed/updatefeed.module';
 import { ShowNewestModule }           from './SharedComponentModules/ShowNewest/show-newest.module';
+import { ScrollFrameModule }          from './SharedComponentModules/SmallComponents/scroll-frame/scroll-frame.module';
 
 import { AppComponent }               from './app.component';
 import { AboutComponent }             from './SimplePages/about/about.component';
@@ -56,7 +57,8 @@ export function AuthFactory(provider: AuthService) {
     HttpClientModule,
     UpdatefeedModule,
     ShowNewestModule,
-
+    ScrollFrameModule,
+    
     ReactiveFormsModule,
 
     AngularFireModule.initializeApp(environment.firebase),

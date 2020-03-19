@@ -1,11 +1,16 @@
+<app-scroll-frame
+[Title]="'Your Bookmarks'">
 <div id="outer">
-  <h4>Your Bookmarks</h4>
-  <hr>
-  
-  <div *ngIf="dataExists === true; then display else notsaved">
-  </div>
+  <div *ngIf="dataExists === true; then display else notsaved"></div>
+</div>
+</app-scroll-frame>
 
-  <ng-template #display>
+
+<!-- <div id="outer">
+  <h4>Your Bookmarks</h4>
+  <hr> -->
+
+  <ng-template #display class="outer">
     <p *ngFor="let type of data">
       <span>{{ type.Type }}:</span>
       <span class="linker" *ngFor="let link of type.Data; let i = index">
@@ -17,10 +22,10 @@
     </p>
   </ng-template>
 
-  <ng-template #notsaved>
+  <ng-template #notsaved class="outer">
     <p>
       You have not saved your place anywhere.
     </p>
   </ng-template>
 
-</div>
+<!-- </div> -->

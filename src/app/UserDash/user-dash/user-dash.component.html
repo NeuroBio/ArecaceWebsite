@@ -1,4 +1,4 @@
-<div *ngIf="authorized === true; then authenticated else guest"></div>
+<div *ngIf="authorized !== true; then authenticated else guest"></div>
 
 
 <!-- User NOT logged in -->

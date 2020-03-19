@@ -7,35 +7,6 @@ div#splatter {
 
 div.textblock {
     border: 1px solid white;
-}
-
-/*feeeeeeeeeeeeeeed*/
-div#updatefeed {
-    position: relative;
-    float: left;
-    height: 500px;
-    width: calc(100% - 20px);
-    max-width: 600px;
-    border: 1px solid white;
-    margin: 10px;
-    overflow-y: scroll;
-    margin-right: 10px;
-}
-
-div#updatefeedheader {
-    position: -webkit-sticky;
-    position: sticky;
-    background-color: #454545;
-    display: block;
-    top: 0px;
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 25px;
-    font-weight: bold;
-    padding-top: 10px;
-    text-align: center;
-}
-
-div.textblock {
     max-width: 500px;
     float: left;
     margin: 10px;
@@ -101,8 +72,6 @@ button#large2 {
     min-width: 80px;
     overflow: hidden;
 }
-
-
 
 button:hover {
     background: rgba(255,255,255,.2)

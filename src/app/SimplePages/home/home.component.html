@@ -5,13 +5,10 @@
   <div class="textblock" [innerHTML]="mainText"></div>
 
 <!-- UPDATE FEED -->
-  <div id="updatefeed">
-    <div id="updatefeedheader">
-      News Feed
-      <hr>
-    </div>
-      <app-updatefeed></app-updatefeed>
-  </div>
+  <app-scroll-frame
+  [Title]="'News Feed'">
+    <app-updatefeed></app-updatefeed>
+  </app-scroll-frame>
 
 
 

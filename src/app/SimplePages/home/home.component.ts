@@ -28,9 +28,9 @@ export class HomeComponent implements OnInit {
       this.buttonText = ['Intro', 'Scripts','Comic','Play- ground'];
     }else{
       this.buttonText = ['Full Introduction',
-              'Start Comic Scripts',
-              'See Latest Page',
-              'Playground under construction!'];
+                          'Start Comic Scripts',
+                          'See Latest Page',
+                          'Playground under construction!'];
     }
   }
 }

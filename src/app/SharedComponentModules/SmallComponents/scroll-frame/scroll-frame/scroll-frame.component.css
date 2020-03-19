@@ -1,0 +1,22 @@
+div#frame {
+    position: relative;
+    max-height: 500px;
+    width: calc(100% - 22px);
+    max-width: 600px;
+    border: 1px solid white;
+    margin: 10px;
+    overflow-y: auto;
+}
+
+div#frameheader {
+    position: -webkit-sticky;
+    position: sticky;
+    background-color: #454545;
+    display: block;
+    top: 0px;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 25px;
+    font-weight: bold;
+    padding-top: 10px;
+    text-align: center;
+}
