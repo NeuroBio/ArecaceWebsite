@@ -1,13 +1,13 @@
   <app-scroll-frame
   *ngIf="names[0]"
-  [Title]="title">
+  [Title]="title"
+  [Color]="'rgb(49, 49, 49)'">
   
   <ul id="outer">
     <div *ngFor="let name of names; let i = index">
       <li>{{ name }}</li>
-        <button class="Exs" (click)="onView(i)">view</button>
-      <button class="Exs"
-      *ngIf="edit === true"
+      <button class="Exs" (click)="onView(i)">view</button>
+      <button class="Exs" *ngIf="edit === true"
       (click)="onEdit(i)">edit</button>
     </div>
   </ul>

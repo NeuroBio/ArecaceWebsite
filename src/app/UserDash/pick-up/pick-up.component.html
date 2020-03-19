@@ -1,15 +1,15 @@
+
+<!-- Conatainer -->
 <app-scroll-frame
-[Title]="'Your Bookmarks'">
+[Title]="'Your Bookmarks'"
+[Color]="'rgb(49, 49, 49)'">
 <div id="outer">
   <div *ngIf="dataExists === true; then display else notsaved"></div>
 </div>
 </app-scroll-frame>
 
 
-<!-- <div id="outer">
-  <h4>Your Bookmarks</h4>
-  <hr> -->
-
+<!-- Favorites -->
   <ng-template #display class="outer">
     <p *ngFor="let type of data">
       <span>{{ type.Type }}:</span>
@@ -22,10 +22,10 @@
     </p>
   </ng-template>
 
+
+  <!-- No favorites -->
   <ng-template #notsaved class="outer">
     <p>
       You have not saved your place anywhere.
     </p>
   </ng-template>
-
-<!-- </div> -->

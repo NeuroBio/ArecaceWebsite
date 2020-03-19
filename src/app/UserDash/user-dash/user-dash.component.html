@@ -12,21 +12,25 @@
 <ng-template #authenticated>
     <div id="outer" *ngIf="user">
         <div class="compheader">
-            <button id="logout" (click)="auth.logout()">Logout</button>
-            <h3 class="compheader">Welcome Back, {{ user.userName }} (ID#{{ user.ID }})</h3>
+            <h3 class="compheader">Welcome Back, {{ user.userName }} (ID#{{ user.ID }})
+                <app-logout ></app-logout>
+            </h3>
         </div>
         <hr>
-        <div [innerHTML]="loggedinText"></div>
-        <hr>
+
+        <div id="announcement">
+            <div id="innerText" [innerHTML]="loggedinText"></div>
+            <hr>
+        </div>
 
 
         <div id="UserComponents">
-            <app-pick-up
+            <app-pick-up class="UserData"
             [user]="user"
             ></app-pick-up>
         
-        <!-- The Vast Majority of the Data -->
-        <div *ngFor="let datum of savedData">
+            <!-- The Vast Majority of the Data -->
+            <div *ngFor="let datum of savedData" class="UserData">
                 <app-data-options
                 [names]="datum.name"
                 [title]="datum.title"
@@ -36,9 +40,9 @@
                 [edit]="datum.edit"
                 ></app-data-options>
             </div>
-        </div>        
-        <hr>
-
+        </div>
+        
+        <div style="clear: both;"></div>
         <button (click)="setShowAccountInfo()">Show Account Info</button>
 
         <app-user-info

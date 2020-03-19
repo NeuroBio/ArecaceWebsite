@@ -10,9 +10,8 @@ export class LogoutComponent {
 
   constructor(private auth: AuthService) { }
 
-  login() {
-    console.log("happied")
-    //this.auth.logout();
+  logout() {
+    this.auth.logout();
   }
 
 }

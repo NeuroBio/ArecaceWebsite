@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LoginComponent } from './login/login.component';
-import { LogoutComponent } from 'src/app/administration/DashBoard/logout/logout.component';
+import { LogoutComponent } from './logout/logout.component';
 @NgModule({
   declarations: [
     LoginComponent,

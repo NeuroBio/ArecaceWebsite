@@ -30,7 +30,6 @@ import { UploadLogComponent }         from './SimplePages/upload-log/upload-log.
 import { AuthService }                from './administration/security/Auth/auth.service';
 import { TextProvider }               from './GlobalServices/textprovider.service';
 
-
 export function TextFactory(provider: TextProvider) {
   return () => provider.load();
 }

@@ -1,11 +1,11 @@
 div#outer {
-    background-color: #454545;
+    background-color: rgb(69, 69, 69);
     width: 400px;
     padding: 7px;
 }
 
 a {
-    color: rgb(220,220,220);
+    color: rgb(241, 241, 241);
     width: 100%;
     padding: 0px 5px 0px 5px;
     margin: 3px;

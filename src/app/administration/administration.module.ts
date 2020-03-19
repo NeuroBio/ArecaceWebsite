@@ -9,7 +9,6 @@ import { SharedFormsModule }            from '../SharedComponentModules/SharedFo
 import { LanguageTableModule }          from '../SharedComponentModules/language-table/language-table.module';
 import { UploadPreviewModule }          from 'src/app/SharedComponentModules/SmallComponents/upload-preview/upload-preview.module';
 
-
 import { AboutTextComponent }           from './Forms/about-text/about-text.component';
 
 import { AdminComponent }               from './DashBoard/admin/admin.component';
@@ -27,7 +26,6 @@ import { GeneratorComponent }           from './LanguageGeneration/generator/gen
 import { GuildFormComponent }           from './Forms/guild/guildform/guildform.component';
 import { IntroTextComponent }           from './Forms/intro-text/intro-text.component';
 import { LanguageComponent }            from './DashBoard/language/language.component';
-import { LogoutComponent }              from './DashBoard/logout/logout.component';
 import { LooseNotesFormComponent }      from './Forms/loosenotes/loose-notes-form/loose-notes-form.component';
 import { MessageComponent }             from './DashBoard/message/message.component';
 import { OthersArtFormComponent }       from './Forms/othersart/othersartform/othersartform.component';
@@ -53,7 +51,6 @@ import { WordFormComponent }            from './LanguageGeneration/word-form/wor
     StoryFormComponent,
     GuildFormComponent,
     ContentComponent,
-    LogoutComponent,
     EditListComponent,
     ReferenceFormComponent,
     UpdateFormComponent,

@@ -22,7 +22,6 @@ export class DownloadResolverService implements Resolve<any>{
               private auth: AuthService) { }
 
   resolve(route: ActivatedRouteSnapshot) {
-    console.log("resolving")
     const P = this.assignParams(route);
     if(this.firePaths[P.Type]) { //my data
       return this.standardPath(P);

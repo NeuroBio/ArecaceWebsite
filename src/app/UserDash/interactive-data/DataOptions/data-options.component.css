@@ -1,5 +1,5 @@
 ul#outer {
-    background-color: hsl(0, 0%, 27%);
+    background-color: rgb(69, 69, 69);
     width: 400px;
     padding: 7px;
 }
@@ -17,5 +17,5 @@ ul {
 li {
     display: inline-block;
     padding: 5px;
-    width: 270px;
+    width: 260px;
 }
