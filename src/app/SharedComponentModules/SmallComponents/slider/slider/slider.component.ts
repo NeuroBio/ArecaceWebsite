@@ -1,6 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { SliderService } from '../slider.service';
-import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-slider',
@@ -18,6 +17,9 @@ export class SliderComponent implements OnInit {
 
   ngOnInit() {
     this.preview = this.sliderserv.getPreview();
+    if(!this.preview) {
+      this.preview = true;
+    }
   }
 
   changeView() {
