@@ -9,6 +9,7 @@ import { SurveyComponentsModule } from '../playground/activities/Surveys/survey-
 import { PrimaryContentDisplayModule } from 'src/app/SharedComponentModules/PrimaryContentDisplayer/primary-content-display.module';
 import { SharedFormsModule } from 'src/app/SharedComponentModules/SharedForms/shared-forms.module';
 import { CharacterComponentsModule } from 'src/app/worldbuilding/characters/character-components/character-components.module';
+import { ScrollFrameModule } from 'src/app/SharedComponentModules/SmallComponents/scroll-frame/scroll-frame.module';
 
 import { UserDashComponent } from './user-dash/user-dash.component';
 import { UserInfoComponent } from './user-info/user-info.component';
@@ -38,6 +39,7 @@ import { CharacterFormModule } from 'src/app/SharedComponentModules/SharedForms/
     SharedFormsModule,
     CharacterComponentsModule,
     CharacterFormModule,
+    ScrollFrameModule,
     
     UserDashRoutingModule
   ]
