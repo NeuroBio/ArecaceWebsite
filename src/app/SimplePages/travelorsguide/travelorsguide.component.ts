@@ -1,6 +1,5 @@
 import { Component, OnInit }  from '@angular/core';
 import { TextProvider }       from 'src/app/GlobalServices/textprovider.service';
-import { DomSanitizer }       from '@angular/platform-browser';
 
 @Component({
   selector: 'app-travelorsguide',
@@ -21,8 +20,7 @@ export class TravelorsGuideComponent implements OnInit {
   index = 0;
   mainText: string;
 
-  constructor(private textprovider: TextProvider,
-              public sanitizer: DomSanitizer) {}
+  constructor(private textprovider: TextProvider) {}
 
   ngOnInit() {
     window.scroll(0,0);

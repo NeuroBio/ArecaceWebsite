@@ -1,5 +1,4 @@
 import { Component, OnInit }  from '@angular/core';
-import { DomSanitizer }       from '@angular/platform-browser';
 
 import { TextProvider }       from 'src/app/GlobalServices/textprovider.service';
 import { Question }           from 'src/app/Classes/WebsiteText';
@@ -13,8 +12,7 @@ export class FAQComponent implements OnInit{
 
   mainText: Question[];
 
-  constructor(private textprovider: TextProvider,
-              public sanitizer: DomSanitizer) { }
+  constructor(private textprovider: TextProvider) { }
 
   ngOnInit() {
     window.scroll(0,0);
