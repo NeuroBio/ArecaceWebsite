@@ -19,7 +19,7 @@ div#quickstart {
     display: inline-block;
     background-color: #454545;
     border: 1px solid white;
-    margin: 10px;
+    margin: 0px;
     max-width: calc(100vw - 50px);
 }
 
