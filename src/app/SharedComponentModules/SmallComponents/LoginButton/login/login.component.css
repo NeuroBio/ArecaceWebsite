@@ -2,14 +2,13 @@ div#googleBtn{
     display: flex;
     align-items: center;
     cursor: pointer;
-    height: 60px;
-    width: 260px;
+    height: 46px;
+    width: 150px;
     background-repeat: no-repeat;
     background-position: center;
     background-image: url("src/assets/svgs/g-normal.svg");
     padding-left: 50px;
     margin: 7px;
-    background-color: cornsilk;
 }
 
 div#googleBtn:hover{

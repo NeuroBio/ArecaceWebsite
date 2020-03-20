@@ -25,7 +25,7 @@
     <g id="Google-Button" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
         <g id="9-PATCH" sketch:type="MSArtboardGroup" transform="translate(-668.000000, -160.000000)"></g>
         <g id="btn_google_light_focus" sketch:type="MSArtboardGroup" transform="translate(-1.000000, -1.000000)">
-            <rect id="Rectangle-14" fill-opacity="0.3" fill="#4285F4" sketch:type="MSShapeGroup" x="1" y="1" width="200" height="46"></rect>
+            <rect id="Rectangle-14" fill-opacity="0.6" fill="#4285F4" sketch:type="MSShapeGroup" x="1" y="1" width="200" height="46"></rect>
             <g id="button" sketch:type="MSLayerGroup" transform="translate(4.000000, 4.000000)" filter="url(#filter-1)">
                 <g id="button-bg">
                     <use fill="#FFFFFF" fill-rule="evenodd" sketch:type="MSShapeGroup" xlink:href="#path-2"></use>
