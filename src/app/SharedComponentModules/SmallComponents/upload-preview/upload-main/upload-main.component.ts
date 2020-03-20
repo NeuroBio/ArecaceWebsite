@@ -26,7 +26,7 @@ export class UploadMainComponent implements OnInit, OnDestroy {
                             [undefined, undefined, undefined]]);
   
   @ViewChild('mainInput', { static: true }) mainUploader: ElementRef;
-  @ViewChild('thumbInput', { static: false }) thumbUploader: ElementRef;
+  @ViewChild('thumbInput') thumbUploader: ElementRef;
   mainImg: UploadPreviewInfo;
   thumbImg: UploadPreviewInfo;
   mainRequirements: string;

@@ -15,7 +15,7 @@ export class ShowNewestComponent implements OnInit {
   @Input() collectionName: string;
   @Input() contentLink: string;
   @Input() footerText: string;
-  @ViewChild('items', { static: false }) items: ElementRef;
+  @ViewChild('items') items: ElementRef;
   @ViewChild('right', { static: true }) right: ElementRef;
   @ViewChild('left', { static: true }) left: ElementRef;
 

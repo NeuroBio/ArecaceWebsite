@@ -21,7 +21,7 @@ export class DownloadPageComponent implements OnInit, OnDestroy {
   full = false;
   loading: boolean;
   maxed: boolean;
-  @ViewChild('image', {static: false}) Image: ElementRef;
+  @ViewChild('image') Image: ElementRef;
 
   constructor(private downloadserv: DownloadPageService,
               private route: ActivatedRoute,
