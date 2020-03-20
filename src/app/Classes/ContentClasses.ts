@@ -225,6 +225,7 @@ export class User {
     userName: string;
     Admin: boolean;
     User: boolean;
+    Mod: boolean;
     Narratives?: Bookmark[];
     Comics?: Bookmark[];
     Scripts?: Bookmark[];
@@ -240,6 +241,7 @@ export class User {
         this.ID = ID;
         this.userName = 'defaultUserName_2.0';
         this.Admin = false;
+        this.Mod = false;
         this.accountCreated = formatDate(new Date(), 'yyyy-MM-dd, HH:mm', 'en');
     }
 }

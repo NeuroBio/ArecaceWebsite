@@ -1,4 +1,4 @@
-<div *ngIf="authorized === true; then authenticated else guest"></div>
+<div *ngIf="authorized !== true; then authenticated else guest"></div>
 
 
 <!-- User NOT logged in -->
@@ -14,8 +14,11 @@
         <div class="compheader">
             <h3 class="compheader">Welcome Back, {{ user.userName }} (ID#{{ user.ID }})
                 <div id="useractions">
-                    <img style="width: 50px; height: 50px; background-color: aquamarine;">
-                    <img style="width: 50px; height: 50px; background-color: chartreuse;">
+                    <span *ngFor="let action of actions">
+                        <a class="icon" *ngIf="action.show === true" [routerLink]="action.link" tabindex="0">
+                            <img class="icon" [src]="action.src" [alt]="action.alt">
+                        </a>
+                    </span>
                     <br>
                     <app-logout ></app-logout>
                 </div>

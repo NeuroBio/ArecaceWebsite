@@ -4,8 +4,7 @@ div#useractions {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    max-width: 150px;
-    background-color: orchid;
+    max-width: 190px;
 }
 
 app-logout {
@@ -16,6 +15,29 @@ div#outer {
     background-image: url(https://firebasestorage.googleapis.com/v0/b/arecaceworld.appspot.com/o/WebSite%2Fsmear2.png?alt=media&token=03185fb3-b90c-4635-98c7-5e045e6b2579);
 }
 
+img.icon {
+    width: 46px;
+    height: 46px;
+    padding: 2px;
+    border: whitesmoke 1px solid;
+    background-color: rgb(49, 49, 49);
+}
+
+img.icon:hover {
+    background-color: rgb(89, 89, 89);
+}
+
+img.icon:active {
+    background-color: rgb(150, 150, 150);
+}
+
+a.icon {
+    height: 52px;
+    padding: 0px;
+    display: block;
+    cursor: pointer;
+    margin: 5px;
+}
 
 .UserData {
     float: left;

@@ -4,6 +4,7 @@ import { Subscription }                 from 'rxjs';
 import { AuthService }                  from 'src/app/administration/security/Auth/auth.service';
 import { TextProvider }                 from 'src/app/GlobalServices/textprovider.service';
 import { User }                         from 'src/app/Classes/ContentClasses';
+import { ThrowStmt } from '@angular/compiler';
 
 @Component({
   selector: 'app-user-dash',
@@ -18,6 +19,9 @@ export class UserDashComponent implements OnInit, OnDestroy {
   savedData: any[];
   titles: string[];
   authorized: boolean;
+  actions = [ { src: '../../../../../assets/svgs/gear.svg', link: 'settings', alt: 'Settings', show: true },
+              { src: '../../../../../assets/svgs/modstar.svg', link: 'controls', alt: 'Mod Controls', show: false },
+              { src: '../../../../../assets/svgs/diamond.svg', link: '/kArAAdministrativeUpload/Dash', alt: 'Admin Controls', show: false }]
 
   stream1: Subscription;
 
@@ -35,7 +39,10 @@ export class UserDashComponent implements OnInit, OnDestroy {
     this.stream1 = this.auth.user.subscribe(user => {
       this.authorized = this.auth.isUser();
       this.user = user;
-      if(user) this.PrepareData();
+      if(user) {
+        this.PrepareData();
+        this.checkRoles();
+      }
     });
   }
 
@@ -80,5 +87,10 @@ export class UserDashComponent implements OnInit, OnDestroy {
       edit: false
     });
     }
+  }
+
+  checkRoles() {
+    this.actions[1].show = this.user.Mod === true;
+    this.actions[2].show = this.user.Admin === true;
   }
 }
