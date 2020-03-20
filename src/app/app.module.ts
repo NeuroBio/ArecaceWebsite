@@ -10,6 +10,8 @@ import { AngularFirestoreModule }     from '@angular/fire/firestore';
 import { AngularFireStorageModule }   from '@angular/fire/storage';
 import { AngularFireAuthModule }      from '@angular/fire/auth';
 import { environment }                from '../environments/environment';
+import { DeviceDetectorModule }       from 'ngx-device-detector';
+
 
 import { AppRoutingModule }           from './app-routing.module';
 import { UpdatefeedModule }           from './SharedComponentModules/UpdateFeed/updatefeed.module';
@@ -65,6 +67,8 @@ export function AuthFactory(provider: AuthService) {
     AngularFireAuthModule, // imports firebase/auth, only needed for auth features,
     AngularFireStorageModule, // imports firebase/storage only needed for storage features
     AngularFireFunctionsModule, //cloud functions
+
+    DeviceDetectorModule.forRoot(),
 
     AppRoutingModule,//this should always be LAST!!!
 
