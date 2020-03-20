@@ -6,8 +6,8 @@
     <div id="banner" role="banner"> 
         <h1 id="title">Arecace</h1>
         <nav id="header" role="navigation">
-            <div *ngFor="let link of linkList" class="navver">
-                    <a class="navver" [routerLink]="link.link">{{ link.name | titlecase }}</a>
+            <div *ngFor="let link of headerLinkList" class="navver">
+                    <a class="navver" [routerLink]="link.link">{{ link.name }}</a>
             </div>
         </nav>
     </div>
@@ -19,13 +19,13 @@
 <!-- FOOTER -->
 <hr>
 <div id="footer" role="navigation">
-        <a class="footer" routerLink="/about">About</a> &nbsp;<b>|</b>&nbsp;
-        <a class="footer" routerLink="/contact">Contact</a> &nbsp;<b>|</b>&nbsp;
-        <a class="footer" routerLink="/faq">FAQ</a> &nbsp;<b>|</b>&nbsp;
-        <a class="footer" routerLink="/sitemap">Site Map</a> &nbsp;<b>|</b>&nbsp;
-        <a class="footer" routerLink="/guide">Buy Traveler's Guide</a> &nbsp;<b>|</b>&nbsp;
-        <a class="footer" routerLink="/kArAAdministrativeUpload/Dash">Admin</a>
-    <br><br>
-    &copy;kArA Redwing: Website 2018-{{year}}, Content 2004-{{year}}
+    <span *ngFor="let link of footerLinkList; let i = index">
+        <a class="footer" [routerLink]="link.link"> {{ link.name }} </a>
+        <span *ngIf="i !== footerLinkList.length-1">
+            &nbsp;<b>|</b>&nbsp;
+        </span>
+    </span><br><br>
+    
+    &copy;kArA Redwing: Website 2018-{{ year }}, Content 2004-{{ year }}
     <br>
 </div>

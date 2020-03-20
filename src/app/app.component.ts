@@ -14,14 +14,19 @@ export class AppComponent implements AfterViewInit{
   @ViewChild('flag', { static: true }) flag: ElementRef;
   title: string = 'Arecace';
   year: number = new Date().getFullYear()
-  linkList: {}[] = [{link:'home', name: 'home'},
-                    {link:'comic', name: 'comic'},
-                    {link:'story', name: 'story'},
-                    {link:'world', name: 'world'},
-                    {link:'playground', name: '*play*'},
-                    {link:'extras', name: 'extras'},
-                    {link:'dash', name: 'dash'}]
-
+  headerLinkList: {}[] = [{link:'home', name: 'Home'},
+                          {link:'comic', name: 'Comic'},
+                          {link:'story', name: 'Story'},
+                          {link:'world', name: 'World'},
+                          {link:'playground', name: '*Play*'},
+                          {link:'extras', name: 'Extras'},
+                          {link:'dash', name: 'Dash'}]
+  footerLinkList: {}[] = [{link:'about', name: 'About'},
+                          {link: 'contact', name: 'Contact'},
+                          {link: 'faq', name: 'FAQ'},
+                          {link: 'sitemap', name: 'Site Map'},
+                          {link: 'guide', name: 'Traveler\'s Guide'}]
+  
   constructor(private global: GlobalVarsService) { }
 
   ngAfterViewInit() {
