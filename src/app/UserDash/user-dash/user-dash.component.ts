@@ -28,15 +28,14 @@ export class UserDashComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.loggedoutText = this.textprovider.WebsiteText
-    .find(member => member.ID =='login').Text;
+      .find(member => member.ID =='login').Text;
     this.loggedinText = this.textprovider.WebsiteText
-    .find(member => member.ID =='userdash').Text;
+      .find(member => member.ID =='userdash').Text;
+      
     this.stream1 = this.auth.user.subscribe(user => {
       this.authorized = this.auth.isUser();
       this.user = user;
-      if(user) {
-        this.PrepareData();
-      }
+      if(user) this.PrepareData();
     });
   }
 

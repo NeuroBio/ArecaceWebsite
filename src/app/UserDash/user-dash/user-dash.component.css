@@ -1,6 +1,14 @@
-app-logout {
+div#useractions {
     margin-right: 15px;
     float: right;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    max-width: 150px;
+    background-color: orchid;
+}
+
+app-logout {
     white-space: nowrap;
 }
 
@@ -20,9 +28,7 @@ div#outer {
 
 h3.compheader {
     margin: 0px;
-    padding: 0px;
-    padding-top: 20px;
-    padding-left: 5px;
+    padding: 7px;
     display: flex;
     justify-content: space-between;
 }

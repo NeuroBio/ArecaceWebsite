@@ -1,6 +1,6 @@
 import { Component, Input, OnChanges } from '@angular/core';
 import { User } from 'src/app/Classes/ContentClasses';
-import { DashCRUDService } from '../dash-CRUD.service';
+import { DashCRUDService } from '../../dash-CRUD.service';
 
 @Component({
   selector: 'app-pick-up',

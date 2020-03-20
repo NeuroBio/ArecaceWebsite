@@ -13,7 +13,7 @@ import { ScrollFrameModule } from 'src/app/SharedComponentModules/SmallComponent
 
 import { UserDashComponent } from './user-dash/user-dash.component';
 import { UserInfoComponent } from './user-info/user-info.component';
-import { PickUpComponent } from './pick-up/pick-up.component';
+import { PickUpComponent } from './interactive-data/pick-up/pick-up.component';
 import { DataOptionsComponent } from './interactive-data/DataOptions/data-options.component';
 import { InteractHomeComponent } from './interactive-data/interact-home/interact-home.component';
 import { InteractDetailsSwitchComponent } from './interactive-data/interact-details-switch/interact-details-switch.component';

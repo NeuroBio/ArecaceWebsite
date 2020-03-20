@@ -1,4 +1,4 @@
-<div *ngIf="authorized !== true; then authenticated else guest"></div>
+<div *ngIf="authorized === true; then authenticated else guest"></div>
 
 
 <!-- User NOT logged in -->
@@ -13,7 +13,12 @@
     <div id="outer" *ngIf="user">
         <div class="compheader">
             <h3 class="compheader">Welcome Back, {{ user.userName }} (ID#{{ user.ID }})
-                <app-logout ></app-logout>
+                <div id="useractions">
+                    <img style="width: 50px; height: 50px; background-color: aquamarine;">
+                    <img style="width: 50px; height: 50px; background-color: chartreuse;">
+                    <br>
+                    <app-logout ></app-logout>
+                </div>
             </h3>
         </div>
         <hr>
