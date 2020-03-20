@@ -32,7 +32,7 @@ export class BookmarkComponent implements OnInit, OnChanges, OnDestroy {
   ngOnInit() {
     this.stream1 = this.auth.user.subscribe(data => {
       this.data = data;
-      this.notLoggedIn = !this.auth.isUser();
+      this.notLoggedIn = this.auth.isLoggedIn;//!this.auth.isUser();
       this.setColors();
     });
     this.stream2 = this.bookmarkserv.real
