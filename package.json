@@ -25,6 +25,7 @@
     "firebase-admin": "^8.10.0",
     "minimist": "^1.2.5",
     "ngx-device-detector": "^1.4.1",
+    "roboto-fontface": "^0.10.0",
     "rxjs": "~6.5.4",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"
