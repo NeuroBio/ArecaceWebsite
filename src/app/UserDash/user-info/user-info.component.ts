@@ -5,6 +5,7 @@ import { AuthService } from '../../administration/security/Auth/auth.service';
 import { FormBuilder, ValidationErrors } from '@angular/forms';
 import { userNameValidator } from './userNameValidator';
 import { Subscription } from 'rxjs';
+import { DashCRUDService } from '../dash-CRUD.service';
 
 @Component({
   selector: 'app-user-info',
@@ -16,19 +17,29 @@ export class UserInfoComponent implements OnInit, OnDestroy {
   user: User;
   Form = this.createForm();
   message: string;
-  stream: Subscription;
+  dangerMessage: string;
+  stream1: Subscription;
+  stream2: Subscription;
+  dangerNoodle = false;
+  dangerButton = 'Reveal Spookiness';
+  disabled = false;
 
   constructor(private firebaseserv: FireBaseService,
               private auth: AuthService,
-              private fb: FormBuilder) { }
+              private fb: FormBuilder,
+              private crud: DashCRUDService) { }
 
   ngOnInit() {
-    this.stream = this.auth.user.subscribe(user => 
+    this.stream1 = this.auth.user.subscribe(user => 
       this.user = user);
+    this.stream2 = this.crud.message.subscribe(mess => 
+      this.dangerMessage = mess);
   }
 
   ngOnDestroy() {
-    this.stream.unsubscribe();
+    this.stream1.unsubscribe();
+    this.stream2.unsubscribe();
+    this.crud.dispose();
   }
 
   changeUserName() {
@@ -40,7 +51,6 @@ export class UserInfoComponent implements OnInit, OnDestroy {
     } else {
       this.getFormValidationErrors();
     }
-
   }
 
   createForm() {
@@ -62,4 +72,22 @@ export class UserInfoComponent implements OnInit, OnDestroy {
     this.Form = this.createForm();
   }
 
+  switchDanger() {
+    this.dangerNoodle = !this.dangerNoodle;
+    this.dangerButton = this.dangerNoodle === false ? 'Reveal Spookiness' : 'Hide Spookiness';
+  }
+
+  deleteData() {
+    this.disabled = true;
+    return this.crud.deleteAccountData(false)
+    .then(() => this.disabled = false)
+    .catch(() => this.disabled = false);
+  }
+
+  deleteAccount() {
+    this.disabled = true;
+    return this.crud.deleteAccountData(true)
+    .then(() => this.disabled = false)
+    .catch(() => this.disabled = false);
+  }
 }

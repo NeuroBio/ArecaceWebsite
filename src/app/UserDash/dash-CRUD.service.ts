@@ -10,7 +10,7 @@ import { AuthService }              from '../administration/security/Auth/auth.s
 import { CRUD }                     from 'src/app/administration/services/CRUD.service';
 import { FetchService }             from 'src/app/GlobalServices/fetch.service';
 
-import { CRUDdata }                 from 'src/app/Classes/ContentClasses';
+import { CRUDdata, User }                 from 'src/app/Classes/ContentClasses';
 import { UserDataNameTokens }       from 'src/app/Classes/UploadDownloadPaths';
 import { DisplayService } from './interactive-data/display.service';
 @Injectable({
@@ -158,8 +158,14 @@ export class DashCRUDService {
   }
 
   deleteImages(Links: string[]) {
-    return Links.forEach(link => {
-      this.firebaseserv.deleteImage(link);
+    return Promise.all(Links.map(link => {
+      if(link) {
+        return this.firebaseserv.deleteImage(link);
+      } else {
+        return Promise.resolve();
+      }
+    })).catch(err => {
+      this.message.next(err)
     });
   }
 
@@ -186,6 +192,56 @@ export class DashCRUDService {
     nameTokens.forEach(token => 
       displayName.push(dataToSave[token]));
     return displayName.join(' ');
+  }
+
+  deleteAccountData(accountToo: boolean) {
+    this.message.next('Processing Data...');
+    const Data = this.auth.user.value;
+    const Links = [];
+
+    if(Data.FanCharacters) {
+      Data.FanCharacters.forEach(char => 
+        char.Links.forEach(link => Links.push(link)));  
+    }
+
+    this.message.next('Deleting Images...');
+    return this.deleteImages(Links) 
+    .then(() => {
+      if(accountToo === true) {
+        return this.deleteAccount();
+      } else {
+        return this.deleteAllData(Data);
+      }
+    }).then(() =>{
+      this.message.next('Data Deleted!');
+    }).catch(err => {
+      this.message.next(err);
+    });
+
+  }
+
+  deleteAccount() {
+    return this.firebaseserv.deleteDocument(`Users/`, this.auth.uid.value)
+    .then(() => {
+      this.auth.logout();
+      this.router.navigate(['/dash'])
+    });
+  }
+
+  deleteAllData(Data: User) {
+    this.message.next('Deleting Other Data...');
+    delete Data.FanCharacters;
+    delete Data.SurveyResults;
+    delete Data.SAcalculations;
+
+    delete Data.Narratives;
+    delete Data.Scripts;
+    delete Data.Comics;
+    delete Data.Favorites;
+  }
+
+  dispose() {
+    this.message.next(undefined);
   }
 
 }

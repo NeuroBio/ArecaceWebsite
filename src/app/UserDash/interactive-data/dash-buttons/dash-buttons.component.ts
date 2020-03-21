@@ -32,6 +32,7 @@ export class DashButtonsComponent implements OnInit, OnDestroy {
     this.stream1.unsubscribe();
     this.stream2.unsubscribe();
     this.stream3.unsubscribe();
+    this.crud.dispose();
   }
   
   onEdit() {

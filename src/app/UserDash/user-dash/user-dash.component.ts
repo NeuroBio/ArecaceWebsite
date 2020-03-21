@@ -4,7 +4,6 @@ import { Subscription }                 from 'rxjs';
 import { AuthService }                  from 'src/app/administration/security/Auth/auth.service';
 import { TextProvider }                 from 'src/app/GlobalServices/textprovider.service';
 import { User }                         from 'src/app/Classes/ContentClasses';
-import { ThrowStmt } from '@angular/compiler';
 
 @Component({
   selector: 'app-user-dash',

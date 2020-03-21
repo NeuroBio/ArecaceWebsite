@@ -9,7 +9,7 @@ div#background {
 
 div.accountInfo {
     border: 1px white solid;
-    max-width: 400px;
+    max-width: 450px;
     margin: 7px;
 }
 
@@ -29,9 +29,13 @@ input {
     margin: 3px;
     font-size: 14px;
 }
-button {
+button#change {
     float: right;
-    margin: 3px;
+    margin: 7px;
+}
+
+button.danger {
+    margin: 10px;
 }
 
 hr {
@@ -40,4 +44,16 @@ hr {
 
 span {
     padding-left: 15px;
+}
+
+span#danger {
+    padding: 0px;
+    color: orange;
+    font-weight: bold;
+    font-size: 20px;
+    white-space: pre-wrap;
+}
+
+h4#danger {
+    text-align: center;
 }

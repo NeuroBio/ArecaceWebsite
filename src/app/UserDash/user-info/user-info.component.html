@@ -10,13 +10,17 @@
 
         <h4>Email:</h4>
         <span>{{ user.email }}</span>
-    
         <hr>
+
+        <h4>Account Created:</h4>
+        <span>{{ user.accountCreated }}</span>
+        <hr>
+
         <h4>User Name:</h4>
         <span>{{ user.userName }}<br></span>
         <form [formGroup]="Form">
             <input type="text" formControlName="newName">
-            <button (click)="changeUserName()"
+            <button id="change" (click)="changeUserName()"
             >Change</button>
             <div style="clear: both;"></div>
             {{ message }}
@@ -25,6 +29,25 @@
         <h4>View Settings:</h4>
         <span>Show Image Previews: {{ user.showPreview}}</span>
         <hr>
+        <br>
         <a routerLink="/privacy">See our Privay Policy</a>
+    </div>
+
+    <div class="textblock accountInfo">
+        <h4 id="danger">!*Danger Zone*!</h4>
+        <button (click)="switchDanger()">{{ dangerButton }}</button>
+        <hr>
+        <div *ngIf="dangerNoodle === true">
+            <br>
+            <span id="danger">WARNING: These actions cannot be undone!</span>
+            <button class="danger" (click)="deleteData()"
+            [disabled]="disabled === true">
+                Delete Your Saved Data</button><br>
+            <button class="danger" (click)="deleteAccount()"
+            [disabled]="disabled === true">
+                Delete Your Account</button><br>
+            {{ dangerMessage }}
+        </div>
+
     </div>
 </div>
