@@ -14,12 +14,13 @@ export class OptionsComponent implements OnInit {
   @Input() current: string = "tester2";
 
   width: any;
+  mobile: boolean;
 
-  constructor(public global: GlobalVarsService) {
-  }
+  constructor(public global: GlobalVarsService) { }
 
   ngOnInit() {
     this.onResize();
+    this.mobile = this.global.phone.value;
   }
 
   @HostListener('window:resize') 
