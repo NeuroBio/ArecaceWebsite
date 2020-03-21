@@ -25,8 +25,6 @@ export class UserDashComponent implements OnInit, OnDestroy {
 
   stream1: Subscription;
 
-  showAccountInfo = false;
-
   constructor(private auth: AuthService,
               private textprovider: TextProvider) { }
 
@@ -48,10 +46,6 @@ export class UserDashComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.stream1.unsubscribe();
-  }
-
-  setShowAccountInfo() {
-    this.showAccountInfo = !this.showAccountInfo;
   }
 
   PrepareData(){

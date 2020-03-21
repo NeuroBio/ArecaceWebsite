@@ -3,14 +3,16 @@
 
 <!-- User NOT logged in -->
 <ng-template #guest>
-    <div [innerHTML]="loggedoutText"></div>
-    <app-login></app-login>
+    <div id="background">
+        <div [innerHTML]="loggedoutText"></div>
+        <app-login></app-login>
+    </div>
 </ng-template>
 
 
 <!-- User logged in -->
 <ng-template #authenticated>
-    <div id="outer" *ngIf="user">
+    <div id="background" *ngIf="user">
         <div class="compheader">
             <h3 class="compheader">Welcome Back, {{ user.userName }} (ID#{{ user.ID }})
                 <div id="useractions">
@@ -51,12 +53,5 @@
         </div>
         
         <div style="clear: both;"></div>
-        <button (click)="setShowAccountInfo()">Show Account Info</button>
-
-        <app-user-info
-        [user]="user"
-        *ngIf="showAccountInfo === true"
-        ></app-user-info>
-
       </div>
   </ng-template>

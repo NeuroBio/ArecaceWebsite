@@ -1,22 +1,30 @@
-<div id="accountInfo">
-    <h4>Your Roles:</h4>
-    <p>
-        User: {{ user.User }}<br>
-        Admin: {{ user.Admin }}
-    </p>
+<div id="background">
+    <div class="textblock accountInfo">
+        <h4>Your Roles:</h4>
+            <span>User-{{ user.User }}</span><br>
+            <span>Forum Moderator-{{ user.Mod }}</span><br>
+            <span>Site Admin-{{ user.Admin }}</span><br>
+            <br>
+        <hr>
+        
 
+        <h4>Email:</h4>
+        <span>{{ user.email }}</span>
     
-    <h4>Email:</h4>
-    <p>{{ user.email }}</p>
-
-    
-    <h4>User Name:</h4>
-    <p>{{ user.userName }}<br></p>
-    <form [formGroup]="Form">
-        <input type="text" formControlName="newName">
-        <button (click)="changeUserName()"
-        >Change</button>
-        <div style="clear: both;"></div>
-        {{ message }}
-    </form>
+        <hr>
+        <h4>User Name:</h4>
+        <span>{{ user.userName }}<br></span>
+        <form [formGroup]="Form">
+            <input type="text" formControlName="newName">
+            <button (click)="changeUserName()"
+            >Change</button>
+            <div style="clear: both;"></div>
+            {{ message }}
+        </form>
+        <hr>
+        <h4>View Settings:</h4>
+        <span>Show Image Previews: {{ user.showPreview}}</span>
+        <hr>
+        <a routerLink="/privacy">See our Privay Policy</a>
+    </div>
 </div>
