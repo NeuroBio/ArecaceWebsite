@@ -6,10 +6,12 @@ import { PlaygroundhomeComponent } from './playgroundhome/playgroundhome.compone
 
 import { ShowNewestModule } from '../SharedComponentModules/ShowNewest/show-newest.module';
 import { ImageButtonModule } from 'src/app/SharedComponentModules/SmallComponents/image-button/image-button.module';
+import { ForumComponent } from './Forum/forum/forum.component';
 
 @NgModule({
   declarations: [
     PlaygroundhomeComponent,
+    ForumComponent,
   ],
     
   imports: [
