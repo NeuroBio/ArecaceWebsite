@@ -25,7 +25,8 @@ export class AppComponent implements AfterViewInit{
                           {link: 'contact', name: 'Contact'},
                           {link: 'faq', name: 'FAQ'},
                           {link: 'sitemap', name: 'Site Map'},
-                          {link: 'guide', name: 'Traveler\'s Guide'}]
+                          {link: 'guide', name: 'Traveler\'s Guide'},
+                          {link: 'privacy', name: 'Privacy Policy'}]
   
   constructor(private global: GlobalVarsService) { }
 

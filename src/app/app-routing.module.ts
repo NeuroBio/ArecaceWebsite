@@ -1,5 +1,5 @@
 import { NgModule }                 from '@angular/core';
-import { Routes, RouterModule, UrlSegment }     from '@angular/router';
+import { Routes, RouterModule }     from '@angular/router';
 
 import { AboutComponent }           from './SimplePages/about/about.component';
 import { BadserviceComponent }      from './SimplePages/badservice/badservice.component';
@@ -10,6 +10,7 @@ import { HomeComponent }            from './SimplePages/home/home.component';
 import { PageNotFoundComponent }    from './SimplePages/pagenotfound/pagenotfound.component';
 import { TravelorsGuideComponent }  from './SimplePages/travelorsguide/travelorsguide.component';
 import { UploadLogComponent }       from './SimplePages/upload-log/upload-log.component';
+import { PrivacyPolicyComponent } from './SimplePages/privacy-policy/privacy-policy.component';
 //import { DownloadResolverService }  from './SimplePages/downloadpage/download-resolver.service';
 
 // export function downloadImages(url: UrlSegment[]) {
@@ -26,7 +27,8 @@ const routes: Routes = [
   {path: 'faq/copyright', component: CopyrightComponent},
   {path: 'guide', component: TravelorsGuideComponent},
   {path: 'home', component: HomeComponent},
-  {path: 'changelog', component: UploadLogComponent}, 
+  {path: 'changelog', component: UploadLogComponent},
+  {path: 'privacy', component: PrivacyPolicyComponent},
 
   //modules
   {path: 'comic',

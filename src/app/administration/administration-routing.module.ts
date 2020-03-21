@@ -75,6 +75,7 @@ const AdminRoutes: Routes = [
           {path: 'comic', component: WebsiteTextComponent },
           {path: 'nomadicintro', component: WebsiteTextComponent },
           {path: 'nomadicsyntax', component: WebsiteTextComponent },
+          {path: 'datapolicy', component: WebsiteTextComponent}
          ]
       },
       {path: 'Nomadic', component: LanguageComponent},

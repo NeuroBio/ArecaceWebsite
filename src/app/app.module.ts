@@ -31,6 +31,7 @@ import { UploadLogComponent }         from './SimplePages/upload-log/upload-log.
 
 import { AuthService }                from './administration/security/Auth/auth.service';
 import { TextProvider }               from './GlobalServices/textprovider.service';
+import { PrivacyPolicyComponent } from './SimplePages/privacy-policy/privacy-policy.component';
 
 export function TextFactory(provider: TextProvider) {
   return () => provider.load();
@@ -50,7 +51,8 @@ export function AuthFactory(provider: AuthService) {
     PageNotFoundComponent,
     BadserviceComponent,
     ContactComponent,
-    UploadLogComponent
+    UploadLogComponent,
+    PrivacyPolicyComponent
     ],
 
   imports: [
