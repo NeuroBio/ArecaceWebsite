@@ -16,10 +16,8 @@ export class SliderService {
               private firebaseserv: FireBaseService) {
     this.auth.user.pipe(take(1))
     .subscribe(user => {
-    if(this.auth.isLoggedIn === true//isUser() === true
-      ) {
-      this.preview.next(user.showPreview);
-    }
+    if(this.auth.isUser() === true)
+       this.preview.next(user.showPreview);
    });
   }
 
@@ -31,8 +29,7 @@ export class SliderService {
     this.preview.next(preview);
     return this.auth.user.pipe(take(1))
     .subscribe(user => {
-      if(this.auth.isLoggedIn === true//isUser() === true
-        ) {
+      if(this.auth.isUser() === true) {
         user.showPreview = preview;
         this.firebaseserv.editDocument(user, 'Users', this.auth.uid.value);
       }
