@@ -5,12 +5,14 @@ import { FanCharactersComponent } from './fan-characters/fan-characters.componen
 
 
 const activeRoutes: Routes = [
-  {path: '', component: ActivitieshomeComponent},
-  {path: 'makefancharacter', component: FanCharactersComponent},
-  {path: 'calc',
-    loadChildren: () => import('./CalcConvert/calc-convert.module').then(m => m.CalcConvertModule)},
-  {path: 'surveys',
-    loadChildren: () => import('./Surveys/survey.module').then(m => m.SurveyModule)},
+  {path: '', component: ActivitieshomeComponent,
+  children: [
+    {path: 'makefancharacter', component: FanCharactersComponent},
+    {path: 'calc',
+      loadChildren: () => import('./CalcConvert/calc-convert.module').then(m => m.CalcConvertModule)},
+    {path: 'surveys',
+      loadChildren: () => import('./Surveys/survey.module').then(m => m.SurveyModule)}
+  ]}
 ];
 
 @NgModule({

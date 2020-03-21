@@ -1,14 +1,19 @@
 <div class="background">
     <div class="compheader">
-        <h2 class="compheader">Activities</h2>
+        <h2 class="compheader">Activities</h2> <br>
+        <!-- <div class="navver" role="nav" id="quickNav" *ngFor="let link of links">
+            <a class="navver" [routerLink]="link.Link">{{ link.Title }}</a>
+        </div> -->
     </div>
     <hr>
-    <p>The activities page is still a work in progress!</p>
-
-    <div>
-        <div class="navver" role="nav" id="quickNav" *ngFor="let link of links">
-            <a class="navver" [routerLink]="link.Link">{{ link.Title }}</a>
+    <!-- Activity choices -->
+    <div class="toggler" role="navigation">
+        <div *ngFor="let link of links, let i = index" class="toggler">
+            <input type="radio" class="toggler" name="activity" [id]="link.Title"
+            (click)="pickActivity(i)" [checked]="selected === link.Title">
+            <label class="toggler" [for]="link.Title"  tabindex="0"
+            (keyup.enter)="pickActivity(i)">{{ link.Title }}</label>
         </div>
     </div>
-    <!-- <a class="navver" [routerLink]="'makefancharacter'">Characters</a> -->
+    <router-outlet></router-outlet>
 </div>
