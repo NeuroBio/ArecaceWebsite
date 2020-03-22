@@ -221,8 +221,10 @@ export class DashCRUDService {
   }
 
   deleteAccount() {
+    this.message.next('Deleting Account...');
     return this.firebaseserv.deleteDocument(`Users/`, this.auth.uid.value)
     .then(() => {
+      this.auth.authState.auth.deleteUser()
       this.auth.logout();
       this.router.navigate(['/dash'])
     });
