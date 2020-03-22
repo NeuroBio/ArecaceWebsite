@@ -12,6 +12,8 @@ import { AngularFireAuthModule }      from '@angular/fire/auth';
 import { environment }                from '../environments/environment';
 import { DeviceDetectorModule }       from 'ngx-device-detector';
 
+import { AuthService }                from './administration/security/Auth/auth.service';
+import { TextProvider }               from './GlobalServices/textprovider.service';
 
 import { AppRoutingModule }           from './app-routing.module';
 import { UpdatefeedModule }           from './SharedComponentModules/UpdateFeed/updatefeed.module';
@@ -26,12 +28,10 @@ import { CopyrightComponent }         from './SimplePages/copyright/copyright.co
 import { FAQComponent }               from './SimplePages/faq/faq.component';
 import { HomeComponent }              from './SimplePages/home/home.component';
 import { PageNotFoundComponent }      from './SimplePages/pagenotfound/pagenotfound.component';
+import { PrivacyPolicyComponent }     from './SimplePages/privacy-policy/privacy-policy.component';
 import { TravelorsGuideComponent }    from './SimplePages/travelorsguide/travelorsguide.component';
 import { UploadLogComponent }         from './SimplePages/upload-log/upload-log.component';
 
-import { AuthService }                from './administration/security/Auth/auth.service';
-import { TextProvider }               from './GlobalServices/textprovider.service';
-import { PrivacyPolicyComponent } from './SimplePages/privacy-policy/privacy-policy.component';
 
 export function TextFactory(provider: TextProvider) {
   return () => provider.load();

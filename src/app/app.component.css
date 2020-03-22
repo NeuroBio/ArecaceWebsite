@@ -3,13 +3,13 @@ img#flag {
   position: absolute
 }
 
-div#banner {
+header#banner {
   background-size: 2800px;
   background-position-y: 25%;
   background-image: url(https://firebasestorage.googleapis.com/v0/b/arecaceworld.appspot.com/o/WebSite%2Fbanner.jpg?alt=media&token=3d4cce3a-0735-4508-b0be-5d18d6d17b87);
 }
 
-h1#title {
+h1#websiteTitle {
   display: inline-block;
   margin: 0px;
   margin-left: 10px;
@@ -26,15 +26,18 @@ div#center {
   top: 50%;
 }
 
-nav#header {
+nav#headerNav {
   margin: 5px;
   margin-bottom: 0px;
   padding-bottom: 10px;
 }
 
 /* The Footer*/
-div#footer {
-  margin: 15px;
+footer {
+  margin: 10px;  
+}
+
+p#footer {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 12px;
   color: white;

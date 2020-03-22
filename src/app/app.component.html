@@ -1,31 +1,32 @@
 
+<!-- Images enabled tester -->
 <img id="flag" #flag src="assets/tester.png" alt="">
 
 <!-- HEADER AND BANNER -->
-<div id="myHeader">
-    <div id="banner" role="banner"> 
-        <h1 id="title">Arecace</h1>
-        <nav id="header" role="navigation">
-            <div *ngFor="let link of headerLinkList" class="navver">
-                    <a class="navver" [routerLink]="link.link">{{ link.name }}</a>
-            </div>
-        </nav>
-    </div>
-</div>
+<header role="banner" id="banner">
+    <h1 id="websiteTitle">Arecace</h1>
+    <nav id="headerNav" aria-labelledby="primary-navigation">
+        <div *ngFor="let link of headerLinkList" class="navver">
+            <a class="navver" [routerLink]="link.link">{{ link.name }}</a>
+        </div>
+    </nav>
+</header>
 <hr>
+
 
 <router-outlet></router-outlet>
 
+
 <!-- FOOTER -->
 <hr>
-<div id="footer" role="navigation">
-    <span *ngFor="let link of footerLinkList; let i = index">
-        <a class="footer" [routerLink]="link.link"> {{ link.name }} </a>
-        <span *ngIf="i !== footerLinkList.length-1">
-            &nbsp;<b>|</b>&nbsp;
+<footer role="contentinfo">
+    <nav aria-labelledby="footer-navigation">
+        <span *ngFor="let link of footerLinkList; let i = index">
+            <a class="footer" [routerLink]="link.link"> {{ link.name }} </a>
+            <span *ngIf="i !== footerLinkList.length-1"><b>|</b></span>
         </span>
-    </span><br><br>
-    
-    &copy;kArA Redwing: Website 2018-{{ year }}, Content 2004-{{ year }}
-    <br>
-</div>
+    </nav>
+    <p id="footer">
+        &copy;kArA Redwing: Website 2018-{{ year }}, Content 2004-{{ year }}
+    </p>
+</footer>

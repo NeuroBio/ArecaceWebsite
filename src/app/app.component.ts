@@ -1,6 +1,9 @@
 import { Component, ViewEncapsulation,
-  ViewChild, ElementRef, AfterViewInit }    from '@angular/core';
-import { GlobalVarsService}                 from './GlobalServices/global-vars.service';
+         ViewChild, ElementRef, AfterViewInit,
+         OnInit }                                 from '@angular/core';
+import { Title }                                  from '@angular/platform-browser';
+
+import { GlobalVarsService}                       from './GlobalServices/global-vars.service';
 
 @Component({
   selector: 'app-root',
@@ -9,26 +12,33 @@ import { GlobalVarsService}                 from './GlobalServices/global-vars.s
   encapsulation: ViewEncapsulation.None
 })
 
-export class AppComponent implements AfterViewInit{
+export class AppComponent implements AfterViewInit, OnInit {
 
   @ViewChild('flag', { static: true }) flag: ElementRef;
   title: string = 'Arecace';
   year: number = new Date().getFullYear()
-  headerLinkList: {}[] = [{link:'home', name: 'Home'},
-                          {link:'comic', name: 'Comic'},
-                          {link:'story', name: 'Story'},
-                          {link:'world', name: 'World'},
-                          {link:'playground', name: '*Play*'},
-                          {link:'extras', name: 'Extras'},
-                          {link:'dash', name: 'Dash'}]
-  footerLinkList: {}[] = [{link:'about', name: 'About'},
-                          {link: 'contact', name: 'Contact'},
-                          {link: 'faq', name: 'FAQ'},
-                          {link: 'sitemap', name: 'Site Map'},
-                          {link: 'guide', name: 'Traveler\'s Guide'},
-                          {link: 'privacy', name: 'Privacy Policy'}]
+
+  headerLinkList: {}[] = [{ link:'home', name: 'Home' },
+                          { link:'comic', name: 'Comic' },
+                          { link:'story', name: 'Story' },
+                          { link:'world', name: 'World' },
+                          { link:'playground', name: '*Play*' },
+                          { link:'extras', name: 'Extras' },
+                          { link:'dash', name: 'Dash' }]
+
+  footerLinkList: {}[] = [{ link:'about', name: 'About' },
+                          { link: 'contact', name: 'Contact' },
+                          { link: 'faq', name: 'FAQ' },
+                          { link: 'sitemap', name: 'Site Map' },
+                          { link: 'guide', name: 'Traveler\'s Guide' },
+                          { link: 'privacy', name: 'Privacy Policy' }]
   
-  constructor(private global: GlobalVarsService) { }
+  constructor(private global: GlobalVarsService,
+              private titleService: Title) { }
+  
+  ngOnInit() {
+    this.titleService.setTitle( 'Arecace' );
+  }
 
   ngAfterViewInit() {
     setTimeout(() => { this.checkLoad() }, 1000);
