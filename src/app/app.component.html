@@ -5,7 +5,7 @@
 <!-- HEADER AND BANNER -->
 <header role="banner" id="banner">
     <h1 id="websiteTitle">Arecace</h1>
-    <nav id="headerNav" aria-labelledby="primary-navigation">
+    <nav id="headerNav" aria-label="primary-navigation">
         <div *ngFor="let link of headerLinkList" class="navver">
             <a class="navver" [routerLink]="link.link">{{ link.name }}</a>
         </div>
@@ -20,7 +20,7 @@
 <!-- FOOTER -->
 <hr>
 <footer role="contentinfo">
-    <nav aria-labelledby="footer-navigation">
+    <nav aria-label="footer-navigation">
         <span *ngFor="let link of footerLinkList; let i = index">
             <a class="footer" [routerLink]="link.link"> {{ link.name }} </a>
             <span *ngIf="i !== footerLinkList.length-1"><b>|</b></span>
