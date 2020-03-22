@@ -1,5 +1,6 @@
 import { Component, OnInit }                from '@angular/core';
 import { ActivatedRoute }                   from '@angular/router';
+
 import { GeneralcollectionService }         from 'src/app/GlobalServices/generalcollection.service';
 
 @Component({
@@ -14,22 +15,20 @@ export class CharactersBlowupmasterComponent implements OnInit {
   gridPath: string;
 
   constructor(private route: ActivatedRoute,
-    private generalcollectserv: GeneralcollectionService) { }
+              private generalcollectserv: GeneralcollectionService) { }
 
   ngOnInit() {
     this.route.parent.paramMap.subscribe(
       path =>
         this.generalcollectserv.getMember(path.get('CharaID'))
-        .subscribe(chara => {
-          this.linksList = chara.References;
-          this.gridPath = `world/characters/${chara.ID}`
-      }).unsubscribe()
-    ); 
+          .subscribe(chara => {
+            this.linksList = chara.References;
+            this.gridPath = `world/characters/${chara.ID}`;
+    }) ); 
    
     this.route.data.subscribe(data => 
       this.index = this.linksList.findIndex(member =>
-        member.ID === data.links.ID)
-    );  
+        member.ID === data.links.ID) );
   }
 
 }

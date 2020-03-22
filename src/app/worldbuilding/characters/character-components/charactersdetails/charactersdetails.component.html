@@ -1,17 +1,16 @@
-  
-  <!-- Character image -->
-  <div id="Bio" #top>
-      <div *ngIf="loading===true" class="loading"></div>
-      <img id="BioImage" [hidden]="loading" [src]="char.Links[0]" (load)="loading=false"
-      [alt]="char.FirstName+' '+char.LastName">
-      <a [hidden]="loading" routerLink="Download" >View Full Size</a>
-  </div>
+<main>
 
-  <br>
-  <div id="textblockcontainer">
+    <!-- Character image -->
+    <div id="Bio" #top>
+        <div *ngIf="loading===true" class="loading"></div>
+        <img id="BioImage" [hidden]="loading" [src]="char.Links[0]" (load)="loading=false"
+        [alt]="'Drawing of ' + char.FirstName+' '+char.LastName">
+        <a [hidden]="loading" routerLink="Download">View Full Size</a>
+    </div><br>
+
 
     <!-- Bio facts -->
-      <div class="firstblock">
+    <section class="firstblock">
 
         <!-- Mini header -->
           <div class="compheader">
@@ -25,66 +24,59 @@
           </div>
 
         <!-- actual deets -->
-          <p class="textblock"><b>Class: </b> {{ char.SMClass }}</p>
-          <p class="textblock"><b>Occupation: </b> {{ char.Occupation }}</p>
-          <p class="textblock"><b>Nationality: </b>{{ char.Country }}, {{ char.Territory }} Territory</p>
-          <p class="textblock"><b>Ethnicity: </b>{{ char.Ethnicity1 }}/{{ char.Ethnicity2 }}</p>
-          <p class="textblock"><b>Age: </b> {{ char.Age }}, born {{ char.Year }}{{ char.Era }}, {{ char.Qt }} {{ char.Day }}, ({{ char.Zodiac }})</p>
-          <p class="textblock"><b>Height: </b>{{ char.Cm }} cm</p>
+          <p><b>Class: </b> {{ char.SMClass }}</p>
+          <p><b>Occupation: </b> {{ char.Occupation }}</p>
+          <p><b>Nationality: </b>{{ char.Country }}, {{ char.Territory }} Territory</p>
+          <p><b>Ethnicity: </b>{{ char.Ethnicity1 }}/{{ char.Ethnicity2 }}</p>
+          <p><b>Age: </b> {{ char.Age }}, born {{ char.Year }}{{ char.Era }}, {{ char.Qt }} {{ char.Day }}, ({{ char.Zodiac }})</p>
+          <p><b>Height: </b>{{ char.Cm }} cm</p>
           <b>Distinguishing Marks: </b>{{ char.DistinguishingMarks }}<br>
-      </div>
-      <br>
-      <div style="clear: both"></div>
+    </section><br>
+    <div style="clear: both"></div>
 
-      
-    <!-- Personality -->
-      <div class="textblock">
-        <b>Personality: </b>{{ char.Personality }}<br>
-      </div>
-      <br>
-      
 
-    <!-- Philo/Motivation/Goals -->
-      <div class="textblock">
-        <p class="textblock"><b>Philosophy: </b>{{ char.Philosophy }}</p>
-        <p class="textblock"><b>Motivations/Goals: </b>{{ char.MotivationsGoals }}</p>
-        <p class="textblock"><b>Strengths: </b>{{ char.Strengths }}</p>
-        <p class="textblock"><b>Weaknesses: </b>{{ char.Weaknesses }}</p>
+    <!-- Personality Block-->
+    <section class="textblock">
+      <b>Personality: </b>{{ char.Personality }}<br>
+    </section><br>
 
-    <!-- Family and Source Abilities -->
-        <p><b>Source Abilities: </b>{{ char.SourceAbilitiesFormatted }}</p>
 
-        <span><b>Family in Story: </b>{{ char.RelationsFormatted }}</span>
-      </div>
-      <br>
+    <!-- Philo/Motivation/Goals Block-->
+    <section class="textblock">
+      <p><b>Philosophy: </b>{{ char.Philosophy }}</p>
+      <p><b>Motivations/Goals: </b>{{ char.MotivationsGoals }}</p>
+      <p><b>Strengths: </b>{{ char.Strengths }}</p>
+      <p><b>Weaknesses: </b>{{ char.Weaknesses }}</p>
+      <!-- Family and Source Abilities -->
+      <p><b>Source Abilities: </b>{{ char.SourceAbilitiesFormatted }}</p>
+      <span><b>Family in Story: </b>{{ char.RelationsFormatted }}</span>
+    </section><br>
       
 
-    <!-- Background -->
-      <div class="textblock">
-        <div *ngIf="char.BriefBackground !== ''" class="toggler">
+    <!-- Background Block-->
+      <section class="textblock">
+
+        <!-- pick which bio version to show -->
+        <fieldset *ngIf="char.BriefBackground !== ''" class="toggler">
           <input type="radio" class="toggler" name="abouter" id="Brief"
           (click)="changeBio(false)" [checked]="!FullBio">
-          <label class="toggler" for="Brief"
-          tabindex="0" (keyup.enter)="changeBio(false)">
-            Brief</label>
+          <label class="toggler" for="Brief" tabindex="0"
+          (keyup.enter)="changeBio(false)"> Brief</label>
+
           <input type="radio" class="toggler" name="abouter" id="Full"
           (click)="changeBio(true)" [checked]="FullBio">
-          <label class="toggler" for="Full"
-          tabindex="0" (keyup.enter)="changeBio(true)">
-            Full</label>
-        </div>
-        <div *ngIf="char.BriefBackground !== ''">
-          <br>
-        </div>
+          <label class="toggler" for="Full" tabindex="0"
+          (keyup.enter)="changeBio(true)"> Full</label>
+        </fieldset>
+
         <b>Background: </b>
         <span *ngIf="!FullBio">{{ char.BriefBackground }}</span>
         <span *ngIf="FullBio">{{ char.FullBackground }}</span>
-      </div>
+      </section><br>
       <div style="clear: both"></div>
-      <br>
 
       <!-- MISC References -->
-      <div class="textblock" id="refs" *ngIf="char.Links[2]">
+      <section class="textblock" id="refs" *ngIf="char.Links[2]">
         <b>Other References:</b><br><br>
         <app-grid
         [collect]="char.References"
@@ -95,6 +87,7 @@
         [flow]="'row'"
         [width]="270"
         ></app-slider>
-      </div><br>
+      </section>
+  </main>
 
 <router-outlet></router-outlet>

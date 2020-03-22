@@ -1,8 +1,9 @@
 import { Component, OnInit }          from '@angular/core';
+import { Title }                      from '@angular/platform-browser';
 import { ActivatedRoute }             from '@angular/router';
 
 import { Observable }                 from 'rxjs';
-import { map, tap }                   from 'rxjs/operators';
+import { map }                        from 'rxjs/operators';
 
 import { GeneralcollectionService }   from 'src/app/GlobalServices/generalcollection.service';
 
@@ -17,9 +18,11 @@ export class CharactersMainComponent implements OnInit {
   characters$: Observable<string[]>;
 
   constructor(private generalcollectserv: GeneralcollectionService,
-              private route: ActivatedRoute) { }
+              private route: ActivatedRoute,
+              private titleserv: Title) { }
 
   ngOnInit() {
+    this.titleserv.setTitle('Characters')
     this.characters$ = this.generalcollectserv.returnMetaData().pipe(
       map(characters => {
         characters = characters.map(character => [character.FirstName, character.ID]);
@@ -28,6 +31,6 @@ export class CharactersMainComponent implements OnInit {
     )
     
     this.route.firstChild.paramMap.subscribe(
-      path => this.current = path.get('CharaID'));
+      path => this.current = path.get('CharaID') );
   }
 }

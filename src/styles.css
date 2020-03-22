@@ -93,7 +93,7 @@ p.caption {
 
 
 /* extended text blocks*/
-div.textblock, .firstblock {
+.textblock, .firstblock {
   line-height: 150%;
   font-size: 10;
   white-space: pre-line;
@@ -102,12 +102,12 @@ div.textblock, .firstblock {
   color: rgb(238, 238, 238);
 }
 
-div.firstblock {
+.firstblock {
   overflow: hidden;
   min-width: 300px;
 }
 
-p.textblock {
+.textblock p, .firstblock p {
   color: inherit;
   margin: 0;
   margin-bottom: 3px;

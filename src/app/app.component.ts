@@ -1,7 +1,5 @@
 import { Component, ViewEncapsulation,
-         ViewChild, ElementRef, AfterViewInit,
-         OnInit }                                 from '@angular/core';
-import { Title }                                  from '@angular/platform-browser';
+         ViewChild, ElementRef, AfterViewInit }   from '@angular/core';
 
 import { GlobalVarsService}                       from './GlobalServices/global-vars.service';
 
@@ -12,7 +10,7 @@ import { GlobalVarsService}                       from './GlobalServices/global-
   encapsulation: ViewEncapsulation.None
 })
 
-export class AppComponent implements AfterViewInit, OnInit {
+export class AppComponent implements AfterViewInit {
 
   @ViewChild('flag', { static: true }) flag: ElementRef;
   title: string = 'Arecace';
@@ -33,13 +31,8 @@ export class AppComponent implements AfterViewInit, OnInit {
                           { link: 'guide', name: 'Traveler\'s Guide' },
                           { link: 'privacy', name: 'Privacy Policy' }]
   
-  constructor(private global: GlobalVarsService,
-              private titleserv: Title) { }
+  constructor(private global: GlobalVarsService) { }
   
-  ngOnInit() {
-    this.titleserv.setTitle( 'Arecace' );
-  }
-
   ngAfterViewInit() {
     setTimeout(() => { this.checkLoad() }, 1000);
   }

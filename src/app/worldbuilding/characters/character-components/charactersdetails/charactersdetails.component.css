@@ -12,7 +12,7 @@ img#BioImage {
     max-height: 450px;
 }
 
-div#textblockcontainer {
+main {
     max-width: 900px;
 }
 
@@ -31,7 +31,9 @@ h2.compheader {
     line-height: 1.25;
 }
 
-
+fieldset {
+    border: 0px;
+}
 
 app-bookmark {
     align-self: stretch;
