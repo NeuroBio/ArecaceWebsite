@@ -1,8 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+
 import { Subscription }                 from 'rxjs';
 
 import { AuthService }                  from 'src/app/administration/security/Auth/auth.service';
 import { TextProvider }                 from 'src/app/GlobalServices/textprovider.service';
+
 import { User }                         from 'src/app/Classes/ContentClasses';
 
 @Component({
@@ -10,6 +12,7 @@ import { User }                         from 'src/app/Classes/ContentClasses';
   templateUrl: './user-dash.component.html',
   styleUrls: ['./user-dash.component.css']
 })
+
 export class UserDashComponent implements OnInit, OnDestroy {
 
   loggedoutText: string;
@@ -63,8 +66,7 @@ export class UserDashComponent implements OnInit, OnDestroy {
       this.savedData.push({
         title: 'Your Source Affinity Data',
         link: 'sacalculations',
-        name: this.user.SAcalculations.map(sa =>
-          sa.DisplayName.split('-').join(' ')),
+        name: this.user.SAcalculations.map(sa => sa.DisplayName),
         type: 'SAcalculations',
         data: this.user.SAcalculations,
         edit: true

@@ -3,23 +3,25 @@
 <app-scroll-frame
 [Title]="'Your Bookmarks'"
 [Color]="'rgb(49, 49, 49)'">
-<div id="outer">
-  <div *ngIf="dataExists === true; then display else notsaved"></div>
-</div>
+  <div id="outer">
+    <div *ngIf="dataExists === true; then display else notsaved"></div>
+  </div>
 </app-scroll-frame>
 
 
 <!-- Favorites -->
   <ng-template #display class="outer">
-    <p *ngFor="let type of data">
-      <span>{{ type.Type }}:</span>
+    <section *ngFor="let type of data" class="bookmark">
+      <h5>{{ type.Type }}:</h5>
       <span class="linker" *ngFor="let link of type.Data; let i = index">
-        <button class="Exs" (click)="onDelete(type.Type, i)">x</button>
+        <button class="Exs" type="button"
+        [aria-label]="'Delete Bookmark:' + link.Name"
+        (click)="onDelete(type.Type, i)">x</button>
         <a [routerLink]="'/'+ link.Link">
             {{ link.Name }}
         </a><br>
       </span>
-    </p>
+    </section>
   </ng-template>
 
 

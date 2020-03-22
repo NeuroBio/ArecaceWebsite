@@ -3,24 +3,28 @@
 
 <!-- User NOT logged in -->
 <ng-template #guest>
-    <div id="background">
+    <main class="background">
         <div [innerHTML]="loggedoutText"></div>
         <app-login></app-login>
-    </div>
+    </main>
 </ng-template>
 
 
 <!-- User logged in -->
 <ng-template #authenticated>
-    <div id="background" *ngIf="user">
+    <div class="background">
+        <!-- Header -->
         <div class="compheader">
             <h3 class="compheader">Welcome Back, {{ user.userName }} (ID#{{ user.ID }})
                 <div id="useractions">
-                    <span *ngFor="let action of actions">
-                        <a class="icon" *ngIf="action.show === true" [routerLink]="action.link" tabindex="0">
-                            <img class="icon" [src]="action.src" [alt]="action.alt">
-                        </a>
-                    </span>
+                    <nav>
+                        <span *ngFor="let action of actions">
+                            <a class="icon" *ngIf="action.show === true"
+                            [routerLink]="action.link" tabindex="0">
+                                <img class="icon" [src]="action.src" [alt]="action.alt">
+                            </a>
+                        </span>
+                    </nav>
                     <br>
                     <app-logout ></app-logout>
                 </div>
@@ -28,13 +32,18 @@
         </div>
         <hr>
 
-        <div id="announcement">
+
+        <!-- Website Annoucements -->
+        <section id="announcement">
+            <h4>Announcements:</h4>
             <div id="innerText" [innerHTML]="loggedinText"></div>
             <hr>
-        </div>
+        </section>
 
 
-        <div id="UserComponents">
+        <main>
+
+            <!-- Favorited data -->
             <app-pick-up class="UserData"
             [user]="user"
             ></app-pick-up>
@@ -50,8 +59,8 @@
                 [edit]="datum.edit"
                 ></app-data-options>
             </div>
-        </div>
-        
+        </main>
         <div style="clear: both;"></div>
-      </div>
-  </ng-template>
+
+    </div>
+</ng-template>

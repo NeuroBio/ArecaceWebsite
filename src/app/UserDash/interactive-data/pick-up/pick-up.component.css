@@ -5,6 +5,7 @@ div#outer {
 }
 
 a {
+    display: flex;
     color: rgb(241, 241, 241);
     width: 100%;
     padding: 0px 5px 0px 5px;
@@ -12,6 +13,7 @@ a {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    align-items: center;
 }
 
 a:hover {
@@ -24,4 +26,14 @@ a:active {
 
 .linker {
     display: flex;
+}
+
+h5 {
+    font-size: 18px;
+    padding-bottom: 3px;;
+    margin: 0px;
+}
+
+section.bookmark {
+    margin: 20px;
 }

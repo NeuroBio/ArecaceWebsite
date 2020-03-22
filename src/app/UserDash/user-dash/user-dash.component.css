@@ -1,4 +1,4 @@
-div#useractions {
+#useractions {
     margin-right: 15px;
     float: right;
     display: flex;
@@ -11,7 +11,7 @@ app-logout {
     white-space: nowrap;
 }
 
-div#background {
+.background {
     background-image: url(https://firebasestorage.googleapis.com/v0/b/arecaceworld.appspot.com/o/WebSite%2Fsmear2.png?alt=media&token=03185fb3-b90c-4635-98c7-5e045e6b2579);
 }
 
@@ -43,10 +43,10 @@ a.icon {
     float: left;
 }
 
-::ng-deep #announcement h4 {
+#announcement h4 {
+    padding: 15px 15px 0px 15px;
     margin: 0px;
     font-size: 24px;
-    padding-bottom: 7px;
 }
 
 h3.compheader {
@@ -54,9 +54,10 @@ h3.compheader {
     padding: 7px;
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
-div#announcement {
+#announcement {
     background-color: rgb(49, 49, 49);
 }
 

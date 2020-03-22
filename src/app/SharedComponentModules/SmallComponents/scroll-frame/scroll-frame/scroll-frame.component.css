@@ -1,4 +1,4 @@
-div#frame {
+section#frame {
     position: relative;
     max-height: 500px;
     width: calc(100% - 22px);
@@ -14,8 +14,13 @@ div#frameheader {
     display: block;
     top: 0px;
     font-family: 'Courier New', Courier, monospace;
+}
+
+h4#frameheader {
     font-size: 25px;
+    padding: 5px 0px 5px 0px;
+    margin: 0px;
     font-weight: bold;
-    padding-top: 10px;
     text-align: center;
+
 }
