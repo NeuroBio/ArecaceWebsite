@@ -7,13 +7,13 @@ div#background {
     background-image: url(https://firebasestorage.googleapis.com/v0/b/arecaceworld.appspot.com/o/WebSite%2Fsmear2.png?alt=media&token=03185fb3-b90c-4635-98c7-5e045e6b2579);
 }
 
-div.accountInfo {
+.accountInfo {
     border: 1px white solid;
     max-width: 450px;
     margin: 7px;
 }
 
-div#accountInfo p {
+.accountInfo p {
     margin: 0px;
     padding-top: 0px;
     padding-bottom: 20px;
@@ -24,11 +24,13 @@ h4 {
     padding: 7px;
     margin: 0px;
 }
+
 input {
     width: 95%;
     margin: 3px;
     font-size: 14px;
 }
+
 button#change {
     float: right;
     margin: 7px;

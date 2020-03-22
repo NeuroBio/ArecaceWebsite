@@ -1,10 +1,11 @@
 <div id="background">
-    <div class="textblock accountInfo">
+    <main class="textblock accountInfo">
+        
         <h4>Your Roles:</h4>
-            <span>User-{{ user.User }}</span><br>
-            <span>Forum Moderator-{{ user.Mod }}</span><br>
-            <span>Site Admin-{{ user.Admin }}</span><br>
-            <br>
+        <span>User-{{ user.User }}</span><br>
+        <span>Forum Moderator-{{ user.Mod }}</span><br>
+        <span>Site Admin-{{ user.Admin }}</span><br>
+        <br>
         <hr>
         
 
@@ -12,13 +13,15 @@
         <span>{{ user.email }}</span>
         <hr>
 
+
         <h4>Account Created:</h4>
         <span>{{ user.accountCreated }}</span>
         <hr>
 
+
         <h4>User Name:</h4>
         <span>{{ user.userName }}<br></span>
-        <form [formGroup]="Form">
+        <form [formGroup]="Form" aria-label="Change User Name">
             <input type="text" formControlName="newName">
             <button id="change" (click)="changeUserName()"
             >Change</button>
@@ -26,28 +29,29 @@
             {{ message }}
         </form>
         <hr>
+
         <h4>View Settings:</h4>
         <span>Show Image Previews: {{ user.showPreview}}</span>
         <hr>
         <br>
         <a routerLink="/privacy">See our Privay Policy</a>
-    </div>
+    </main>
 
-    <div class="textblock accountInfo">
+    <Aside class="textblock accountInfo">
         <h4 id="danger">!*Danger Zone*!</h4>
-        <button (click)="switchDanger()">{{ dangerButton }}</button>
+        <button type="button" (click)="switchDanger()">{{ dangerButton }}</button>
         <hr>
         <div *ngIf="dangerNoodle === true">
             <br>
             <span id="danger">WARNING: These actions cannot be undone!</span>
-            <button class="danger" (click)="deleteData()"
+            <button type="button" class="danger" (click)="deleteData()"
             [disabled]="disabled === true">
                 Delete Your Saved Data</button><br>
-            <button class="danger" (click)="deleteAccount()"
+            <button type="button" class="danger" (click)="deleteAccount()"
             [disabled]="disabled === true">
                 Delete Your Account</button><br>
             {{ dangerMessage }}
         </div>
 
-    </div>
+    </Aside>
 </div>

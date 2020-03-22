@@ -16,12 +16,10 @@ export function userNameValidator(): ValidatorFn {
         || justLetters.match(/bitch/)
         || justLetters.match(/nigger/)
         || justLetters.match(/ngger/)
-        || justLetters.match(/nigga/)
-        || justLetters.match(/nigg/) ) {
+        || justLetters.match(/nigga/)) {
             return {'ProfanityFilter': {value: control.value,
                                         message: 'You triggered the profanity filter, so you were probably typing something inappropriate (and not being clever enough about it).  If you weren\'t, my bad!  The filter is pretty blunt.  Feel free to contact me about what you wanted to do, and I\'ll see if I can do something about it!'}}
         }
-        
         return null;
     };
   }

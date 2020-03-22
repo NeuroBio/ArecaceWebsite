@@ -1,6 +1,6 @@
 import { Injectable }               from '@angular/core';
-import { Router }                   from '@angular/router'
 import { formatDate }               from '@angular/common';
+import { Router }                   from '@angular/router';
 
 import { BehaviorSubject }          from 'rxjs';
 import { take }                     from 'rxjs/operators';
@@ -10,9 +10,10 @@ import { AuthService }              from '../administration/security/Auth/auth.s
 import { CRUD }                     from 'src/app/administration/services/CRUD.service';
 import { FetchService }             from 'src/app/GlobalServices/fetch.service';
 
-import { CRUDdata, User }                 from 'src/app/Classes/ContentClasses';
+import { CRUDdata, User }           from 'src/app/Classes/ContentClasses';
 import { UserDataNameTokens }       from 'src/app/Classes/UploadDownloadPaths';
-import { DisplayService } from './interactive-data/display.service';
+import { DisplayService }           from './interactive-data/display.service';
+
 @Injectable({
   providedIn: 'root'
 })

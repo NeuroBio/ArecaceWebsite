@@ -16,10 +16,9 @@ import { User }                           from 'src/app/Classes/ContentClasses';
 export class UserGuardGuard implements CanActivate {
 
   constructor(private auth: AuthService,
-    private router: Router) { }
+              private router: Router) { }
 
-  canActivate(
-    route: ActivatedRouteSnapshot,
+  canActivate(route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> {
     const url: string = state.url;
     return this.checkUser(url);
@@ -34,7 +33,7 @@ export class UserGuardGuard implements CanActivate {
             if(user.User){return true};
         }
         this.auth.redirectUrl = url;
-        this.router.navigate(['/Dash']);
+        this.router.navigate(['/dash']);
         return false;
       })
     );

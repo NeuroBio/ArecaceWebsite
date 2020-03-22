@@ -2,7 +2,8 @@ import { NgModule }                         from '@angular/core';
 import { Routes, RouterModule }             from '@angular/router';
 
 import { UserdataMainResolverService }      from './interactive-data/interact-home/userdata-main-resolver.service';
-import { UserdataDetailsResolverService }   from './interactive-data/interact-details-switch/userdata-details-resolver.service'
+import { UserdataDetailsResolverService }   from './interactive-data/interact-details-switch/userdata-details-resolver.service';
+
 import { UserGuardGuard }                   from './user-guard.guard';
 
 import { UserDashComponent }                from './user-dash/user-dash.component';
@@ -15,17 +16,17 @@ import { UserInfoComponent }                from './user-info/user-info.componen
 const userRoutes: Routes = [
   { path: '', component: UserDashComponent },
   { path: 'settings', component: UserInfoComponent,
-    canActivate: [UserGuardGuard], },
+    canActivate: [UserGuardGuard] },
 
   // Survey Results
   { path: 'SurveyResults', component: InteractHomeComponent,
-  canActivate: [UserGuardGuard],
-  resolve: { UserdataMainResolverService },
+    canActivate: [UserGuardGuard],
+    resolve: { UserdataMainResolverService },
     children: [
       { path: 'notfound', redirectTo: '' },
       { path: ':surveyID', component: InteractDetailsSwitchComponent,
         resolve: { Data: UserdataDetailsResolverService },
-      children: [{ path: '**', redirectTo: '' }]}
+        children: [{ path: '**', redirectTo: '' }] }
   ]},
 
   // Source Affinity Calculations
@@ -45,12 +46,12 @@ const userRoutes: Routes = [
     loadChildren: () => import('src/app/SimplePages/downloadpage/download-page.module').then(m => m.DownloadPageModule)},
 
   { path: 'FanCharacters', component: InteractHomeComponent,
-  canActivate: [UserGuardGuard],
-  resolve: { UserdataMainResolverService },
+    canActivate: [UserGuardGuard],
+    resolve: { UserdataMainResolverService },
     children: [
       { path: 'notfound', redirectTo: ''},
       { path: ':CharaID', component: InteractDetailsSwitchComponent,
-        resolve: {Data: UserdataDetailsResolverService},
+        resolve: { Data: UserdataDetailsResolverService },
         children: [
           { path: ':RefID', component: CharactersBlowupmasterComponent,
             resolve: { links: CBUMResolverService } }

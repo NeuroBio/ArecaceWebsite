@@ -1,17 +1,21 @@
-import { Component, OnInit, Input, OnDestroy } from '@angular/core';
-import { User } from 'src/app/Classes/ContentClasses';
-import { FireBaseService } from 'src/app/GlobalServices/firebase.service';
-import { AuthService } from '../../administration/security/Auth/auth.service';
-import { FormBuilder, ValidationErrors } from '@angular/forms';
-import { userNameValidator } from './userNameValidator';
-import { Subscription } from 'rxjs';
-import { DashCRUDService } from '../dash-CRUD.service';
+import { Component, OnInit, OnDestroy }   from '@angular/core';
+import { FormBuilder, ValidationErrors }  from '@angular/forms';
+
+import { Subscription }                   from 'rxjs';
+
+import { FireBaseService }                from 'src/app/GlobalServices/firebase.service';
+import { AuthService }                    from '../../administration/security/Auth/auth.service';
+import { DashCRUDService }                from '../dash-CRUD.service';
+
+import { userNameValidator }              from './userNameValidator';
+import { User }                           from 'src/app/Classes/ContentClasses';
 
 @Component({
   selector: 'app-user-info',
   templateUrl: './user-info.component.html',
   styleUrls: ['./user-info.component.css']
 })
+
 export class UserInfoComponent implements OnInit, OnDestroy {
 
   user: User;
@@ -32,6 +36,7 @@ export class UserInfoComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.stream1 = this.auth.user.subscribe(user => 
       this.user = user);
+    
     this.stream2 = this.crud.message.subscribe(mess => 
       this.dangerMessage = mess);
   }
@@ -56,7 +61,7 @@ export class UserInfoComponent implements OnInit, OnDestroy {
   createForm() {
     return this.fb.group({
       newName: ['', [userNameValidator()]]
-    })
+    });
   }
 
   getFormValidationErrors() {
