@@ -88,8 +88,20 @@ export class PathInfo {
     }
 } 
 
-export class UserDataNameTokens {
-    FanCharacters = ['FirstName', 'LastName'];
-    SurveyResults = ['Name', 'UploadTimeShort'];
-    SAcalculations = ['ID'];
+export class AllUserDataInfo {
+    FanCharacters = new UserData(['FirstName', 'LastName'], 'Fan Characters', 'Fan Char');
+    SurveyResults = new UserData(['Name', 'UploadTimeShort'], 'Survey Results', 'Survey Result');
+    SAcalculations = new UserData(['ID'], 'SA Calculations', 'SA Calc');
+}
+
+export class UserData {
+    NameTokens: string[];
+    DisplayName: string;
+    ShortName: string;
+
+    constructor(tokens: string[], name: string, shortName: string) {
+        this.NameTokens = tokens;
+        this.DisplayName = name;
+        this.ShortName = shortName;
+    }
 }

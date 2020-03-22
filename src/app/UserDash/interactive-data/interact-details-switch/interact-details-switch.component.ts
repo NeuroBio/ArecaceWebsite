@@ -1,11 +1,11 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, OnInit, OnDestroy }     from '@angular/core';
+import { ActivatedRoute }                   from '@angular/router';
 
-import { Subscription } from 'rxjs';
+import { Subscription }                     from 'rxjs';
 
-import { SurveyService } from 'src/app/playground/activities/Surveys/survey-components/survey.service';
-import { FetchService } from 'src/app/GlobalServices/fetch.service';
-import { DisplayService } from '../display.service';
+import { SurveyService }                    from 'src/app/playground/activities/Surveys/survey-components/survey.service';
+import { FetchService }                     from 'src/app/GlobalServices/fetch.service';
+import { DisplayService }                   from '../display.service';
 
 @Component({
   selector: 'app-interact-details-switch',
@@ -27,7 +27,7 @@ export class InteractDetailsSwitchComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.type = this.route.snapshot.parent.url[0].path;
-    this.route.data.subscribe((data: {Data: any}) => {
+    this.route.data.subscribe((data: { Data: any }) => {
       window.scroll(0,0);
       this.userData = data.Data;
       switch(this.type) {

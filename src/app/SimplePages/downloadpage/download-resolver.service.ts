@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Resolve, ActivatedRouteSnapshot, Router } from '@angular/router';
 import { DownloadPageService } from './download-page.service';
 import { CacheService } from 'src/app/GlobalServices/cache.service';
-import { AllPathInfo, UserDataNameTokens } from 'src/app/Classes/UploadDownloadPaths';
+import { AllPathInfo, AllUserDataInfo } from 'src/app/Classes/UploadDownloadPaths';
 import { take, tap } from 'rxjs/operators';
 import { CharacterMetaData } from 'src/app/Classes/ContentClasses';
 import { AuthService } from 'src/app/administration/security/Auth/auth.service';
@@ -14,7 +14,7 @@ import { AuthService } from 'src/app/administration/security/Auth/auth.service';
 export class DownloadResolverService implements Resolve<any>{
   
   firePaths = new AllPathInfo();
-  userTokens = new UserDataNameTokens();
+  userTokens = new AllUserDataInfo();
 
   constructor(private cache: CacheService,
               private router: Router,
@@ -42,7 +42,7 @@ export class DownloadResolverService implements Resolve<any>{
     let ID: string;
     let refName: string;
     //check whether second to last seg is the type (ref); otherwise assume it is the third (subref)
-    if(this.firePaths[url[url.length-3]] || this.userTokens[url[url.length-3]]) {
+    if(this.firePaths[url[url.length-3]] || this.userTokens[url[url.length-3]].NameTokens) {
       type = url[url.length-3];
       ID = url[url.length-2];
     } else {

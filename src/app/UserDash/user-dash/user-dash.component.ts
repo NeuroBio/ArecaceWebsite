@@ -1,4 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Title }                        from '@angular/platform-browser';
 
 import { Subscription }                 from 'rxjs';
 
@@ -28,9 +29,11 @@ export class UserDashComponent implements OnInit, OnDestroy {
   stream1: Subscription;
 
   constructor(private auth: AuthService,
-              private textprovider: TextProvider) { }
+              private textprovider: TextProvider,
+              private titleserv: Title) { }
 
   ngOnInit() {
+    this.titleserv.setTitle('User Dash');
     this.loggedoutText = this.textprovider.WebsiteText
       .find(member => member.ID =='login').Text;
     this.loggedinText = this.textprovider.WebsiteText

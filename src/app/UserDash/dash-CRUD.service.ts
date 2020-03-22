@@ -11,7 +11,7 @@ import { CRUD }                     from 'src/app/administration/services/CRUD.s
 import { FetchService }             from 'src/app/GlobalServices/fetch.service';
 
 import { CRUDdata, User }           from 'src/app/Classes/ContentClasses';
-import { UserDataNameTokens }       from 'src/app/Classes/UploadDownloadPaths';
+import { AllUserDataInfo }          from 'src/app/Classes/UploadDownloadPaths';
 import { DisplayService }           from './interactive-data/display.service';
 
 @Injectable({
@@ -21,7 +21,7 @@ import { DisplayService }           from './interactive-data/display.service';
 export class DashCRUDService {
 
   message = new BehaviorSubject<string>(undefined);
-  NameTokens = new UserDataNameTokens();
+  NameTokens = new AllUserDataInfo();
 
   constructor(private firebaseserv: FireBaseService,
               private auth: AuthService,
@@ -44,7 +44,7 @@ export class DashCRUDService {
 
     uploadInfo.MetaData.UploadTime = formatDate(new Date(), 'yyyy-MM-dd, HH:mm:ss', 'en');
     uploadInfo.MetaData.UploadTimeShort = formatDate(new Date(), 'yy/MM/dd', 'en');
-    uploadInfo.MetaData.DisplayName = this.makeDisplayName(this.NameTokens[type], uploadInfo.MetaData);
+    uploadInfo.MetaData.DisplayName = this.makeDisplayName(this.NameTokens[type].NameTokens, uploadInfo.MetaData);
     uploadInfo.MetaData.ID = `${this.auth.user.value.ID}_${this.getUniqueId(4)}`
 
     if(uploadInfo.NewImageLinks[0]) {
@@ -173,7 +173,7 @@ export class DashCRUDService {
   replaceUserValues(newData: any, oldData: any, type: string) {
     newData.UploadTime = oldData.UploadTime;
     newData.UploadTimeShort = oldData.UploadTimeShort;
-    newData.DisplayName = this.makeDisplayName(this.NameTokens[type], newData);
+    newData.DisplayName = this.makeDisplayName(this.NameTokens[type].NameTokens, newData);
     newData.ID = oldData.ID;
     return newData;
   }

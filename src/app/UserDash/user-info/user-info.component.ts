@@ -6,6 +6,7 @@ import { Subscription }                   from 'rxjs';
 import { FireBaseService }                from 'src/app/GlobalServices/firebase.service';
 import { AuthService }                    from '../../administration/security/Auth/auth.service';
 import { DashCRUDService }                from '../dash-CRUD.service';
+import { Title }                          from '@angular/platform-browser';
 
 import { userNameValidator }              from './userNameValidator';
 import { User }                           from 'src/app/Classes/ContentClasses';
@@ -31,9 +32,11 @@ export class UserInfoComponent implements OnInit, OnDestroy {
   constructor(private firebaseserv: FireBaseService,
               private auth: AuthService,
               private fb: FormBuilder,
-              private crud: DashCRUDService) { }
+              private crud: DashCRUDService,
+              private titleserv: Title) { }
 
   ngOnInit() {
+    this.titleserv.setTitle('Settings');
     this.stream1 = this.auth.user.subscribe(user => 
       this.user = user);
     
