@@ -1,22 +1,22 @@
 import { NgModule }                         from '@angular/core';
 import { Routes, RouterModule }             from '@angular/router';
 
-import { BestiaryComponent }                from './bestiary/bestiary.component';
-import { BlowupmasterComponent}             from 'src/app/SharedComponentModules/PrimaryContentDisplayer/GridBlowUp/blowupmaster/blowupmaster.component';
-
 import { GeneralcollectionresolverService } from 'src/app/GlobalServices/generalcollectionresolver.service';
 import { GeneralmemberresolverService }     from 'src/app/GlobalServices/generalmemberresolver.service';
 
-const bestiaryRoutes: Routes = [
-  {path: 'bestiary/:BeastID/Download',
-    loadChildren: () => import('src/app/SimplePages/downloadpage/download-page.module').then(m => m.DownloadPageModule)},
+import { BestiaryComponent }                from './bestiary/bestiary.component';
+import { BlowupmasterComponent}             from 'src/app/SharedComponentModules/PrimaryContentDisplayer/GridBlowUp/blowupmaster/blowupmaster.component';
 
-  {path: 'bestiary', component: BestiaryComponent,
-    resolve: {GeneralcollectionresolverService},
+const bestiaryRoutes: Routes = [
+  { path: 'bestiary/:BeastID/Download',
+    loadChildren: () => import('src/app/SimplePages/downloadpage/download-page.module').then(m => m.DownloadPageModule) },
+
+  { path: 'bestiary', component: BestiaryComponent,
+    resolve: { GeneralcollectionresolverService },
     children: [
-      {path: 'notfound', redirectTo: ''},
-      {path: ':BeastID', component: BlowupmasterComponent,
-      resolve: {links: GeneralmemberresolverService}}
+      { path: 'notfound', redirectTo: '' },
+      { path: ':BeastID', component: BlowupmasterComponent,
+        resolve: { links: GeneralmemberresolverService } }
     ]
   },
 ];

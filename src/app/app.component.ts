@@ -34,10 +34,10 @@ export class AppComponent implements AfterViewInit, OnInit {
                           { link: 'privacy', name: 'Privacy Policy' }]
   
   constructor(private global: GlobalVarsService,
-              private titleService: Title) { }
+              private titleserv: Title) { }
   
   ngOnInit() {
-    this.titleService.setTitle( 'Arecace' );
+    this.titleserv.setTitle( 'Arecace' );
   }
 
   ngAfterViewInit() {

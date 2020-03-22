@@ -3,9 +3,9 @@ import { CommonModule }             from '@angular/common';
 
 import { BestiaryRoutingModule }    from './bestiary-routing.module';
 import { GridBlowupModule }         from 'src/app/SharedComponentModules/PrimaryContentDisplayer/GridBlowUp/grid-blowup.module';
+import { SliderModule }             from 'src/app/SharedComponentModules/SmallComponents/slider/slider.module';
 
 import { BestiaryComponent }        from './bestiary/bestiary.component';
-import { SliderModule }             from 'src/app/SharedComponentModules/SmallComponents/slider/slider.module';
 
 @NgModule({
   declarations: [

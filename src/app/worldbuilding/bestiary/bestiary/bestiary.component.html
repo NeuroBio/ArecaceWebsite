@@ -1,22 +1,23 @@
-<!--Header-->
 <div id="background">
 
-  <div class="compheader" role="header">
+  <!--Header-->
+  <div class="compheader">
     <h2 class="compheader">
       <!-- Main header -->
-      <span id="headertext">Bestiary</span>
+      <span>Bestiary</span>
       
+      <!-- Display controls -->
       <div id="selections">
+
         <!-- Sort options -->
-        <div id="sort">
+        <fieldset>
+          <legend>Sort By:</legend>
           <div *ngFor="let option of sortOptions">
               <input type="radio" name="sorter"  [id]="option"
-              [checked]="option === 'Biome'"
-              (click)="onSort(option)">
+              [checked]="option === 'Biome'" (click)="onSort(option)">
               <label [for]="option">{{ option }}</label>
-              <br>
           </div>
-        </div>
+        </fieldset>
   
         <!-- show Preview -->
         <app-slider
