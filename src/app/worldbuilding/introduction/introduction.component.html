@@ -1,26 +1,25 @@
-<div class="compheader" role="header">
+<div class="compheader">
     <h2 class="compheader">An Introduction to Arecace</h2>
 </div>
 <hr>
 
-<div id="splatter">
-
-    <div class="holdme" role="main" *ngFor="let intro of mainText">
-        <div class="textblock">
-            <div class="textContainer">
-                <h3>{{ intro.Title }}:</h3>
-                <p [innerHTML]="intro.Text"></p>
-                <div class="buttonbank">
-                    <div class="navver" *ngFor="let route of intro.RouterLinks; let i = index">
-                        <a class="navver" [routerLink]="route">
-                        {{ intro.RouterLinksNames[i] }}</a>
-                    </div>
+<main>
+    <section class="textblock" *ngFor="let intro of mainText" >
+        <!-- Text -->
+        <div>
+            <h3 role="heading">{{ intro.Title }}:</h3>
+            <p [innerHTML]="intro.Text"></p>
+            <nav class="buttonbank" aria-label="intro.Title + '-navigation'">
+                <div class="navver" *ngFor="let route of intro.RouterLinks; let i = index">
+                    <a class="navver" [routerLink]="route">
+                    {{ intro.RouterLinksNames[i] }}</a>
                 </div>
-            </div>
+            </nav>
+        </div>
 
-            <div *ngIf="intro.Image === true" class="imageContainer">
-                <img  src="">
-            </div>
-        </div><br>
-    </div>
-</div>
+        <!-- Image -->
+        <div *ngIf="intro.Image === true" class="imageContainer">
+            <img  src="" alt="">
+        </div>
+    </section>
+</main>

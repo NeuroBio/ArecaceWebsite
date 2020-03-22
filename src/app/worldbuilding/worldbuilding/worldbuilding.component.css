@@ -13,7 +13,7 @@ div.compheader {
 }
 
 /*the div image that hangs out behind the main content buttons*/
-div#mapped {
+main {
     background-image: url(https://firebasestorage.googleapis.com/v0/b/arecaceworld.appspot.com/o/WebSite%2FArecace%20Shipping%20Routes.png?alt=media&token=ade78c73-a4f3-45a4-be8f-388a44fb9570);
     background-repeat: repeat-y;
     width: 100%;
@@ -22,7 +22,7 @@ div#mapped {
 }
 
 /* Navigation */
-nav#world {
+nav {
     max-width: 700px;
     display: flex;
     align-items: flex-start;

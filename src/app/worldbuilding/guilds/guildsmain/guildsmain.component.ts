@@ -24,10 +24,9 @@ export class GuildsMainComponent implements OnInit {
       map(Guilds => {
         Guilds.sort((a,b) => a.Founded < b.Founded ? -1 : 1);
         return Guilds.map(Guild => [Guild.ID, Guild.ID]);
-      })
-    );
+      }) );
     
     this.route.firstChild.paramMap.subscribe(
-      path => this.current = path.get('GuildID'));
+      path => this.current = path.get('GuildID') );
   }
 }

@@ -4,8 +4,9 @@ import { ActivatedRoute }             from '@angular/router';
 import { Observable }                 from 'rxjs';
 import { map }                        from 'rxjs/operators';
 
-import { ReferenceCategories }        from 'src/app/Classes/UploadDownloadPaths';
 import { GeneralcollectionService }   from 'src/app/GlobalServices/generalcollection.service';
+
+import { ReferenceCategories }        from 'src/app/Classes/UploadDownloadPaths';
 
 @Component({
   selector: 'app-culturemain',
@@ -34,7 +35,7 @@ export class CulturemainComponent implements OnInit {
     );
     
     this.route.firstChild.paramMap.subscribe(
-      path => this.current = path.get('CultureID'));
+      path => this.current = path.get('CultureID') );
   }
 
 }

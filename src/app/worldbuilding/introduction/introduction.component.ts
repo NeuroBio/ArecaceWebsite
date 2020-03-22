@@ -1,6 +1,7 @@
 import { Component, OnInit }  from '@angular/core';
 
 import { TextProvider }       from 'src/app/GlobalServices/textprovider.service';
+
 import { Intro }              from 'src/app/Classes/WebsiteText';
 
 @Component({
@@ -14,7 +15,7 @@ export class IntroductionComponent implements OnInit {
   mainText: Intro[];
   links: string[];
 
-  constructor(private textprovider: TextProvider) {}
+  constructor(private textprovider: TextProvider) { }
 
   ngOnInit() {
     window.scroll(0,0);
