@@ -1,9 +1,10 @@
 import { Injectable }                               from '@angular/core';
 import { Resolve, ActivatedRouteSnapshot, Router }  from '@angular/router';
 import { HttpClient }                               from '@angular/common/http';
+import { Title }                                    from '@angular/platform-browser';
 
-import { Observable, of, EMPTY }                    from 'rxjs';
-import { take, map, tap, flatMap }                  from 'rxjs/operators';
+import { Observable, EMPTY }                        from 'rxjs';
+import { take, map, flatMap }                       from 'rxjs/operators';
 
 import { StoryService }                             from '../story.service';
 import { StoryMetaData }                            from 'src/app/Classes/ContentClasses';
@@ -16,7 +17,8 @@ export class StoryResolver3Service implements Resolve<any>{
 
   constructor(private storyserv: StoryService,
               private router: Router,
-              private httpclient: HttpClient) { }
+              private httpclient: HttpClient,
+              private titleserv: Title) { }
 
   //see the story service for notes
   resolve(route: ActivatedRouteSnapshot): Observable<any>{
@@ -31,6 +33,7 @@ export class StoryResolver3Service implements Resolve<any>{
         if(metaData) {
           this.storyserv.getStory(metaData.ID);
           this.storyserv.changeSection(metaData.ID);
+          this.titleserv.setTitle(`${metaData.Title}`)
           return this.getText(metaData.StoryLink).pipe(
             map(text => ({metaData, text})) );
 

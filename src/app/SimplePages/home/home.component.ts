@@ -1,4 +1,6 @@
 import { Component, OnInit, HostListener }  from '@angular/core';
+import { Title }                            from '@angular/platform-browser';
+
 import { TextProvider }                     from 'src/app/GlobalServices/textprovider.service';
 
 @Component({
@@ -13,9 +15,11 @@ export class HomeComponent implements OnInit {
   buttonText: string[];
   mainText: string;
 
-  constructor(private textprovider: TextProvider) { }
+  constructor(private textprovider: TextProvider,
+              private titleserv: Title) { }
 
   ngOnInit() {
+    this.titleserv.setTitle('Arecace');
     this.mainText = this.textprovider.WebsiteText
                         .find(member => member.ID === 'home').Text;
     window.scroll(0,0);

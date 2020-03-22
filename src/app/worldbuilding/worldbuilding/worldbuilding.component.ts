@@ -1,4 +1,5 @@
 import { Component, OnInit }          from '@angular/core';
+import { Title }                      from '@angular/platform-browser';
 
 @Component({
   selector: 'app-worldbuilding',
@@ -16,7 +17,10 @@ export class WorldbuildingComponent implements OnInit {
                     { link: 'source', name:'Source and Siphoid', src: 'https://firebasestorage.googleapis.com/v0/b/arecaceworld.appspot.com/o/WebSite%2Fworld%20buttons%2Fsource.png?alt=media&token=93ad9b0d-7dda-429a-9323-3f92ff83fec4' },
                     { link: 'guilds', name: 'The DIA and Guilds', src: 'https://firebasestorage.googleapis.com/v0/b/arecaceworld.appspot.com/o/WebSite%2Fworld%20buttons%2Fguilds.png?alt=media&token=9ca20138-76ed-4a0e-a45a-f15c73c45506' } ];
 
+  constructor(private titleserv: Title) { }
+
   ngOnInit() {
+    this.titleserv.setTitle('World');
     window.scroll(0,0);
   }
 
