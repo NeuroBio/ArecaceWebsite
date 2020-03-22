@@ -51,7 +51,7 @@ export class AllPathInfo {
     characters = new PathInfo('Character Bio', 'CharacterBios', '/world/characters', ['FirstName', 'LastName']);
     culture = new PathInfo('Culture Info', 'CultureInfo', '/world/culture', ['Topic']);
     extras = new PathInfo('Extra Art', 'MiscArt', '/extras', ['Name']);
-    guilds = new PathInfo('Guild', 'Guilds', '/world/guilds', ['Guild Name']);
+    guilds = new PathInfo('Guild', 'Guilds', '/world/guilds', ['GuildName']);
     maps = new PathInfo('Map', 'Maps', '/world/maps', ['Topic']);
     narratives = new PathInfo('Story', 'Narratives', '/story/Narratives', ['Series', 'Title'], 'Series');
     notes = new PathInfo('Writing Note','LooseNotes', '/playground/notes', ['ShortTitle']);

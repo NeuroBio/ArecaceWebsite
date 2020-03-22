@@ -1,5 +1,4 @@
 import { Component, OnInit, OnDestroy }   from '@angular/core';
-import { Title }                          from '@angular/platform-browser';
 
 import { Observable }                     from 'rxjs';
 import { map }                            from 'rxjs/operators';
@@ -23,11 +22,9 @@ export class BestiaryComponent implements OnInit, OnDestroy {
                      Tunicata: 4, Ichthyia: 5, ReptiliaAmphibia: 6, Avia: 7,
                      Therapsida: 8, Mammalia: 9 };
   
-  constructor(private generalcollectserv: GeneralcollectionService,
-              private titleserv: Title) { }
+  constructor(private generalcollectserv: GeneralcollectionService) { }
 
   ngOnInit() {
-    this.titleserv.setTitle('Bestiary');
     this.beasts$ = this.generalcollectserv.returnMetaData().pipe(
       map(beasts => {
         beasts.sort((a,b) => a.ID < b.ID ? -1 : 1);

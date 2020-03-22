@@ -1,5 +1,4 @@
 import { Component, OnInit }          from '@angular/core';
-import { Title }                      from '@angular/platform-browser';
 import { ActivatedRoute }             from '@angular/router';
 
 import { Observable }                 from 'rxjs';
@@ -18,11 +17,9 @@ export class CharactersMainComponent implements OnInit {
   characters$: Observable<string[]>;
 
   constructor(private generalcollectserv: GeneralcollectionService,
-              private route: ActivatedRoute,
-              private titleserv: Title) { }
+              private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.titleserv.setTitle('Characters')
     this.characters$ = this.generalcollectserv.returnMetaData().pipe(
       map(characters => {
         characters = characters.map(character => [character.FirstName, character.ID]);
