@@ -11,8 +11,8 @@ export class Alphabet {
                   'm', 'n', 'n', 'p', 'r',
                   's', 't', 'v', 'x', 'z'];
     nounEnd = ['a', 'i', 'o', 'e', 'r'];
-    AdjEnd = ['x', 'v', 'g', 's', 'l', 't']
-    AdjEndProbability = [.375, .75, .8125, .875, .9375, 1]
+    AdjEnd = ['x', 'v', 'g', 's', 'l', 't'];
+    AdjEndProbability = [.375, .75, .8125, .875, .9375, 1];
 }
 
 export class WordTypes {
@@ -133,7 +133,7 @@ export class Nomadic {
             if(Math.random() < .6){
                 return "a";
             } else if(lastLastLetter === 's') {
-                this.Alphabet.consonants.splice(4, 1) //remove the l to prevent sil
+                this.Alphabet.consonants.splice(4, 1); //remove the l to prevent sil
             }
         }
         return this.sample(this.Alphabet.consonants);
@@ -243,16 +243,15 @@ export class Nomadic {
         if(probability === undefined){
             probability = [];
             const chance = 1/options.length;
-            options.forEach((x, index) => { //x is not used!
-                probability.push(chance * (index+1))
-            })
+            options.forEach((x: void, index) =>  //x is not used!
+                probability.push(chance * (index+1)) )//
             probability[probability.length-1] = 1;
         }else if(options.length !== probability.length) {
             console.error("Your sample inputs are of different lengths!");
         }
 
         const Choice = Math.random();
-        for(let i = 0; i < probability.length; i++){
+        for(let i = 0; i < probability.length; i++) {
             if(Choice < probability[i]) {
                 return options[i];
             }
@@ -271,6 +270,7 @@ export class Nomadic {
         return sortedDict;
     }
 
+    //HEY SELF, WHY IS TYPE HERE?
     concatinateWords(words: CompWord[], type: string) {
         let cores =  [];
         words.forEach(word => {

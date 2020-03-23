@@ -8,6 +8,6 @@ export class Intro {
 
 export class Question {
     Question: string;
-    Answer:string;
+    Answer: string;
     RouterLink: string;
 }

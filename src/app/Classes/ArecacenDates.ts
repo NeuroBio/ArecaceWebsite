@@ -40,7 +40,7 @@ export class DateInfo {
                                .concat(earthDates.splice(0, 355));
         this.EarthDates = earthDates;
         let arecaceDates = this.makeDates(this.ArecaceMonthLengths);
-        for(let position of this.MissingPositions){
+        for(let position of this.MissingPositions) {
             arecaceDates.splice(position, 0, "NA");
         }
         this.ArecaceDates = arecaceDates;
@@ -49,7 +49,7 @@ export class DateInfo {
     makeDates(monthLength: number[]) {
         let Days = [];
         monthLength.forEach((month, i) => {
-            Array(month).fill('').forEach((day, j) => {
+            Array(month).fill('').forEach((day: void, j) => { //don't use day!
                 Days.push(`${this.quickFormat(i+1)}-${this.quickFormat(j+1)}`)
             });  
         })
@@ -64,11 +64,9 @@ export class DateInfo {
     }
 
     arecacetoEarthConverter(QT: string, day: number) {
-        const month = this.ArecaceMonthNames
-                                    .findIndex(month => QT === month)+1;
+        const month = this.ArecaceMonthNames.findIndex(month => QT === month) + 1;
         const dateCheck = `${this.quickFormat(month)}-${this.quickFormat(day)}`;
-        const index = this.ArecaceDates
-                                    .findIndex(date => dateCheck === date);
+        const index = this.ArecaceDates.findIndex(date => dateCheck === date);
         return(this.EarthDates[index]);
     }
 
@@ -78,9 +76,9 @@ export class DateInfo {
                                     .findIndex(date => dateCheck === date);
         const numericDate = this.ArecaceDates[index].split('-');
         if(numericDate[0] === "NA") {
-            return "This date doesn't exist on Arecace"
+            return "This date doesn't exist on Arecace";
         } else {
-            return(`${this.ArecaceMonthNames[(+numericDate[0])-1]} ${numericDate[1]}`)
+            return(`${this.ArecaceMonthNames[(+numericDate[0])-1]} ${numericDate[1]}`);
         }
     }
 }
