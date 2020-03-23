@@ -4,14 +4,6 @@
   <!-- INTRODUTCTION -->
   <div class="textblock" [innerHTML]="mainText"></div>
 
-<!-- UPDATE FEED -->
-  <app-scroll-frame
-  [Title]="'News Feed'">
-    <app-updatefeed></app-updatefeed>
-  </app-scroll-frame>
-
-
-
 <!-- QUICK START GUIDE -->
   <div id="quickstart">
     <h3 id="qsheader">Quick Start Guide:</h3>
@@ -36,8 +28,13 @@
   </div>
 
 
+  <!-- UPDATE FEED -->
+    <app-scroll-frame
+    [Title]="'News Feed:'">
+      <app-updatefeed></app-updatefeed>
+    </app-scroll-frame><br>
+  
   <div style="clear:both"></div>
-  <br>
 
   <!-- NEWEST AND CHANGELOG -->
     <!-- <app-show-newest

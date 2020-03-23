@@ -7,24 +7,26 @@ div#splatter {
 
 div.textblock {
     border: 1px solid white;
-    max-width: 500px;
+    max-width: 570px;
     float: left;
     margin: 10px;
 }
 
-
-
+app-scroll-frame {
+    display: inline-block;
+}
 /* the quickstart nightmare*/
 div#quickstart {
     display: inline-block;
     background-color: #454545;
     border: 1px solid white;
-    margin: 0px;
     max-width: calc(100vw - 50px);
+    margin: 10px;
 }
 
 h3#qsheader {
-    margin: 7px;
+    margin: 0px;
+    padding: 7px;
 }
 
 div#buttonbox {
