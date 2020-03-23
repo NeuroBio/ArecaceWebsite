@@ -1,9 +1,11 @@
-import { Component, OnInit, OnChanges, Input, OnDestroy } from '@angular/core';
-import { User } from '../../../../Classes/ContentClasses';
+import { Component, OnInit, OnChanges,
+         Input, OnDestroy }                 from '@angular/core';
+import { User }                             from '../../../../Classes/ContentClasses';
 
-import { BookmarkService } from '../bookmark.service';
-import { Subscription } from 'rxjs';
-import { AuthService } from 'src/app/administration/security/Auth/auth.service';
+import { Subscription }                     from 'rxjs';
+
+import { BookmarkService }                  from '../bookmark.service';
+import { AuthService }                      from 'src/app/administration/security/Auth/auth.service';
 
 @Component({
   selector: 'app-bookmark',

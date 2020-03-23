@@ -14,8 +14,8 @@ export class UploadPreviewComponent implements OnInit, OnDestroy {
 
   @Input() name: string;
   @Input() imgUrl: string;
-  @Input() loading: boolean
-  @Input() oldUrl: string
+  @Input() loading: boolean;
+  @Input() oldUrl: string;
   neverLoading: boolean;
   stream1: Subscription;
 

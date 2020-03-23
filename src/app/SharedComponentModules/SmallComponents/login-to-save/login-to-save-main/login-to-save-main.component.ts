@@ -1,8 +1,11 @@
-import { Component, OnInit, OnDestroy, Input } from '@angular/core';
-import { AuthService } from '../../../../administration/security/Auth/auth.service';
-import { Subscription } from 'rxjs';
-import { LoginToSaveService } from '../login-to-save.service';
-import { FetchService } from 'src/app/GlobalServices/fetch.service';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+
+import { Subscription }                 from 'rxjs';
+
+import { AuthService }                  from 'src/app/administration/security/Auth/auth.service';
+import { LoginToSaveService }           from '../login-to-save.service';
+import { FetchService }                 from 'src/app/GlobalServices/fetch.service';
+
 @Component({
   selector: 'app-login-to-save-main',
   templateUrl: './login-to-save-main.component.html',
@@ -30,7 +33,7 @@ export class LoginToSaveMainComponent implements OnInit, OnDestroy {
     this.stream2 = this.logintosaveserv.stopClick
       .subscribe(click => this.stopClicking = click);
     this.stream3 = this.logintosaveserv.message
-      .subscribe(message => this.message = message);    
+      .subscribe(message => this.message = message);
     this.stream4 = this.fetcher.valid
       .subscribe(valid => this.Disabled = !valid);
   }

@@ -21,9 +21,8 @@ img.help {
     width: 150px;
     background-color: black;
     color: whitesmoke;
-    text-align: center;
     border-radius: 6px;
-    padding: 5px 0;
+    padding: 5px 0px 0px 3px;
     white-space: pre-line;
 
     /* Position the tooltip */
@@ -34,6 +33,10 @@ img.help {
 }
 
 .tooltip:hover .tooltiptext {
+    visibility: visible;
+}
+
+.tooltip:focus .tooltiptext {
     visibility: visible;
 }
 

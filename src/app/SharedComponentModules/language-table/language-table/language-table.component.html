@@ -1,82 +1,96 @@
-<div class="container" class="compheader" role="header">
-    <h2 class="compheader"> Nomadic Dictionary
-        <div>Core Words: {{ CoreWords }}</div>
-    </h2>
-</div>
-<hr>
+<main>
 
-<form [formGroup]="Form">
-    <h4>Sort:</h4>
-    <div class="Sort">
-        <div class="Tag">Alphabetical:</div>
-        <select formControlName="SortAlpha"
-        (change)="onSortAlpha()">
-            <option *ngFor="let option of alphaOptions"
-            [value]="option">
-            {{ option }}
-            </option>
-        </select>
-    
-        <div class="Tag">Type:</div>
-        <select formControlName="SortType"
-        (change)="onSortType()">
-            <option *ngFor="let option of typeOptions"
-            [value]="option">
-            {{ option }}
-            </option>
-        </select>
+    <!-- HEADER -->
+    <div class="container" class="compheader" role="header">
+        <h2 class="compheader"> Nomadic Dictionary
+            <div>Core Words: {{ CoreWords }}</div>
+        </h2>
     </div>
+    <hr>
     
-    
-    <h4>Filter:</h4>
-    <div class="Sort">
-        <div class="Tag">Level:</div>
-        <select formControlName="FilterLevel"
-        (change)="onFilterLevel()">
-            <option *ngFor="let option of levelFilterOptions"
-            [value]="option">
-            {{ option }}
-            </option>
-        </select>
-    
-        <div class="Tag">Type:</div>
-        <select formControlName="FilterType"
-        (change)="onFilterType()">
-            <option *ngFor="let option of typeFilterOptions"
-            [value]="option">
-            {{ option }}
-            </option>
-        </select>
 
-        <div class="Tag">Subtype:</div>
-        <select formControlName="FilterSubtype"
-        (change)="onFilterSubtype()">
-            <option *ngFor="let option of subtypeFilterOptions"
-            [value]="option">
-            {{ option }}
-            </option>
-        </select>
-    </div>
-</form>
+    <!-- FILTER AND SORT -->
+    <form [formGroup]="Form">
+        <fieldset>
+            <legend>Sort:</legend>
+            <div class="Sort">
+                <label class="Tag" for="alpha">Alphabetical:</label>
+                <select formControlName="SortAlpha" id="alpha"
+                (change)="onSortAlpha()">
+                    <option *ngFor="let option of alphaOptions"
+                    [value]="option">
+                    {{ option }}
+                    </option>
+                </select>
+            
+                <label class="Tag" for="type">Type:</label>
+                <select formControlName="SortType" id="type"
+                (change)="onSortType()">
+                    <option *ngFor="let option of typeOptions"
+                    [value]="option">
+                    {{ option }}
+                    </option>
+                </select>
+            </div>
+        </fieldset>
 
-<table>
-    <tr>
-        <th>Indativor</th>
-        <th>English</th>
-        <th>Type</th>
-        <th>Subtype</th>
-        <th>Level</th>
-        <th>Core</th>
-        <th>Components</th>
-    </tr>
-    <tr *ngFor="let word of currentDict, let i = index">
-        <td>{{ word.Indativor }}</td>
-        <td>{{ word.English.split(';').join(', ') }}</td>
-        <td>{{ word.Type }}</td>
-        <td>{{ word.Subtype.split('/').join(', ') }}</td>
-        <td>{{ word.Level }}</td>
-        <td>{{ word.Core }}</td>
-        <td>{{ word.Components.split(';').join(', ') }}</td>
-        <td *ngIf="Edit"><button (click)="loadWord(i)">Edit</button></td>
-    </tr>
-</table>
+        
+        <fieldset>
+            <legend>Filter:</legend>
+            <div class="Sort">
+                <label for="filterLevel" class="Tag">Level:</label>
+                <select formControlName="FilterLevel" id="filterLevel"
+                (change)="onFilterLevel()">
+                    <option *ngFor="let option of levelFilterOptions"
+                    [value]="option">
+                    {{ option }}
+                    </option>
+                </select>
+            
+                <label for="filterType" class="Tag">Type:</label>
+                <select formControlName="FilterType" id="filterType"
+                (change)="onFilterType()">
+                    <option *ngFor="let option of typeFilterOptions"
+                    [value]="option">
+                    {{ option }}
+                    </option>
+                </select>
+        
+                <label for="filterSubtype" class="Tag">Subtype:</label>
+                <select formControlName="FilterSubtype" id="filterSubtype"
+                (change)="onFilterSubtype()">
+                    <option *ngFor="let option of subtypeFilterOptions"
+                    [value]="option">
+                    {{ option }}
+                    </option>
+                </select>
+            </div>
+        </fieldset>
+    </form>
+    
+
+    <!-- LANGUAGE TABLE -->
+    <table>
+        <tr>
+            <th>Indativor</th>
+            <th>English</th>
+            <th>Type</th>
+            <th>Subtype</th>
+            <th>Level</th>
+            <th>Core</th>
+            <th>Components</th>
+        </tr>
+        <tr *ngFor="let word of currentDict, let i = index">
+            <td>{{ word.Indativor }}</td>
+            <td>{{ word.English.split(';').join(', ') }}</td>
+            <td>{{ word.Type }}</td>
+            <td>{{ word.Subtype.split('/').join(', ') }}</td>
+            <td>{{ word.Level }}</td>
+            <td>{{ word.Core }}</td>
+            <td>{{ word.Components.split(';').join(', ') }}</td>
+            <td *ngIf="Edit"><button (click)="loadWord(i)">Edit</button></td>
+        </tr>
+    </table>
+
+</main>
+

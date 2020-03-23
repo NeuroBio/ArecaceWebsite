@@ -1,5 +1,7 @@
-import { Injectable } from '@angular/core';
-import { RelatednessMatrix, AbilityData, AbilityMastery } from './SourceAbilityData';
+import { Injectable }                     from '@angular/core';
+
+import { RelatednessMatrix, AbilityData,
+         AbilityMastery }                 from './SourceAbilityData';
 
 @Injectable({
   providedIn: 'root'
@@ -10,8 +12,6 @@ export class SourceAbilityCalculatorService {
   Related = new RelatednessMatrix ();
   SAData = new AbilityData ();
   Save = [.25, .20, .15, .10];
-
-  constructor() { }
 
   calculateAffinity(abilitymastery: AbilityMastery[],
                     esarianGenetics: number = 0, connectionGenetics: number = 0) {
@@ -42,7 +42,7 @@ export class SourceAbilityCalculatorService {
   catchErrors(abilitymastery: AbilityMastery[],
               esarianGenetics: number, connectionGenetics: number) {
     abilitymastery.forEach(type => {
-      if(type.Ability in ['Integrate', 'Maintain', 'Imprint']){
+      if(type.Ability in ['Integrate', 'Maintain', 'Imprint']) {
         if(type.Ability !== 'Low') {
           throw new Error('Integrate, Maintain, and Imprint do not have levels above low.');
         }
@@ -73,7 +73,7 @@ export class SourceAbilityCalculatorService {
 
     let structure = {};
     abilitymastery.forEach(ability => {
-      let SAClass = this.SAData[ability.Ability].Class
+      let SAClass = this.SAData[ability.Ability].Class;
       if(SAClass in structure) {
         structure[SAClass].push(ability);
       } else {
@@ -88,8 +88,8 @@ export class SourceAbilityCalculatorService {
     let Mastery: number[] = [];
     Abilities.forEach((ability, i) => {
       Costs.push([]);
-      if(i === 0){
-        Mastery.push(ability.Mastery+1)
+      if(i === 0) {
+        Mastery.push(ability.Mastery+1);
         for(let j=0; j<Mastery[0]; j++) {
           Costs[i].push(1);
         }
@@ -113,14 +113,15 @@ export class SourceAbilityCalculatorService {
   }
 
   getInteractionCost(CostStructure: any[]) {
-    CostStructure.forEach((saclass, i) =>{
+    CostStructure.forEach((saclass, i) => {
       if(i === 0){
         saclass.BufferCost = 0;
       } else {
         let interactions = new Array(i);
         for(let j = 0; j< i; j++){
-          interactions.push(this.Related[saclass.SAClass][CostStructure[j].SAClass]
-              *CostStructure[j].Level);
+          interactions.push(
+            this.Related[saclass.SAClass][CostStructure[j].SAClass]
+            *CostStructure[j].Level);
         }
         saclass.BufferCost = interactions.reduce((a,b) => a*b, 1)/100;
       }
@@ -128,14 +129,14 @@ export class SourceAbilityCalculatorService {
     return CostStructure;
   }
 
-  adjustClass(CostStructure: any[]){
+  adjustClass(CostStructure: any[]) {
     CostStructure.forEach(saclass =>
       saclass.Discounts = saclass.Discounts.map(cost =>
-        cost = cost.map(c => c + saclass.BufferCost)));
+        cost = cost.map(c => c + saclass.BufferCost)) );
     return CostStructure;
   }
 
-  geneticsModifier(CostStructure: any[], eGenes: number, cGenes: number){
+  geneticsModifier(CostStructure: any[], eGenes: number, cGenes: number) {
     CostStructure.forEach((saclass) => {
       if (saclass.SAClass === "Reconstruction") {
         saclass.Abilities.forEach((ability, j) => {

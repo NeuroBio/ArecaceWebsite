@@ -1,8 +1,8 @@
-import { Injectable }         from '@angular/core';
+import { Injectable }                   from '@angular/core';
 
-import { Subject, BehaviorSubject }            from 'rxjs';
+import { Subject, BehaviorSubject }     from 'rxjs';
 
-import { ImageSettings }      from './uploadpreviewclass';
+import { ImageSettings }                from './uploadpreviewclass';
 
 @Injectable({
   providedIn: 'root'
@@ -40,19 +40,19 @@ export class UploadPreviewService {
     this.mainsData.push(undefined);
   }
 
-  remove(index:number) {
+  remove(index: number) {
     this.thumbsData.splice(index,1);
     this.mainsData.splice(index,1);
   }
 
-  erase(index:number) {
+  erase(index: number) {
     this.thumbsData[index] = undefined;
     this.mainsData[index] = undefined;
   }
 
   checkFile(event: any, settings: ImageSettings) {
     return new Promise((resolve, reject) => {
-      const found = this.allowed.findIndex(x => x === event.target.files[0].type)
+      const found = this.allowed.findIndex(x => x === event.target.files[0].type);
       if(found === -1) {
         return reject([false, `Image must be of type jpeg, gif, or png.`]);
       }
@@ -81,7 +81,7 @@ export class UploadPreviewService {
       const File = event.target.files[0];
       const Size = File.size;
       let Width: number;
-      let Height: number
+      let Height: number;
       const reader = new FileReader();
 
       reader.onload = function() {
@@ -100,7 +100,7 @@ export class UploadPreviewService {
 
   quickFiletob64(event: any) {
     return new Promise((resolve: any) => {
-      const File = event.target.files[0]
+      const File = event.target.files[0];
       let reader = new FileReader();
       reader.onload = function () {
         return resolve(reader.result);

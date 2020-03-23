@@ -1,11 +1,13 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { SliderService } from '../slider.service';
+import { Component, OnInit, Input }   from '@angular/core';
+
+import { SliderService }              from '../slider.service';
 
 @Component({
   selector: 'app-slider',
   templateUrl: './slider.component.html',
   styleUrls: ['./slider.component.css']
 })
+
 export class SliderComponent implements OnInit {
 
   @Input() name: string;
@@ -25,5 +27,11 @@ export class SliderComponent implements OnInit {
   changeView() {
     this.preview = !this.preview;
     this.sliderserv.setPreview(this.preview);
+  }
+
+  onKeydown(event) {
+    if (event.key === "Enter") {
+      this.changeView();
+    }
   }
 }

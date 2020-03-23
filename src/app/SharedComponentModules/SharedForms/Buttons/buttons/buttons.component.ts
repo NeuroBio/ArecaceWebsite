@@ -1,13 +1,17 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { CRUDcontrollerService } from '../../../../administration/services/CRUDcontroller.service';
-import { Subscription } from 'rxjs';
-import { ButtonController } from '../buttoncontroller';
+
+import { Subscription }                 from 'rxjs';
+
+import { CRUDcontrollerService }        from 'src/app/administration/services/CRUDcontroller.service';
+
+import { ButtonController }             from '../buttoncontroller';
 
 @Component({
   selector: 'app-formButtons',
   templateUrl: './buttons.component.html',
   styleUrls: []
 })
+
 export class ButtonsComponent implements OnInit, OnDestroy {
 
   allow: ButtonController;
@@ -23,12 +27,16 @@ export class ButtonsComponent implements OnInit, OnDestroy {
   constructor(private controller: CRUDcontrollerService) { }
 
   ngOnInit() {
-    this.stream1 = this.controller.allowButtons.subscribe(array => this.allow = array);
-    this.stream2 = this.controller.showButtons.subscribe(array => this.show = array)
-    this.stream3 = this.controller.itemToEdit.subscribe(data => {
-      this.action = data === undefined ? "Submit" : "Edit"
-    });
-    this.stream4 = this.controller.message.subscribe(string => this.message = string);
+    this.stream1 = this.controller.allowButtons
+      .subscribe(array => this.allow = array);
+    this.stream2 = this.controller.showButtons
+      .subscribe(array => this.show = array)
+    this.stream3 = this.controller.itemToEdit
+      .subscribe(data => {
+        this.action = data === undefined ? "Submit" : "Edit"
+      });
+    this.stream4 = this.controller.message
+      .subscribe(string => this.message = string);
   }
 
   ngOnDestroy() {

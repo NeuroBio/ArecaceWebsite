@@ -1,8 +1,10 @@
-import { Component, Input, OnChanges } from '@angular/core';
-import { Word } from '../../../Classes/NomadicLanguage';
-import { CRUDcontrollerService } from '../../../administration/services/CRUDcontroller.service';
-import { WordTypes } from '../../../Classes/NomadicLanguage';
-import { FormBuilder } from '@angular/forms';
+import { Component, Input, OnChanges }  from '@angular/core';
+import { FormBuilder }                  from '@angular/forms';
+
+import { CRUDcontrollerService }        from '../../../administration/services/CRUDcontroller.service';
+
+import { Word }                         from '../../../Classes/NomadicLanguage';
+import { WordTypes }                    from '../../../Classes/NomadicLanguage';
 @Component({
   selector: 'app-language-table',
   templateUrl: './language-table.component.html',
@@ -17,6 +19,7 @@ export class LanguageTableComponent implements OnChanges {
   currentDict: Word[];
   CoreWords : Number;
   Form = this.creatForm();
+
   alphaOptions = ['Nomadic', 'English'];
   typeOptions = ['Type and Subtype', 'Type', 'Subtype'];
   levelFilterOptions = ['All', 'Level 1', 'Level 2', 'Level 3+'];
@@ -62,6 +65,7 @@ export class LanguageTableComponent implements OnChanges {
         this.currentDict = this.Dictionary.filter(word => word.Level > 2);
         break;
     }
+    
     if(first) {
       this.onFilterType(false);
       this.onFilterSubtype(false);

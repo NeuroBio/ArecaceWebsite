@@ -1,13 +1,13 @@
 import { DateInfo } from 'src/app/Classes/ArecacenDates';
 
 export class countryData{
-    id:string;
-    terr:string[];
+    id: string;
+    terr: string[];
 }
 
 export class EthnicityData{
-    id:string;
-    hex:string;
+    id: string;
+    hex: string;
 }
 
 export class UploadCharacterDrops {
@@ -39,13 +39,13 @@ export class UploadCharacterDrops {
                                 {id:"Hnr", hex:"#f2e7da"},
                                 {id:"Mixed", hex:"#ffffff"}];
 
-    Era:string[]=["DE", "pDE"];
+    Era:string[] = ["DE", "pDE"];
 
-    SAbilities:string[]=["Augment","Blank", "Blaze", "Breaker", "Chaos",
-                          "Communion", "Compress",  "Connection", "Disrupt",
-                          "Energy Gathering", "Epitax", "Ghost Hack", "Growth",
-                          "Integrate", "Maintain", "Metamorph", "Rebuild",
-                          "Refine", "Soothe", "Stagnate"]
+    SAbilities:string[] = ["Augment","Blank", "Blaze", "Breaker", "Chaos",
+                            "Communion", "Compress",  "Connection", "Disrupt",
+                            "Energy Gathering", "Epitax", "Ghost Hack", "Growth",
+                            "Integrate", "Maintain", "Metamorph", "Rebuild",
+                            "Refine", "Soothe", "Stagnate"];
     constructor() {
         const Dates = new DateInfo();
         this.Months = Dates.ArecaceMonthLengths;

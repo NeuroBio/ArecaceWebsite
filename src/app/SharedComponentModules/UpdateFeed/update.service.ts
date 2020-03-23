@@ -1,15 +1,16 @@
-import { Injectable } from '@angular/core';
+import { Injectable }                     from '@angular/core';
 
-import { map }          from 'rxjs/operators';
+import { BehaviorSubject, Subscription }  from 'rxjs';
+import { map }                            from 'rxjs/operators';
 
-import { CacheService } from 'src/app/GlobalServices/cache.service';
+import { CacheService }                   from 'src/app/GlobalServices/cache.service';
 
-import { PostData }     from 'src/app/Classes/ContentClasses';
-import { BehaviorSubject, Subscription } from 'rxjs';
+import { PostData }                       from 'src/app/Classes/ContentClasses';
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class UpdateService {
 
   posts = new BehaviorSubject<PostData[]>(undefined);

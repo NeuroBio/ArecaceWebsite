@@ -28,7 +28,8 @@ form p {
     font-weight: bold;
 }
 
-h2 {
+h3 {
+    font-size: 30px;
     color: black;
     margin: 0px;
 }
@@ -90,4 +91,14 @@ button:active {
 li {
     color: black;
     margin: 10px;
+}
+
+#Info {
+    margin-top: 15px;
+    background-color: rgb(136, 218, 213);
+    border: 2px solid rgb(19, 134, 131);;
+}
+
+label {
+    border: 0px;
 }

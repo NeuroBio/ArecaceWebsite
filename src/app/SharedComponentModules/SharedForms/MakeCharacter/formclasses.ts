@@ -1,6 +1,6 @@
 export class SourceAbilities {
-    Ability:string;
-    Known:boolean;
+    Ability: string;
+    Known: boolean;
 }
 
 export class Relations {

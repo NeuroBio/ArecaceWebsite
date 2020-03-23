@@ -35,7 +35,7 @@ export class Ability {
     constructor(cla: string, low: number, mid: number,
                 high: number, top: number) {
         this.Class = cla;
-        this.Costs = [low, mid, high, top]
+        this.Costs = [low, mid, high, top];
     }
 }
 
@@ -96,5 +96,5 @@ export class AbilityNames {
     'Connection', 'Disrupt', 'Energy Gathering', 'Epitax',
     'Ghost Hack-Spike', 'Ghost Hack-Signal', 'Ghost Hack-Source Wyrm',
     'Growth', 'Integrate', 'Maintain', 'Metamorph', 'Rebuild',
-    'Refine', 'Soothe', 'Stagnate', 'Shatter', 'Imprint', 'Channal']
+    'Refine', 'Soothe', 'Stagnate', 'Shatter', 'Imprint', 'Channal'];
 }

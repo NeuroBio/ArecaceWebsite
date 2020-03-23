@@ -1,7 +1,7 @@
-<div *ngIf="postList" tabindex="0">
+<div *ngIf="postList">
     <div *ngFor="let post of postList">
 
-      <div role="article" class="textblock">
+      <article class="textblock">
           <b>Poster: </b> <span id="name">{{ post.Poster }}</span>
           <div id="right"><b>Date: </b> {{ post.Date }}, {{ post.Time }}</div><br>
           <div style="clear: both;"></div>
@@ -13,9 +13,8 @@
           </div>
           <div id="right" *ngIf="post.Edited === true">(Edited)</div>
           <div style="clear: both;"></div>
-      </div>
+      </article>
       <br>
 
     </div>
-
 </div>

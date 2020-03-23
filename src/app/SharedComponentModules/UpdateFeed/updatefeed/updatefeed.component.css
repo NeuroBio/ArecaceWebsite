@@ -2,12 +2,12 @@ img {
     max-width: 100%;
     max-height: 100%;
 }
-div.textblock {
+.textblock {
     border: 1px solid whitesmoke;
     margin: 10px;
 }
 
-div#right {
+#right {
     float: right;
 }
 
@@ -15,7 +15,7 @@ hr {
     border: 1px dotted white;
 }
 
-span#name {
+#name {
     font-family: 'Courier New', Courier, monospace;
     font-size: 20px;
 }

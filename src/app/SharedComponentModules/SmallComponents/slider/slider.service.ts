@@ -1,8 +1,10 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
-import { AuthService } from 'src/app/administration/security/Auth/auth.service';
-import { take } from 'rxjs/operators';
-import { FireBaseService } from 'src/app/GlobalServices/firebase.service';
+import { Injectable }       from '@angular/core';
+
+import { BehaviorSubject }  from 'rxjs';
+import { take }             from 'rxjs/operators';
+
+import { AuthService }      from 'src/app/administration/security/Auth/auth.service';
+import { FireBaseService }  from 'src/app/GlobalServices/firebase.service';
 
 @Injectable({
   providedIn: 'root'

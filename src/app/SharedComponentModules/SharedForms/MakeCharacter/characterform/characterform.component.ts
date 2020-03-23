@@ -145,6 +145,7 @@ export class CharacterFormComponent implements OnInit, OnDestroy {
             new CRUDdata(true, `At least one of your references (${i}) lacks a main image.`));
         }
       }
+
       if(ThumbImageData[i] === undefined && !Final.Links[i*2]) {
         if(i === 0) {
           return this.fetcher.assignActiveFormData(
@@ -173,10 +174,10 @@ export class CharacterFormComponent implements OnInit, OnDestroy {
 
     const BioPicMain = this.uploadpreviewserv.mainsData[0];
     const BioPicThumb = this.uploadpreviewserv.thumbsData[0];
-    const RefsMain = Object.assign([], this.uploadpreviewserv.mainsData)
+    const RefsMain = Object.assign([], this.uploadpreviewserv.mainsData);
     RefsMain.splice(0,1);
-    const RefsThumb = Object.assign([], this.uploadpreviewserv.thumbsData)
-    RefsThumb.splice(0,1);    
+    const RefsThumb = Object.assign([], this.uploadpreviewserv.thumbsData);
+    RefsThumb.splice(0,1);
 
     Final.SourceAbilitiesFormatted = this.FormatSA(Final);
     Final.RelationsFormatted = this.FormatRelat(Final);
@@ -210,7 +211,7 @@ export class CharacterFormComponent implements OnInit, OnDestroy {
     this.noReferences = true;
     this.noFamily = true;
     this.uploadpreviewserv.reset.next();
-    this.uploadpreviewserv.clear()
+    this.uploadpreviewserv.clear();
     this.uploadpreviewserv.add();
   }
 
@@ -226,7 +227,7 @@ export class CharacterFormComponent implements OnInit, OnDestroy {
   addRelative(add: boolean, name: string = '', ship: string = '') {
     if(add) {
       (<FormArray>this.Form.controls.Relations)
-      .push(this.fb.group({RelationName: name, Relationship:ship}));
+      .push(this.fb.group({ RelationName: name, Relationship:ship }));
       this.noFamily = false;
     } else {
       (<FormArray>this.Form.controls.Relations)
@@ -238,7 +239,7 @@ export class CharacterFormComponent implements OnInit, OnDestroy {
   }
 
   addRef(add: boolean, ref: string = '') {
-    if(add){
+    if(add) {
       (<FormArray>this.Form.controls.ReferenceIDs)
         .push(this.fb.group({ Ref: ref }));
       this.uploadpreviewserv.add();
@@ -261,12 +262,12 @@ export class CharacterFormComponent implements OnInit, OnDestroy {
       }
     });
 
-    if(data.Unique.Known){
+    if(data.Unique.Known) {
       abilities.push(data.Unique.Ability);
     }
 
     let final = abilities.join(", ");
-    if(final === ""){
+    if(final === "") {
       final = "None";
     }
     return final;
@@ -274,19 +275,18 @@ export class CharacterFormComponent implements OnInit, OnDestroy {
 
   FormatRelat(data:any) {
     let relations:string[] = [];
-    data.Relations.forEach(relation => {
-      relations.push(`${relation.RelationName}-${relation.Relationship}`)
-    });
+    data.Relations.forEach(relation => 
+      relations.push(`${relation.RelationName}-${relation.Relationship}`) );
 
     let final = relations.join(', ');
-    if(final === ""){
+    if(final === "") {
       final = "None";
     }
     return final;
   }
 
   combineEvents(full: string[], thumb: string[]) {
-    if(thumb.length > 0){
+    if(thumb.length > 0) {
       return thumb.map((thumb,i) => [thumb, full[i]])
         .reduce(function(a,b) {
           return a.concat(b); });
@@ -312,7 +312,7 @@ export class CharacterFormComponent implements OnInit, OnDestroy {
     }
 
     let references: any[] = [];
-    for(let index in ids){
+    for(let index in ids) {
       references.push({
         ID: ids[index].Ref.split(' ').join(''),
         Name: `${name} ${ids[index].Ref}`,
@@ -342,7 +342,7 @@ export class CharacterFormComponent implements OnInit, OnDestroy {
   updateTerritory(nation: string) {
     this.activeRegion = this.DropDowns.countries
       .filter(x => nation === x.id)[0].terr;
-    this.Form.patchValue({Territory: this.activeRegion[0]});
+    this.Form.patchValue({ Territory: this.activeRegion[0] });
   }
 
   updateAge(chosenQT: string) {
@@ -361,8 +361,7 @@ export class CharacterFormComponent implements OnInit, OnDestroy {
     const inches = this.Form.controls.Cm.value*.393701;
     this.Form.patchValue({
       Inch: (inches%12).toFixed(2),
-      Ft: Math.floor(inches/12)
-    });
+      Ft: Math.floor(inches/12) });
   }
 
   getDropData(group:string, id: string, formvalue: string, desired: string) {

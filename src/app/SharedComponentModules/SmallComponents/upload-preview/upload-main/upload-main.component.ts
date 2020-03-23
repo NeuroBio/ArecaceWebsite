@@ -72,7 +72,7 @@ export class UploadMainComponent implements OnInit, OnDestroy {
     return `${type} images must be of type jpeg, png, or gif.
     \nMax Height: ${maxHeight}
     \nMax Width: ${maxWidth}
-    \nMax Size: ${settings.MaxSizeRead}`
+    \nMax Size: ${settings.MaxSizeRead}`;
   }
 
   switchThumbType() {
@@ -93,7 +93,7 @@ export class UploadMainComponent implements OnInit, OnDestroy {
         return this.CheckandAssign(event, imgType)
         .catch(error => {
           this.thumbUploader.nativeElement.value = '';
-          alert(error[1])
+          alert(error[1]);
         });
 
       case 'main':
@@ -106,7 +106,7 @@ export class UploadMainComponent implements OnInit, OnDestroy {
           }
         }).catch(error => {
           this.mainUploader.nativeElement.value = '';
-          alert(error[1])
+          alert(error[1]);
         });
 
       case 'auto':
@@ -123,11 +123,11 @@ export class UploadMainComponent implements OnInit, OnDestroy {
                                 this.Settings.thumb.MaxHeight,
                                 this.Settings.thumb.MaxWidth, false)
     .then((resized: string) => {
-      const phauxEvent = {target: {files: [this.resizeserv.b64toBlob(resized)]}}
-      this.loadImage('thumb', phauxEvent, resized)
+      const phauxEvent = {target: {files: [this.resizeserv.b64toBlob(resized)]}};
+      this.loadImage('thumb', phauxEvent, resized);
       this.thumbImg.Loading = false;
       this.fetcher.assignLoading(false);
-    }).catch(err => {
+    }).catch(() => {
       this.thumbImg.Loading = false;
       this.fetcher.assignLoading(false);
     });

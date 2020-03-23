@@ -2,7 +2,7 @@ export class UploadPreviewInfo {
     Name: string;
     ImgUrl: string;
     Loading: boolean;
-    Generate?: boolean
+    Generate?: boolean;
 
     constructor(name: string, imgUrl: string, loading: boolean, generate?: boolean) {
         this.Name = name;
@@ -45,7 +45,7 @@ export class UploadPreviewSettings {
             const measure = readable.match(/\w/g).toString();
             const multiply = Measures.findIndex(x => x===measure) + 1;
             for(let i = 0; i < multiply; i++) {
-                num = num*1024
+                num = num*1024;
             }
             return num;
         } else {

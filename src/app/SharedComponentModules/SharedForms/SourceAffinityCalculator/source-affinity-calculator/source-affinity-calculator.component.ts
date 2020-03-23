@@ -44,15 +44,15 @@ export class SourceAffinityCalculatorComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.stream1 = this.fetcher.itemToEdit
       .subscribe(item => {
-        this.assignData(item)
+        this.assignData(item);
         if(this.viewOnly) {
           this.Form.get('Abilities').disable();
         }
       });
     this.stream2 = this.fetcher.processData
       .subscribe(() => this.onSubmit());
-    this.stream3 = this.Form.valueChanges.subscribe(() =>
-      this.fetcher.assignvalidity(false));
+    this.stream3 = this.Form.valueChanges
+      .subscribe(() => this.fetcher.assignvalidity(false));
   }
 
   ngOnDestroy() {
@@ -72,7 +72,7 @@ export class SourceAffinityCalculatorComponent implements OnInit, OnDestroy {
 
   assignData(editFormData: any) {
     this.onReset();
-    if(editFormData){
+    if(editFormData) {
       this.removeAbility(0);
       this.qa.assign(this.Form, editFormData);
       const Build = JSON.parse(editFormData.Build);
@@ -83,15 +83,16 @@ export class SourceAffinityCalculatorComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
-
     this.result = undefined;
     this.rank = undefined;
     this.error = undefined;
     const build: AbilityMastery[] = [];
+
     this.abilitiesArray.controls.forEach(abimas =>
       build.push(new AbilityMastery(abimas.value.Ability, +abimas.value.Mastery)));
     const eGenes = this.Form.controls.EsarianGenes.value;
     const cGenes = this.Form.controls.ConnectionGenes.value;
+    
     try {
       this.result = this.SAserv.calculateAffinity(build, eGenes, cGenes);
     } catch(err) {
@@ -105,9 +106,8 @@ export class SourceAffinityCalculatorComponent implements OnInit, OnDestroy {
     if(this.showName === true) {//submissions are allowed
 
       if(this.Form.valid !== true) {
-        this.error ='Name is required!'
-        return this.fetcher.activeFormData.next(
-          new CRUDdata(true, this.error));
+        this.error ='Name is required!';
+        return this.fetcher.activeFormData.next(new CRUDdata(true, this.error));
       }
   
       const Final = {Build: JSON.stringify(build),
@@ -116,7 +116,7 @@ export class SourceAffinityCalculatorComponent implements OnInit, OnDestroy {
                       Cost: this.result,
                       Rank: this.rank,
                       Name: this.Form.value.Name,
-                      ID: ''}
+                      ID: ''};
       Final.ID = `${Final.Name}-(${Final.Cost})`;
       this.fetcher.assignvalidity(true);
       return this.fetcher.assignActiveFormData(new CRUDdata(false, '', Final));
@@ -164,11 +164,11 @@ export class SourceAffinityCalculatorComponent implements OnInit, OnDestroy {
     }
   }
 
-  addAbility(ability: string = 'EnergyGathering', mastery: number = 0){
-      this.abilitiesArray.push(this.fb.group({
+  addAbility(ability: string = 'EnergyGathering', mastery: number = 0) {
+    this.abilitiesArray.push(this.fb.group({
         Ability: ability,
         Mastery: mastery
-    }));
+    }) );
   }
 
   removeAbility(index: number) {

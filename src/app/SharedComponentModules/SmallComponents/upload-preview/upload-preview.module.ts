@@ -1,7 +1,7 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { NgModule }               from '@angular/core';
+import { CommonModule }           from '@angular/common';
 import { UploadPreviewComponent } from './upload-preview/upload-preview.component';
-import { UploadMainComponent } from './upload-main/upload-main.component';
+import { UploadMainComponent }    from './upload-main/upload-main.component';
 
 @NgModule({
   declarations: [
