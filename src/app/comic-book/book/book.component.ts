@@ -4,10 +4,9 @@ import { ActivatedRoute, Router }                       from '@angular/router';
 import { Observable, Subscription }                     from 'rxjs';
 
 import { ComicService }                                 from '../comic.service';
-import { ChapterMetaData }                              from 'src/app/Classes/ContentClasses';
 import { TextProvider }                                 from 'src/app/GlobalServices/textprovider.service';
 
-
+import { ChapterMetaData }                              from 'src/app/Classes/ContentClasses';
 
 @Component({
   selector: 'app-book',
@@ -38,12 +37,13 @@ export class BookComponent implements OnInit, OnDestroy {
     this.chapterData$ = this.comicserv.getMetaData();
     this.chapterData$.subscribe(chap =>
       this.route.firstChild.paramMap.subscribe(path =>
-        this.initialVarAssign(path, chap)).unsubscribe()
+        this.initialVarAssign(path, chap))
     ).unsubscribe();
 
-    this.stream = this.comicserv.loading.subscribe(bool => setTimeout(() => {this.loading = bool}, 10));
+    this.stream = this.comicserv.loading.subscribe(bool =>
+      setTimeout(() => { this.loading = bool }, 10));
     this.mainText = this.textprovider.WebsiteText
-                        .find(member => member.ID === 'comic').Text;
+      .find(member => member.ID === 'comic').Text;
   }
 
   ngOnDestroy() {
@@ -67,7 +67,7 @@ export class BookComponent implements OnInit, OnDestroy {
     this.navigate();
   }
  
-  navigate( ){
+  navigate(){
     this.name = `Chapter ${this.currentChapter.ID}: Page ${this.currentPage}`;
     this.path = `comic/${this.currentChapter.ID}-${this.currentPage}`;
     this.router.navigate([this.path]);
@@ -78,13 +78,13 @@ export class BookComponent implements OnInit, OnDestroy {
   }
 
   //dropdown selectors
-  changePage(newpage:number): void {
+  changePage(newpage: number) {
     this.loading=true;
     this.currentPage = (+newpage+1);
     this.navigate();
   }
 
-  changeChapter(newchap:string, increase:boolean=true): void {
+  changeChapter(newchap: string, increase: boolean = true) {
     this.loading=true;
     this.chapterData$.subscribe(chaps => {
       this.currentChapter = chaps[newchap];
@@ -99,7 +99,7 @@ export class BookComponent implements OnInit, OnDestroy {
   }
 
   // buttons
-  onButton(check: boolean, incre :number): void {
+  onButton(check: boolean, incre :number) {
     if(check) {
       this.loading = true;
       this.currentPage += incre;
@@ -112,13 +112,15 @@ export class BookComponent implements OnInit, OnDestroy {
   //Arrow keys (trigger button options)
   @HostListener('window:keyup', ['$event']) KeyEvent(event: KeyboardEvent) { 
     if(event.keyCode === 39 &&//right, next
-      !(this.currentPage == this.currentChapter.NumPages && this.currentChapter.ID == this.maxChap)) {//not last page
+      !(this.currentPage == this.currentChapter.NumPages
+        && this.currentChapter.ID == this.maxChap)) {//not last page
       this.onButton(this.currentPage < this.currentChapter.NumPages,1);
     }
 
     if(event.keyCode === 37 &&//left, prev
-      !(this.currentPage == 1 && this.currentChapter.ID == 0)) {//not first page
-        this.onButton(this.currentPage > 1,-1);
+      !(this.currentPage == 1
+        && this.currentChapter.ID == 0)) {//not first page
+        this.onButton(this.currentPage > 1, -1);
     }
   }
 

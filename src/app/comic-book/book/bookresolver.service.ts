@@ -1,12 +1,8 @@
 import { Injectable }             from '@angular/core';
 import { Resolve, Router }        from '@angular/router';
 
-import { map, take }              from 'rxjs/operators';
-
-import { ChapterMetaData }        from '../../Classes/ContentClasses';
 import { ComicService }           from '../comic.service';
-import { FireBaseService }        from 'src/app/GlobalServices/firebase.service';
-import { CacheService } from 'src/app/GlobalServices/cache.service';
+import { CacheService }           from 'src/app/GlobalServices/cache.service';
 
 @Injectable({
   providedIn: 'root'

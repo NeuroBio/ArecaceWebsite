@@ -1,6 +1,7 @@
-import { Component, OnInit, ElementRef, ViewChild }      from '@angular/core';
-import { ActivatedRoute }         from '@angular/router'
-import { ComicService }           from '../comic.service'
+import { Component, OnInit, ElementRef, ViewChild }     from '@angular/core';
+import { ActivatedRoute }                               from '@angular/router'
+
+import { ComicService }                                 from '../comic.service'
 
 @Component({
   selector: 'app-page',
@@ -20,8 +21,8 @@ export class PageComponent implements OnInit {
   ngOnInit() {
     this.init = true;
     this.route.data.subscribe((data: {pageLink: string}) => {
-        this.comicserv.setloading(true)
-        this.pageUrl = data.pageLink
+        this.comicserv.setloading(true);
+        this.pageUrl = data.pageLink;
     });
   }
 
@@ -29,7 +30,7 @@ export class PageComponent implements OnInit {
     this.comicserv.setloading(false);
     if(this.init) {
       this.init = false;
-    }else{
+    } else {
       window.scroll(0, 120);
       //this.main.nativeElement.scrollIntoView();
     }

@@ -22,7 +22,7 @@ export class ComicService {
 
   initializeMetaData(meta: Observable<ChapterMetaData[]>) {
     return this.stream = meta.subscribe(data =>
-      this.ChapterData.next(data.sort((a,b) => a.ID < b.ID? -1 : 1)));
+      this.ChapterData.next(data.sort((a,b) => a.ID < b.ID? -1 : 1)) );
   }
 
   getMetaData() {
@@ -49,7 +49,7 @@ export class ComicService {
 
   getLatest(): string {
     const chaps = this.ChapterData.value;
-    const lastchapindex = chaps.length-1 ;
+    const lastchapindex = chaps.length-1;
     return `${chaps[lastchapindex].ID}-${chaps[lastchapindex].Links.length}`;
   }
 
