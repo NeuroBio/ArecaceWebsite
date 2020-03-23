@@ -3,7 +3,7 @@ import { Component, OnInit, ViewChild, ElementRef,
 import { Location }                                 from '@angular/common';
 import { ActivatedRoute }                           from '@angular/router';
 
-import { Subscription } from 'rxjs';
+import { Subscription }                             from 'rxjs';
 
 import { StoryService }                             from '../story.service';
 
@@ -26,7 +26,6 @@ export class StorydisplayComponent implements OnInit, OnDestroy {
 
 
   constructor(private route:ActivatedRoute,
-              private location: Location,
               private storyserv: StoryService) { }
 
   ngOnInit() {

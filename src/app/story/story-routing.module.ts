@@ -10,19 +10,19 @@ import { StoryResolver3Service }  from './resolvers/storyresolver3.service';
 
 
 const storyRoutes: Routes = [
-  {path: '', redirectTo: 'Scripts', pathMatch:"full"},
-  {path: ':StoryType',
-  resolve: {StoryResolver1Service},
-  children:[
-    {path: '', redirectTo: "First", pathMatch:'full'},
-    {path: ':SeriesID', component:SeriesChooserComponent,
-    resolve: {StoryResolver2Service},
+  { path: '', redirectTo: 'Scripts', pathMatch: 'full' },
+  { path: ':StoryType',
+    resolve: { StoryResolver1Service },
     children:[
-      {path: '', redirectTo:'First', pathMatch: 'full'},
-      {path: ':StoryID',  component:StorydisplayComponent,
-      resolve: {Story:StoryResolver3Service}}
-    ]}
-  ]}
+    { path: '', redirectTo: "First", pathMatch: 'full' },
+    { path: ':SeriesID', component: SeriesChooserComponent,
+      resolve: { StoryResolver2Service },
+      children:[
+      { path: '', redirectTo: 'First', pathMatch: 'full' },
+      { path: ':StoryID',  component:StorydisplayComponent,
+        resolve: { Story:StoryResolver3Service } }
+    ] }
+  ] }
 ];
 
 @NgModule({

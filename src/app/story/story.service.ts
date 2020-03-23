@@ -95,8 +95,7 @@ export class StoryService {
   changeSeries(newSec: string) {
     this.currentSeries.next(newSec);
     this.getSeriesData().pipe(
-      tap(serie => this.changeSection(serie[0].ID))
-    );
+      tap(serie => this.changeSection(serie[0].ID)) );
   }
 
   updateLoading(change: boolean) {

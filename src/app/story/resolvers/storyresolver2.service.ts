@@ -16,7 +16,7 @@ export class StoryResolver2Service implements Resolve<any> {
   //see the story service for notes
   resolve(route:ActivatedRouteSnapshot) {
     const type = route.parent.paramMap.get("StoryType");
-    const series = route.paramMap.get("SeriesID")
+    const series = route.paramMap.get("SeriesID");
     if(this.checkUrl(series, type) === true) {
       return;
     }
@@ -43,7 +43,7 @@ export class StoryResolver2Service implements Resolve<any> {
         return true;
       }
     } else {
-      return false
+      return false;
     }
   }
 

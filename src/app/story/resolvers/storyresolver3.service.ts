@@ -33,7 +33,7 @@ export class StoryResolver3Service implements Resolve<any>{
         if(metaData) {
           this.storyserv.getStory(metaData.ID);
           this.storyserv.changeSection(metaData.ID);
-          this.titleserv.setTitle(`${metaData.Title}`)
+          this.titleserv.setTitle(`${metaData.Title}`);
           return this.getText(metaData.StoryLink).pipe(
             map(text => ({metaData, text})) );
 

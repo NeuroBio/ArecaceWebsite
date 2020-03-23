@@ -1,10 +1,10 @@
 import { Component, OnInit, OnDestroy }     from '@angular/core';
-import { ActivatedRoute, Router }           from '@angular/router'
+import { ActivatedRoute, Router }           from '@angular/router';
 
 import { Subscription }                     from 'rxjs';
 
-import { StoryService }                     from '../story.service'
-import { StoryMetaData }                    from 'src/app/Classes/ContentClasses'
+import { StoryService }                     from '../story.service';
+import { StoryMetaData }                    from 'src/app/Classes/ContentClasses';
 
 @Component({
   selector: 'app-serieschooser',

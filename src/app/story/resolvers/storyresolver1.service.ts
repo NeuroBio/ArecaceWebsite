@@ -1,12 +1,9 @@
 import { Injectable }               from '@angular/core';
 import { Resolve, Router,
-  ActivatedRouteSnapshot }          from '@angular/router';
+         ActivatedRouteSnapshot }   from '@angular/router';
 
-import { Observable, EMPTY, of }    from 'rxjs';
-import { take, mergeMap }           from 'rxjs/operators';
-
-import { StoryService }             from '../story.service'
-import { CacheService } from 'src/app/GlobalServices/cache.service';
+import { StoryService }             from '../story.service';
+import { CacheService }             from 'src/app/GlobalServices/cache.service';
 
 @Injectable({
   providedIn: 'root'
@@ -48,6 +45,6 @@ export class StoryResolver1Service implements Resolve<any> {
       this.router.navigate(['/story/Narratives']);
       return true;
     }
-    return false
+    return false;
   }
 }
