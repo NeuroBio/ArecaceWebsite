@@ -1,4 +1,4 @@
-<div id="background" *ngIf="pixels$ | async as pixels">
+<section id="background" *ngIf="pixels$ | async as pixels" aria-label="Pixel-Art">
   <div *ngFor="let pixel of pixels">
 
     <!-- Artist Link -->
@@ -13,4 +13,4 @@
         <img [src]="pixel.Links[0]" [title]="'By ' + pixel.Artist + ', ' + pixel.Date">
     </div>
   </div>
-</div>
+</section>

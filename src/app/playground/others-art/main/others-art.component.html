@@ -1,27 +1,31 @@
-<div class="compheader" role="header">
-  <h2 class="compheader">
-    <span id="headertext">
-      Arecace Content by Other Artists
-    </span>
+<main>
+  <div class="compheader" role="header">
+    <h2 class="compheader">
+      <span id="headertext">
+        Arecace Content by Other Artists
+      </span>
+  
+      <app-slider
+      [name]="'Show Preview'"
+      ></app-slider>
+    </h2>
+  </div>
+  <hr>
 
-    <app-slider
-    [name]="'Show Preview'"
-    ></app-slider>
-  </h2>
-</div>
-<hr>
+  <app-pixel-army></app-pixel-army>
 
-<app-pixel-army></app-pixel-army>
+  <section id="background" aria-label="Non-Pixel-Art">
+        <hr>
+  
+    <br>
+    <app-grid
+    [collect]="arts$ | async">
+    </app-grid>
+  
+  
+    <!--Blow up version-->
+    <router-outlet></router-outlet>
+  </section>
+</main>
 
-<div id="background">
-      <hr>
 
-  <br>
-  <app-grid
-  [collect]="arts$ | async">
-  </app-grid>
-
-
-  <!--Blow up version-->
-  <router-outlet></router-outlet>
-</div>

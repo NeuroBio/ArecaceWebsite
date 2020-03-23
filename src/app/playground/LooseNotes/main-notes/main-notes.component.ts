@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Component, OnInit }        from '@angular/core';
+import { ActivatedRoute }           from '@angular/router';
+
+import { Observable }               from 'rxjs';
+import { map }                      from 'rxjs/operators';
+
 import { GeneralcollectionService } from 'src/app/GlobalServices/generalcollection.service';
-import { ActivatedRoute } from '@angular/router';
-import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-main-notes',
@@ -22,8 +24,7 @@ export class MainNotesComponent implements OnInit {
       map((notes) => {
         notes.sort((a,b) => a.Created < b.Created ? 1 : -1);
         return notes.map(note => [note.ShortTitle, note.ID]);
-      })
-    );
+    }) );
     
     this.route.firstChild.paramMap.subscribe(path => {
         this.current = path.get('NotesID')

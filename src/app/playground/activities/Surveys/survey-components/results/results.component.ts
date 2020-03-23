@@ -50,7 +50,7 @@ export class ResultsComponent implements OnInit, OnDestroy {
     this.stream1.unsubscribe();
   }
 
-  onReset(){
+  onReset() {
     this.surveyserv.surveyResults.next(undefined);
     this.surveyserv.showSurvey.next(true);
   }

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit }  from '@angular/core';
+import { Title }              from '@angular/platform-browser';
 
 @Component({
   selector: 'app-forum',
@@ -7,9 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ForumComponent implements OnInit {
 
-  constructor() { }
+  constructor(private titleserv: Title) { }
 
   ngOnInit(): void {
+    this.titleserv.setTitle('Sad Cicadas')
   }
 
 }

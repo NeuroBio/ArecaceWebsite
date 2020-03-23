@@ -1,12 +1,16 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject, Subscription } from 'rxjs';
-import { SurveyData } from 'src/app/Classes/ContentClasses';
-import { SurveyProcessorService } from '../survey-processor.service';
-import { FireBaseService } from 'src/app/GlobalServices/firebase.service';
+import { Injectable }                     from '@angular/core';
+
+import { BehaviorSubject, Subscription }  from 'rxjs';
+
+import { SurveyProcessorService }         from '../survey-processor.service';
+import { FireBaseService }                from 'src/app/GlobalServices/firebase.service';
+
+import { SurveyData }                     from 'src/app/Classes/ContentClasses';
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class SurveyService {
 
   surveyData = new BehaviorSubject<SurveyData>(undefined);
@@ -23,7 +27,7 @@ export class SurveyService {
       .subscribe(surveyStats => this.allSurveyStats.next(surveyStats));
   }
 
-  assignSurveyData(data: any){
+  assignSurveyData(data: any) {
     this.surveyData.next({Questions: JSON.parse(data.Questions),
                           Results: JSON.parse(data.Results),
                           Outcomes: JSON.parse(data.Outcomes),
@@ -58,14 +62,14 @@ export class SurveyService {
     let keys = Object.keys(finalScores);
 
     // Pull out relevant answer results
-    answers.forEach((q,i) =>{
-      let temp = surveyData.Results[i][q.Answer]
+    answers.forEach((q,i) => {
+      let temp = surveyData.Results[i][q.Answer];
       keys.forEach(key => finalScores[key] += +temp[key]);
     });
 
     //combine results for each key and convert to fraction of maxscore
     keys.forEach(key => {
-      if(surveyData.MaxScores[key] !== 0){
+      if(surveyData.MaxScores[key] !== 0) {
         finalScores[key] = finalScores[key]/surveyData.MaxScores[key];
       } else {
         finalScores[key] = 0;

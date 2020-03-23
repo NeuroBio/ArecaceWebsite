@@ -1,7 +1,5 @@
-<div id="outer" #holder (window:resize)="onResize()">
-  <div id="title">
-      Survey Result Stats:
-  </div>
+<aside id="outer" #holder (window:resize)="onResize()">
+  <h3 id="title">Survey Result Stats:</h3>
 
   <svg [attr.height]="height" width="100%"
     style="background-color: rgb(49, 49, 49);">
@@ -51,4 +49,4 @@
   <div id="bottom">
       Completed {{ Stats.Max }} times.
   </div>
-</div>
+</aside>

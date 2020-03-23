@@ -1,12 +1,17 @@
-import { Component, OnInit, OnDestroy, ViewChild, ElementRef, AfterContentChecked } from '@angular/core';
-import { Subscription } from 'rxjs'; 
-import { SurveyService } from '../survey.service';
+import { Component, OnInit, OnDestroy,
+         ViewChild, ElementRef,
+         AfterContentChecked }    from '@angular/core';
+
+import { Subscription }           from 'rxjs'; 
+
+import { SurveyService }          from '../survey.service';
 
 @Component({
   selector: 'app-survey-stats',
   templateUrl: './survey-stats.component.html',
   styleUrls: ['./survey-stats.component.css']
 })
+
 export class SurveyStatsComponent implements OnInit, AfterContentChecked, OnDestroy {
 
   Stats: any = {};
@@ -20,13 +25,13 @@ export class SurveyStatsComponent implements OnInit, AfterContentChecked, OnDest
   ngOnInit() {
     this.stream = this.surveyserv.currentSurveyStats.subscribe(counts => {
       if(counts) {
-        this.displayData(counts)
+        this.displayData(counts);
       }
     });
   }
 
-  ngAfterContentChecked(){
-    setTimeout(() => { this.onResize()}, 10);
+  ngAfterContentChecked() {
+    setTimeout(() => { this.onResize() }, 10);
   }
 
   ngOnDestroy() {
@@ -35,7 +40,7 @@ export class SurveyStatsComponent implements OnInit, AfterContentChecked, OnDest
   }
 
   displayData(counts: any) {
-    if(counts){
+    if(counts) {
       const Counts = Object.assign({}, counts);
       delete Counts.ID;
       delete Counts.UploadTime;
@@ -53,6 +58,6 @@ export class SurveyStatsComponent implements OnInit, AfterContentChecked, OnDest
 
   onResize() {
       this.width = (this.Holder.nativeElement.getBoundingClientRect().right -
-                    this.Holder.nativeElement.getBoundingClientRect().left)
+                    this.Holder.nativeElement.getBoundingClientRect().left);
   }
 }

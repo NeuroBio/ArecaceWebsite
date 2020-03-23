@@ -1,4 +1,4 @@
-<div class="outer">
+<main class="outer">
   <div id="match">{{ results.Match }}% match</div>
 
   <div id="inner">
@@ -19,13 +19,13 @@
     
   </div>
 
-</div>
+</main>
 
-<button (click)="setShowAll()">All Scores</button>
-<button (click)="setShowStats()">Stats</button>
+<button (click)="setShowAll()">Show All Scores</button>
+<button (click)="setShowStats()">Show Stats</button>
 <button *ngIf="ViewOnly === false" (click)="onReset()">Reset Survey</button>
 
-<div *ngIf="showAll === true" class="outer">
+<aside *ngIf="showAll === true" class="outer" aria-labelledby="All-Your-Results">
 
   <div class="scores" *ngFor="let score of results.AllScores; let i = index">
     <h3 class="scoreQualifier" *ngIf="i === 0 && acceptable === true">Acceptable Scores: </h3>
@@ -39,7 +39,7 @@
     </p>
   </div>
 
-</div>
+</aside>
 
 <app-survey-stats
 *ngIf="showStats === true"

@@ -1,8 +1,12 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { NomadicService } from '../nomadic.service';
-import { Subscription } from 'rxjs';
-import { FormBuilder } from '@angular/forms';
-import { TranslationService } from './translation.service';
+import { Component, OnInit, OnDestroy }   from '@angular/core';
+import { FormBuilder }                    from '@angular/forms';
+import { Title }                          from '@angular/platform-browser';
+
+import { Subscription }                   from 'rxjs';
+
+import { NomadicService }                 from '../nomadic.service';
+import { TranslationService }             from './translation.service';
+
 @Component({
   selector: 'app-translate',
   templateUrl: './translate.component.html',
@@ -21,15 +25,17 @@ export class TranslateComponent implements OnInit, OnDestroy {
 
   constructor(private nomadserv: NomadicService,
               private fb: FormBuilder,
-              private translationserv: TranslationService) { }
+              private translationserv: TranslationService,
+              private titleserv: Title) { }
 
   ngOnInit() {
+    this.titleserv.setTitle('Nomadic: Translate');
     this.stream = this.nomadserv.TranslationDictionary
     .subscribe(dicts => {
-      this.transdicts = dicts
+      this.transdicts = dicts;
       this.keySets = {
         NtoE: Object.keys(this.transdicts.NtoETrans).sort((a,b) => a < b ? -1 : 1),
-        EtoN: Object.keys(this.transdicts.EtoNTrans).sort((a,b) => a < b ? -1 : 1)}
+        EtoN: Object.keys(this.transdicts.EtoNTrans).sort((a,b) => a < b ? -1 : 1)};
       this.keys = this.keySets.NtoE;
     });
   }
@@ -49,6 +55,7 @@ export class TranslateComponent implements OnInit, OnDestroy {
     if(!this.Form.controls.RawText) {
       return;
     }
+
     const translate = [];
     let dict = this.Form.controls.NtoE.value === 'true' ? 'NtoETrans' : 'EtoNTrans'
     const text = this.Form.controls.RawText.value.replace(/[\.,\/#!$%\^&;:{}=_`~@\+\?><\[\]\+"]/g, '')
@@ -60,6 +67,7 @@ export class TranslateComponent implements OnInit, OnDestroy {
       const trans = this.translationserv.wordChecks(this.Form.controls.NtoE.value === 'true', word, dict);
       translate.push(`${trans}`);
     }); 
+
     let finalText = this.Form.controls.RawText.value.trim()
                                                     .replace(/[\*'-\(\)]/g, '')
                                                     .replace(/\n/g, '\*')
@@ -84,14 +92,16 @@ export class TranslateComponent implements OnInit, OnDestroy {
       }
       return word;
     });
+
     this.translation = finalText.join(' ').replace(/\*/g, '\n');
   }
 
   addWord(word: string) {
     const newText = this.Form.controls.RawText.value
-                        .trim()
-                        .replace(/\s{2,}/g," ")
-                        .split(' ');
+      .trim()
+      .replace(/\s{2,}/g," ")
+      .split(' ');
+
     newText.push(word);
     this.Form.patchValue({RawText: newText.join(' ')});
     this.translate(false);

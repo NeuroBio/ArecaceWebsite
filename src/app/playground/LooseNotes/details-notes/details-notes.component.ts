@@ -1,12 +1,16 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { LooseNotesMetaData } from 'src/app/Classes/ContentClasses';
-import { GetRouteSegmentsService } from 'src/app/GlobalServices/commonfunctions.service';
+import { Component, OnInit }        from '@angular/core';
+import { ActivatedRoute }           from '@angular/router';
+
+import { GetRouteSegmentsService }  from 'src/app/GlobalServices/commonfunctions.service';
+
+import { LooseNotesMetaData }       from 'src/app/Classes/ContentClasses';
+
 @Component({
   selector: 'app-details-notes',
   templateUrl: './details-notes.component.html',
   styleUrls: ['./details-notes.component.css']
 })
+
 export class DetailsNotesComponent implements OnInit {
 
   note: LooseNotesMetaData;

@@ -4,7 +4,7 @@ form {
     padding: 6px;
 }
 
-div.question {
+.question {
     background-color: rgb(49, 49, 49);
     padding: 7px;
     border: 1px solid whitesmoke;
@@ -29,6 +29,6 @@ h3 {
     font-weight: normal;
 }
 
-div#surveyResults {
-    border: white 1px solid;
+fieldset {
+    border: 0px;
 }

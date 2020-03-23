@@ -1,11 +1,12 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Subscription } from 'rxjs';
-import { SurveyService } from '../survey.service';
+
+import { Subscription }                 from 'rxjs';
+
+import { SurveyService }                from '../survey.service';
 
 @Component({
   selector: 'app-survey-parts',
-  templateUrl: './survey-parts.component.html',
-  styleUrls: ['./survey-parts.component.css']
+  templateUrl: './survey-parts.component.html'
 })
 export class SurveyPartsComponent implements OnInit, OnDestroy {
 
