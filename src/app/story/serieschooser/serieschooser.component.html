@@ -1,9 +1,9 @@
 <div id="splatter">
   <div id="maxTop">
-    <div id="storynav" role="navigation">
+    <nav id="storynav" aria-label="Story-type-Series-and-Title-navigation">
   
       <!--Info from urlsegment 1-->
-      <fieldset id="radio">
+      <fieldset id="radio" aria-label="Story-Type">
           <input type="radio" name="storytype" id="Script"
           [checked]="storyType === 'Scripts'"
           (change)="updateType('Scripts')">
@@ -15,9 +15,10 @@
           <label for="Narrative">Narratives</label>
       </fieldset>
   
-      <!--Info from urlsegment 2-->      
       <div *ngIf="localLoading===true" class="loading"></div>
       <div [hidden]="localLoading" id="dropbox">
+
+          <!--Info from urlsegment 2-->
           <div class="drops" [style.display]="this.localLoading ? 'none' : 'inline-block'">
             Series:
             <select (change)="changeSeries($event.target.value)">
@@ -40,16 +41,17 @@
               </option>
             </select>
           </div>
-      
-      </div>
+
+        </div>
+
       <app-bookmark
       [type]="storyType"
       [path]="path"
       [name]="name"
       ></app-bookmark>  
       
-    </div>
+    </nav>
   </div>
 
-  <router-outlet></router-outlet>
+    <router-outlet></router-outlet>
 </div>

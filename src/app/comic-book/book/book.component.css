@@ -18,11 +18,7 @@ div#fullblock {
   background: #454545;
 }
 
-div#topblock {
-  padding-left: 7px;
-}
-
-div#chapselect {
+#chapselect {
   position: relative;
   float: left;
   padding-top: 18px;
@@ -47,19 +43,20 @@ div.break {
   border-left: 3px solid white;
 }
 
-div#viewradio {
+#viewradio {
   position: relative;
   display: flex;
   justify-content: flex-end;
   min-width: 175px;
 }
 
-div#radiobox {
+#radiobox {
   display: inline-block;
   padding: 14px;
   right: 0px;
-  border-left: solid white 3px;
+  border-left: solid white 2px;
   background-color: rgb(49,49,49);
+  margin: 0px;
 }
 
 div#bookmark1 {
@@ -139,7 +136,7 @@ span#footspin {
 }
 
 /*final notice*/
-div#info {
+aside#info {
   background-color: #454545;
   position: absolute;
   top: 0px;
