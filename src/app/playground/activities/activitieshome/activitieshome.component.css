@@ -1,9 +1,9 @@
-div.compheader {
+.compheader {
     display: flex;
     align-items: center;
     flex-flow: column;
 }
-div.toggler {
+.toggler {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;

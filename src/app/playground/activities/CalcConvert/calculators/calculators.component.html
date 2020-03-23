@@ -1,15 +1,16 @@
 <div class="background">
     <div id="outer">
-        <div id="headerNav">
-            <div class="navver" role="nav" id="quickNav" *ngFor="let link of links">
+        <nav id="headerNav" aria-label="Calculator-Nav">
+            <div class="navver" id="quickNav" name="CalcNav"
+            *ngFor="let link of links">
                 <a class="navver" [routerLink]="link.Link">{{ link.Title }}</a>
-            </div>    
-        </div>
+            </div>
+        </nav>
         <hr>
 
 
-        <div id="holder">
+        <main id="holder">
             <router-outlet></router-outlet>
-        </div>
+        </main>
     </div>
 </div>

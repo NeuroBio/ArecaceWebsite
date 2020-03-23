@@ -1,12 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit }      from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { DateInfo } from 'src/app/Classes/ArecacenDates';
+import { Title }                  from '@angular/platform-browser';
+
+import { DateInfo }               from 'src/app/Classes/ArecacenDates';
 
 @Component({
   selector: 'app-date-converter',
   templateUrl: './date-converter.component.html',
   styleUrls: ['./date-converter.component.css']
 })
+
 export class DateConverterComponent implements OnInit {
 
   Form: FormGroup;
@@ -16,9 +19,11 @@ export class DateConverterComponent implements OnInit {
   days = new Array(this.monthLengths[0]);
   convertedDate = "Qt1-1 12";
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder,
+              private titleserv: Title) { }
 
   ngOnInit() {
+    this.titleserv.setTitle('Calc: Date');
     this.onReset();
   }
 

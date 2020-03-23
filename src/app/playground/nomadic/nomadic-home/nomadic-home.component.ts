@@ -1,12 +1,14 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { NomadicService } from '../nomadic.service';
+import { Router, ActivatedRoute }       from '@angular/router';
+
+import { NomadicService }               from '../nomadic.service';
 
 @Component({
   selector: 'app-nomadic-home',
   templateUrl: './nomadic-home.component.html',
   styleUrls: ['./nomadic-home.component.css']
 })
+
 export class NomadicHomeComponent implements OnInit, OnDestroy {
 
   choices = ['introduction', 'syntax', 'translate', 'dictionary'];
@@ -17,7 +19,7 @@ export class NomadicHomeComponent implements OnInit, OnDestroy {
               private nomadicserv: NomadicService) { }
 
   ngOnInit() {
-    this.selected = this.route.firstChild.snapshot.url[0].path
+    this.selected = this.route.firstChild.snapshot.url[0].path;
   }
 
   ngOnDestroy() {

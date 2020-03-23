@@ -21,9 +21,9 @@
     <option *ngFor="let day of days; let i = index" [value]="i">
         {{ i+1 }}
       </option>
-  </select>
+  </select> <br>
 
-  <div>
+  <output aria-live="polite">
       Converts to: {{ convertedDate }}.
-  </div>
+  </output>
 </form>

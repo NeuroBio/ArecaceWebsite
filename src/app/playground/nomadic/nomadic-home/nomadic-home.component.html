@@ -1,11 +1,11 @@
 <div class="background">
-    <div class="toggler" role="navigation">
+    <nav class="toggler" role="navigation" aria-label="Nomadic-Navigation">
         <div *ngFor="let choice of choices, let i = index" class="toggler">
             <input type="radio" class="toggler" name="topic" [id]="choice"
             (click)="pickTopic(i)" [checked]="selected === choice">
             <label class="toggler" [for]="choice"  tabindex="0"
             (keyup.enter)="pickTopic(i)">{{ choice | titlecase }}</label>
         </div>
-    </div>
+    </nav>
     <router-outlet></router-outlet>
 </div>

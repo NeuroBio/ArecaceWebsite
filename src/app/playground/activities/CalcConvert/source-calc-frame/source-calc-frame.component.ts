@@ -1,4 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Title }                        from '@angular/platform-browser';
 
 import { Subscription }                 from 'rxjs';
 
@@ -25,9 +26,11 @@ export class SourceCalcFrameComponent implements OnInit, OnDestroy {
   constructor(private generalcollectserv: GeneralcollectionService,
               private logintosaveserv: LoginToSaveService,
               private fetcher: FetchService,
-              private auth: AuthService) { }
+              private auth: AuthService,
+              private titleserv: Title) { }
 
   ngOnInit() {
+    this.titleserv.setTitle('Calc: SA')
     this.canonSA = this.generalcollectserv.collectionData.value
     .sort((a,b) => a.ID > b.ID ? 1 : -1);
     this.logintosaveserv.assignType('SAcalculations');

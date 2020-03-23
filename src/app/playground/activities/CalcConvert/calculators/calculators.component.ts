@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit }  from '@angular/core';
+import { Title }              from '@angular/platform-browser';
 
 @Component({
   selector: 'app-calculators',
@@ -9,11 +10,12 @@ export class CalculatorsComponent implements OnInit {
 
 
   links = [{ Link: 'dateconvert', Title: 'Date Converter' },
-           { Link: 'sourceaffinity', Title: 'Source Affinity Calculator' },]
+           { Link: 'sourceaffinity', Title: 'Source Affinity Calculator' }];
 
-  constructor() { }
+  constructor(private titleserv: Title) { }
 
   ngOnInit() {
+    this.titleserv.setTitle('Calculators');
   }
 
 }
