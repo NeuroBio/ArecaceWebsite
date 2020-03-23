@@ -19,10 +19,10 @@ export class ContactService {
   }
 
   cleanData(Data: any, index: number) {
-    return {Reason: this.reasons[index],
-            Name: Data.FirstName,
-            Email: Data.Email,
-            Message: Data.Message,
-            Date: formatDate(new Date(), 'yyyy-MM-dd, HH:mm', 'en')};
+    return { Reason: this.reasons[index],
+             Name: Data.FirstName,
+             Email: Data.Email,
+             Message: Data.Message,
+             Date: formatDate(new Date(), 'yyyy-MM-dd, HH:mm', 'en') };
   }
 }

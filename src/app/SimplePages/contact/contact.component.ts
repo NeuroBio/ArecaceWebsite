@@ -1,9 +1,11 @@
 import { Component, OnInit }        from '@angular/core';
 import { FormBuilder, Validators }  from '@angular/forms';
+import { Title }                    from '@angular/platform-browser';
 
-import { messageValidator }         from './Validate';
 import { ContactService }           from './contact.service';
 import { AuthService }              from 'src/app/administration/security/Auth/auth.service';
+
+import { messageValidator }         from './Validate';
 
 @Component({
   selector: 'app-contact',
@@ -35,9 +37,11 @@ export class ContactComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
               private contactserv: ContactService,
-              private auth: AuthService) { }
+              private auth: AuthService,
+              private titleserv: Title) { }
 
   ngOnInit() {
+    this.titleserv.setTitle('Contact');
     window.scroll(0,0);
     this.resetTimer();
     if(!this.auth.isLoggedIn) {
@@ -46,7 +50,7 @@ export class ContactComponent implements OnInit {
   }
 
   createForm() {
-    return this.fb.group({
+    return this.fb.group( {
       Reason: ['', Validators.required],
       FirstName: ['', Validators.required],
       Email: ['', [Validators.required,
@@ -59,11 +63,11 @@ export class ContactComponent implements OnInit {
       LastName: '',
       Phone: '',
       Reply: ''
-    });
+    } );
   }
 
   retrieveInfo() {
-    const reason:string = this.contactForm.controls.Reason.value
+    const reason: string = this.contactForm.controls.Reason.value
     if(reason === "Use of my work or attribution") {
       this.dropdownInfo = "Make sure you have read list items 4-7 in the FAQ!  There's a link in the footer.";
       this.tempDisable = false;
@@ -80,8 +84,8 @@ export class ContactComponent implements OnInit {
     this.ready = false;
     clearTimeout(this.timeOut);
     this.timeOut = setTimeout(() => {
-      this.ready=true;
-      this.message=undefined;
+      this.ready = true;
+      this.message = undefined;
     }, 5000);
   }
 
@@ -95,7 +99,8 @@ export class ContactComponent implements OnInit {
         if(form.Reason !== "I'm a bot :)") {
           if(this.contactForm.valid) {
             const reasonIndex = this.reasons.findIndex(rea => rea === form.Reason);
-            this.contactserv.PushMessage(form, reasonIndex).then(() => this.message = "Submitted!");
+            this.contactserv.PushMessage(form, reasonIndex)
+              .then(() => this.message = "Submitted!");
           } else {
             this.findError();
           }

@@ -1,10 +1,10 @@
-div#splatter {
+#splatter {
     background-repeat: repeat;
     background-color: rgb(53, 53, 53);
     background-image: url(https://firebasestorage.googleapis.com/v0/b/arecaceworld.appspot.com/o/WebSite%2Fsmear4.png?alt=media&token=fc921624-299c-4470-b40e-a22d256f81dd);
 }
 
-div#preview {
+#preview {
     float: left;
     max-width: 500px;
     align-items: center;
@@ -20,13 +20,13 @@ img#TG {
     margin: 20px;
 }
 
-div#spiel {
+#spiel {
     float: left;
     max-width: 500px;
     margin: 7px;
 }
 
-::ng-deep div#spiel div.textblock a.teaser {
+::ng-deep #spiel div.textblock a.teaser {
     font-family: 'Courier New', Courier, monospace;
     font-size: 30px;
     font-weight: bold;
@@ -37,11 +37,17 @@ p#subtext {
     margin-top: 0px;
 }
 
-::ng-deep h3 {
+h3 {
     padding: 0px;
     margin: 0px;
 }
 
-::ng-deep div#spiel div.textblock p.sorry {
+::ng-deep #spiel div.textblock h3 {
+    padding: 0px;
+    margin: 0px;
+}
+
+::ng-deep #spiel div.textblock p.sorry {
+    padding-top: 14px;
     font-size: 14px;
 }

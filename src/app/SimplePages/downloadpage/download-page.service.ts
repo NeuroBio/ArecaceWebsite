@@ -1,12 +1,16 @@
-import { Injectable } from '@angular/core';
-import { CacheService } from 'src/app/GlobalServices/cache.service';
-import { BehaviorSubject, Subscription } from 'rxjs';
-import { CharacterMetaData, User } from 'src/app/Classes/ContentClasses';
-import { AuthService } from 'src/app/administration/security/Auth/auth.service';
+import { Injectable }                     from '@angular/core';
+
+import { BehaviorSubject, Subscription }  from 'rxjs';
+
+import { CacheService }                   from 'src/app/GlobalServices/cache.service';
+import { AuthService }                    from 'src/app/administration/security/Auth/auth.service';
+
+import { CharacterMetaData, User }        from 'src/app/Classes/ContentClasses';
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class DownloadPageService {
 
   ImageData = new BehaviorSubject<any>(undefined);

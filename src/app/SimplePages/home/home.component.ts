@@ -21,7 +21,7 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.titleserv.setTitle('Arecace');
     this.mainText = this.textprovider.WebsiteText
-                        .find(member => member.ID === 'home').Text;
+      .find(member => member.ID === 'home').Text;
     window.scroll(0,0);
     this.setButtonText();
   }
@@ -30,7 +30,7 @@ export class HomeComponent implements OnInit {
   setButtonText() {
     if(window.innerWidth < 485){
       this.buttonText = ['Intro', 'Scripts','Comic','Play- ground'];
-    }else{
+    } else {
       this.buttonText = ['Full Introduction',
                           'Start Comic Scripts',
                           'See Latest Page',

@@ -1,14 +1,14 @@
 
-<!-- Header -->
-<div class="compheader">
-  <h2 class="compheader">Traveler's Guide to Arecace</h2>
-</div>
-<hr>
-
 <div id="splatter">
 
+  <!-- Header -->
+  <div class="compheader">
+      <h2 class="compheader">Traveler's Guide to Arecace</h2>
+  </div>
+  <hr>
+
   <!-- Preview -->
-  <div id="preview">
+  <section id="preview">
       <br>
       <h3>Example Pages</h3>
         <img id="TG" [src]="previews[index]"><br>
@@ -16,10 +16,10 @@
             <button (click)="nextPage(-1)">Prev</button> <b>|||</b>
             <button (click)="nextPage(1)">Next</button>
         </div>
-    </div>
+    </section>
     
     <!-- info on the guide -->
-    <div id="spiel" role="main" [innerHTML]="mainText"></div>
+    <section id="spiel" role="main" [innerHTML]="mainText"></section>
     <div style="clear:both;"></div>
     <br>
 </div>

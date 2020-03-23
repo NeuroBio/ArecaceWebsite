@@ -1,32 +1,41 @@
 <div id="splatter">
 
     <!--Artist Image-->
-<img id="meme" src="https://firebasestorage.googleapis.com/v0/b/arecaceworld.appspot.com/o/WebSite%2FArtist%20Potrait.png?alt=media&token=11d02016-e5b1-41bb-bcc8-f556528d58d2">
+    <img id="meme" alt="Picture of kArA, the AUthor/Web Designer"
+    src="https://firebasestorage.googleapis.com/v0/b/arecaceworld.appspot.com/o/WebSite%2FArtist%20Potrait.png?alt=media&token=11d02016-e5b1-41bb-bcc8-f556528d58d2">
 
-<!--Main text-->
-<div class="container" id="meme">
+    <!--Main text-->
+    <main class="container" id="meme">
+        <br>
+        <section>
+            <h3>Hello!</h3>
+            <div class="textblock" [innerHTML]="mainText.Hello"></div><br>    
+        </section>
+
+        <!--More info choices-->
+        <section aria-label="More Info">
+            <fieldset class="toggler">
+                <legend>More about...</legend>
+                <div>
+                    <div *ngFor="let choice of choices, let i = index" class="toggler">
+                        <input type="radio" class="toggler" name="abouter" [id]="choice"
+                        (click)="pickAbout(i)" [checked]="contentPicker === i">
+                        <label class="toggler" [for]="choice"  tabindex="0"
+                        (keyup.enter)="pickAbout(i)">{{ choice }}</label>
+                    </div>
+                </div>
+            </fieldset>
+        
+        
+            <div *ngIf="contentPicker === 0" class="textblock" [innerHTML]="mainText.Story"></div>
+            
+            <div *ngIf="contentPicker === 1" class="textblock" [innerHTML]="mainText.Me"></div>
+        
+            <div *ngIf="contentPicker === 2" class="textblock" [innerHTML]="mainText.Website"></div>
+        
+            <div style="clear:both;"></div>
+        </section>
+
+    </main>
     <br>
-    <h3>Hello!</h3>
-    <div class="textblock" [innerHTML]="mainText.Hello"></div><br>
-
-    <!--More info choices-->
-    <div class="toggler">
-        <h3>More about...</h3>
-        <div *ngFor="let choice of choices, let i = index" class="toggler">
-            <input type="radio" class="toggler" name="abouter" [id]="choice"
-            (click)="pickAbout(i)" [checked]="contentPicker === i">
-            <label class="toggler" [for]="choice"  tabindex="0"
-            (keyup.enter)="pickAbout(i)">{{ choice }}</label>
-        </div>
-    </div>
-
-  
-    <div *ngIf="contentPicker === 0" class="textblock" role="alert" [innerHTML]="mainText.Story"></div>
-    
-    <div *ngIf="contentPicker === 1" class="textblock" role="alert" [innerHTML]="mainText.Me"></div>
-
-    <div *ngIf="contentPicker === 2" class="textblock" role="alert" [innerHTML]="mainText.Website"></div>
-
-    <div style="clear:both;"></div>
-
 </div>

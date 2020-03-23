@@ -1,10 +1,13 @@
-import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
-import { DownloadPageService } from '../download-page.service';
-import { ActivatedRoute } from '@angular/router';
-import { GetRouteSegmentsService } from 'src/app/GlobalServices/commonfunctions.service';
-import { Subscription } from 'rxjs';
-import { GlobalVarsService } from 'src/app/GlobalServices/global-vars.service';
-import { BookmarkService } from 'src/app/SharedComponentModules/SmallComponents/bookmark/bookmark.service';
+import { Component, OnInit, OnDestroy,
+         ViewChild, ElementRef }          from '@angular/core';
+import { ActivatedRoute }                 from '@angular/router';
+
+import { Subscription }                   from 'rxjs';
+
+import { DownloadPageService }            from '../download-page.service';
+import { GetRouteSegmentsService }        from 'src/app/GlobalServices/commonfunctions.service';
+import { GlobalVarsService }              from 'src/app/GlobalServices/global-vars.service';
+import { BookmarkService }                from 'src/app/SharedComponentModules/SmallComponents/bookmark/bookmark.service';
 
 @Component({
   selector: 'app-download-page',
@@ -39,7 +42,7 @@ export class DownloadPageComponent implements OnInit, OnDestroy {
       ? this.ImageData.Name
       : `${this.ImageData.FirstName} ${this.ImageData.LastName}'s Bio Pic`;
     this.loading = this.global.ImagesLoadable.value;
-    this.bookmarkserv.real.next(this.downloadserv.real)
+    this.bookmarkserv.real.next(this.downloadserv.real);
   }
 
   ngOnDestroy() {
@@ -58,7 +61,7 @@ export class DownloadPageComponent implements OnInit, OnDestroy {
 
   onResize() {
     if(this.Image.nativeElement.offsetWidth + 33 < window.innerWidth) {
-      this.maxed = true
+      this.maxed = true;
     } else {
       this.maxed = false;
     }

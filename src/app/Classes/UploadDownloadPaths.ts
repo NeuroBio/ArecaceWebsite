@@ -15,27 +15,29 @@ export class SiteMap {
         ['The DIA and Guilds', this.PathInfo.guilds.Local],
         ['Siphoid/Source', this.PathInfo.source.Local],
         ['Maps', this.PathInfo.maps.Local],
-        ['Nomadic Dictionary'], this.PathInfo.nomadic.Local]
+        ['Nomadic Dictionary', this.PathInfo.nomadic.Local]];
 
     Story =
         [['Comic', this.PathInfo.arc1.Local],
         ['Scripts', this.PathInfo.scripts.Local],
-        ['Narratives', this.PathInfo.narratives.Local]]
+        ['Narratives', this.PathInfo.narratives.Local]];
 
     Info =
         [['About the Author', '/about'],
         ['Cite Me', '/faq/copyright'],
         ['Fanart/Fanfic Policy', '/faq/copyright'],
         ['FAQ', '/faq'],
-        ['Site Map (here)', '/sitemap']]
+        ['Site Map (here)', '/sitemap']];
+
     Interactive =
         [['Surveys', this.PathInfo.surveys.Local],
-        ['Calculators', '/playground/calc']]
+        ['Calculators', '/playground/calc']];
+        
     'Misc.' =
         [['Extras', this.PathInfo.extras.Local],
         ['Playground', '/playground'],
         ['Writer\'s Notes', this.PathInfo.notes.Local],
-        ['Other\'s Art', this.PathInfo.othersart.Local]]
+        ['Other\'s Art', this.PathInfo.othersart.Local]];
 }
 
 export class LocalPaths {

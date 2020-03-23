@@ -72,7 +72,7 @@ export class CharacterMetaData {
     Weaknesses: string = '';
     SourceAbilities: string;
     Unique: string;
-    SourceAbilitiesFormatted:string;
+    SourceAbilitiesFormatted: string;
     Relations: string;
     RelationsFormatted: string;
     BriefBackground: string = '';

@@ -1,4 +1,4 @@
-<div id="splatter">
+<main id="splatter">
   <br>
   <form [formGroup]="contactForm" id="contactform">
     
@@ -8,13 +8,13 @@
     </div>
     
     
-    Reason for Contact:
+    <label for="Reason">Reason for Contact:</label>
     <span class="invalid" role="alert"
     [style.display]="ReasonInvalid ? 'inline-block' : 'none'">
       *required field
     </span>
     <br>
-    <select id="reason" formControlName="Reason" (change)="retrieveInfo()">
+    <select id="Reason" formControlName="Reason" (change)="retrieveInfo()">
       <option *ngFor="let reason of reasons"
       [value]=reason>
         {{ reason }}
@@ -27,7 +27,7 @@
     <br>
     
     
-    Name:
+    <label for="FirstName">Name:</label>
     <span class="invalid" role="alert"
     [style.display]="NameInvalid ? 'inline-block' : 'none'">
       *required field</span>
@@ -40,31 +40,32 @@
     
     <br><br>
     
-    <div id="Phone">Phone:*<br> <input id="Email" type='text' value="1"
+    <div id="Phone">Phone:*<br> <input id="email" type='text' value="1"
       tabindex="-1" autocomplete="new-password"
       formControlName="Phone">
       <br><br>
     </div>
 
-    Email:
-    <span class="invalid" role="alert"
+    <label for="Address">Email:</label>
+    <span class="invalid" role="alert" id="Email"
     [style.display]="EmailInvalid ? 'inline-block' : 'none'">
       *This email is invalid
     </span>
     <br>
     <input id="Address" type="email" formControlName="Email"><br>
-    <div class="info">
+
+    <aside class="info">
       You're not added to any mailing lists, and I don't sell or give away this data.
-    </div>
+    </aside>
     <br>
     
-    Message:
+    <label for="Message">Message:</label>
     <span class="invalid" role="alert"
     [style.display]="MessageInvalid ? 'inline-block' : 'none'">
       *Either your message was too short or it included script tags or links.
     </span>
     <br>
-    <textarea id="message" rows="8" cols="66" #characters
+    <textarea id="Message" rows="8" cols="66" #characters
     ng-trim="false" maxlength="5500"
     autocomplete="new-password" formControlName="Message">
     </textarea><br>
@@ -75,8 +76,8 @@
     <br><br>
   
     <div id="Reply">
-      Get a reply?* <input type="checkbox" name="email-me" value="1"
-      tabindex="-1" autocomplete="off"
+      <label id="ReplyTo">Get a reply?*</label> <input type="checkbox" name="email-me" value="1"
+      tabindex="-1" autocomplete="off" id="ReplyTo"
       formControlName="Reply"><br><br>
     </div>
     
@@ -90,4 +91,4 @@
   </form>
 
   <br>
-</div>
+</main>

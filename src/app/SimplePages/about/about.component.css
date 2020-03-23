@@ -10,9 +10,10 @@ img#meme {
     float: left;
     background-color: rgb(116, 116, 116);
     border: 7px solid #232323;
+    margin: 0px 15px 0px 10px;
 }
 
-div#meme{
+main#meme{
     max-width: 1000px;
     padding-left: 7px;
 }
@@ -24,5 +25,22 @@ p {
 
 h3 {
     margin: 0px;
+    margin-bottom: 15px;
+}
+
+fieldset {
+    border: 0px;
+    padding: 0px;
+}
+
+legend {
+     font-family: 'Courier New', Courier, monospace;
+     font-size: 25px;
+     font-weight: bold;
+     padding-bottom: 7px;
+
+}
+
+.toggler {
     margin-bottom: 15px;
 }

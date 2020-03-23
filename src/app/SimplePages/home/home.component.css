@@ -1,26 +1,35 @@
 div#splatter {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     position: relative;
     background-repeat: repeat;
     background-color: rgb(53, 53, 53);
     background-image: url(https://firebasestorage.googleapis.com/v0/b/arecaceworld.appspot.com/o/WebSite%2Fsmear4.png?alt=media&token=fc921624-299c-4470-b40e-a22d256f81dd);
 }
 
-div.textblock {
+main {
+    max-width: 1105px;
+}
+
+.textblock {
     border: 1px solid white;
-    max-width: 570px;
+    max-width: 500px;
     float: left;
     margin: 10px;
 }
 
 app-scroll-frame {
+    max-width: 552px;
     display: inline-block;
 }
 /* the quickstart nightmare*/
-div#quickstart {
+#quickstart {
     display: inline-block;
     background-color: #454545;
     border: 1px solid white;
-    max-width: calc(100vw - 50px);
+    width: 531px;
+    max-width: calc(100vw - 53px);
     margin: 10px;
 }
 

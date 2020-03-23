@@ -1,4 +1,6 @@
 import { Component, OnInit }  from '@angular/core';
+import { Title }              from '@angular/platform-browser';
+
 import { TextProvider }       from 'src/app/GlobalServices/textprovider.service';
 
 @Component({
@@ -20,9 +22,11 @@ export class TravelorsGuideComponent implements OnInit {
   index = 0;
   mainText: string;
 
-  constructor(private textprovider: TextProvider) {}
+  constructor(private textprovider: TextProvider,
+              private titleserv: Title) { }
 
   ngOnInit() {
+    this.titleserv.setTitle('Traveler\s Guide');
     window.scroll(0,0);
     this.mainText = this.textprovider.WebsiteText
                         .find(member => member.ID =='travelersguide').Text;
@@ -32,7 +36,7 @@ export class TravelorsGuideComponent implements OnInit {
     this.index += incre;
     if(this.index === -1) {
       this.index = 6;
-    } else if(this.index === this.previews.length){
+    } else if(this.index === this.previews.length) {
       this.index = 0;
     }
   }

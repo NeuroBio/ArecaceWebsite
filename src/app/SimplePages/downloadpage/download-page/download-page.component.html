@@ -1,7 +1,9 @@
-<div id="background">
+<main id="background">
     <div *ngIf="ImageData">
 
-        <div id="everFave" *ngIf="!ImageData.Artist  && !ImageData.Description">
+        <!-- Favorite when there is no descirption or artist credit -->
+        <section id="everFave" aria-label="Image-Header"
+        *ngIf="!ImageData.Artist  && !ImageData.Description">
             {{ name }}
             <app-bookmark
             [path]="path"
@@ -9,39 +11,47 @@
             [name]="name"
             [bookmarkImage]="false"
             ></app-bookmark>
-        </div>
+        </section>
+
+        <!-- IMAGE! Joy! -->
         <div id="imageHolder" #image (window:resize)="onResize()">
             <div class="loading" *ngIf="loading===true"></div>
             <img [src]="ImageData.Links[1]"
+            [alt]="ImageData.AltText ? ImageData.AltText : ''"
             (click)="switchView()"
             (load)="onLoad()"
             [style.max-width]="full === true ? 'none' : '100%'"
             [style.cursor]="maxed === true ? 'default'
                             : full === true ? 'zoom-out'
-                            : 'zoom-in'"
-            >
+                            : 'zoom-in'">
         </div>
 
-        <div *ngIf="ImageData.Artist">
+        <!-- Artist Credit -->
+        <section *ngIf="ImageData.Artist" aria-label="Artist-Credit">
         
+            <!-- link out! -->
             <div *ngIf="ImageData.ArtistLink" id="othersArt">
                 <a [href]="ImageData.ArtistLink" target="_blank">
-                    Artist: {{ ImageData.Artist }}, {{ ImageData.Date }}</a>  
+                    Artist: {{ ImageData.Artist }}, {{ ImageData.Date }}</a>
             </div>
+
+            <!-- No link out -->
             <div *ngIf="!ImageData.ArtistLink" id="othersArt">
                 Artist: {{ ImageData.Artist }}, {{ ImageData.Date }}
             </div>
     
-          </div>
+          </section>
     </div>
 
 
-    <div class="textblock" *ngIf="ImageData.Description">
+    <section class="textblock" *ngIf="ImageData.Description"
+    aria-labelledby="Image-Description">
         <h3>
             <span>
-                {{ ImageData.Name }}<br>
-                <span id="date">{{ ImageData.Date }}</span>
+                {{ ImageData.Name }}
+                <div id="date">{{ ImageData.Date }}</div>
             </span>
+
             <app-bookmark
             [path]="path"
             type="Favorites"
@@ -50,8 +60,8 @@
             ></app-bookmark>
         </h3>
         <hr><br>
-        {{ ImageData.Description }}<br>
-    </div>
 
-    
-</div>
+        <p> {{ ImageData.Description }}</p>
+    </section>
+
+</main>

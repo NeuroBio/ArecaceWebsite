@@ -1,4 +1,4 @@
-<div class="textblock">
+<main class="textblock">
   <h3>Well, this isn't good...</h3>
  
   <p *ngIf="service === undefined">Checking your connection...!</p>
@@ -8,7 +8,7 @@
   <p *ngIf="service !== undefined && online === true">TegaBot tested whether you could connect to the server and found that
     <span *ngIf="service===true"> your connection was fine.</span>
     <span *ngIf="service===false"> a connection could not be established.</span><br>
-    <button (click)="checkAgain()">Test again?</button>
+    <button type="button" (click)="checkAgain()">Test again?</button>
   </p>
   <br><br>
  
@@ -18,4 +18,4 @@
     <span id="info">Please tell me what page you tried
       to navigate to in the request!</span>
   </p>
-</div>
+</main>

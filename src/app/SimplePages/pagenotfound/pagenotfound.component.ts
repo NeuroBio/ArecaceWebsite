@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit }  from '@angular/core';
+import { Title }              from '@angular/platform-browser';
 
 @Component({
   selector: 'app-pagenotfound',
@@ -8,7 +9,10 @@ import { Component, OnInit } from '@angular/core';
 
 export class PageNotFoundComponent implements OnInit {
 
+  constructor(private titleserv: Title) { }
+
   ngOnInit() {
+    this.titleserv.setTitle('Not Found...')
     window.scroll(0,0);
   }
   

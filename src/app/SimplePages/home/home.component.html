@@ -1,40 +1,41 @@
-<div id="splatter">
-  <br>
+<div id="splatter"><br>
 
-  <!-- INTRODUTCTION -->
-  <div class="textblock" [innerHTML]="mainText"></div>
+  <main>
+    <!-- INTRODUTCTION -->
+    <section class="textblock" [innerHTML]="mainText"></section>
 
-<!-- QUICK START GUIDE -->
-  <div id="quickstart">
-    <h3 id="qsheader">Quick Start Guide:</h3>
-    <hr>
-    <div id="buttonbox">
-        <button class="strokeme" id="large"
-        routerLink="/world/introduction">
-        {{ buttonText[0] }}</button>
-        
-        <div id="smallbuttons">
-            <button class="strokeme" id="small"
-            routerLink = "/story/Scripts/Arc1/Chapter0">
-            {{ buttonText[1] }}</button><br>
-            <button class="strokeme" id="small2"
-            routerLink="/comic/latest">
-            {{ buttonText[2] }}</button>
+    <!-- QUICK START GUIDE -->
+    <section id="quickstart">
+        <h3 id="qsheader">Quick Start Guide:</h3>
+        <hr>
+        <div id="buttonbox">
+            <button class="strokeme" id="large"
+            routerLink="/world/introduction">
+            {{ buttonText[0] }}</button>
+            
+            <div id="smallbuttons">
+                <button class="strokeme" id="small"
+                routerLink = "/story/Scripts/Arc1/Chapter0">
+                {{ buttonText[1] }}</button><br>
+                <button class="strokeme" id="small2"
+                routerLink="/comic/latest">
+                {{ buttonText[2] }}</button>
+            </div>
+            <button class="strokeme" id="large2"
+            routerLink="/playground">
+            {{ buttonText[3] }}</button>
         </div>
-        <button class="strokeme" id="large2"
-        routerLink="/playground">
-        {{ buttonText[3] }}</button>
-    </div>
-  </div>
+    </section>
 
 
-  <!-- UPDATE FEED -->
-    <app-scroll-frame
-    [Title]="'News Feed:'">
-      <app-updatefeed></app-updatefeed>
-    </app-scroll-frame><br>
-  
-  <div style="clear:both"></div>
+    <!-- UPDATE FEED -->
+      <app-scroll-frame
+      [Title]="'News Feed:'">
+        <app-updatefeed></app-updatefeed>
+      </app-scroll-frame><br>
+
+    <div style="clear:both"></div>
+  </main><br>
 
   <!-- NEWEST AND CHANGELOG -->
     <!-- <app-show-newest

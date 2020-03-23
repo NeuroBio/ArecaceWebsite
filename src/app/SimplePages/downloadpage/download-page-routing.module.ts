@@ -1,11 +1,12 @@
-import { NgModule }               from '@angular/core';
-import { Routes, RouterModule }   from '@angular/router';
+import { NgModule }                   from '@angular/core';
+import { Routes, RouterModule }       from '@angular/router';
 
-import { DownloadPageComponent }       from './download-page/download-page.component';
-import { DownloadResolverService } from './download-resolver.service';
+import { DownloadResolverService }    from './download-resolver.service';
+
+import { DownloadPageComponent }      from './download-page/download-page.component';
 
 const downloadRoutes: Routes = [
-  {path: '', component: DownloadPageComponent,
+  { path: '', component: DownloadPageComponent,
     resolve: { DownloadResolverService }
   }
 ];
