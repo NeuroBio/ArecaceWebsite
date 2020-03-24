@@ -1,180 +1,223 @@
-<form [formGroup]="Form">   
-    <p>Name:<br>&nbsp;&nbsp;&nbsp;&nbsp;
-    First <input class="medium" formControlName="FirstName" type="text">
-    Last <input class="medium"  formControlName="LastName" type="text"></p>
+<form [formGroup]="Form">
+    <fieldset>
+        <legend>Name</legend>
+            <label>First:&nbsp;
+                <input class="medium" formControlName="FirstName" type="text">
+            </label><wbr>
+            <label>Last:&nbsp;
+                <input class="medium"  formControlName="LastName" type="text">
+            </label>
+    </fieldset>
     
-    <p>Class:
-    <select formControlName="SMClass">
-        <option *ngFor="let sm of DropDowns.class"
-        [value]="sm">{{ sm }}</option>
-    </select></p>
+    <p><label>Class:&nbsp;
+            <select formControlName="SMClass">
+                <option *ngFor="let sm of DropDowns.class"
+                [value]="sm">{{ sm }}</option>
+            </select>
+    </label></p>
     
-    <p>Occupation:
-    <input type="text" formControlName="Occupation"></p>
+    <p><label>Occupation:&nbsp;
+        <input type="text" formControlName="Occupation">
+    </label></p>
     
+    <fieldset>
+        <legend>Nationality</legend>
+       
+        <label>Country:&nbsp;
+            <select formControlName="Country"
+                (change)="updateTerritory($event.target.value)">
+                <option *ngFor="let country of DropDowns.countries; let i = index"
+                [value]="country.id">
+                {{ country.id }}</option>
+            </select>
+        </label><wbr>
+        
+        <label>Territory:&nbsp;
+            <select formControlName="Territory">
+                <option *ngFor="let terr of activeRegion"
+                [value]="terr">{{ terr }}</option>
+            </select>
+        </label>
+    </fieldset>
 
-    <p>Nationality:<br>&nbsp;&nbsp;&nbsp;&nbsp;
-    
-    Country <select formControlName="Country"
-        (change)="updateTerritory($event.target.value)">
-        <option *ngFor="let country of DropDowns.countries; let i = index"
-        [value]="country.id">
-        {{ country.id }}</option>
-    </select>
-    
-    Territory <select formControlName="Territory">
-        <option *ngFor="let terr of activeRegion"
-        [value]="terr">{{ terr }}</option>
-    </select></p>
 
-
-    <p>Ethnicity:
-    
+    <p><label>Ethnicity:&nbsp;
         <select formControlName="Ethnicity1"
-    (change) = "updateColor($event.target.value, 1)"
-    [style.background-color]="toneColor1">
-        <option *ngFor="let peep of DropDowns.Ethnicity"
-        [style.background-color]="peep.hex"
-        [value]="peep.id">{{ peep.id }}</option>
-    </select> / 
+        (change) = "updateColor($event.target.value, 1)"
+        [style.background-color]="toneColor1">
+            <option *ngFor="let peep of DropDowns.Ethnicity"
+            [style.background-color]="peep.hex"
+            [value]="peep.id">{{ peep.id }}</option>
+        </select> / 
+        
+        <select formControlName="Ethnicity2"
+        (change) = "updateColor($event.target.value, 2)"
+        [style.background-color]="toneColor2">
+            <option *ngFor="let peep of DropDowns.Ethnicity"
+            [style.background-color]="peep.hex"
+            [value]="peep.id">{{ peep.id }}</option>
+        </select>
+    </label></p>
     
-    <select formControlName="Ethnicity2"
-    (change) = "updateColor($event.target.value, 2)"
-    [style.background-color]="toneColor2">
-        <option *ngFor="let peep of DropDowns.Ethnicity"
-        [style.background-color]="peep.hex"
-        [value]="peep.id">{{ peep.id }}</option>
-    </select></p>
+    <fieldset>
+        <legend>Age</legend>
+
+        <label>Years:&nbsp;<input formControlName="Age" class="short" type="number"></label>, 
+        <label>Birth Date:&nbsp;
+            <input formControlName="Year" class="short" type="number">
+
+            <select formControlName="Era">
+                <option *ngFor="let era of DropDowns.Era"
+                [value]="era">{{ era }}</option>
+            </select> 
+
+            <select formControlName="Qt"
+            (change)="updateAge($event.target.value)">
+                <option *ngFor="let qt of DropDowns.Quartrits; let i = index"
+                [value]="qt">{{ qt }}</option>
+            </select> 
+
+            <select formControlName="Day">
+                <option *ngFor="let day of daysArray; let i = index"
+                [value]="i+1">{{ i+1 }}</option>
+            </select>&nbsp;({{ Form.controls.Zodiac.value }})
+        </label>
+    </fieldset><br>
+
+
+    <fieldset>
+        <legend>Height</legend>
+        <label><input formControlName="Ft" class="short" type="number"
+        (change)="updateCM()"
+        (blur)="updateCM()"> ft</label>
     
-    <p>Age:<br>&nbsp;&nbsp;&nbsp;&nbsp;
+        <label><input formControlName="Inch" class="short" type="number"
+        (change)="updateCM()"
+        (blur)="updateCM()"> in,</label>
+    
+        or <label><input formControlName="Cm" class="short" type="number"
+        (change)="updateFtIn()"
+        (blur)="updateFtIn()"> cm</label>    
+    </fieldset>
+    
 
-    Years <input formControlName="Age" class="short" type="number">, 
-
-    Birth Date <input formControlName="Year" class="short" type="number">
-
-    <select formControlName="Era">
-        <option *ngFor="let era of DropDowns.Era"
-        [value]="era">{{ era }}</option>
-    </select> 
-
-    <select formControlName="Qt"
-    (change)="updateAge($event.target.value)">
-        <option *ngFor="let qt of DropDowns.Quartrits; let i = index"
-        [value]="qt">{{ qt }}</option>
-    </select> 
-
-    <select formControlName="Day">
-        <option *ngFor="let day of daysArray; let i = index"
-        [value]="i+1">{{ i+1 }}</option>
-    </select>&nbsp;({{ Form.controls.Zodiac.value }})</p>
-
-
-    <p>Height:<br>&nbsp;&nbsp;&nbsp;&nbsp;
-    <input formControlName="Ft" class="short" type="number"
-    (change)="updateCM()"
-    (blur)="updateCM()">ft 
-    <input formControlName="Inch" class="short" type="number"
-    (change)="updateCM()"
-    (blur)="updateCM()">in, or
-    <input formControlName="Cm" class="short" type="number"
-    (change)="updateFtIn()"
-    (blur)="updateFtIn()">cm
+    <p><label>Distinguishing Marks: </label>
+        <textarea formControlName="DistinguishingMarks" rows="2" cols="72"></textarea>
     </p>
-    
 
-    <p>Distinguishing Marks: <br>
-    <textarea formControlName="DistinguishingMarks" rows="2" cols="65"></textarea></p>
+    <p><label>Personality: </label>
+        <textarea formControlName="Personality" rows="6" cols="72"></textarea>
+    </p>
 
-    <p>Personality:<br>
-    <textarea formControlName="Personality" rows="6" cols="65"></textarea></p>
+    <p><label>Philosophy: </label>
+        <textarea formControlName="Philosophy" rows="2" cols="72"></textarea>
+    </p>
 
-    <p>Philosophy:<br>
-    <textarea formControlName="Philosophy" rows="2" cols="65"></textarea></p>
+    <p><label>Motivations/Goals: </label>
+        <textarea formControlName="MotivationsGoals" rows="2" cols="72"></textarea>
+    </p>
 
-    <p>Motivations/Goals:<br>
-    <textarea formControlName="MotivationsGoals" rows="2" cols="65"></textarea></p>
+    <p><label>Strengths: </label>
+        <textarea formControlName="Strengths" rows="2" cols="72"></textarea>
+    </p>
 
-    <p>Strengths:<br>
-    <textarea formControlName="Strengths" rows="2" cols="65"></textarea></p>
-
-    <p>Weaknesses:<br>
-    <textarea formControlName="Weaknesses" rows="2" cols="65"></textarea></p>
-
+    <p><label>Weaknesses: </label>
+        <textarea formControlName="Weaknesses" rows="2" cols="72"></textarea>
+    </p>
 
 
-    <p>Source Abilities:</p>
-    <div style="width:450px;" formArrayName="SourceAbilities">
-        <div *ngFor="let ability of SourceAbilitiesArray.controls; let i = index"
-        [formGroupName]="i">
-            <div style="float:left; width:45%">
-                <input type="checkbox" formControlName="Known">
-                {{ ability.controls.Ability.value }}
+    <fieldset>
+        <legend>Source Abilities</legend>
+
+        <div class="SourceAbilityBox" formArrayName="SourceAbilities">
+            <div *ngFor="let ability of SourceAbilitiesArray.controls; let i = index"
+            [formGroupName]="i">
+                <div class="SourceAbilityUnit">
+                    <input type="checkbox" formControlName="Known">
+                    {{ ability.controls.Ability.value }}
+                </div>
             </div>
         </div>
-    </div>
 
-    <div style="clear: both"></div>
-    <div formGroupName="Unique" style="float:left">
+        <div style="clear: both"></div>
+        <div formGroupName="Unique" style="float:left">
             <input type="checkbox" formControlName="Known" name="Unique"
             (change)="allowUnique($event.target.checked)"> Unique &nbsp;&nbsp;
-        <div *ngIf="showUnique===true" style="float:left">
-            <input type="text" formControlName="Ability">
+            <div *ngIf="showUnique===true" style="float:left">
+                <input type="text" formControlName="Ability">
+            </div>
         </div>
-    </div>
-    <div style="clear: both"></div>
+    </fieldset><br>
 
 
 
-    <p>Family in Story:
-        <button type="button" (click)="addRelative(true)">+</button>
-        <button type="button" [disabled]="noFamily"
-        (click)="addRelative(false)">-</button></p>
-    <div formArrayName="Relations">
-        <div *ngFor="let relative of RelationsArray.controls; let i = index"
-        [formGroupName]="i">
-            Name: <input type="text"
-            formControlName="RelationName">
-            
-            Relation: <input type="text"
-            formControlName="Relationship">
-            <br>    
+
+    <fieldset>
+        <legend>Family in Story</legend>
+        <button aria-label="Add-Relative" type="button" (click)="addRelative(true)">+</button>
+        <button aria-label="Remove-Relative" type="button" [disabled]="noFamily"
+        (click)="addRelative(false)">-</button><br><br>
+
+        <div formArrayName="Relations">
+            <div *ngFor="let relative of RelationsArray.controls; let i = index"
+            [formGroupName]="i">
+            <p class="Relations">
+                <label class="Relations">Name {{i+1}}:&nbsp;<input type="text"
+                formControlName="RelationName"></label>
+                <wbr>
+                <label class="Relations">Relation {{i+1}}:&nbsp;<input type="text"
+                formControlName="Relationship"></label>
+            </p>
+            </div>
         </div>
-    </div>
+    </fieldset>
+    
     
 
-    <p> Background in Brief:<br>
-    <textarea formControlName="BriefBackground" rows="2" cols="65"></textarea></p>
+    <p> <label> Background in Brief:</label>
+        <textarea formControlName="BriefBackground" rows="2" cols="72"></textarea>
+    </p>
     
-    <p>Background in Full: <br>
-    <textarea formControlName="FullBackground" rows="6" cols="65"></textarea></p>
+    <p><label>Background in Full:</label>
+        <textarea formControlName="FullBackground" rows="6" cols="72"></textarea>
+    </p>
 
 
-    
-    <app-upload-main
-    name="Bio Picture"
-    ID="0"
-    [hasThumb]="true"
-    [Settings]="imageBioPicSettings"
-    ></app-upload-main>
+    <fieldset>
+        <legend>Bio Picture</legend>
+        <app-upload-main
+        name=""
+        ID="0"
+        [hasThumb]="true"
+        [Settings]="imageBioPicSettings"
+        ></app-upload-main>
+    </fieldset><br>
 
 
 
-    <p>Other References:<br>
-        <button type="button" (click)="addRef(true)">+</button>
-        <button type="button" [disabled]="noReferences"
-        (click)="addRef(false)">-</button></p>
-    <div formArrayName="ReferenceIDs" >
-        <div *ngFor="let refs of ReferencesArray.controls; let i = index"
-        [formGroupName]="i">
-            Reference {{ i+1 }}:<br>
-            ID:
-            <input type="text" formControlName="Ref" class="long"><br>
-            <app-upload-main
-            name=""
-            [ID]="i+1"
-            [hasThumb]="true"
-            [Settings]="imageRefSettings"
-            ></app-upload-main>
+    <fieldset>
+        <legend>Other References</legend>
+            <button aria-label="Add-Reference" type="button" (click)="addRef(true)">+</button>
+            <button aria-label="Remove-Reference" type="button" [disabled]="noReferences"
+            (click)="addRef(false)">-</button>
+        <br><br>
+
+        <div formArrayName="ReferenceIDs" >
+            <fieldset *ngFor="let refs of ReferencesArray.controls; let i = index"
+            [formGroupName]="i" class="subField">
+                <legend>Reference {{ i+1 }}:</legend><br>
+                <label class="subField ">Name:
+                    <input type="text" formControlName="Ref" class="long">
+                </label>
+
+                <app-upload-main
+                name=""
+                [ID]="i+1"
+                [hasThumb]="true"
+                [Settings]="imageRefSettings"
+                ></app-upload-main>
+            </fieldset>
         </div>
-    </div>
+    </fieldset>
+
 </form>

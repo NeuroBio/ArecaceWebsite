@@ -24,8 +24,8 @@ h2.formstyle {
 }
 
 input.fileupload {
-  width: 400px;
-  max-width: calc(100% - 200px);
+  width: 100%;
+  max-width: calc(100% - 160px);
 }
 
 textarea {
@@ -39,6 +39,7 @@ option {
 }
 
 input {
+  margin: 5px 0px 5px 0px;
   font-size: 18px;
 }
 
@@ -80,5 +81,35 @@ div.WYSIWYG {
 }
 
 label {
+  background-color: rgb(59,59,59);
+  padding: 5px;
+  margin: 0px 2px 0px 1px;
+  font-size: 20px;
+  display: flex;
+  border: white 1px solid;
+  font-family: 'Courier New', Courier, monospace;
+  align-items: center;
+}
+
+fieldset {
+  background-color: rgb(59,59,59);
+}
+
+fieldset label {
+  display: inline;
   border: 0px;
+  font-size: 18px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+legend {
+  background-color: rgb(59,59,59);
+  padding: 5px;
+  font-size: 20px;
+  border: white 1px solid;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+select {
+  margin: 5px 0px 5px 0px;
 }

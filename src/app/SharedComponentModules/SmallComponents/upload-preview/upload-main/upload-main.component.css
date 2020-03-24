@@ -1,6 +1,7 @@
 .align {
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
 }
 
 img.help {
@@ -40,6 +41,10 @@ img.help {
     visibility: visible;
 }
 
-div#shove {
-    padding-left: 15px;
+label {
+    display: inline;
+    border: 0px;
+    font-size: 18px;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: rgba(0,0,0,0);
 }

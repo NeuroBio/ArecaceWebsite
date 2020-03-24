@@ -2,3 +2,26 @@ form {
     border: 0px;
     float: none;
 }
+
+.Relations {
+    background-color: rgb(39,39,39);
+}
+
+p {
+    padding: 3px;
+}
+
+.subField {
+    background-color: rgb(39,39,39);
+    margin: 5px 0px 10px 0px;
+}
+
+.SourceAbilityBox {
+    width: 100%;
+    max-width: 450px;
+}
+
+.SourceAbilityUnit {
+    float: left;
+    width: 50%;
+}
