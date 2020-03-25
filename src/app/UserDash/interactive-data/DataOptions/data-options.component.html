@@ -7,10 +7,10 @@
     <div *ngFor="let name of names; let i = index">
       <li>{{ name }}</li>
       <button class="Exs" (click)="onView(i)"
-      [attr.aria-label]="'View' + Title + ':' + name"
+      [attr.aria-label]="'View-' + Title + ':-' + name"
       >view</button>
       <button class="Exs" *ngIf="edit === true"
-      [attr.aria-label]="'Edit' + Title + ':' + name"
+      [attr.aria-label]="'Edit-' + Title + ':-'+ name"
       (click)="onEdit(i)">edit</button>
     </div>
   </ul>

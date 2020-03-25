@@ -2,8 +2,7 @@
     <div *ngIf="ImageData">
 
         <!-- Favorite when there is no descirption or artist credit -->
-        <section id="everFave" aria-label="Image-Header"
-        *ngIf="!ImageData.Artist  && !ImageData.Description">
+        <section id="everFave" *ngIf="!ImageData.Artist  && !ImageData.Description">
             {{ name }}
             <app-bookmark
             [path]="path"
@@ -27,8 +26,7 @@
         </div>
 
         <!-- Artist Credit -->
-        <section *ngIf="ImageData.Artist" aria-label="Artist-Credit">
-        
+        <section *ngIf="ImageData.Artist">
             <!-- link out! -->
             <div *ngIf="ImageData.ArtistLink" id="othersArt">
                 <a [href]="ImageData.ArtistLink" target="_blank">
@@ -44,8 +42,7 @@
     </div>
 
 
-    <section class="textblock" *ngIf="ImageData.Description"
-    aria-labelledby="Image-Description">
+    <section class="textblock" *ngIf="ImageData.Description">
         <h3>
             <span>
                 {{ ImageData.Name }}

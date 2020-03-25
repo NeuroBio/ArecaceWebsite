@@ -10,7 +10,7 @@
             <div>
                 <h3>{{ intro.Title }}:</h3>
                 <p [innerHTML]="intro.Text"></p>
-                <nav class="buttonbank" aria-label="intro.Title + '-navigation'">
+                <nav class="buttonbank" aria-label="intro.Title + '-Navigation'">
                     <div class="navver" *ngFor="let route of intro.RouterLinks; let i = index">
                         <a class="navver" [routerLink]="route">
                         {{ intro.RouterLinksNames[i] }}</a>

@@ -6,6 +6,7 @@ import { BlowUpComponent }        from './blowup/blowup.component';
 import { BlowupmasterComponent }  from './blowupmaster/blowupmaster.component';
 import { GridComponent }          from './grid/grid.component';
 import { BookmarkModule }         from '../../SmallComponents/bookmark/bookmark.module';
+
 @NgModule({
   declarations: [
     BlowUpComponent,

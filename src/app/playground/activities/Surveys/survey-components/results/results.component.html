@@ -29,7 +29,7 @@
     <button (click)="setShowStats()">Show Stats</button>
     <button *ngIf="ViewOnly === false" (click)="onReset()">Reset Survey</button>
     
-    <article *ngIf="showAll === true" class="outer" aria-labelledby="All-Your-Results">
+    <article *ngIf="showAll === true" class="outer">
     
       <div class="scores" *ngFor="let score of results.AllScores; let i = index">
         <h3 class="scoreQualifier" *ngIf="i === 0 && acceptable === true">Acceptable Scores: </h3>

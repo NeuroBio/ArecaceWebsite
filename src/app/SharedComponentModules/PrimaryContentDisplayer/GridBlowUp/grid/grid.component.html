@@ -1,4 +1,4 @@
-<div id="outer">
+<section id="outer" aria-label="Image-Link-Grid">
   <a class="item"
   *ngFor="let member of collect"
   [routerLink]="preview === true ? member.ID : member.ID+'/Download'">
@@ -7,6 +7,6 @@
     </div>
     <div class="thumbtext">{{ member.Name }}</div>
   </a> 
-</div>
+</section>
 
 <br>

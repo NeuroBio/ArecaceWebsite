@@ -1,9 +1,9 @@
 import { Component, OnInit, HostListener,
-          ViewChild, ElementRef, Input }    from '@angular/core';
-import { Router, ActivatedRoute }                           from '@angular/router';
+          ViewChild, ElementRef, Input }      from '@angular/core';
+import { Router, ActivatedRoute }             from '@angular/router';
 
-import { GlobalVarsService }                from 'src/app/GlobalServices/global-vars.service';
-import { GetRouteSegmentsService } from 'src/app/GlobalServices/commonfunctions.service';
+import { GlobalVarsService }                  from 'src/app/GlobalServices/global-vars.service';
+import { GetRouteSegmentsService }            from 'src/app/GlobalServices/commonfunctions.service';
 
 @Component({
   selector: 'app-blowup',
@@ -28,9 +28,10 @@ export class BlowUpComponent implements OnInit {
   @ViewChild('left', { static: true }) left: ElementRef;
   @ViewChild('right', { static: true }) right: ElementRef;
   @ViewChild('bigger', { static: true }) bigger: ElementRef;
+  @ViewChild('back', { static: true }) back: ElementRef;
   textHeight: number;
 
-  @ViewChild('back', { static: true }) back: ElementRef;
+  
 
   constructor(private router: Router,
               private route: ActivatedRoute,
@@ -45,13 +46,11 @@ export class BlowUpComponent implements OnInit {
     this.setPath();
   }
 
-  onResize(){
+  onResize() {
     setTimeout(() => {
       this.textHeight = this.bigger.nativeElement.offsetHeight - 30;
-      if(this.textHeight < 400){
-        this.textHeight = 400;
-      }
-    }, 10)
+      if(this.textHeight < 400) this.textHeight = 400;
+    }, 10);
   }
 
   onLoad() {
@@ -69,19 +68,20 @@ export class BlowUpComponent implements OnInit {
     this.path = `${mainPath.join('/')}/${this.activeMember.ID}/Download`;
   }
 
-  onArrow(incre: number){
+  onArrow(incre: number) {
     const startIndex = this.index;
     this.loading = this.global.ImagesLoadable.value;
     this.index += incre;
-    if(this.index === -1){
+    if(this.index === -1) {
       this.index = this.linksList.length-1;
-    }else if(this.index === this.linksList.length){
+    } else if(this.index === this.linksList.length) {
       this.index = 0;
     }
+
     if(this.index === startIndex) {
       this.loading = false;
     } else {
-      this.activeMember = this.linksList[this.index]    
+      this.activeMember = this.linksList[this.index];
       this.bigUrl = this.activeMember.Links[1];
       this.router.navigate([`${this.gridPath}/${this.activeMember.ID}`]);
       this.setPath();
@@ -89,19 +89,31 @@ export class BlowUpComponent implements OnInit {
   }
 
   //Arrow keys (trigger arrow options)
-  @HostListener('window:keyup', ['$event']) KeyEvent(event: KeyboardEvent){ 
+  @HostListener('window:keyup', ['$event']) KeyEvent(event: KeyboardEvent) { 
     if(event.keyCode === 39){//right, next
       this.right.nativeElement.focus();
       this.onArrow(1);
     }
 
-    if(event.keyCode === 37){//left, prev
+    if(event.keyCode === 37) {//left, prev
       this.left.nativeElement.focus();
       this.onArrow(-1);
     }
 
-    if(event.keyCode == 27){//escape
+    if(event.keyCode == 27) {//escape
       this.router.navigate([`${this.gridPath}`]);
+    }
+  }
+
+  onTwistieKeydown(event: any) {
+    if (event.key === "Enter") {
+      this.showHideDescription();
+    }
+  }
+
+  onArrowKeydown(event: any, change: number){
+    if (event.key === "Enter") {
+      this.onArrow(change);
     }
   }
 

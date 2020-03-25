@@ -1,23 +1,16 @@
-<nav id="biggerouter">
+<article id="biggerouter">
     <div #back id="biggerback" [routerLink]="['../']"></div>
-    
-    <!-- Left and Right arrow "buttons" -->
-    <img #left id="left" src="assets/svgs/back.svg" alt="Prev"
-    (click)="onArrow(-1)" tabindex="0" role="button">
-
-    <img #right id="right" src="assets/svgs/back.svg" alt="Next"
-    (click)="onArrow(1)" tabindex="0" role="button">
 
     <!-- Bookmark when not special -->
     <div id="vanillaFave"
-          *ngIf="!activeMember.Description && !activeMember.Artist && !loading">
-            <app-bookmark
-            [path]="path"
-            type="Favorites"
-            [name]="activeMember.Name"
-            [bookmarkImage]="false"
-            ></app-bookmark>
-          </div>
+    *ngIf="!activeMember.Description && !activeMember.Artist && !loading">
+        <app-bookmark
+        [path]="path"
+        type="Favorites"
+        [name]="activeMember.Name"
+        [bookmarkImage]="false"
+        ></app-bookmark>
+    </div>
 
     <!-- Image and Text -->  
     <div id="content" (window:resize)="onResize()">
@@ -34,11 +27,14 @@
           [style.height.px]="textHeight">
 
         <!--Show/hide info-->
-          <img *ngIf="!loading"
-          id="downUp" src="assets/svgs/back.svg" alt=""
+          <img *ngIf="!loading" tabindex="0" aria-label="Show-Hide-Image-Description"
+          id="downUp" src="assets/svgs/back.svg" alt="" role="button"
           [style.transform]="'rotate(' + rotation + 'deg)'"
+          (keydown)="onTwistieKeydown($event)"
           (click)="showHideDescription()">
-          <div id="textblockinner" *ngIf="!loading" [style.display]="this.showDescription ? 'block' : 'none'">
+
+          <section id="textblockinner" *ngIf="!loading"
+          [style.display]="this.showDescription ? 'block' : 'none'">
             <h3>
               <app-bookmark
               [path]="path"
@@ -47,16 +43,20 @@
               [bookmarkImage]="false"
               ></app-bookmark>
               {{ activeMember.Name }}
-            </h3><br>
-            {{ activeMember.Date }}<br><br>
-            {{ activeMember.Description }}
-            <br><br>
-          </div>
+            </h3>
+            <p>
+              {{ activeMember.Date }}
+            </p><br>
+            <p>
+              {{ activeMember.Description }}
+            </p>
+            <br>
+          </section>
           
         </div>
 
       </div>
-      <div *ngIf="activeMember.Artist">
+      <section *ngIf="activeMember.Artist">
         <div *ngIf="activeMember.ArtistLink" id="othersArt">
             <a [href]="activeMember.ArtistLink" target="_blank">
                 Artist: {{ activeMember.Artist }}, {{ activeMember.Date }}</a>  
@@ -65,11 +65,16 @@
             Artist: {{ activeMember.Artist }}, {{ activeMember.Date }}
         </div>
 
-      </div>
+      </section>
 
-      <div id="Back">
-          <a [routerLink]="['../']">Go Back</a>
-      </div>
+        <!-- Left and Right arrow "buttons" -->
+      <img #left id="left" src="assets/svgs/back.svg" alt="Prev-Left"
+      (click)="onArrow(-1)" tabindex="0" role="button"
+      (keydown)="onArrowKeydown($event, -1)">
+
+      <img #right id="right" src="assets/svgs/back.svg" alt="Next-Right"
+      (click)="onArrow(1)" tabindex="0" role="button"
+      (keydown)="onArrowKeydown($event, 1)">
 
       <!-- Link out to full image -->
       <div id="SeeFull">
@@ -77,6 +82,11 @@
           >Full Size</a>
       </div>
 
+      <!-- go back to grid -->
+      <div id="Back">
+        <a [routerLink]="['../']">Go Back</a>
+      </div>
+
     </div>
 
-</nav>
+</article>

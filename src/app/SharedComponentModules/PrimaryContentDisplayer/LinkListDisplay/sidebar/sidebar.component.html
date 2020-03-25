@@ -9,7 +9,7 @@
   <div id="listHolder" #listHolder
   [style.maxHeight.px]="listHeight"
   (window:resize)="onResize()">
-    <nav #list aria-label="Content-navigation">
+    <nav #list aria-label="Content-Navigation">
       <div *ngFor="let list of linkList, let i = index">
           <hr *ngIf="i!==0">
           <div class="sidebarlab">{{ labels[i] }}</div>

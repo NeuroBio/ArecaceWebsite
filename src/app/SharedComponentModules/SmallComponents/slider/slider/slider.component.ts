@@ -30,7 +30,8 @@ export class SliderComponent implements OnInit {
   }
 
   onKeydown(event) {
-    if (event.key === "Enter") {
+    if (event.key === "Enter" || event.key === " " || event.key === "Spacebar") {
+      event.preventDefault();
       this.changeView();
     }
   }
