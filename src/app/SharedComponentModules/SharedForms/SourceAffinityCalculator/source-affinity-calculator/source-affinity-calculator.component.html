@@ -25,7 +25,7 @@
     </p>
     
     <p>
-        <button type="button" *ngIf="viewOnly === false"
+        <button #addAbilityButton type="button" *ngIf="viewOnly === false"
         (click)="addAbility()">Add Ability</button>
     </p>
     
@@ -51,6 +51,7 @@
 
             <button type="button" *ngIf="viewOnly === false"
             [attr.aria-label]="'Remove-Ability-'+ (i+1)"
+            [disabled]="allowRemove === false"
             (click)="removeAbility(i)">-</button>
         </div>
         <br><br>

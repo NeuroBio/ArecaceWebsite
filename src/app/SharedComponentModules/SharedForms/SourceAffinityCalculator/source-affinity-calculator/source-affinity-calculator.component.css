@@ -71,6 +71,7 @@ div#Error {
 }
 
 button {
+    margin: 2px;
     padding: 7px;
     padding-top: 3px;
     padding-bottom: 3px;
@@ -86,6 +87,11 @@ button:hover {
 
 button:active {
     background-color: rgb(3, 43, 41);
+}
+
+button:disabled {
+    background-color: rgb(167, 167, 167);
+    cursor: default;
 }
 
 li {

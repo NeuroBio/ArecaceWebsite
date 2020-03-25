@@ -1,4 +1,5 @@
-import { Component, OnInit, OnDestroy, Input }  from '@angular/core';
+import { Component, OnInit, OnDestroy,
+         Input, ViewChild, ElementRef }         from '@angular/core';
 import { FormBuilder, FormArray,
          FormGroup, Validators }                from '@angular/forms';
 
@@ -11,6 +12,7 @@ import { QuickAssign }                          from 'src/app/GlobalServices/com
 import { AbilityData, AbilityMastery,
          AbilityNames }                         from '../SourceAbilityData';
 import { CRUDdata }                             from 'src/app/Classes/ContentClasses';
+
 @Component({
   selector: 'app-source-affinity-calculator',
   templateUrl: './source-affinity-calculator.component.html',
@@ -22,6 +24,11 @@ export class SourceAffinityCalculatorComponent implements OnInit, OnDestroy {
   @Input() showName: boolean = true;
   @Input() viewOnly: boolean = false;
   @Input() new: boolean = true;
+
+  @ViewChild('addAbilityButton') addAbilityButton: ElementRef;
+
+  allowRemove = false;
+
   result: any;
   rank: string;
   abilitiesArray: FormArray;
@@ -169,9 +176,16 @@ export class SourceAffinityCalculatorComponent implements OnInit, OnDestroy {
         Ability: ability,
         Mastery: mastery
     }) );
+    if(this.abilitiesArray.value.length > 1) {
+      this.allowRemove = true;
+    }
   }
 
   removeAbility(index: number) {
     this.abilitiesArray.removeAt(index);
+    this.addAbilityButton.nativeElement.focus();
+    if(this.abilitiesArray.value.length === 1) {
+      this.allowRemove = false;
+    }
   }
 }

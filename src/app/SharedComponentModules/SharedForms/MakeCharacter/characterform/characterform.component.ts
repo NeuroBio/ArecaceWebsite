@@ -1,4 +1,5 @@
-import { Component, OnInit, OnDestroy, ViewChild, ElementRef }             from '@angular/core';
+import { Component, OnInit, OnDestroy,
+         ViewChild, ElementRef }                    from '@angular/core';
 import { FormBuilder, FormArray,
          FormGroup, Validators}                     from '@angular/forms';
 
