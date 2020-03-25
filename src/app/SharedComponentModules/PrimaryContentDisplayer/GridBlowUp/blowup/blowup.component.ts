@@ -39,6 +39,7 @@ export class BlowUpComponent implements OnInit {
               private global: GlobalVarsService) { }
 
   ngOnInit() {
+    this.back.nativeElement.focus();
     this.activeMember = this.linksList[this.index];
     this.bigUrl = this.activeMember.Links[1];
     this.loading = this.global.ImagesLoadable.value;
