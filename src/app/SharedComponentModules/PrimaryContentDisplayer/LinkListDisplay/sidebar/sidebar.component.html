@@ -1,4 +1,4 @@
-<div #container class="sidebar" role="navigation">
+<div #container class="sidebar">
 
   <svg id ="greyband" [style.height.px]="greybarHeight">
       <rect width="100%" height="100%" style="fill:#616161"/>
@@ -6,24 +6,25 @@
 
   
 
-  <div id="listHolder" #listHolder [style.maxHeight.px]="listHeight"
+  <div id="listHolder" #listHolder
+  [style.maxHeight.px]="listHeight"
   (window:resize)="onResize()">
-  <div #list>
+    <nav #list aria-label="Content-navigation">
       <div *ngFor="let list of linkList, let i = index">
           <hr *ngIf="i!==0">
           <div class="sidebarlab">{{ labels[i] }}</div>
           <hr>
-            <ul class="sidebarlist" style="max-width: 250px;">
-              <li class="sidebarlist" *ngFor="let namelink of list"
-              [class.selected.sidebarlist]="namelink[1] === current"
-              (click)="onSelect(namelink[1])">
-                <a [routerLink]="[namelink[1]]"
-                queryParamsHandling="merge">
-                  {{ namelink[0] }}</a>
-              </li>
-            </ul>
+          <ul class="sidebarlist" style="max-width: 250px;">
+            <li class="sidebarlist" *ngFor="let namelink of list"
+            [class.selected.sidebarlist]="namelink[1] === current"
+            (click)="onSelect(namelink[1])">
+              <a [routerLink]="[namelink[1]]"
+              queryParamsHandling="merge">
+                {{ namelink[0] }}</a>
+            </li>
+          </ul>
         </div>
-    </div>      
+      </nav>
   </div>
 
 

@@ -25,7 +25,7 @@ export class DetailsDisplayComponent implements OnInit {
 
   ngOnInit() {
     const mainPath = this.getsegserv.fetch(this.route.snapshot.pathFromRoot);
-    this.route.data.subscribe((data: {Ref: GeneralMetaData})=>{
+    this.route.data.subscribe((data: { Ref: GeneralMetaData }) => {
       this.loading = this.global.ImagesLoadable.value;
       window.scroll(0,0);
       this.ref = data.Ref;

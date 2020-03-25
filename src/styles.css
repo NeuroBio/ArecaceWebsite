@@ -82,7 +82,7 @@ input[type="file"] {
   background-color: rgb(116, 116, 116);
 }
 
-p.caption {
+.caption {
   margin-top: 0px;
   padding: 5px;
   font-size: 12px;

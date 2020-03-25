@@ -3,7 +3,7 @@ div.compheader {
     justify-content: center;
 }
 
-main {
+#main {
     display: flex;
     flex-flow: column;
     align-items: center;

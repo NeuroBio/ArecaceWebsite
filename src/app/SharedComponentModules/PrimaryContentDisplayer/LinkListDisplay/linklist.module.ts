@@ -1,9 +1,10 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
-import { DropDownComponent } from './drop-down/drop-down.component';
-import { OptionsComponent } from './options/options.component';
-import { SideBarComponent } from './sidebar/sidebar.component';
+import { NgModule }             from '@angular/core';
+import { CommonModule }         from '@angular/common';
+import { RouterModule }         from '@angular/router';
+
+import { DropDownComponent }    from './drop-down/drop-down.component';
+import { OptionsComponent }     from './options/options.component';
+import { SideBarComponent }     from './sidebar/sidebar.component';
 
 @NgModule({
   declarations: [
@@ -21,4 +22,5 @@ import { SideBarComponent } from './sidebar/sidebar.component';
     OptionsComponent,
   ]
 })
+
 export class LinkListModule { }

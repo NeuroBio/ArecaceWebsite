@@ -1,46 +1,52 @@
-<main class="outer">
-  <div id="match">{{ results.Match }}% match</div>
+<main>
 
-  <div id="inner">
-    <h3>{{ results.Name }} Results:</h3>
-    <hr>
-  
-    <p [innerHTML]="results.Outcome.Text"></p>
-  
-    <div class="navver" *ngIf="results.Outcome.Link">
-        <a class="navver" [routerLink]="results.Outcome.Link">
-            {{ results.Outcome.LinkName }}</a>
-    </div>
+    <article class="outer">
+      
     
-    <div *ngIf="results  && ViewOnly === false">
-      <app-login-to-save-main
-      ></app-login-to-save-main>
-    </div>
+      <div id="inner">
+        <h3>{{ results.Name }} Results:</h3>
+        <div id="match">{{ results.Match }}% match</div>
+        <div style="clear: both;"></div>
+        <hr>
+      
+        <p [innerHTML]="results.Outcome.Text"></p>
+      
+        <div class="navver" *ngIf="results.Outcome.Link">
+            <a class="navver" [routerLink]="results.Outcome.Link">
+                {{ results.Outcome.LinkName }}</a>
+        </div>
+        
+        <div *ngIf="results  && ViewOnly === false">
+          <app-login-to-save-main
+          ></app-login-to-save-main>
+        </div>
+        
+      </div>
     
-  </div>
-
+    </article>
+    
+    <button (click)="setShowAll()">Show All Scores</button>
+    <button (click)="setShowStats()">Show Stats</button>
+    <button *ngIf="ViewOnly === false" (click)="onReset()">Reset Survey</button>
+    
+    <article *ngIf="showAll === true" class="outer" aria-labelledby="All-Your-Results">
+    
+      <div class="scores" *ngFor="let score of results.AllScores; let i = index">
+        <h3 class="scoreQualifier" *ngIf="i === 0 && acceptable === true">Acceptable Scores: </h3>
+        <h3 class="scoreQualifier" *ngIf="i === tooLow">Unacceptable Scores: </h3>
+        <p>
+          {{ score.Name }}: {{ score.Score }}% Match
+          <button (click)="setShowSpecific(i)">Read Result</button>    
+        </p>
+        <p *ngIf="showSpecific[i] === true"
+          [innerHTML]="score.Text">
+        </p>
+      </div>
+    
+    </article>
+    
+    <app-survey-stats
+    *ngIf="showStats === true"
+    ></app-survey-stats>
+  
 </main>
-
-<button (click)="setShowAll()">Show All Scores</button>
-<button (click)="setShowStats()">Show Stats</button>
-<button *ngIf="ViewOnly === false" (click)="onReset()">Reset Survey</button>
-
-<aside *ngIf="showAll === true" class="outer" aria-labelledby="All-Your-Results">
-
-  <div class="scores" *ngFor="let score of results.AllScores; let i = index">
-    <h3 class="scoreQualifier" *ngIf="i === 0 && acceptable === true">Acceptable Scores: </h3>
-    <h3 class="scoreQualifier" *ngIf="i === tooLow">Unacceptable Scores: </h3>
-    <p>
-      {{ score.Name }}: {{ score.Score }}% Match
-      <button (click)="setShowSpecific(i)">Read Result</button>    
-    </p>
-    <p *ngIf="showSpecific[i] === true"
-      [innerHTML]="score.Text">
-    </p>
-  </div>
-
-</aside>
-
-<app-survey-stats
-*ngIf="showStats === true"
-></app-survey-stats>

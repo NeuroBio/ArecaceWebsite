@@ -1,11 +1,11 @@
+.top {
+    min-height:80vh;
+}
+
 div.compheader {
     position: relative;
     display: flex;
     justify-content: stretch;
-}
-
-div#top {
-    min-height:80vh;
 }
 
 div#outer {
@@ -34,9 +34,13 @@ div.textblock {
     max-width: 1000px;
 }
 
-p.caption {
+.caption {
     max-width: 1000px;
     box-sizing: border-box;
+}
+
+figure {
+    background-color: rgb(116, 116, 116);
 }
 
 div#compstretcher {

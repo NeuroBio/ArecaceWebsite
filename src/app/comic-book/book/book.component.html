@@ -3,7 +3,7 @@
 
         <!--Comic Header-->
         <div>
-            <nav id="chapselect" aria-label="chapter-page-navigation">
+            <nav id="chapselect" aria-label="comic-chapter-page-navigation">
                 <!--chapters-->
                 <div class="dropdowns">
                     <label for="chap">Arc 1: </label> 
@@ -77,10 +77,10 @@
 
 
         <!--Comic Footer-->
-        <div id="footbox" role="navigation">
+        <div id="footbox" >
 
             <!--buttons-->
-            <nav aria-label="next-previous-navigation">
+            <nav aria-label="next-prev-comic-navigation">
                 <button (click)="onButton(currentPage > 1,-1)"
                 [disabled]="(currentPage === 1 && currentChapter.ID === 0)">Prev</button>
                 <b>------|||------</b>
@@ -103,7 +103,7 @@
 
 
         <!--Side Info-->
-        <aside id="info" role="complementary" [innerHTML]="mainText"></aside>
+        <aside id="info" role="note" [innerHTML]="mainText"></aside>
 
 
     </div>

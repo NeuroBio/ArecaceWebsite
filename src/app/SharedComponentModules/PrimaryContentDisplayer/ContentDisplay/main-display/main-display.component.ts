@@ -1,5 +1,6 @@
-import { Component, Input, OnInit, OnDestroy } from '@angular/core';
-import { GeneralcollectionService }           from 'src/app/GlobalServices/generalcollection.service';
+import { Component, Input, OnInit, OnDestroy }  from '@angular/core';
+
+import { GeneralcollectionService }             from 'src/app/GlobalServices/generalcollection.service';
 @Component({
   selector: 'app-main-display',
   templateUrl: './main-display.component.html',

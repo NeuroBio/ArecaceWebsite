@@ -1,5 +1,5 @@
 <div class="background">
-    <nav class="toggler" role="navigation" aria-label="Nomadic-Navigation">
+    <nav class="toggler" aria-label="Nomadic-Navigation">
         <div *ngFor="let choice of choices, let i = index" class="toggler">
             <input type="radio" class="toggler" name="topic" [id]="choice"
             (click)="pickTopic(i)" [checked]="selected === choice">

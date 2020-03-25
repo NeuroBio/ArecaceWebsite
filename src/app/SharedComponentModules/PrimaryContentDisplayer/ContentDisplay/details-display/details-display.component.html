@@ -1,32 +1,33 @@
-<div id="top">
+<main class="top" id="mainContent">
     
     <!--Header-->
-    <header>
-        <div class="compheader" role="header">
-            <div id="compstretcher">
-                <h2 class="compheader">{{ ref.Topic }}</h2>
-            </div>
-            <app-bookmark
-            [path]="path"
-            type="Favorites"
-            [name]="name"
-            [bookmarkImage]="false"
-            ></app-bookmark>
+    <div class="compheader">
+        <div id="compstretcher">
+            <h2 class="compheader">{{ ref.Topic }}</h2>
         </div>
-    </header>
+        <app-bookmark
+        [path]="path"
+        type="Favorites"
+        [name]="name"
+        [bookmarkImage]="false"
+        ></app-bookmark>
+    </div>
     <hr>
 
     <!--Body-->
     <div id="outer">
-        <div id="imageholder">
-            <div *ngIf="loading===true" class="loading"></div>
-            <img class="imgcaption" id="main" [hidden]="loading"
-            alt="" [src]="ref.Links[0]" (load)="loading=false">
-        </div>
+        <figure>
+            <div id="imageholder">
+                <div *ngIf="loading===true" class="loading"></div>
+                <img class="imgcaption" id="main" [hidden]="loading"
+                alt="" [src]="ref.Links[0]" (load)="loading=false">
+            </div>
+    
+            <figcaption class="caption">{{ ref.Caption }}</figcaption>
+        </figure>
 
-        <p class="caption">{{ ref.Caption }}</p>
         <div class="textblock">{{ ref.FullText }}</div>
     </div>
 
     <br>
-</div>
+</main>

@@ -1,5 +1,4 @@
 import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
-import { GeneralmemberresolverService } from 'src/app/GlobalServices/generalmemberresolver.service';
 
 @Component({
   selector: 'app-drop-down',
@@ -10,7 +9,9 @@ import { GeneralmemberresolverService } from 'src/app/GlobalServices/generalmemb
 export class DropDownComponent implements OnInit {
 
   @Input() labels: string[] = ["default", "Sub"];
-  @Input() linkList: string[][][] = [ [ ["tester 1", "tester1"], ["tester 2", "tester2"], ["tester 3", "tester3"] ],
+  @Input() linkList: string[][][] = [ [ ["tester 1", "tester1"],
+                                        ["tester 2", "tester2"],
+                                        ["tester 3", "tester3"] ],
                                     [ ['subtester 1', 'subtester1'] ] ];
   @Input() current: string = "tester2";
   revealArray: boolean[] = [];
@@ -31,12 +32,11 @@ export class DropDownComponent implements OnInit {
     this.current = selected;
   }
 
-  onReveal(index: number){
+  onReveal(index: number) {
     this.revealArray[index] = !this.revealArray[index];
     setTimeout(() => {
       this.height = this.linkListHolder.nativeElement.offsetHeight;
     }, 10);
-    this.rotationArray[index] =
-      (this.rotationArray[index] === 0 ? 180 : 0);
+    this.rotationArray[index] = (this.rotationArray[index] === 0 ? 180 : 0);
   }
 }

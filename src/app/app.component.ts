@@ -2,6 +2,7 @@ import { Component, ViewEncapsulation,
          ViewChild, ElementRef, AfterViewInit }   from '@angular/core';
 
 import { GlobalVarsService}                       from './GlobalServices/global-vars.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -31,7 +32,8 @@ export class AppComponent implements AfterViewInit {
                           { link: 'guide', name: 'Traveler\'s Guide' },
                           { link: 'privacy', name: 'Privacy Policy' }]
   
-  constructor(private global: GlobalVarsService) { }
+  constructor(private global: GlobalVarsService,
+              public route: ActivatedRoute) { }
   
   ngAfterViewInit() {
     setTimeout(() => { this.checkLoad() }, 1000);

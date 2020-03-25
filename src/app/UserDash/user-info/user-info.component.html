@@ -1,46 +1,57 @@
-<div id="background">
+<main id="background">
     <!-- Display stats -->
-    <main class="textblock accountInfo">
+    <article class="textblock accountInfo">
+        <h3>Settings:</h3>
+        <hr>
+        <section>
+            <h4>Your Roles:</h4>
+            <p>User-{{ user.User }}</p>
+            <p>Forum Moderator-{{ user.Mod }}</p>
+            <p>Site Admin-{{ user.Admin }}</p>
+            <br>
+            <hr>
+        </section>
         
-        <h4>Your Roles:</h4>
-        <span>User-{{ user.User }}</span><br>
-        <span>Forum Moderator-{{ user.Mod }}</span><br>
-        <span>Site Admin-{{ user.Admin }}</span><br>
+        <section>
+            <h4>Email:</h4>
+            <p>{{ user.email }}</p>
+            <hr>
+        </section>
+
+        <section>
+            <h4>Account Created:</h4>
+            <p>{{ user.accountCreated }}</p>
+            <hr>
+        </section>
+
+        <section>
+            <h4>User Name:</h4>
+            <p>{{ user.userName }}<p>
+            <form [formGroup]="Form" aria-label="Change-User-Name">
+                <input type="text" formControlName="newName">
+                <button id="change" (click)="changeUserName()"
+                >Change</button>
+                <div style="clear: both;"></div>
+                {{ message }}
+            </form>
+            <hr>
+        </section>
+
+        <section>
+            <h4>View Settings:</h4>
+            <p>Show Image Previews: {{ user.showPreview}}</p>
+            <hr>
+        </section>
+
         <br>
-        <hr>
-        
-
-        <h4>Email:</h4>
-        <span>{{ user.email }}</span>
-        <hr>
-
-
-        <h4>Account Created:</h4>
-        <span>{{ user.accountCreated }}</span>
-        <hr>
-
-
-        <h4>User Name:</h4>
-        <span>{{ user.userName }}<br></span>
-        <form [formGroup]="Form" aria-label="Change User Name">
-            <input type="text" formControlName="newName">
-            <button id="change" (click)="changeUserName()"
-            >Change</button>
-            <div style="clear: both;"></div>
-            {{ message }}
-        </form>
-        <hr>
-
-        <h4>View Settings:</h4>
-        <span>Show Image Previews: {{ user.showPreview}}</span>
-        <hr>
-        <br>
-        <a routerLink="/privacy">See our Privay Policy</a>
-    </main>
+        <aside aria-label="Privacy-Policy">
+            <a routerLink="/privacy">See our Privay Policy</a>
+        </aside>
+    </article>
 
     <!-- Delete Properties -->
-    <Aside class="textblock accountInfo">
-        <h4 id="danger">!*Danger Zone*!</h4>
+    <article class="textblock accountInfo">
+        <h3 id="danger">!*Danger Zone*!</h3>
         <button type="button" (click)="switchDanger()">{{ dangerButton }}</button>
         <hr>
         <div *ngIf="dangerNoodle === true">
@@ -54,6 +65,5 @@
                 Delete Your Account</button><br>
             {{ dangerMessage }}
         </div>
-
-    </Aside>
-</div>
+    </article>
+</main>

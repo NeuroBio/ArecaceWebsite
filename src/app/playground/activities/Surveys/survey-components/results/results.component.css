@@ -10,16 +10,19 @@ app-survey-stats {
 }
 
 div#match {
-    float: right;
     margin: 5px;
+    float: right;
+    float: top;
 }
 
 div#inner {
     padding: 7px;
     white-space: pre-line;
+    position: relative;
 }
 
 h3 {
+    display: inline-block;
     margin: 5px;
     padding: 0px;
 }
