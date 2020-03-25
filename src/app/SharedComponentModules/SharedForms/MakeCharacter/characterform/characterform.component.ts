@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy }             from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, ElementRef }             from '@angular/core';
 import { FormBuilder, FormArray,
          FormGroup, Validators}                     from '@angular/forms';
 
@@ -23,6 +23,8 @@ import { CRUDdata }                                 from 'src/app/Classes/Conten
 
 export class CharacterFormComponent implements OnInit, OnDestroy {
 
+  @ViewChild('addRelativeButton') addRelativeButton: ElementRef;
+  @ViewChild('addReferenceButton') addReferenceButton: ElementRef;
   DropDowns = new UploadCharacterDrops;
   Form: FormGroup;
 
@@ -233,6 +235,7 @@ export class CharacterFormComponent implements OnInit, OnDestroy {
       (<FormArray>this.Form.controls.Relations)
       .removeAt(this.Form.controls.Relations.value.length-1);
       if(this.Form.controls.Relations.value.length === 0) {
+        this.addRelativeButton.nativeElement.focus();
         this.noFamily = true;
       }
     }
@@ -249,6 +252,7 @@ export class CharacterFormComponent implements OnInit, OnDestroy {
         .removeAt(this.Form.controls.ReferenceIDs.value.length-1);
       this.uploadpreviewserv.remove(this.Form.controls.ReferenceIDs.value.length-1);
       if(this.uploadpreviewserv.mainsData.length === 1) {
+        this.addReferenceButton.nativeElement.focus();
         this.noReferences = true;
       }
     }

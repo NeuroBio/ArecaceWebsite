@@ -154,9 +154,12 @@
 
     <fieldset>
         <legend>Family in Story</legend>
-        <button aria-label="Add-Relative" type="button" (click)="addRelative(true)">+</button>
-        <button aria-label="Remove-Relative" type="button" [disabled]="noFamily"
-        (click)="addRelative(false)">-</button><br><br>
+        <div class="buttonFloater">
+            <button #addRelativeButton aria-label="Add-Relative"
+            type="button" (click)="addRelative(true)">+</button>
+            <button aria-label="Remove-Relative" type="button" [disabled]="noFamily"
+            (click)="addRelative(false)">-</button>
+        </div><br><br>
 
         <div formArrayName="Relations">
             <div *ngFor="let relative of RelationsArray.controls; let i = index"
@@ -197,9 +200,13 @@
 
     <fieldset>
         <legend>Other References</legend>
-            <button aria-label="Add-Reference" type="button" (click)="addRef(true)">+</button>
+        <div class="buttonFloater">
+            <button #addReferenceButton aria-label="Add-Reference"
+            type="button" (click)="addRef(true)">+</button>
             <button aria-label="Remove-Reference" type="button" [disabled]="noReferences"
             (click)="addRef(false)">-</button>
+        </div>
+        
         <br><br>
 
         <div formArrayName="ReferenceIDs" >

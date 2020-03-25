@@ -62,8 +62,9 @@ input[type="checkbox"] {
   height: 25px;
 }
 
-button[type="button"] {
+.buttonFloater {
   float: right;
+
 }
 
 app-formButtons {
