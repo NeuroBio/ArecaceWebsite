@@ -1,7 +1,7 @@
 import { Component, Input, ViewChild, ElementRef,
          HostListener, ViewChildren, QueryList, AfterViewInit }        from '@angular/core';
 import { FocusKeyManager } from '@angular/cdk/a11y';
-import { UP_ARROW, DOWN_ARROW }                from '@angular/cdk/keycodes';
+import { UP_ARROW, DOWN_ARROW, TAB }                from '@angular/cdk/keycodes';
 import { LinkListComponent } from '../link-list/link-list.component';
 
 @Component({
@@ -31,6 +31,7 @@ export class SideBarComponent implements AfterViewInit {
   greybarHeight = 0;
   resizeTimer: any;
   initialLabel: string;
+  leave = false;
   
 
   ngAfterViewInit() {
@@ -75,15 +76,21 @@ export class SideBarComponent implements AfterViewInit {
   }
 
   handleKeyDown(event: KeyboardEvent) {
-    event.stopImmediatePropagation();
-    if (event.keyCode === UP_ARROW || event.keyCode === DOWN_ARROW) {
+    if (event.key === 'ArrowUp' || event.key === 'ArrowDown') {
+      event.stopImmediatePropagation();
       this.keyManager.onKeydown(event);
       return false;
+    }
+    if(event.shiftKey == true && event.key === 'Tab') {
+      this.leave = true;
+      setTimeout(() => {
+        this.leave = false
+      }, 10);
     }
   }
 
   focus() {
-    this.keyManager.activeItem.focus();
+      this.keyManager.activeItem.focus();
   }
- 
+
 }

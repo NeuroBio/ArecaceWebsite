@@ -11,8 +11,9 @@
   (window:resize)="onResize()"
   aria-label="Content-Navigation">
 
-    <ul #list role="menubar" class="menubar" tabindex="0"
-    (keydown)="handleKeyDown($event)" (focus)="focus()">
+    <ul #list role="menubar" class="menubar" [attr.tabindex]="leave === true ? -1 : 0"
+    (keydown)="handleKeyDown($event)"
+    (focus)="focus()">
       <li *ngFor="let list of linkList, let i = index"
       role="menuitem" class="menuitem" aria-labelledby="type">
           <hr *ngIf="i!==0">

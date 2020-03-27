@@ -63,7 +63,7 @@
   margin: 0px 0px 0px 0px;
 }
 
-a {
+::ng-deep a.linklistelement {
   display: inline-block;
   height: inherit;
   width: calc(100% - 8px);
@@ -74,23 +74,24 @@ a {
   border-bottom: 2px solid rgb(82, 82, 82);
 }
 
-a.selected {
+::ng-deep a.linklistelement.selected {
   background-color: #8b8b8b;
   border-bottom: 2px solid #8b8b8b;
 }
 
-a:hover {
+::ng-deep a.linklistelement:hover {
   background-color: #8b8b8b;
   border-bottom: 2px solid #8b8b8b;
 }
-a:active {
+
+::ng-deep a.linklistelement:active {
   background-color: #242424;
   border-bottom: 2px solid #242424;
 }
 
-a:focus {
+::ng-deep a.linklistelement:focus {
   background-color: #8b8b8b;
-border-bottom: 2px solid #8b8b8b;
+  border-bottom: 2px solid #8b8b8b;
 }
 
 hr {

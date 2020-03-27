@@ -2,8 +2,7 @@ import { Component, Input, ViewChild, ElementRef } from '@angular/core';
 
 @Component({
   selector: 'app-link-list-element',
-  templateUrl: './link-list-element.component.html',
-  styleUrls: ['../options/options.component.css']
+  templateUrl: './link-list-element.component.html'
 })
 export class LinkListElementComponent {
 

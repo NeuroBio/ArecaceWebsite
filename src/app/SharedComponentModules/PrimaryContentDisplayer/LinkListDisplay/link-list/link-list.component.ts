@@ -1,8 +1,9 @@
 import { Component, OnInit, ViewChildren, EventEmitter,
-         QueryList, AfterViewInit, Input, ElementRef, ViewChild, Output }            from '@angular/core';
-import { FocusKeyManager }                            from '@angular/cdk/a11y';
-import { LEFT_ARROW, RIGHT_ARROW, ENTER }                from '@angular/cdk/keycodes';
-import { LinkListElementComponent }                   from '../link-list-element/link-list-element.component';
+         QueryList, AfterViewInit, Input, ElementRef,
+         ViewChild, Output }                            from '@angular/core';
+import { FocusKeyManager }                              from '@angular/cdk/a11y';
+import { LEFT_ARROW, RIGHT_ARROW, ENTER }               from '@angular/cdk/keycodes';
+import { LinkListElementComponent }                     from 'src/app/SharedComponentModules/SmallComponents/link-list-element/link-list-element/link-list-element.component';
 
 
 @Component({
