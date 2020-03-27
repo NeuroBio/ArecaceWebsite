@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, HostListener } from '@angular/core';
+import { Component, OnInit, Input, HostListener, ElementRef } from '@angular/core';
 import { GlobalVarsService }                      from 'src/app/GlobalServices/global-vars.service';
 
 @Component({
@@ -17,6 +17,7 @@ export class OptionsComponent implements OnInit {
 
   width: any;
   mobile: boolean;
+  height: number;
 
   constructor(public global: GlobalVarsService) { }
 

@@ -1,18 +1,15 @@
-div#chooser {
-    min-height: 100%;
-}
-
-div.sidebar {
-    position: -webkit-sticky;
+.linklistcontainer {
     position: sticky;
+    position: -webkit-sticky;
+    display: flex; /* NEVER CHANGE THIS */
     float: left;
     top: 0px;
-    max-height: 100vh;
+    max-height: 50%;
     overflow-y: scroll;
     overflow-x: hidden;
     background-color: #454545;
     border-right: 3px solid white;
-    border-bottom: 3px solid white;
+    /* border-bottom: 3px solid white; */
     padding-top: 0px;
 }
 
@@ -24,7 +21,18 @@ div.sidebar {
   z-index: 1;
 }
 
-div.sidebarlab {
+.menubar {
+  list-style-type: none;
+  margin: 0px;
+  padding: 0px;
+}
+
+.menuitem {
+  margin: 0px;
+  padding: 0px;
+}
+
+.linklistlabel {
   font-family: 'Courier New', Courier, monospace;
   font-weight: bold;
   font-size: 25px;
@@ -35,7 +43,7 @@ div.sidebarlab {
   z-index: 2;
 }
 
-ul.sidebarlist {
+.linklist {
   list-style-type: circle;
   font-family: 'Courier New', Courier, monospace;
   font-weight: bold;
@@ -50,38 +58,39 @@ ul.sidebarlist {
   height: 100%;
 }
 
-li {
+.linklistelement {
   border: 0px;
-  border-bottom: 2px solid rgb(82, 82, 82);
-  margin: 1px 0px 1px 0px;
-}
-
-li.sidebarlist:hover {
-  background-color: #8b8b8b;
-  border-bottom: 2px solid #8b8b8b;
-}
-
-li.selected.sidebarlist {
-  background-color: #8b8b8b;
-  border-bottom: 2px solid #8b8b8b;
-}
-
-li.sidebarlist:active {
-  background-color: #242424;
-  border-bottom: 2px solid #242424;;
+  margin: 0px 0px 0px 0px;
 }
 
 a {
-  display: block;
+  display: inline-block;
   height: inherit;
-  width: inherit;
+  width: calc(100% - 8px);
   color: white;
-  padding-top: 6px;
-  padding-bottom: 6px;
-  padding-left: 11px;
-  padding-right: 4px;
-  margin: -3px;
+  padding: 7px 4px 7px 4px;
+  margin: 0px;
+  margin: 0px;
+  border-bottom: 2px solid rgb(82, 82, 82);
+}
 
+a.selected {
+  background-color: #8b8b8b;
+  border-bottom: 2px solid #8b8b8b;
+}
+
+a:hover {
+  background-color: #8b8b8b;
+  border-bottom: 2px solid #8b8b8b;
+}
+a:active {
+  background-color: #242424;
+  border-bottom: 2px solid #242424;
+}
+
+a:focus {
+  background-color: #8b8b8b;
+border-bottom: 2px solid #8b8b8b;
 }
 
 hr {

@@ -1,4 +1,4 @@
-<div #container class="sidebar">
+<div #container class="linklistcontainer">
 
   <svg id ="greyband" [style.height.px]="greybarHeight">
       <rect width="100%" height="100%" style="fill:#616161"/>
@@ -6,26 +6,28 @@
 
   
 
-  <div id="listHolder" #listHolder
+  <nav id="linklistHolder"
   [style.maxHeight.px]="listHeight"
-  (window:resize)="onResize()">
-    <nav #list aria-label="Content-Navigation">
-      <div *ngFor="let list of linkList, let i = index">
+  (window:resize)="onResize()"
+  aria-label="Content-Navigation">
+
+    <ul #list role="menubar" class="menubar" tabindex="0"
+    (keydown)="handleKeyDown($event)" (focus)="focus()">
+      <li *ngFor="let list of linkList, let i = index"
+      role="menuitem" class="menuitem" aria-labelledby="type">
           <hr *ngIf="i!==0">
-          <div class="sidebarlab">{{ labels[i] }}</div>
+          <div class="linklistlabel" id="type">{{ labels[i] }}</div>
           <hr>
-          <ul class="sidebarlist" style="max-width: 250px;">
-            <li class="sidebarlist" *ngFor="let namelink of list"
-            [class.selected.sidebarlist]="namelink[1] === current"
-            (click)="onSelect(namelink[1])">
-              <a [routerLink]="[namelink[1]]"
-              queryParamsHandling="merge">
-                {{ namelink[0] }}</a>
-            </li>
-          </ul>
-        </div>
-      </nav>
-  </div>
+          <app-link-list
+          [label]="labels[i]"
+          [list]="list"
+          [current]="current"
+          (lableEmitter)="onSelect($event)"
+          ></app-link-list>
+      </li>
+    </ul>
+
+  </nav>
 
 
 

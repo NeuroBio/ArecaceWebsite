@@ -1,0 +1,11 @@
+<ul #Host class="linklist" style="max-width: 250px;" role="menu"
+tabindex="-1" (keydown)="handleKeyDown($event)"
+[class.selected]="active === true">
+  <li class="linklistelement" *ngFor="let namelink of list"
+   role="menuitem">
+  <app-link-list-element
+  [item]="namelink"
+  [active]="namelink[1] === current"
+  ></app-link-list-element>
+  </li>
+</ul>
