@@ -1,6 +1,8 @@
-import { Component, OnInit, Input, ViewChild, ElementRef, QueryList, ViewChildren } from '@angular/core';
-import { FocusKeyManager } from '@angular/cdk/a11y';
-import { LinkListComponent } from '../link-list/link-list.component';
+import { Component, OnInit, Input, ViewChild,
+         ElementRef, QueryList, ViewChildren }  from '@angular/core';
+import { FocusKeyManager }                      from '@angular/cdk/a11y';
+
+import { LinkListComponent }                    from '../link-list/link-list.component';
 
 @Component({
   selector: 'app-drop-down',
@@ -8,6 +10,7 @@ import { LinkListComponent } from '../link-list/link-list.component';
   styleUrls: ['../options/options.component.css',
               './drop-down.component.css']
 })
+
 export class DropDownComponent implements OnInit {
 
   @Input() labels: string[] = ["default", "Sub"];
@@ -24,7 +27,6 @@ export class DropDownComponent implements OnInit {
   initialLabel: string;
   revealTimer: any;
 
-
   keyManager: FocusKeyManager<any>;
   @ViewChildren(LinkListComponent) items: QueryList<any>;
   
@@ -40,7 +42,6 @@ export class DropDownComponent implements OnInit {
     this.keyManager = new FocusKeyManager(this.items)
     .withVerticalOrientation();
     this.onSelect(this.initialLabel);
-    // this.keyManager.activeItem.selectItem();
   }
 
   onSelect(selected: string) {
@@ -87,8 +88,11 @@ export class DropDownComponent implements OnInit {
   }
 
   focus() {
-      this.onReveal(this.keyManager.activeItemIndex, true);
-      setTimeout(() => { this.keyManager.activeItem.focus(); }, 5);
+    if(!this.keyManager.activeItem) {
+      this.keyManager.setFirstItemActive();
+    }
+    this.onReveal(this.keyManager.activeItemIndex, true);
+    setTimeout(() => { this.keyManager.activeItem.focus(); }, 5);
   }
 
 }

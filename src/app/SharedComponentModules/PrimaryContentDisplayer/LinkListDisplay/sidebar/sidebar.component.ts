@@ -1,7 +1,9 @@
 import { Component, Input, ViewChild, ElementRef,
-         HostListener, ViewChildren, QueryList, AfterViewInit }        from '@angular/core';
-import { FocusKeyManager } from '@angular/cdk/a11y';
-import { LinkListComponent } from '../link-list/link-list.component';
+         HostListener, ViewChildren, QueryList,
+         AfterViewInit }                          from '@angular/core';
+import { FocusKeyManager }                        from '@angular/cdk/a11y';
+
+import { LinkListComponent }                      from '../link-list/link-list.component';
 
 @Component({
   selector: 'app-sidebar',
@@ -38,7 +40,6 @@ export class SideBarComponent implements AfterViewInit {
     this.keyManager = new FocusKeyManager(this.items)
     .withVerticalOrientation();
     this.onSelect(this.initialLabel);
-    // this.keyManager.activeItem.selectItem();
   }
 
   @HostListener('window:scroll') 
@@ -80,6 +81,7 @@ export class SideBarComponent implements AfterViewInit {
       this.keyManager.onKeydown(event);
       return false;
     }
+    
     if(event.shiftKey == true && event.key === 'Tab') {
       this.leave = true;
       setTimeout(() => {
@@ -89,6 +91,9 @@ export class SideBarComponent implements AfterViewInit {
   }
 
   focus() {
+    if(!this.keyManager.activeItem) {
+      this.keyManager.setFirstItemActive();
+    }
       this.keyManager.activeItem.focus();
   }
 

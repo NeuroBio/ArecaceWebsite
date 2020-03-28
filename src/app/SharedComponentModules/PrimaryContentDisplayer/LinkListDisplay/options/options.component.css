@@ -63,7 +63,7 @@
   margin: 0px 0px 0px 0px;
 }
 
-::ng-deep a.linklistelement {
+::ng-deep .linklistelement app-link-list-element a.linklistelement {
   display: inline-block;
   height: inherit;
   width: calc(100% - 8px);
@@ -74,22 +74,22 @@
   border-bottom: 2px solid rgb(82, 82, 82);
 }
 
-::ng-deep a.linklistelement.selected {
+::ng-deep .linklistelement app-link-list-element a.linklistelement.selected {
   background-color: #8b8b8b;
   border-bottom: 2px solid #8b8b8b;
 }
 
-::ng-deep a.linklistelement:hover {
+::ng-deep .linklistelement app-link-list-element a.linklistelement:hover {
   background-color: #8b8b8b;
   border-bottom: 2px solid #8b8b8b;
 }
 
-::ng-deep a.linklistelement:active {
+::ng-deep .linklistelement app-link-list-element a.linklistelement:active {
   background-color: #242424;
   border-bottom: 2px solid #242424;
 }
 
-::ng-deep a.linklistelement:focus {
+::ng-deep .linklistelement app-link-list-element a.linklistelement:focus {
   background-color: #8b8b8b;
   border-bottom: 2px solid #8b8b8b;
 }
