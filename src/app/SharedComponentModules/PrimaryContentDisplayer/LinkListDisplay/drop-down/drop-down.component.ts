@@ -52,7 +52,6 @@ export class DropDownComponent implements OnInit {
   }
 
   onReveal(index: number, show?: boolean) {
-    console.log('reveal: ', index)
       if(show !== undefined) {
         this.revealArray[index] = show;
         this.rotationArray[index] = show === false ? 180 : 0;
@@ -73,25 +72,23 @@ export class DropDownComponent implements OnInit {
       this.focus();
 
       if(event.key === 'ArrowUp'
-        && this.keyManager.activeItemIndex > 0) {
+        && this.keyManager.activeItemIndex > -1) {
         this.onReveal(this.keyManager.activeItemIndex + 1, false);
       } else if(event.key === 'ArrowDown'
-                && this.keyManager.activeItemIndex < this.labels.length - 1) {
+                && this.keyManager.activeItemIndex < this.labels.length) {
         this.onReveal(this.keyManager.activeItemIndex - 1, false);
       }
       return false;
     }
     if(event.shiftKey == true && event.key === 'Tab') {
       this.leave = true;
-      setTimeout(() => {
-        this.leave = false
-      }, 10);
+      setTimeout(() => { this.leave = false; }, 10);
     }
   }
 
   focus() {
       this.onReveal(this.keyManager.activeItemIndex, true);
-      setTimeout(() => {console.log('focus');this.keyManager.activeItem.focus();}, 5);
+      setTimeout(() => { this.keyManager.activeItem.focus(); }, 5);
   }
 
 }
