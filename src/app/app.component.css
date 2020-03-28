@@ -32,9 +32,28 @@ nav#headerNav {
   padding-bottom: 10px;
 }
 
+nav#headerNav ul {
+  padding: 0px;
+  margin: 0px;
+  display: inline-block;
+}
+
 /* The Footer*/
 footer {
   margin: 10px;  
+
+}
+
+footer ul {
+  padding: 0px;
+  margin: 0px;
+  display: inline-block;
+}
+
+.footli {
+  padding: 0px;
+  margin: 0px;
+  display: inline-block;
 }
 
 p#footer {
@@ -43,6 +62,21 @@ p#footer {
   color: white;
 }
 
-a.footer {
+footer a.linklistelement {
   font-size: 14px;
+  padding: 0px 7px 0px 7px;
+}
+
+.navverContainer a.linklistelement:active {
+  background-color: rgb(59, 59, 59);
+}
+
+.navverContainer a.linklistelement:hover {
+  color:black;
+  background-color: whitesmoke;
+}
+
+.navverContainer a.linklistelement:focus {
+  color:black;
+  background-color: whitesmoke;
 }

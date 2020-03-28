@@ -116,37 +116,68 @@ input[type="file"] {
 
 
 /* Navigation "buttons */
-div.navver {
+.navverContainer {
   display: inline-block;
   font-size: 25px;
   font-weight: bold;
   font-family: Arial, Helvetica, sans-serif;
-  padding: 0;
+  padding: 1px;
   margin-right: 7px;
   margin-top: 5px;
   margin-bottom: 5px;
-  background-color: #d1d1d1;
+  background-color: #cacaca;
   border: 2px solid black; 
 }
 
-div.navver:hover {
-  background-color: #ebe9e9;
+.navverContainer:hover {
+  background-color: whitesmoke;
 }
 
-a.navver:active {
+.navverContainer:active {
   background-color: rgb(59, 59, 59);
 }
 
+/* STANDARD FORM */
 a.navver {
   display: block;
   color: black;
   padding: 5px;
 }
 
-a.navver:hover {
-  color:black;
+a.navver:active {
+  background-color: rgb(59, 59, 59);
 }
 
+a.navver:focus {
+  color:black;
+  background-color: whitesmoke;
+}
+
+a.navver:hover {
+  color:black;
+  background-color: whitesmoke;
+}
+
+/* ACCESSIBLE FORM */
+.navverContainer a.linklistelement {
+  display: block;
+  color: black;
+  padding: 5px;
+}
+
+.navverContainer a.linklistelement:active {
+  background-color: rgb(59, 59, 59);
+}
+
+.navverContainer a.linklistelement:hover {
+  color:black;
+  background-color: whitesmoke;
+}
+
+.navverContainer a.linklistelement:focus {
+  color:black;
+  background-color: whitesmoke;
+}
 
 
 div.fillspace{

@@ -11,7 +11,7 @@
       
         <p [innerHTML]="results.Outcome.Text"></p>
       
-        <div class="navver" *ngIf="results.Outcome.Link">
+        <div class="navverContainer" *ngIf="results.Outcome.Link">
             <a class="navver" [routerLink]="results.Outcome.Link">
                 {{ results.Outcome.LinkName }}</a>
         </div>

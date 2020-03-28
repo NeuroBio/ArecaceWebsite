@@ -1,8 +1,9 @@
 import { Component, ViewEncapsulation,
-         ViewChild, ElementRef, AfterViewInit }   from '@angular/core';
-
-import { GlobalVarsService}                       from './GlobalServices/global-vars.service';
+         ViewChild, ElementRef, AfterViewInit, QueryList, ViewChildren }   from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { FocusKeyManager } from '@angular/cdk/a11y';
+         
+import { GlobalVarsService}                       from './GlobalServices/global-vars.service';
 
 @Component({
   selector: 'app-root',
@@ -16,6 +17,14 @@ export class AppComponent implements AfterViewInit {
   @ViewChild('flag', { static: true }) flag: ElementRef;
   title: string = 'Arecace';
   year: number = new Date().getFullYear()
+
+  headerKeyManager: FocusKeyManager<any>;
+  @ViewChildren('header') headItems: QueryList<any>;
+  headerLeave = false;
+
+  footerKeyManager: FocusKeyManager<any>;
+  @ViewChildren('footer') footItems: QueryList<any>;
+  footerLeave = false;
 
   headerLinkList: {}[] = [{ link:'home', name: 'Home' },
                           { link:'comic', name: 'Comic' },
@@ -36,6 +45,12 @@ export class AppComponent implements AfterViewInit {
               public route: ActivatedRoute) { }
   
   ngAfterViewInit() {
+    this.headerKeyManager = new FocusKeyManager(this.headItems)
+      .withHorizontalOrientation('ltr');
+    this.headerKeyManager.setFirstItemActive();
+    this.footerKeyManager = new FocusKeyManager(this.footItems)
+      .withHorizontalOrientation('ltr');
+    this.footerKeyManager.setFirstItemActive();
     setTimeout(() => { this.checkLoad() }, 1000);
   }
 
@@ -47,5 +62,24 @@ export class AppComponent implements AfterViewInit {
         this.global.ImagesLoadable.next(false);
       }
     }
+  }
+
+  handleKeyDown(event: KeyboardEvent, keymanger: string) {
+    if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
+      event.stopImmediatePropagation();
+      this[`${keymanger}KeyManager`].onKeydown(event);
+    }
+    if(event.shiftKey == true && event.key === 'Tab') {
+      this[`${keymanger}Leave`] = true;
+      setTimeout(() => { this[`${keymanger}Leave`] = false; }, 10);
+    }
+  }
+
+  focus(keymanger: string) {
+    console.log(keymanger)
+    if(!this[`${keymanger}KeyManager`].activeItem) {
+      this[`${keymanger}KeyManager`].setFirstItemActive();
+    }
+    this[`${keymanger}KeyManager`].activeItem.focus();
   }
 }

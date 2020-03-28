@@ -6,7 +6,7 @@ import { Component, Input, ViewChild, ElementRef } from '@angular/core';
 })
 export class LinkListElementComponent {
 
-    @Input() item;
+    @Input() item: string[];
     @Input() active: boolean;
     @Input() route: string;
     @ViewChild('Host') Host: ElementRef;

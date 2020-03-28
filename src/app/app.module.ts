@@ -2,23 +2,25 @@ import { BrowserModule }              from '@angular/platform-browser';
 import { NgModule, APP_INITIALIZER }  from '@angular/core';
 import { ReactiveFormsModule }        from '@angular/forms';
 import { HttpClientModule }           from '@angular/common/http';
-
+import { A11yModule }                 from '@angular/cdk/a11y';
 
 import { AngularFireModule }          from '@angular/fire';
 import { AngularFireFunctionsModule } from '@angular/fire/functions';
 import { AngularFirestoreModule }     from '@angular/fire/firestore';
 import { AngularFireStorageModule }   from '@angular/fire/storage';
 import { AngularFireAuthModule }      from '@angular/fire/auth';
-import { environment }                from '../environments/environment';
 import { DeviceDetectorModule }       from 'ngx-device-detector';
+
+import { environment }                from '../environments/environment';
 
 import { AuthService }                from './administration/security/Auth/auth.service';
 import { TextProvider }               from './GlobalServices/textprovider.service';
 
 import { AppRoutingModule }           from './app-routing.module';
-import { UpdatefeedModule }           from './SharedComponentModules/UpdateFeed/updatefeed.module';
-import { ShowNewestModule }           from './SharedComponentModules/ShowNewest/show-newest.module';
+import { LinkListElementModule }      from './SharedComponentModules/SmallComponents/link-list-element/link-list-element.module';
 import { ScrollFrameModule }          from './SharedComponentModules/SmallComponents/scroll-frame/scroll-frame.module';
+import { ShowNewestModule }           from './SharedComponentModules/ShowNewest/show-newest.module';
+import { UpdatefeedModule }           from './SharedComponentModules/UpdateFeed/updatefeed.module';
 
 import { AppComponent }               from './app.component';
 import { AboutComponent }             from './SimplePages/about/about.component';
@@ -58,12 +60,14 @@ export function AuthFactory(provider: AuthService) {
   imports: [
     BrowserModule,
     HttpClientModule,
+    ReactiveFormsModule,
+    A11yModule,
+
     UpdatefeedModule,
     ShowNewestModule,
     ScrollFrameModule,
+    LinkListElementModule,
     
-    ReactiveFormsModule,
-
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule, // imports firebase/firestore, only needed for database features
     AngularFireAuthModule, // imports firebase/auth, only needed for auth features,

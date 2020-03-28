@@ -8,9 +8,17 @@
 <header role="banner" id="banner">
     <h1 id="websiteTitle">Arecace</h1>
     <nav id="headerNav" aria-label="primary-navigation">
-        <div *ngFor="let link of headerLinkList" class="navver">
-            <a class="navver" [routerLink]="link.link">{{ link.name }}</a>
-        </div>
+        <ul  [attr.tabindex]="headerLeave === true ? -1 : 0"
+        (keydown)="handleKeyDown($event, 'header')"
+        (focus)="focus('header')">
+            <li *ngFor="let link of headerLinkList" class="navverContainer">
+                <app-link-list-element
+                #header
+                [item]="[link.name, link.link]"
+                ></app-link-list-element>
+                <!-- <a class="navver" [routerLink]="link.link">{{ link.name }}</a> -->
+            </li>
+        </ul>
     </nav>
 </header>
 <hr>
@@ -23,10 +31,18 @@
 <hr>
 <footer role="contentinfo">
     <nav aria-label="footer-navigation">
-        <span *ngFor="let link of footerLinkList; let i = index">
-            <a class="footer" [routerLink]="link.link"> {{ link.name }} </a>
-            <span *ngIf="i !== footerLinkList.length-1"><b>|</b></span>
-        </span>
+        <ul [attr.tabindex]="footerLeave === true ? -1 : 0"
+        (keydown)="handleKeyDown($event, 'footer')"
+        (focus)="focus('footer')">
+            <li *ngFor="let link of footerLinkList; let i = index" class="footli">
+                <app-link-list-element
+                #footer
+                [item]="[link.name, link.link]"
+                ></app-link-list-element>
+                <!-- <a class="footer" [routerLink]="link.link"> {{ link.name }} </a> -->
+                <span *ngIf="i !== footerLinkList.length-1"><b>|</b></span>
+            </li>
+        </ul>
     </nav>
     <p id="footer">
         &copy;kArA Redwing: Website 2018-{{ year }}, Content 2004-{{ year }}
