@@ -1,31 +1,45 @@
-<svg id="greyband" [style.height.px]="height">
+<svg id="greyband" [style.height.px]="greybandHeight">
     <rect width="100%" height="100%" style="fill:#616161"/>
 </svg>
 
-<nav #linkListHolder id="outerdrop">
-  <div *ngFor="let list of linkList, let i = index">
+<nav #linkListHolder id="outerdrop"  aria-label="Content-Navigation">
 
+  
+  <ul #list role="menubar" class="menubar"
+  [attr.tabindex]="leave === true ? -1 : 0"
+  (keydown)="handleKeyDown($event)" (focus)="focus()">
+    <li *ngFor="let list of linkList, let i = index"
+    tabindex="-1"
+    role="menuitem" class="menuitem" aria-labelledby="type">
     <hr *ngIf="i!==0">
-    <div class="sidebarlab" (click)="onReveal(i)">
+    <div class="linklistlabel" (click)="onReveal(i)" id="type">
       {{ labels[i] }}
       <img id="downUp" src="assets/svgs/back.svg" alt=""
       [style.transform]="'rotate(' + rotationArray[i] + 'deg)'"
       (onclick)="onReveal(i)"> 
     </div>
 
-    <div id="hider" [style.display]="revealArray[i] ? 'inline-block' : 'none'">
-      <hr>
-      <ul class="sidebarlist">
-        <li class="sidebarlist" *ngFor="let namelink of list"
-        [class.selected.sidebarlist]="namelink[1] === current"
-        (click)="onSelect(namelink[1])">
-          <a [routerLink]="[namelink[1]]"
-          queryParamsHandling="merge">
-            {{ namelink[0] }}</a>
-        </li>
-      </ul>  
-    </div>
-    <hr *ngIf="i===linkList.length-1">
+      <div id="hider" [style.display]="revealArray[i] ? 'inline-block' : 'none'">
+        <hr>
+        <app-link-list
+          [label]="labels[i]"
+          [list]="list"
+          [current]="current"
+          (lableEmitter)="onSelect($event)"
+          ></app-link-list>
+        <!-- <ul class="sidebarlist">
+          <li class="sidebarlist" *ngFor="let namelink of list"
+          [class.selected.sidebarlist]="namelink[1] === current"
+          (click)="onSelect(namelink[1])">
+            <a [routerLink]="[namelink[1]]"
+            queryParamsHandling="merge">
+              {{ namelink[0] }}</a>
+          </li>
+        </ul>   -->
+      </div>
+      <hr *ngIf="i===linkList.length-1">
+      
+    </li>
+  </ul>
 
-  </div>
 </nav>

@@ -1,7 +1,6 @@
 import { Component, Input, ViewChild, ElementRef,
          HostListener, ViewChildren, QueryList, AfterViewInit }        from '@angular/core';
 import { FocusKeyManager } from '@angular/cdk/a11y';
-import { UP_ARROW, DOWN_ARROW, TAB }                from '@angular/cdk/keycodes';
 import { LinkListComponent } from '../link-list/link-list.component';
 
 @Component({

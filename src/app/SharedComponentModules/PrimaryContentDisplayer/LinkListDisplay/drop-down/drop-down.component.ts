@@ -1,4 +1,6 @@
-import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ElementRef, QueryList, ViewChildren } from '@angular/core';
+import { FocusKeyManager } from '@angular/cdk/a11y';
+import { LinkListComponent } from '../link-list/link-list.component';
 
 @Component({
   selector: 'app-drop-down',
@@ -16,10 +18,16 @@ export class DropDownComponent implements OnInit {
   @Input() current: string = "tester2";
   revealArray: boolean[] = [];
   @ViewChild('linkListHolder', { static: true }) linkListHolder: ElementRef;
-  height = 0;
+  greybandHeight = 0;
   rotationArray: number[] = [];
+  leave: boolean;
+  initialLabel: string;
+  revealTimer: any;
+
+
+  keyManager: FocusKeyManager<any>;
+  @ViewChildren(LinkListComponent) items: QueryList<any>;
   
-  constructor() { }
 
   ngOnInit() {
     this.labels.forEach(() => {
@@ -28,15 +36,62 @@ export class DropDownComponent implements OnInit {
     });
   }
 
-  onSelect(selected: string) {
-    this.current = selected;
+  ngAfterViewInit() {
+    this.keyManager = new FocusKeyManager(this.items)
+    .withVerticalOrientation();
+    this.onSelect(this.initialLabel);
+    // this.keyManager.activeItem.selectItem();
   }
 
-  onReveal(index: number) {
-    this.revealArray[index] = !this.revealArray[index];
-    setTimeout(() => {
-      this.height = this.linkListHolder.nativeElement.offsetHeight;
-    }, 10);
-    this.rotationArray[index] = (this.rotationArray[index] === 0 ? 180 : 0);
+  onSelect(selected: string) {
+    if(this.keyManager) {
+      this.keyManager.setActiveItem(this.labels.findIndex(lab => lab === selected));
+    } else {
+      this.initialLabel = selected;
+    }
   }
+
+  onReveal(index: number, show?: boolean) {
+    console.log('reveal: ', index)
+      if(show !== undefined) {
+        this.revealArray[index] = show;
+        this.rotationArray[index] = show === false ? 180 : 0;
+      } else {
+        this.revealArray[index] = !this.revealArray[index];
+        this.rotationArray[index] = (this.rotationArray[index] === 0 ? 180 : 0);
+      }
+      setTimeout(() => {
+        this.greybandHeight = this.linkListHolder.nativeElement.offsetHeight;
+      }, 5);
+  }
+
+  handleKeyDown(event: KeyboardEvent) {
+    if (event.key === 'ArrowUp' || event.key === 'ArrowDown') {
+      event.stopImmediatePropagation();
+
+      this.keyManager.onKeydown(event);
+      this.focus();
+
+      if(event.key === 'ArrowUp'
+        && this.keyManager.activeItemIndex > 0) {
+        this.onReveal(this.keyManager.activeItemIndex + 1, false);
+      } else if(event.key === 'ArrowDown'
+                && this.keyManager.activeItemIndex < this.labels.length - 1) {
+        this.onReveal(this.keyManager.activeItemIndex - 1, false);
+      }
+      return false;
+    }
+    if(event.shiftKey == true && event.key === 'Tab') {
+      this.leave = true;
+      setTimeout(() => {
+        this.leave = false
+      }, 10);
+    }
+  }
+
+  focus() {
+      this.onReveal(this.keyManager.activeItemIndex, true);
+      setTimeout(() => {console.log('focus');this.keyManager.activeItem.focus();}, 5);
+  }
+
 }
