@@ -1,0 +1,82 @@
+/* DEFAULT */
+input[type="checkbox"] {
+    position: absolute;
+    clip: rect(1px, 1px, 1px, 1px);
+    padding: 0;
+    border: 0;
+    height: 1px;
+    width: 1px;
+    overflow: hidden;
+}
+
+.checkboxContainer {
+    position: relative;
+    display: inline-block;
+    align-items: center;
+}
+  
+label {
+    border: 0px;
+    cursor: pointer;
+}
+
+label.checkbox:before {
+    content: "";
+    display: inline-block;
+    vertical-align: middle;
+    margin: 2px;
+    width: 25px;
+    height: 25px;
+    border: 2px solid #000000;
+    margin-right: 8px;
+    background-color: whitesmoke;
+}
+
+.checkbox svg {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    left: 12px;
+    top: 6px;
+    z-index: 1;
+}
+
+.checkbox path {
+    stroke: whitesmoke;
+}
+  
+  
+
+/* CHECKED */
+input:checked + .checkbox:before {
+  border-color: orange;
+}
+  
+input:checked + .checkbox path {
+  stroke: rgb(0, 0, 0);
+  stroke-dashoffset: 0;
+}
+
+
+/* ON HOVER */
+label:hover:before {
+    background-color: orange;
+}
+
+label:hover path {
+    stroke: orange;
+}
+
+
+/* FOCUS */
+input:focus + label.checkbox path {
+  stroke: orange;
+}
+
+input:checked:focus + label.checkbox path {
+  stroke: black;
+}
+
+input:focus + label.checkbox:before {
+  background-color: orange;
+}

@@ -3,9 +3,9 @@ import { CommonModule }             from '@angular/common';
 import { ReactiveFormsModule }      from '@angular/forms';
 
 import { UploadPreviewModule }      from 'src/app/SharedComponentModules/SmallComponents/upload-preview/upload-preview.module';
+import { SharedFormsModule } from '../shared-forms.module';
 
 import { CharacterFormComponent }   from './characterform/characterform.component';
-
 
 
 @NgModule({
@@ -15,6 +15,7 @@ import { CharacterFormComponent }   from './characterform/characterform.componen
   imports: [
     CommonModule,
     ReactiveFormsModule,
+    SharedFormsModule,
     UploadPreviewModule
   ],
   exports: [
