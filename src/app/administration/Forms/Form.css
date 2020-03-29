@@ -38,6 +38,25 @@ option {
   font-size: 18px;  
 }
 
+.buttonFloater {
+  float: right;
+
+}
+
+app-formButtons {
+  padding-bottom: 10px;
+}
+
+div.WYSIWYG {
+  white-space: pre-line;
+  border: 1px solid white;
+  float: left;
+  width: 400px;
+  max-width: 100%;
+  margin:3px;
+  padding:4px;
+}
+
 input {
   margin: 5px 0px 5px 0px;
   font-size: 18px;
@@ -58,27 +77,83 @@ input.long {
 }
 
 input[type="checkbox"] {
+  position: absolute;
+  clip: rect(1px, 1px, 1px, 1px);
+  padding: 0;
+  border: 0;
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+}
+.checkboxContainer {
+  position: relative;
+  display: inline-block;
+  align-items: center;
+  /* background-color: yellow; */
+}
+
+label.checkbox:before {
+  content: "";
+  display: inline-block;
+  vertical-align: middle;
+  margin: 2px;
   width: 25px;
   height: 25px;
+  border: 2px solid #000000;
+  margin-right: 8px;
+  background-color: whitesmoke;
+  /* position: absolute; */
 }
 
-.buttonFloater {
-  float: right;
+input:checked + .checkbox:before {
+  border-color: orange;
+  /* background: url('../img/checkmark.svg') center/12px no-repeat; */
+}
+
+/* input[type="checkbox"] + label {
+  height: 40px;
+} */
+input:focus {
 
 }
 
-app-formButtons {
-  padding-bottom: 10px;
+input:focus + label.checkbox:before {
+  background-color: orange;
 }
 
-div.WYSIWYG {
-  white-space: pre-line;
-  border: 1px solid white;
-  float: left;
-  width: 400px;
-  max-width: 100%;
-  margin:3px;
-  padding:4px;
+input:focus + label.checkbox path {
+  stroke: orange;
+}
+
+input:checked:focus + label.checkbox path {
+  stroke: black;
+}
+
+.checkbox svg {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  left: 12px;
+  top: 6px;
+  z-index: 1;
+}
+
+.checkbox path {
+  stroke: whitesmoke;
+}
+
+input:checked + .checkbox path {
+  stroke: rgb(0, 0, 0);
+  stroke-dashoffset: 0;
+}
+
+
+input:focus + label.checkbox + svg + .path {
+    /* stroke-dashoffset: 111.46px;
+    stroke-dasharray: 111.46px; */
+    stroke: #3863d9;
+    background-color: orangered;
+    /* transition: all 0.35s ease-out; */
 }
 
 label {
@@ -90,6 +165,10 @@ label {
   border: white 1px solid;
   font-family: 'Courier New', Courier, monospace;
   align-items: center;
+}
+
+label.accessible {
+  cursor: pointer;
 }
 
 fieldset {

@@ -258,7 +258,11 @@ button {
 }
 
 button:hover {
-  background-color: rgb(230, 230, 230)
+  background-color: whitesmoke
+}
+
+button:focus {
+  background-color: whitesmoke
 }
 
 button:active {
