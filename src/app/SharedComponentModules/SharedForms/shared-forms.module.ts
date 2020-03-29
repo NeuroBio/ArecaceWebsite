@@ -5,14 +5,15 @@ import { ReactiveFormsModule }                from '@angular/forms';
 import { SourceAffinityCalculatorComponent }  from './SourceAffinityCalculator/source-affinity-calculator/source-affinity-calculator.component';
 import { ButtonsComponent }                   from './Buttons/buttons/buttons.component';
 import { CheckboxComponent }                  from './checkbox/checkbox.component';
+import { ToolTipComponent }                   from './tool-tip/tool-tip.component';
 
 
 @NgModule({
   declarations: [
     SourceAffinityCalculatorComponent,
     ButtonsComponent,
-    CheckboxComponent
-  ],
+    CheckboxComponent,
+    ToolTipComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule
@@ -20,7 +21,8 @@ import { CheckboxComponent }                  from './checkbox/checkbox.componen
   exports: [
     SourceAffinityCalculatorComponent,
     ButtonsComponent,
-    CheckboxComponent
+    CheckboxComponent,
+    ToolTipComponent
   ]
 })
 

@@ -32,7 +32,9 @@
                 <button id="change" (click)="changeUserName()"
                 >Change</button>
                 <div style="clear: both;"></div>
-                {{ message }}
+                <div aria-live="polite">
+                    {{ message }}
+                </div>
             </form>
             <hr>
         </section>

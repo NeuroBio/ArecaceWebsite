@@ -9,5 +9,5 @@
     <button (click)="saveUserData()"
     [disabled]="stopClicking === true || Disabled === true"
     >Save Results</button>
-    <div> {{ message }} </div>
+    <div aria-live="polite"> {{ message }} </div>
 </ng-template>
