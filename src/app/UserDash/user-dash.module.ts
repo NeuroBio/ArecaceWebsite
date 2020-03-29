@@ -4,6 +4,7 @@ import { ReactiveFormsModule }            from '@angular/forms';
 
 
 import { CharacterComponentsModule }      from 'src/app/worldbuilding/characters/character-components/character-components.module';
+import { CharacterFormModule }            from 'src/app/SharedComponentModules/SharedForms/MakeCharacter/character-form.module';
 import { LoginModule }                    from '../SharedComponentModules/SmallComponents/LoginButton/login.module';
 import { PrimaryContentDisplayModule }    from 'src/app/SharedComponentModules/PrimaryContentDisplayer/primary-content-display.module';
 import { ScrollFrameModule }              from 'src/app/SharedComponentModules/SmallComponents/scroll-frame/scroll-frame.module';
@@ -11,7 +12,6 @@ import { SharedFormsModule }              from 'src/app/SharedComponentModules/S
 import { SurveyComponentsModule }         from '../playground/activities/Surveys/survey-components/survey-components.module';
 import { UserDashRoutingModule }          from './user-dash-routing.module';
 
-import { CharacterFormModule }            from 'src/app/SharedComponentModules/SharedForms/MakeCharacter/character-form.module';
 import { DashButtonsComponent }           from './interactive-data/dash-buttons/dash-buttons.component';
 import { DataOptionsComponent }           from './interactive-data/DataOptions/data-options.component';
 import { InteractDetailsSwitchComponent } from './interactive-data/interact-details-switch/interact-details-switch.component';

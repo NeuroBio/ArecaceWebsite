@@ -59,13 +59,22 @@
         <div *ngIf="dangerNoodle === true">
             <br>
             <span id="danger">WARNING: These actions cannot be undone!</span>
-            <button type="button" class="danger" (click)="deleteData()"
-            [disabled]="disabled === true">
-                Delete Your Saved Data</button><br>
-            <button type="button" class="danger" (click)="deleteAccount()"
-            [disabled]="disabled === true">
-                Delete Your Account</button><br>
-            {{ dangerMessage }}
+
+            <div class="align">
+                <button type="button" class="danger" (click)="deleteData()"
+                [disabled]="disabled === true">
+                    Delete Your Saved Data</button>
+                <app-tool-tip [Info]="deleteDataInfo"></app-tool-tip>
+            </div><br>
+
+            <div class="align">
+                <button type="button" class="danger" (click)="deleteAccount()"
+                [disabled]="disabled === true">
+                    Delete Your Account</button>
+                <app-tool-tip [Info]="deleteAccountInfo"></app-tool-tip>
+            </div><br>
+
+            <div aria-live="polite">{{ dangerMessage }}</div>
         </div>
     </article>
 </main>

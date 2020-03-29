@@ -64,3 +64,8 @@ span#danger {
 h4#danger {
     text-align: center;
 }
+
+.align {
+    display: flex;
+    align-items: center;
+}

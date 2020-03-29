@@ -29,6 +29,9 @@ export class UserInfoComponent implements OnInit, OnDestroy {
   dangerButton = 'Reveal Spookiness';
   disabled = false;
 
+  deleteAccountInfo: string = 'This button will delete your account and all data associated with it.';
+  deleteDataInfo: string = 'This button will delete bookmark data and user data such as Fan Characters and Survey Results.  It will not affect the settings displayed on this page.';
+
   constructor(private firebaseserv: FireBaseService,
               private auth: AuthService,
               private fb: FormBuilder,
