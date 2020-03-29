@@ -35,6 +35,10 @@ a.imagebutton:hover {
     background-color: rgba(255,255,255,.5);
 }
 
+a.imagebutton:focus {
+    background-color: rgba(255,255,255,.5);
+}
+
 a.imagebutton:active {
     background-color: rgba(0,0,0,.2);
 }
