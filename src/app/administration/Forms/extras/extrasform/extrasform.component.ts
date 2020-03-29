@@ -5,8 +5,8 @@ import { Subscription }                 from 'rxjs';
 import { CRUDcontrollerService }        from '../../../services/CRUDcontroller.service'
 import { ExtrasMetaData }               from 'src/app/Classes/ContentClasses';
 import { QuickAssign }                  from 'src/app/GlobalServices/commonfunctions.service';
-import { UploadPreviewService }         from 'src/app/SharedComponentModules/SmallComponents/upload-preview/upload-preview.service';
-import { UploadPreviewSettings }        from 'src/app/SharedComponentModules/SmallComponents/upload-preview/uploadpreviewclass';
+import { UploadPreviewService }         from 'src/app/SharedComponentModules/SharedForms/UploadPreview//upload-preview.service';
+import { UploadPreviewSettings }        from 'src/app/SharedComponentModules/SharedForms/UploadPreview//uploadpreviewclass';
 import { FetchService }                 from 'src/app/GlobalServices/fetch.service';
 import { CRUDdata }                     from 'src/app/Classes/ContentClasses';
 @Component({

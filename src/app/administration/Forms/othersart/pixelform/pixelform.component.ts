@@ -5,10 +5,10 @@ import { Subscription }                 from 'rxjs';
 
 import { CRUDcontrollerService }        from 'src/app/administration/services/CRUDcontroller.service';
 import { QuickAssign }                  from 'src/app/GlobalServices/commonfunctions.service';
-import { UploadPreviewService }         from 'src/app/SharedComponentModules/SmallComponents/upload-preview/upload-preview.service';
+import { UploadPreviewService }         from 'src/app/SharedComponentModules/SharedForms/UploadPreview//upload-preview.service';
 import { FetchService }                 from 'src/app/GlobalServices/fetch.service';
 
-import { UploadPreviewSettings }        from 'src/app/SharedComponentModules/SmallComponents/upload-preview/uploadpreviewclass';
+import { UploadPreviewSettings }        from 'src/app/SharedComponentModules/SharedForms/UploadPreview//uploadpreviewclass';
 import { OthersArt }                    from 'src/app/Classes/ContentClasses';
 import { CRUDdata }                     from 'src/app/Classes/ContentClasses';
 
