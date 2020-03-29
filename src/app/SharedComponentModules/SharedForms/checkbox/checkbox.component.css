@@ -20,7 +20,7 @@ label {
     cursor: pointer;
 }
 
-label.checkbox:before {
+label.checkboxBefore:before {
     content: "";
     display: inline-block;
     vertical-align: middle;
@@ -32,35 +32,65 @@ label.checkbox:before {
     background-color: whitesmoke;
 }
 
-.checkbox svg {
+label.checkboxAfter:after {
+  content: "";
+  display: inline-block;
+  vertical-align: middle;
+  margin: 2px;
+  width: 25px;
+  height: 25px;
+  border: 2px solid #000000;
+  margin-left: 8px;
+  background-color: whitesmoke;
+}
+
+
+.checkboxBefore svg {
     position: absolute;
     width: 20px;
     height: 20px;
-    left: 12px;
+    left: 15px;
     top: 6px;
     z-index: 1;
 }
 
-.checkbox path {
+.checkboxAfter svg {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    right: 15px;
+    top: 6px;
+    z-index: 1;
+}
+
+label path {
     stroke: whitesmoke;
 }
   
   
 
 /* CHECKED */
-input:checked + .checkbox:before {
+input:checked + .checkboxBefore:before {
+  border-color: orange;
+}
+
+input:checked + .checkboxAfter:after {
   border-color: orange;
 }
   
-input:checked + .checkbox path {
+input:checked + label path {
   stroke: rgb(0, 0, 0);
   stroke-dashoffset: 0;
 }
 
 
 /* ON HOVER */
-label:hover:before {
+label.checkboxBefore:hover:before {
     background-color: orange;
+}
+
+label.checkboxAfter:hover:after {
+  background-color: orange;
 }
 
 label:hover path {
@@ -69,14 +99,18 @@ label:hover path {
 
 
 /* FOCUS */
-input:focus + label.checkbox path {
+input:focus + label path {
   stroke: orange;
 }
 
-input:checked:focus + label.checkbox path {
+input:checked:focus + label path {
   stroke: black;
 }
 
-input:focus + label.checkbox:before {
+input:focus + label.checkboxBefore:before {
+  background-color: orange;
+}
+
+input:focus + label.checkboxAfter:after {
   background-color: orange;
 }

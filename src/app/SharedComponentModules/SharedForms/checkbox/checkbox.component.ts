@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
 @Component({
@@ -12,4 +12,7 @@ export class CheckboxComponent {
   @Input() labelName: string;
   @Input() formName: FormGroup;
   @Input() id: string = 'check';
+  @Input() checked: boolean;
+  @Input() before: boolean = true;
+
 }

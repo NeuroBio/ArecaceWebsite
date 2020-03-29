@@ -22,11 +22,19 @@
 <ng-template #thumb>
 
     <div class="align">
-        <label for="thumbCheck">Autogenerate Thumb:</label>
-        
+
+        <app-checkbox
+        [labelName]="'Autogenerate Thumb: '"
+        id="thumbCheck"
+        [checked]="autoGenerate"
+        [before]="false"
+        (click)="switchThumbType()"
+        ></app-checkbox>
+
+        <!-- <label for="thumbCheck">Autogenerate Thumb:</label>
         <input type="checkbox" id="thumbCheck"
         (change)="switchThumbType()"
-        [checked]="autoGenerate">
+        [checked]="autoGenerate"> -->
 
         <div class="tooltip" tabindex="0">
             <img class="help" src="assets/svgs/help.svg">

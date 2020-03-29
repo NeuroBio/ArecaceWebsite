@@ -1,7 +1,22 @@
 <!-- SourceAbilityUnit -->
-<div class="checkboxContainer" [formGroup]="formName">
+<!-- <div *ngIf="formName !== undefined; then FormExists else noFormExists"></div> -->
+
+<div class="checkboxContainer" *ngIf="formName"
+[formGroup]="formName">
     <input type="checkbox" [formControlName]="controlName" [id]="id">
-    <label class="checkbox accessible" [for]="id">
+    <label [for]="id"
+    [class]="before === true ? 'checkboxBefore' : 'checkboxAfter'">
+        <svg viewBox="0 0 100 100">
+            <path class="path" fill="none" stroke="#000" stroke-width="13" d="M12.1 52.1l24.4 24.4 53-53"/>
+        </svg>
+        {{ labelName }}
+    </label>
+</div>
+
+<div *ngIf="!formName" class="checkboxContainer">
+    <input type="checkbox" [id]="id" [checked]="checked">
+    <label [for]="id"
+    [class]="before === true ? 'checkboxBefore' : 'checkboxAfter'">
         <svg viewBox="0 0 100 100">
             <path class="path" fill="none" stroke="#000" stroke-width="13" d="M12.1 52.1l24.4 24.4 53-53"/>
         </svg>
