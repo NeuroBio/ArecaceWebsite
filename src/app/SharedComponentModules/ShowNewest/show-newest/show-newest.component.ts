@@ -1,14 +1,15 @@
-import { Component, OnInit, Input, ElementRef, ViewChild, HostListener } from '@angular/core';
+import { Component, OnInit, Input, ElementRef, ViewChild, HostListener, OnDestroy } from '@angular/core';
 import { FireBaseService } from 'src/app/GlobalServices/firebase.service';
-import { Observable } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
+import { Observable, fromEvent, Subscription } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-show-newest',
   templateUrl: './show-newest.component.html',
   styleUrls: ['./show-newest.component.css']
 })
-export class ShowNewestComponent implements OnInit {
+
+export class ShowNewestComponent implements OnInit, OnDestroy {
 
   display$: Observable<any>;
   @Input() contentType: string;
@@ -18,6 +19,9 @@ export class ShowNewestComponent implements OnInit {
   @ViewChild('items') items: ElementRef;
   @ViewChild('right', { static: true }) right: ElementRef;
   @ViewChild('left', { static: true }) left: ElementRef;
+  
+  KeyListener = fromEvent(document, 'keydown');
+  stream: Subscription;
 
   constructor(private firebaseserv: FireBaseService) { }
 
@@ -41,8 +45,14 @@ export class ShowNewestComponent implements OnInit {
           member = {Name: member.Name,
                     Link: `${this.contentLink}/${member.ID}`,
                     Image: member.Links ? member.Links[0] : ''});
-        })
-      );
+      })
+    );
+    this.stream = this.KeyListener
+      .subscribe((event: KeyboardEvent) => this.KeyEvent(event));
+  }
+
+  ngOnDestroy() {
+    this.stream.unsubscribe();
   }
 
   scroll(right: boolean) {
@@ -63,7 +73,8 @@ export class ShowNewestComponent implements OnInit {
   }
 
   //Arrow keys (trigger arrow options)
-  @HostListener('window:keyup', ['$event']) KeyEvent(event: KeyboardEvent){ 
+  // @HostListener('window:keyup', ['$event'])
+  KeyEvent(event: KeyboardEvent){ 
     if(event.keyCode === 39){//right, next
       this.right.nativeElement.focus();
       this.animate(170);

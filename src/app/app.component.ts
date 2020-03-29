@@ -1,7 +1,8 @@
 import { Component, ViewEncapsulation,
-         ViewChild, ElementRef, AfterViewInit, QueryList, ViewChildren }   from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { FocusKeyManager } from '@angular/cdk/a11y';
+         ViewChild, ElementRef, AfterViewInit,
+         QueryList, ViewChildren }                from '@angular/core';
+import { ActivatedRoute }                         from '@angular/router';
+import { FocusKeyManager }                        from '@angular/cdk/a11y';
          
 import { GlobalVarsService}                       from './GlobalServices/global-vars.service';
 
@@ -45,13 +46,13 @@ export class AppComponent implements AfterViewInit {
               public route: ActivatedRoute) { }
   
   ngAfterViewInit() {
-    this.headerKeyManager = new FocusKeyManager(this.headItems)
-      .withHorizontalOrientation('ltr');
-    this.headerKeyManager.setFirstItemActive();
+    setTimeout(() => { this.checkLoad() }, 1000);
     this.footerKeyManager = new FocusKeyManager(this.footItems)
       .withHorizontalOrientation('ltr');
     this.footerKeyManager.setFirstItemActive();
-    setTimeout(() => { this.checkLoad() }, 1000);
+    this.headerKeyManager = new FocusKeyManager(this.headItems)
+    .withHorizontalOrientation('ltr');
+    this.headerKeyManager.setFirstItemActive();
   }
 
   checkLoad() {
@@ -76,7 +77,6 @@ export class AppComponent implements AfterViewInit {
   }
 
   focus(keymanger: string) {
-    console.log(keymanger)
     if(!this[`${keymanger}KeyManager`].activeItem) {
       this[`${keymanger}KeyManager`].setFirstItemActive();
     }

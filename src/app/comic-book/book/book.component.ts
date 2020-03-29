@@ -1,7 +1,7 @@
-import { Component, OnInit, HostListener, OnDestroy }   from '@angular/core';
+import { Component, OnInit, OnDestroy }                 from '@angular/core';
 import { ActivatedRoute, Router }                       from '@angular/router';
 
-import { Observable, Subscription, fromEvent }                     from 'rxjs';
+import { Observable, Subscription, fromEvent }          from 'rxjs';
 
 import { ComicService }                                 from '../comic.service';
 import { TextProvider }                                 from 'src/app/GlobalServices/textprovider.service';
@@ -22,11 +22,12 @@ export class BookComponent implements OnInit, OnDestroy {
   currentPage: number;
   maxChap: number;
   loading: boolean;
-  stream: Subscription;
+  stream1: Subscription;
+  stream2: Subscription;
   mainText: string;
   path: string;
   name: string;
-  KeyListener = fromEvent(document, 'keydown')
+  KeyListener = fromEvent(document, 'keydown');
   
   constructor(private comicserv: ComicService,
               private route: ActivatedRoute,
@@ -41,16 +42,18 @@ export class BookComponent implements OnInit, OnDestroy {
         this.initialVarAssign(path, chap))
     ).unsubscribe();
 
-    this.stream = this.comicserv.loading.subscribe(bool =>
+    this.stream1 = this.comicserv.loading.subscribe(bool =>
       setTimeout(() => { this.loading = bool }, 10));
     this.mainText = this.textprovider.WebsiteText
       .find(member => member.ID === 'comic').Text;
 
-    this.KeyListener.subscribe((event: KeyboardEvent) => this.KeyEvent(event));
+    this.stream2 = this.KeyListener
+      .subscribe((event: KeyboardEvent) => this.KeyEvent(event));
   }
 
   ngOnDestroy() {
-    this.stream.unsubscribe();
+    this.stream1.unsubscribe();
+    this.stream2.unsubscribe();
     this.comicserv.disposal();
   }
   
@@ -63,14 +66,14 @@ export class BookComponent implements OnInit, OnDestroy {
     } else {//get specific page
       const id = route.split('-');
       this.currentChapter = chap.find(c => c.ID === +id[0]);
-      this.currentPage = +id[1];    
+      this.currentPage = +id[1];
     }
     this.maxChap = chap[chap.length-1].ID;
     this.updatePageIndex();
     this.navigate();
   }
  
-  navigate(){
+  navigate() {
     this.name = `Chapter ${this.currentChapter.ID}: Page ${this.currentPage}`;
     this.path = `comic/${this.currentChapter.ID}-${this.currentPage}`;
     this.router.navigate([this.path]);
@@ -113,8 +116,6 @@ export class BookComponent implements OnInit, OnDestroy {
   }
 
   //Arrow keys (trigger button options)
-  // @HostListener('window:keyup', ['$event'])
-  
   KeyEvent(event: KeyboardEvent) { 
     if(event.keyCode === 39 &&//right, next
       !(this.currentPage == this.currentChapter.NumPages
