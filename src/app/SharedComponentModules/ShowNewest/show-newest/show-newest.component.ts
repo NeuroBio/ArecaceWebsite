@@ -73,7 +73,6 @@ export class ShowNewestComponent implements OnInit, OnDestroy {
   }
 
   //Arrow keys (trigger arrow options)
-  // @HostListener('window:keyup', ['$event'])
   KeyEvent(event: KeyboardEvent){ 
     if(event.keyCode === 39){//right, next
       this.right.nativeElement.focus();

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, HostListener, ElementRef } from '@angular/core';
+import { Component, OnInit, Input, HostListener } from '@angular/core';
 import { GlobalVarsService }                      from 'src/app/GlobalServices/global-vars.service';
 
 @Component({

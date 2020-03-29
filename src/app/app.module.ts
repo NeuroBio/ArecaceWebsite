@@ -34,7 +34,6 @@ import { PrivacyPolicyComponent }     from './SimplePages/privacy-policy/privacy
 import { TravelorsGuideComponent }    from './SimplePages/travelorsguide/travelorsguide.component';
 import { UploadLogComponent }         from './SimplePages/upload-log/upload-log.component';
 
-
 export function TextFactory(provider: TextProvider) {
   return () => provider.load();
 }

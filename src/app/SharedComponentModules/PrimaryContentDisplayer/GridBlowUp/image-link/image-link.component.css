@@ -1,30 +1,28 @@
-ul {
-    margin: 0px;
-    padding: 0px;
-
+a {
+    min-width: 0px;
+    height: 270px;
+    display: inline-block;
 }
 
-#outer {
-    display: flex;
-    flex-flow: wrap;
-    justify-content: space-around;
+a:hover {
+    background-color: rgba(140,140,140,.8);
 }
 
-.item {
-    position: relative;
-    flex-flow: column;
-    overflow: hidden;
+a:focus {
+    background-color: rgba(140,140,140,.8);
 }
 
+a:active {
+    background-color: rgba(255,255,255,.7);
+}
 
-
-div#imageholder {
+#imageholder {
     display: inline-flex;
     height: 200px;
     margin: 7px;
 }
 
-img.thumb {
+.thumb {
     display: inline-block;
     max-height: 100%;
     max-width: 100vw;
@@ -34,7 +32,7 @@ img.thumb {
     background-color: rgb(116, 116, 116);
 }
 
-div.thumbtext {
+.thumbtext {
     position: absolute;
     width: 100%;
     text-align: center;

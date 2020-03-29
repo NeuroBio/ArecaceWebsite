@@ -1,0 +1,7 @@
+<a #Host tabindex="-1"
+[routerLink]="preview === true ? item.ID : item.ID+'/Download'">
+  <div id="imageholder">
+      <img class="thumb" [src]="item.Links[0]" alt=""><br>
+  </div>
+  <div class="thumbtext">{{ item.Name }}</div>
+</a>   

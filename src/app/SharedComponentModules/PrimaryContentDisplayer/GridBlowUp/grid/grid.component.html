@@ -1,12 +1,14 @@
-<section id="outer" aria-label="Image-Link-Grid">
-  <a class="item"
-  *ngFor="let member of collect"
-  [routerLink]="preview === true ? member.ID : member.ID+'/Download'">
-    <div id="imageholder">
-        <img class="thumb" [src]="member.Links[0]" alt=""><br>
-    </div>
-    <div class="thumbtext">{{ member.Name }}</div>
-  </a> 
-</section>
+<nav aria-label="Image-Link-Navigation" >
+  <ul  (keydown)="handleKeyDown($event)"
+  tabindex="0" id="outer" (focus)="focus()"
+  [attr.tabindex]="leave === true ? -1 : 0">
+    <li class="item" *ngFor="let member of collect">
+      <app-image-link
+      [item]="member"
+      [preview]="preview"
+      ></app-image-link>
+    </li>
+  </ul>
+</nav>
 
 <br>

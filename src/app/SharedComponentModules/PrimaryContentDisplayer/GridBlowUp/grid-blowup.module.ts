@@ -7,12 +7,14 @@ import { BlowUpComponent }        from './blowup/blowup.component';
 import { BlowupmasterComponent }  from './blowupmaster/blowupmaster.component';
 import { GridComponent }          from './grid/grid.component';
 import { BookmarkModule }         from '../../SmallComponents/bookmark/bookmark.module';
+import { ImageLinkComponent }     from './image-link/image-link.component';
 
 @NgModule({
   declarations: [
     BlowUpComponent,
     BlowupmasterComponent,
-    GridComponent
+    GridComponent,
+    ImageLinkComponent
   ],
   imports: [
     CommonModule,
