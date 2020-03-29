@@ -1,7 +1,7 @@
 import { Component, OnInit, HostListener, OnDestroy }   from '@angular/core';
 import { ActivatedRoute, Router }                       from '@angular/router';
 
-import { Observable, Subscription }                     from 'rxjs';
+import { Observable, Subscription, fromEvent }                     from 'rxjs';
 
 import { ComicService }                                 from '../comic.service';
 import { TextProvider }                                 from 'src/app/GlobalServices/textprovider.service';
@@ -26,6 +26,7 @@ export class BookComponent implements OnInit, OnDestroy {
   mainText: string;
   path: string;
   name: string;
+  KeyListener = fromEvent(document, 'keydown')
   
   constructor(private comicserv: ComicService,
               private route: ActivatedRoute,
@@ -44,6 +45,8 @@ export class BookComponent implements OnInit, OnDestroy {
       setTimeout(() => { this.loading = bool }, 10));
     this.mainText = this.textprovider.WebsiteText
       .find(member => member.ID === 'comic').Text;
+
+    this.KeyListener.subscribe((event: KeyboardEvent) => this.KeyEvent(event));
   }
 
   ngOnDestroy() {
@@ -110,7 +113,9 @@ export class BookComponent implements OnInit, OnDestroy {
   }
 
   //Arrow keys (trigger button options)
-  @HostListener('window:keyup', ['$event']) KeyEvent(event: KeyboardEvent) { 
+  // @HostListener('window:keyup', ['$event'])
+  
+  KeyEvent(event: KeyboardEvent) { 
     if(event.keyCode === 39 &&//right, next
       !(this.currentPage == this.currentChapter.NumPages
         && this.currentChapter.ID == this.maxChap)) {//not last page
