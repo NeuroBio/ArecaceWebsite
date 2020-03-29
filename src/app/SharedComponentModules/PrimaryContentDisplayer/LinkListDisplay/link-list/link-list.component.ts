@@ -17,6 +17,7 @@ export class LinkListComponent implements OnInit, AfterViewInit {
   @Input() list: string[];
   @Input() label: string;
   @Input() active: boolean;
+  @Input() maxWidth: string = 'none'
   @Output() lableEmitter = new EventEmitter<string>();
 
   keyManager: FocusKeyManager<any>;

@@ -5,12 +5,12 @@
 <nav #linkListHolder id="outerdrop"  aria-label="Content-Navigation">
 
   
-  <ul #list role="menubar" class="menubar"
+  <ul #list class="menubar"
   [attr.tabindex]="leave === true ? -1 : 0"
   (keydown)="handleKeyDown($event)" (focus)="focus()">
     <li *ngFor="let list of linkList, let i = index"
     tabindex="-1"
-    role="menuitem" class="menuitem" aria-labelledby="type">
+    class="menuitem" aria-labelledby="type">
     <hr *ngIf="i!==0">
     <div class="linklistlabel" (click)="onReveal(i)" id="type">
       {{ labels[i] }}
