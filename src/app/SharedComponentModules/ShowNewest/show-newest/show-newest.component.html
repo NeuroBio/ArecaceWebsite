@@ -6,14 +6,21 @@
       <img #left id="left" src="assets/svgs/back.svg"
         alt="Prev" (click)="scroll(false)" tabindex="0">
 
-      <div #items role="nav" id="inner" *ngIf="display$ | async as display">
-        
-        <a class="strokeme displayItem" *ngFor="let member of display"
+      <nav *ngIf="display$ | async as display">        
+        <ul #itemBand>
+          <li *ngFor="let member of display">
+            <app-new-item
+            [item]="member"
+            ></app-new-item>
+          </li>
+        </ul>
+        <!-- <a class="strokeme displayItem" *ngFor="let member of display"
           [style.background-image]="'url('+member.Image+')'"
           [routerLink]="member.Link">
           {{ member.Name }}
-        </a>
-      </div>
+        </a> -->
+      </nav>
+
       <img #right id="right" src="assets/svgs/back.svg"
         alt="Next" (click)="scroll(true)" tabindex="0">
   </div>

@@ -1,7 +1,10 @@
-import { Component, OnInit, Input, ElementRef, ViewChild, HostListener, OnDestroy } from '@angular/core';
-import { FireBaseService } from 'src/app/GlobalServices/firebase.service';
-import { Observable, fromEvent, Subscription } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Component, OnInit, Input,
+         ElementRef, ViewChild, OnDestroy }     from '@angular/core';
+
+import { Observable, fromEvent, Subscription }  from 'rxjs';
+import { map }                                  from 'rxjs/operators';
+
+import { FireBaseService }                      from 'src/app/GlobalServices/firebase.service';
 
 @Component({
   selector: 'app-show-newest',
@@ -12,11 +15,13 @@ import { map } from 'rxjs/operators';
 export class ShowNewestComponent implements OnInit, OnDestroy {
 
   display$: Observable<any>;
+  
   @Input() contentType: string;
   @Input() collectionName: string;
   @Input() contentLink: string;
   @Input() footerText: string;
-  @ViewChild('items') items: ElementRef;
+
+  @ViewChild('itemBand') itemBand: ElementRef;
   @ViewChild('right', { static: true }) right: ElementRef;
   @ViewChild('left', { static: true }) left: ElementRef;
   
@@ -28,25 +33,19 @@ export class ShowNewestComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.display$ = this.firebaseserv.returnCollect(this.collectionName).pipe(
       map(members => {
-        // console.log(members)
-        //remove hidden
-        members = members.filter(member => member.Allowed !== false);
+        members = members.filter(member => member.Allowed !== false);//remove hidden
+        members = members.sort((a,b) => a.TimeStampCreated > b.TimeStampCreated ? 1 :-1);// order
 
-        // order
-        members = members.sort((a,b) => a.TimeStampCreated > b.TimeStampCreated ? 1 :-1);
-        
-        //cut to newest
-        if(members.length > 10) {
+        if(members.length > 10) {//cut to newest
           members = members.slice(0, 10);
         }
 
-        //set up for display
-        return members.map(member =>
+        return members.map(member => //set up for display
           member = {Name: member.Name,
                     Link: `${this.contentLink}/${member.ID}`,
                     Image: member.Links ? member.Links[0] : ''});
-      })
-    );
+      }) );
+
     this.stream = this.KeyListener
       .subscribe((event: KeyboardEvent) => this.KeyEvent(event));
   }
@@ -65,25 +64,24 @@ export class ShowNewestComponent implements OnInit, OnDestroy {
 
   animate(amount: number) {
     if(HTMLElement.prototype.scrollTo) {
-      this.items.nativeElement.scrollTo(
-        { left: (this.items.nativeElement.scrollLeft + amount), behavior: 'smooth' });
+      this.itemBand.nativeElement.scrollTo(
+        { left: (this.itemBand.nativeElement.scrollLeft + amount), behavior: 'smooth' });
     } else {
-      this.items.nativeElement.scrollLeft += amount;
+      this.itemBand.nativeElement.scrollLeft += amount;
     }
   }
 
   //Arrow keys (trigger arrow options)
-  KeyEvent(event: KeyboardEvent){ 
-    if(event.keyCode === 39){//right, next
+  KeyEvent(event: KeyboardEvent) {
+    if(event.key === 'ArrowRight') {
       this.right.nativeElement.focus();
       this.animate(170);
     }
 
-    if(event.keyCode === 37){//left, prev
+    if(event.key === 'ArrowLeft') {
       this.left.nativeElement.focus();
       this.animate(-170);
     }
   }
-
 
 }

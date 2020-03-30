@@ -1,4 +1,4 @@
-div#outer {
+#outer {
     border: 1px solid white;
     background-color: rgb(23, 23, 23);
     overflow: auto;
@@ -7,14 +7,12 @@ div#outer {
     position: relative;
 }
 
-div#pickItems {
+#pickItems {
     display: flex;
     align-items: center
 }
 
-div#inner {
-    background: #454545;
-    display: flex;
+nav {
     overflow: hidden;
 }
 
@@ -22,7 +20,7 @@ h3 {
     margin: 7px;
 }
 
-a.displayItem {
+/* a.displayItem {
     border: 3px solid #454545;
     margin: 7px;
     background-color: rgb(116, 116, 116);
@@ -40,6 +38,21 @@ a.displayItem:hover {
     color: black;
     background-color: rgb(158, 158, 158);
     border: 3px solid white;
+} */
+
+ul {
+    margin: 0px;
+    padding: 0px;
+    background: #454545;
+    display: flex;
+    overflow: hidden;
+
+}
+
+li {
+    display: inline-block;
+    margin: 0px;
+    padding: 0px;
 }
 
 a#seeAll {
