@@ -1,6 +1,6 @@
 import { Component, ViewEncapsulation,
          ViewChild, ElementRef, AfterViewInit,
-         QueryList, ViewChildren, HostListener }                from '@angular/core';
+         QueryList, ViewChildren }                from '@angular/core';
 import { ActivatedRoute }                         from '@angular/router';
 import { FocusKeyManager }                        from '@angular/cdk/a11y';
          

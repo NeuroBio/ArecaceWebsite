@@ -1,4 +1,4 @@
-import { Component, Input, ViewChildren, ElementRef } from '@angular/core';
+import { Component, Input, ViewChild, ElementRef } from '@angular/core';
 
 @Component({
   selector: 'app-new-item',
@@ -9,7 +9,7 @@ export class NewItemComponent {
 
   @Input() item: any;
   @Input() active: boolean;
-  @ViewChildren('Host') Host: ElementRef;
+  @ViewChild('Host') Host: ElementRef;
   
   selectItem() {
     this.Host.nativeElement.click();

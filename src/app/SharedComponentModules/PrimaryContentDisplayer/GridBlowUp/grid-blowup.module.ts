@@ -1,7 +1,6 @@
 import { NgModule }               from '@angular/core';
 import { CommonModule }           from '@angular/common';
 import { RouterModule }           from '@angular/router';
-import { A11yModule }             from '@angular/cdk/a11y';
 
 import { BlowUpComponent }        from './blowup/blowup.component';
 import { BlowupmasterComponent }  from './blowupmaster/blowupmaster.component';
@@ -19,7 +18,6 @@ import { ImageLinkComponent }     from './image-link/image-link.component';
   imports: [
     CommonModule,
     BookmarkModule,
-    A11yModule,
     RouterModule
   ],
   exports: [

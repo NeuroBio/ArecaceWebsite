@@ -1,12 +1,14 @@
 import { Component, OnInit, Input,
-         ElementRef, ViewChild, OnDestroy, ViewChildren, QueryList, AfterViewInit }     from '@angular/core';
+         ElementRef, ViewChild, OnDestroy,
+         ViewChildren, QueryList, AfterViewInit }   from '@angular/core';
+import { FocusKeyManager }                          from '@angular/cdk/a11y';
 
-import { Observable, fromEvent, Subscription }  from 'rxjs';
-import { map }                                  from 'rxjs/operators';
+import { Observable, fromEvent, Subscription }      from 'rxjs';
+import { map }                                      from 'rxjs/operators';
 
-import { FireBaseService }                      from 'src/app/GlobalServices/firebase.service';
-import { FocusKeyManager } from '@angular/cdk/a11y';
-import { NewItemComponent } from '../new-item/new-item.component';
+import { FireBaseService }                          from 'src/app/GlobalServices/firebase.service';
+
+import { NewItemComponent }                         from '../new-item/new-item.component';
 
 @Component({
   selector: 'app-show-newest',
@@ -37,6 +39,8 @@ export class ShowNewestComponent implements OnInit, OnDestroy, AfterViewInit {
   constructor(private firebaseserv: FireBaseService) { }
 
   ngOnInit() {
+    this.stream = this.KeyListener
+      .subscribe((event: KeyboardEvent) => this.KeyEvent(event));
     this.display$ = this.firebaseserv.returnCollect(this.collectionName).pipe(
       map(members => {
         members = members.filter(member => member.Allowed !== false);//remove hidden
@@ -51,9 +55,6 @@ export class ShowNewestComponent implements OnInit, OnDestroy, AfterViewInit {
                     Link: `${this.contentLink}/${member.ID}`,
                     Image: member.Links ? member.Links[0] : ''});
       }) );
-
-    this.stream = this.KeyListener
-      .subscribe((event: KeyboardEvent) => this.KeyEvent(event));
   }
 
   ngAfterViewInit() {
@@ -87,7 +88,14 @@ export class ShowNewestComponent implements OnInit, OnDestroy, AfterViewInit {
       event.stopImmediatePropagation();
       this.keyManager.onKeydown(event);
     }
+
+    if(event.key === 'Tab') {
+      this.leave = true;
+      setTimeout(() => { this.leave = false }, 10);
+    }
   }
+
+
   //Arrow keys (trigger arrow options)
   KeyEvent(event: KeyboardEvent) {
     if(event.key === 'ArrowRight') {
@@ -102,8 +110,6 @@ export class ShowNewestComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   focus() {
-    console.log(this.keyManager)
-
     if(!this.keyManager.activeItem) {
       this.keyManager.setFirstItemActive();
     }

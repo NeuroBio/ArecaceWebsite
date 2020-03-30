@@ -84,9 +84,7 @@ export class SideBarComponent implements AfterViewInit {
     
     if(event.key === 'Tab') {
       this.leave = true;
-      setTimeout(() => {
-        this.leave = false
-      }, 10);
+      setTimeout(() => { this.leave = false }, 10);
     }
   }
 
