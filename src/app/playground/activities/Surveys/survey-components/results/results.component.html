@@ -25,8 +25,12 @@
     
     </article>
     
-    <button (click)="setShowAll()">Show All Scores</button>
-    <button (click)="setShowStats()">Show Stats</button>
+    <button (click)="setShowAll()">
+      {{ showAll === true ? 'Hide All Scores' : 'Show All Scores'}}
+    </button>
+    <button (click)="setShowStats()">Show Stats
+      {{ showStats === true ? 'Hide Stats' : 'Show Stats'}}
+    </button>
     <button *ngIf="ViewOnly === false" (click)="onReset()">Reset Survey</button>
     
     <article *ngIf="showAll === true" class="outer">
@@ -36,7 +40,7 @@
         <h3 class="scoreQualifier" *ngIf="i === tooLow">Unacceptable Scores: </h3>
         <p>
           {{ score.Name }}: {{ score.Score }}% Match
-          <button (click)="setShowSpecific(i)">Read Result</button>    
+          <button (click)="setShowSpecific(i)">{{ showSpecific[i] === true ? 'Hide Result' : 'Show Result' }}</button>    
         </p>
         <p *ngIf="showSpecific[i] === true"
           [innerHTML]="score.Text">
