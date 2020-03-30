@@ -19,6 +19,8 @@ export class DropDownComponent implements OnInit {
                                                               new LinkListElement('tester 3', 'tester3') ]),
                                     new LinkList('defaultSub', [new LinkListElement('subtester 1', 'subtester1')]) ];
   @Input() current: string = "tester2";
+  @Input() queryParamsHandling: string = '';
+
   revealArray: boolean[] = [];
   @ViewChild('linkListHolder', { static: true }) linkListHolder: ElementRef;
   greybandHeight = 0;

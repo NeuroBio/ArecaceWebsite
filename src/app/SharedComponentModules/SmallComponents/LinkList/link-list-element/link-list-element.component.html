@@ -3,7 +3,7 @@
     <!-- Standard Case: Within Site Routing -->
     <a *ngSwitchCase="'Route'"
     #Host tabindex="-1"
-    [routerLink]="[route]" queryParamsHandling="merge"
+    [routerLink]="[route]" [queryParamsHandling]="queryParamsHandling"
     class="linklistelement"
     [class.selected]="active === true">
         <ng-container *ngTemplateOutlet="content"></ng-container>
@@ -14,7 +14,6 @@
     <a  *ngSwitchCase="'Href'"
     #Host tabindex="-1"
     [href]="href"
-    queryParamsHandling="merge"
     class="linklistelement"
     [class.selected]="active === true">
         <ng-container *ngTemplateOutlet="content"></ng-container>

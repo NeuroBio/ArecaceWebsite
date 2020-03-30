@@ -27,6 +27,7 @@ export class SideBarComponent implements AfterViewInit {
                                                               new LinkListElement('tester 3', 'tester3') ]),
                                     new LinkList('defaultSub', [new LinkListElement('subtester 1', 'subtester1')]) ];
   @Input() current: string = "tester2";
+  @Input() queryParamsHandling: string = '';
 
   @ViewChild('container', { static: true }) container: ElementRef;
   @ViewChild('list', { static: true }) list: ElementRef;

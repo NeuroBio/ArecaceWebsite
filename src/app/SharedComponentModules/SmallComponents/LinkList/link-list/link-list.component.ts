@@ -18,6 +18,7 @@ export class LinkListComponent implements OnInit, AfterViewInit {
   @Input() list: LinkListElement[];
   @Input() label: string;
   @Input() active: boolean;
+  @Input() queryParamsHandling: string = '';
 
   @Output() lableEmitter = new EventEmitter<string>();
 

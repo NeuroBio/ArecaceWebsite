@@ -14,6 +14,7 @@ export class MainDisplayComponent implements OnInit, OnDestroy {
 
   @Input() current: string;
   @Input() linkList: LinkList[];
+  @Input() queryParamsHandling: string = '';
 
   constructor(private generalcollectserv: GeneralcollectionService) { }
 

@@ -8,7 +8,8 @@
         <app-link-list-element
         [route]="item.Route"
         [href]="item.Href"
-        [active]="item.ListName === current">
+        [active]="item.ListName === current"
+        [queryParamsHandling]="queryParamsHandling">
             <ng-container
                   [ngTemplateOutlet]="itemTemplateRef"
                   [ngTemplateOutletContext]="{$implicit: item}">
