@@ -1,10 +1,12 @@
 import { Component, OnInit, Input,
-         ElementRef, ViewChild, OnDestroy }     from '@angular/core';
+         ElementRef, ViewChild, OnDestroy, ViewChildren, QueryList, AfterViewInit }     from '@angular/core';
 
 import { Observable, fromEvent, Subscription }  from 'rxjs';
 import { map }                                  from 'rxjs/operators';
 
 import { FireBaseService }                      from 'src/app/GlobalServices/firebase.service';
+import { FocusKeyManager } from '@angular/cdk/a11y';
+import { NewItemComponent } from '../new-item/new-item.component';
 
 @Component({
   selector: 'app-show-newest',
@@ -12,7 +14,7 @@ import { FireBaseService }                      from 'src/app/GlobalServices/fir
   styleUrls: ['./show-newest.component.css']
 })
 
-export class ShowNewestComponent implements OnInit, OnDestroy {
+export class ShowNewestComponent implements OnInit, OnDestroy, AfterViewInit {
 
   display$: Observable<any>;
   
@@ -27,6 +29,10 @@ export class ShowNewestComponent implements OnInit, OnDestroy {
   
   KeyListener = fromEvent(document, 'keydown');
   stream: Subscription;
+
+  keyManager: FocusKeyManager<any>
+  @ViewChildren(NewItemComponent) items: QueryList<any>;
+  leave: boolean = false;
 
   constructor(private firebaseserv: FireBaseService) { }
 
@@ -50,6 +56,11 @@ export class ShowNewestComponent implements OnInit, OnDestroy {
       .subscribe((event: KeyboardEvent) => this.KeyEvent(event));
   }
 
+  ngAfterViewInit() {
+    this.keyManager = new FocusKeyManager(this.items)
+      .withHorizontalOrientation('ltr');
+  }
+
   ngOnDestroy() {
     this.stream.unsubscribe();
   }
@@ -71,6 +82,12 @@ export class ShowNewestComponent implements OnInit, OnDestroy {
     }
   }
 
+  handleKeyDown(event: KeyboardEvent){
+    if(event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
+      event.stopImmediatePropagation();
+      this.keyManager.onKeydown(event);
+    }
+  }
   //Arrow keys (trigger arrow options)
   KeyEvent(event: KeyboardEvent) {
     if(event.key === 'ArrowRight') {
@@ -82,6 +99,15 @@ export class ShowNewestComponent implements OnInit, OnDestroy {
       this.left.nativeElement.focus();
       this.animate(-170);
     }
+  }
+
+  focus() {
+    console.log(this.keyManager)
+
+    if(!this.keyManager.activeItem) {
+      this.keyManager.setFirstItemActive();
+    }
+    this.keyManager.activeItem.focus();
   }
 
 }

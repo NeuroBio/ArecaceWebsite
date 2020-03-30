@@ -52,7 +52,7 @@ export class GridComponent implements OnInit, OnDestroy, AfterViewInit {
       event.stopImmediatePropagation();
       this.keyManager.onKeydown(event);
     }
-    if(event.shiftKey == true && event.key === 'Tab') {
+    if(event.key === 'Tab') {
       this.leave = true;
       setTimeout(() => { this.leave = false; }, 10);
     }

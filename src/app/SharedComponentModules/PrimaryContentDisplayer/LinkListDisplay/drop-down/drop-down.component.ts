@@ -81,7 +81,7 @@ export class DropDownComponent implements OnInit {
       }
       return false;
     }
-    if(event.shiftKey == true && event.key === 'Tab') {
+    if(event.key === 'Tab') {
       this.leave = true;
       setTimeout(() => { this.leave = false; }, 10);
     }

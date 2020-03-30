@@ -1,6 +1,6 @@
 import { Component, ViewEncapsulation,
          ViewChild, ElementRef, AfterViewInit,
-         QueryList, ViewChildren }                from '@angular/core';
+         QueryList, ViewChildren, HostListener }                from '@angular/core';
 import { ActivatedRoute }                         from '@angular/router';
 import { FocusKeyManager }                        from '@angular/cdk/a11y';
          
@@ -49,10 +49,8 @@ export class AppComponent implements AfterViewInit {
     setTimeout(() => { this.checkLoad() }, 1000);
     this.footerKeyManager = new FocusKeyManager(this.footItems)
       .withHorizontalOrientation('ltr');
-    this.footerKeyManager.setFirstItemActive();
     this.headerKeyManager = new FocusKeyManager(this.headItems)
     .withHorizontalOrientation('ltr');
-    this.headerKeyManager.setFirstItemActive();
   }
 
   checkLoad() {
@@ -70,7 +68,7 @@ export class AppComponent implements AfterViewInit {
       event.stopImmediatePropagation();
       this[`${keymanger}KeyManager`].onKeydown(event);
     }
-    if(event.shiftKey == true && event.key === 'Tab') {
+    if(event.key === 'Tab') {
       this[`${keymanger}Leave`] = true;
       setTimeout(() => { this[`${keymanger}Leave`] = false; }, 10);
     }
@@ -82,4 +80,5 @@ export class AppComponent implements AfterViewInit {
     }
     this[`${keymanger}KeyManager`].activeItem.focus();
   }
+
 }

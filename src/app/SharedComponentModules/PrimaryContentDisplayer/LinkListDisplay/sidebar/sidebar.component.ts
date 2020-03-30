@@ -32,7 +32,7 @@ export class SideBarComponent implements AfterViewInit {
   greybarHeight = 0;
   resizeTimer: any;
   initialLabel: string;
-  leave = false;
+  leave: boolean = false;
   
 
   ngAfterViewInit() {
@@ -82,7 +82,7 @@ export class SideBarComponent implements AfterViewInit {
       return false;
     }
     
-    if(event.shiftKey == true && event.key === 'Tab') {
+    if(event.key === 'Tab') {
       this.leave = true;
       setTimeout(() => {
         this.leave = false
@@ -94,7 +94,7 @@ export class SideBarComponent implements AfterViewInit {
     if(!this.keyManager.activeItem) {
       this.keyManager.setFirstItemActive();
     }
-      this.keyManager.activeItem.focus();
+    this.keyManager.activeItem.focus();
   }
 
 }

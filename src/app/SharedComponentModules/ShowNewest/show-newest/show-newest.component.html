@@ -7,7 +7,9 @@
         alt="Prev" (click)="scroll(false)" tabindex="0">
 
       <nav *ngIf="display$ | async as display">        
-        <ul #itemBand>
+        <ul #itemBand tabindex="0"
+        (focus)="focus()"
+        (keydown)="handleKeyDown($event)">
           <li *ngFor="let member of display">
             <app-new-item
             [item]="member"
