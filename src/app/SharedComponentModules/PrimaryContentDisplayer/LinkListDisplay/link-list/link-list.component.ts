@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChildren, EventEmitter,
          QueryList, AfterViewInit, Input, ElementRef,
          ViewChild, Output }                            from '@angular/core';
 import { FocusKeyManager }                              from '@angular/cdk/a11y';
-import { LEFT_ARROW, RIGHT_ARROW, ENTER }               from '@angular/cdk/keycodes';
+
 import { LinkListElementComponent }                     from 'src/app/SharedComponentModules/SmallComponents/link-list-element/link-list-element/link-list-element.component';
 
 
@@ -51,11 +51,11 @@ export class LinkListComponent implements OnInit, AfterViewInit {
 
     handleKeyDown(event: KeyboardEvent) {
       if (this.keyManager) {
-        if (event.keyCode === LEFT_ARROW || event.keyCode === RIGHT_ARROW) {
+        if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
           event.stopImmediatePropagation();
           this.keyManager.onKeydown(event);
           return false;
-        } else if (event.keyCode === ENTER) {
+        } else if (event.key === 'Enter') {
           event.stopImmediatePropagation();
           this.keyManager.activeItem.selectItem();
           this.lableEmitter.emit(this.label);

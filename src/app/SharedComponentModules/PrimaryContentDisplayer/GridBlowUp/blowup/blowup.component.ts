@@ -91,17 +91,17 @@ export class BlowUpComponent implements OnInit {
 
   //Arrow keys (trigger arrow options)
   @HostListener('window:keyup', ['$event']) KeyEvent(event: KeyboardEvent) { 
-    if(event.keyCode === 39){//right, next
+    if(event.key === 'ArrowRight'){//right, next
       this.right.nativeElement.focus();
       this.onArrow(1);
     }
 
-    if(event.keyCode === 37) {//left, prev
+    if(event.key === 'ArrowLeft') {//left, prev
       this.left.nativeElement.focus();
       this.onArrow(-1);
     }
 
-    if(event.keyCode == 27) {//escape
+    if(event.key === 'Escape') {//escape
       this.router.navigate([`${this.gridPath}`]);
     }
   }
