@@ -1,10 +1,11 @@
-import { Component, OnInit }        from '@angular/core';
-import { ActivatedRoute }           from '@angular/router';
+import { Component, OnInit }          from '@angular/core';
+import { ActivatedRoute }             from '@angular/router';
 
-import { Observable }               from 'rxjs';
-import { map }                      from 'rxjs/operators';
+import { Observable }                 from 'rxjs';
+import { map }                        from 'rxjs/operators';
 
-import { GeneralcollectionService } from 'src/app/GlobalServices/generalcollection.service';
+import { GeneralcollectionService }   from 'src/app/GlobalServices/generalcollection.service';
+import { LinkList, LinkListElement }  from 'src/app/SharedComponentModules/SmallComponents/LinkList/linklist';
 
 @Component({
   selector: 'app-main-notes',
@@ -14,7 +15,7 @@ import { GeneralcollectionService } from 'src/app/GlobalServices/generalcollecti
 export class MainNotesComponent implements OnInit {
 
   current: string;
-  notes$: Observable<string[][][]>;
+  notes$: Observable<LinkList>;
 
   constructor(private generalcollectserv: GeneralcollectionService,
               private route: ActivatedRoute) { }
@@ -23,15 +24,16 @@ export class MainNotesComponent implements OnInit {
     this.notes$ = this.generalcollectserv.returnMetaData().pipe(
       map((notes) => {
         notes.sort((a,b) => a.Created < b.Created ? 1 : -1);
-        return notes.map(note => [note.ShortTitle, note.ID]);
+        return new LinkList('Notes', 
+        notes.map(note => new LinkListElement(note.ShortTitle, note.ID))); 
     }) );
     
     this.route.firstChild.paramMap.subscribe(path => {
         this.current = path.get('NotesID')
-        if(this.current === 'Latest') {
-          return this.notes$.subscribe(all => this.current = all[0][1].toString()
-          ).unsubscribe();
-        }
+        this.notes$.subscribe(notes => {
+          const index = notes.Data.findIndex(note => note.Route === this.current);
+          this.current = notes.Data[index].ListName;
+        }).unsubscribe();
       });
     }
 }

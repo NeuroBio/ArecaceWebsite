@@ -24,7 +24,7 @@ export class CharactersMainComponent implements OnInit {
   ngOnInit() {
     this.characters$ = this.generalcollectserv.returnMetaData().pipe(
       map(characters => {
-        characters = characters.sort((a,b) => a.ID < b.ID ? -1 : 1);
+        characters.sort((a,b) => a.ID < b.ID ? -1 : 1);
         return new LinkList('Characters', characters.map(character =>
           new LinkListElement(character.FirstName, character.ID)) );
       })

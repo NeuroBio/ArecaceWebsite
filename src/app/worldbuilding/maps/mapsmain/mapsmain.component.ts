@@ -24,7 +24,7 @@ export class MapsMainComponent implements OnInit {
   ngOnInit() {
     this.maps$ = this.generalcollectserv.returnMetaData().pipe(
       map(maps => {
-        maps = maps.sort((a,b) => a.Topic > b.Topic ? -1 : 1);
+        maps.sort((a,b) => a.Topic > b.Topic ? -1 : 1);
         return new LinkList('Maps',
           maps.map(map => new LinkListElement(map.Topic, map.ID)));
       }) );

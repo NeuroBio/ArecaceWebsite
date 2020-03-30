@@ -7,6 +7,7 @@ import { SurveyService }                from 'src/app/playground/activities/Surv
 import { FetchService }                 from 'src/app/GlobalServices/fetch.service';
 import { DisplayService }               from '../display.service';
 import { AllUserDataInfo }              from 'src/app/Classes/UploadDownloadPaths';
+import { LinkList, LinkListElement } from 'src/app/SharedComponentModules/SmallComponents/LinkList/linklist';
 
 @Component({
   selector: 'app-interact-home',
@@ -16,9 +17,8 @@ import { AllUserDataInfo }              from 'src/app/Classes/UploadDownloadPath
 export class InteractHomeComponent implements OnInit, OnDestroy {
 
   type: string;
-  displayType: string;
   current: string;
-  userData$: Observable<string[][][]>;
+  userData$: Observable<LinkList>;
   UserDataInfo = new AllUserDataInfo();
 
   constructor(private displayserv: DisplayService,
@@ -26,12 +26,18 @@ export class InteractHomeComponent implements OnInit, OnDestroy {
               private fetcher: FetchService) { }
 
   ngOnInit() {
-    this.current = this.displayserv.currentID.value;
     this.type = this.displayserv.currentDataType.value;
-    this.displayType = this.UserDataInfo[this.type].DisplayName;
+    const displayType = this.UserDataInfo[this.type].DisplayName;
     this.userData$ = this.displayserv.currentUserData
-      .pipe(map(list => list.map(datum => [datum.DisplayName, datum.ID])
+      .pipe(map(list => new LinkList(displayType,
+      list.map(datum => new LinkListElement(datum.DisplayName, datum.ID)))
     ));
+    
+    this.current = this.displayserv.currentID.value;
+    this.userData$.subscribe(data => {
+      const index = data.Data.findIndex(datum => datum.Route === this.current);
+      this.current = data.Data[index].ListName;
+    }).unsubscribe();
   }
 
   ngOnDestroy() {

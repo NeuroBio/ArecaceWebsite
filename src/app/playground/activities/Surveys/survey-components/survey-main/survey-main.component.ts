@@ -7,6 +7,7 @@ import { map }                          from 'rxjs/operators';
 import { GeneralcollectionService }     from 'src/app/GlobalServices/generalcollection.service';
 import { AuthService }                  from 'src/app/administration/security/Auth/auth.service';
 import { SurveyService }                from '../survey.service';
+import { LinkList, LinkListElement }    from 'src/app/SharedComponentModules/SmallComponents/LinkList/linklist';
 
 @Component({
   selector: 'app-survey-main',
@@ -16,7 +17,7 @@ import { SurveyService }                from '../survey.service';
 export class SurveyMainComponent implements OnInit, OnDestroy {
 
   current: string;
-  surveys$: Observable<string[]>;
+  surveys$: Observable<LinkList>;
 
   constructor(private generalcollectserv: GeneralcollectionService,
               private surveyserv: SurveyService,
@@ -26,9 +27,10 @@ export class SurveyMainComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.surveys$ = this.generalcollectserv.returnMetaData().pipe(
       map(surveys => {
-        surveys = surveys.map(survey => [survey.ID, survey.ID]);
-        return surveys.sort((a,b) => a[0] < b[0] ? -1 : 1);
-      }) );
+        surveys.sort((a,b) => a[0] < b[0] ? -1 : 1);
+        return new LinkList('Surveys',
+          surveys.map(survey => new LinkListElement(survey.ID, survey.ID)) );
+        }) );
 
     this.route.firstChild.paramMap.subscribe(
       path => this.current = path.get('SurveyID') );

@@ -2,6 +2,7 @@ import { Component, OnInit }  from '@angular/core';
 import { Title }              from '@angular/platform-browser';
 
 import { SiteMap }            from '../../../Classes/UploadDownloadPaths';
+import { LinkList, LinkListElement } from 'src/app/SharedComponentModules/SmallComponents/LinkList/linklist';
 
 @Component({
   selector: 'app-sitemap',
@@ -13,7 +14,7 @@ export class SiteMapComponent implements OnInit{
 
   SiteMap = new SiteMap();
   keys: string[];
-  linkList: string[][];
+  linkList: LinkList[];
 
   constructor(private titleserv: Title) { }
 
@@ -21,7 +22,9 @@ export class SiteMapComponent implements OnInit{
     this.titleserv.setTitle('Site Map');
     delete this.SiteMap.PathInfo;
     this.keys = Object.keys(this.SiteMap);
-    this.linkList = this.keys.map(key => this.SiteMap[key]);
+
+    this.linkList = this.keys.map(key =>
+      new LinkList(key, this.SiteMap[key]));
     window.scroll(0,0);
   }
 

@@ -1,3 +1,5 @@
+import { LinkListElement } from '../SharedComponentModules/SmallComponents/LinkList/linklist';
+
 export class ReferenceCategories {
     source: string[] = ['Source', 'Esarians', 'Source Entities', 'Siphoid Technology'];
     culture: string[] = ['Groups', 'Religion and Myth', 'Misc.'];
@@ -8,36 +10,36 @@ export class SiteMap {
     PathInfo = new AllPathInfo();
 
     Worldbuilding =
-        [['Introduction to Arecace', '/world/introduction'],
-        ['Bestiary',  this.PathInfo.bestiary.Local],
-        ['Characters', this.PathInfo.characters.Local],
-        ['Culture', this.PathInfo.culture.Local],
-        ['The DIA and Guilds', this.PathInfo.guilds.Local],
-        ['Siphoid/Source', this.PathInfo.source.Local],
-        ['Maps', this.PathInfo.maps.Local],
-        ['Nomadic Dictionary', this.PathInfo.nomadic.Local]];
+        [new LinkListElement('Introduction to Arecace', '/world/introduction'),
+        new LinkListElement('Bestiary',  this.PathInfo.bestiary.Local),
+        new LinkListElement('Characters', this.PathInfo.characters.Local),
+        new LinkListElement('Culture', this.PathInfo.culture.Local),
+        new LinkListElement('The DIA and Guilds', this.PathInfo.guilds.Local),
+        new LinkListElement('Siphoid/Source', this.PathInfo.source.Local),
+        new LinkListElement('Maps', this.PathInfo.maps.Local),
+        new LinkListElement('Nomadic Dictionary', this.PathInfo.nomadic.Local)];
 
     Story =
-        [['Comic', this.PathInfo.arc1.Local],
-        ['Scripts', this.PathInfo.scripts.Local],
-        ['Narratives', this.PathInfo.narratives.Local]];
+        [new LinkListElement('Comic', this.PathInfo.arc1.Local),
+        new LinkListElement('Scripts', this.PathInfo.scripts.Local),
+        new LinkListElement('Narratives', this.PathInfo.narratives.Local)];
 
     Info =
-        [['About the Author', '/about'],
-        ['Cite Me', '/faq/copyright'],
-        ['Fanart/Fanfic Policy', '/faq/copyright'],
-        ['FAQ', '/faq'],
-        ['Site Map (here)', '/sitemap']];
+        [new LinkListElement('About the Author', '/about'),
+        new LinkListElement('Cite Me', '/faq/copyright'),
+        new LinkListElement('Fanart/Fanfic Policy', '/faq/copyright'),
+        new LinkListElement('FAQ', '/faq'),
+        new LinkListElement('Site Map (here)', '/sitemap')];
 
     Interactive =
-        [['Surveys', this.PathInfo.surveys.Local],
-        ['Calculators', '/playground/calc']];
+        [new LinkListElement('Surveys', this.PathInfo.surveys.Local),
+        new LinkListElement('Calculators', '/playground/calc')];
         
     'Misc.' =
-        [['Extras', this.PathInfo.extras.Local],
-        ['Playground', '/playground'],
-        ['Writer\'s Notes', this.PathInfo.notes.Local],
-        ['Other\'s Art', this.PathInfo.othersart.Local]];
+        [new LinkListElement('Extras', this.PathInfo.extras.Local),
+        new LinkListElement('Playground', '/playground'),
+        new LinkListElement('Writer\'s Notes', this.PathInfo.notes.Local),
+        new LinkListElement('Other\'s Art', this.PathInfo.othersart.Local)];
 }
 
 export class LocalPaths {
