@@ -4,6 +4,7 @@ import { Router, ActivatedRoute }             from '@angular/router';
 
 import { GlobalVarsService }                  from 'src/app/GlobalServices/global-vars.service';
 import { GetRouteSegmentsService }            from 'src/app/GlobalServices/commonfunctions.service';
+import { RefocusService }                     from '../refocus.service';
 
 @Component({
   selector: 'app-blowup',
@@ -36,6 +37,7 @@ export class BlowUpComponent implements OnInit {
   constructor(private router: Router,
               private route: ActivatedRoute,
               private getsegserv: GetRouteSegmentsService,
+              private refocusserv: RefocusService,
               private global: GlobalVarsService) { }
 
   ngOnInit() {
@@ -103,6 +105,7 @@ export class BlowUpComponent implements OnInit {
 
     if(event.key === 'Escape') {//escape
       this.router.navigate([`${this.gridPath}`]);
+      this.refocusserv.triggerRefocus();
     }
   }
 

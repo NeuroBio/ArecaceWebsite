@@ -5,6 +5,7 @@ import { FocusKeyManager }                          from '@angular/cdk/a11y';
 import { Subscription }                             from 'rxjs';
 
 import { SliderService }                            from 'src/app/SharedComponentModules/SmallComponents/slider/slider.service';
+import { RefocusService }                           from '../refocus.service';
 
 import { ImageLinkComponent }                       from '../image-link/image-link.component';
 
@@ -18,17 +19,21 @@ export class GridComponent implements OnInit, OnDestroy, AfterViewInit {
 
   @Input() collect: any[];
   preview: boolean;
-  stream: Subscription;
+  stream1: Subscription;
+  stream2: Subscription;
 
   keyManager: FocusKeyManager<QueryList<any>>;
   @ViewChildren(ImageLinkComponent) items: QueryList<any>;
   leave = false;
 
-  constructor(private sliderserv: SliderService) { }
+  constructor(private sliderserv: SliderService,
+              private refocusserv: RefocusService) { }
 
   ngOnInit() {
-    this.stream = this.sliderserv.preview
+    this.stream1 = this.sliderserv.preview
       .subscribe(preview => this.preview = preview);
+    this.stream2 = this.refocusserv.Refocus
+      .subscribe(() => this.focus());
   }
 
   ngAfterViewInit() {
@@ -38,7 +43,8 @@ export class GridComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngOnDestroy() {
-    this.stream.unsubscribe();
+    this.stream1.unsubscribe();
+    this.stream2.unsubscribe();
   }
 
   handleKeyDown(event: KeyboardEvent) {
