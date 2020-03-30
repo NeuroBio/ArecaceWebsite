@@ -5,9 +5,10 @@ aria-label="Pixel-Art"
 (focus)="focus()"
 (keydown)="handleKeyDown($event)">
   <li *ngFor="let pixel of pixels">
-    <app-pixel-soldier
-    [pixel]="pixel"
-    ></app-pixel-soldier>
-    
+
+    <app-link-list-element
+    [href] ="pixel.ArtistLink">
+        <img #Host [src]="pixel.Links[0]" [title]="'By ' + pixel.Artist + ', ' + pixel.Date">
+    </app-link-list-element>
   </li>
 </ul>

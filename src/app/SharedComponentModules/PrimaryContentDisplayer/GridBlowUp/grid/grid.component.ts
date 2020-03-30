@@ -7,11 +7,12 @@ import { Subscription }                             from 'rxjs';
 import { SliderService }                            from 'src/app/SharedComponentModules/SmallComponents/slider/slider.service';
 import { RefocusService }                           from '../refocus.service';
 
-import { ImageLinkComponent }                       from '../image-link/image-link.component';
+import { LinkListElementComponent }                 from '../../../SmallComponents/link-list-element/link-list-element/link-list-element.component';
 
 @Component({
   selector: 'app-grid',
   templateUrl: './grid.component.html',
+  
   styleUrls: ['./grid.component.css']
 })
 
@@ -23,7 +24,7 @@ export class GridComponent implements OnInit, OnDestroy, AfterViewInit {
   stream2: Subscription;
 
   keyManager: FocusKeyManager<QueryList<any>>;
-  @ViewChildren(ImageLinkComponent) items: QueryList<any>;
+  @ViewChildren(LinkListElementComponent) items: QueryList<any>;
   leave = false;
 
   constructor(private sliderserv: SliderService,

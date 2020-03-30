@@ -2,11 +2,15 @@
   <ul  (keydown)="handleKeyDown($event)"
   tabindex="0" id="outer" (focus)="focus()"
   [attr.tabindex]="leave === true ? -1 : 0">
-    <li class="item" *ngFor="let member of collect">
-      <app-image-link
-      [item]="member"
-      [preview]="preview"
-      ></app-image-link>
+    <li *ngFor="let item of collect" class="gridli">
+
+      <app-link-list-element
+      [route]="preview === true ? item.ID : item.ID+'/Download'">
+          <div id="imageholder">
+            <img class="thumb" [src]="item.Links[0]" alt=""><br>
+          </div>
+          <div class="thumbtext">{{ item.Name }}</div>
+      </app-link-list-element>
     </li>
   </ul>
 </nav>

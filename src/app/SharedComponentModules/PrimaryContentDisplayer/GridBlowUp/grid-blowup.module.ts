@@ -2,22 +2,22 @@ import { NgModule }               from '@angular/core';
 import { CommonModule }           from '@angular/common';
 import { RouterModule }           from '@angular/router';
 
+import { BookmarkModule }         from '../../SmallComponents/bookmark/bookmark.module';
+import { LinkListElementModule }  from '../../SmallComponents/link-list-element/link-list-element.module';
 import { BlowUpComponent }        from './blowup/blowup.component';
 import { BlowupmasterComponent }  from './blowupmaster/blowupmaster.component';
 import { GridComponent }          from './grid/grid.component';
-import { BookmarkModule }         from '../../SmallComponents/bookmark/bookmark.module';
-import { ImageLinkComponent }     from './image-link/image-link.component';
 
 @NgModule({
   declarations: [
     BlowUpComponent,
     BlowupmasterComponent,
     GridComponent,
-    ImageLinkComponent
   ],
   imports: [
     CommonModule,
     BookmarkModule,
+    LinkListElementModule,
     RouterModule
   ],
   exports: [

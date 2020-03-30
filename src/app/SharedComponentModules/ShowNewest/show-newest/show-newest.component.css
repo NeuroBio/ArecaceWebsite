@@ -87,3 +87,38 @@ img#left {
     transform: rotate(90deg);
     background-color: rgba(0,0,0,.3);
 }
+
+
+
+.displayItem {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 20px;
+    display: inline-block;
+    border: 3px solid #454545;
+    margin: 7px;
+    background-color: rgb(116, 116, 116);
+    height: 150px;
+    width: 150px;
+    flex-shrink: 0;
+    background-repeat: no-repeat;
+    cursor: pointer;
+    background-position: center;
+    text-align: center;
+    background-size: contain;
+}
+
+.displayItem:hover {
+    color: black;
+    background-color: rgb(158, 158, 158);
+    border: 3px solid white;
+}
+
+.displayItem:focus {
+    color: black;
+    background-color: rgb(158, 158, 158);
+    border: 3px solid white;
+}
+
+::ng-deep app-link-list-element a.linklistelement {
+    display: inline-block;
+}

@@ -1,12 +1,14 @@
-import { Component, OnInit, ViewChildren, QueryList, AfterViewInit }  from '@angular/core';
+import { Component, OnInit, ViewChildren,
+         QueryList, AfterViewInit }       from '@angular/core';
+import { FocusKeyManager }                from '@angular/cdk/a11y';
 
 import { Observable }         from 'rxjs';
 import { map }                from 'rxjs/operators';
 
 import { AuthService }        from 'src/app/administration/security/Auth/auth.service';
 import { FireBaseService }    from 'src/app/GlobalServices/firebase.service';
-import { FocusKeyManager } from '@angular/cdk/a11y';
-import { PixelSoldierComponent } from '../pixel-soldier/pixel-soldier.component';
+
+import { LinkListElementComponent } from 'src/app/SharedComponentModules/SmallComponents/link-list-element/link-list-element/link-list-element.component';
 
 @Component({
   selector: 'app-pixel-army',
@@ -19,7 +21,7 @@ export class PixelArmyComponent implements OnInit, AfterViewInit {
   pixels$: Observable<any>;
   leave: boolean = false;
   keyManager: FocusKeyManager<any>;
-  @ViewChildren(PixelSoldierComponent) items: QueryList<any>
+  @ViewChildren(LinkListElementComponent) items: QueryList<any>
 
   constructor(private firebaseserv: FireBaseService,
               private auth: AuthService) { }

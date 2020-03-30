@@ -13,9 +13,9 @@
         (focus)="focus('header')">
             <li *ngFor="let link of headerLinkList" class="navverContainer">
                 <app-link-list-element
-                #header
-                [item]="[link.name, link.link]"
-                ></app-link-list-element>
+                #header [route]="link.link">
+                    {{ link.name }}
+                </app-link-list-element>
                 <!-- <a class="navver" [routerLink]="link.link">{{ link.name }}</a> -->
             </li>
         </ul>
@@ -36,9 +36,9 @@
         (focus)="focus('footer')">
             <li *ngFor="let link of footerLinkList; let i = index" class="footli">
                 <app-link-list-element
-                #footer
-                [item]="[link.name, link.link]"
-                ></app-link-list-element>
+                #footer [route]="link.link">
+                    {{ link.name }}
+                </app-link-list-element>
                 <span *ngIf="i !== footerLinkList.length-1"><b>|</b></span>
             </li>
         </ul>

@@ -10,10 +10,17 @@
         <ul #itemBand [attr.tabindex]="leave === true ? -1 : 0"
         (focus)="focus()"
         (keydown)="handleKeyDown($event)">
-          <li *ngFor="let member of display">
-            <app-new-item
+          <li *ngFor="let item of display">
+            <app-link-list-element
+            [route]="item.Link">
+              <div class="strokeme displayItem"
+              [style.background-image]="'url('+item.Image+')'">
+                {{ item.Name }}
+              </div>
+            </app-link-list-element>
+            <!-- <app-new-item
             [item]="member"
-            ></app-new-item>
+            ></app-new-item> -->
           </li>
         </ul>
       </nav>

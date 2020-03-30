@@ -8,8 +8,7 @@ import { map }                                      from 'rxjs/operators';
 
 import { FireBaseService }                          from 'src/app/GlobalServices/firebase.service';
 
-import { NewItemComponent }                         from '../new-item/new-item.component';
-
+import { LinkListElementComponent } from 'src/app/SharedComponentModules/SmallComponents/link-list-element/link-list-element/link-list-element.component';
 @Component({
   selector: 'app-show-newest',
   templateUrl: './show-newest.component.html',
@@ -33,7 +32,7 @@ export class ShowNewestComponent implements OnInit, OnDestroy, AfterViewInit {
   stream: Subscription;
 
   keyManager: FocusKeyManager<any>
-  @ViewChildren(NewItemComponent) items: QueryList<any>;
+  @ViewChildren(LinkListElementComponent) items: QueryList<any>;
   leave: boolean = false;
 
   constructor(private firebaseserv: FireBaseService) { }

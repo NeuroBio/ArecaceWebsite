@@ -4,8 +4,9 @@ tabindex="-1" (keydown)="handleKeyDown($event)"
   <li class="linklistelement"
   *ngFor="let namelink of list">
     <app-link-list-element
-    [item]="namelink"
-    [active]="namelink[1] === current"
-    ></app-link-list-element>
+    [route]="namelink[1]"
+    [active]="namelink[1] === current">
+      {{ namelink[0] }}
+    </app-link-list-element>
   </li>
 </ul>
