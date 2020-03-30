@@ -21,7 +21,7 @@
   z-index: 1;
 }
 
-.menubar {
+ul.menubar {
   list-style-type: none;
   margin: 0px;
   padding: 0px;

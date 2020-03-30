@@ -7,11 +7,13 @@ import { SliderModule }             from 'src/app/SharedComponentModules/SmallCo
 
 import { OthersArtComponent }       from '../others-art/main/others-art.component';
 import { PixelArmyComponent }       from '../others-art/pixel-army/pixel-army.component';
+import { PixelSoldierComponent } from './pixel-soldier/pixel-soldier.component';
 
 @NgModule({
   declarations: [
     OthersArtComponent,
-    PixelArmyComponent
+    PixelArmyComponent,
+    PixelSoldierComponent
   ],
   imports: [
     CommonModule,

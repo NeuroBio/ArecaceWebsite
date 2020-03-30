@@ -5,3 +5,14 @@
     flex-wrap: wrap;
     justify-content: center;
 }
+
+ul {
+    list-style-type: none;
+    margin: 0px;
+    padding: 0px;
+}
+
+li {
+    margin: 0px;
+    padding: 0px;
+}

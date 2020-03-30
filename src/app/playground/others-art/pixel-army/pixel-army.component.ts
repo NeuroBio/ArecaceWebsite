@@ -1,10 +1,12 @@
-import { Component, OnInit }  from '@angular/core';
+import { Component, OnInit, ViewChildren, QueryList, AfterViewInit }  from '@angular/core';
 
 import { Observable }         from 'rxjs';
 import { map }                from 'rxjs/operators';
 
 import { AuthService }        from 'src/app/administration/security/Auth/auth.service';
 import { FireBaseService }    from 'src/app/GlobalServices/firebase.service';
+import { FocusKeyManager } from '@angular/cdk/a11y';
+import { PixelSoldierComponent } from '../pixel-soldier/pixel-soldier.component';
 
 @Component({
   selector: 'app-pixel-army',
@@ -12,9 +14,12 @@ import { FireBaseService }    from 'src/app/GlobalServices/firebase.service';
   styleUrls: ['./pixel-army.component.css']
 })
 
-export class PixelArmyComponent implements OnInit {
+export class PixelArmyComponent implements OnInit, AfterViewInit {
 
   pixels$: Observable<any>;
+  leave: boolean = false;
+  keyManager: FocusKeyManager<any>;
+  @ViewChildren(PixelSoldierComponent) items: QueryList<any>
 
   constructor(private firebaseserv: FireBaseService,
               private auth: AuthService) { }
@@ -31,4 +36,27 @@ export class PixelArmyComponent implements OnInit {
       map(art => art.sort((a,b) => a.Date > b.Date ? -1 : 1)) );
   }
 
+  ngAfterViewInit() {
+    this.keyManager = new FocusKeyManager<any>(this.items)
+    .withHorizontalOrientation('ltr');
+  }
+
+  handleKeyDown(event: KeyboardEvent){
+    if(event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
+      event.stopImmediatePropagation();
+      this.keyManager.onKeydown(event);
+    }
+
+    if(event.key === 'Tab') {
+      this.leave = true;
+      setTimeout(() => { this.leave = false }, 10);
+    }
+  }
+
+  focus() {
+    if(!this.keyManager.activeItem) {
+      this.keyManager.setFirstItemActive();
+    }
+    this.keyManager.activeItem.focus();
+  }
 }
