@@ -3,7 +3,7 @@ import { CommonModule }           from '@angular/common';
 import { RouterModule }           from '@angular/router';
 
 import { BookmarkModule }         from '../../SmallComponents/bookmark/bookmark.module';
-import { LinkListElementModule }  from '../../SmallComponents/link-list-element/link-list-element.module';
+import { LinkListElementModule }  from '../../SmallComponents/LinkList/link-list-element.module';
 import { BlowUpComponent }        from './blowup/blowup.component';
 import { BlowupmasterComponent }  from './blowupmaster/blowupmaster.component';
 import { GridComponent }          from './grid/grid.component';

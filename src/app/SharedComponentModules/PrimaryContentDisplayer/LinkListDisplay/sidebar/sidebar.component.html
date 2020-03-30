@@ -1,36 +1,43 @@
 <div #container class="linklistcontainer">
 
-  <svg id ="greyband" [style.height.px]="greybarHeight">
-      <rect width="100%" height="100%" style="fill:#616161"/>
-  </svg>
+    <svg id ="greyband" [style.height.px]="greybarHeight">
+        <rect width="100%" height="100%" style="fill:#616161"/>
+    </svg>
 
-  
+      
 
-  <nav id="linklistHolder"
-  [style.maxHeight.px]="listHeight"
-  (window:resize)="onResize()"
-  aria-label="Content-Navigation">
+    <nav id="linklistHolder"
+    [style.maxHeight.px]="listHeight"
+    (window:resize)="onResize()"
+    aria-label="Content-Navigation">
 
-    <ul #list class="menubar"
-    [attr.tabindex]="leave === true ? -1 : 0"
-    (keydown)="handleKeyDown($event)"
-    (focus)="focus()">
-      <li *ngFor="let list of linkList, let i = index"
-      class="menuitem" aria-labelledby="type">
-          <hr *ngIf="i!==0">
-          <div class="linklistlabel" id="type">{{ labels[i] }}</div>
-          <hr>
-          <app-link-list
-          [maxWidth]="'250px'"
-          [label]="labels[i]"
-          [list]="list"
-          [current]="current"
-          (lableEmitter)="onSelect($event)"
-          ></app-link-list>
-      </li>
-    </ul>
+        <ul #list class="menubar"
+        [attr.tabindex]="leave === true ? -1 : 0"
+        (keydown)="handleKeyDown($event)" (focus)="focus()">    
+            <li *ngFor="let list of linkList, let i = index"
+            class="menuitem" aria-labelledby="type">
 
-  </nav>
+                <!-- Label -->
+                <hr *ngIf="i!==0">
+                <div class="linklistlabel" id="type">{{ list.Name }}</div>
+                <hr>
+
+                <!-- Actual Link List -->
+                <app-link-list class="options"
+                [style.max-width.px]="250"
+                [label]="list.Name"
+                [list]="list.Data"
+                [current]="current"
+                (lableEmitter)="onSelect($event)">
+                    <!-- Item Template -->
+                    <ng-template let-item #Content>
+                      {{ item.ListName }}
+                    </ng-template>
+                </app-link-list>
+            </li>
+        </ul>
+
+    </nav>
 
 
 

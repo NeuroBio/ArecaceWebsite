@@ -8,7 +8,7 @@ import { map }                from 'rxjs/operators';
 import { AuthService }        from 'src/app/administration/security/Auth/auth.service';
 import { FireBaseService }    from 'src/app/GlobalServices/firebase.service';
 
-import { LinkListElementComponent } from 'src/app/SharedComponentModules/SmallComponents/link-list-element/link-list-element/link-list-element.component';
+import { LinkListElementComponent } from 'src/app/SharedComponentModules/SmallComponents/LinkList/link-list-element/link-list-element.component';
 
 @Component({
   selector: 'app-pixel-army',

@@ -43,7 +43,9 @@ ul.menubar {
   z-index: 2;
 }
 
-.linklist {
+
+/* List */
+::ng-deep app-link-list.options .linklist {
   list-style-type: circle;
   font-family: 'Courier New', Courier, monospace;
   font-weight: bold;
@@ -58,11 +60,7 @@ ul.menubar {
   height: 100%;
 }
 
-.linklistelement {
-  border: 0px;
-  margin: 0px 0px 0px 0px;
-}
-
+/* Final Elements */
 ::ng-deep .linklistelement app-link-list-element a.linklistelement {
   display: inline-block;
   height: inherit;

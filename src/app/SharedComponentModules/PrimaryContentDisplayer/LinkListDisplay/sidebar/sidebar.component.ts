@@ -3,7 +3,10 @@ import { Component, Input, ViewChild, ElementRef,
          AfterViewInit }                          from '@angular/core';
 import { FocusKeyManager }                        from '@angular/cdk/a11y';
 
-import { LinkListComponent }                      from '../link-list/link-list.component';
+import { LinkListComponent }                      from '../../../SmallComponents/LinkList/link-list/link-list.component';
+
+import { LinkList }                               from '../../../SmallComponents/LinkList/linklist';
+import { LinkListElement }                               from '../../../SmallComponents/LinkList/linklist';
 
 @Component({
   selector: 'app-sidebar',
@@ -14,11 +17,15 @@ import { LinkListComponent }                      from '../link-list/link-list.c
 export class SideBarComponent implements AfterViewInit {
 
 
-  @Input() labels: string[] = ["default", "Sub"];
-  @Input() linkList: string[][][] = [ [ ["tester 1", "tester1"],
-                                        ["tester 2", "tester2"],
-                                        ["tester 3", "tester3"] ],
-                                    [ ['subtester 1', 'subtester1'] ] ];
+  // @Input() labels: string[] = ["default", "Sub"];
+  // @Input() linkList: string[][][] = [ [ ["tester 1", "tester1"],
+  //                                       ["tester 2", "tester2"],
+  //                                       ["tester 3", "tester3"] ],
+  //                                   [ ['subtester 1', 'subtester1'] ] ];
+  @Input() linkList: LinkList[] = [ new LinkList('default', [ new LinkListElement('tester 1', 'tester1'),
+                                                              new LinkListElement('tester 2', 'tester2'),
+                                                              new LinkListElement('tester 3', 'tester3') ]),
+                                    new LinkList('defaultSub', [new LinkListElement('subtester 1', 'subtester1')]) ];
   @Input() current: string = "tester2";
 
   @ViewChild('container', { static: true }) container: ElementRef;
@@ -69,7 +76,8 @@ export class SideBarComponent implements AfterViewInit {
 
   onSelect(selected: string) {
     if(this.keyManager) {
-      this.keyManager.setActiveItem(this.labels.findIndex(lab => lab === selected));
+      this.keyManager.setActiveItem(this.linkList
+        .findIndex(list => list.Name === selected));
     } else {
       this.initialLabel = selected;
     }
@@ -92,7 +100,7 @@ export class SideBarComponent implements AfterViewInit {
     if(!this.keyManager.activeItem) {
       this.keyManager.setFirstItemActive();
     }
-    this.keyManager.activeItem.focus();
+    this.keyManager.activeItem.focusAbove();
   }
 
 }

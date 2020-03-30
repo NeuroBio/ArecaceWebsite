@@ -2,7 +2,8 @@ import { Component, OnInit, Input, ViewChild,
          ElementRef, QueryList, ViewChildren }  from '@angular/core';
 import { FocusKeyManager }                      from '@angular/cdk/a11y';
 
-import { LinkListComponent }                    from '../link-list/link-list.component';
+import { LinkListComponent }                    from '../../../SmallComponents/LinkList/link-list/link-list.component';
+import { LinkList, LinkListElement }            from 'src/app/SharedComponentModules/SmallComponents/LinkList/linklist';
 
 @Component({
   selector: 'app-drop-down',
@@ -13,11 +14,10 @@ import { LinkListComponent }                    from '../link-list/link-list.com
 
 export class DropDownComponent implements OnInit {
 
-  @Input() labels: string[] = ["default", "Sub"];
-  @Input() linkList: string[][][] = [ [ ["tester 1", "tester1"],
-                                        ["tester 2", "tester2"],
-                                        ["tester 3", "tester3"] ],
-                                    [ ['subtester 1', 'subtester1'] ] ];
+  @Input() linkList: LinkList[] = [ new LinkList('default', [ new LinkListElement('tester 1', 'tester1'),
+                                                              new LinkListElement('tester 2', 'tester2'),
+                                                              new LinkListElement('tester 3', 'tester3') ]),
+                                    new LinkList('defaultSub', [new LinkListElement('subtester 1', 'subtester1')]) ];
   @Input() current: string = "tester2";
   revealArray: boolean[] = [];
   @ViewChild('linkListHolder', { static: true }) linkListHolder: ElementRef;
@@ -32,7 +32,7 @@ export class DropDownComponent implements OnInit {
   
 
   ngOnInit() {
-    this.labels.forEach(() => {
+    this.linkList.forEach(() => {
       this.revealArray.push(false);
       this.rotationArray.push(0);
     });
@@ -46,7 +46,8 @@ export class DropDownComponent implements OnInit {
 
   onSelect(selected: string) {
     if(this.keyManager) {
-      this.keyManager.setActiveItem(this.labels.findIndex(lab => lab === selected));
+      this.keyManager.setActiveItem(this.linkList
+        .findIndex(list => list.Name === selected));
     } else {
       this.initialLabel = selected;
     }
@@ -76,7 +77,7 @@ export class DropDownComponent implements OnInit {
         && this.keyManager.activeItemIndex > -1) {
         this.onReveal(this.keyManager.activeItemIndex + 1, false);
       } else if(event.key === 'ArrowDown'
-                && this.keyManager.activeItemIndex < this.labels.length) {
+                && this.keyManager.activeItemIndex < this.linkList.length) {
         this.onReveal(this.keyManager.activeItemIndex - 1, false);
       }
       return false;
@@ -92,7 +93,7 @@ export class DropDownComponent implements OnInit {
       this.keyManager.setFirstItemActive();
     }
     this.onReveal(this.keyManager.activeItemIndex, true);
-    setTimeout(() => { this.keyManager.activeItem.focus(); }, 5);
+    setTimeout(() => { this.keyManager.activeItem.focusAbove(); }, 5);
   }
 
 }

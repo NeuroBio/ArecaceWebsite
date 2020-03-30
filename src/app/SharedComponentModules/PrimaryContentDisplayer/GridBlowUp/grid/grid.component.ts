@@ -7,7 +7,7 @@ import { Subscription }                             from 'rxjs';
 import { SliderService }                            from 'src/app/SharedComponentModules/SmallComponents/slider/slider.service';
 import { RefocusService }                           from '../refocus.service';
 
-import { LinkListElementComponent }                 from '../../../SmallComponents/link-list-element/link-list-element/link-list-element.component';
+import { LinkListElementComponent }                 from '../../../SmallComponents/LinkList/link-list-element/link-list-element.component';
 
 @Component({
   selector: 'app-grid',

@@ -29,8 +29,11 @@
 
 <!-- FOOTER -->
 <hr>
-<footer role="contentinfo">
+<!-- <footer role="contentinfo">
     <nav aria-label="footer-navigation">
+        <app-link-list class="footer"
+          [list]="footerLinkList"
+          ></app-link-list>
         <ul [attr.tabindex]="footerLeave === true ? -1 : 0"
         (keydown)="handleKeyDown($event, 'footer')"
         (focus)="focus('footer')">
@@ -46,4 +49,4 @@
     <p id="footer">
         &copy;kArA Redwing: Website 2018-{{ year }}, Content 2004-{{ year }}
     </p>
-</footer>
+</footer> -->

@@ -4,7 +4,7 @@ import { RouterModule }         from '@angular/router';
 
 import { ShowNewestComponent }  from './show-newest/show-newest.component';
 
-import { LinkListElementModule} from '../SmallComponents/link-list-element/link-list-element.module';
+import { LinkListElementModule} from '../SmallComponents/LinkList/link-list-element.module';
 
 @NgModule({
   declarations: [

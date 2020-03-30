@@ -1,6 +1,9 @@
 import { Component, Input, OnInit, OnDestroy }      from '@angular/core';
 
 import { GeneralcollectionService }                 from 'src/app/GlobalServices/generalcollection.service';
+
+import { LinkList }                                 from 'src/app/SharedComponentModules/SmallComponents/LinkList/linklist';
+
 @Component({
   selector: 'app-main-display',
   templateUrl: './main-display.component.html',
@@ -10,8 +13,7 @@ import { GeneralcollectionService }                 from 'src/app/GlobalServices
 export class MainDisplayComponent implements OnInit, OnDestroy {
 
   @Input() current: string;
-  @Input() labels: string[];
-  @Input() linkList: string[][][];
+  @Input() linkList: LinkList[];
 
   constructor(private generalcollectserv: GeneralcollectionService) { }
 

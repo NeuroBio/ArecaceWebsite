@@ -17,7 +17,7 @@ import { AuthService }                from './administration/security/Auth/auth.
 import { TextProvider }               from './GlobalServices/textprovider.service';
 
 import { AppRoutingModule }           from './app-routing.module';
-import { LinkListElementModule }      from './SharedComponentModules/SmallComponents/link-list-element/link-list-element.module';
+import { LinkListElementModule }      from './SharedComponentModules/SmallComponents/LinkList/link-list-element.module';
 import { ScrollFrameModule }          from './SharedComponentModules/SmallComponents/scroll-frame/scroll-frame.module';
 import { ShowNewestModule }           from './SharedComponentModules/ShowNewest/show-newest.module';
 import { UpdatefeedModule }           from './SharedComponentModules/UpdateFeed/updatefeed.module';

@@ -1,0 +1,24 @@
+<ul #Host class="linklist"
+(keydown)="handleKeyDown($event)"
+[attr.tabindex]="leave === true ? -1 : 0"
+(focus)="focus()">
+    <li class="linklistelement"
+    *ngFor="let item of list">
+
+        <app-link-list-element
+        [route]="item.Route"
+        [href]="item.Href"
+        [active]="item.ListName === current">
+            <ng-container
+                  [ngTemplateOutlet]="itemTemplateRef"
+                  [ngTemplateOutletContext]="{$implicit: item}">
+            </ng-container>
+        </app-link-list-element>
+
+    </li>
+</ul>
+
+<!-- <ng-template #content>
+  lol
+  <ng-content></ng-content>
+</ng-template> -->
