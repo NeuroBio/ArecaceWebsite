@@ -7,6 +7,7 @@ import { map }                          from 'rxjs/operators';
 import { GeneralcollectionService }     from 'src/app/GlobalServices/generalcollection.service';
 
 import { ReferenceCategories }          from 'src/app/Classes/UploadDownloadPaths';
+import { LinkList, LinkListElement }    from 'src/app/SharedComponentModules/SmallComponents/LinkList/linklist';
 
 @Component({
   selector: 'app-sourcesiphoindmain',
@@ -16,9 +17,8 @@ import { ReferenceCategories }          from 'src/app/Classes/UploadDownloadPath
 export class SourceSiphoidMainComponent implements OnInit {
 
   cats: ReferenceCategories = new ReferenceCategories;
-  labels: string[] = this.cats.source;
   current: string;
-  sourceRefs$: Observable<string[][][]>;
+  sourceRefs$: Observable<LinkList[]>;
 
   constructor(private generalcollectserv: GeneralcollectionService,
               private route: ActivatedRoute) { }
@@ -26,11 +26,12 @@ export class SourceSiphoidMainComponent implements OnInit {
   ngOnInit() {
     this.sourceRefs$ = this.generalcollectserv.returnMetaData().pipe(
       map(refs => {
-        let final:string[][][] = [];
-        for(let cat of this.labels) {
-          final.push(refs
-               .filter(ref => ref.Category === cat)
-               .map(filtered => [filtered.Topic, filtered.ID]));
+        let final:LinkList[] = [];
+        for(let cat of this.cats.source) {
+          const Data = refs.filter(ref =>
+            ref.Category === cat).map(filtered =>
+            new LinkListElement(filtered.Topic, filtered.ID));
+          final.push(new LinkList(cat, Data));
         }
         return final; 
       }) );

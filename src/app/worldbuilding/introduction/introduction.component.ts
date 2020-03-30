@@ -23,8 +23,7 @@ export class IntroductionComponent implements OnInit {
     this.titleserv.setTitle('Introduction')
     window.scroll(0,0);
     const temp = this.textprovider.WebsiteText
-      .find(member =>
-        member.ID =='intro');
+      .find(member => member.ID =='intro');
     this.mainText = JSON.parse(temp.Intros);
     if(temp.Links) {
       this.links = temp.Links;

@@ -7,6 +7,7 @@ import { map }                        from 'rxjs/operators';
 import { GeneralcollectionService }   from 'src/app/GlobalServices/generalcollection.service';
 
 import { ReferenceCategories }        from 'src/app/Classes/UploadDownloadPaths';
+import { LinkList, LinkListElement }  from 'src/app/SharedComponentModules/SmallComponents/LinkList/linklist';
 
 @Component({
   selector: 'app-culturemain',
@@ -15,9 +16,8 @@ import { ReferenceCategories }        from 'src/app/Classes/UploadDownloadPaths'
 export class CulturemainComponent implements OnInit {
 
   cats: ReferenceCategories = new ReferenceCategories;
-  labels: string[] = this.cats.culture;
   current: string;
-  cultureRefs$: Observable<string[][][]>;
+  cultureRefs$: Observable<LinkList[]>;
 
   constructor(private generalcollectserv: GeneralcollectionService,
               private route: ActivatedRoute) { }
@@ -25,10 +25,12 @@ export class CulturemainComponent implements OnInit {
   ngOnInit() {
     this.cultureRefs$ = this.generalcollectserv.returnMetaData().pipe(
       map(refs => {
-        let final:string[][][] = [];
-        for(let cat of this.labels) {
-          final.push(refs.filter(ref => ref.Category === cat)
-                          .map(filtered => [filtered.Topic, filtered.ID]));
+        let final: LinkList[] = [];
+        for(let cat of this.cats.culture) {
+          const Data = refs.filter(ref =>
+            ref.Category === cat).map(filtered =>
+            new LinkListElement(filtered.Topic, filtered.ID));
+          final.push(new LinkList(cat, Data));
         }
         return final; 
       })
