@@ -53,7 +53,6 @@ export class BestiaryComponent implements OnInit, OnDestroy {
                              : 0)
       ).unsubscribe();
     }
-    console.log(this.Grid.collect)
     this.gridserv.triggerSorted();
   }
 

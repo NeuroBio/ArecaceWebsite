@@ -22,8 +22,8 @@ aria-label="Pixel-Art">
         <!-- Item Template -->
         <ng-template let-item #Content>
           <img #Host [src]="item.Item.Links[0]"
-          [title]="'By ' + item.Item.Artist + ', ' + item.Item.Date"
-          [alt]="'By ' + item.Item.Artist + ', ' + item.Item.Date">
+          [title]="item.ListName + ' by ' + item.Item.Artist + ', ' + item.Item.Date"
+          [alt]="item.ListName + ' by ' + item.Item.Artist + ', ' + item.Item.Date">
         </ng-template>
     </app-link-list>
  </div>
