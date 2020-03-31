@@ -6,13 +6,6 @@
     justify-content: center;
 }
 
-ul {
-    list-style-type: none;
-    margin: 0px;
-    padding: 0px;
-}
-
-li {
-    margin: 0px;
-    padding: 0px;
+::ng-deep app-link-list.PixelList li {
+    display: inline-block;
 }

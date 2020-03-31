@@ -1,4 +1,4 @@
-<ul id="background"
+<!-- <ul id="background"
 *ngIf="pixels$ | async as pixels"
 aria-label="Pixel-Art"
 [attr.tabindex]="leave === true ? -1 : 0"
@@ -11,4 +11,19 @@ aria-label="Pixel-Art"
         <img #Host [src]="pixel.Links[0]" [title]="'By ' + pixel.Artist + ', ' + pixel.Date">
     </app-link-list-element>
   </li>
-</ul>
+</ul> -->
+
+ <!-- Actual Link List -->
+<div id="background"
+*ngIf="pixels$ | async as pixels"
+aria-label="Pixel-Art">
+    <app-link-list class="PixelList"
+    [list]="pixels">
+        <!-- Item Template -->
+        <ng-template let-item #Content>
+          <img #Host [src]="item.Item.Links[0]"
+          [title]="'By ' + item.Item.Artist + ', ' + item.Item.Date"
+          [alt]="'By ' + item.Item.Artist + ', ' + item.Item.Date">
+        </ng-template>
+    </app-link-list>
+ </div>
