@@ -16,12 +16,6 @@ import { LinkListElement }                               from '../../../SmallCom
 
 export class SideBarComponent implements AfterViewInit {
 
-
-  // @Input() labels: string[] = ["default", "Sub"];
-  // @Input() linkList: string[][][] = [ [ ["tester 1", "tester1"],
-  //                                       ["tester 2", "tester2"],
-  //                                       ["tester 3", "tester3"] ],
-  //                                   [ ['subtester 1', 'subtester1'] ] ];
   @Input() linkList: LinkList[] = [ new LinkList('default', [ new LinkListElement('tester 1', 'tester1'),
                                                               new LinkListElement('tester 2', 'tester2'),
                                                               new LinkListElement('tester 3', 'tester3') ]),

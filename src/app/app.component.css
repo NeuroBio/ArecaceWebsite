@@ -21,39 +21,20 @@ h1#websiteTitle {
   background-color: rgba(0,0,0,.4)
 }
 
-div#center {
-  position: absolute;
-  top: 50%;
-}
-
 nav#headerNav {
   margin: 5px;
   margin-bottom: 0px;
   padding-bottom: 10px;
 }
 
-nav#headerNav ul {
+.navverContainer {
   padding: 0px;
   margin: 0px;
-  display: inline-block;
 }
 
 /* The Footer*/
 footer {
-  margin: 10px;  
-
-}
-
-footer ul {
-  padding: 0px;
-  margin: 0px;
-  display: inline-block;
-}
-
-.footli {
-  padding: 0px;
-  margin: 0px;
-  display: inline-block;
+  margin: 10px;
 }
 
 p#footer {
@@ -62,21 +43,34 @@ p#footer {
   color: white;
 }
 
-footer a.linklistelement {
+.footerLink {
   font-size: 14px;
   padding: 0px 7px 0px 7px;
 }
 
-.navverContainer a.linklistelement:active {
+/* Styling out */
+::ng-deep app-link-list.homepageNav app-link-list-element {
+  padding: 1px;
+  margin-right: 7px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+::ng-deep app-link-list.homepageNav app-link-list-element a:focus .navverContainer {
+  background-color: whitesmoke;
+}
+
+::ng-deep app-link-list.homepageNav app-link-list-element a.linklistelement:active .navver {
   background-color: rgb(59, 59, 59);
 }
 
-.navverContainer a.linklistelement:hover {
-  color:black;
-  background-color: whitesmoke;
+::ng-deep app-link-list.homepageNav ul {
+  margin: 0px;
+  padding: 0px;
 }
 
-.navverContainer a.linklistelement:focus {
-  color:black;
-  background-color: whitesmoke;
+::ng-deep app-link-list.homepageNav li {
+  margin: 0px;
+  padding: 0px;
+  display: inline-block;
 }

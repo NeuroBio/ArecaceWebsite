@@ -5,7 +5,7 @@ import { Component, Input, ViewChild, ElementRef, OnInit } from '@angular/core';
   templateUrl: './link-list-element.component.html'
 })
 
-export class LinkListElementComponent implements OnInit{
+export class LinkListElementComponent implements OnInit {
 
     @Input() active: boolean;
     @Input() route: string;
@@ -16,15 +16,16 @@ export class LinkListElementComponent implements OnInit{
 
     ngOnInit() {
       if(this.route !== undefined) { //within site
-        this.Type = 'Route'
+        this.Type = 'Route';
       } else if(this.href !== '') { //link out
-        this.Type = 'Href'
+        this.Type = 'Href';
       } else { //no link out in a set of link outs
-        this.Type = 'Div'
+        this.Type = 'Div';
       }
     }
-        
+
     selectItem() {
+      this.Host.nativeElement.focus();
       this.Host.nativeElement.click();
     }
 

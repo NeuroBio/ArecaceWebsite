@@ -1,8 +1,8 @@
 <div class="background">
     <div id="outer">
-        <nav id="headerNav" aria-label="Calculator-Nav">
-            <div class="navverContainer" id="quickNav" name="CalcNav"
-            *ngFor="let link of links">
+        <nav id="calcNav" aria-label="Calculator-Nav">
+            <div class="navverContainer" id="quickNav"
+            name="CalcNav" *ngFor="let link of links">
                 <a class="navver" [routerLink]="link.Link">{{ link.Title }}</a>
             </div>
         </nav>

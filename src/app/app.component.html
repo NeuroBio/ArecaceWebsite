@@ -7,18 +7,22 @@
 <!-- HEADER AND BANNER -->
 <header role="banner" id="banner">
     <h1 id="websiteTitle">Arecace</h1>
+
+
+    <!-- Primary Navigation -->
     <nav id="headerNav" aria-label="primary-navigation">
-        <ul  [attr.tabindex]="headerLeave === true ? -1 : 0"
-        (keydown)="handleKeyDown($event, 'header')"
-        (focus)="focus('header')">
-            <li *ngFor="let link of headerLinkList" class="navverContainer">
-                <app-link-list-element
-                #header [route]="link.link">
-                    {{ link.name }}
-                </app-link-list-element>
-                <!-- <a class="navver" [routerLink]="link.link">{{ link.name }}</a> -->
-            </li>
-        </ul>
+         <!-- Actual Link List -->
+         <app-link-list class="homepageNav"
+         [list]="headerLinkList.Data">
+             <!-- Item Template -->
+             <ng-template let-item #Content>
+                 <div class="navverContainer">
+                     <div class="navver">
+                        {{ item.ListName }}
+                     </div>
+                 </div>
+             </ng-template>
+         </app-link-list>
     </nav>
 </header>
 <hr>
@@ -29,12 +33,19 @@
 
 <!-- FOOTER -->
 <hr>
-<!-- <footer role="contentinfo">
+<footer role="contentinfo">
+
     <nav aria-label="footer-navigation">
-        <app-link-list class="footer"
-          [list]="footerLinkList"
-          ></app-link-list>
-        <ul [attr.tabindex]="footerLeave === true ? -1 : 0"
+        <app-link-list class="homepageNav"
+        [list]="footerLinkList.Data">
+        <ng-template let-item #Content>
+                <span class="footerLink">
+                   {{ item.ListName }}
+                </span>
+                <!-- <span *ngIf="i !== footerLinkLi    st.length-1"><b>|</b></span> -->
+        </ng-template>
+        </app-link-list>
+        <!-- <ul [attr.tabindex]="footerLeave === true ? -1 : 0"
         (keydown)="handleKeyDown($event, 'footer')"
         (focus)="focus('footer')">
             <li *ngFor="let link of footerLinkList; let i = index" class="footli">
@@ -44,9 +55,11 @@
                 </app-link-list-element>
                 <span *ngIf="i !== footerLinkList.length-1"><b>|</b></span>
             </li>
-        </ul>
+        </ul> -->
     </nav>
+
+
     <p id="footer">
         &copy;kArA Redwing: Website 2018-{{ year }}, Content 2004-{{ year }}
     </p>
-</footer> -->
+</footer>

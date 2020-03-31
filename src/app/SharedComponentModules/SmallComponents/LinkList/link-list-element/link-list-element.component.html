@@ -4,8 +4,7 @@
     <a *ngSwitchCase="'Route'"
     #Host tabindex="-1"
     [routerLink]="[route]" [queryParamsHandling]="queryParamsHandling"
-    class="linklistelement"
-    [class.selected]="active === true">
+    class="linklistelement" [class.selected]="active === true">
         <ng-container *ngTemplateOutlet="content"></ng-container>
     </a>
 

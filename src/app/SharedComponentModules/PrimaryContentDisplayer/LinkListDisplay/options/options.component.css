@@ -61,7 +61,7 @@ ul.menubar {
 }
 
 /* Final Elements */
-::ng-deep .linklistelement app-link-list-element a.linklistelement {
+::ng-deep app-link-list.options .linklistelement app-link-list-element a.linklistelement {
   display: inline-block;
   height: inherit;
   width: calc(100% - 8px);
@@ -72,22 +72,22 @@ ul.menubar {
   border-bottom: 2px solid rgb(82, 82, 82);
 }
 
-::ng-deep .linklistelement app-link-list-element a.linklistelement.selected {
+::ng-deep app-link-list.options .linklistelement app-link-list-element a.linklistelement.selected {
   background-color: #8b8b8b;
   border-bottom: 2px solid #8b8b8b;
 }
 
-::ng-deep .linklistelement app-link-list-element a.linklistelement:hover {
+::ng-deep app-link-list.options .linklistelement app-link-list-element a.linklistelement:hover {
   background-color: #8b8b8b;
   border-bottom: 2px solid #8b8b8b;
 }
 
-::ng-deep .linklistelement app-link-list-element a.linklistelement:active {
+::ng-deep app-link-list.options .linklistelement app-link-list-element a.linklistelement:active {
   background-color: #242424;
   border-bottom: 2px solid #242424;
 }
 
-::ng-deep .linklistelement app-link-list-element a.linklistelement:focus {
+::ng-deep app-link-list.options .linklistelement app-link-list-element a.linklistelement:focus {
   background-color: #8b8b8b;
   border-bottom: 2px solid #8b8b8b;
 }

@@ -5,12 +5,12 @@ import { ActivatedRoute }                         from '@angular/router';
 import { FocusKeyManager }                        from '@angular/cdk/a11y';
          
 import { GlobalVarsService}                       from './GlobalServices/global-vars.service';
+import { LinkListElement, LinkList } from './SharedComponentModules/SmallComponents/LinkList/linklist';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css'],
-  encapsulation: ViewEncapsulation.None
+  styleUrls: ['./app.component.css']
 })
 
 export class AppComponent implements AfterViewInit {
@@ -27,21 +27,23 @@ export class AppComponent implements AfterViewInit {
   @ViewChildren('footer') footItems: QueryList<any>;
   footerLeave = false;
 
-  headerLinkList: {}[] = [{ link:'home', name: 'Home' },
-                          { link:'comic', name: 'Comic' },
-                          { link:'story', name: 'Story' },
-                          { link:'world', name: 'World' },
-                          { link:'playground', name: '*Play*' },
-                          { link:'extras', name: 'Extras' },
-                          { link:'dash', name: 'Dash' }]
+  headerLinkList = new LinkList('header',
+    [ new LinkListElement('Home', 'home'),
+      new LinkListElement('Comic', 'comic'),
+      new LinkListElement('Story', 'story' ),
+      new LinkListElement('World', 'world'),
+      new LinkListElement('*Play*', 'playground'),
+      new LinkListElement('Extras', 'extras'),
+      new LinkListElement('Dash', 'dash') ]);
 
-  footerLinkList: {}[] = [{ link:'about', name: 'About' },
-                          { link: 'contact', name: 'Contact' },
-                          { link: 'faq', name: 'FAQ' },
-                          { link: 'sitemap', name: 'Site Map' },
-                          { link: 'guide', name: 'Traveler\'s Guide' },
-                          { link: 'privacy', name: 'Privacy Policy' }]
-  
+  footerLinkList = new LinkList('footer',
+    [ new LinkListElement('About', 'about'),
+      new LinkListElement('Contact', 'contact'),
+      new LinkListElement('FAQ', 'faq'),
+      new LinkListElement('Site Map', 'sitemap'),
+      new LinkListElement('Traveler\'s Guide', 'guide'),
+      new LinkListElement('Privacy Policy', 'privacy') ]);
+
   constructor(private global: GlobalVarsService,
               public route: ActivatedRoute) { }
   
