@@ -5,6 +5,7 @@ import { ReactiveFormsModule }            from '@angular/forms';
 
 import { CharacterComponentsModule }      from 'src/app/worldbuilding/characters/character-components/character-components.module';
 import { CharacterFormModule }            from 'src/app/SharedComponentModules/SharedForms/MakeCharacter/character-form.module';
+import { LinkListElementModule }          from 'src/app/SharedComponentModules/SmallComponents/LinkList/link-list-element.module';
 import { LoginModule }                    from '../SharedComponentModules/SmallComponents/LoginButton/login.module';
 import { PrimaryContentDisplayModule }    from 'src/app/SharedComponentModules/PrimaryContentDisplayer/primary-content-display.module';
 import { ScrollFrameModule }              from 'src/app/SharedComponentModules/SmallComponents/scroll-frame/scroll-frame.module';
@@ -40,6 +41,7 @@ import { UserInfoComponent }              from './user-info/user-info.component'
     CharacterComponentsModule,
     CharacterFormModule,
     ScrollFrameModule,
+    LinkListElementModule,
     
     UserDashRoutingModule
   ]

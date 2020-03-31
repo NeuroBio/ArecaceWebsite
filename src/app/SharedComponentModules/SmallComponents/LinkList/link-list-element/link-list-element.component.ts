@@ -20,7 +20,7 @@ export class LinkListElementComponent implements OnInit {
     ngOnInit() {
       if(this.route !== undefined) { //within site
         this.Type = 'Route';
-      } else if(this.href !== '') { //link out
+      } else if(this.href !== undefined && this.href !== '') { //link out
         this.Type = 'Href';
       } else { //no link out in a set of link outs
         this.Type = 'Div';

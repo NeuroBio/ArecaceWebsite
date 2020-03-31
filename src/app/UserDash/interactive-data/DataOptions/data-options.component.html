@@ -3,7 +3,7 @@
   [Title]="title"
   [Color]="'rgb(49, 49, 49)'">
   
-  <ul id="outer">
+  <!-- <ul id="outer">
     <div *ngFor="let name of names; let i = index">
       <li>{{ name }}</li>
       <button class="Exs" (click)="onView(i)"
@@ -13,6 +13,28 @@
       [attr.aria-label]="'Edit-' + Title + ':-'+ name"
       (click)="onEdit(i)">edit</button>
     </div>
+  </ul> -->
+
+  <ul id="outer" class="top">
+    <div *ngFor="let name of names; let i = index">
+      <li class="top">{{ name }}
+
+           <!-- Actual Link List -->
+            <app-link-list class="DiplayUserData"
+            [list]="LinkList.Data">
+                <!-- Item Template -->
+                <ng-template let-item #Content>
+                  <button class="Exs" (click)="onCall(item.Item.Type, i)"
+                  [attr.aria-label]="item.Item.Type + ':-' + item.ListName"
+                  tabindex="-1">{{ item.Item.Type }}</button>
+                </ng-template>
+            </app-link-list>
+
+   
+      </li>
+    </div>
   </ul>
+
+
 
 </app-scroll-frame>

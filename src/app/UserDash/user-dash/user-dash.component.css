@@ -27,6 +27,10 @@ img.icon:hover {
     background-color: rgb(89, 89, 89);
 }
 
+a:focus img.icon {
+    background-color: rgb(89, 89, 89);
+}
+
 img.icon:active {
     background-color: rgb(150, 150, 150);
 }

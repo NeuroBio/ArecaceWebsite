@@ -32,6 +32,7 @@ export class LinkListComponent implements OnInit, AfterViewInit {
   @ContentChild('Decoration') decorationTemplateRef: TemplateRef<any>;
 
   ngOnInit() {
+    console.log(this.list)
     this.leave = this.label ? true : false;
   }
 
