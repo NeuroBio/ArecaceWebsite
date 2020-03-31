@@ -1,6 +1,7 @@
 import { NgModule }               from '@angular/core';
 import { CommonModule }           from '@angular/common';
 import { RouterModule }           from '@angular/router';
+import { A11yModule }             from '@angular/cdk/a11y';
 
 import { BookmarkModule }         from '../../SmallComponents/bookmark/bookmark.module';
 import { LinkListElementModule }  from '../../SmallComponents/LinkList/link-list-element.module';
@@ -18,6 +19,7 @@ import { GridComponent }          from './grid/grid.component';
     CommonModule,
     BookmarkModule,
     LinkListElementModule,
+    A11yModule, //REQUIRED FOR FOCUSTRAP
     RouterModule
   ],
   exports: [

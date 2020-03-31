@@ -1,5 +1,5 @@
 <article id="biggerouter" cdkTrapFocus>
-    <div #back id="biggerback" [routerLink]="['../']"></div>
+    <div #back id="biggerback" [routerLink]="['../']" cdkFocusRegionStart></div>
 
       <!-- Bookmark when not special -->
       <div id="vanillaFave"
@@ -86,7 +86,7 @@
     </div>
 
     <!-- go back to grid -->
-    <div id="Back">
+    <div id="Back" cdkFocusRegionEnd>
       <a [routerLink]="['../']">Go Back</a>
     </div>
 

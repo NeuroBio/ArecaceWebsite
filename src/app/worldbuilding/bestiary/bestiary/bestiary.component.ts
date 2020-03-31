@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy }   from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild }   from '@angular/core';
 
 import { Observable }                     from 'rxjs';
 import { map }                            from 'rxjs/operators';
@@ -6,6 +6,9 @@ import { map }                            from 'rxjs/operators';
 import { GeneralcollectionService }       from 'src/app/GlobalServices/generalcollection.service';
 
 import { BeastMetaData }                  from 'src/app/Classes/ContentClasses';
+import { LinkListComponent } from 'src/app/SharedComponentModules/SmallComponents/LinkList/link-list/link-list.component';
+import { GridComponent } from 'src/app/SharedComponentModules/PrimaryContentDisplayer/GridBlowUp/grid/grid.component';
+import { GridService } from 'src/app/SharedComponentModules/PrimaryContentDisplayer/GridBlowUp/refocus.service';
 
 
 @Component({
@@ -16,13 +19,15 @@ import { BeastMetaData }                  from 'src/app/Classes/ContentClasses';
 
 export class BestiaryComponent implements OnInit, OnDestroy {
 
-  beasts$:Observable<BeastMetaData[]>;
+  @ViewChild(GridComponent) Grid: any;
+  beasts$: Observable<BeastMetaData[]>;
   sortOptions: string[] = ['Name', 'Region', 'Biome', 'Phylogeny']
   phyloDict: any = { Porifera: 0, Ctenophora: 1, Panarthropoda: 2, Mollusca: 3,
                      Tunicata: 4, Ichthyia: 5, ReptiliaAmphibia: 6, Avia: 7,
                      Therapsida: 8, Mammalia: 9 };
   
-  constructor(private generalcollectserv: GeneralcollectionService) { }
+  constructor(private generalcollectserv: GeneralcollectionService,
+              private gridserv: GridService) { }
 
   ngOnInit() {
     this.beasts$ = this.generalcollectserv.returnMetaData().pipe(
@@ -38,16 +43,18 @@ export class BestiaryComponent implements OnInit, OnDestroy {
 
   onSort(style: string) {
     if(style !== "Phylogeny") {
-      return this.beasts$.subscribe( (beasts: BeastMetaData[]) =>
+      this.beasts$.subscribe( (beasts: BeastMetaData[]) =>
         beasts.sort((a,b) => a[style] < b[style] ? -1 :1)
       ).unsubscribe();
     } else {
-      return this.beasts$.subscribe( (beasts: BeastMetaData[]) =>
+      this.beasts$.subscribe( (beasts: BeastMetaData[]) =>
         beasts.sort((a,b) => this.phyloDict[a.Phylo] < this.phyloDict[b.Phylo] ? -1
                              : this.phyloDict[a.Phylo] > this.phyloDict[b.Phylo] ? 1
                              : 0)
       ).unsubscribe();
     }
+    console.log(this.Grid.collect)
+    this.gridserv.triggerSorted();
   }
 
 }
