@@ -78,7 +78,28 @@ export class LinkListComponent implements OnInit, AfterViewInit {
         if(event.key === 'Tab') {
           this.leave = true;
           setTimeout(() => { this.leave = false }, 10);
+          return;
         }
+      }
+
+    }
+
+    // handleKeyUp(event: KeyboardEvent) {
+    //   console.log("keyup")
+    //   if (event.key === 'Enter') {
+    //     event.stopImmediatePropagation();
+    //     this.keyManager.activeItem.selectItem();
+    //     if(this.label) {
+    //       this.lableEmitter.emit(this.label);
+    //     }
+    //     return false;
+    //   }
+    // }
+
+    onClick(index: number) {
+      this.keyManager.setActiveItem(index);
+      if(this.label) {
+        this.lableEmitter.emit(this.label);
       }
     }
 

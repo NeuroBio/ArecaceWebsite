@@ -1,5 +1,15 @@
 <nav aria-label="Image-Link-Navigation" >
-  <ul  (keydown)="handleKeyDown($event)"
+  <app-link-list class="imageLinkNav"
+  [list]="collect">
+      <!-- Item Template -->
+      <ng-template let-item #Content>
+        <div id="imageholder">
+          <img class="thumb" [src]="item.Links[0]" alt=""><br>
+        </div>
+        <div class="thumbtext">{{ item.Name }}</div>
+      </ng-template>
+  </app-link-list>
+  <!-- <ul  (keydown)="handleKeyDown($event)"
   tabindex="0" id="outer" (focus)="focus()"
   [attr.tabindex]="leave === true ? -1 : 0">
     <li *ngFor="let item of collect" class="gridli">
@@ -12,7 +22,7 @@
           <div class="thumbtext">{{ item.Name }}</div>
       </app-link-list-element>
     </li>
-  </ul>
+  </ul> -->
 </nav>
 
 <br>

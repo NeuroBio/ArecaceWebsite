@@ -16,16 +16,16 @@ import { LinkListElementComponent }                 from '../../../SmallComponen
   styleUrls: ['./grid.component.css']
 })
 
-export class GridComponent implements OnInit, OnDestroy, AfterViewInit {
+export class GridComponent implements OnInit, OnDestroy {
 
   @Input() collect: any[];
   preview: boolean;
   stream1: Subscription;
-  stream2: Subscription;
+  // stream2: Subscription;
 
-  keyManager: FocusKeyManager<QueryList<any>>;
-  @ViewChildren(LinkListElementComponent) items: QueryList<any>;
-  leave = false;
+  // keyManager: FocusKeyManager<QueryList<any>>;
+  // @ViewChildren(LinkListElementComponent) items: QueryList<any>;
+  // leave = false;
 
   constructor(private sliderserv: SliderService,
               private refocusserv: RefocusService) { }
@@ -33,37 +33,37 @@ export class GridComponent implements OnInit, OnDestroy, AfterViewInit {
   ngOnInit() {
     this.stream1 = this.sliderserv.preview
       .subscribe(preview => this.preview = preview);
-    this.stream2 = this.refocusserv.Refocus
-      .subscribe(() => this.focus());
+    // this.stream2 = this.refocusserv.Refocus
+    //   .subscribe(() => this.focus());
   }
 
-  ngAfterViewInit() {
-    this.keyManager = new FocusKeyManager(this.items)
-    .withHorizontalOrientation('ltr');
-    this.keyManager.setFirstItemActive();
-  }
+  // ngAfterViewInit() {
+  //   this.keyManager = new FocusKeyManager(this.items)
+  //   .withHorizontalOrientation('ltr');
+  //   this.keyManager.setFirstItemActive();
+  // }
 
   ngOnDestroy() {
     this.stream1.unsubscribe();
-    this.stream2.unsubscribe();
+    // this.stream2.unsubscribe();
   }
 
-  handleKeyDown(event: KeyboardEvent) {
-    if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
-      event.stopImmediatePropagation();
-      this.keyManager.onKeydown(event);
-    }
-    if(event.key === 'Tab') {
-      this.leave = true;
-      setTimeout(() => { this.leave = false; }, 10);
-    }
-  }
+  // handleKeyDown(event: KeyboardEvent) {
+  //   if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
+  //     event.stopImmediatePropagation();
+  //     this.keyManager.onKeydown(event);
+  //   }
+  //   if(event.key === 'Tab') {
+  //     this.leave = true;
+  //     setTimeout(() => { this.leave = false; }, 10);
+  //   }
+  // }
 
-  focus() {
-    if(!this.keyManager.activeItem) {
-      this.keyManager.setFirstItemActive();
-    }
-    this.keyManager.activeItem.focus();
-  }
+  // focus() {
+  //   if(!this.keyManager.activeItem) {
+  //     this.keyManager.setFirstItemActive();
+  //   }
+  //   this.keyManager.activeItem.focus();
+  // }
 
 }

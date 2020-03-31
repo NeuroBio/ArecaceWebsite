@@ -1,11 +1,9 @@
-import { Component, ViewEncapsulation,
-         ViewChild, ElementRef, AfterViewInit,
-         QueryList, ViewChildren }                from '@angular/core';
+import { Component, ViewChild,
+         ElementRef, AfterViewInit}               from '@angular/core';
 import { ActivatedRoute }                         from '@angular/router';
-import { FocusKeyManager }                        from '@angular/cdk/a11y';
          
 import { GlobalVarsService}                       from './GlobalServices/global-vars.service';
-import { LinkListElement, LinkList } from './SharedComponentModules/SmallComponents/LinkList/linklist';
+import { LinkListElement, LinkList }              from './SharedComponentModules/SmallComponents/LinkList/linklist';
 
 @Component({
   selector: 'app-root',
@@ -13,19 +11,10 @@ import { LinkListElement, LinkList } from './SharedComponentModules/SmallCompone
   styleUrls: ['./app.component.css']
 })
 
-export class AppComponent implements AfterViewInit {
+export class AppComponent implements AfterViewInit{
 
   @ViewChild('flag', { static: true }) flag: ElementRef;
-  title: string = 'Arecace';
   year: number = new Date().getFullYear()
-
-  headerKeyManager: FocusKeyManager<any>;
-  @ViewChildren('header') headItems: QueryList<any>;
-  headerLeave = false;
-
-  footerKeyManager: FocusKeyManager<any>;
-  @ViewChildren('footer') footItems: QueryList<any>;
-  footerLeave = false;
 
   headerLinkList = new LinkList('header',
     [ new LinkListElement('Home', 'home'),
@@ -46,41 +35,14 @@ export class AppComponent implements AfterViewInit {
 
   constructor(private global: GlobalVarsService,
               public route: ActivatedRoute) { }
-  
-  ngAfterViewInit() {
-    setTimeout(() => { this.checkLoad() }, 1000);
-    this.footerKeyManager = new FocusKeyManager(this.footItems)
-      .withHorizontalOrientation('ltr');
-    this.headerKeyManager = new FocusKeyManager(this.headItems)
-    .withHorizontalOrientation('ltr');
-  }
 
+  ngAfterViewInit() {
+    setTimeout(() => {this.checkLoad()}, 1000)
+  }
   checkLoad() {
     if(this.flag.nativeElement.offsetWidth !== 1) {
-      if(this.global.phone) {
         this.global.ImagesLoadable.next(false);
-      } else {
-        this.global.ImagesLoadable.next(false);
-      }
     }
-  }
-
-  handleKeyDown(event: KeyboardEvent, keymanger: string) {
-    if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
-      event.stopImmediatePropagation();
-      this[`${keymanger}KeyManager`].onKeydown(event);
-    }
-    if(event.key === 'Tab') {
-      this[`${keymanger}Leave`] = true;
-      setTimeout(() => { this[`${keymanger}Leave`] = false; }, 10);
-    }
-  }
-
-  focus(keymanger: string) {
-    if(!this[`${keymanger}KeyManager`].activeItem) {
-      this[`${keymanger}KeyManager`].setFirstItemActive();
-    }
-    this[`${keymanger}KeyManager`].activeItem.focus();
   }
 
 }

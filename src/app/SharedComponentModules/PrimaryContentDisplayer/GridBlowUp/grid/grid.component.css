@@ -10,28 +10,28 @@ ul {
     justify-content: space-around;
 }
 
-.gridli {
+::ng-deep .imageLinkNav li {
     position: relative;
     flex-flow: column;
     overflow: hidden;
 }
 
 
-::ng-deep .gridli .linklistelement {
+::ng-deep .imageLinkNav .linklistelement {
     min-width: 0px;
     height: 270px;
     display: inline-block;
 }
 
-::ng-deep .gridli  a.linklistelement:hover {
+::ng-deep .imageLinkNav  a.linklistelement:hover {
     background-color: rgba(140,140,140,.8);
 }
 
-::ng-deep .gridli a:focus {
+::ng-deep .imageLinkNav a:focus {
     background-color: rgba(140,140,140,.8);
 }
 
-::ng-deep .gridli a:active {
+::ng-deep .imageLinkNav a:active {
     background-color: rgba(255,255,255,.7);
 }
 

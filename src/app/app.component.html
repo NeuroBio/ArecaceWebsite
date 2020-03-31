@@ -4,14 +4,14 @@
 <!-- Images enabled tester -->
 <img id="flag" #flag src="assets/tester.png" alt="">
 
+
+
 <!-- HEADER AND BANNER -->
 <header role="banner" id="banner">
     <h1 id="websiteTitle">Arecace</h1>
 
-
     <!-- Primary Navigation -->
     <nav id="headerNav" aria-label="primary-navigation">
-         <!-- Actual Link List -->
          <app-link-list class="homepageNav"
          [list]="headerLinkList.Data">
              <!-- Item Template -->
@@ -28,39 +28,35 @@
 <hr>
 
 
+
 <router-outlet></router-outlet>
+
 
 
 <!-- FOOTER -->
 <hr>
 <footer role="contentinfo">
 
+    <!-- Footer Navigation -->
     <nav aria-label="footer-navigation">
         <app-link-list class="homepageNav"
         [list]="footerLinkList.Data">
+
+            <!-- Item Template -->
             <ng-template let-item #Content>
                     <span class="footerLink">
                     {{ item.ListName }}
                     </span>
             </ng-template>
+            <!-- Divider Template -->
             <ng-template let-i #Decoration>
                 <span id="footerDivider" *ngIf="i !== footerLinkList.Data.length-1"><b>|</b></span>
             </ng-template>
         </app-link-list>
-        <!-- <ul [attr.tabindex]="footerLeave === true ? -1 : 0"
-        (keydown)="handleKeyDown($event, 'footer')"
-        (focus)="focus('footer')">
-            <li *ngFor="let link of footerLinkList; let i = index" class="footli">
-                <app-link-list-element
-                #footer [route]="link.link">
-                    {{ link.name }}
-                </app-link-list-element>
-                <span *ngIf="i !== footerLinkList.length-1"><b>|</b></span>
-            </li>
-        </ul> -->
     </nav>
 
 
+    <!-- Copyright info -->
     <p id="footer">
         &copy;kArA Redwing: Website 2018-{{ year }}, Content 2004-{{ year }}
     </p>

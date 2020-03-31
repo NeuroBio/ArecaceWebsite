@@ -8,8 +8,10 @@
         <app-link-list-element
         [route]="item.Route"
         [href]="item.Href"
-        [active]="item.ListName === current"
-        [queryParamsHandling]="queryParamsHandling">
+        [active]="item.Route === current"
+        [index]="i"
+        [queryParamsHandling]="queryParamsHandling"
+        (clickEventEmitter)="onClick($event)">
             <ng-container
                   [ngTemplateOutlet]="itemTemplateRef"
                   [ngTemplateOutletContext]="{$implicit: item}">
