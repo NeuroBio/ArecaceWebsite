@@ -1,4 +1,4 @@
-import { Component, Input, ViewChild, ElementRef, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, Input, ViewChild, ElementRef, OnInit, Output, EventEmitter, TemplateRef, ContentChild } from '@angular/core';
 
 @Component({
   selector: 'app-link-list-element',
@@ -17,13 +17,15 @@ export class LinkListElementComponent implements OnInit {
     @Output() clickEventEmitter = new EventEmitter<number>();;
     Type: string;
 
+    // @ContentChild('Item') itemTemplateRef: TemplateRef<any>;
+
     ngOnInit() {
       if(this.route !== undefined) { //within site
         this.Type = 'Route';
       } else if(this.href !== undefined && this.href !== '') { //link out
         this.Type = 'Href';
       } else { //no link out in a set of link outs
-        this.Type = 'Div';
+        this.Type = 'Span';
       }
     }
 

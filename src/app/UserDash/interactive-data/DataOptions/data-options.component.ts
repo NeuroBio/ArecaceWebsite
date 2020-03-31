@@ -16,20 +16,24 @@ export class DataOptionsComponent implements OnInit {
   @Input() type: string;
   @Input() data: any;
   @Input() edit: any;
-  buttonTypes = ['View', 'Edit'];
-  LinkList = new LinkList(undefined, []);
+  LinkList: LinkList[];
 
   constructor(private route: ActivatedRoute,
               private router: Router) { }
 
   ngOnInit() {
-    this.names.forEach(name => {
-      this.buttonTypes.forEach(button => {
-        this.LinkList.Data.push(
+    const buttonTypes = ['View'];
+    if(this.edit) {
+      buttonTypes.push('Edit');
+    }
+    this.LinkList = []
+    this.names.forEach((name, i) => {
+      this.LinkList.push(new LinkList(name, []));
+      buttonTypes.forEach(button => {
+        this.LinkList[i].Data.push(
           new LinkListElement(name, undefined, undefined, { Title: this.title, Type: button}));
-      })
-    })
-    console.log('LOCAL')
+      });
+    });
     console.log(this.LinkList)
   }
 
@@ -46,14 +50,12 @@ export class DataOptionsComponent implements OnInit {
   }
 
   onCall(functionName: string, index: number) {
-    console.log(functionName)
     switch (functionName) {
       case 'View':
         return this.onView(index);
       case 'Edit':
         return this.onEdit(index);
     }
-    console.log('called')
   }
   // onDelete(index: number) {
   //   this.crud.deleteEntry(this.type, index)

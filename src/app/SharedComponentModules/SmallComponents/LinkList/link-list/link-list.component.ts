@@ -28,11 +28,10 @@ export class LinkListComponent implements OnInit, AfterViewInit {
   leave: boolean;
 
   @ViewChild('Host') Host: ElementRef;
-  @ContentChild('Content') itemTemplateRef: TemplateRef<any>;
+  @ContentChild('Item') itemTemplateRef: TemplateRef<any>;
   @ContentChild('Decoration') decorationTemplateRef: TemplateRef<any>;
 
   ngOnInit() {
-    console.log(this.list)
     this.leave = this.label ? true : false;
   }
 

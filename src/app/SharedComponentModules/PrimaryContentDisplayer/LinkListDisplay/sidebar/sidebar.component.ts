@@ -28,13 +28,12 @@ export class SideBarComponent implements AfterViewInit {
 
   keyManager: FocusKeyManager<any>;
   @ViewChildren(LinkListComponent) items: QueryList<any>;
+  leave: boolean = false;
+  initialLabel: string;
  
-  style = true;
   listHeight = 0;
   greybarHeight = 0;
   resizeTimer: any;
-  initialLabel: string;
-  leave: boolean = false;
   
 
   ngAfterViewInit() {

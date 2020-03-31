@@ -12,11 +12,14 @@
         [index]="i"
         [queryParamsHandling]="queryParamsHandling"
         (clickEventEmitter)="onClick($event)">
+        <!-- Render into List Element -->
             <ng-container
                   [ngTemplateOutlet]="itemTemplateRef"
                   [ngTemplateOutletContext]="{$implicit: item}">
             </ng-container>
         </app-link-list-element>
+
+        <!-- Render After ist element (NOT Focused) -->
         <ng-container
         [ngTemplateOutlet]="decorationTemplateRef"
         [ngTemplateOutletContext]="{$implicit: i}">

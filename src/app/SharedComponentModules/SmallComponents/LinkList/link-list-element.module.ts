@@ -4,12 +4,13 @@ import { CommonModule }             from '@angular/common';
 
 import { LinkListElementComponent } from './link-list-element/link-list-element.component';
 import { LinkListComponent }        from './link-list/link-list.component';
-
+import { MasterLinkListComponent }  from './master-link-list/master-link-list.component';
 
 @NgModule({
   declarations: [
     LinkListElementComponent,
-    LinkListComponent
+    LinkListComponent,
+    MasterLinkListComponent
   ],
   imports: [
     CommonModule,
@@ -17,7 +18,9 @@ import { LinkListComponent }        from './link-list/link-list.component';
   ],
   exports: [
     LinkListElementComponent,
-    LinkListComponent
+    LinkListComponent,
+    MasterLinkListComponent
   ]
 })
+
 export class LinkListElementModule { }

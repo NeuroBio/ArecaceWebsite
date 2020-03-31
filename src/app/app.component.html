@@ -15,7 +15,7 @@
          <app-link-list class="homepageNav"
          [list]="headerLinkList.Data">
              <!-- Item Template -->
-             <ng-template let-item #Content>
+             <ng-template let-item #Item>
                  <div class="navverContainer">
                      <div class="navver">
                         {{ item.ListName }}
@@ -43,7 +43,7 @@
         [list]="footerLinkList.Data">
 
             <!-- Item Template -->
-            <ng-template let-item #Content>
+            <ng-template let-item #Item>
                     <span class="footerLink">
                     {{ item.ListName }}
                     </span>

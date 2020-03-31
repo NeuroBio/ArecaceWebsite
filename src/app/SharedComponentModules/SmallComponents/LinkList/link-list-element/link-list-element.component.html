@@ -7,7 +7,8 @@
     class="linklistelement"
     (click)="click()"
     [class.selected]="active === true">
-        <ng-container *ngTemplateOutlet="content"></ng-container>
+        <ng-container *ngTemplateOutlet="item">
+        </ng-container>
     </a>
 
 
@@ -17,21 +18,21 @@
     [href]="href"
     class="linklistelement"
     [class.selected]="active === true">
-        <ng-container *ngTemplateOutlet="content"></ng-container>
+        <ng-container *ngTemplateOutlet="item"></ng-container>
     </a>
 
 
     <!-- Route does not exist -->
-    <span *ngSwitchCase="'Div'"
+    <span *ngSwitchCase="'Span'"
     #Host tabindex="-1"
     class="linklistelement"
     [class.selected]="active === true">
-        <ng-container *ngTemplateOutlet="content"></ng-container>
+        <ng-container *ngTemplateOutlet="item"></ng-container>
     </span>
 
 </span>
 
-<ng-template #content>
+<ng-template #item>
     <ng-content></ng-content>
 </ng-template>
 
