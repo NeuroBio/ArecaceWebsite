@@ -21,9 +21,9 @@ export class GridComponent implements OnInit, OnDestroy {
 
   @Input() collect: any[];
   formattedCollect = new LinkList('Grid', []);
-  preview: boolean;
+  init = true;
 
-  @ViewChild(LinkListComponent) linklist: any;
+  @ViewChild(LinkListComponent) linklistElement: any;
 
   stream1: Subscription;
   stream2: Subscription;
@@ -34,7 +34,6 @@ export class GridComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.stream1 = this.sliderserv.preview
       .subscribe(preview => {
-        this.preview = preview;
         this.quickFormat(preview);
       });
     this.stream2 = this.refocusserv.Refocus
@@ -47,15 +46,22 @@ export class GridComponent implements OnInit, OnDestroy {
   }
 
   quickFormat(preview: boolean) {
-    this.formattedCollect.Data =
-    this.collect.map(item =>
-      new LinkListElement(item.Name,
-                          preview === true ? item.ID : `${item.ID}/Download`,
-                          undefined, item));
+    if(this.init === true) { //create
+      this.formattedCollect.Data =
+      this.collect.map(item =>
+        new LinkListElement(item.Name,
+                            preview === true ? item.ID : `${item.ID}/Download`,
+                            undefined, item));
+      this.init = false;
+    } else { //update
+      this.formattedCollect.Data.map(item =>
+        item.Route =  preview === true ? item.Item.ID : `${item.Item.ID}/Download`);
+    }
+
   }
 
   focus() {
-    this.linklist.Host.nativeElement.focus();
+    this.linklistElement.Host.nativeElement.focus();
   }
 
 }
