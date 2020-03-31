@@ -37,25 +37,24 @@ export class LinkListComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
     this.keyManager = new FocusKeyManager(this.items)
       .withHorizontalOrientation('ltr');
-    this.setActive();
   }
 
     setActive() {
       if(this.current) {
         let count = 0;
         for(let element of this.list) {
-          if(element[1] === this.current) {
+          if(element.Route === this.current) {
             this.keyManager.setActiveItem(count);
             if(this.label) {
               this.lableEmitter.emit(this.label);
             }
-            break;
+            return;
           }
           count += 1;
         }
-      } else {
-        this.keyManager.setFirstItemActive();
       }
+      
+      return this.keyManager.setFirstItemActive();
     }
 
     handleKeyDown(event: KeyboardEvent) {
@@ -109,7 +108,7 @@ export class LinkListComponent implements OnInit, AfterViewInit {
 
     focus() {
       if(!this.keyManager.activeItem) {
-        this.keyManager.setFirstItemActive();
+        this.setActive();
       }
       this.keyManager.activeItem.focus();
     }
