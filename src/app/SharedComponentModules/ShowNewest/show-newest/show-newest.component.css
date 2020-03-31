@@ -20,21 +20,6 @@ h3 {
     margin: 7px;
 }
 
-ul {
-    margin: 0px;
-    padding: 0px;
-    background: #454545;
-    display: flex;
-    overflow: hidden;
-
-}
-
-li {
-    display: inline-block;
-    margin: 0px;
-    padding: 0px;
-}
-
 a#seeAll {
     margin: 7px;
 }
@@ -70,7 +55,7 @@ img#left {
 
 
 
-/* List CSS */
+/* List element CSS */
 .displayItem {
     font-family: 'Courier New', Courier, monospace;
     font-size: 20px;
@@ -100,6 +85,21 @@ img#left {
     border: 3px solid white;
 }
 
-::ng-deep app-link-list-element a.linklistelement {
+::ng-deep app-link-list.NewestCue app-link-list-element a.linklistelement {
     display: inline-block;
+}
+
+::ng-deep app-link-list.NewestCue ul {
+    margin: 0px;
+    padding: 0px;
+    background: #454545;
+    display: flex;
+    overflow: hidden;
+
+}
+
+::ng-deep app-link-list.NewestCue li {
+    display: inline-block;
+    margin: 0px;
+    padding: 0px;
 }

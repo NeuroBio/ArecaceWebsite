@@ -3,28 +3,31 @@
   <h3>{{ contentType }}</h3>
   
   <div id="pickItems">
+
+    <!-- LEFT ARROW -->
       <img #left id="left" src="assets/svgs/back.svg"
         alt="Prev" (click)="scroll(false)" tabindex="-1">
 
+
+
+      <!-- NEWEST ITEMS -->
       <nav *ngIf="display$ | async as display">
-        <ul #itemBand [attr.tabindex]="leave === true ? -1 : 0"
-        (focus)="focus()"
-        (keydown)="handleKeyDown($event)">
-          <li *ngFor="let item of display">
-            <app-link-list-element
-            [route]="item.Link">
-              <div class="strokeme displayItem"
-              [style.background-image]="'url('+item.Image+')'">
-                {{ item.Name }}
-              </div>
-            </app-link-list-element>
-            <!-- <app-new-item
-            [item]="member"
-            ></app-new-item> -->
-          </li>
-        </ul>
+         <app-link-list class="NewestCue" [list]="display">
+
+             <!-- Item Template -->
+             <ng-template let-item #Content>
+                <div class="strokeme displayItem"
+                [style.background-image]="'url('+item.Item.Image+')'">
+                  {{ item.Item.Name }}
+                </div>
+             </ng-template>
+
+         </app-link-list>
       </nav>
 
+
+
+      <!-- RIGHT ARROW -->
       <img #right id="right" src="assets/svgs/back.svg"
         alt="Next" (click)="scroll(true)" tabindex="-1">
   </div>

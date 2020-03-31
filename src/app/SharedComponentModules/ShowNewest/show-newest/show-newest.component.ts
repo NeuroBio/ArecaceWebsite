@@ -1,24 +1,23 @@
 import { Component, OnInit, Input,
-         ElementRef, ViewChild, OnDestroy,
-         ViewChildren, QueryList, AfterViewInit }   from '@angular/core';
-import { FocusKeyManager }                          from '@angular/cdk/a11y';
+         ElementRef, OnDestroy, ViewChild }         from '@angular/core';
 
 import { Observable, fromEvent, Subscription }      from 'rxjs';
 import { map }                                      from 'rxjs/operators';
 
 import { FireBaseService }                          from 'src/app/GlobalServices/firebase.service';
 
-import { LinkListElementComponent } from 'src/app/SharedComponentModules/SmallComponents/LinkList/link-list-element/link-list-element.component';
+import { LinkListElement }                          from '../../SmallComponents/LinkList/linklist';
+
 @Component({
   selector: 'app-show-newest',
   templateUrl: './show-newest.component.html',
   styleUrls: ['./show-newest.component.css']
 })
 
-export class ShowNewestComponent implements OnInit, OnDestroy, AfterViewInit {
+export class ShowNewestComponent implements OnInit, OnDestroy {
 
-  display$: Observable<any>;
-  
+  display$: Observable<LinkListElement[]>;
+
   @Input() contentType: string;
   @Input() collectionName: string;
   @Input() contentLink: string;
@@ -31,15 +30,12 @@ export class ShowNewestComponent implements OnInit, OnDestroy, AfterViewInit {
   KeyListener = fromEvent(document, 'keydown');
   stream: Subscription;
 
-  keyManager: FocusKeyManager<any>
-  @ViewChildren(LinkListElementComponent) items: QueryList<any>;
-  leave: boolean = false;
-
   constructor(private firebaseserv: FireBaseService) { }
 
   ngOnInit() {
     this.stream = this.KeyListener
       .subscribe((event: KeyboardEvent) => this.KeyEvent(event));
+
     this.display$ = this.firebaseserv.returnCollect(this.collectionName).pipe(
       map(members => {
         members = members.filter(member => member.Allowed !== false);//remove hidden
@@ -49,21 +45,20 @@ export class ShowNewestComponent implements OnInit, OnDestroy, AfterViewInit {
           members = members.slice(0, 10);
         }
 
-        return members.map(member => //set up for display
-          member = {Name: member.Name,
-                    Link: `${this.contentLink}/${member.ID}`,
-                    Image: member.Links ? member.Links[0] : ''});
+        return members = members.map(member => //set up for display
+          member = new LinkListElement(
+            member.Name,
+            `${this.contentLink}/${member.ID}`,
+            undefined,
+            { Name: member.Name,
+              Image: member.Links ? member.Links[0] : '' }));
       }) );
-  }
-
-  ngAfterViewInit() {
-    this.keyManager = new FocusKeyManager(this.items)
-      .withHorizontalOrientation('ltr');
-  }
+    }
 
   ngOnDestroy() {
     this.stream.unsubscribe();
   }
+
 
   scroll(right: boolean) {
     if(right) {
@@ -82,19 +77,6 @@ export class ShowNewestComponent implements OnInit, OnDestroy, AfterViewInit {
     }
   }
 
-  handleKeyDown(event: KeyboardEvent){
-    if(event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
-      event.stopImmediatePropagation();
-      this.keyManager.onKeydown(event);
-    }
-
-    if(event.key === 'Tab') {
-      this.leave = true;
-      setTimeout(() => { this.leave = false }, 10);
-    }
-  }
-
-
   //Arrow keys (trigger arrow options)
   KeyEvent(event: KeyboardEvent) {
     if(event.key === 'ArrowRight') {
@@ -106,13 +88,6 @@ export class ShowNewestComponent implements OnInit, OnDestroy, AfterViewInit {
       this.left.nativeElement.focus();
       this.animate(-170);
     }
-  }
-
-  focus() {
-    if(!this.keyManager.activeItem) {
-      this.keyManager.setFirstItemActive();
-    }
-    this.keyManager.activeItem.focus();
   }
 
 }
