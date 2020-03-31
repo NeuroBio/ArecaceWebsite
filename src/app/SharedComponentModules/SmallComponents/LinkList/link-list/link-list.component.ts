@@ -1,6 +1,7 @@
 import { Component, ViewChildren, EventEmitter,
-         QueryList, AfterViewInit, Input, ElementRef,
-         ViewChild, Output, OnInit, ContentChild, TemplateRef }                    from '@angular/core';
+         QueryList, AfterViewInit, Input,
+         ElementRef, ViewChild, Output, OnInit,
+         ContentChild, TemplateRef }                    from '@angular/core';
 import { FocusKeyManager }                              from '@angular/cdk/a11y';
 
 import { LinkListElementComponent }                     from '../link-list-element/link-list-element.component';

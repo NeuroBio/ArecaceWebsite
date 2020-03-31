@@ -1,13 +1,14 @@
 import { Component, Input, OnInit, OnDestroy,
-         ViewChildren, QueryList, AfterViewInit }   from '@angular/core';
-import { FocusKeyManager }                          from '@angular/cdk/a11y';
+         ViewChild, ElementRef }                    from '@angular/core';
 
 import { Subscription }                             from 'rxjs';
 
 import { SliderService }                            from 'src/app/SharedComponentModules/SmallComponents/slider/slider.service';
 import { RefocusService }                           from '../refocus.service';
 
-import { LinkListElementComponent }                 from '../../../SmallComponents/LinkList/link-list-element/link-list-element.component';
+import { LinkListComponent }                        from 'src/app/SharedComponentModules/SmallComponents/LinkList/link-list/link-list.component';
+
+import { LinkList, LinkListElement }                from 'src/app/SharedComponentModules/SmallComponents/LinkList/linklist';
 
 @Component({
   selector: 'app-grid',
@@ -19,51 +20,42 @@ import { LinkListElementComponent }                 from '../../../SmallComponen
 export class GridComponent implements OnInit, OnDestroy {
 
   @Input() collect: any[];
+  formattedCollect = new LinkList('Grid', []);
   preview: boolean;
-  stream1: Subscription;
-  // stream2: Subscription;
 
-  // keyManager: FocusKeyManager<QueryList<any>>;
-  // @ViewChildren(LinkListElementComponent) items: QueryList<any>;
-  // leave = false;
+  @ViewChild(LinkListComponent) linklist: any;
+
+  stream1: Subscription;
+  stream2: Subscription;
 
   constructor(private sliderserv: SliderService,
               private refocusserv: RefocusService) { }
 
   ngOnInit() {
     this.stream1 = this.sliderserv.preview
-      .subscribe(preview => this.preview = preview);
-    // this.stream2 = this.refocusserv.Refocus
-    //   .subscribe(() => this.focus());
+      .subscribe(preview => {
+        this.preview = preview;
+        this.quickFormat(preview);
+      });
+    this.stream2 = this.refocusserv.Refocus
+      .subscribe(() => this.focus());
   }
-
-  // ngAfterViewInit() {
-  //   this.keyManager = new FocusKeyManager(this.items)
-  //   .withHorizontalOrientation('ltr');
-  //   this.keyManager.setFirstItemActive();
-  // }
 
   ngOnDestroy() {
     this.stream1.unsubscribe();
-    // this.stream2.unsubscribe();
+    this.stream2.unsubscribe();
   }
 
-  // handleKeyDown(event: KeyboardEvent) {
-  //   if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
-  //     event.stopImmediatePropagation();
-  //     this.keyManager.onKeydown(event);
-  //   }
-  //   if(event.key === 'Tab') {
-  //     this.leave = true;
-  //     setTimeout(() => { this.leave = false; }, 10);
-  //   }
-  // }
+  quickFormat(preview: boolean) {
+    this.formattedCollect.Data =
+    this.collect.map(item =>
+      new LinkListElement(item.Name,
+                          preview === true ? item.ID : `${item.ID}/Download`,
+                          undefined, item));
+  }
 
-  // focus() {
-  //   if(!this.keyManager.activeItem) {
-  //     this.keyManager.setFirstItemActive();
-  //   }
-  //   this.keyManager.activeItem.focus();
-  // }
+  focus() {
+    this.linklist.Host.nativeElement.focus();
+  }
 
 }
