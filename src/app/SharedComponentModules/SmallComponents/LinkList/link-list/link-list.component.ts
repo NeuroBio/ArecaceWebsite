@@ -27,7 +27,8 @@ export class LinkListComponent implements OnInit, AfterViewInit {
   leave: boolean;
 
   @ViewChild('Host') Host: ElementRef;
-  @ContentChild('Content', {static: false}) itemTemplateRef: TemplateRef<any>;
+  @ContentChild('Content') itemTemplateRef: TemplateRef<any>;
+  @ContentChild('Decoration') decorationTemplateRef: TemplateRef<any>;
 
   ngOnInit() {
     this.leave = this.label ? true : false;

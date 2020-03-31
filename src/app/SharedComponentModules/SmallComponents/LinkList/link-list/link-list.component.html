@@ -3,7 +3,7 @@
 [attr.tabindex]="leave === true ? -1 : 0"
 (focus)="focus()">
     <li class="linklistelement"
-    *ngFor="let item of list">
+    *ngFor="let item of list; let i = index">
 
         <app-link-list-element
         [route]="item.Route"
@@ -15,6 +15,9 @@
                   [ngTemplateOutletContext]="{$implicit: item}">
             </ng-container>
         </app-link-list-element>
-
+        <ng-container
+        [ngTemplateOutlet]="decorationTemplateRef"
+        [ngTemplateOutletContext]="{$implicit: i}">
+        </ng-container>
     </li>
 </ul>

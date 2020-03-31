@@ -38,12 +38,14 @@
     <nav aria-label="footer-navigation">
         <app-link-list class="homepageNav"
         [list]="footerLinkList.Data">
-        <ng-template let-item #Content>
-                <span class="footerLink">
-                   {{ item.ListName }}
-                </span>
-                <!-- <span *ngIf="i !== footerLinkLi    st.length-1"><b>|</b></span> -->
-        </ng-template>
+            <ng-template let-item #Content>
+                    <span class="footerLink">
+                    {{ item.ListName }}
+                    </span>
+            </ng-template>
+            <ng-template let-i #Decoration>
+                <span id="footerDivider" *ngIf="i !== footerLinkList.Data.length-1"><b>|</b></span>
+            </ng-template>
         </app-link-list>
         <!-- <ul [attr.tabindex]="footerLeave === true ? -1 : 0"
         (keydown)="handleKeyDown($event, 'footer')"
