@@ -4,24 +4,10 @@ div#outer {
     padding: 7px;
 }
 
-a {
-    display: flex;
-    color: rgb(241, 241, 241);
-    width: 100%;
-    padding: 0px 5px 0px 5px;
-    margin: 3px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    align-items: center;
-}
-
-a:hover {
-    background-color: rgb(100,100,100);
-}
-
-a:active {
-    background-color: rgb(180,180,180);
+h5 {
+    font-size: 18px;
+    padding-bottom: 3px;
+    margin: 0px;
 }
 
 app-master-link-list.UserFavoriteData {
@@ -31,47 +17,59 @@ app-master-link-list.UserFavoriteData {
 ::ng-deep app-master-link-list.UserFavoriteData ul {
     display: block; 
     padding-left: 7px;
-    background-color: tomato;
 }
 
 ::ng-deep app-master-link-list.UserFavoriteData li {
     display: list-item;
-    background-color: teal;
     display: block;
 }
 
 ::ng-deep app-master-link-list.UserFavoriteData app-link-list ul {
-    background-color: rgb(71, 89, 255);
-    display: block; 
+    display: flex;
+    margin: 7px 0px 7px 0px;
+    overflow: hidden;
 }
 
 ::ng-deep app-master-link-list.UserFavoriteData app-link-list li {
     display: inline-block;
-    background-color: violet;
     margin-left: 10px;
     padding: 0px;
-}
-
-h5 {
-    font-size: 18px;
-    padding-bottom: 3px;;
-    margin: 0px;
+    overflow: hidden;
 }
 
 span {
     padding: 0px;
-    background-color: blueviolet;
 }
 
 span#type {
     display: none;
-    height: 0px;
+}
+
+
+::ng-deep app-master-link-list.UserFavoriteData a {
+    display: block;
+    color: whitesmoke;
+    padding: 0px 5px 0px 5px;
+    margin: 3px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    align-items: center;
+}
+
+::ng-deep app-master-link-list.UserFavoriteData a:hover {
+    background-color: rgb(100,100,100);
+}
+
+::ng-deep app-master-link-list.UserFavoriteData a:focus {
+    background-color: rgb(100,100,100);
+}
+
+::ng-deep app-master-link-list.UserFavoriteData a:active {
+    background-color: rgb(180,180,180);
 }
 
 button {
     display: inline-block;
     margin: 0px;
 }
-/* app-master-link-list.UserFavoriteData li {
-    margin: 20px;
-} */

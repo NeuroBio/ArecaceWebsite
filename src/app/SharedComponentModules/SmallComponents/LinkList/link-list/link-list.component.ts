@@ -44,7 +44,7 @@ export class LinkListComponent implements OnInit, AfterViewInit {
       if(this.current) {
         let count = 0;
         for(let element of this.list) {
-          if(element.Route === this.current) {
+          if(element.ListName === this.current) {
             this.keyManager.setActiveItem(count);
             if(this.label) {
               this.lableEmitter.emit(this.label);

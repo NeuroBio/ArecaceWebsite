@@ -29,11 +29,13 @@ export class MainNotesComponent implements OnInit {
     }) );
     
     this.route.firstChild.paramMap.subscribe(path => {
-        this.current = path.get('NotesID')
-        this.notes$.subscribe(notes => {
-          const index = notes.Data.findIndex(note => note.Route === this.current);
-          this.current = notes.Data[index].ListName;
-        }).unsubscribe();
+      return this.current = this.generalcollectserv
+        .getCurrent(this.notes$, path.get('NotesID'));
+        // this.current = path.get('NotesID')
+        // this.notes$.subscribe(notes => {
+        //   const index = notes.Data.findIndex(note => note.Route === this.current);
+        //   this.current = notes.Data[index].ListName;
+        // }).unsubscribe();
       });
     }
 }

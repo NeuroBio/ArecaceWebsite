@@ -24,8 +24,12 @@
     </section> -->
     <div *ngFor="let bmt of data">
       <h5>{{ bmt.Name }}:</h5>
-      <app-master-link-list class="UserFavoriteData"
-      [linkList]="bmt.LinkList">
+      <app-master-link-list 
+      #MasterLists
+      class="UserFavoriteData"
+      [linkList]="bmt.LinkList"
+      current="View"
+      [MasterListName]="bmt.Name">
 
             <!-- Label template -->
             <ng-template let-list #Label>
@@ -35,13 +39,12 @@
             <!-- List Element Template -->
             <ng-template let-item #Item>
               <!-- Delete -->
-              <span *ngIf="item.Item">
-                  <button class="Exs" type="button" tabindex="-1"
-                  attr.aria-label="Delete-Bookmark"
-                  (click)="onDelete(item.Item.Type, item.Item.Index)">x</button>
-              </span>
+              <button *ngIf="!item.Route"
+              class="Exs" type="button" tabindex="-1"
+              attr.aria-label="Delete-Bookmark"
+              (click)="onDelete(item.Item.Type, item.Item.Index)">x</button>
               <!-- View -->
-              <span *ngIf="!item.Item">{{ item.ListName }}</span>
+              <span *ngIf="item.Route">{{ item.Item.Name }}</span>
              </ng-template>
 
       </app-master-link-list>
@@ -51,7 +54,7 @@
 
   <!-- No favorites -->
   <ng-template #notsaved class="outer">
-    <p>
+    <p tabindex="-1" #None>
       You have not saved your place anywhere.
     </p>
   </ng-template>

@@ -23,8 +23,8 @@ export class CulturemainComponent implements OnInit {
               private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.cultureRefs$ = this.generalcollectserv.returnMetaData().pipe(
-      map(refs => {
+    this.cultureRefs$ = this.generalcollectserv.returnMetaData()
+      .pipe(map(refs => {
         let final: LinkList[] = [];
         for(let cat of this.cats.culture) {
           const Data = refs.filter(ref =>
@@ -36,8 +36,10 @@ export class CulturemainComponent implements OnInit {
       })
     );
     
-    this.route.firstChild.paramMap.subscribe(
-      path => this.current = path.get('CultureID') );
+    this.route.firstChild.paramMap.subscribe(path => {
+      return this.current = this.generalcollectserv
+        .getCurrent(this.cultureRefs$, path.get('CultureID'));
+    });
   }
 
 }

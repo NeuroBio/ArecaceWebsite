@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges }  from '@angular/core';
+import { Component, Input, OnChanges, ViewChildren, ElementRef, QueryList, ViewChild }  from '@angular/core';
 
 import { DashCRUDService }              from '../../dash-CRUD.service';
 
@@ -17,6 +17,8 @@ export class PickUpComponent implements OnChanges {
   data: {}[];
   dataExists: boolean;
   bookmarkTypes = ['Comics', 'Narratives', 'Scripts', 'Favorites'];
+  @ViewChildren('MasterLists') MasterLists:  any[];
+  @ViewChild('None') None: ElementRef;
   
   constructor(private crud: DashCRUDService) { }
 
@@ -28,8 +30,8 @@ export class PickUpComponent implements OnChanges {
         const LinkListArray = [];
         this.user[bmt].forEach((link, j) => {
           const List = new LinkList(link.name, [])
-          const Delete = new LinkListElement(link.name, undefined, undefined, {Type: bmt, Index: j});
-          const View = new LinkListElement(link.name, '/'+ link.path, undefined, undefined);
+          const Delete = new LinkListElement('Delete', undefined, undefined, {Type: bmt, Name: link.name, Index: j});
+          const View = new LinkListElement('View', '/'+ link.path, undefined, {Name: link.name});
           List.Data.push(Delete);
           List.Data.push(View);
           LinkListArray.push(List)
@@ -41,7 +43,26 @@ export class PickUpComponent implements OnChanges {
   }
 
   onDelete(type: string, index: number) {
-    this.crud.deleteBookmark(index, type);
+    return this.crud.deleteBookmark(index, type)
+    .then(() =>{
+      for(let i = 0; i < this.MasterLists['_results'].length; i++) {
+        let Master = this.MasterLists['_results'][i];
+        if(Master.MasterListName === type) {//correct list; still exists
+          if(index > 0) {//not first
+            Master.items['_results'][index-1].focus();
+          } else {//first
+            Master.items['_results'][index+1].focus();
+          }
+          return;
+        }
+      }
+      //List no longer exists!
+      if(this.MasterLists['_results'][0]) {
+        this.MasterLists['_results'][0].focus();
+      } else {
+        this.None.nativeElement.focus();
+      }
+    });
   }
 
 }

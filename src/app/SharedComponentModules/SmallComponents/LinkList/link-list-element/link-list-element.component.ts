@@ -1,4 +1,6 @@
-import { Component, Input, ViewChild, ElementRef, OnInit, Output, EventEmitter, TemplateRef, ContentChild } from '@angular/core';
+import { Component, Input, ViewChild,
+         ElementRef, OnInit, Output,
+         EventEmitter }               from '@angular/core';
 
 @Component({
   selector: 'app-link-list-element',
@@ -14,7 +16,7 @@ export class LinkListElementComponent implements OnInit {
     @Input() index: number;
 
     @ViewChild('Host') Host: ElementRef;
-    @Output() clickEventEmitter = new EventEmitter<number>();;
+    @Output() clickEventEmitter = new EventEmitter<number>();
     Type: string;
 
     // @ContentChild('Item') itemTemplateRef: TemplateRef<any>;
@@ -30,11 +32,18 @@ export class LinkListElementComponent implements OnInit {
     }
 
     selectItem() {
-      this.Host.nativeElement.click();
+      if(this.Type === 'Span') {
+        this.Host.nativeElement.firstChild.click();
+      } else {
+        this.Host.nativeElement.click();
+      }
     }
 
     focus() {
       this.Host.nativeElement.focus();
+      if(this.Type === 'Span') {
+        this.Host.nativeElement.firstChild.focus();
+      }
     }
 
     click() {

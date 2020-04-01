@@ -23,7 +23,11 @@ export class GeneralmemberresolverService implements Resolve<any>{
               private titleserv: Title) { }
   
   resolve(route: ActivatedRouteSnapshot) {
-    const ID = this.checkLatest(route.url[0].path);
+    const ID = route.url[0].path;
+    if(this.checkLatest(ID, route) === false) {
+      return;
+    }
+
     return this.generalcollectserv.getMember(ID).pipe(
       take(1),
       tap(member => {
@@ -38,12 +42,17 @@ export class GeneralmemberresolverService implements Resolve<any>{
     )
   }
 
-  checkLatest(ID: string) {
+  checkLatest(ID: string, route: any) {
     if(ID === 'Latest') {
       ID = this.generalcollectserv.collectionData.value
-      .sort((a,b) => a.Created > b.Created ? -1 : 1)[0].ID
+      .sort((a,b) => a.Created > b.Created ? -1 : 1)[0].ID;
+      const url = route['_routerState'].url.split('/');
+      url.pop();
+      url.push(ID);
+      this.router.navigate([url.join('/')]);
+      return false;
     }
-    return ID;
+    return true;
   }
 
   setTitle(member: any) {

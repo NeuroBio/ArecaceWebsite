@@ -9,7 +9,7 @@
         <app-link-list-element
         [route]="item.Route"
         [href]="item.Href"
-        [active]="item.Route === current"
+        [active]="item.ListName === current"
         [index]="i"
         [queryParamsHandling]="queryParamsHandling"
         (clickEventEmitter)="onClick($event)">

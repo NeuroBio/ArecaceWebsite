@@ -30,7 +30,9 @@ export class CharactersMainComponent implements OnInit {
       })
     )
     
-    this.route.firstChild.paramMap.subscribe(
-      path => this.current = path.get('CharaID') );
+    this.route.firstChild.paramMap.subscribe(path => {
+      return this.current = this.generalcollectserv
+        .getCurrent(this.characters$, path.get('CharaID'));
+    });
   }
 }

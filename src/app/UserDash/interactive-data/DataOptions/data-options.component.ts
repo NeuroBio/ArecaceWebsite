@@ -51,6 +51,8 @@ export class DataOptionsComponent implements OnInit {
   }
 
   onCall(functionName: string, index: number) {
+    console.log('clicked!')
+
     switch (functionName) {
       case 'View':
         return this.onView(index);

@@ -36,7 +36,9 @@ export class SourceSiphoidMainComponent implements OnInit {
         return final; 
       }) );
 
-    this.route.firstChild.paramMap.subscribe(
-      path => this.current = path.get('SourceID') );
+    this.route.firstChild.paramMap.subscribe(path => {
+      return this.current = this.generalcollectserv
+        .getCurrent(this.sourceRefs$, path.get('SourceID'));
+    });
   }
 }

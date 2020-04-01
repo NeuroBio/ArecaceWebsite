@@ -29,7 +29,9 @@ export class GuildsMainComponent implements OnInit {
           Guilds.map(Guild => new LinkListElement(Guild.ID, Guild.ID)));
       }) );
     
-    this.route.firstChild.paramMap.subscribe(
-      path => this.current = path.get('GuildID') );
+    this.route.firstChild.paramMap.subscribe(path => {
+      return this.current = this.generalcollectserv
+        .getCurrent(this.guilds$, path.get('GuildID'));
+    });
   }
 }

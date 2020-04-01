@@ -29,8 +29,10 @@ export class MapsMainComponent implements OnInit {
           maps.map(map => new LinkListElement(map.Topic, map.ID)));
       }) );
 
-    this.route.firstChild.paramMap.subscribe(
-      path => this.current = path.get('MapID') ); 
+    this.route.firstChild.paramMap.subscribe(path => {
+      return this.current = this.generalcollectserv
+        .getCurrent(this.maps$, path.get('MapID'));
+    });
   }
 
 }
