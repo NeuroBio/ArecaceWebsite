@@ -6,22 +6,41 @@
 
 
     <nav id="linklistHolder"
-    [style.maxHeight.px]="listHeight"
+    [style.max-height.px]="listHeight"
     (window:resize)="onResize()"
     aria-label="Content-Navigation">
 
-        <ul #list class="menubar"
+    <span #list>
+    <app-master-link-list
+    class="options"
+    [style.max-width.px]="250"
+    [linkList]="linkList"
+    [current]="current"
+    [queryParamsHandling]="queryParamsHandling">
+
+              <!-- Label template -->
+              <ng-template let-list #Label>
+                <hr *ngIf="list.Name !== linkList[0].Name">
+                    <div class="linklistlabel" id="type">{{ list.Name }}</div>
+                <hr>
+              </ng-template>
+              
+              <!-- List Element Template -->
+              <ng-template let-item #Item>
+                {{ item.ListName }}
+              </ng-template>
+
+        </app-master-link-list>
+        <!-- <ul #list class="menubar"
         [attr.tabindex]="leave === true ? -1 : 0"
         (keydown)="handleKeyDown($event)" (focus)="focus()">    
             <li *ngFor="let list of linkList, let i = index"
             class="menuitem" aria-labelledby="type">
 
-                <!-- Label -->
                 <hr *ngIf="i!==0">
                 <div class="linklistlabel" id="type">{{ list.Name }}</div>
                 <hr>
 
-                <!-- Actual Link List -->
                 <app-link-list class="options"
                 [style.max-width.px]="250"
                 [label]="list.Name"
@@ -29,14 +48,14 @@
                 [current]="current"
                 [queryParamsHandling]="queryParamsHandling"
                 (lableEmitter)="onSelect($event)">
-                    <!-- Item Template -->
                     <ng-template let-item #Item>
                       {{ item.ListName }}
                     </ng-template>
                 </app-link-list>
             </li>
-        </ul>
+        </ul> -->
 
+    </span>
     </nav>
 
 

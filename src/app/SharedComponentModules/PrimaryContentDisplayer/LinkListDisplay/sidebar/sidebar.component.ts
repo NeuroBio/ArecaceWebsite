@@ -1,12 +1,8 @@
 import { Component, Input, ViewChild, ElementRef,
-         HostListener, ViewChildren, QueryList,
-         AfterViewInit }                          from '@angular/core';
-import { FocusKeyManager }                        from '@angular/cdk/a11y';
+         HostListener, AfterViewInit }             from '@angular/core';
 
-import { LinkListComponent }                      from '../../../SmallComponents/LinkList/link-list/link-list.component';
-
-import { LinkList }                               from '../../../SmallComponents/LinkList/linklist';
-import { LinkListElement }                               from '../../../SmallComponents/LinkList/linklist';
+import { LinkList }                                 from '../../../SmallComponents/LinkList/linklist';
+import { LinkListElement }                          from '../../../SmallComponents/LinkList/linklist';
 
 @Component({
   selector: 'app-sidebar',
@@ -24,23 +20,15 @@ export class SideBarComponent implements AfterViewInit {
   @Input() queryParamsHandling: string = '';
 
   @ViewChild('container', { static: true }) container: ElementRef;
-  @ViewChild('list', { static: true }) list: ElementRef;
+  @ViewChild('list', { static: true }) list: any;
 
-  keyManager: FocusKeyManager<any>;
-  @ViewChildren(LinkListComponent) items: QueryList<any>;
-  leave: boolean = false;
-  initialLabel: string;
- 
-  listHeight = 0;
+  listHeight = 100;
   greybarHeight = 0;
   resizeTimer: any;
   
 
   ngAfterViewInit() {
     this.onResize();
-    this.keyManager = new FocusKeyManager(this.items)
-    .withVerticalOrientation();
-    this.onSelect(this.initialLabel);
   }
 
   @HostListener('window:scroll') 
@@ -66,35 +54,6 @@ export class SideBarComponent implements AfterViewInit {
       }, 3);
       
     }, 20);
-  }
-
-  onSelect(selected: string) {
-    if(this.keyManager) {
-      this.keyManager.setActiveItem(this.linkList
-        .findIndex(list => list.Name === selected));
-    } else {
-      this.initialLabel = selected;
-    }
-  }
-
-  handleKeyDown(event: KeyboardEvent) {
-    if (event.key === 'ArrowUp' || event.key === 'ArrowDown') {
-      event.stopImmediatePropagation();
-      this.keyManager.onKeydown(event);
-      return false;
-    }
-    
-    if(event.key === 'Tab') {
-      this.leave = true;
-      setTimeout(() => { this.leave = false }, 10);
-    }
-  }
-
-  focus() {
-    if(!this.keyManager.activeItem) {
-      this.keyManager.setFirstItemActive();
-    }
-    this.keyManager.activeItem.focusAbove();
   }
 
 }

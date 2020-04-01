@@ -4,7 +4,6 @@
     display: flex; /* NEVER CHANGE THIS */
     float: left;
     top: 0px;
-    max-height: 50%;
     overflow-y: scroll;
     overflow-x: hidden;
     background-color: #454545;
@@ -57,13 +56,12 @@ ul.menubar {
   margin-top: 0px;
   padding-top: 3px;
   padding-left: 31px;
-  height: 100%;
 }
 
 /* Final Elements */
 ::ng-deep app-link-list.options a.linklistelement {
   display: inline-block;
-  height: inherit;
+  /* height: inherit; */
   width: calc(100% - 8px);
   color: white;
   padding: 7px 4px 7px 4px;
@@ -95,4 +93,72 @@ ul.menubar {
 hr {
   position: relative;
   z-index: 2;
+}
+
+
+
+
+
+
+
+/* List */
+::ng-deep app-master-link-list.options .linklist {
+  list-style-type: circle;
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: bold;
+  font-size: 20px;
+  position: relative;
+  z-index: 2;
+  padding-bottom: 0px;
+  margin-bottom: 0px;
+  margin-top: 0px;
+  padding-top: 3px;
+  padding-left: 31px;
+}
+
+/* Final Elements */
+::ng-deep app-master-link-list.options a.linklistelement {
+  display: inline-block;
+  height: inherit;
+  width: calc(100% - 8px);
+  color: white;
+  padding: 7px 4px 7px 4px;
+  margin: 0px;
+  margin: 0px;
+  border-bottom: 2px solid rgb(82, 82, 82);
+}
+
+::ng-deep app-master-link-list.options a.linklistelement.selected {
+  background-color: #8b8b8b;
+  border-bottom: 2px solid #8b8b8b;
+}
+
+::ng-deep app-master-link-list.options  a.linklistelement:hover {
+  background-color: #8b8b8b;
+  border-bottom: 2px solid #8b8b8b;
+}
+
+::ng-deep app-master-link-list.options a.linklistelement:active {
+  background-color: #242424;
+  border-bottom: 2px solid #242424;
+}
+
+::ng-deep app-master-link-list.options a.linklistelement:focus {
+  background-color: #8b8b8b;
+  border-bottom: 2px solid #8b8b8b;
+}
+
+
+::ng-deep app-master-link-list ul.menubar {
+  list-style-type: none;
+  display: flex;
+  flex-flow: column;
+  margin: 0px;
+  padding: 0px;
+}
+
+::ng-deep app-master-link-list  .menuitem {
+  display: list-item;
+  margin: 0px;
+  padding: 0px;
 }
