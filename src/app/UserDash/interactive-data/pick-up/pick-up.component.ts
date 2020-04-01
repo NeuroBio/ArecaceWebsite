@@ -1,9 +1,11 @@
-import { Component, Input, OnChanges, ViewChildren, ElementRef, QueryList, ViewChild }  from '@angular/core';
+import { Component, Input, OnChanges,
+         ViewChildren, ElementRef,
+         ViewChild }                      from '@angular/core';
 
-import { DashCRUDService }              from '../../dash-CRUD.service';
+import { DashCRUDService }                from '../../dash-CRUD.service';
 
-import { User }                         from 'src/app/Classes/ContentClasses';
-import { LinkList, LinkListElement } from 'src/app/SharedComponentModules/SmallComponents/LinkList/linklist';
+import { User }                           from 'src/app/Classes/ContentClasses';
+import { LinkList, LinkListElement }      from 'src/app/SharedComponentModules/SmallComponents/LinkList/linklist';
 
 @Component({
   selector: 'app-pick-up',
@@ -44,7 +46,7 @@ export class PickUpComponent implements OnChanges {
 
   onDelete(type: string, index: number) {
     return this.crud.deleteBookmark(index, type)
-    .then(() =>{
+    .then(() => {
       for(let i = 0; i < this.MasterLists['_results'].length; i++) {
         let Master = this.MasterLists['_results'][i];
         if(Master.MasterListName === type) {//correct list; still exists

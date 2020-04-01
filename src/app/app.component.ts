@@ -37,7 +37,7 @@ export class AppComponent implements AfterViewInit{
               public route: ActivatedRoute) { }
 
   ngAfterViewInit() {
-    setTimeout(() => {this.checkLoad()}, 1000)
+    setTimeout(() => {this.checkLoad()}, 1000);
   }
   checkLoad() {
     if(this.flag.nativeElement.offsetWidth !== 1) {

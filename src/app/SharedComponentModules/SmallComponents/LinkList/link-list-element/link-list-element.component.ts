@@ -19,8 +19,7 @@ export class LinkListElementComponent implements OnInit {
     @Output() clickEventEmitter = new EventEmitter<number>();
     Type: string;
 
-    // @ContentChild('Item') itemTemplateRef: TemplateRef<any>;
-
+    
     ngOnInit() {
       if(this.route !== undefined) { //within site
         this.Type = 'Route';

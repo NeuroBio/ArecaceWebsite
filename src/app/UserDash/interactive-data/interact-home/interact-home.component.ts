@@ -7,7 +7,7 @@ import { SurveyService }                from 'src/app/playground/activities/Surv
 import { FetchService }                 from 'src/app/GlobalServices/fetch.service';
 import { DisplayService }               from '../display.service';
 import { AllUserDataInfo }              from 'src/app/Classes/UploadDownloadPaths';
-import { LinkList, LinkListElement } from 'src/app/SharedComponentModules/SmallComponents/LinkList/linklist';
+import { LinkList, LinkListElement }    from 'src/app/SharedComponentModules/SmallComponents/LinkList/linklist';
 
 @Component({
   selector: 'app-interact-home',

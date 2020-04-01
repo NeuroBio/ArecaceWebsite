@@ -1,20 +1,29 @@
 <div *ngIf="postList">
-    <div *ngFor="let post of postList">
+    <app-link-list
+    [list]="postList.Data"
+    [horizontal]="false"
+    class="NewFeed">
 
-      <article class="textblock" tabindex="0">
-          <b>Poster: </b> <span id="name">{{ post.Poster }}</span>
-          <div id="right"><b>Date: </b> {{ post.Date }}, {{ post.Time }}</div><br>
-          <div style="clear: both;"></div>
-          <hr>
-          <br>
-          <div [innerHTML]="post.Body"></div>
-          <div *ngIf="post.Links">
-            <img [src]="post.Links" [alt]="post.AltText">
-          </div>
-          <div id="right" *ngIf="post.Edited === true">(Edited)</div>
-          <div style="clear: both;"></div>
-      </article>
-      <br>
+    <!-- UPdate Post -->
+        <ng-template let-item #Item>
+            <article class="textblock" tabindex="-1">
+                <span id="name"><b>Poster: </b> {{ item.Item.Poster }}</span>
+                <div id="right"><b>Date: </b> {{ item.Item.Date }}, {{ item.Item.Time }}</div><br>
+                <div style="clear: both;"></div>
+                <hr>
+                <br>
+                <div [innerHTML]="item.Item.Body"></div>
+                <div *ngIf="item.Item.Links">
+                    <img [src]="item.Item.Links" [alt]="item.Item.AltText">
+                </div>
+                <div id="right" *ngIf="item.Item.Edited === true">(Edited)</div>
+                <div style="clear: both;"></div>
+            </article>
+        </ng-template>
 
-    </div>
+        <!-- Space between posts -->
+        <ng-template lit-i #Decoration>
+            <br>
+        </ng-template>
+    </app-link-list>
 </div>

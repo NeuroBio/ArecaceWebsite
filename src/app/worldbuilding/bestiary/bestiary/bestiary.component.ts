@@ -1,14 +1,15 @@
-import { Component, OnInit, OnDestroy, ViewChild }   from '@angular/core';
+import { Component, OnInit, OnDestroy,
+         ViewChild }                      from '@angular/core';
 
 import { Observable }                     from 'rxjs';
 import { map }                            from 'rxjs/operators';
 
 import { GeneralcollectionService }       from 'src/app/GlobalServices/generalcollection.service';
+import { GridService }                    from 'src/app/SharedComponentModules/PrimaryContentDisplayer/GridBlowUp/refocus.service';
+
+import { GridComponent }                  from 'src/app/SharedComponentModules/PrimaryContentDisplayer/GridBlowUp/grid/grid.component';
 
 import { BeastMetaData }                  from 'src/app/Classes/ContentClasses';
-import { LinkListComponent } from 'src/app/SharedComponentModules/SmallComponents/LinkList/link-list/link-list.component';
-import { GridComponent } from 'src/app/SharedComponentModules/PrimaryContentDisplayer/GridBlowUp/grid/grid.component';
-import { GridService } from 'src/app/SharedComponentModules/PrimaryContentDisplayer/GridBlowUp/refocus.service';
 
 
 @Component({

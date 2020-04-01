@@ -11,12 +11,12 @@
 
         <!-- Sort options -->
         <fieldset>
-          <legend>Sort By:</legend>
-          <div *ngFor="let option of sortOptions">
-              <input type="radio" name="sorter"  [id]="option"
-              [checked]="option === 'Biome'" (click)="onSort(option)">
-              <label [for]="option">{{ option }}</label>
-          </div>
+            <legend>Sort By:</legend>
+            <div *ngFor="let option of sortOptions">
+                <input type="radio" name="sorter"  [id]="option"
+                [checked]="option === 'Biome'" (click)="onSort(option)">
+                <label [for]="option">{{ option }}</label>
+            </div>
         </fieldset>
   
         <!-- show Preview -->

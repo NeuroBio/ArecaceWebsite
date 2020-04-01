@@ -19,6 +19,7 @@ export class LinkListComponent implements OnInit, AfterViewInit {
   @Input() list: LinkListElement[];
   @Input() label: string;
   @Input() active: boolean;
+  @Input() horizontal: boolean = true;
   @Input() queryParamsHandling: string = '';
 
   @Output() lableEmitter = new EventEmitter<string>();
@@ -36,8 +37,14 @@ export class LinkListComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.keyManager = new FocusKeyManager(this.items)
-      .withHorizontalOrientation('ltr');
+    if(this.horizontal === true) {
+      this.keyManager = new FocusKeyManager(this.items)
+        .withHorizontalOrientation('ltr');
+    } else {
+      this.keyManager = new FocusKeyManager(this.items)
+        .withVerticalOrientation();
+    }
+
   }
 
     setActive() {
@@ -59,11 +66,21 @@ export class LinkListComponent implements OnInit, AfterViewInit {
     }
 
     handleKeyDown(event: KeyboardEvent) {
-      if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
-        event.stopImmediatePropagation();
-        this.keyManager.onKeydown(event);
-        return false;
+
+      if(this.horizontal === true) {
+        if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
+          event.stopImmediatePropagation();
+          this.keyManager.onKeydown(event);
+          return false;
+        }
+      } else {
+        if (event.key === 'ArrowUp' || event.key === 'ArrowDown') {
+          event.stopImmediatePropagation();
+          this.keyManager.onKeydown(event);
+          return false;
+        }
       }
+
       
       if (event.key === 'Enter') {
         event.stopImmediatePropagation();
@@ -83,18 +100,6 @@ export class LinkListComponent implements OnInit, AfterViewInit {
       }
 
     }
-
-    // handleKeyUp(event: KeyboardEvent) {
-    //   console.log("keyup")
-    //   if (event.key === 'Enter') {
-    //     event.stopImmediatePropagation();
-    //     this.keyManager.activeItem.selectItem();
-    //     if(this.label) {
-    //       this.lableEmitter.emit(this.label);
-    //     }
-    //     return false;
-    //   }
-    // }
 
     onClick(index: number) {
       this.keyManager.setActiveItem(index);

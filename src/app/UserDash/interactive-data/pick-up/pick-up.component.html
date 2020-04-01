@@ -11,17 +11,7 @@
 
 <!-- Favorites -->
 <ng-template #display class="outer">
-    <!-- <section *ngFor="let type of data" class="bookmark">
-      <h5>{{ type.Type }}:</h5>
-      <span class="linker" *ngFor="let link of type.Data; let i = index">
-        <button class="Exs" type="button"
-        [attr.aria-label]="'Delete-Bookmark:-' + link.Name"
-        (click)="onDelete(type.Type, i)">x</button>
-        <a [routerLink]="'/'+ link.Link">
-            {{ link.Name }}
-        </a><br>
-      </span>
-    </section> -->
+
     <div *ngFor="let bmt of data">
       <h5>{{ bmt.Name }}:</h5>
       <app-master-link-list 

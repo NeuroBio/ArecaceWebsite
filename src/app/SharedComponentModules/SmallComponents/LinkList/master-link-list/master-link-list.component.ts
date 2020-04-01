@@ -1,7 +1,11 @@
-import { Component, OnInit, QueryList, ViewChildren, Input, TemplateRef, ContentChild, AfterViewInit } from '@angular/core';
-import { FocusKeyManager } from '@angular/cdk/a11y';
-import { LinkListComponent } from '../link-list/link-list.component';
-import { LinkList, LinkListElement } from '../linklist';
+import { Component, QueryList, ViewChildren,
+         Input, TemplateRef, ContentChild,
+         AfterViewInit }                      from '@angular/core';
+import { FocusKeyManager }                    from '@angular/cdk/a11y';
+
+import { LinkListComponent }                  from '../link-list/link-list.component';
+
+import { LinkList, LinkListElement }          from '../linklist';
 
 @Component({
   selector: 'app-master-link-list',

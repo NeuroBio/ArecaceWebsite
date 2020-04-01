@@ -1,10 +1,12 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { Subscription}                  from 'rxjs';
+import { map }                          from 'rxjs/operators';
 
 import { UpdateService }                from '../update.service';
 
 import { PostData }                     from 'src/app/Classes/ContentClasses';
+import { LinkList, LinkListElement } from '../../SmallComponents/LinkList/linklist';
 
 @Component({
   selector: 'app-updatefeed',
@@ -14,7 +16,7 @@ import { PostData }                     from 'src/app/Classes/ContentClasses';
 
 export class UpdateFeedComponent implements OnInit, OnDestroy {
 
-  postList: PostData[];
+  postList: LinkList;
   message: string;
   stream1: Subscription;
   stream2: Subscription;
@@ -24,9 +26,16 @@ export class UpdateFeedComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.updateserv.getPosts();
     this. stream1 = this.updateserv.posts
-      .subscribe(posts => this.postList = posts);
+      .subscribe((posts: PostData[]) => {
+          if(posts) {
+            this.postList = new LinkList('Posts', posts.map(post =>
+              new LinkListElement(post.ID, undefined, undefined, post))); 
+            console.log(this.postList) 
+          }
+    });
+
     this.stream2 = this.updateserv.message
-    .subscribe(message => this.message = message);
+      .subscribe(message => this.message = message);
   }
 
   ngOnDestroy() {

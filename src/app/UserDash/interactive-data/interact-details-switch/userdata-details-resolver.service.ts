@@ -21,13 +21,13 @@ export class UserdataDetailsResolverService implements Resolve<any> {
   resolve(route: ActivatedRouteSnapshot) {
     const path =  route['_routerState'].url.split('/');
     const ID = path[path.length-1].split('\?')[0]; //remove query params
-    const Type = path[path.length-2]
+    const Type = path[path.length-2];
 
     if(this.displayserv.updateCurrentUserDatum(ID) === true) {
-      this.titleserv.setTitle(`${this.UserDataInfo[Type].ShortName}: ${ID}`)
+      this.titleserv.setTitle(`${this.UserDataInfo[Type].ShortName}: ${ID}`);
       return this.displayserv.currentUserDatum.value;
     } else {
-      this.router.navigate([`/dash/${path[path.length-2]}`])
+      this.router.navigate([`/dash/${path[path.length-2]}`]);
     }
   }
 }
