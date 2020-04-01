@@ -31,7 +31,8 @@ export class AppComponent implements AfterViewInit{
       new LinkListElement('FAQ', 'faq'),
       new LinkListElement('Site Map', 'sitemap'),
       new LinkListElement('Traveler\'s Guide', 'guide'),
-      new LinkListElement('Privacy Policy', 'privacy') ]);
+      new LinkListElement('Privacy Policy', 'privacy'),
+      new LinkListElement('Accessibility', 'accessibility')]);
 
   constructor(private global: GlobalVarsService,
               public route: ActivatedRoute) { }
@@ -39,6 +40,7 @@ export class AppComponent implements AfterViewInit{
   ngAfterViewInit() {
     setTimeout(() => {this.checkLoad()}, 1000);
   }
+  
   checkLoad() {
     if(this.flag.nativeElement.offsetWidth !== 1) {
         this.global.ImagesLoadable.next(false);

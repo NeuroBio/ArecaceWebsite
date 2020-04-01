@@ -33,6 +33,7 @@ import { PageNotFoundComponent }      from './SimplePages/pagenotfound/pagenotfo
 import { PrivacyPolicyComponent }     from './SimplePages/privacy-policy/privacy-policy.component';
 import { TravelorsGuideComponent }    from './SimplePages/travelorsguide/travelorsguide.component';
 import { UploadLogComponent }         from './SimplePages/upload-log/upload-log.component';
+import { AccessibilityComponent } from './SimplePages/accessibility/accessibility.component';
 
 export function TextFactory(provider: TextProvider) {
   return () => provider.load();
@@ -53,7 +54,8 @@ export function AuthFactory(provider: AuthService) {
     BadserviceComponent,
     ContactComponent,
     UploadLogComponent,
-    PrivacyPolicyComponent
+    PrivacyPolicyComponent,
+    AccessibilityComponent
     ],
 
   imports: [

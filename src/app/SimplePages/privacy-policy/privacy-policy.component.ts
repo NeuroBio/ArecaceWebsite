@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { TextProvider } from 'src/app/GlobalServices/textprovider.service';
+import { Component, OnInit }  from '@angular/core';
+
+import { TextProvider }       from 'src/app/GlobalServices/textprovider.service';
 
 @Component({
   selector: 'app-privacy-policy',
