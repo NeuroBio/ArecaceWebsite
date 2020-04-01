@@ -1,9 +1,9 @@
-/*Form styling*/
-form {
+ form {
     position: relative;
     margin: 3px;
     padding: 7px;
-    width: 800px;
+    width: calc(100% - 20px);
+    /* width: 800px; */
     max-width: calc(100vw - 60px);
     overflow: visible;
     border: 1px solid white;
@@ -82,9 +82,11 @@ label {
   margin: 0px 2px 0px 1px;
   font-size: 20px;
   display: flex;
+  flex-wrap: wrap;
   border: white 1px solid;
   font-family: 'Courier New', Courier, monospace;
   align-items: center;
+  white-space: pre-wrap;
 }
 
 label.accessible {

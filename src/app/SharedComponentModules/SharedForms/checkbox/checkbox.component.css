@@ -51,7 +51,6 @@ label.checkboxAfter:after {
     height: 20px;
     left: 15px;
     top: 6px;
-    z-index: 1;
 }
 
 .checkboxAfter svg {
@@ -60,7 +59,6 @@ label.checkboxAfter:after {
     height: 20px;
     right: 15px;
     top: 6px;
-    z-index: 1;
 }
 
 label path {

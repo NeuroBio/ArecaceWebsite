@@ -1,3 +1,13 @@
-div.formholder {
-    background-color: rgb(49,49,49);
+.userDataDetails {
+    width: calc(100% - 16px);
+    position: relative;
+}
+
+::ng-deep .userDataDetails form {
+    width: 100%;
+    background-color: rgb(53, 53, 53);
+    overflow: hidden;
+}
+::ng-deep .userDataDetails form textarea {
+    width: 100%;
 }

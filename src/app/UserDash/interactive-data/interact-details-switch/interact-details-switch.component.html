@@ -1,32 +1,34 @@
-<!-- SURVEYS -->
-<app-results
-*ngIf="type === 'SurveyResults'"
-[ViewOnly]="true"
-></app-results>
+<div class="userDataDetails">
+    <!-- SURVEYS -->
+    <app-results
+    *ngIf="type === 'SurveyResults'"
+    [ViewOnly]="true"
+    ></app-results>
 
-<!-- Source Affinity -->
-<div *ngIf="type === 'SAcalculations'">
-    <app-source-affinity-calculator
-    [viewOnly]="view !== 'edit'"
-    [new]="false"
-    ></app-source-affinity-calculator>
-</div>
-
-
-<!-- Characters -->
-<div *ngIf="type === 'FanCharacters'">
-    <app-charactersdetails
-    *ngIf="view !== 'edit'"
-    ></app-charactersdetails>
-
-    <div class="formholder"
-    *ngIf="view === 'edit'">
-        <app-characterform></app-characterform>
+    <!-- Source Affinity -->
+    <div *ngIf="type === 'SAcalculations'">
+        <app-source-affinity-calculator
+        [viewOnly]="view !== 'edit'"
+        [new]="false"
+        ></app-source-affinity-calculator>
     </div>
 
+
+    <!-- Characters -->
+    <div *ngIf="type === 'FanCharacters'">
+        <app-charactersdetails
+        *ngIf="view !== 'edit'"
+        ></app-charactersdetails>
+
+        <div class="formholder"
+        *ngIf="view === 'edit'">
+            <app-characterform
+            ></app-characterform>
+        </div>
+
+    </div>
+
+    <app-dash-buttons
+    *ngIf="view === 'edit'  && editable === true"
+    ></app-dash-buttons>
 </div>
-
-<app-dash-buttons
-*ngIf="view === 'edit'  && editable === true"
-></app-dash-buttons>
-
