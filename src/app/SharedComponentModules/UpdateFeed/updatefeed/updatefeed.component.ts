@@ -30,7 +30,6 @@ export class UpdateFeedComponent implements OnInit, OnDestroy {
           if(posts) {
             this.postList = new LinkList('Posts', posts.map(post =>
               new LinkListElement(post.ID, undefined, undefined, post))); 
-            console.log(this.postList) 
           }
     });
 
