@@ -1,7 +1,7 @@
 <div *ngIf="postList">
     <div *ngFor="let post of postList">
 
-      <article class="textblock">
+      <article class="textblock" tabindex="0">
           <b>Poster: </b> <span id="name">{{ post.Poster }}</span>
           <div id="right"><b>Date: </b> {{ post.Date }}, {{ post.Time }}</div><br>
           <div style="clear: both;"></div>

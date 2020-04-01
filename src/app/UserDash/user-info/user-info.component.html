@@ -32,7 +32,7 @@
                 <button id="change" (click)="changeUserName()"
                 >Change</button>
                 <div style="clear: both;"></div>
-                <div aria-live="polite">
+                <div role="status">
                     {{ message }}
                 </div>
             </form>
@@ -74,7 +74,7 @@
                 <app-tool-tip [Info]="deleteAccountInfo"></app-tool-tip>
             </div><br>
 
-            <div aria-live="polite">{{ dangerMessage }}</div>
+            <div role="status">{{ dangerMessage }}</div>
         </div>
     </article>
 </main>

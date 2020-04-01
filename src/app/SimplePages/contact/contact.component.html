@@ -82,7 +82,7 @@
     </div>
     
     <button (click)="onSubmit()" [disabled]="(active || tempDisable)">Submit</button>
-    <div class="alert" role="alert"
+    <div class="alert" role="status"
       [style.display]="message ? 'inline-block' : 'none'">
       &nbsp;&nbsp;{{ message }}
     </div>
