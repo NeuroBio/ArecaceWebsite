@@ -9,7 +9,7 @@
     (keydown)="handleKeyDown($event)" (focus)="focus()">
         <li *ngFor="let list of linkList, let i = index"
         tabindex="-1"
-        class="menuitem" aria-labelledby="type">
+        class="menuitem">
 
             <!-- Label -->
             <hr *ngIf="i!==0">

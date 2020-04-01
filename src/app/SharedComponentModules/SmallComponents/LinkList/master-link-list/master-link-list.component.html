@@ -3,8 +3,7 @@
 (keydown)="handleKeyDown($event)" (focus)="focus()">    
 
     <li *ngFor="let list of linkList, let i = index"
-    class="menuitem" aria-labelledby="type">
-
+    class="menuitem">
         <!-- Label -->
         <ng-container
         [ngTemplateOutlet]="labelTemplateRef"

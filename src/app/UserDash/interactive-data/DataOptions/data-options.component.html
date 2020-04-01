@@ -8,7 +8,9 @@
         [linkList]="LinkList">
 
               <!-- Label template -->
-              <ng-template let-list #Label>{{ list.Name }}</ng-template>
+              <ng-template let-list #Label>
+                <span id="type">{{ list.Name }}</span>
+              </ng-template>
               
               <!-- List Element Template -->
               <ng-template let-item #Item>

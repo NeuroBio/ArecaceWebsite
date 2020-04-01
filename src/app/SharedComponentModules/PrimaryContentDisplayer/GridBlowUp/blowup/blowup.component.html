@@ -27,8 +27,9 @@
             [style.height.px]="textHeight">
 
           <!--Show/hide info-->
-            <img *ngIf="!loading" tabindex="0" aria-label="Show-Hide-Image-Description"
-            id="downUp" src="assets/svgs/back.svg" alt="" role="button"
+            <img *ngIf="!loading" tabindex="0"
+            role="button" aria-label="Show-Hide-Image-Description"
+            id="downUp" src="assets/svgs/back.svg" alt=""
             [style.transform]="'rotate(' + rotation + 'deg)'"
             (keydown)="onTwistieKeydown($event)"
             (click)="showHideDescription()">

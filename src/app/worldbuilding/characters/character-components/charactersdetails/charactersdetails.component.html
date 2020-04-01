@@ -10,7 +10,7 @@
 
 
     <!-- Bio facts -->
-    <section class="firstblock" aria-label="Quick Facts">
+    <section class="firstblock">
 
         <!-- Mini header -->
           <div class="compheader">
@@ -36,13 +36,13 @@
 
 
     <!-- Personality Block-->
-    <section class="textblock" aria-label="Personality">
+    <section class="textblock">
       <b>Personality: </b>{{ char.Personality }}<br>
     </section><br>
 
 
     <!-- Philo/Motivation/Goals Block-->
-    <section class="textblock" aria-label="Goals, Motivations, and Abilities">
+    <section class="textblock">
       <p><b>Philosophy: </b>{{ char.Philosophy }}</p>
       <p><b>Motivations/Goals: </b>{{ char.MotivationsGoals }}</p>
       <p><b>Strengths: </b>{{ char.Strengths }}</p>
@@ -54,7 +54,7 @@
       
 
     <!-- Background Block-->
-      <section class="textblock" aria-label="Biopgraphy">
+      <section class="textblock">
 
         <!-- pick which bio version to show -->
         <fieldset *ngIf="char.BriefBackground !== ''" class="toggler">

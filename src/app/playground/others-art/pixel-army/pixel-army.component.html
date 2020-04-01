@@ -1,22 +1,6 @@
-<!-- <ul id="background"
-*ngIf="pixels$ | async as pixels"
-aria-label="Pixel-Art"
-[attr.tabindex]="leave === true ? -1 : 0"
-(focus)="focus()"
-(keydown)="handleKeyDown($event)">
-  <li *ngFor="let pixel of pixels">
+<nav id="background" aria-label="Pixel-Art-Navigation"
+*ngIf="pixels$ | async as pixels">
 
-    <app-link-list-element
-    [href] ="pixel.ArtistLink">
-        <img #Host [src]="pixel.Links[0]" [title]="'By ' + pixel.Artist + ', ' + pixel.Date">
-    </app-link-list-element>
-  </li>
-</ul> -->
-
- <!-- Actual Link List -->
-<div id="background"
-*ngIf="pixels$ | async as pixels"
-aria-label="Pixel-Art">
     <app-link-list class="PixelList"
     [list]="pixels">
         <!-- Item Template -->
@@ -26,4 +10,5 @@ aria-label="Pixel-Art">
           [alt]="item.ListName + ' by ' + item.Item.Artist + ', ' + item.Item.Date">
         </ng-template>
     </app-link-list>
- </div>
+
+</nav>

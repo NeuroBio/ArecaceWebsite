@@ -3,6 +3,7 @@ import { Component, Input, OnChanges }  from '@angular/core';
 import { DashCRUDService }              from '../../dash-CRUD.service';
 
 import { User }                         from 'src/app/Classes/ContentClasses';
+import { LinkList, LinkListElement } from 'src/app/SharedComponentModules/SmallComponents/LinkList/linklist';
 
 @Component({
   selector: 'app-pick-up',
@@ -13,7 +14,7 @@ import { User }                         from 'src/app/Classes/ContentClasses';
 export class PickUpComponent implements OnChanges {
 
   @Input() user: User;
-  data: any[];
+  data: {}[];
   dataExists: boolean;
   bookmarkTypes = ['Comics', 'Narratives', 'Scripts', 'Favorites'];
   
@@ -21,14 +22,19 @@ export class PickUpComponent implements OnChanges {
 
   ngOnChanges() {
     this.data = [];
-    this.bookmarkTypes.forEach(bmt => {
-      if(this.user[bmt]) {
-        if(this.user[bmt][0]) {
-          this.data.push({ Type: bmt,
-                           Data: this.user[bmt].map(link => {
-                           return { Link: link.path, Name: link.name }; })
-          });
-        }
+    this.bookmarkTypes.forEach((bmt, i) => {
+      if(this.user[bmt] && this.user[bmt][0]) {
+        // this.data.push({});
+        const LinkListArray = [];
+        this.user[bmt].forEach((link, j) => {
+          const List = new LinkList(link.name, [])
+          const Delete = new LinkListElement(link.name, undefined, undefined, {Type: bmt, Index: j});
+          const View = new LinkListElement(link.name, '/'+ link.path, undefined, undefined);
+          List.Data.push(Delete);
+          List.Data.push(View);
+          LinkListArray.push(List)
+        });
+        this.data.push({Name: bmt, LinkList: LinkListArray});
       }
     });
     this.dataExists = this.data[0] ? true : false;

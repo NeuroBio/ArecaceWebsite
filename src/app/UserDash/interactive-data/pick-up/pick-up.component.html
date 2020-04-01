@@ -10,8 +10,8 @@
 
 
 <!-- Favorites -->
-  <ng-template #display class="outer">
-    <section *ngFor="let type of data" class="bookmark">
+<ng-template #display class="outer">
+    <!-- <section *ngFor="let type of data" class="bookmark">
       <h5>{{ type.Type }}:</h5>
       <span class="linker" *ngFor="let link of type.Data; let i = index">
         <button class="Exs" type="button"
@@ -21,7 +21,31 @@
             {{ link.Name }}
         </a><br>
       </span>
-    </section>
+    </section> -->
+    <div *ngFor="let bmt of data">
+      <h5>{{ bmt.Name }}:</h5>
+      <app-master-link-list class="UserFavoriteData"
+      [linkList]="bmt.LinkList">
+
+            <!-- Label template -->
+            <ng-template let-list #Label>
+              <span id="type">{{ list.Name }}:</span>
+            </ng-template>
+            
+            <!-- List Element Template -->
+            <ng-template let-item #Item>
+              <!-- Delete -->
+              <span *ngIf="item.Item">
+                  <button class="Exs" type="button" tabindex="-1"
+                  attr.aria-label="Delete-Bookmark"
+                  (click)="onDelete(item.Item.Type, item.Item.Index)">x</button>
+              </span>
+              <!-- View -->
+              <span *ngIf="!item.Item">{{ item.ListName }}</span>
+             </ng-template>
+
+      </app-master-link-list>
+    </div>
   </ng-template>
 
 
