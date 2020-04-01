@@ -1,7 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { LinkList, LinkListElement } from 'src/app/SharedComponentModules/SmallComponents/LinkList/linklist';
-import { LinkListElementModule } from 'src/app/SharedComponentModules/SmallComponents/LinkList/link-list-element.module';
+import { Component, OnInit, Input }   from '@angular/core';
+import { Router, ActivatedRoute }     from '@angular/router';
+import { LinkList, LinkListElement }  from 'src/app/SharedComponentModules/SmallComponents/LinkList/linklist';
+
 @Component({
   selector: 'app-data-options',
   templateUrl: './data-options.component.html',
@@ -26,27 +26,28 @@ export class DataOptionsComponent implements OnInit {
     if(this.edit) {
       buttonTypes.push('Edit');
     }
+
     this.LinkList = []
     this.names.forEach((name, i) => {
       this.LinkList.push(new LinkList(name, []));
       buttonTypes.forEach(button => {
         this.LinkList[i].Data.push(
-          new LinkListElement(name, undefined, undefined, { Title: this.title, Type: button}));
+          new LinkListElement(name, undefined, undefined,
+          { Title: this.title, Type: button, Index: i}));
       });
     });
-    console.log(this.LinkList)
   }
 
   onView(index: number) {
-    this.router.navigate([`${this.type}/${this.data[index].ID}`],
+    this.router.navigate([ `${this.type}/${this.data[index].ID}` ],
                          { relativeTo: this.route,
-                          queryParams: {Action: 'view'} });
+                           queryParams: {Action: 'view'} });
   }
 
   onEdit(index: number) {
-    this.router.navigate([`${this.type}/${this.data[index].ID}`],
+    this.router.navigate([ `${this.type}/${this.data[index].ID}` ],
                          { relativeTo: this.route,
-                          queryParams: {Action: 'edit'} });
+                           queryParams: {Action: 'edit'} });
   }
 
   onCall(functionName: string, index: number) {
@@ -57,7 +58,5 @@ export class DataOptionsComponent implements OnInit {
         return this.onEdit(index);
     }
   }
-  // onDelete(index: number) {
-  //   this.crud.deleteEntry(this.type, index)
-  // }
+
 }

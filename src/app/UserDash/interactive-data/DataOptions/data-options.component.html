@@ -3,46 +3,22 @@
   [Title]="title"
   [Color]="'rgb(49, 49, 49)'">
   
-  <!-- <ul id="outer">
-    <div *ngFor="let name of names; let i = index">
-      <li>{{ name }}</li>
-      <button class="Exs" (click)="onView(i)"
-      [attr.aria-label]="'View-' + Title + ':-' + name"
-      >view</button>
-      <button class="Exs" *ngIf="edit === true"
-      [attr.aria-label]="'Edit-' + Title + ':-'+ name"
-      (click)="onEdit(i)">edit</button>
+    <div class="outer">
+        <app-master-link-list class="DiplayUserData"
+        [linkList]="LinkList">
+
+              <!-- Label template -->
+              <ng-template let-list #Label>{{ list.Name }}</ng-template>
+              
+              <!-- List Element Template -->
+              <ng-template let-item #Item>
+                <button class="Exs" (click)="onCall(item.Item.Type, item.Item.Index)"
+                [attr.aria-label]="item.Item.Type + ': ' + item.ListName"
+                tabindex="-1">{{ item.Item.Type }}</button>
+              </ng-template>
+
+        </app-master-link-list>
     </div>
-  </ul> -->
-
-  <!-- <ul id="outer" class="top">
-    <div *ngFor="let name of names; let i = index">
-      <li class="top">{{ name }}
-
-            <app-link-list class="DiplayUserData"
-            [list]="LinkList[i].Data">
-
-
-            <ng-template let-item #Item>
-                  <button class="Exs" (click)="onCall(item.Item.Type, i)"
-                  [attr.aria-label]="item.Item.Type + ':-' + item.ListName"
-                  tabindex="-1">{{ item.Item.Type }}</button>
-                </ng-template>
-            </app-link-list>
-      </li>
-    </div>
-  </ul> -->
-
-
-  <app-master-link-list
-  [linkList]="LinkList">
-    <ng-template let-list #Label>{{ list.Name }}</ng-template>
-    <ng-template let-item #Item>
-      <button class="Exs" (click)="onCall(item.Item.Type, item.Item.Index)"
-      [attr.aria-label]="item.Item.Type + ': ' + item.ListName"
-      tabindex="-1">{{ item.Item.Type }}</button>
-    </ng-template>
-  </app-master-link-list>
 
 
 
