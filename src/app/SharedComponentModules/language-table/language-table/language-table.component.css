@@ -54,11 +54,12 @@ label {
 }
 
 legend {
+    float: left;
     font-family: 'Courier New', Courier, monospace;
     font-weight: bold;
     font-size: 22px;
     margin: 0px;
-    padding: 3px 3px 3px 7px;
+    padding: 10px 3px 0px 7px;
 }
 fieldset {
     border: 0px;
