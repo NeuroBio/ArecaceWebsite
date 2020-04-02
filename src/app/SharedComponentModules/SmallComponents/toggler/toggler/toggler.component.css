@@ -1,6 +1,7 @@
 /*Toggle buttons*/
 .toggler {
     display: inline-block;
+    position: relative;
 }
 
 input[type="radio"].toggler {
@@ -10,6 +11,7 @@ input[type="radio"].toggler {
     height: 1px;
     width: 1px;
     left: 1px;
+    top: 1px;
     overflow: hidden;
 }
 
