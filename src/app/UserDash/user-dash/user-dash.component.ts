@@ -18,7 +18,7 @@ export class UserDashComponent implements OnInit, OnDestroy {
 
   loggedoutText: string;
   loggedinText: string;
-  user: User;
+  user: User = new User('fake@faker.com', -49);
   savedData: any[];
   titles: string[];
   authorized: boolean;
@@ -33,6 +33,7 @@ export class UserDashComponent implements OnInit, OnDestroy {
               private titleserv: Title) { }
 
   ngOnInit() {
+    console.log(new User('fake@faker.com', -49))
     this.titleserv.setTitle('User Dash');
     this.loggedoutText = this.textprovider.WebsiteText
       .find(member => member.ID =='login').Text;
@@ -41,8 +42,8 @@ export class UserDashComponent implements OnInit, OnDestroy {
       
     this.stream1 = this.auth.user.subscribe(user => {
       this.authorized = this.auth.isUser();
-      this.user = user;
       if(user) {
+        this.user = user;
         this.PrepareData();
         this.checkRoles();
       }

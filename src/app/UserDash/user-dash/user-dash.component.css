@@ -69,3 +69,15 @@ h3.compheader {
 div#innerText {
     padding: 15px;
 }
+
+
+#loggedoutholder {
+    max-width: 400px;
+    padding: 7px;
+    background-color: rgb(29, 29, 29);
+}
+
+#outerloggedoutholder {
+    display: flex;
+    justify-content: center;
+}
