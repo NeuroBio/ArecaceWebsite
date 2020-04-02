@@ -31,7 +31,6 @@ export class GeneralcollectionService {
   getCurrent(data$: Observable<LinkList | LinkList[]>, routeID: string) {
     let current: string;
     data$.subscribe(data => {
-      console.log('ID', routeID)
       if(routeID) {//child route doesn't exist
         if(data instanceof LinkList) {
           const index = data.Data.findIndex(datum => datum.Route === routeID);

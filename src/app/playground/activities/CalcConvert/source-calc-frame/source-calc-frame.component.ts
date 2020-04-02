@@ -18,7 +18,7 @@ import { LoginToSaveService }           from 'src/app/SharedComponentModules/Sma
 export class SourceCalcFrameComponent implements OnInit, OnDestroy {
 
   canonSA: SA[]
-  loggedIn: boolean;
+  isUser: boolean;
   notValid: boolean;
   stream1: Subscription;
   stream2: Subscription;
@@ -36,7 +36,7 @@ export class SourceCalcFrameComponent implements OnInit, OnDestroy {
     this.logintosaveserv.assignType('SAcalculations');
 
     this.stream1 = this.auth.user.subscribe(() => 
-      this.loggedIn = this.auth.isUser());  
+      this.isUser = this.auth.isUser());  
     this.stream2 =this.logintosaveserv.reset.subscribe(() => {
       this.fetcher.assignItemtoEdit(undefined);
       this.logintosaveserv.assignStopClick(false);

@@ -24,13 +24,12 @@ export class UserGuardGuard implements CanActivate {
     return this.checkUser(url);
   }
 
-  checkUser(url:string): Observable<boolean> {
+  checkUser(url: string): Observable<boolean> {
     return this.auth.user.pipe(
       take(1),
       map((user:User) => {
-        return true;
         if(user) {
-            if(user.User){return true};
+            if(user.User) { return true };
         }
         this.auth.redirectUrl = url;
         this.router.navigate(['/dash']);
