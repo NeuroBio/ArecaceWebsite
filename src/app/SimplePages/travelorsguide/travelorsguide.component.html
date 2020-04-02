@@ -7,20 +7,25 @@
   </div>
   <hr>
 
-  <!-- Preview -->
-  <section id="preview">
-      <br>
-      <h3>Example Pages</h3>
-        <img id="TG" [src]="previews[index]"><br>
-        <div>
-            <button (click)="nextPage(-1)">Prev</button> <b>|||</b>
-            <button (click)="nextPage(1)">Next</button>
+  <div id="centering">
+        <div id="mainContent">
+                <!-- Preview -->
+                <section id="preview">
+                    <br>
+                    <h3>Example Pages</h3>
+                    <img id="TG" [src]="previews[index]"><br>
+                    <div>
+                        <button (click)="nextPage(-1)">Prev</button> <b>|||</b>
+                        <button (click)="nextPage(1)">Next</button>
+                    </div>
+                </section>
+                
+                <!-- info on the guide -->
+                <section id="spiel" [innerHTML]="mainText"></section>
+                <div style="clear:both;"></div>
+                <br>
         </div>
-    </section>
-    
-    <!-- info on the guide -->
-    <section id="spiel" [innerHTML]="mainText"></section>
-    <div style="clear:both;"></div>
-    <br>
+  </div>
+  
 </main>
 

@@ -53,7 +53,7 @@ export class UserDashComponent implements OnInit, OnDestroy {
     this.stream1.unsubscribe();
   }
 
-  PrepareData(){
+  PrepareData() {
     this.savedData = [];
     if(this.user.FanCharacters) {
       this.savedData.push({

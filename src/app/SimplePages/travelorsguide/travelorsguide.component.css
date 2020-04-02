@@ -4,6 +4,20 @@
     background-image: url(https://firebasestorage.googleapis.com/v0/b/arecaceworld.appspot.com/o/WebSite%2Fsmear4.png?alt=media&token=fc921624-299c-4470-b40e-a22d256f81dd);
 }
 
+.compheader {
+    display: flex;
+    justify-content: center;
+}
+
+#centering {
+    display: flex;
+    justify-content: center;
+}
+
+#mainContent {
+    max-width: 1030px;
+}
+
 #preview {
     float: left;
     max-width: 500px;

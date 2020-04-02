@@ -17,7 +17,7 @@
         <div class="compheader">
             <h3 class="compheader">Welcome Back, {{ user.userName }} (ID#{{ user.ID }})
                 <div id="useractions">
-                    <nav>
+                    <nav aria-label="User-Actions-Navigation">
                         <span *ngFor="let action of actions">
                             <a class="icon" *ngIf="action.show === true"
                             [routerLink]="action.link" tabindex="0">
