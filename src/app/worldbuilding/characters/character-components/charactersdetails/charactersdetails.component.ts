@@ -48,8 +48,12 @@ export class CharactersDetailsComponent implements OnInit, OnDestroy {
     this.bookmarkserv.dispose();
   }
 
-  changeBio(toggle: boolean) {
-    this.FullBio = toggle;
+  changeBio(toggle: number) {
+    if(toggle === 0) {
+      this.FullBio = false;
+    } else {
+      this.FullBio = true;
+    }
   }
 
   blowupReorganization(refs: any[]) {

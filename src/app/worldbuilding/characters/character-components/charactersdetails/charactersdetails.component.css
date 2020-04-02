@@ -53,3 +53,8 @@ app-slider {
     justify-content: center;
     background-color: rgb(89, 89, 89);
 }
+
+app-toggler {
+    margin: 0px;
+    padding: 0px;
+}

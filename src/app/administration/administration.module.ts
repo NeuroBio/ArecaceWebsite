@@ -6,8 +6,10 @@ import { ReactiveFormsModule }          from '@angular/forms';
 import { AdministrationRoutingModule }  from './administration-routing.module';
 import { CharacterFormModule }          from '../SharedComponentModules/SharedForms/MakeCharacter/character-form.module';
 import { SharedFormsModule }            from '../SharedComponentModules/SharedForms/shared-forms.module';
+import { TogglerModule }                from '../SharedComponentModules/SmallComponents/toggler/toggler.module';
 import { LanguageTableModule }          from '../SharedComponentModules/language-table/language-table.module';
 import { UploadPreviewModule }          from 'src/app/SharedComponentModules/SharedForms/UploadPreview/upload-preview.module';
+
 
 import { AboutTextComponent }           from './Forms/about-text/about-text.component';
 
@@ -81,6 +83,7 @@ import { WordFormComponent }            from './LanguageGeneration/word-form/wor
     LanguageTableModule,
     UploadPreviewModule,
     ReactiveFormsModule,
+    TogglerModule,
     
     AdministrationRoutingModule
   ]

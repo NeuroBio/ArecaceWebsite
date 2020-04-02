@@ -57,17 +57,13 @@
       <section class="textblock">
 
         <!-- pick which bio version to show -->
-        <fieldset *ngIf="char.BriefBackground !== ''" class="toggler">
-          <input type="radio" class="toggler" name="abouter" id="Brief"
-          (click)="changeBio(false)" [checked]="!FullBio">
-          <label class="toggler" for="Brief" tabindex="0"
-          (keyup.enter)="changeBio(false)"> Brief</label>
-
-          <input type="radio" class="toggler" name="abouter" id="Full"
-          (click)="changeBio(true)" [checked]="FullBio">
-          <label class="toggler" for="Full" tabindex="0"
-          (keyup.enter)="changeBio(true)"> Full</label>
-        </fieldset>
+        <app-toggler
+        *ngIf="char.BriefBackground !== ''"
+        [toggles]="['Brief', 'Full']"
+        togglerTitle="Pick Bio Version"
+        toggleName="BioChoice"
+        (choiceEmitter)="changeBio($event)"
+        ></app-toggler><br><br>
 
         <b>Background: </b>
         <span *ngIf="!FullBio">{{ char.BriefBackground }}</span>

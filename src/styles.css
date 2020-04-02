@@ -12,26 +12,6 @@ h2.compheader {
   padding-left: 5px;
 }
 
-
-
-/*Toggle buttons*/
-/* div.toggler {
-  display: inline-block;
-}
-
-input[type="radio"].toggler {
-  display: none;
-  visibility: hidden;
-}
-
-input[type="radio"].toggler:checked + label {
-  background-color: rgb(163, 163, 163);
-}
-
-input[type="radio"].toggler:not(:checked) + label {
-  background-color: #616161;
-} */
-
 label {
   padding: 5px;
   text-align: center;
@@ -39,15 +19,6 @@ label {
   margin: 3px;
   white-space: nowrap
 }
-
-/* label.toggler {
-  cursor: pointer;
-  padding-right: 10px;
-}
-
-label.toggler:focus {
-  border: 1px solid white;
-} */
 
 select {
   cursor: pointer;
@@ -157,28 +128,6 @@ input[type="file"] {
   color: black;
   background-color: whitesmoke;
 }
-
-/* ACCESSIBLE FORM */
-/* .navverContainer a.linklistelement {
-  display: block;
-  color: black;
-  padding: 5px;
-}
-
-.navverContainer a.linklistelement:active {
-  background-color: rgb(59, 59, 59);
-}
-
-.navverContainer a.linklistelement:hover {
-  color:black;
-  background-color: whitesmoke;
-}
-
-.navverContainer a.linklistelement:focus {
-  color:black;
-  background-color: whitesmoke;
-} */
-
 
 div.fillspace{
   overflow: hidden;

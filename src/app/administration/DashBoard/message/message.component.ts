@@ -91,8 +91,8 @@ export class MessageComponent implements OnInit, OnDestroy {
       this.onReset(true)});
   }
 
-  getSaved(save:boolean) {
-    if(save) {
+  getSaved(save: number) {
+    if(save === 1) {
       this.Messages = this.OldMessages;
       this.noSave = true;
     }else{

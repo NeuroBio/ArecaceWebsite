@@ -6,12 +6,13 @@
 
     <!-- Activity choices -->
     <nav class="toggler" aria-label="Activity-Navigation">
-        <div *ngFor="let link of links, let i = index" class="toggler">
-            <input type="radio" class="toggler" name="activity" [id]="link.Title"
-            (click)="pickActivity(i)" [checked]="selected === link.Link">
-            <label class="toggler" [for]="link.Title"  tabindex="0"
-            (keyup.enter)="pickActivity(i)">{{ link.Title }}</label>
-        </div>
+        <app-toggler
+        [toggles]="linkNames"
+        togglerTitle="Pick an Activity"
+        toggleName="PickActivity"
+        [current]="selected"
+        (choiceEmitter)="pickActivity($event)"
+        ></app-toggler>
     </nav>
 
     <router-outlet></router-outlet>

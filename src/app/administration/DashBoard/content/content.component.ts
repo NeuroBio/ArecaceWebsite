@@ -30,8 +30,12 @@ export class ContentComponent implements OnInit, OnDestroy {
     this.controller.assignItemList(undefined);
   }
   
-  onEditCheck(edit:boolean) {
-    this.edit = edit;
+  onEditCheck(edit: number) {
+    if(edit === 0) {
+      this.edit = false;
+    } else {
+      this.edit = true;
+    }
   }
 
   onAllow(type:number) {

@@ -11,15 +11,18 @@ import { NomadicService }               from '../nomadic.service';
 
 export class NomadicHomeComponent implements OnInit, OnDestroy {
 
-  choices = ['introduction', 'syntax', 'translate', 'dictionary'];
-  selected: string;
+  choiceLinks = ['introduction', 'syntax', 'translate', 'dictionary'];
+  choices = ['Introduction', 'Syntax', 'Translate', 'Dictionary'];
+  selected: number;
 
   constructor(private route: ActivatedRoute,
               private router: Router,
               private nomadicserv: NomadicService) { }
 
   ngOnInit() {
-    this.selected = this.route.firstChild.snapshot.url[0].path;
+    const index = this.choiceLinks.findIndex(choice =>
+      choice === this.route.firstChild.snapshot.url[0].path);
+    this.selected = index;
   }
 
   ngOnDestroy() {
@@ -27,7 +30,7 @@ export class NomadicHomeComponent implements OnInit, OnDestroy {
   }
   
   pickTopic(index) {
-    this.router.navigate([`${this.choices[index]}`], {relativeTo: this.route });
+    this.router.navigate([`${this.choiceLinks[index]}`], {relativeTo: this.route });
   }
 
 }

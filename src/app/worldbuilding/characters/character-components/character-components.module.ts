@@ -5,12 +5,14 @@ import { RouterModule }                     from '@angular/router';
 
 import { GridBlowupModule }                 from 'src/app/SharedComponentModules/PrimaryContentDisplayer/GridBlowUp/grid-blowup.module';
 import { PrimaryContentDisplayModule }      from 'src/app/SharedComponentModules/PrimaryContentDisplayer/primary-content-display.module';
+import { BookmarkModule }                   from 'src/app/SharedComponentModules/SmallComponents/bookmark/bookmark.module';
+import { SliderModule }                     from 'src/app/SharedComponentModules/SmallComponents/slider/slider.module';
+import { TogglerModule }                     from 'src/app/SharedComponentModules/SmallComponents/toggler/toggler.module';
 
 import { CharactersMainComponent }          from './charactersmain/charactersmain.component';
 import { CharactersDetailsComponent }       from './charactersdetails/charactersdetails.component';
 import { CharactersBlowupmasterComponent }  from './charactersblowupmaster/charactersblowupmaster.component';
-import { BookmarkModule }                   from 'src/app/SharedComponentModules/SmallComponents/bookmark/bookmark.module';
-import { SliderModule }                     from 'src/app/SharedComponentModules/SmallComponents/slider/slider.module';
+
 @NgModule({
   declarations: [
     CharactersMainComponent,
@@ -23,6 +25,7 @@ import { SliderModule }                     from 'src/app/SharedComponentModules
     PrimaryContentDisplayModule,
     BookmarkModule,
     SliderModule,
+    TogglerModule,
     RouterModule
   ],
   exports: [

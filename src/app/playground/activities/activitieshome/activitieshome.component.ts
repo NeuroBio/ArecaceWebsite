@@ -9,10 +9,9 @@ import { Title }                    from '@angular/platform-browser';
 })
 export class ActivitieshomeComponent implements OnInit {
 
-  links = [ {Link: 'surveys', Title: 'Surveys'},
-            {Link: 'calc', Title: 'Calculators and Converters'},
-            {Link: 'makefancharacter', Title: 'Make Character'}];
-  selected: string;
+  links = ['surveys', 'calc', 'makefancharacter'];
+  linkNames = ['Surveys', 'Calculators and Converters', 'Make Fan Character']
+  selected: number;
 
   constructor(private router: Router,
               private route: ActivatedRoute,
@@ -20,14 +19,15 @@ export class ActivitieshomeComponent implements OnInit {
 
   ngOnInit() {
     if(this.route.firstChild) {
-      this.selected = this.route.firstChild.snapshot.url[0].path;
+      const index = this.links.findIndex(link =>
+        link === this.route.firstChild.snapshot.url[0].path);
+      this.selected = index;
     }
     this.titleserv.setTitle('Activities');
   }
 
   pickActivity(index: number) {
-    this.selected = this.links[index].Title;
-    this.router.navigate([this.links[index].Link], {relativeTo: this.route});
+    this.router.navigate([this.links[index]], {relativeTo: this.route});
   }
 
 }

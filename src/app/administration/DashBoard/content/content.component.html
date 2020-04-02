@@ -15,15 +15,14 @@
     </div><br>
 
     <!--Form picker-->
+
     <div class="toggler" style="float:left">
-
-        <input type="radio" class="toggler" name="editup" id="upload" checked=true
-        (click)="onEditCheck(false)">
-        <label for="upload">Upload</label>
-
-        <input type="radio" class="toggler" name="editup" id="edit"
-        (click)="onEditCheck(true)">
-        <label for="edit">Edit</label>
+        <app-toggler
+        [toggles]="['Upload', 'Edit']"
+        togglerTitle="Upload or Edit"
+        toggleName="EditUpload"
+        (choiceEmitter)="onEditCheck($event)"
+        ></app-toggler>
     </div>
 
     <div style="clear: both"></div>
