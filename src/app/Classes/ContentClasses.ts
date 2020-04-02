@@ -242,6 +242,7 @@ export class User {
         this.userName = 'defaultUserName_2.0';
         this.Admin = false;
         this.Mod = false;
+        this.User = true;
         this.accountCreated = formatDate(new Date(), 'yyyy-MM-dd, HH:mm', 'en');
     }
 }

@@ -168,15 +168,17 @@ export class CRUDcontrollerService {
       if("StoryLink" in CRUDdata.MetaData){
         CRUDdata.MetaData.StoryLink = link;
       }
-      this.newestCue.updateCue(
-        Object.assign({}, CRUDdata.MetaData),
-        this.itemType.value, 'Edited');
+      if(this.itemType.value !== 'website') {
+        this.newestCue.updateCue(
+          Object.assign({}, CRUDdata.MetaData),
+          this.itemType.value, 'Edited');  
+      }
       return this.crud.editItem(CRUDdata.MetaData,
               this.firePaths[this.itemType.value].Fire,
               this.itemToEdit.value.key);
 //POST UPLOAD
     }).then(() => {
-      if(this.itemType.value !== 'Website') {
+      if(this.itemType.value !== 'website') {
         this.itemToEdit.next(undefined);
       }
       this.message.next("Edit successful!");

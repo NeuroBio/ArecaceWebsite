@@ -87,7 +87,7 @@ export class AuthService {
 
   isUser() {
     if(this.isLoggedIn) {
-      if(!this.isAnon) {
+      if(!this.isAnon()) {
         return this.user.value.User;
       }
     }
