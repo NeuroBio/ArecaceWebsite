@@ -15,7 +15,7 @@ h2.compheader {
 
 
 /*Toggle buttons*/
-div.toggler {
+/* div.toggler {
   display: inline-block;
 }
 
@@ -30,7 +30,7 @@ input[type="radio"].toggler:checked + label {
 
 input[type="radio"].toggler:not(:checked) + label {
   background-color: #616161;
-}
+} */
 
 label {
   padding: 5px;
@@ -40,14 +40,14 @@ label {
   white-space: nowrap
 }
 
-label.toggler {
+/* label.toggler {
   cursor: pointer;
   padding-right: 10px;
 }
 
 label.toggler:focus {
   border: 1px solid white;
-}
+} */
 
 select {
   cursor: pointer;

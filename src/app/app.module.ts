@@ -21,9 +21,11 @@ import { LinkListElementModule }      from './SharedComponentModules/SmallCompon
 import { ScrollFrameModule }          from './SharedComponentModules/SmallComponents/scroll-frame/scroll-frame.module';
 import { ShowNewestModule }           from './SharedComponentModules/ShowNewest/show-newest.module';
 import { UpdatefeedModule }           from './SharedComponentModules/UpdateFeed/updatefeed.module';
+import { TogglerModule } from './SharedComponentModules/SmallComponents/toggler/toggler.module';
 
 import { AppComponent }               from './app.component';
 import { AboutComponent }             from './SimplePages/about/about.component';
+import { AccessibilityComponent }     from './SimplePages/accessibility/accessibility.component';
 import { BadserviceComponent }        from './SimplePages/badservice/badservice.component';
 import { ContactComponent }           from './SimplePages/contact/contact.component';
 import { CopyrightComponent }         from './SimplePages/copyright/copyright.component';
@@ -33,7 +35,6 @@ import { PageNotFoundComponent }      from './SimplePages/pagenotfound/pagenotfo
 import { PrivacyPolicyComponent }     from './SimplePages/privacy-policy/privacy-policy.component';
 import { TravelorsGuideComponent }    from './SimplePages/travelorsguide/travelorsguide.component';
 import { UploadLogComponent }         from './SimplePages/upload-log/upload-log.component';
-import { AccessibilityComponent } from './SimplePages/accessibility/accessibility.component';
 
 export function TextFactory(provider: TextProvider) {
   return () => provider.load();
@@ -68,6 +69,7 @@ export function AuthFactory(provider: AuthService) {
     ShowNewestModule,
     ScrollFrameModule,
     LinkListElementModule,
+    TogglerModule,
     
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule, // imports firebase/firestore, only needed for database features

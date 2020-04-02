@@ -14,15 +14,13 @@
 
         <!--More info choices-->
         <section>
-            <fieldset class="toggler">
-                <legend>More about...</legend>
-                <div *ngFor="let choice of choices, let i = index" class="toggler">
-                    <input type="radio" class="toggler" name="abouter" [id]="choice"
-                    (click)="pickAbout(i)" [checked]="contentPicker === i">
-                    <label class="toggler" [for]="choice"  tabindex="0"
-                    (keyup.enter)="pickAbout(i)">{{ choice }}</label>
-                </div>
-            </fieldset>
+            <app-toggler
+            [toggles]="choices"
+            togglerTitle="More about..."
+            toggleName="MoreAbout"
+            [visible]="true"
+            (choiceEmitter)="pickAbout($event)"
+            ></app-toggler>
         
         
             <div *ngIf="contentPicker === 0" class="textblock" [innerHTML]="mainText.Story"></div>

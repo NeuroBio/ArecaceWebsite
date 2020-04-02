@@ -1,0 +1,14 @@
+<fieldset class="toggler">
+    <legend [style.visibility]="visible === true ? 'visible' : 'hidden'">
+        {{ togglerTitle }}
+    </legend>
+    <div *ngFor="let toggle of toggles, let i = index" class="toggler">
+        <input type="radio" class="toggler"
+        [attr.name]="toggleName" [id]="i"
+        (click)="emitChoice(i)"
+        [checked]="i === current">
+
+        <label class="toggler" [for]="i"
+        (keyup.enter)="emitChoice(i)">{{ toggle }}</label>
+    </div>
+</fieldset>
