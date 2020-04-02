@@ -33,7 +33,6 @@ export class UserDashComponent implements OnInit, OnDestroy {
               private titleserv: Title) { }
 
   ngOnInit() {
-    console.log(new User('fake@faker.com', -49))
     this.titleserv.setTitle('User Dash');
     this.loggedoutText = this.textprovider.WebsiteText
       .find(member => member.ID =='login').Text;
