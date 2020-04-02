@@ -11,18 +11,21 @@
 
 
       <!-- NEWEST ITEMS -->
-      <nav *ngIf="display$ | async as display">
-         <app-link-list class="NewestCue" [list]="display">
+      <nav *ngIf="display$ | async as display" #itemBand>
+        <div id="itemBand" >
+          <app-link-list class="NewestCue" [list]="display">
 
-             <!-- Item Template -->
-             <ng-template let-item #Item>
-                <div class="strokeme displayItem"
-                [style.background-image]="'url('+item.Item.Image+')'">
-                  {{ item.Item.Name }}
-                </div>
-             </ng-template>
+            <!-- Item Template -->
+            <ng-template let-item #Item>
+               <div class="strokeme displayItem"
+               [style.background-image]="'url('+item.Item.Image+')'">
+                 {{ item.Item.Name }}
+               </div>
+            </ng-template>
 
-         </app-link-list>
+        </app-link-list>
+
+        </div>
       </nav>
 
 
