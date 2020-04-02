@@ -25,7 +25,7 @@ export class OthersArtComponent implements OnInit {
     this.arts$ = this.generalcollectserv.returnMetaData().pipe(
       take(1),
       map(art => {
-        if(this.auth.isLoggedIn) {
+        if(this.auth.isLoggedIn === true) {
           if(this.auth.isAdmin()) {
             return art;
           }

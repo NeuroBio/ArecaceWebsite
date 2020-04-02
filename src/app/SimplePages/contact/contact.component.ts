@@ -44,7 +44,7 @@ export class ContactComponent implements OnInit {
     this.titleserv.setTitle('Contact');
     window.scroll(0,0);
     this.resetTimer();
-    if(!this.auth.isLoggedIn) {
+    if(this.auth.isLoggedIn === false) {
       this.auth.anonymousLogin();
     }
   }

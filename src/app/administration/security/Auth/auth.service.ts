@@ -34,11 +34,12 @@ export class AuthService {
       this.authorize.authState.pipe(switchMap(user => {
         if (user) {
           this.isLoggedIn = true;
-          this.uid.next(user.uid);
-          return this.firebaseserv.returnDocument(`Users/${user.uid}`);
-        } else {
-          return of (null);
+          if(user.isAnonymous === false) {
+            this.uid.next(user.uid);
+            return this.firebaseserv.returnDocument(`Users/${user.uid}`);
+          }
         }
+        return of (null); //no login or anonlogin
       })
     ).subscribe(user => {
       this.user.next(user);
@@ -68,7 +69,7 @@ export class AuthService {
         this.updateUserData(credential.user, false,
                             credential.additionalUserInfo.isNewUser)
       ).catch(err => //anon user already has an account
-        this.authorize.auth.signInAndRetrieveDataWithCredential(err.credential)
+        this.authorize.auth.signInWithCredential(err.credential)
       .then((credential) =>
         this.updateUserData(credential.user, false,
                             credential.additionalUserInfo.isNewUser)) );

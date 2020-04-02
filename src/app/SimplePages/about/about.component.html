@@ -1,37 +1,40 @@
 <div id="splatter">
 
-    <!--Artist Image-->
-    <img id="meme" alt="Picture of kArA, the AUthor/Web Designer"
-    src="https://firebasestorage.googleapis.com/v0/b/arecaceworld.appspot.com/o/WebSite%2FArtist%20Potrait.png?alt=media&token=11d02016-e5b1-41bb-bcc8-f556528d58d2">
+    <div>
+        <!--Artist Image-->
+        <img id="meme" alt="Picture of kArA, the AUthor/Web Designer"
+        src="https://firebasestorage.googleapis.com/v0/b/arecaceworld.appspot.com/o/WebSite%2FArtist%20Potrait.png?alt=media&token=11d02016-e5b1-41bb-bcc8-f556528d58d2">
 
-    <!--Main text-->
-    <main class="container" id="meme">
-        <br>
-        <section>
-            <h3>Hello!</h3>
-            <div class="textblock" [innerHTML]="mainText.Hello"></div><br>    
-        </section>
+        <!--Main text-->
+        <main class="container" id="meme">
+            <br>
+            <section>
+                <h3>Hello!</h3>
+                <div class="textblock" [innerHTML]="mainText.Hello"></div><br>    
+            </section>
 
-        <!--More info choices-->
-        <section>
-            <app-toggler
-            [toggles]="choices"
-            togglerTitle="More about..."
-            toggleName="MoreAbout"
-            [visible]="true"
-            (choiceEmitter)="pickAbout($event)"
-            ></app-toggler>
-        
-        
-            <div *ngIf="contentPicker === 0" class="textblock" [innerHTML]="mainText.Story"></div>
+            <!--More info choices-->
+            <section>
+                <app-toggler
+                [toggles]="choices"
+                togglerTitle="More about..."
+                toggleName="MoreAbout"
+                [visible]="true"
+                (choiceEmitter)="pickAbout($event)"
+                ></app-toggler>
             
-            <div *ngIf="contentPicker === 1" class="textblock" [innerHTML]="mainText.Me"></div>
-        
-            <div *ngIf="contentPicker === 2" class="textblock" [innerHTML]="mainText.Website"></div>
-        
-            <div style="clear:both;"></div>
-        </section>
+            
+                <div *ngIf="contentPicker === 0" class="textblock" [innerHTML]="mainText.Story"></div>
+                
+                <div *ngIf="contentPicker === 1" class="textblock" [innerHTML]="mainText.Me"></div>
+            
+                <div *ngIf="contentPicker === 2" class="textblock" [innerHTML]="mainText.Website"></div>
+            
+                <div style="clear:both;"></div>
+            </section>
 
-    </main>
-    <br>
+        </main>
+        <br>
+    </div>
+
 </div>

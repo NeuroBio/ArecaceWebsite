@@ -35,7 +35,7 @@ export class SurveyMainComponent implements OnInit, OnDestroy {
     this.route.firstChild.paramMap.subscribe(
       path => this.current = path.get('SurveyID') );
 
-    if(!this.auth.isLoggedIn) {
+    if(this.auth.isLoggedIn === false) {
       this.auth.anonymousLogin();
     }
   }
