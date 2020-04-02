@@ -1,7 +1,6 @@
 
 image#bookmark {
     height: 30px;
-    margin: 5px 5px 5px 5px;
 }
 
 button#bookmark {
@@ -11,7 +10,7 @@ button#bookmark {
     cursor: pointer;
     border: whitesmoke 1px solid;
     margin: 0px;
-    padding: 0px;
+    padding: 5px;
 }
 
 button#bookmark:disabled {
