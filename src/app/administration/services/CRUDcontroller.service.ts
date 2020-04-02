@@ -124,9 +124,9 @@ export class CRUDcontrollerService {
         if("StoryLink" in data.MetaData) {
           data.MetaData.StoryLink = link;
         }
-        this.newestCue.updateCue(
-          Object.assign({}, data.MetaData),
-          this.itemType.value, 'Created');
+        // this.newestCue.updateCue(
+        //   Object.assign({}, data.MetaData),
+        //   this.itemType.value, 'Created');
         return this.crud.uploadItem(data.MetaData, this.firePaths[this.itemType.value].Fire);
 //POST UPLOAD
       }).then(() => {
@@ -168,11 +168,9 @@ export class CRUDcontrollerService {
       if("StoryLink" in CRUDdata.MetaData){
         CRUDdata.MetaData.StoryLink = link;
       }
-      if(this.itemType.value !== 'website') {
-        this.newestCue.updateCue(
-          Object.assign({}, CRUDdata.MetaData),
-          this.itemType.value, 'Edited');  
-      }
+        // this.newestCue.updateCue(
+        //   Object.assign({}, CRUDdata.MetaData),
+        //   this.itemType.value, 'Edited');  
       return this.crud.editItem(CRUDdata.MetaData,
               this.firePaths[this.itemType.value].Fire,
               this.itemToEdit.value.key);
@@ -206,9 +204,9 @@ export class CRUDcontrollerService {
       links.push(item.StoryLink);
     }
 
-    this.newestCue.updateCue(
-      Object.assign({}, this.itemToEdit.value),
-      this.itemType.value, 'Deleted');
+    // this.newestCue.updateCue(
+    //   Object.assign({}, this.itemToEdit.value),
+    //   this.itemType.value, 'Deleted');
     this.crud.deleteItem(links, this.firePaths[this.itemType.value].Fire, item.key)
     .then(() => {
         this.itemToEdit.next(undefined);
