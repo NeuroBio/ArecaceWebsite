@@ -1,8 +1,8 @@
-import { Component, OnInit }          from '@angular/core';
-import { ActivatedRoute }             from '@angular/router';
+import { Component, OnInit, OnDestroy }          from '@angular/core';
+import { ActivatedRoute, NavigationEnd, Router }             from '@angular/router';
 
-import { Observable }                 from 'rxjs';
-import { map }                        from 'rxjs/operators';
+import { Observable, Subscription }                 from 'rxjs';
+import { map, filter, take, skipWhile, tap }                        from 'rxjs/operators';
 
 import { GeneralcollectionService }   from 'src/app/GlobalServices/generalcollection.service';
 import { LinkList }                   from 'src/app/SharedComponentModules/SmallComponents/LinkList/linklist';
@@ -13,13 +13,15 @@ import { LinkListElement }            from 'src/app/SharedComponentModules/Small
   templateUrl: './charactersmain.component.html'
 })
 
-export class CharactersMainComponent implements OnInit {
+export class CharactersMainComponent implements OnInit, OnDestroy {
  
   current: string;
   characters$: Observable<LinkList>;
+  stream: Subscription;
 
   constructor(private generalcollectserv: GeneralcollectionService,
-              private route: ActivatedRoute) { }
+              private route: ActivatedRoute,
+              private router: Router) { }
 
   ngOnInit() {
     this.characters$ = this.generalcollectserv.returnMetaData().pipe(
@@ -29,14 +31,36 @@ export class CharactersMainComponent implements OnInit {
           new LinkListElement(character.FirstName, character.ID)) );
       })
     )
-    
+
+    this.getCurrent();
+    if(!this.current) {
+      this.waitforChild();
+    }
+  }
+
+  ngOnDestroy() {
+    if(this.stream) {
+      this.stream.unsubscribe();
+    }
+  }
+
+  getCurrent() {
     this.route.firstChild.paramMap.subscribe(path => {
-      if(path.get('CharaID')){
         return this.current = this.generalcollectserv
         .getCurrent(this.characters$, path.get('CharaID'));
-      } else {
-        this.current = '';
-      }
     });
   }
+
+  waitforChild() {
+    this.stream = this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd),
+      skipWhile(() => this.route.firstChild === undefined),
+      take(1)
+    ).subscribe(() => {
+        if(this.route.firstChild && !this.current) {
+          this.getCurrent();
+        }
+    });
+  }
+
 }
