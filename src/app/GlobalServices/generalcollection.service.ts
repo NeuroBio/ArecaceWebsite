@@ -33,7 +33,7 @@ export class GeneralcollectionService {
     data$.subscribe(data => {
       if(data instanceof LinkList) {
         const index = data.Data.findIndex(datum => datum.Route === routeID);
-        current = data.Data[index].ListName;        
+        current = data.Data[index].ListName;
       } else {
         data.forEach(type => {
           const index = type.Data.findIndex(datum => datum.Route === routeID);

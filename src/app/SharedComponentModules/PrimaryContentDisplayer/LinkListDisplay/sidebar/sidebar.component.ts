@@ -35,6 +35,8 @@ export class SideBarComponent implements AfterViewInit {
   onResize() {
     clearTimeout(this.resizeTimer);
     this.resizeTimer = setTimeout(() => {
+      console.log('window', window.innerHeight)
+      console.log('list', this.list.nativeElement.getBoundingClientRect())
       if(this.listHeight < this.list.nativeElement.offsetHeight
         && this.listHeight < window.innerHeight) {//allow appropriate growth
         this.listHeight = window.innerHeight -
