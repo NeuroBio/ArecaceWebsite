@@ -10,8 +10,11 @@ div.compheader {
 }
 
 h2 {
+    flex-shrink: 1;
     margin: 0px;
     padding: 0px;
+    overflow-wrap: break-word;
+    max-width: calc(100vw - 102px);
 }
 
 div#insig {

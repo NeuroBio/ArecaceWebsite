@@ -29,3 +29,13 @@
     align-items: center;
     min-height: 300px;
 }
+
+.navver {
+    display: inline-block;
+}
+
+
+.navverContainer {
+    display: inline-block;
+    width: 200px;
+}

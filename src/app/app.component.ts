@@ -43,7 +43,11 @@ export class AppComponent implements AfterViewInit{
   
   checkLoad() {
     if(this.flag.nativeElement.offsetWidth !== 1) {
+
+      if(this.global.phone.value === false) { //allow spinner of mobile
         this.global.ImagesLoadable.next(false);
+
+      }
     }
   }
 

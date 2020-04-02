@@ -1,7 +1,7 @@
 <div class="checkboxContainer" *ngIf="formName"
 [formGroup]="formName">
-    <input type="checkbox" [formControlName]="controlName" [id]="id">
-    <label [for]="id"
+    <input type="checkbox" [formControlName]="controlName" [id]="id + labelName + 'checkbox'">
+    <label [for]="id + labelName + 'checkbox'"
     [class]="before === true ? 'checkboxBefore' : 'checkboxAfter'">
         <svg viewBox="0 0 100 100">
             <path class="path" fill="none" stroke="#000" stroke-width="13" d="M12.1 52.1l24.4 24.4 53-53"/>
@@ -11,8 +11,9 @@
 </div>
 
 <div *ngIf="!formName" class="checkboxContainer">
-    <input type="checkbox" [id]="id" [checked]="checked">
-    <label [for]="id"
+    <input type="checkbox" [id]="id + labelName + 'checkbox'"
+    [checked]="checked">
+    <label [for]="id + labelName + 'checkbox'"
     [class]="before === true ? 'checkboxBefore' : 'checkboxAfter'">
         <svg viewBox="0 0 100 100">
             <path class="path" fill="none" stroke="#000" stroke-width="13" d="M12.1 52.1l24.4 24.4 53-53"/>

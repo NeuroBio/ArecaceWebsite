@@ -6,11 +6,11 @@
     </legend>
     <div *ngFor="let toggle of toggles, let i = index" class="toggler">
         <input type="radio" class="toggler"
-        [attr.name]="toggleName" [id]="i"
+        [attr.name]="toggleName" [id]="toggle + toggleName + 'toggler'"
         (click)="emitChoice(i)"
         [checked]="i === current">
 
-        <label class="toggler" [for]="i"
+        <label class="toggler" [for]="toggle + toggleName + 'toggler'"
         (keyup.enter)="emitChoice(i)">{{ toggle }}</label>
     </div>
 </fieldset>

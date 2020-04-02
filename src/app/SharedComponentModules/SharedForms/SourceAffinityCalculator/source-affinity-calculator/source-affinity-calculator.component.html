@@ -33,7 +33,7 @@
         <div *ngFor="let newAbility of abilitiesArray.controls; let i = index"
         [formGroupName]="i">
         <div class="stayTogether">
-            <label [for]="'Ability'+i">Ability {{i+1}}:</label> 
+            <label [for]="'Ability'+i">Ability {{i+1}}:</label> <wbr>
             <select [id]="'Ability'+i" formControlName="Ability">
                 <option *ngFor="let ability of abilityKeys; let i = index"
                 [value]="ability">
@@ -42,7 +42,7 @@
             </select>  
         </div>
         <div class="stayTogether">
-          <label [for]="'Mastery'+i">Mastery {{i+1}}:</label> 
+          <label [for]="'Mastery'+i">Mastery {{i+1}}:</label> <wbr>
             <select [id]="'Mastery'+i" formControlName="Mastery">
               <option *ngFor="let master of mastery; let j = index" [value]="j">
                 {{ master }}

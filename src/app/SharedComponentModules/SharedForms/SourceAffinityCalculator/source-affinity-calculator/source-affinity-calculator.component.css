@@ -48,6 +48,8 @@ hr#top{
 
 div.stayTogether {
     display: inline-block;
+    word-wrap: break-word;
+    white-space: wrap;
 }
 
 div#bottom {
