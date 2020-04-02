@@ -7,7 +7,6 @@ import { map }                                      from 'rxjs/operators';
 import { FireBaseService }                          from 'src/app/GlobalServices/firebase.service';
 
 import { LinkListElement }                          from '../../SmallComponents/LinkList/linklist';
-import { LinkListComponent } from '../../SmallComponents/LinkList/link-list/link-list.component';
 
 @Component({
   selector: 'app-show-newest',
