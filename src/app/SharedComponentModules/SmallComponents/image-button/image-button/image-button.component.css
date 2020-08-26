@@ -11,12 +11,13 @@ div.imagebutton {
 
 
 span.imagebutton {
+    padding-right: 7px;
     position: relative;
     top: 7px;
-    right: 7px;
     font-size: 24px;
     font-weight: bold;
     font-family: 'Courier New', Courier, monospace;
+    display: inline-block;
 }
 
 .div#imagebutton:hover {
@@ -40,6 +41,6 @@ a.imagebutton:focus {
 }
 
 a.imagebutton:active {
-    background-color: rgba(0,0,0,.2);
+    background-color: rgba(0,0,0,.3);
 }
 

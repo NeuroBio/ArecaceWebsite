@@ -87,7 +87,7 @@ input[type="file"] {
 /* Navigation "buttons */
 .navverContainer {
   display: inline-block;
-  background-color: #cacaca;
+  background-color: #b8b8b8;
   border: 2px solid black;
   padding: 1px;
   margin-right: 7px;
@@ -119,7 +119,7 @@ input[type="file"] {
 
 .navver:focus {
   color: black;
-  background-color: whitesmoke;
+  background-color: rgb(245, 245, 245);
 }
 
 .navver:hover {

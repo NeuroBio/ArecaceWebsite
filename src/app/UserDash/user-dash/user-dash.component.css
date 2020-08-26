@@ -7,6 +7,10 @@
     max-width: 190px;
 }
 
+nav#special {
+    display: flex;
+}
+
 app-logout {
     white-space: nowrap;
 }

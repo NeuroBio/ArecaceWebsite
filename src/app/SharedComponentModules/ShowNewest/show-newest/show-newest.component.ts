@@ -17,6 +17,7 @@ import { LinkListElement }                          from '../../SmallComponents/
 export class ShowNewestComponent implements OnInit, OnDestroy {
 
   display$: Observable<LinkListElement[]>;
+  imageLength = 160;
 
   @Input() contentType: string;
   @Input() collectionName: string;
@@ -62,9 +63,9 @@ export class ShowNewestComponent implements OnInit, OnDestroy {
 
   scroll(right: boolean) {
     if(right) {
-      this.animate(170);
+      this.animate(this.imageLength);
     } else {
-      this.animate(-170);
+      this.animate(this.imageLength*-1);
     }
   }
 
@@ -81,12 +82,12 @@ export class ShowNewestComponent implements OnInit, OnDestroy {
   KeyEvent(event: KeyboardEvent) {
     if(event.key === 'ArrowRight') {
       this.right.nativeElement.focus();
-      this.animate(170);
+      this.animate(this.imageLength);
     }
 
     if(event.key === 'ArrowLeft') {
       this.left.nativeElement.focus();
-      this.animate(-170);
+      this.animate(this.imageLength*-1);
     }
   }
 
