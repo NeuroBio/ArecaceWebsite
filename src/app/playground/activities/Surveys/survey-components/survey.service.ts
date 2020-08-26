@@ -43,7 +43,7 @@ export class SurveyService {
 
   assignSurveyStats(ID: string) {
     this.subStream.unsubscribe();
-    this. subStream = this.allSurveyStats.subscribe(all => {
+    this.subStream = this.allSurveyStats.subscribe(all => {
       if(all) {
         this.currentSurveyStats.next(all.find(x => x.ID === ID))
       }

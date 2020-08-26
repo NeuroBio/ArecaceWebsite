@@ -34,7 +34,7 @@ export class InteractDetailsSwitchComponent implements OnInit, OnDestroy {
         case 'SurveyResults':
           this.editable = false;
           this.surveyserv.assignSurveyResults(this.userData);
-          return this.surveyserv.assignSurveyStats(this.userData.Name);
+          return this.surveyserv.assignSurveyStats(this.userData.ID);
 
         default :
           if(this.stream) {
@@ -42,7 +42,7 @@ export class InteractDetailsSwitchComponent implements OnInit, OnDestroy {
           }
           this.editable = true;
           this.stream = this.displayserv.currentUserDatum
-          .subscribe(datum => this.fetcher.assignItemtoEdit(datum));
+            .subscribe(datum => this.fetcher.assignItemtoEdit(datum));
       }
     });
 

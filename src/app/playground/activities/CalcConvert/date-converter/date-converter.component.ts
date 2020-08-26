@@ -39,8 +39,8 @@ export class DateConverterComponent implements OnInit {
     this.Form = this.createForm();
   }
 
-  onSwitch(earth: boolean) {
-    if(earth){
+  onSwitch(earth: string) {
+    if(earth == "earth") {
       this.months = this.dateInfo.EarthMonthNames;
       this.monthLengths = this.dateInfo.EarthMonthLengths;      
     } else {
@@ -58,13 +58,14 @@ export class DateConverterComponent implements OnInit {
   }
 
   onAnyChange() {
-    if(this.Form.value.Start === 'Earth') {
+    if(this.Form.value.Start === 'earth') {
       this.convertedDate = this.dateInfo.earthtoArecaceConverter(
         (+this.Form.value.Month)+1, (+this.Form.value.Day)+1);
     } else {
       const tempDate = this.dateInfo.arecacetoEarthConverter(
         this.dateInfo.ArecaceMonthNames[+this.Form.value.Month],
         (+this.Form.value.Day)+1).split('-');
+      console.log( this.convertedDate)
       this.convertedDate = `${this.dateInfo.EarthMonthNames[(+tempDate[0])-1]}-${tempDate[1]}`
     }
   }

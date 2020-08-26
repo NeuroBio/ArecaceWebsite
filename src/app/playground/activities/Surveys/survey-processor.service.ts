@@ -24,6 +24,7 @@ export class SurveyProcessorService {
       .find(o => o.Name === finalOutcome);
     const Match = Math.trunc(finalScores[finalOutcome]*1000)/10;
     const Name = surveyData.Name;
+    const ID = surveyData.ID;
 
     //ALL SCORES
     let allScores: any[] = [];
@@ -35,7 +36,7 @@ export class SurveyProcessorService {
 
     allScores.sort((a,b) => a.Score > b.Score ? -1 : 1);
 
-    return({Outcome: Outcome, Match: Match, Name: Name,
+    return({Outcome: Outcome, Match: Match, Name: Name, ID: ID,
             AllScores: allScores, OutcomeKey: finalOutcome});
   }
 

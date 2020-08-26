@@ -1,19 +1,17 @@
 <form [formGroup]="Form">
   <h3>Date Converter:</h3>
   <hr>
-  <select formControlName="Start">
-    <option selected="true"
-    (click)="onSwitch(true)" value="Earth">
-      Earth
-    </option>
-    <option (click)="onSwitch(false)" value="Arecace">
-      Arecace
-    </option>
+  <select formControlName="Start"
+  (change)="onSwitch($event.target.value)">
+    <option [selected]="true" value="earth">
+      Earth </option>
+    <option value="arecace">
+      Arecace </option>
   </select>
 
   <select formControlName="Month" (change)="onMonthChange($event.target.value)">
       <option *ngFor="let month of months; let i = index" [value]="i">
-        {{ month }}
+        {{ months[i] }}
       </option>
   </select>
 
