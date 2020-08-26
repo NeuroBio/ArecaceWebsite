@@ -112,7 +112,7 @@ img#right:hover {
 }
 
 img:focus {
-    outline: 4px dashed orange;
+    outline: 3px dashed orange;
 }
 
 #SeeFull {

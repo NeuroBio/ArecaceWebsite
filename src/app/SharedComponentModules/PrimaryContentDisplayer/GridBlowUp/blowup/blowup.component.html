@@ -1,11 +1,12 @@
 <article id="biggerouter" cdkTrapFocus>
-    <div #back id="biggerback" [routerLink]="['../']" cdkFocusRegionStart></div>
+    <div #back id="biggerback" [routerLink]="['../']"></div>
 
 
         <!-- Left and Right arrow "buttons" -->
         <img #left id="left" src="assets/svgs/back.svg" alt="Prev-Left"
         (click)="onArrow(-1)" tabindex="0" role="button"
-        (keydown)="onArrowKeydown($event, -1)">
+        (keydown)="onArrowKeydown($event, -1)"
+        cdkFocusRegionStart>
     
         <img #right id="right" src="assets/svgs/back.svg" alt="Next-Right"
         (click)="onArrow(1)" tabindex="0" role="button"

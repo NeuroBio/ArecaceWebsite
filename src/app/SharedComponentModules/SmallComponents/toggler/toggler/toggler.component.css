@@ -13,6 +13,8 @@ input[type="radio"].toggler {
     left: 1px;
     top: 1px;
     overflow: hidden;
+    opacity: 0;
+    pointer-events: none;
 }
 
 input[type="radio"].toggler:focus + label {
