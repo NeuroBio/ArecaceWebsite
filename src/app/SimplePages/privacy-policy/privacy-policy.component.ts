@@ -14,6 +14,7 @@ export class PrivacyPolicyComponent implements OnInit {
   constructor(private textprovider: TextProvider) { }
 
   ngOnInit(): void {
+    window.scroll(0,0);
     this.dataPolicy = this.textprovider.WebsiteText
       .find(member => member.ID =='datapolicy').Text;
   }

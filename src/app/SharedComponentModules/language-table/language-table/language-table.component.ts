@@ -18,10 +18,9 @@ export class LanguageTableComponent implements OnChanges {
   wordTypes = new WordTypes();
   currentDict: Word[];
   CoreWords : Number;
-  Form = this.creatForm();
+  Form = this.createForm();
 
-  alphaOptions = ['Nomadic', 'English'];
-  typeOptions = ['Type and Subtype', 'Type', 'Subtype'];
+  sortOptions = ['Alphebetical-Nomadic', 'Alphebetical-English', 'Type', 'Subtype', 'Type and Subtype'];
   levelFilterOptions = ['All', 'Level 1', 'Level 2', 'Level 3+'];
   typeFilterOptions = Object.assign([], ['All'].concat(this.wordTypes.Types));
   subtypeFilterOptions = Object.assign([], ['All'].concat(this.wordTypes.Subtypes));
@@ -40,10 +39,9 @@ export class LanguageTableComponent implements OnChanges {
     this.controller.assignEditItem(this.currentDict[index]);
   }
 
-  creatForm() {
+  createForm() {
     return this.fb.group({
-      SortAlpha: 'Nomadic',
-      SortType: 'Type and Subtype',
+      SortType: 'Alphebetical-Nomadic',
       FilterLevel: 'All',
       FilterType: 'All',
       FilterSubtype: 'All'
@@ -69,13 +67,12 @@ export class LanguageTableComponent implements OnChanges {
     if(first) {
       this.onFilterType(false);
       this.onFilterSubtype(false);
-      this.onSortAlpha();
       this.onSortType();
     }
   }
 
   onFilterType(first: boolean = true) {
-    if(first){
+    if(first) {
       this.onFilterLevel(false);
     }
     const type = this.Form.controls.FilterType.value;
@@ -84,9 +81,8 @@ export class LanguageTableComponent implements OnChanges {
       this.currentDict = this.currentDict.filter(word => word.Type === type);
     }
 
-    if(first){
+    if(first) {
       this.onFilterSubtype(false);
-      this.onSortAlpha();
       this.onSortType();
     }
   }
@@ -102,25 +98,19 @@ export class LanguageTableComponent implements OnChanges {
       this.currentDict = this.currentDict.filter(word => word.Subtype === subtype);
     }
 
-    if(first){
-      this.onSortAlpha();
+    if(first) {
       this.onSortType();
-    }
-  }
-
-  onSortAlpha() {
-    switch(this.Form.controls.SortAlpha.value) {
-      case 'Nomadic':
-        this.currentDict.sort((a,b) => a.Indativor < b.Indativor ? -1 : 1);
-        break;
-      case 'English':
-          this.currentDict.sort((a,b) => a.English < b.English ? -1 : 1);
-          break;
     }
   }
 
   onSortType() {
     switch(this.Form.controls.SortType.value) {
+      case 'Alphebetical-Nomadic':
+        this.currentDict.sort((a,b) => a.Indativor < b.Indativor ? -1 : 1);
+        break;
+      case 'Alphebetical-English':
+          this.currentDict.sort((a,b) => a.English.toLowerCase() < b.English.toLowerCase() ? -1 : 1);
+          break;
       case 'Subtype':
         this.currentDict.sort((a,b) => a.Subtype < b.Subtype ? -1 :  a.Subtype > b.Subtype ? 1 : 0);
         break;

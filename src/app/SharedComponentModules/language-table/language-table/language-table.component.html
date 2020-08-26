@@ -14,19 +14,9 @@
         <fieldset>
             <legend>Sort:</legend><br><br>
             <div class="Sort">
-                <label class="Tag" for="alpha">Alphabetical:</label>
-                <select formControlName="SortAlpha" id="alpha"
-                (change)="onSortAlpha()">
-                    <option *ngFor="let option of alphaOptions"
-                    [value]="option">
-                    {{ option }}
-                    </option>
-                </select>
-            
-                <label class="Tag" for="type">Type:</label>
                 <select formControlName="SortType" id="type"
                 (change)="onSortType()">
-                    <option *ngFor="let option of typeOptions"
+                    <option *ngFor="let option of sortOptions"
                     [value]="option">
                     {{ option }}
                     </option>

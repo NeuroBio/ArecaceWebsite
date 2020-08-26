@@ -14,6 +14,7 @@ export class AccessibilityComponent implements OnInit {
   constructor(private textprovider: TextProvider) { }
 
   ngOnInit(): void {
+    window.scroll(0,0);
     this.accessibility = this.textprovider.WebsiteText
       .find(member => member.ID =='accessibility').Text;
   }

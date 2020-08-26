@@ -103,7 +103,7 @@ export class TranslateComponent implements OnInit, OnDestroy {
       .split(' ');
 
     newText.push(word);
-    this.Form.patchValue({RawText: newText.join(' ')});
+    this.Form.patchValue({RawText: newText.join(' ').trim()});
     this.translate(false);
   }
 
