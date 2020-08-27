@@ -25,11 +25,10 @@
     z-index: 10;
     margin: 0px;
     position: absolute;
-    max-width: calc(100vw - 15px);
+    max-width: calc(100vw - 40px);
     min-width: 200px;
     max-height: 95vh;
     background-color: rgb(116, 116, 116);
-    
 }
 
 #aligner {
@@ -43,7 +42,7 @@
 img#bigger {
     margin: auto;
     max-width: calc(100vw - 350px);
-    max-height: calc(95vh - 15px);
+    max-height: calc(95vh - 45px);
     padding: 0px;
     align-self: center;
     justify-self: center;
@@ -54,7 +53,9 @@ img#bigger {
 
 .textblock {
     max-width: 500px;
+    min-width: 18px;
     overflow-y: auto;
+    display: block;
 }
 
 #textblockinner {
@@ -108,7 +109,7 @@ img#left:hover {
 }
 
 img#right:hover {
-    background-color: rgba(0,0,0,.6);
+    background-color: rgba(0,0,0,.6)
 }
 
 img:focus {
@@ -133,7 +134,7 @@ img:focus {
     z-index: 15;
     position: absolute;
     bottom: 0;
-    right: 7px;
+    right: 20px;
     background-color: rgba(0,0,0,.8);
     color: white;
     padding: 3px;
@@ -154,7 +155,7 @@ img#downUp {
     position: relative;
     top: 5.5px;
     background-color: rgba(0,0,0,.3);
-    margin-right: 8px;
+    margin: 0px 9px 3px 0px;
 }
 
 app-bookmark {
@@ -165,7 +166,7 @@ app-bookmark {
 
 #vanillaFave {
     position: absolute;
-    right: 30px;
-    top: 20px;
+    right: 3px;
+    top: 2px;
     z-index: 15;
 }

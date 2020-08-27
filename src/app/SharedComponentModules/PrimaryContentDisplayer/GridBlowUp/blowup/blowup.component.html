@@ -15,16 +15,7 @@
         
 
 
-      <!-- Bookmark when not special -->
-      <div id="vanillaFave"
-      *ngIf="!activeMember.Description && !activeMember.Artist && !loading">
-          <app-bookmark
-          [path]="path"
-          type="Favorites"
-          [name]="activeMember.Name"
-          [bookmarkImage]="false"
-          ></app-bookmark>
-      </div>
+      
 
 
 
@@ -33,9 +24,20 @@
       <!-- Image and Text -->  
       <div id="content" (window:resize)="onResize()">
 
+        <!-- Bookmark when not special -->
+        <div id="vanillaFave"
+        *ngIf="!activeMember.Description && !activeMember.Artist && !loading">
+            <app-bookmark
+            [path]="path"
+            type="Favorites"
+            [name]="activeMember.Name"
+            [bookmarkImage]="false"
+            ></app-bookmark>
+        </div>
+
         <div class="imgcaption" id="aligner">
           <!-- Link out to full image -->
-          <div id="linkHolder">
+          <!-- <div id="linkHolder"> -->
             <div id="SeeFull" [hidden]="loading">
               <a [routerLink]="['Download']">Full Size</a>
             </div>
@@ -52,7 +54,7 @@
             [src]="bigUrl"
             [alt]="activeMember.AltText ? activeMember.AltText : ''"
             (load)="onResize();onLoad()">
-          </div>
+          <!-- </div> -->
 
             <div *ngIf="activeMember.Description && !loading" class="textblock"
             [style.height.px]="textHeight">
