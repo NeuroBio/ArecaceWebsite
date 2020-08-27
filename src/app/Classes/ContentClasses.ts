@@ -226,10 +226,10 @@ export class User {
     Admin: boolean;
     User: boolean;
     Mod: boolean;
-    Narratives?: Bookmark[];
-    Comics?: Bookmark[];
-    Scripts?: Bookmark[];
-    Favorites?: Bookmark[];
+    Narratives?: any[];
+    Comics?: any[];
+    Scripts?: any[];
+    Favorites?: any[];
     SurveyResults?: any[];
     FanCharacters?: CharacterMetaData[];
     SAcalculations?: SA[];

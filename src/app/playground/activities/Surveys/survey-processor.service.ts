@@ -36,7 +36,7 @@ export class SurveyProcessorService {
 
     allScores.sort((a,b) => a.Score > b.Score ? -1 : 1);
 
-    return({Outcome: Outcome, Match: Match, Name: Name, ID: ID,
+    return({Outcome: Outcome, Match: Match, Name: Name, SurveyID: ID,
             AllScores: allScores, OutcomeKey: finalOutcome});
   }
 

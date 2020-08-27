@@ -30,16 +30,20 @@ export class InteractDetailsSwitchComponent implements OnInit, OnDestroy {
     this.route.data.subscribe((data: { Data: any }) => {
       window.scroll(0,0);
       this.userData = data.Data;
+      if(this.stream) {
+        this.stream.unsubscribe();
+      }
+      
       switch(this.type) {
         case 'SurveyResults':
           this.editable = false;
           this.surveyserv.assignSurveyResults(this.userData);
-          return this.surveyserv.assignSurveyStats(this.userData.ID);
+          this.fetcher.activeFormData.subscribe()
+          this.stream = this.displayserv.currentUserDatum
+            .subscribe(datum => this.surveyserv.assignSurveyStats(datum.SurveyID));
+          return;
 
         default :
-          if(this.stream) {
-            this.stream.unsubscribe();
-          }
           this.editable = true;
           this.stream = this.displayserv.currentUserDatum
             .subscribe(datum => this.fetcher.assignItemtoEdit(datum));

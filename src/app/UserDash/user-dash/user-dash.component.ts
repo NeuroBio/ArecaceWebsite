@@ -6,7 +6,8 @@ import { Subscription }                 from 'rxjs';
 import { AuthService }                  from 'src/app/administration/security/Auth/auth.service';
 import { TextProvider }                 from 'src/app/GlobalServices/textprovider.service';
 
-import { User }                         from 'src/app/Classes/ContentClasses';
+import { User, Bookmark }                         from 'src/app/Classes/ContentClasses';
+import { compileFactoryFunction } from '@angular/compiler';
 
 @Component({
   selector: 'app-user-dash',
@@ -46,6 +47,10 @@ export class UserDashComponent implements OnInit, OnDestroy {
         this.PrepareData();
         this.checkRoles();
       }
+      // else {
+      //   this.mockupUser();
+      //   this.PrepareData();
+      // }
     });
   }
 
@@ -62,7 +67,8 @@ export class UserDashComponent implements OnInit, OnDestroy {
         name: this.user.FanCharacters.map(char => char.DisplayName),
         type: 'FanCharacters',
         data: this.user.FanCharacters,
-        edit: true
+        edit: true,
+        delete: false
      });
     }
     if(this.user.SAcalculations) {
@@ -72,17 +78,21 @@ export class UserDashComponent implements OnInit, OnDestroy {
         name: this.user.SAcalculations.map(sa => sa.DisplayName),
         type: 'SAcalculations',
         data: this.user.SAcalculations,
-        edit: true
+        edit: true,
+        delete: false
         });
     }
+    console.log("here")
     if(this.user.SurveyResults) {
+      console.log("in")
       this.savedData.push({
       title: 'Your Survey Data',
       link: 'surveyresults',
       name: this.user.SurveyResults.map(survey => survey.DisplayName),
       type: 'SurveyResults',
       data: this.user.SurveyResults,
-      edit: false
+      edit: false,
+      delete: true
     });
     }
   }
@@ -90,5 +100,17 @@ export class UserDashComponent implements OnInit, OnDestroy {
   checkRoles() {
     this.actions[1].show = this.user.Mod === true;
     this.actions[2].show = this.user.Admin === true;
+  }
+
+  mockupUser() { //for testing purposes
+    this.user.Narratives = [ {path: "story/Narratives/SpeedChess/What'stheDifferenceBetweenanAmphibianandaReptile?",
+    time: "2020-08-26, 19:10",
+    name: "Speed Chess: What's the Difference Between an Amphibian and a Reptile"}];
+    this.user.SurveyResults = [{SurveyID: "Companion",
+    DisplayName: "Ideal Source Companion Questionair 20/08/26",
+    Name: "Ideal Source Companion Questionair"},
+    {SurveyID: "Companion",
+    DisplayName: "Ideal Source Companion Questionair 20/08/26-2",
+    Name: "Ideal Source Companion Questionair"}];
   }
 }

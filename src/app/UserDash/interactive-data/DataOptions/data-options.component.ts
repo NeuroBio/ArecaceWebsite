@@ -1,6 +1,7 @@
 import { Component, OnInit, Input }   from '@angular/core';
 import { Router, ActivatedRoute }     from '@angular/router';
 import { LinkList, LinkListElement }  from 'src/app/SharedComponentModules/SmallComponents/LinkList/linklist';
+import { DashCRUDService } from '../../dash-CRUD.service';
 
 @Component({
   selector: 'app-data-options',
@@ -15,16 +16,21 @@ export class DataOptionsComponent implements OnInit {
   @Input() link: string;
   @Input() type: string;
   @Input() data: any;
-  @Input() edit: any;
+  @Input() edit: boolean;
+  @Input() delete: boolean;
   LinkList: LinkList[];
 
   constructor(private route: ActivatedRoute,
-              private router: Router) { }
+              private router: Router,
+              private crud: DashCRUDService) { }
 
   ngOnInit() {
     const buttonTypes = ['View'];
     if(this.edit) {
       buttonTypes.push('Edit');
+    }
+    if(this.delete) {
+      buttonTypes.push('X');
     }
 
     this.LinkList = []
@@ -50,12 +56,19 @@ export class DataOptionsComponent implements OnInit {
                            queryParams: {Action: 'edit'} });
   }
 
+  onDelete(index: number) {
+    return this.crud.deleteBookmark(index, this.type);
+  }
+
+
   onCall(functionName: string, index: number) {
     switch (functionName) {
       case 'View':
         return this.onView(index);
       case 'Edit':
         return this.onEdit(index);
+      case 'X':
+        return this.onDelete(index);
     }
   }
 

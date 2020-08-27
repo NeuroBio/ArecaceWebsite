@@ -15,7 +15,7 @@
               <!-- List Element Template -->
               <ng-template let-item #Item>
                 <button class="Exs" (click)="onCall(item.Item.Type, item.Item.Index)"
-                [attr.aria-label]="item.Item.Type + ': ' + item.ListName"
+                [attr.aria-label]="item.Item.Type === 'X' ? 'Delete' : item.Item.Type  + ': ' + item.ListName"
                 tabindex="-1">{{ item.Item.Type }}</button>
               </ng-template>
 

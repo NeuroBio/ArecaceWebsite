@@ -55,6 +55,7 @@ span#type {
     overflow: hidden;
     text-overflow: ellipsis;
     align-items: center;
+    max-width: 350px;
 }
 
 ::ng-deep app-master-link-list.UserFavoriteData a:hover {

@@ -35,3 +35,9 @@ h4 {
 button {
     margin: 0px
 }
+
+
+::ng-deep app-master-link-list.DiplayUserData app-link-list  {
+    display: inline;
+    white-space: nowrap
+}
