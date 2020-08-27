@@ -14,5 +14,5 @@ export class CheckboxComponent {
   @Input() id: string = 'check';
   @Input() checked: boolean;
   @Input() before: boolean = true;
-
+  
 }

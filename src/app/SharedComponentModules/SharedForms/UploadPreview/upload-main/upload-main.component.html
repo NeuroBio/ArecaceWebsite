@@ -25,10 +25,10 @@
         id="thumbCheck"
         [checked]="autoGenerate"
         [before]="false"
-        (click)="switchThumbType(); false" 
+        (change)="switchThumbType(); false" 
         ></app-checkbox>
          <!-- The false in the click event prevents double firing caused by the label
-        bubbling back to teh real check box!  Do NOT remove it. -->
+        bubbling back to the real check box!  Do NOT remove it. -->
 
         <app-tool-tip [Info]="autoGenHelp"></app-tool-tip>
     </div>
