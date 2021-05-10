@@ -1,3 +1,4 @@
 dist/*
 e2e/*
 node_modules/*
+src/environments/*
