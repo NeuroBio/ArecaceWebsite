@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { SourceAffinityCalculatorComponent } from './source-affinity-calculator.component';
 
@@ -6,7 +6,7 @@ describe('SourceAffinityCalculatorComponent', () => {
   let component: SourceAffinityCalculatorComponent;
   let fixture: ComponentFixture<SourceAffinityCalculatorComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ SourceAffinityCalculatorComponent ]
     })

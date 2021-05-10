@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { MasterLinkListComponent } from './master-link-list.component';
 
@@ -6,7 +6,7 @@ describe('MasterLinkListComponent', () => {
   let component: MasterLinkListComponent;
   let fixture: ComponentFixture<MasterLinkListComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ MasterLinkListComponent ]
     })

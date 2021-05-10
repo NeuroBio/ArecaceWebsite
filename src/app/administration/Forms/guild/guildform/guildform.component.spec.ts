@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { GuildFormComponent } from './guildform.component';
 
@@ -6,7 +6,7 @@ describe('GuildFormComponent', () => {
   let component: GuildFormComponent;
   let fixture: ComponentFixture<GuildFormComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ GuildFormComponent ]
     })

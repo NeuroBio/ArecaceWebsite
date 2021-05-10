@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { NomadicHomeComponent } from './nomadic-home.component';
 
@@ -6,7 +6,7 @@ describe('NomadicHomeComponent', () => {
   let component: NomadicHomeComponent;
   let fixture: ComponentFixture<NomadicHomeComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ NomadicHomeComponent ]
     })

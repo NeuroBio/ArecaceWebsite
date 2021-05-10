@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { DateConverterComponent } from './date-converter.component';
 
@@ -6,7 +6,7 @@ describe('DateConverterComponent', () => {
   let component: DateConverterComponent;
   let fixture: ComponentFixture<DateConverterComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ DateConverterComponent ]
     })

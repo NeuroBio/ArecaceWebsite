@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import {InteractDetailsSwitchComponent } from './interact-details-switch.component';
 
@@ -6,7 +6,7 @@ describe('InteractDetailsSwitchComponent', () => {
   let component: InteractDetailsSwitchComponent;
   let fixture: ComponentFixture<InteractDetailsSwitchComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ InteractDetailsSwitchComponent ]
     })

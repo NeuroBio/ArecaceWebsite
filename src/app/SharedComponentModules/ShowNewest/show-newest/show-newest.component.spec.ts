@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { ShowNewestComponent } from './show-newest.component';
 
@@ -6,7 +6,7 @@ describe('ShowNewestComponent', () => {
   let component: ShowNewestComponent;
   let fixture: ComponentFixture<ShowNewestComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ ShowNewestComponent ]
     })

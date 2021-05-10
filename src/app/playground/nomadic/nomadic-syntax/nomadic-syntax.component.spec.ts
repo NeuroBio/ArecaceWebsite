@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { NomadicSyntaxComponent } from './nomadic-syntax.component';
 
@@ -6,7 +6,7 @@ describe('NomadicSyntaxComponent', () => {
   let component: NomadicSyntaxComponent;
   let fixture: ComponentFixture<NomadicSyntaxComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ NomadicSyntaxComponent ]
     })

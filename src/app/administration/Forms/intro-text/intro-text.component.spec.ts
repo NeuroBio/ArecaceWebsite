@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { IntroTextComponent } from './intro-text.component';
 
@@ -6,7 +6,7 @@ describe('IntroTextComponent', () => {
   let component: IntroTextComponent;
   let fixture: ComponentFixture<IntroTextComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ IntroTextComponent ]
     })
