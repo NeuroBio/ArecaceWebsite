@@ -24,7 +24,7 @@ export class OthersArtComponent implements OnInit {
     window.scroll(0,0);
     this.arts$ = this.generalcollectserv.returnMetaData().pipe(
       take(1),
-      map(art => {
+      map((art: any[]) => {
         if(this.auth.isLoggedIn === true) {
           if(this.auth.isAdmin()) {
             return art;
@@ -34,7 +34,7 @@ export class OthersArtComponent implements OnInit {
         this.generalcollectserv.collectionData.next(art);
         return art;
       }),
-      map(art => art.sort((a,b) => a.Date > b.Date ? -1 : 1)) );
+      map((art: any[]) => art.sort((a,b) => a.Date > b.Date ? -1 : 1)) );
   }
 
 }

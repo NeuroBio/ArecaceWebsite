@@ -24,14 +24,14 @@ export class PixelArmyComponent implements OnInit {
 
   ngOnInit() {
     this.pixels$ = this.firebaseserv.returnCollect('Pixels').pipe(
-      map(art => {
+      map((art: any[]) => {
         if(this.auth.isAdmin()) {
           return art;
         }
         art = art.filter(a => a.Allowed);
         return art;
       }),
-      map(art => {
+      map((art: any[]) => {
         art.sort((a,b) => a.Date > b.Date ? -1 : 1)
         return art.map((piece: OthersArt) =>
           new LinkListElement(piece.Name, undefined, piece.ArtistLink, piece));

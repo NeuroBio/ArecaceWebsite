@@ -4,7 +4,7 @@ import { BehaviorSubject, Observable,
          Subscription }                   from 'rxjs';
 import { map }                            from 'rxjs/operators';
 
-import { ChapterMetaData }                from '../Classes/ContentClasses';
+import { ChapterMetaData, CharacterMetaData }                from '../Classes/ContentClasses';
 
 @Injectable({
   providedIn: 'root'
@@ -31,17 +31,17 @@ export class ComicService {
 
   getChap(chapID: number): Observable<ChapterMetaData> {
     return this.getMetaData().pipe(
-      map(chaps => chaps.find(chaps => chaps.ID == chapID)) );
+      map((chaps: ChapterMetaData[]) => chaps.find(chaps => chaps.ID == chapID)) );
   }
 
   getPage(fullID: string): Observable<string> {
     const ids = fullID.split("-");
     return this.getChap(+ids[0]).pipe(
-      map(chap => {
+      map((chap: any) => {
         if(chap) {
           return chap.Links[+ids[1]-1];
         } else {
-          return;
+          return undefined;
         }
       })
     );

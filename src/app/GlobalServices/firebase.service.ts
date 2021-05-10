@@ -49,15 +49,15 @@ export class FireBaseService {
     return task.snapshotChanges().pipe(finalize(() => {})).toPromise();
   }
 
-  uploadBlob(path:string, blob:Blob){
+  uploadBlob(path:string, blob:Blob) {
     return this.storage.ref(path).put(blob);
   }
 
-  returnCollectionWithKeys(path:string){
+  returnCollectionWithKeys(path:string) {
     return this.database.collection<any>(path)
       .snapshotChanges().pipe(
-        map(actions => {
-        return actions.map(a => {
+        map((actions: any[]) => {
+        return actions.map((a: any) => {
         const data = a.payload.doc.data() as any;
         data.key = a.payload.doc.id;
         return data;

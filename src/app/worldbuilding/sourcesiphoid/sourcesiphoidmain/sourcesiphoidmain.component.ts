@@ -25,7 +25,7 @@ export class SourceSiphoidMainComponent implements OnInit {
 
   ngOnInit() {
     this.sourceRefs$ = this.generalcollectserv.returnMetaData().pipe(
-      map(refs => {
+      map((refs: any[]) => {
         let final:LinkList[] = [];
         for(let cat of this.cats.source) {
           const Data = refs.filter(ref =>

@@ -24,7 +24,7 @@ export class CulturemainComponent implements OnInit {
 
   ngOnInit() {
     this.cultureRefs$ = this.generalcollectserv.returnMetaData()
-      .pipe(map(refs => {
+      .pipe(map((refs: any[]) => {
         let final: LinkList[] = [];
         for(let cat of this.cats.culture) {
           const Data = refs.filter(ref =>

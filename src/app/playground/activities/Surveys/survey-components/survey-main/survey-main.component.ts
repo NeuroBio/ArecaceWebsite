@@ -8,6 +8,7 @@ import { GeneralcollectionService }     from 'src/app/GlobalServices/generalcoll
 import { AuthService }                  from 'src/app/administration/security/Auth/auth.service';
 import { SurveyService }                from '../survey.service';
 import { LinkList, LinkListElement }    from 'src/app/SharedComponentModules/SmallComponents/LinkList/linklist';
+import { SurveyData } from 'src/app/Classes/ContentClasses';
 
 @Component({
   selector: 'app-survey-main',
@@ -26,7 +27,7 @@ export class SurveyMainComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.surveys$ = this.generalcollectserv.returnMetaData().pipe(
-      map(surveys => {
+      map((surveys: SurveyData[]) => {
         surveys.sort((a,b) => a[0] < b[0] ? -1 : 1);
         return new LinkList('Surveys',
           surveys.map(survey => new LinkListElement(survey.ID, survey.ID)) );

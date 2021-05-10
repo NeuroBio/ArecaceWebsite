@@ -22,7 +22,7 @@ export class MainNotesComponent implements OnInit {
 
   ngOnInit() {
     this.notes$ = this.generalcollectserv.returnMetaData().pipe(
-      map((notes) => {
+      map((notes: any[]) => {
         notes.sort((a,b) => a.Created < b.Created ? 1 : -1);
         return new LinkList('Notes', 
         notes.map(note => new LinkListElement(note.ShortTitle, note.ID))); 

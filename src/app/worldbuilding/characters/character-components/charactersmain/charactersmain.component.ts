@@ -7,6 +7,7 @@ import { map, filter, take, skipWhile, tap }                        from 'rxjs/o
 import { GeneralcollectionService }   from 'src/app/GlobalServices/generalcollection.service';
 import { LinkList }                   from 'src/app/SharedComponentModules/SmallComponents/LinkList/linklist';
 import { LinkListElement }            from 'src/app/SharedComponentModules/SmallComponents/LinkList/linklist';
+import { CharacterMetaData } from 'src/app/Classes/ContentClasses';
 
 @Component({
   selector: 'app-charactersmain',
@@ -25,7 +26,7 @@ export class CharactersMainComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.characters$ = this.generalcollectserv.returnMetaData().pipe(
-      map(characters => {
+      map((characters: CharacterMetaData[]) => {
         characters.sort((a,b) => a.ID < b.ID ? -1 : 1);
         return new LinkList('Characters', characters.map(character =>
           new LinkListElement(character.FirstName, character.ID)) );

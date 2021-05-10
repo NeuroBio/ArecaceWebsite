@@ -32,7 +32,7 @@ export class BestiaryComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.beasts$ = this.generalcollectserv.returnMetaData().pipe(
-      map(beasts => {
+      map((beasts: BeastMetaData[]) => {
         beasts.sort((a,b) => a.ID < b.ID ? -1 : 1);
         return beasts.sort((a,b) => a.Biome < b.Biome ? -1 : a.Biome > b.Biome ? 1 : 0);
     }) );
