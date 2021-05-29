@@ -43,7 +43,7 @@ export class AuthService {
       })
     ).subscribe(user => {
       this.user.next(user);
-      resolve();
+      resolve(true);
     }) );
   }
 
