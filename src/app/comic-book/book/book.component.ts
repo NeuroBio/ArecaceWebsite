@@ -68,11 +68,11 @@ export class BookComponent implements OnInit, OnDestroy {
       this.currentChapter = chap.find(c => c.ID === +id[0]);
       this.currentPage = +id[1];
     }
-    this.maxChap = chap[chap.length-1].ID;
+    this.maxChap = chap[chap.length - 1].ID;
     this.updatePageIndex();
     this.navigate();
   }
- 
+
   navigate() {
     this.name = `Chapter ${this.currentChapter.ID}: Page ${this.currentPage}`;
     this.path = `comic/${this.currentChapter.ID}-${this.currentPage}`;
@@ -115,17 +115,17 @@ export class BookComponent implements OnInit, OnDestroy {
     this.navigate();
   }
 
-  //Arrow keys (trigger button options)
+  // Arrow keys (trigger button options)
   KeyEvent(event: KeyboardEvent) { 
-    if(event.keyCode === 39 && // right, next
-      !(this.currentPage == this.currentChapter.NumPages
-        && this.currentChapter.ID == this.maxChap)) { // not last page
+    if (event.keyCode === 39 && // right, next
+      !(this.currentPage === this.currentChapter.NumPages
+        && this.currentChapter.ID === this.maxChap)) { // not last page
       this.onButton(this.currentPage < this.currentChapter.NumPages, 1);
     }
 
-    if(event.keyCode === 37 && // left, prev
-      !(this.currentPage == 1
-        && this.currentChapter.ID == 0)) { // not first page
+    if (event.keyCode === 37 && // left, prev
+      !(this.currentPage === 1
+        && this.currentChapter.ID === 0)) { // not first page
         this.onButton(this.currentPage > 1, -1);
     }
   }

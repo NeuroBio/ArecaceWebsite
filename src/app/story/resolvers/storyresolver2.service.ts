@@ -13,8 +13,8 @@ export class StoryResolver2Service implements Resolve<any> {
   constructor(private router: Router,
               private storyserv: StoryService) { }
 
-  //see the story service for notes
-  resolve(route:ActivatedRouteSnapshot) {
+  // see the story service for notes
+  resolve(route: ActivatedRouteSnapshot) {
     const type = route.parent.paramMap.get('StoryType');
     const series = route.paramMap.get('SeriesID');
     if (this.checkUrl(series, type) === true) {

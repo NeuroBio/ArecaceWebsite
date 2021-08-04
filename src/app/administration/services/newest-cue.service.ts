@@ -1,9 +1,9 @@
-import { Injectable }         from '@angular/core';
-import { formatDate }         from '@angular/common';
+import { Injectable } from '@angular/core';
+import { formatDate } from '@angular/common';
 
-import { take }               from 'rxjs/operators';
+import { take } from 'rxjs/operators';
 
-import { FireBaseService }    from 'src/app/GlobalServices/firebase.service';
+import { FireBaseService } from 'src/app/GlobalServices/firebase.service';
 
 import { AllPathInfo } from 'src/app/Classes/UploadDownloadPaths';
 
@@ -23,23 +23,22 @@ export class NewestCueService {
     newItem.UploadName = this.makeName(type, newItem);
     newItem.UploadChange = change;
 
-    //no need to wait!  This is not a priority
-    if(change === 'Created') {
+    // no need to wait!  This is not a priority
+    if (change === 'Created') {
       this.firebaseserv.returnCollectionWithKeys('NewestCue').pipe(take(1))
       .subscribe(newest => {
-        if(newest.length >= 25) {
-          newest = newest.sort((a,b) => a.UploadTime > b.UploadTime ? -1 : 1);
-          const deleteKey = newest[newest.length-1].key;
+        if (newest.length >= 25) {
+          newest = newest.sort((a, b) => a.UploadTime > b.UploadTime ? -1 : 1);
+          const deleteKey = newest[newest.length - 1].key;
           this.firebaseserv.deleteDocument('NewestCue', deleteKey);
         }
-  
         this.firebaseserv.uploadDocument(newItem, 'NewestCue');
       });
     }
   }
 
   makeLink(type: string, newItem: any) {
-    if(this.AllPathInfo[type].ExtraPath) {
+    if (this.AllPathInfo[type].ExtraPath) {
       return `${this.AllPathInfo[type].DirectLink}/${this.AllPathInfo[type].ExtraPath}/${newItem.ID}`;
     } else {
       return `${this.AllPathInfo[type].DirectLink}/${newItem.ID}`;

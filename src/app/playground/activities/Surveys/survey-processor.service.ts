@@ -49,7 +49,7 @@ export class SurveyProcessorService {
     let assassinMatch = Math.trunc((finalScores.Assassin * maxAssassin / (maxAssassin - 2)) * 1000) / 100;
     let bestMatch = '';
 
-    //Assassin check
+    // Assassin check
     if (assassinMatch >= 50) {
       assassin = surveyData.Outcomes.find(a => a.Name === 'Assassin').Text;
       if (assassinMatch > 100) {
@@ -70,7 +70,7 @@ export class SurveyProcessorService {
       age = 'You are too young to apply for the Guilds right now.  However, if you were a little bit older, your results would be the following: \n\n';
     }
 
-    if (answers[23].Answer === 0 &&  (['DIA', 'AnK'].indexOf(Results.Outcome.Name) === -1)){
+    if (answers[23].Answer === 0 &&  (['DIA', 'AnK'].indexOf(Results.Outcome.Name) === -1)) {
       esarian = 'Unfortunately, your best match was with a Guild that doesn\'t accept Esarian members.  If you were not Esarian, you would have received the following result: \n\n';
     }
 

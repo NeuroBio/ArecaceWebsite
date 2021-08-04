@@ -12,7 +12,7 @@ export class BookResolverService implements Resolve<any> {
 
   constructor(
     private router: Router,
-    private cache: CacheService, 
+    private cache: CacheService,
     private comicserv: ComicService
   ) { }
 

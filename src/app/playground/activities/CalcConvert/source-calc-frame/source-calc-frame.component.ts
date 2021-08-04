@@ -37,7 +37,7 @@ export class SourceCalcFrameComponent implements OnInit, OnDestroy {
 
     this.stream1 = this.auth.user.subscribe(() =>
       this.isUser = this.auth.isUser());
-    this.stream2 =this.logintosaveserv.reset.subscribe(() => {
+    this.stream2 = this.logintosaveserv.reset.subscribe(() => {
       this.fetcher.assignItemtoEdit(undefined);
       this.logintosaveserv.assignStopClick(false);
     });

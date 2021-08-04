@@ -17,7 +17,7 @@ export class PageResolverService implements Resolve<string> {
   constructor(private comicserv: ComicService,
               private router: Router,
               private titleserv: Title) { }
-  
+
   resolve(route: ActivatedRouteSnapshot): Observable<string | never> {
     const FullID = route.paramMap.get('PageID');
     if (FullID === 'latest') { // no specific page

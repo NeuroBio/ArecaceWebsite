@@ -1,9 +1,8 @@
-import { Component, ViewChild,
-         ElementRef, AfterViewInit}               from '@angular/core';
-import { ActivatedRoute }                         from '@angular/router';
-         
-import { GlobalVarsService}                       from './GlobalServices/global-vars.service';
-import { LinkListElement, LinkList }              from './SharedComponentModules/SmallComponents/LinkList/linklist';
+import { Component, ViewChild, ElementRef, AfterViewInit} from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+
+import { GlobalVarsService} from './GlobalServices/global-vars.service';
+import { LinkListElement, LinkList } from './SharedComponentModules/SmallComponents/LinkList/linklist';
 
 @Component({
   selector: 'app-root',
@@ -11,10 +10,10 @@ import { LinkListElement, LinkList }              from './SharedComponentModules
   styleUrls: ['./app.component.css']
 })
 
-export class AppComponent implements AfterViewInit{
+export class AppComponent implements AfterViewInit {
 
   @ViewChild('flag', { static: true }) flag: ElementRef;
-  year: number = new Date().getFullYear()
+  year: number = new Date().getFullYear();
 
   headerLinkList = new LinkList('header',
     [ new LinkListElement('Home', 'home'),
@@ -38,13 +37,13 @@ export class AppComponent implements AfterViewInit{
               public route: ActivatedRoute) { }
 
   ngAfterViewInit() {
-    setTimeout(() => {this.checkLoad()}, 1000);
+    setTimeout(() => { this.checkLoad(); }, 1000);
   }
   
   checkLoad() {
-    if(this.flag.nativeElement.offsetWidth !== 1) {
+    if (this.flag.nativeElement.offsetWidth !== 1) {
 
-      if(this.global.phone.value === false) { //allow spinner of mobile
+      if (this.global.phone.value === false) { // allow spinner of mobile
         this.global.ImagesLoadable.next(false);
 
       }

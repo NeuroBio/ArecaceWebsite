@@ -21,7 +21,7 @@ export class ComicService {
 
   initializeMetaData(meta: Observable<ChapterMetaData[]>) {
     return this.stream = meta.subscribe(data =>
-      this.ChapterData.next(data.sort((a, b) => a.ID < b.ID? -1 : 1)) );
+      this.ChapterData.next(data.sort((a, b) => a.ID < b.ID ? -1 : 1)) );
   }
 
   getMetaData() {
@@ -53,7 +53,7 @@ export class ComicService {
   }
 
   disposal() {
-    if(this.stream) {
+    if (this.stream) {
       this.stream.unsubscribe();
     }
   }

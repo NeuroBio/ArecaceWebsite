@@ -40,7 +40,7 @@ export class DateConverterComponent implements OnInit {
   }
 
   onSwitch(earth: string) {
-    if(earth === 'earth') {
+    if (earth === 'earth') {
       this.months = this.dateInfo.EarthMonthNames;
       this.monthLengths = this.dateInfo.EarthMonthLengths;
     } else {

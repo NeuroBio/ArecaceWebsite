@@ -10,7 +10,7 @@ import { BlowupmasterComponent } from 'src/app/SharedComponentModules/PrimaryCon
 const extrasRoutes: Routes = [
   { path: ':ExtraID/Download',
     loadChildren: () => import('src/app/SimplePages/downloadpage/download-page.module').then(m => m.DownloadPageModule)},
-  { path:'', component: ExtrasMainComponent,
+  { path: '', component: ExtrasMainComponent,
     resolve: { GeneralcollectionresolverService },
     children: [
     { path: 'notfound', redirectTo: '' },

@@ -75,7 +75,7 @@ export function AuthFactory(provider: AuthService) {
     AngularFireStorageModule, // imports firebase/storage only needed for storage features
     AngularFireFunctionsModule, // cloud functions
     DeviceDetectorModule.forRoot(),
-    AppRoutingModule,// this should always be LAST!!!
+    AppRoutingModule, // this should always be LAST!!!
   ],
 
   providers: [AuthService,
