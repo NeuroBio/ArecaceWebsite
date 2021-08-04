@@ -16,13 +16,13 @@ export class StorydisplayComponent implements OnInit, OnDestroy {
   @ViewChild('frame', { static: true }) frame: ElementRef;
   @ViewChild('main', { static: true }) main: ElementRef;
   leftspace: number;
-  
+
   story: any;
   loading: boolean;
   stream: Subscription;
 
   constructor(
-    private route:ActivatedRoute,
+    private route: ActivatedRoute,
     private storyserv: StoryService
   ) { }
 
@@ -34,7 +34,7 @@ export class StorydisplayComponent implements OnInit, OnDestroy {
       this.storyserv.updateLoading(false);
     });
 
-    this.stream = this.storyserv.loading.subscribe(load => this.loading = load)
+    this.stream = this.storyserv.loading.subscribe(load => this.loading = load);
   }
 
   ngOnDestroy() {

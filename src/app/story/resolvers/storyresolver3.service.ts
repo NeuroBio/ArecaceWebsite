@@ -23,7 +23,7 @@ export class StoryResolver3Service implements Resolve<any> {
   ) { }
 
   // see the story service for notes
-  resolve(route: ActivatedRouteSnapshot): Observable<any>{
+  resolve(route: ActivatedRouteSnapshot): Observable<any> {
     const ID = route.paramMap.get('StoryID');
     if (this.checkUrl(ID, route) === true) {
       return;
@@ -31,7 +31,7 @@ export class StoryResolver3Service implements Resolve<any> {
 
     return this.storyserv.getStory(ID).pipe(
       take(1),
-      mergeMap((metaData:StoryMetaData) => {
+      mergeMap((metaData: StoryMetaData) => {
         if (metaData) {
           this.storyserv.getStory(metaData.ID);
           this.storyserv.changeSection(metaData.ID);
@@ -48,7 +48,7 @@ export class StoryResolver3Service implements Resolve<any> {
     }) );
   }
 
-  getText(link:string): Observable<string> {
+  getText(link: string): Observable<string> {
     return this.httpclient.get(link, { responseType: 'text' });
   }
 

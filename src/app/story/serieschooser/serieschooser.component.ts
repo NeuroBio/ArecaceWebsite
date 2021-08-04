@@ -37,7 +37,7 @@ export class SeriesChooserComponent implements OnInit, OnDestroy {
               private router: Router) { }
 
   ngOnInit() {
-    window.scroll(0,0);
+    window.scroll(0, 0);
 
     this.stream1 = this.storyserv.seriesIDName.subscribe(IDName => {
       this.seriesIDs = Object.keys(IDName);

@@ -13,7 +13,7 @@ import { ForumComponent } from './Forum/forum/forum.component';
     PlaygroundhomeComponent,
     ForumComponent,
   ],
-    
+
   imports: [
     CommonModule,
     ShowNewestModule,
@@ -24,6 +24,6 @@ import { ForumComponent } from './Forum/forum/forum.component';
 
 export class PlaygroundModule implements OnInit {
   ngOnInit() {
-    window.scroll(0,0);
+    window.scroll(0, 0);
   }
 }

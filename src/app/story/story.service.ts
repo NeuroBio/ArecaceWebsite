@@ -70,7 +70,7 @@ export class StoryService {
     return this.seriesTitles;
   }
 
-  getStory(storyID:string): Observable<StoryMetaData> {
+  getStory(storyID: string): Observable<StoryMetaData> {
     return this.getSeriesData().pipe(
       map((stories: StoryMetaData[]) => stories.find(story =>
         story.ID === storyID)) );

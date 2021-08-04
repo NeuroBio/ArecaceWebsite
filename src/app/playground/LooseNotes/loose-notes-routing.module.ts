@@ -7,15 +7,15 @@ import { GeneralmemberresolverService } from 'src/app/GlobalServices/generalmemb
 import { GeneralcollectionresolverService } from 'src/app/GlobalServices/generalcollectionresolver.service';
 
 const noteRoutes: Routes = [
-  {path: '', component: MainNotesComponent,
-  resolve: {GeneralcollectionresolverService},
+  { path: '', component: MainNotesComponent,
+  resolve: { GeneralcollectionresolverService },
   children: [
-    {path: '', redirectTo: 'Latest', pathMatch: 'full'},
-    {path: 'notfound', component: NotFoundComponent},
-    {path: ':NotesID', component: DetailsNotesComponent,
-      resolve: {Note: GeneralmemberresolverService}}
-  ]},
-];;
+    { path: '', redirectTo: 'Latest', pathMatch: 'full' },
+    { path: 'notfound', component: NotFoundComponent },
+    { path: ':NotesID', component: DetailsNotesComponent,
+      resolve: { Note: GeneralmemberresolverService } }
+  ] },
+];
 
 @NgModule({
   imports: [RouterModule.forChild(noteRoutes)],

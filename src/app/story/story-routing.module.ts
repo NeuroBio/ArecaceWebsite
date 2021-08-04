@@ -17,7 +17,7 @@ const storyRoutes: Routes = [
     { path: '', redirectTo: 'First', pathMatch: 'full' },
     { path: ':SeriesID', component: SeriesChooserComponent,
       resolve: { StoryResolver2Service },
-      children:[
+      children: [
       { path: '', redirectTo: 'First', pathMatch: 'full' },
       { path: ':StoryID',  component: StorydisplayComponent,
         resolve: { Story: StoryResolver3Service } }

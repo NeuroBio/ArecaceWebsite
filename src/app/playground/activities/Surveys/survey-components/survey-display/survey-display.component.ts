@@ -50,7 +50,7 @@ export class SurveyDisplayComponent implements OnInit {
   onSubmit() {
     let Answers = this.Form.controls.Answers.value;
     Answers = Answers.map((ans, index) => {
-      return { Answer: ans[`Answer${index}`] }
+      return { Answer: ans[`Answer${index}`] };
     });
     this.surveyserv.calculateFinalScores(Answers);
   }

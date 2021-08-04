@@ -1,12 +1,12 @@
-import { NgModule }                       from '@angular/core';
-import { CommonModule }                   from '@angular/common';
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
-import { LooseNotesRoutingModule }        from './loose-notes-routing.module';
-import { PrimaryContentDisplayModule }    from 'src/app/SharedComponentModules/PrimaryContentDisplayer/primary-content-display.module';
-import { BookmarkModule }                 from 'src/app/SharedComponentModules/SmallComponents/bookmark/bookmark.module';
+import { LooseNotesRoutingModule } from './loose-notes-routing.module';
+import { PrimaryContentDisplayModule } from 'src/app/SharedComponentModules/PrimaryContentDisplayer/primary-content-display.module';
+import { BookmarkModule } from 'src/app/SharedComponentModules/SmallComponents/bookmark/bookmark.module';
 
-import { MainNotesComponent }             from './main-notes/main-notes.component';
-import { DetailsNotesComponent }          from './details-notes/details-notes.component';
+import { MainNotesComponent } from './main-notes/main-notes.component';
+import { DetailsNotesComponent } from './details-notes/details-notes.component';
 @NgModule({
   declarations: [
     MainNotesComponent,

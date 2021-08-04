@@ -23,7 +23,7 @@ export class WorldbuildingComponent implements OnInit {
 
   ngOnInit() {
     this.titleserv.setTitle('World');
-    window.scroll(0,0);
+    window.scroll(0, 0);
   }
 
  }

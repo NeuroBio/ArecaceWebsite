@@ -1,12 +1,12 @@
-import { Component, OnInit, OnDestroy }                 from '@angular/core';
-import { ActivatedRoute, Router }                       from '@angular/router';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
-import { Observable, Subscription, fromEvent }          from 'rxjs';
+import { Observable, Subscription, fromEvent } from 'rxjs';
 
-import { ComicService }                                 from '../comic.service';
-import { TextProvider }                                 from 'src/app/GlobalServices/textprovider.service';
+import { ComicService } from '../comic.service';
+import { TextProvider } from 'src/app/GlobalServices/textprovider.service';
 
-import { ChapterMetaData }                              from 'src/app/Classes/ContentClasses';
+import { ChapterMetaData } from 'src/app/Classes/ContentClasses';
 
 @Component({
   selector: 'app-book',
@@ -28,14 +28,14 @@ export class BookComponent implements OnInit, OnDestroy {
   path: string;
   name: string;
   KeyListener = fromEvent(document, 'keydown');
-  
+
   constructor(private comicserv: ComicService,
               private route: ActivatedRoute,
               private router: Router,
               private textprovider: TextProvider) { }
 
   ngOnInit() {
-    window.scroll(0,0);
+    window.scroll(0, 0);
     this.chapterData$ = this.comicserv.getMetaData();
     this.chapterData$.subscribe(chap =>
       this.route.firstChild.paramMap.subscribe(path =>
@@ -43,7 +43,7 @@ export class BookComponent implements OnInit, OnDestroy {
     ).unsubscribe();
 
     this.stream1 = this.comicserv.loading.subscribe(bool =>
-      setTimeout(() => { this.loading = bool }, 10));
+      setTimeout(() => { this.loading = bool; }, 10));
     this.mainText = this.textprovider.WebsiteText
       .find(member => member.ID === 'comic').Text;
 
@@ -56,14 +56,14 @@ export class BookComponent implements OnInit, OnDestroy {
     this.stream2.unsubscribe();
     this.comicserv.disposal();
   }
-  
+
   initialVarAssign(path: any, chap: ChapterMetaData[]) {
     const route = path.get('PageID');
 
-    if(route === null) {//latest
-      this.currentChapter = chap[chap.length-1];
+    if (route === null) { // latest
+      this.currentChapter = chap[chap.length - 1];
       this.currentPage = this.currentChapter.NumPages;
-    } else {//get specific page
+    } else { // get specific page
       const id = route.split('-');
       this.currentChapter = chap.find(c => c.ID === +id[0]);
       this.currentPage = +id[1];
@@ -83,18 +83,18 @@ export class BookComponent implements OnInit, OnDestroy {
     this.pageIndex = Array(this.currentChapter.NumPages);
   }
 
-  //dropdown selectors
+  // dropdown selectors
   changePage(newpage: number) {
-    this.loading=true;
-    this.currentPage = (+newpage+1);
+    this.loading = true;
+    this.currentPage = (+newpage + 1);
     this.navigate();
   }
 
   changeChapter(newchap: string, increase: boolean = true) {
-    this.loading=true;
+    this.loading = true;
     this.chapterData$.subscribe(chaps => {
       this.currentChapter = chaps[newchap];
-      if(increase) {
+      if (increase) {
         this.currentPage = 1;
       } else {
         this.currentPage = this.currentChapter.NumPages;
@@ -105,27 +105,27 @@ export class BookComponent implements OnInit, OnDestroy {
   }
 
   // buttons
-  onButton(check: boolean, incre :number) {
-    if(check) {
+  onButton(check: boolean, incre: number) {
+    if (check) {
       this.loading = true;
       this.currentPage += incre;
     } else {
-      this.changeChapter((this.currentChapter.Index+incre).toString(), incre>=1);
+      this.changeChapter((this.currentChapter.Index + incre).toString(), incre >= 1);
     }
     this.navigate();
   }
 
   //Arrow keys (trigger button options)
   KeyEvent(event: KeyboardEvent) { 
-    if(event.keyCode === 39 &&//right, next
+    if(event.keyCode === 39 && // right, next
       !(this.currentPage == this.currentChapter.NumPages
-        && this.currentChapter.ID == this.maxChap)) {//not last page
-      this.onButton(this.currentPage < this.currentChapter.NumPages,1);
+        && this.currentChapter.ID == this.maxChap)) { // not last page
+      this.onButton(this.currentPage < this.currentChapter.NumPages, 1);
     }
 
-    if(event.keyCode === 37 &&//left, prev
+    if(event.keyCode === 37 && // left, prev
       !(this.currentPage == 1
-        && this.currentChapter.ID == 0)) {//not first page
+        && this.currentChapter.ID == 0)) { // not first page
         this.onButton(this.currentPage > 1, -1);
     }
   }

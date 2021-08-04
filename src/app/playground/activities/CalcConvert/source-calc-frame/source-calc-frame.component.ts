@@ -1,13 +1,13 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Title }                        from '@angular/platform-browser';
+import { Title } from '@angular/platform-browser';
 
-import { Subscription }                 from 'rxjs';
+import { Subscription } from 'rxjs';
 
-import { SA }                           from 'src/app/Classes/ContentClasses';
-import { AuthService }                  from 'src/app/administration/security/Auth/auth.service';
-import { FetchService }                 from 'src/app/GlobalServices/fetch.service';
-import { GeneralcollectionService }     from 'src/app/GlobalServices/generalcollection.service';
-import { LoginToSaveService }           from 'src/app/SharedComponentModules/SmallComponents/login-to-save/login-to-save.service';
+import { SA } from 'src/app/Classes/ContentClasses';
+import { AuthService } from 'src/app/administration/security/Auth/auth.service';
+import { FetchService } from 'src/app/GlobalServices/fetch.service';
+import { GeneralcollectionService } from 'src/app/GlobalServices/generalcollection.service';
+import { LoginToSaveService } from 'src/app/SharedComponentModules/SmallComponents/login-to-save/login-to-save.service';
 
 @Component({
   selector: 'app-source-calc-frame',
@@ -17,7 +17,7 @@ import { LoginToSaveService }           from 'src/app/SharedComponentModules/Sma
 
 export class SourceCalcFrameComponent implements OnInit, OnDestroy {
 
-  canonSA: SA[]
+  canonSA: SA[];
   isUser: boolean;
   notValid: boolean;
   stream1: Subscription;
@@ -30,13 +30,13 @@ export class SourceCalcFrameComponent implements OnInit, OnDestroy {
               private titleserv: Title) { }
 
   ngOnInit() {
-    this.titleserv.setTitle('Calc: SA')
+    this.titleserv.setTitle('Calc: SA');
     this.canonSA = this.generalcollectserv.collectionData.value
-    .sort((a,b) => a.ID > b.ID ? 1 : -1);
+    .sort((a, b) => a.ID > b.ID ? 1 : -1);
     this.logintosaveserv.assignType('SAcalculations');
 
-    this.stream1 = this.auth.user.subscribe(() => 
-      this.isUser = this.auth.isUser());  
+    this.stream1 = this.auth.user.subscribe(() =>
+      this.isUser = this.auth.isUser());
     this.stream2 =this.logintosaveserv.reset.subscribe(() => {
       this.fetcher.assignItemtoEdit(undefined);
       this.logintosaveserv.assignStopClick(false);

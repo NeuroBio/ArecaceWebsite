@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy, ViewChild, ElementRef, AfterContentChecked } from '@angular/core';
 
-import { Subscription } from 'rxjs'; 
+import { Subscription } from 'rxjs';
 
 import { SurveyService } from '../survey.service';
 
@@ -29,7 +29,7 @@ export class SurveyStatsComponent implements OnInit, AfterContentChecked, OnDest
   }
 
   ngAfterContentChecked() {
-    setTimeout(() => { this.onResize() }, 10);
+    setTimeout(() => { this.onResize(); }, 10);
   }
 
   ngOnDestroy() {
@@ -47,7 +47,7 @@ export class SurveyStatsComponent implements OnInit, AfterContentChecked, OnDest
       this.Stats.Counts = Object.values(Counts);
       this.Stats.Max = this.Stats.Counts.reduce((a, b) => a + b);
       this.Stats.Counts = this.Stats.Counts
-        .map(count => count/this.Stats.Max);
+        .map(count => count / this.Stats.Max);
       this.Stats.CountsDisplay = this.Stats.Counts
         .map(count => Math.trunc(count * 1000) / 10);
       this.height = 45 * this.Stats.Keys.length;

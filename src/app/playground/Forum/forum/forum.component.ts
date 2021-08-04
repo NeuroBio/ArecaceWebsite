@@ -1,5 +1,5 @@
-import { Component, OnInit }  from '@angular/core';
-import { Title }              from '@angular/platform-browser';
+import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-forum',
@@ -11,7 +11,7 @@ export class ForumComponent implements OnInit {
   constructor(private titleserv: Title) { }
 
   ngOnInit(): void {
-    this.titleserv.setTitle('Sad Cicadas')
+    this.titleserv.setTitle('Sad Cicadas');
   }
 
 }

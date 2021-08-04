@@ -1,11 +1,11 @@
-import { Component, OnInit }          from '@angular/core';
-import { ActivatedRoute }             from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
-import { Observable }                 from 'rxjs';
-import { map }                        from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
-import { GeneralcollectionService }   from 'src/app/GlobalServices/generalcollection.service';
-import { LinkList, LinkListElement }  from 'src/app/SharedComponentModules/SmallComponents/LinkList/linklist';
+import { GeneralcollectionService } from 'src/app/GlobalServices/generalcollection.service';
+import { LinkList, LinkListElement } from 'src/app/SharedComponentModules/SmallComponents/LinkList/linklist';
 
 @Component({
   selector: 'app-main-notes',
@@ -23,11 +23,11 @@ export class MainNotesComponent implements OnInit {
   ngOnInit() {
     this.notes$ = this.generalcollectserv.returnMetaData().pipe(
       map((notes: any[]) => {
-        notes.sort((a,b) => a.Created < b.Created ? 1 : -1);
-        return new LinkList('Notes', 
-        notes.map(note => new LinkListElement(note.ShortTitle, note.ID))); 
+        notes.sort((a, b) => a.Created < b.Created ? 1 : -1);
+        return new LinkList('Notes',
+        notes.map(note => new LinkListElement(note.ShortTitle, note.ID)));
     }) );
-    
+
     this.route.firstChild.paramMap.subscribe(path => {
       return this.current = this.generalcollectserv
         .getCurrent(this.notes$, path.get('NotesID'));

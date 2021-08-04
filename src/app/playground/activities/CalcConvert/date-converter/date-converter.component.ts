@@ -1,8 +1,8 @@
-import { Component, OnInit }      from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { Title }                  from '@angular/platform-browser';
+import { Title } from '@angular/platform-browser';
 
-import { DateInfo }               from 'src/app/Classes/ArecacenDates';
+import { DateInfo } from 'src/app/Classes/ArecacenDates';
 
 @Component({
   selector: 'app-date-converter',
@@ -17,7 +17,7 @@ export class DateConverterComponent implements OnInit {
   months = this.dateInfo.EarthMonthNames;
   monthLengths = this.dateInfo.EarthMonthLengths;
   days = new Array(this.monthLengths[0]);
-  convertedDate = "Qt1-1 12";
+  convertedDate = 'Qt1-1 12';
 
   constructor(private fb: FormBuilder,
               private titleserv: Title) { }
@@ -40,9 +40,9 @@ export class DateConverterComponent implements OnInit {
   }
 
   onSwitch(earth: string) {
-    if(earth == "earth") {
+    if(earth === 'earth') {
       this.months = this.dateInfo.EarthMonthNames;
-      this.monthLengths = this.dateInfo.EarthMonthLengths;      
+      this.monthLengths = this.dateInfo.EarthMonthLengths;
     } else {
       this.months = this.dateInfo.ArecaceMonthNames;
       this.monthLengths = this.dateInfo.ArecaceMonthLengths;
@@ -58,15 +58,14 @@ export class DateConverterComponent implements OnInit {
   }
 
   onAnyChange() {
-    if(this.Form.value.Start === 'earth') {
+    if (this.Form.value.Start === 'earth') {
       this.convertedDate = this.dateInfo.earthtoArecaceConverter(
-        (+this.Form.value.Month)+1, (+this.Form.value.Day)+1);
+        (+this.Form.value.Month) + 1, (+this.Form.value.Day) + 1);
     } else {
       const tempDate = this.dateInfo.arecacetoEarthConverter(
         this.dateInfo.ArecaceMonthNames[+this.Form.value.Month],
-        (+this.Form.value.Day)+1).split('-');
-      console.log( this.convertedDate)
-      this.convertedDate = `${this.dateInfo.EarthMonthNames[(+tempDate[0])-1]}-${tempDate[1]}`
+        (+this.Form.value.Day) + 1).split('-');
+      this.convertedDate = `${this.dateInfo.EarthMonthNames[(+tempDate[0]) - 1]}-${tempDate[1]}`;
     }
   }
 

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { CalculatorsComponent } from './calculators/calculators.component'
-import { DateConverterComponent } from './date-converter/date-converter.component'
+import { CalculatorsComponent } from './calculators/calculators.component';
+import { DateConverterComponent } from './date-converter/date-converter.component';
 import { SourceCalcFrameComponent } from './source-calc-frame/source-calc-frame.component';
 import { GeneralcollectionresolverService } from 'src/app/GlobalServices/generalcollectionresolver.service';
 

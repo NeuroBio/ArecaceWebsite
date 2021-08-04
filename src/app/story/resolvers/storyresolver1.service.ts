@@ -13,12 +13,12 @@ export class StoryResolver1Service implements Resolve<any> {
   constructor(
     private storyserv: StoryService,
     private cache: CacheService,
-    private router:Router
+    private router: Router
   ) { }
 
-  //see the story service for notes
+  // see the story service for notes
   resolve(route: ActivatedRouteSnapshot) {
-    let type = route.paramMap.get('StoryType');
+    const type = route.paramMap.get('StoryType');
     if (this.catchErrors(type) === true) {
       return;
     }
@@ -36,7 +36,7 @@ export class StoryResolver1Service implements Resolve<any> {
       });
     }
   }
-  
+
   catchErrors(type: string) {
     if (type === 'Script') {
       this.router.navigate(['/story/Scripts']);

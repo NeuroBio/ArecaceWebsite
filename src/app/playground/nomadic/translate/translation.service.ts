@@ -51,26 +51,26 @@ export class TranslationService {
       if (trans) {
         return trans;
       }
-  
+
     } else {
       trans =  this.checkEnding(letters, ['\'', 's'], dict, 'a', 'h', ['a']); // possesive check
       if (trans) {
         return trans;
       }
       trans =  this.checkEnding(letters, ['s'], dict, 'i', 'l', ['a', 'e', 'i', 'o']); // plural check
-      if (trans) {//check if word was a noun or a verb
+      if (trans) { // check if word was a noun or a verb
         const verbcheck = trans.split('').splice(0, trans.length - 1).join('');
-        const wordInfo = this.rawDict.find(word => word.Indativor === verbcheck);
+        const wordInfo = this.rawDict.find(w => w.Indativor === verbcheck);
         if (wordInfo && wordInfo.Type === 'Verb') {
           return verbcheck;
         }
         return trans;
       }
-      trans =  this.checkEnding(letters, ['l','y'], dict, ''); // adjective with ly check
+      trans =  this.checkEnding(letters, ['l', 'y'], dict, ''); // adjective with ly check
       if (trans) {
         return trans;
       }
-      trans =  this.checkEnding(letters, ['e','s'], dict, 'i', 'l', ['a', 'e', 'i', 'o']); // plural check
+      trans =  this.checkEnding(letters, ['e', 's'], dict, 'i', 'l', ['a', 'e', 'i', 'o']); // plural check
       if (trans) {
         return trans;
       }
@@ -88,7 +88,7 @@ export class TranslationService {
         trans =  this.checkEnding(letters, [double, 'i', 'n', 'g'], dict, ''); // **ing verbs check
         if (trans) {
           return trans;
-        } 
+        }
       }
     }
     return `[${word}]`;
@@ -118,7 +118,7 @@ export class TranslationService {
     const trans = word.split('');
     if (suffix2) {
       const special = specialcase
-        .findIndex(letter => letter === trans[trans.length-1]) > -1;
+        .findIndex(letter => letter === trans[trans.length - 1]) > -1;
       if (special) {
           trans.push(suffix2);
       }
@@ -129,7 +129,7 @@ export class TranslationService {
 
   addSuffixtoAll(word: string, suffix1: string, suffix2?: string, specialcase?: string[]) {
     let trans = Object.assign([], word.split(';'));
-    trans = trans.map(trans => this.addSuffix(trans, suffix1, suffix2, specialcase));
+    trans = trans.map(t => this.addSuffix(t, suffix1, suffix2, specialcase));
     return trans.join(';');
   }
 

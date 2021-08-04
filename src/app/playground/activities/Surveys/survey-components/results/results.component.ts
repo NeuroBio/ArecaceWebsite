@@ -1,12 +1,12 @@
 import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 
-import { Subscription }                         from 'rxjs';
+import { Subscription } from 'rxjs';
 
-import { SurveyService }                        from '../survey.service';
-import { FetchService }                         from 'src/app/GlobalServices/fetch.service';
-import { LoginToSaveService }                   from 'src/app/SharedComponentModules/SmallComponents/login-to-save/login-to-save.service';
+import { SurveyService } from '../survey.service';
+import { FetchService } from 'src/app/GlobalServices/fetch.service';
+import { LoginToSaveService } from 'src/app/SharedComponentModules/SmallComponents/login-to-save/login-to-save.service';
 
-import { CRUDdata }                             from 'src/app/Classes/ContentClasses';
+import { CRUDdata } from 'src/app/Classes/ContentClasses';
 
 @Component({
   selector: 'app-results',
@@ -16,7 +16,7 @@ import { CRUDdata }                             from 'src/app/Classes/ContentCla
 
 export class ResultsComponent implements OnInit, OnDestroy {
 
-  @Input() ViewOnly: boolean = false;
+  @Input() ViewOnly = false;
   results: any;
   SurveyData: string;
   stream1: Subscription;
@@ -35,7 +35,7 @@ export class ResultsComponent implements OnInit, OnDestroy {
     this.logintosaveserv.assignType('SurveyResults');
     this.fetcher.assignvalidity(true);
     this.stream1 = this.surveyserv.surveyResults.subscribe(results => {
-      if(results) {
+      if (results) {
         this.fetcher.assignActiveFormData( new CRUDdata(false, '', results));
         this.results = results;
         this.showSpecific = [];

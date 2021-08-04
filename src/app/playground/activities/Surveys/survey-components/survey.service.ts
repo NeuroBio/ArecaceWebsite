@@ -47,7 +47,7 @@ export class SurveyService {
     this.subStream.unsubscribe();
     this.subStream = this.allSurveyStats.subscribe(all => {
       if (all) {
-        this.currentSurveyStats.next(all.find(x => x.ID === ID))
+        this.currentSurveyStats.next(all.find(x => x.ID === ID));
       }
     } );
   }
@@ -57,7 +57,7 @@ export class SurveyService {
 
     // Get/Make data structures
     const surveyData = this.surveyData.value;
-    const finalScores: any = {}; 
+    const finalScores: any = {};
     surveyData.Outcomes.forEach(o => {
       finalScores[o.Name] = 0;
     });
@@ -90,7 +90,6 @@ export class SurveyService {
     return this.updateStatistics(this.surveyResults.value.OutcomeKey);
   }
 
-  
   updateStatistics(match: string) {
     const ID = this.surveyData.value.ID;
     this.assignSurveyStats(ID);
