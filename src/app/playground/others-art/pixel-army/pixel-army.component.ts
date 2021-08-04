@@ -1,12 +1,12 @@
-import { Component, OnInit }  from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
-import { Observable }         from 'rxjs';
-import { map }                from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
-import { AuthService }        from 'src/app/administration/security/Auth/auth.service';
-import { FireBaseService }    from 'src/app/GlobalServices/firebase.service';
+import { AuthService } from 'src/app/administration/security/Auth/auth.service';
+import { FireBaseService } from 'src/app/GlobalServices/firebase.service';
 
-import { LinkListElement }    from 'src/app/SharedComponentModules/SmallComponents/LinkList/linklist';
+import { LinkListElement } from 'src/app/SharedComponentModules/SmallComponents/LinkList/linklist';
 import { OthersArt } from 'src/app/Classes/ContentClasses';
 
 @Component({
@@ -25,14 +25,14 @@ export class PixelArmyComponent implements OnInit {
   ngOnInit() {
     this.pixels$ = this.firebaseserv.returnCollect('Pixels').pipe(
       map((art: any[]) => {
-        if(this.auth.isAdmin()) {
+        if (this.auth.isAdmin()) {
           return art;
         }
         art = art.filter(a => a.Allowed);
         return art;
       }),
       map((art: any[]) => {
-        art.sort((a,b) => a.Date > b.Date ? -1 : 1)
+        art.sort((a, b) => a.Date > b.Date ? -1 : 1);
         return art.map((piece: OthersArt) =>
           new LinkListElement(piece.Name, undefined, piece.ArtistLink, piece));
       }) );

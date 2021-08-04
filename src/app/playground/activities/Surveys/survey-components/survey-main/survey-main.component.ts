@@ -1,13 +1,13 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute }               from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
-import { Observable }                   from 'rxjs';
-import { map }                          from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
-import { GeneralcollectionService }     from 'src/app/GlobalServices/generalcollection.service';
-import { AuthService }                  from 'src/app/administration/security/Auth/auth.service';
-import { SurveyService }                from '../survey.service';
-import { LinkList, LinkListElement }    from 'src/app/SharedComponentModules/SmallComponents/LinkList/linklist';
+import { GeneralcollectionService } from 'src/app/GlobalServices/generalcollection.service';
+import { AuthService } from 'src/app/administration/security/Auth/auth.service';
+import { SurveyService } from '../survey.service';
+import { LinkList, LinkListElement } from 'src/app/SharedComponentModules/SmallComponents/LinkList/linklist';
 import { SurveyData } from 'src/app/Classes/ContentClasses';
 
 @Component({
@@ -28,7 +28,7 @@ export class SurveyMainComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.surveys$ = this.generalcollectserv.returnMetaData().pipe(
       map((surveys: SurveyData[]) => {
-        surveys.sort((a,b) => a[0] < b[0] ? -1 : 1);
+        surveys.sort((a, b) => a[0] < b[0] ? -1 : 1);
         return new LinkList('Surveys',
           surveys.map(survey => new LinkListElement(survey.ID, survey.ID)) );
         }) );
@@ -36,7 +36,7 @@ export class SurveyMainComponent implements OnInit, OnDestroy {
     this.route.firstChild.paramMap.subscribe(
       path => this.current = path.get('SurveyID') );
 
-    if(this.auth.isLoggedIn === false) {
+    if (this.auth.isLoggedIn === false) {
       this.auth.anonymousLogin();
     }
   }

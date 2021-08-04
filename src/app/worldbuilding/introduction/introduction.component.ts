@@ -1,9 +1,9 @@
-import { Component, OnInit }  from '@angular/core';
-import { Title }              from '@angular/platform-browser';
+import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 
-import { TextProvider }       from 'src/app/GlobalServices/textprovider.service';
+import { TextProvider } from 'src/app/GlobalServices/textprovider.service';
 
-import { Intro }              from 'src/app/Classes/WebsiteText';
+import { Intro } from 'src/app/Classes/WebsiteText';
 
 @Component({
   selector: 'app-introduction',
@@ -11,7 +11,7 @@ import { Intro }              from 'src/app/Classes/WebsiteText';
   styleUrls: ['./introduction.component.css']
 })
 
-export class IntroductionComponent implements OnInit { 
+export class IntroductionComponent implements OnInit {
 
   mainText: Intro[];
   links: string[];
@@ -20,14 +20,14 @@ export class IntroductionComponent implements OnInit {
               private titleserv: Title) { }
 
   ngOnInit() {
-    this.titleserv.setTitle('Introduction')
-    window.scroll(0,0);
+    this.titleserv.setTitle('Introduction');
+    window.scroll(0, 0);
     const temp = this.textprovider.WebsiteText
-      .find(member => member.ID =='intro');
+      .find(member => member.ID === 'intro');
     this.mainText = JSON.parse(temp.Intros);
-    if(temp.Links) {
+    if (temp.Links) {
       this.links = temp.Links;
     }
   }
-  
+
 }

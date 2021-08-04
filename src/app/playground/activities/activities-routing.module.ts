@@ -1,10 +1,10 @@
-import { NgModule }                 from '@angular/core';
-import { Routes, RouterModule }     from '@angular/router';
+import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
 
 import { TogglerModule } from 'src/app/SharedComponentModules/SmallComponents/toggler/toggler.module';
 
-import { ActivitieshomeComponent }  from './activitieshome/activitieshome.component';
-import { FanCharactersComponent }   from './fan-characters/fan-characters.component';
+import { ActivitieshomeComponent } from './activitieshome/activitieshome.component';
+import { FanCharactersComponent } from './fan-characters/fan-characters.component';
 
 
 const activeRoutes: Routes = [

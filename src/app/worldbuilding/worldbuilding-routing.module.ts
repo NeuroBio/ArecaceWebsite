@@ -1,10 +1,10 @@
-import { NgModule }                 from '@angular/core';
-import { Routes, RouterModule }     from '@angular/router';
+import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
 
-import { IntroductionComponent }    from './introduction/introduction.component';
-import { WorldbuildingComponent }   from './worldbuilding/worldbuilding.component';
+import { IntroductionComponent } from './introduction/introduction.component';
+import { WorldbuildingComponent } from './worldbuilding/worldbuilding.component';
 
-const worldRoutes:Routes = [
+const worldRoutes: Routes = [
   { path: '', component: WorldbuildingComponent },
   { path: 'introduction', component: IntroductionComponent },
 ];

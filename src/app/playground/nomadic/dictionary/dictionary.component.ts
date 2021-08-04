@@ -1,10 +1,10 @@
-import { Component, OnInit, OnDestroy }   from '@angular/core';
-import { Title }                          from '@angular/platform-browser';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 
-import { Subscription }                   from 'rxjs';
+import { Subscription } from 'rxjs';
 
-import { Word }                           from '../../../Classes/NomadicLanguage';
-import { NomadicService }                 from '../nomadic.service';
+import { Word } from '../../../Classes/NomadicLanguage';
+import { NomadicService } from '../nomadic.service';
 
 
 @Component({

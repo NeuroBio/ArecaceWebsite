@@ -10,10 +10,12 @@ import { GetRouteSegmentsService } from 'src/app/GlobalServices/commonfunctions.
 })
 export class CBUMResolverService implements Resolve<any> {
 
-  constructor(private generalcollectserv: GeneralcollectionService,
-              private router: Router,
-              private getrouteserv: GetRouteSegmentsService) { }
-  
+  constructor(
+    private generalcollectserv: GeneralcollectionService,
+    private router: Router,
+    private getrouteserv: GetRouteSegmentsService
+  ) { }
+
   resolve(route: ActivatedRouteSnapshot) {
     const ID = route.parent.paramMap.get('CharaID');
     const Ref = route.paramMap.get('RefID');
@@ -22,14 +24,14 @@ export class CBUMResolverService implements Resolve<any> {
       take(1),
       mergeMap(chara => {
         const reference = this.getRef(chara, Ref);
-        if(reference) {
+        if (reference) {
           return of (reference);
         } else {
           this.router.navigate([this.getrouteserv.fetch(route.pathFromRoot).join('/')]);
           return of (EMPTY);
         }
       })
-    )
+    );
   }
 
   getRef(character: any, ID: string) {

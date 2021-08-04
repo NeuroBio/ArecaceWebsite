@@ -1,10 +1,8 @@
-import { Component, OnInit, OnDestroy,
-         ViewChild, ElementRef,
-         AfterContentChecked }    from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, ElementRef, AfterContentChecked } from '@angular/core';
 
-import { Subscription }           from 'rxjs'; 
+import { Subscription } from 'rxjs'; 
 
-import { SurveyService }          from '../survey.service';
+import { SurveyService } from '../survey.service';
 
 @Component({
   selector: 'app-survey-stats',
@@ -19,12 +17,12 @@ export class SurveyStatsComponent implements OnInit, AfterContentChecked, OnDest
   width = 500;
   height: number;
   stream: Subscription;
-  
+
   constructor(private surveyserv: SurveyService) { }
 
   ngOnInit() {
     this.stream = this.surveyserv.currentSurveyStats.subscribe(counts => {
-      if(counts) {
+      if (counts) {
         this.displayData(counts);
       }
     });
@@ -40,18 +38,18 @@ export class SurveyStatsComponent implements OnInit, AfterContentChecked, OnDest
   }
 
   displayData(counts: any) {
-    if(counts) {
+    if (counts) {
       const Counts = Object.assign({}, counts);
       delete Counts.ID;
       delete Counts.UploadTime;
       delete Counts.key;
       this.Stats.Keys = Object.keys(Counts);
       this.Stats.Counts = Object.values(Counts);
-      this.Stats.Max = this.Stats.Counts.reduce((a,b) => a + b);
+      this.Stats.Max = this.Stats.Counts.reduce((a, b) => a + b);
       this.Stats.Counts = this.Stats.Counts
         .map(count => count/this.Stats.Max);
       this.Stats.CountsDisplay = this.Stats.Counts
-        .map(count => Math.trunc(count*1000)/10);
+        .map(count => Math.trunc(count * 1000) / 10);
       this.height = 45 * this.Stats.Keys.length;
     }
   }

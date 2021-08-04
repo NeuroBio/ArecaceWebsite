@@ -1,12 +1,12 @@
-import { Component, OnInit, OnDestroy }          from '@angular/core';
-import { ActivatedRoute, NavigationEnd, Router }             from '@angular/router';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 
-import { Observable, Subscription }                 from 'rxjs';
-import { map, filter, take, skipWhile, tap }                        from 'rxjs/operators';
+import { Observable, Subscription } from 'rxjs';
+import { map, filter, take, skipWhile } from 'rxjs/operators';
 
-import { GeneralcollectionService }   from 'src/app/GlobalServices/generalcollection.service';
-import { LinkList }                   from 'src/app/SharedComponentModules/SmallComponents/LinkList/linklist';
-import { LinkListElement }            from 'src/app/SharedComponentModules/SmallComponents/LinkList/linklist';
+import { GeneralcollectionService } from 'src/app/GlobalServices/generalcollection.service';
+import { LinkList } from 'src/app/SharedComponentModules/SmallComponents/LinkList/linklist';
+import { LinkListElement } from 'src/app/SharedComponentModules/SmallComponents/LinkList/linklist';
 import { CharacterMetaData } from 'src/app/Classes/ContentClasses';
 
 @Component({
@@ -15,7 +15,7 @@ import { CharacterMetaData } from 'src/app/Classes/ContentClasses';
 })
 
 export class CharactersMainComponent implements OnInit, OnDestroy {
- 
+
   current: string;
   characters$: Observable<LinkList>;
   stream: Subscription;
@@ -27,20 +27,20 @@ export class CharactersMainComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.characters$ = this.generalcollectserv.returnMetaData().pipe(
       map((characters: CharacterMetaData[]) => {
-        characters.sort((a,b) => a.ID < b.ID ? -1 : 1);
+        characters.sort((a, b) => a.ID < b.ID ? -1 : 1);
         return new LinkList('Characters', characters.map(character =>
           new LinkListElement(character.FirstName, character.ID)) );
       })
-    )
+    );
 
     this.getCurrent();
-    if(!this.current) {
+    if (!this.current) {
       this.waitforChild();
     }
   }
 
   ngOnDestroy() {
-    if(this.stream) {
+    if (this.stream) {
       this.stream.unsubscribe();
     }
   }
@@ -58,7 +58,7 @@ export class CharactersMainComponent implements OnInit, OnDestroy {
       skipWhile(() => this.route.firstChild === undefined),
       take(1)
     ).subscribe(() => {
-        if(this.route.firstChild && !this.current) {
+        if (this.route.firstChild && !this.current) {
           this.getCurrent();
         }
     });

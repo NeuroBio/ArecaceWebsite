@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Router, ActivatedRoute }       from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
-import { NomadicService }               from '../nomadic.service';
+import { NomadicService } from '../nomadic.service';
 
 @Component({
   selector: 'app-nomadic-home',
@@ -28,7 +28,7 @@ export class NomadicHomeComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.nomadicserv.dispose();
   }
-  
+
   pickTopic(index) {
     this.router.navigate([`${this.choiceLinks[index]}`], {relativeTo: this.route });
   }

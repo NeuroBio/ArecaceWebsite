@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Subscription } from 'rxjs'
-import { Word } from '../../Classes/NomadicLanguage'
+import { BehaviorSubject, Subscription } from 'rxjs';
+import { Word } from '../../Classes/NomadicLanguage';
 
 @Injectable({
   providedIn: 'root'
@@ -13,18 +13,18 @@ export class NomadicService {
   constructor() { }
 
   initializeDictionary(dict: BehaviorSubject<Word[]>) {
-    return this.stream = dict.subscribe(dict => {
-      this.RawDictionary.next(dict);
-      this.initializeTranslations(dict);
+    return this.stream = dict.subscribe(d => {
+      this.RawDictionary.next(d);
+      this.initializeTranslations(d);
     });
   }
 
   initializeTranslations(dict: Word[]) {
-    let NtoETrans = {};
-    let EtoNTrans = {};
+    const NtoETrans = {};
+    const EtoNTrans = {};
     dict.forEach(word => {
       word.English.split(';').forEach(english => {
-        EtoNTrans[english.toLowerCase()] = word.Indativor; 
+        EtoNTrans[english.toLowerCase()] = word.Indativor;
       });
       NtoETrans[word.Indativor.toLowerCase()] = word.English;
     });
@@ -33,7 +33,7 @@ export class NomadicService {
   }
 
   dispose() {
-    if(this.stream) {
+    if (this.stream) {
       this.stream.unsubscribe();
     }
   }

@@ -1,10 +1,10 @@
-import { Component, OnInit }          from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
-import { Observable }                 from 'rxjs';
-import { map, take }                  from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { map, take } from 'rxjs/operators';
 
-import { AuthService }                from 'src/app/administration/security/Auth/auth.service';
-import { GeneralcollectionService }   from 'src/app/GlobalServices/generalcollection.service';
+import { AuthService } from 'src/app/administration/security/Auth/auth.service';
+import { GeneralcollectionService } from 'src/app/GlobalServices/generalcollection.service';
 
 @Component({
   selector: 'app-others-art',
@@ -21,12 +21,12 @@ export class OthersArtComponent implements OnInit {
               private auth: AuthService) { }
 
   ngOnInit() {
-    window.scroll(0,0);
+    window.scroll(0, 0);
     this.arts$ = this.generalcollectserv.returnMetaData().pipe(
       take(1),
       map((art: any[]) => {
-        if(this.auth.isLoggedIn === true) {
-          if(this.auth.isAdmin()) {
+        if (this.auth.isLoggedIn === true) {
+          if (this.auth.isAdmin()) {
             return art;
           }
         }
@@ -34,7 +34,7 @@ export class OthersArtComponent implements OnInit {
         this.generalcollectserv.collectionData.next(art);
         return art;
       }),
-      map((art: any[]) => art.sort((a,b) => a.Date > b.Date ? -1 : 1)) );
+      map((art: any[]) => art.sort((a, b) => a.Date > b.Date ? -1 : 1)) );
   }
 
 }

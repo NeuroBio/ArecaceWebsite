@@ -1,10 +1,9 @@
-import { Injectable }                       from '@angular/core';
+import { Injectable } from '@angular/core';
 
-import { BehaviorSubject, Observable, of,
-Subscription }                              from 'rxjs';
-import { map, tap }                         from 'rxjs/operators';
+import { BehaviorSubject, Observable, of, Subscription } from 'rxjs';
+import { map, tap } from 'rxjs/operators';
 
-import { StoryMetaData }                    from 'src/app/Classes/ContentClasses'
+import { StoryMetaData } from 'src/app/Classes/ContentClasses';
 
 @Injectable({
   providedIn: 'root'
@@ -13,8 +12,8 @@ import { StoryMetaData }                    from 'src/app/Classes/ContentClasses
 export class StoryService {
 
   /*Notes: Data is pulled down as all stories from resolver one.
-  serializer storts that information into a dictionary and makes
-  a converto between the ID (no spaces; used in route segments) and
+  serializer sorts that information into a dictionary and
+  converts between the ID (no spaces; used in route segments) and
   the actual name (has spaces; for display purposes).  Resolver 2
   takes one series (StoryMetaData array) from serials and populates it
   into currentSeries.  This data together is used for the story
@@ -36,15 +35,15 @@ export class StoryService {
   initializeMetaData(metaData: Observable<StoryMetaData[]>, type: string) {
     this.storyType.next(type);
     return this.stream = metaData.subscribe(stories => {
-      return this.serials.next(this.serialize(stories))
+      return this.serials.next(this.serialize(stories));
     });
   }
 
   serialize(stories: StoryMetaData[]) {
-    let serialize = {};
-    let IDName = {};
-    for(const story of stories) {
-      if(story.Series in serialize) {
+    const serialize = {};
+    const IDName = {};
+    for (const story of stories) {
+      if (story.Series in serialize) {
         serialize[story.Series].push(story);
       } else {
         serialize[story.Series] = [story];
@@ -73,8 +72,8 @@ export class StoryService {
 
   getStory(storyID:string): Observable<StoryMetaData> {
     return this.getSeriesData().pipe(
-      map((stories: StoryMetaData[]) => stories.find(stories =>
-        stories.ID === storyID)) );
+      map((stories: StoryMetaData[]) => stories.find(story =>
+        story.ID === storyID)) );
   }
 
   getType() {
@@ -86,8 +85,8 @@ export class StoryService {
                 this.currentSection,
                 this.storyType]);
   }
-  
-  
+
+
   changeSection(newSec: string) {
     this.currentSection.next(newSec);
   }
@@ -103,7 +102,7 @@ export class StoryService {
   }
 
   dispose() {
-    if(this.stream) {
+    if (this.stream) {
       this.stream.unsubscribe();
     }
   }

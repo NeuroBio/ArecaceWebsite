@@ -1,6 +1,6 @@
-import { Component, OnInit }    from '@angular/core';
-import { TextProvider }         from 'src/app/GlobalServices/textprovider.service';
-import { Title }                from '@angular/platform-browser';
+import { Component, OnInit } from '@angular/core';
+import { TextProvider } from 'src/app/GlobalServices/textprovider.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-nomadic-syntax',
@@ -11,13 +11,15 @@ export class NomadicSyntaxComponent implements OnInit {
 
   mainText: string;
 
-  constructor(private textprovider: TextProvider,
-              private titleserv: Title) { }
+  constructor(
+    private textprovider: TextProvider,
+    private titleserv: Title
+  ) { }
 
   ngOnInit() {
     this.titleserv.setTitle('Nomadic: Syntax');
     this.mainText = this.textprovider.WebsiteText.find(member =>
-      member.ID =='nomadicsyntax').Text;
+      member.ID === 'nomadicsyntax').Text;
   }
 
 }

@@ -1,14 +1,12 @@
-import { NgModule }                 from '@angular/core';
-import { Routes, RouterModule }     from '@angular/router';
+import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
 
-import { PlaygroundhomeComponent }  from './playgroundhome/playgroundhome.component';
-import { ForumComponent }           from './Forum/forum/forum.component';
-
+import { PlaygroundhomeComponent } from './playgroundhome/playgroundhome.component';
+import { ForumComponent } from './Forum/forum/forum.component';
 
 const playgroundRoutes: Routes = [
   { path: '', component: PlaygroundhomeComponent },
   { path: 'forum', component: ForumComponent },
-  
   { path: 'calc',
     loadChildren: () => import('./activities/CalcConvert/calc-convert.module').then(m => m.CalcConvertModule) },
   { path: 'nomadic',

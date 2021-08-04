@@ -1,6 +1,6 @@
-import { Component, OnInit }        from '@angular/core';
-import { Router, ActivatedRoute }   from '@angular/router';
-import { Title }                    from '@angular/platform-browser';
+import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-activitieshome',
@@ -10,7 +10,7 @@ import { Title }                    from '@angular/platform-browser';
 export class ActivitieshomeComponent implements OnInit {
 
   links = ['surveys', 'calc', 'makefancharacter'];
-  linkNames = ['Surveys', 'Calculators and Converters', 'Make Fan Character']
+  linkNames = ['Surveys', 'Calculators and Converters', 'Make Fan Character'];
   selected: number;
 
   constructor(private router: Router,
@@ -18,7 +18,7 @@ export class ActivitieshomeComponent implements OnInit {
               private titleserv: Title) { }
 
   ngOnInit() {
-    if(this.route.firstChild) {
+    if (this.route.firstChild) {
       const index = this.links.findIndex(link =>
         link === this.route.firstChild.snapshot.url[0].path);
       this.selected = index;

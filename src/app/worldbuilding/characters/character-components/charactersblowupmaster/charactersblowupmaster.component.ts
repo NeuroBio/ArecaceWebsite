@@ -1,7 +1,7 @@
-import { Component, OnInit }                from '@angular/core';
-import { ActivatedRoute }                   from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
-import { GeneralcollectionService }         from 'src/app/GlobalServices/generalcollection.service';
+import { GeneralcollectionService } from 'src/app/GlobalServices/generalcollection.service';
 
 @Component({
   selector: 'app-charactersblowupmaster',
@@ -24,9 +24,9 @@ export class CharactersBlowupmasterComponent implements OnInit {
           .subscribe(chara => {
             this.linksList = chara.References;
             this.gridPath = `world/characters/${chara.ID}`;
-    }) ); 
-   
-    this.route.data.subscribe(data => 
+    }) );
+
+    this.route.data.subscribe(data =>
       this.index = this.linksList.findIndex(member =>
         member.ID === data.links.ID) );
   }

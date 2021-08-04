@@ -1,10 +1,10 @@
-import { NgModule }                         from '@angular/core';
-import { CommonModule }                     from '@angular/common';
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
-import { CharactersRoutingModule }          from './characters-routing.module';
-import { CharacterComponentsModule }        from './character-components/character-components.module';
+import { CharactersRoutingModule } from './characters-routing.module';
+import { CharacterComponentsModule } from './character-components/character-components.module';
 
-import { HomeComponent }                    from './home/home.component';
+import { HomeComponent } from './home/home.component';
 
 
 @NgModule({
@@ -14,7 +14,6 @@ import { HomeComponent }                    from './home/home.component';
   imports: [
     CommonModule,
     CharacterComponentsModule,
-    
     CharactersRoutingModule
   ]
 })

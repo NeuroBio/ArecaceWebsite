@@ -1,11 +1,10 @@
-import { Component, OnInit, OnDestroy,
-         ViewChild, ElementRef }                from '@angular/core';
-import { ActivatedRoute }                       from '@angular/router';
+import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
-import { CharacterMetaData}                     from 'src/app/Classes/ContentClasses';
-import { GlobalVarsService }                    from 'src/app/GlobalServices/global-vars.service';
-import { GetRouteSegmentsService }              from 'src/app/GlobalServices/commonfunctions.service';
-import { BookmarkService }                      from 'src/app/SharedComponentModules/SmallComponents/bookmark/bookmark.service';
+import { CharacterMetaData} from 'src/app/Classes/ContentClasses';
+import { GlobalVarsService } from 'src/app/GlobalServices/global-vars.service';
+import { GetRouteSegmentsService } from 'src/app/GlobalServices/commonfunctions.service';
+import { BookmarkService } from 'src/app/SharedComponentModules/SmallComponents/bookmark/bookmark.service';
 
 @Component({
   selector: 'app-charactersdetails',
@@ -15,13 +14,13 @@ import { BookmarkService }                      from 'src/app/SharedComponentMod
 
 export class CharactersDetailsComponent implements OnInit, OnDestroy {
 
-  @ViewChild('top', { static: true }) top: ElementRef
+  @ViewChild('top', { static: true }) top: ElementRef;
   char: CharacterMetaData;
   loading: boolean;
   FullBio = false;
   name: string;
   path: string;
-  
+
   constructor(private route: ActivatedRoute,
               private global: GlobalVarsService,
               private getsegserv: GetRouteSegmentsService,
@@ -33,7 +32,7 @@ export class CharactersDetailsComponent implements OnInit, OnDestroy {
         this.top.nativeElement.scrollIntoView();
         this.loading = this.global.ImagesLoadable.value;
 
-        const real = frags[frags.length-1] === 'FanCharacters' ? false : true;
+        const real = frags[frags.length - 1] === 'FanCharacters' ? false : true;
         this.bookmarkserv.real.next(real);
         this.char = data.Data;
         this.char.References = this.blowupReorganization(this.char.References);
@@ -49,7 +48,7 @@ export class CharactersDetailsComponent implements OnInit, OnDestroy {
   }
 
   changeBio(toggle: number) {
-    if(toggle === 0) {
+    if (toggle === 0) {
       this.FullBio = false;
     } else {
       this.FullBio = true;
@@ -58,8 +57,9 @@ export class CharactersDetailsComponent implements OnInit, OnDestroy {
 
   blowupReorganization(refs: any[]) {
     refs.map((ref, index) =>
-      ref.Links = [this.char.Links[(index+1)*2],
-                  this.char.Links[(index+1)*2+1]]);
+      ref.Links = [
+        this.char.Links[(index + 1) * 2],
+        this.char.Links[(index + 1) * 2 + 1]]);
     return refs;
   }
 

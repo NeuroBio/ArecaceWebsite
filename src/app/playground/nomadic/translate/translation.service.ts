@@ -1,9 +1,9 @@
-import { Injectable }       from '@angular/core';
+import { Injectable } from '@angular/core';
 
-import { NomadicService }   from '../nomadic.service';
+import { NomadicService } from '../nomadic.service';
 
-import { SwapCases }        from './TranslationSwapCases';
-import { Word }             from '../../../Classes/NomadicLanguage';
+import { SwapCases } from './TranslationSwapCases';
+import { Word } from '../../../Classes/NomadicLanguage';
 
 @Injectable({
   providedIn: 'root'
@@ -21,72 +21,72 @@ export class TranslationService {
    }
 
   wordChecks(NtoE: boolean, word: string, dict: string) {
-    if(this.Swap[dict][word]) {
+    if (this.Swap[dict][word]) {
       return this.Swap[dict][word];
     }
     let trans = this.transDicts[dict][word];
-    if(trans) {
+    if (trans) {
       return trans;
     }
 
-    let letters = word.split('');
-    if(NtoE === true) {
-      trans = this.checkEnding(letters, ['a'], dict, '\'s');//possesive check
-      if(trans) {
+    const letters = word.split('');
+    if (NtoE === true) {
+      trans = this.checkEnding(letters, ['a'], dict, '\'s'); // possesive check
+      if (trans) {
           return trans;
       }
-      trans = this.checkEnding(letters, ['i'],  dict, 's');//plural check
-      if(trans) {
+      trans = this.checkEnding(letters, ['i'],  dict, 's'); // plural check
+      if (trans) {
         return trans;
       }
-      trans = this.checkEnding(letters, ['l', 'i'], dict, 's');//plural check
-      if(trans) {
+      trans = this.checkEnding(letters, ['l', 'i'], dict, 's'); // plural check
+      if (trans) {
           return trans;
       }
-      trans = this.checkEnding(letters, ['i', 'a'], dict, 's\'');//possessive plural check
-      if(trans) {
+      trans = this.checkEnding(letters, ['i', 'a'], dict, 's\''); // possessive plural check
+      if (trans) {
         return trans;
       }
-      trans = this.checkEnding(letters, ['l', 'i', 'a'], dict, 's\'');//possessive plural check
-      if(trans) {
+      trans = this.checkEnding(letters, ['l', 'i', 'a'], dict, 's\''); // possessive plural check
+      if (trans) {
         return trans;
       }
   
     } else {
-      trans =  this.checkEnding(letters, ['\'', 's'], dict, 'a', 'h', ['a']);//possesive check
-      if(trans) {
+      trans =  this.checkEnding(letters, ['\'', 's'], dict, 'a', 'h', ['a']); // possesive check
+      if (trans) {
         return trans;
       }
-      trans =  this.checkEnding(letters, ['s'], dict, 'i', 'l', ['a', 'e', 'i', 'o']);//plural check
-      if(trans) {//check if word was a noun or a verb
+      trans =  this.checkEnding(letters, ['s'], dict, 'i', 'l', ['a', 'e', 'i', 'o']); // plural check
+      if (trans) {//check if word was a noun or a verb
         const verbcheck = trans.split('').splice(0, trans.length - 1).join('');
         const wordInfo = this.rawDict.find(word => word.Indativor === verbcheck);
-        if(wordInfo && wordInfo.Type === 'Verb') {
+        if (wordInfo && wordInfo.Type === 'Verb') {
           return verbcheck;
         }
         return trans;
       }
-      trans =  this.checkEnding(letters, ['l','y'], dict, '');//adjective with ly check
-      if(trans) {
+      trans =  this.checkEnding(letters, ['l','y'], dict, ''); // adjective with ly check
+      if (trans) {
         return trans;
       }
-      trans =  this.checkEnding(letters, ['e','s'], dict, 'i', 'l', ['a', 'e', 'i', 'o']);//plural check
-      if(trans) {
+      trans =  this.checkEnding(letters, ['e','s'], dict, 'i', 'l', ['a', 'e', 'i', 'o']); // plural check
+      if (trans) {
         return trans;
       }
-      trans =  this.checkEnding(letters, ['s', '\''], dict, 'ia', 'l', ['a', 'e', 'i', 'o']);//possessive plural check
-      if(trans) {
+      trans =  this.checkEnding(letters, ['s', '\''], dict, 'ia', 'l', ['a', 'e', 'i', 'o']); // possessive plural check
+      if (trans) {
         return trans;
       }
 
-      trans =  this.checkEnding(letters, ['i', 'n', 'g'], dict, '');//ing verbs check
-      if(trans) {
+      trans =  this.checkEnding(letters, ['i', 'n', 'g'], dict, ''); // ing verbs check
+      if (trans) {
         return trans;
       }
-      if(letters.length > 5 && letters[letters.length-4] === letters[letters.length-5]) {
-        const double = letters[letters.length-4];
-        trans =  this.checkEnding(letters, [double, 'i', 'n', 'g'], dict, '');//**ing verbs check
-        if(trans) {
+      if (letters.length > 5 && letters[letters.length - 4] === letters[letters.length - 5]) {
+        const double = letters[letters.length - 4];
+        trans =  this.checkEnding(letters, [double, 'i', 'n', 'g'], dict, ''); // **ing verbs check
+        if (trans) {
           return trans;
         } 
       }
@@ -94,18 +94,20 @@ export class TranslationService {
     return `[${word}]`;
   }
 
-  checkEnding(letters: string[], check: string[], dict: string,
-    suffix1: string, suffix2?: string, specialcase?: string[]) {
+  checkEnding(
+    letters: string[], check: string[], dict: string,
+    suffix1: string, suffix2?: string, specialcase?: string[]
+  ) {
     const ending = Object.assign([], letters)
                          .slice(letters.length - (check.length), letters.length);
 
-    if(this.arraysEqual(check, ending)) {//if endings match, cut off ending
+    if (this.arraysEqual(check, ending)) { // if endings match, cut off ending
       const coreLetters = Object.assign([], letters)
                                 .splice(0, letters.length - check.length)
                                 .join('');
       const trans = this.transDicts[dict][coreLetters];
 
-      if(trans) {
+      if (trans) {
           return this.addSuffixtoAll(trans, suffix1, suffix2, specialcase);
       }
     }
@@ -114,10 +116,10 @@ export class TranslationService {
 
   addSuffix(word: string, suffix1: string, suffix2?: string, specialcase?: string[]) {
     const trans = word.split('');
-    if(suffix2) {
+    if (suffix2) {
       const special = specialcase
         .findIndex(letter => letter === trans[trans.length-1]) > -1;
-      if(special) {
+      if (special) {
           trans.push(suffix2);
       }
     }
@@ -132,8 +134,8 @@ export class TranslationService {
   }
 
   arraysEqual(first: any[], second: any[]) {
-    for(let i = 0; i < first.length; i++) {
-      if(first[i] !== second[i]) {
+    for (let i = 0; i < first.length; i++) {
+      if (first[i] !== second[i]) {
         return false;
       }
       return true;

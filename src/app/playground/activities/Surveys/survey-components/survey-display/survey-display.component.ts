@@ -1,10 +1,10 @@
-import { Component, OnInit }                              from '@angular/core';
-import { FormBuilder, Validators, FormArray, FormGroup }  from '@angular/forms';
-import { ActivatedRoute }                                 from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, Validators, FormArray, FormGroup } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 
-import { SurveyService }                                  from '../survey.service';
+import { SurveyService } from '../survey.service';
 
-import { SurveyQuestion, SurveyOutcome }                  from 'src/app/Classes/ContentClasses';
+import { SurveyQuestion, SurveyOutcome } from 'src/app/Classes/ContentClasses';
 
 @Component({
   selector: 'app-survey-display',
@@ -16,7 +16,7 @@ export class SurveyDisplayComponent implements OnInit {
 
   Questions: SurveyQuestion[];
   Name: string;
-  answers: FormArray
+  answers: FormArray;
   Form: FormGroup;
   surveyResult: SurveyOutcome;
 
@@ -26,15 +26,15 @@ export class SurveyDisplayComponent implements OnInit {
 
   ngOnInit() {
     this.route.data.subscribe((data: { Survey: any }) => {
-      window.scroll(0,0);
+      window.scroll(0, 0);
       this.Questions = this.surveyserv.assignSurveyData(data.Survey);
       this.Name = data.Survey.Name;
       this.onReset();
-      this.Questions.forEach((q, index) => this.addQuestion(index));//DO NOT USE q!
+      this.Questions.forEach((_, index) => this.addQuestion(index));
       this.surveyserv.showSurvey.next(true);
     });
   }
- 
+
   createForm() {
     return this.fb.group({
       Answers: this.answers
@@ -49,7 +49,9 @@ export class SurveyDisplayComponent implements OnInit {
 
   onSubmit() {
     let Answers = this.Form.controls.Answers.value;
-    Answers = Answers.map((ans, index) => { return { Answer: ans[`Answer${index}`] } });
+    Answers = Answers.map((ans, index) => {
+      return { Answer: ans[`Answer${index}`] }
+    });
     this.surveyserv.calculateFinalScores(Answers);
   }
 

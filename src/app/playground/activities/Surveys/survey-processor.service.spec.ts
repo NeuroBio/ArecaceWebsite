@@ -6,7 +6,7 @@ describe('SurveyProcessorService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: SurveyProcessorService = TestBed.get(SurveyProcessorService);
+    const service: SurveyProcessorService = TestBed.inject(SurveyProcessorService);
     expect(service).toBeTruthy();
   });
 });

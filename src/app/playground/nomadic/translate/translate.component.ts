@@ -1,11 +1,11 @@
-import { Component, OnInit, OnDestroy }   from '@angular/core';
-import { FormBuilder }                    from '@angular/forms';
-import { Title }                          from '@angular/platform-browser';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
+import { Title } from '@angular/platform-browser';
 
-import { Subscription }                   from 'rxjs';
+import { Subscription } from 'rxjs';
 
-import { NomadicService }                 from '../nomadic.service';
-import { TranslationService }             from './translation.service';
+import { NomadicService } from '../nomadic.service';
+import { TranslationService } from './translation.service';
 
 @Component({
   selector: 'app-translate',
@@ -34,8 +34,8 @@ export class TranslateComponent implements OnInit, OnDestroy {
     .subscribe(dicts => {
       this.transdicts = dicts;
       this.keySets = {
-        NtoE: Object.keys(this.transdicts.NtoETrans).sort((a,b) => a < b ? -1 : 1),
-        EtoN: Object.keys(this.transdicts.EtoNTrans).sort((a,b) => a < b ? -1 : 1)};
+        NtoE: Object.keys(this.transdicts.NtoETrans).sort((a, b) => a < b ? -1 : 1),
+        EtoN: Object.keys(this.transdicts.EtoNTrans).sort((a, b) => a < b ? -1 : 1)};
       this.keys = this.keySets.NtoE;
     });
   }
@@ -52,21 +52,21 @@ export class TranslateComponent implements OnInit, OnDestroy {
   }
 
   translate(process: boolean = true) {
-    if(!this.Form.controls.RawText) {
+    if (!this.Form.controls.RawText) {
       return;
     }
 
     const translate = [];
-    let dict = this.Form.controls.NtoE.value === 'true' ? 'NtoETrans' : 'EtoNTrans'
+    const dict = this.Form.controls.NtoE.value === 'true' ? 'NtoETrans' : 'EtoNTrans';
     const text = this.Form.controls.RawText.value.replace(/[\.,\/#!$%\^&;:{}=_`~@\+\?><\[\]\+"]/g, '')
                                                   .replace(/\n/g, ' ')
                                                   .toLowerCase();
-    const words = process === true ? text.trim().replace(/\s{2,}/g," ").split(' ')
-                                    : text.split(' ');   
+    const words = process === true ? text.trim().replace(/\s{2,}/g, ' ').split(' ')
+                                    : text.split(' ');
     words.forEach(word => {
       const trans = this.translationserv.wordChecks(this.Form.controls.NtoE.value === 'true', word, dict);
       translate.push(`${trans}`);
-    }); 
+    });
 
     let finalText = this.Form.controls.RawText.value.trim()
                                                     .replace(/[\*'-\(\)]/g, '')
@@ -79,15 +79,15 @@ export class TranslateComponent implements OnInit, OnDestroy {
       const numLetters = word.match(/\w/g);
       const quiet = ((/[a-z]/).test(word) || (numLetters && numLetters.length === 1));
       word = word.replace(/\w{1,}/, translate[index]);
-      
-      if(quiet === false) {
+
+      if (quiet === false) {
         word = word.toUpperCase();
         Start = false;
-      } else if(Start === true) {
+      } else if (Start === true) {
         word = word.replace(/\w/, char => char.toUpperCase());
         Start = false;
       }
-      if((/([\?!\.])$/).test(word)) {
+      if ((/([\?!\.])$/).test(word)) {
         Start = true;
       }
       return word;
@@ -99,7 +99,7 @@ export class TranslateComponent implements OnInit, OnDestroy {
   addWord(word: string) {
     const newText = this.Form.controls.RawText.value
       .trim()
-      .replace(/\s{2,}/g," ")
+      .replace(/\s{2,}/g, ' ')
       .split(' ');
 
     newText.push(word);

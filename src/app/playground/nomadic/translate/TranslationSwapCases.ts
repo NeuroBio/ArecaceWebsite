@@ -1,13 +1,13 @@
 export class SwapCases {
     EtoNTrans: {} = {
         is: 'imiran', are: 'imiran', am: 'imiran',
-        'is*': 'giaphon','are*': 'giaphon',
+        'is*': 'giaphon', 'are*': 'giaphon',
         we: 'klahaeli', 'we*': 'klahae',
         our: 'klahaelia', ours: 'klahaelia',
         'our*': 'klahaea', 'ours*': 'klahaea',
         they: 'aedarti', 'they*': 'darti',
         their: 'aedartia', theirs: 'aedartia',
-        'their*': 'dartia','theirs*': 'dartia',
+        'their*': 'dartia', 'theirs*': 'dartia',
         he: 'aedart', she: 'aedart',  it: 'aedart',
         'he*': 'dart', 'she*': 'dart',  'it*': 'dart',
         his: 'aedarta', her: 'aedarta', hers: 'aedarta', its: 'aedarta',

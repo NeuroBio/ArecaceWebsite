@@ -1,8 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 
-import { Subscription }                 from 'rxjs';
+import { Subscription } from 'rxjs';
 
-import { SurveyService }                from '../survey.service';
+import { SurveyService } from '../survey.service';
 
 @Component({
   selector: 'app-survey-parts',

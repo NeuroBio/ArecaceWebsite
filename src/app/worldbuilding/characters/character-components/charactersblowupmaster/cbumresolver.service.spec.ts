@@ -6,7 +6,7 @@ describe('CBUMResolverService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: CBUMResolverService = TestBed.get(CBUMResolverService);
+    const service: CBUMResolverService = TestBed.inject(CBUMResolverService);
     expect(service).toBeTruthy();
   });
 });

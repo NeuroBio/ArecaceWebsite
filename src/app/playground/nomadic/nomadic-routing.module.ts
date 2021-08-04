@@ -5,7 +5,7 @@ import { DictionaryComponent } from './dictionary/dictionary.component';
 import { NomadicIntroductionComponent } from './nomadic-introduction/nomadic-introduction.component';
 import { NomadicSyntaxComponent } from './nomadic-syntax/nomadic-syntax.component';
 import { TranslateComponent } from './translate/translate.component';
-import { NomadicResolverService } from './nomadic-resolver.service'
+import { NomadicResolverService } from './nomadic-resolver.service';
 
 const nomadRoutes: Routes = [
   {path: '', component: NomadicHomeComponent,

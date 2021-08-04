@@ -1,12 +1,12 @@
-import { Component, OnInit }            from '@angular/core';
-import { ActivatedRoute }               from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
-import { Observable }                   from 'rxjs';
-import { map }                          from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
-import { GeneralcollectionService }     from 'src/app/GlobalServices/generalcollection.service';
+import { GeneralcollectionService } from 'src/app/GlobalServices/generalcollection.service';
 
-import { LinkList, LinkListElement }    from 'src/app/SharedComponentModules/SmallComponents/LinkList/linklist';
+import { LinkList, LinkListElement } from 'src/app/SharedComponentModules/SmallComponents/LinkList/linklist';
 
 @Component({
   selector: 'app-mapsmain',
@@ -24,9 +24,9 @@ export class MapsMainComponent implements OnInit {
   ngOnInit() {
     this.maps$ = this.generalcollectserv.returnMetaData().pipe(
       map((maps: any[]) => {
-        maps.sort((a,b) => a.Topic > b.Topic ? -1 : 1);
+        maps.sort((a, b) => a.Topic > b.Topic ? -1 : 1);
         return new LinkList('Maps',
-          maps.map(map => new LinkListElement(map.Topic, map.ID)));
+          maps.map(m => new LinkListElement(m.Topic, m.ID)));
       }) );
 
     this.route.firstChild.paramMap.subscribe(path => {

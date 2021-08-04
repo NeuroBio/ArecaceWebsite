@@ -1,12 +1,9 @@
-import { Component, OnInit, ViewChild, ElementRef,
-         OnDestroy }                                from '@angular/core';
-import { Location }                                 from '@angular/common';
-import { ActivatedRoute }                           from '@angular/router';
+import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
-import { Subscription }                             from 'rxjs';
+import { Subscription } from 'rxjs';
 
-import { StoryService }                             from '../story.service';
-
+import { StoryService } from '../story.service';
 
 @Component({
   selector: 'app-storydisplay',
@@ -24,9 +21,10 @@ export class StorydisplayComponent implements OnInit, OnDestroy {
   loading: boolean;
   stream: Subscription;
 
-
-  constructor(private route:ActivatedRoute,
-              private storyserv: StoryService) { }
+  constructor(
+    private route:ActivatedRoute,
+    private storyserv: StoryService
+  ) { }
 
   ngOnInit() {
     this.route.data.subscribe(data => {
