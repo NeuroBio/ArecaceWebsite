@@ -6,7 +6,7 @@ The website for my original worldbuilding and story project set on the fictional
 https://arecace.com/home
 
 ## Tools and Languages
-Angular, Firebase, Python, GCP
+`Angular`, `Firebase`, `Python`, `GCP`
 
 ## Future tasks
 - lint code
