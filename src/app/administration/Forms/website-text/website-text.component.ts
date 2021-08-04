@@ -1,8 +1,13 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
-import { CRUDcontrollerService } from '../../services/CRUDcontroller.service';
-import { Subscription, Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { FormBuilder }                  from '@angular/forms';
+
+import { Subscription, Subject }        from 'rxjs';
+import { takeUntil }                    from 'rxjs/operators';
+
+import { CRUDcontrollerService }        from '../../services/CRUDcontroller.service';
+import { QuickAssign }                  from 'src/app/GlobalServices/commonfunctions.service';
+
+import { CRUDdata }                     from 'src/app/Classes/ContentClasses';
 
 @Component({
   selector: 'app-website-text',
@@ -18,14 +23,13 @@ export class WebsiteTextComponent implements OnInit, OnDestroy {
   key: string;
 
   constructor(private fb: FormBuilder,
-              private controller: CRUDcontrollerService) { }
+              private controller: CRUDcontrollerService,
+              private qa: QuickAssign) { }
 
   ngOnInit() {
     this.controller.itemToEdit
-    .pipe(takeUntil(this.stop$))
-    .subscribe(item => {
-      this.assignFormData(item);
-    });
+      .pipe(takeUntil(this.stop$))
+      .subscribe(item => this.assignFormData(item));
 
     this.stream1 = this.controller.triggerProcess.subscribe(() => this.processForm());
   }
@@ -33,6 +37,7 @@ export class WebsiteTextComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.stop$.next(true);
     this.stream1.unsubscribe();
+    this.controller.disposal();
   }
 
   createForm() {
@@ -46,20 +51,15 @@ export class WebsiteTextComponent implements OnInit, OnDestroy {
     if(editFormData) {
       this.onReset();
       this.key = editFormData.key;
-      this.Form = this.controller.quickAssign(this.Form, editFormData);
+      this.Form = this.qa.assign(this.Form, editFormData);
       this.stop$.next(true);
     }
   }
 
   processForm() {
     const Final = Object.assign({}, this.Form.value);
-    this.controller.activeFormData.next([Final,
-                                         [],
-                                         [],
-                                         [],
-                                         undefined,
-                                         undefined,
-                                         undefined]);
+    return this.controller.activeFormData.next(
+      new CRUDdata(false, '', Final));
   }
 
   onReset() {

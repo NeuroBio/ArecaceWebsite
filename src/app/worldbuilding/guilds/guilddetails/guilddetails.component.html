@@ -1,10 +1,19 @@
 <div id="holder">
-    <div>
+    <div class="textblockcontainer">
 
         <!--Header-->
         <header>
             <div class="compheader">
-                <h2>{{ guild.GuildName }}</h2>
+                <div id="compstretcher">
+                    <h2>{{ guild.GuildName }}</h2>
+                </div>
+
+                <app-bookmark
+                [path]="path"
+                type="Favorites"
+                [name]="name"
+                [bookmarkImage]="false"
+                ></app-bookmark>
             </div>
             <hr>
         </header>
@@ -32,6 +41,5 @@
             <b>Brief History: </b>{{ guild.History }}<br>
         </div>
 
-    </div> 
-    <br>      
+    </div><br>
 </div>

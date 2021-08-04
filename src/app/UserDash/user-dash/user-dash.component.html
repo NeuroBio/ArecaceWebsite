@@ -1,49 +1,69 @@
-<div *ngIf="auth.user | async; then authenticated else guest"></div>
+<main class="background">
+    <div *ngIf="authorized === true; then authenticated else guest"></div>
+</main>
 
 
 <!-- User NOT logged in -->
 <ng-template #guest>
-    <div [innerHTML]="loggedoutText"></div>
-    <app-login></app-login>
+    <div id="outerloggedoutholder">
+        <div id="loggedoutholder">
+        <div [innerHTML]="loggedoutText"></div>
+        <app-login></app-login>    
+        </div>
+    </div>
 </ng-template>
 
 
 <!-- User logged in -->
 <ng-template #authenticated>
-    <div id="outer" *ngIf="auth.user | async as user">
-        <button id="logout" (click)="auth.logout()">Logout</button>
-        <h3>Welcome Back, {{ user.userName }}, ID#{{ user.ID }}</h3>
-        <div [innerHTML]="loggedinText"></div>
+    <!-- Header -->
+    <div class="compheader">
+        <h3 class="compheader">Welcome Back, {{ user.userName }} (ID#{{ user.ID }})
+            <div id="useractions">
+                <nav id="special" aria-label="User-Actions-Navigation">
+                    <span *ngFor="let action of actions">
+                        <a class="icon" *ngIf="action.show === true"
+                        [routerLink]="action.link" tabindex="0">
+                            <img class="icon" [src]="action.src" [alt]="action.alt">
+                        </a>
+                    </span>
+                </nav>
+                <br>
+                <app-logout ></app-logout>
+            </div>
+        </h3>
+    </div>
+    <hr>
+
+
+    <!-- Website Annoucements -->
+    <section id="announcement">
+        <h4>Announcements:</h4>
+        <div id="innerText" [innerHTML]="loggedinText"></div>
         <hr>
+    </section>
 
-        <div id="UserComponents">
-            <app-pick-up
-            [user]="user"
-            ></app-pick-up>
-    
-            <app-fan-characters
-            [data]="data.Characters"
-            title="Your Fan Characters"
-            ></app-fan-characters>
-    
-            <app-fan-characters
-            [data]="data.SAs"
-            title="Your Source Affinity Data"
-            ></app-fan-characters>
-    
-            <app-fan-characters
-            [data]="data.Surveys"
-            title="Your Survey Data"
-            ></app-fan-characters>
-        </div>        
-        <hr>
 
-        <button (click)="setShowAccountInfo()">Show Account Info</button>
+    <section>
 
-        <app-user-info
+        <!-- Favorited data -->
+        <app-pick-up class="UserData"
         [user]="user"
-        *ngIf="showAccountInfo === true"
-        ></app-user-info>
+        ></app-pick-up>
+    
+        <!-- The Vast Majority of the Data -->
+        <div *ngFor="let datum of savedData" class="UserData">
+            <app-data-options
+            [names]="datum.name"
+            [title]="datum.title"
+            [link]="datum.link"
+            [type]="datum.type"
+            [data]="datum.data"
+            [edit]="datum.edit"
+            [delete]="datum.delete"
+            ></app-data-options>
+        </div>
+    </section>
+    <div style="clear: both;"></div>
 
-      </div>
-  </ng-template>
+</ng-template>

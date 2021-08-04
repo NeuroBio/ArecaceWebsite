@@ -1,0 +1,10 @@
+.compheader {
+    display: flex;
+    align-items: center;
+    flex-flow: column;
+}
+.toggler {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}

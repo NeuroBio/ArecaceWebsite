@@ -1,77 +1,94 @@
-import { Component, OnInit, Input, ElementRef, ViewChild, HostListener } from '@angular/core';
-import { FireBaseService } from 'src/app/GlobalServices/firebase.service';
-import { Observable } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
+import { Component, OnInit, Input,
+         ElementRef, OnDestroy, ViewChild }         from '@angular/core';
+
+import { Observable, fromEvent, Subscription }      from 'rxjs';
+import { map }                                      from 'rxjs/operators';
+
+import { FireBaseService }                          from 'src/app/GlobalServices/firebase.service';
+
+import { LinkListElement }                          from '../../SmallComponents/LinkList/linklist';
 
 @Component({
   selector: 'app-show-newest',
   templateUrl: './show-newest.component.html',
   styleUrls: ['./show-newest.component.css']
 })
-export class ShowNewestComponent implements OnInit {
 
-  display$: Observable<any>;
+export class ShowNewestComponent implements OnInit, OnDestroy {
+
+  display$: Observable<LinkListElement[]>;
+  imageLength = 160;
+
   @Input() contentType: string;
   @Input() collectionName: string;
   @Input() contentLink: string;
-  @ViewChild('items', { static: false }) items: ElementRef;
+  @Input() footerText: string;
+
+  @ViewChild('itemBand') itemBand: ElementRef;
   @ViewChild('right', { static: true }) right: ElementRef;
   @ViewChild('left', { static: true }) left: ElementRef;
+  
+  KeyListener = fromEvent(document, 'keydown');
+  stream: Subscription;
 
   constructor(private firebaseserv: FireBaseService) { }
 
   ngOnInit() {
+    this.stream = this.KeyListener
+      .subscribe((event: KeyboardEvent) => this.KeyEvent(event));
+
     this.display$ = this.firebaseserv.returnCollect(this.collectionName).pipe(
       map(members => {
-        //remove hidden
-        members = members.filter(member => member.Allowed !== false);
+        members = members.filter(member => member.Allowed !== false);//remove hidden
+        members = members.sort((a,b) => a.TimeStampCreated > b.TimeStampCreated ? 1 :-1);// order
 
-        // order
-        members = members.sort((a,b) => a.TimeStampCreated > b.TimeStampCreated ? 1 :-1);
-        
-        //cut to newest
-        if(members.length > 10) {
+        if(members.length > 10) {//cut to newest
           members = members.slice(0, 10);
         }
 
-        //set up for display
-        return members.map(member =>
-          member = {Name: member.Name,
-                    Link: `${this.contentLink}/${member.ID}`,
-                    Image: member.Links ? member.Links[0] : ''});
-        })
-      );
+        return members = members.map(member => //set up for display
+          member = new LinkListElement(
+            member.Name,
+            `${this.contentLink}/${member.ID}`,
+            undefined,
+            { Name: member.Name,
+              Image: member.Links ? member.Links[0] : '' }));
+      }) );
+    }
+
+  ngOnDestroy() {
+    this.stream.unsubscribe();
   }
+
 
   scroll(right: boolean) {
     if(right) {
-      this.animate(170);
+      this.animate(this.imageLength);
     } else {
-      this.animate(-170);
+      this.animate(this.imageLength*-1);
     }
   }
 
   animate(amount: number) {
     if(HTMLElement.prototype.scrollTo) {
-      this.items.nativeElement.scrollTo(
-        { left: (this.items.nativeElement.scrollLeft + amount), behavior: 'smooth' });
+      this.itemBand.nativeElement.scrollTo(
+        { left: (this.itemBand.nativeElement.scrollLeft + amount), behavior: 'smooth' });
     } else {
-      this.items.nativeElement.scrollLeft += amount;
+      this.itemBand.nativeElement.scrollLeft += amount;
     }
   }
 
   //Arrow keys (trigger arrow options)
-  @HostListener('window:keyup', ['$event']) KeyEvent(event: KeyboardEvent){ 
-    if(event.keyCode === 39){//right, next
+  KeyEvent(event: KeyboardEvent) {
+    if(event.key === 'ArrowRight') {
       this.right.nativeElement.focus();
-      this.animate(170);
+      this.animate(this.imageLength);
     }
 
-    if(event.keyCode === 37){//left, prev
+    if(event.key === 'ArrowLeft') {
       this.left.nativeElement.focus();
-      this.animate(-170);
+      this.animate(this.imageLength*-1);
     }
   }
-
 
 }

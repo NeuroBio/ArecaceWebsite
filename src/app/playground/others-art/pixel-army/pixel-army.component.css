@@ -1,0 +1,11 @@
+#background {
+    background-color: rgb(116, 116, 116);
+    padding: 7px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+::ng-deep app-link-list.PixelList li {
+    display: inline-block;
+}

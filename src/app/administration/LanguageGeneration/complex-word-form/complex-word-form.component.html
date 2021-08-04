@@ -1,11 +1,6 @@
 <form [formGroup]="Form">
-    <!-- <select formControlName="Type">
-        <option value="Noun">Noun</option>
-        <option value="Verb">Verb</option>
-        <option value="Adjective">Adjective</option>
-        <option value="Misc">Misc</option>
-    </select> -->
 
+<!-- Misc type ins -->
     <p>English: <input formControlName="English"></p>
 
     <p>Subtype:
@@ -15,6 +10,7 @@
         </select>
     </p>
 
+<!-- Info for user -->
     <p>Indativor: {{ Form.controls.Indativor.value }} </p>
 
     <p>Level: {{ Form.controls.Level.value }}</p>
@@ -25,14 +21,17 @@
         <button (click)="addWord(false)" [disabled]="!allowDelete">-</button>
     </p>
 
+<!-- Component Words -->
     <div formArrayName="ComponentWords">
         <div *ngFor="let word of WordArray.controls; let i = index"
         [formGroupName]="i">
             <p>Word {{ i + 1}}:
+
                 <select formControlName="Type" (change)="pickType($event.target.value, i)">
                     <option *ngFor="let type of WordTypes.Types"
                     [value]="type">{{ type }}</option>
                 </select>
+
                 <select formControlName="Word"
                 (change)="pickWord()">
                     <option *ngFor="let word of
@@ -40,6 +39,8 @@
                     [value]="word.Indativor">
                         {{ word.English }} / {{ word.Indativor }}</option>
                 </select>
+
+
                 <span *ngIf="word.get('Type').value === 'Verb'">
                     Use core? <input type="checkbox" formControlName="Core">
                 </span>
@@ -49,4 +50,5 @@
 
     <app-formButtons></app-formButtons>
 </form>
+
 <div style="clear: both;"></div>

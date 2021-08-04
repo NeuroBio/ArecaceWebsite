@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit }  from '@angular/core';
+import { Title }              from '@angular/platform-browser';
+
+import { SiteMap }            from '../../../Classes/UploadDownloadPaths';
+import { LinkList, LinkListElement } from 'src/app/SharedComponentModules/SmallComponents/LinkList/linklist';
 
 @Component({
   selector: 'app-sitemap',
@@ -8,36 +12,19 @@ import { Component, OnInit } from '@angular/core';
 
 export class SiteMapComponent implements OnInit{
 
-  labels: string[] = ['Worldbuilding', 'Story', 'Info', 'Misc'];
-  linkList: string[][][] =[[//worldbuilding
-                              ['Introduction to Arecace', '/world/introduction'],
-                              ['Bestiary', '/world/bestiary'],
-                              ['Characters', '/world/characters'],
-                              ['Culture', '/world/culture'],
-                              ['The DIA and Guilds', '/world/guilds'],
-                              ['Siphoid/Source', '/world/source'],
-                              ['Maps', '/world/maps']
-                            ],
+  SiteMap = new SiteMap();
+  keys: string[];
+  linkList: LinkList[];
 
-                            [//Story
-                              ['Comic', '/comic'],
-                              ['Scripts', '/story/Scripts'],
-                              ['Narratives', '/story/Narratives']
-                            ],
+  constructor(private titleserv: Title) { }
 
-                            [//Info
-                              ['About the Author', '/about'],
-                              ['Cite Me', '/faq/copyright'],
-                              ['Fanart/Fanfic Policy', '/faq/copyright'],
-                              ['FAQ', '/faq'],
-                              ['Site Map (here)', '/sitemap']
-                            ],
+  ngOnInit() {
+    this.titleserv.setTitle('Site Map');
+    delete this.SiteMap.PathInfo;
+    this.keys = Object.keys(this.SiteMap);
 
-                            [//Misc
-                              ['Extras', '/extras'],
-                              ['Playground','/playground']
-                            ]]
-  ngOnInit(){
+    this.linkList = this.keys.map(key =>
+      new LinkList(key, this.SiteMap[key]));
     window.scroll(0,0);
   }
 

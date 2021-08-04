@@ -1,61 +1,116 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { AuthService } from 'src/app/administration/security/Auth/auth.service';
-import { TextProvider } from 'src/app/GlobalServices/textprovider.service';
-import { SA } from 'src/app/Classes/SAclass';
-import { CharacterMetaData } from 'src/app/Classes/charactermetadata';
-import { Subscription } from 'rxjs';
-import { FireBaseService } from 'src/app/GlobalServices/firebase.service';
+import { Title }                        from '@angular/platform-browser';
+
+import { Subscription }                 from 'rxjs';
+
+import { AuthService }                  from 'src/app/administration/security/Auth/auth.service';
+import { TextProvider }                 from 'src/app/GlobalServices/textprovider.service';
+
+import { User, Bookmark }                         from 'src/app/Classes/ContentClasses';
+import { compileFactoryFunction } from '@angular/compiler';
 
 @Component({
   selector: 'app-user-dash',
   templateUrl: './user-dash.component.html',
   styleUrls: ['./user-dash.component.css']
 })
+
 export class UserDashComponent implements OnInit, OnDestroy {
 
   loggedoutText: string;
   loggedinText: string;
-  user = {ID: 10,
-          email: "fake@fake.com",
-          userName: "tester",
-          Admin: false,
-          User: true,
-          Narrative: '',
-          Script: '',
-          Comic: '',
-          }
-  data = {
-    Characters: [new CharacterMetaData],
-    SAs: [new SA],
-    Surveys: []
-  }
+  user: User = new User('fake@faker.com', -49);
+  savedData: any[];
+  titles: string[];
+  authorized: boolean;
+  actions = [ { src: '../../../../../assets/svgs/gear.svg', link: 'settings', alt: 'Settings', show: true },
+              { src: '../../../../../assets/svgs/modstar.svg', link: 'controls', alt: 'Mod Controls', show: false },
+              { src: '../../../../../assets/svgs/diamond.svg', link: '/kArAAdministrativeUpload/Dash', alt: 'Admin Controls', show: false }]
 
   stream1: Subscription;
-  stream2: Subscription;
 
-  showAccountInfo = false;
-
-  constructor(public auth: AuthService,
+  constructor(private auth: AuthService,
               private textprovider: TextProvider,
-              private firebaseserv: FireBaseService) { }
+              private titleserv: Title) { }
 
   ngOnInit() {
+    this.titleserv.setTitle('User Dash');
     this.loggedoutText = this.textprovider.WebsiteText
-    .find(member => member.ID =='login').Text;
+      .find(member => member.ID =='login').Text;
     this.loggedinText = this.textprovider.WebsiteText
-    .find(member => member.ID =='userdash').Text;
-    // this.stream1 = this.auth.user.subscribe(user => this.user = user);
-    // this.stream2 = this.firebaseserv.returnCollect(`Users/${this.auth.uid.value}/Data`)
-    //   .subscribe(data => this.data = {Characters: JSON.parse(data.Characters),
-    //                                   SAs: JSON.parse(data.SAs)})
+      .find(member => member.ID =='userdash').Text;
+      
+    this.stream1 = this.auth.user.subscribe(user => {
+      this.authorized = this.auth.isUser();
+      if(user) {
+        this.user = user;
+        this.PrepareData();
+        this.checkRoles();
+      }
+      // else {
+      //   this.mockupUser();
+      //   this.PrepareData();
+      // }
+    });
   }
 
   ngOnDestroy() {
-    // this.stream1.unsubscribe();
-    // this.stream2.unsubscribe();
+    this.stream1.unsubscribe();
   }
 
-  setShowAccountInfo() {
-    this.showAccountInfo = !this.showAccountInfo;
+  PrepareData() {
+    this.savedData = [];
+    if(this.user.FanCharacters) {
+      this.savedData.push({
+        title: 'Your Fan Characters',
+        link: 'fancharacters',
+        name: this.user.FanCharacters.map(char => char.DisplayName),
+        type: 'FanCharacters',
+        data: this.user.FanCharacters,
+        edit: true,
+        delete: false
+     });
+    }
+    if(this.user.SAcalculations) {
+      this.savedData.push({
+        title: 'Your Source Affinity Data',
+        link: 'sacalculations',
+        name: this.user.SAcalculations.map(sa => sa.DisplayName),
+        type: 'SAcalculations',
+        data: this.user.SAcalculations,
+        edit: true,
+        delete: false
+        });
+    }
+    console.log("here")
+    if(this.user.SurveyResults) {
+      console.log("in")
+      this.savedData.push({
+      title: 'Your Survey Data',
+      link: 'surveyresults',
+      name: this.user.SurveyResults.map(survey => survey.DisplayName),
+      type: 'SurveyResults',
+      data: this.user.SurveyResults,
+      edit: false,
+      delete: true
+    });
+    }
+  }
+
+  checkRoles() {
+    this.actions[1].show = this.user.Mod === true;
+    this.actions[2].show = this.user.Admin === true;
+  }
+
+  mockupUser() { //for testing purposes
+    this.user.Narratives = [ {path: "story/Narratives/SpeedChess/What'stheDifferenceBetweenanAmphibianandaReptile?",
+    time: "2020-08-26, 19:10",
+    name: "Speed Chess: What's the Difference Between an Amphibian and a Reptile"}];
+    this.user.SurveyResults = [{SurveyID: "Companion",
+    DisplayName: "Ideal Source Companion Questionair 20/08/26",
+    Name: "Ideal Source Companion Questionair"},
+    {SurveyID: "Companion",
+    DisplayName: "Ideal Source Companion Questionair 20/08/26-2",
+    Name: "Ideal Source Companion Questionair"}];
   }
 }

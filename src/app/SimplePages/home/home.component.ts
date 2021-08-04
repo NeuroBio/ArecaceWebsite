@@ -1,5 +1,7 @@
-import { Component, OnInit, HostListener } from '@angular/core';
-import { TextProvider } from 'src/app/GlobalServices/textprovider.service';
+import { Component, OnInit, HostListener }  from '@angular/core';
+import { Title }                            from '@angular/platform-browser';
+
+import { TextProvider }                     from 'src/app/GlobalServices/textprovider.service';
 
 @Component({
   selector: 'app-home',
@@ -13,39 +15,26 @@ export class HomeComponent implements OnInit {
   buttonText: string[];
   mainText: string;
 
-  constructor(private textprovider: TextProvider) { }
+  constructor(private textprovider: TextProvider,
+              private titleserv: Title) { }
 
   ngOnInit() {
+    this.titleserv.setTitle('Arecace');
     this.mainText = this.textprovider.WebsiteText
-                        .find(member => member.ID === 'home').Text
+      .find(member => member.ID === 'home').Text;
     window.scroll(0,0);
     this.setButtonText();
   }
 
   @HostListener('window:resize')
   setButtonText() {
-    if(window.innerWidth < 560){
+    if(window.innerWidth < 485){
       this.buttonText = ['Intro', 'Scripts','Comic','Play- ground'];
-    }else{
+    } else {
       this.buttonText = ['Full Introduction',
-              'Start Comic Scripts',
-              'See Latest Page',
-              'Playgound (under construction!)'];
+                          'Start Comic Scripts',
+                          'See Latest Page',
+                          'Playground under construction!'];
     }
-  }  
-    /*Finish implementing this later
-    import { FireBaseService } from 'src/app/GlobalServices/firebase.service';
-    import { tap } from 'rxjs/operators';
-    
-    noService:boolean;
-    private firebaseserv: FireBaseService
-    this.firebaseserv.returnCollect('ConnectionTest')
-    .subscribe(x =>{
-      console.log(x);
-      this.noService = false
-    })
-    
-    <div *ngIf="noService">test</div>
-    */   
-
+  }
 }

@@ -11,73 +11,89 @@ div#splatter{
   background-image: url(https://firebasestorage.googleapis.com/v0/b/arecaceworld.appspot.com/o/WebSite%2Fsmear5.png?alt=media&token=ba18f0e4-f934-42a9-89c1-25881fcc0612);
 }
 
+#headerBlock {
+  padding-left: 10px;
+}
+
 /*header components*/
-div#topblock {
+div#fullblock {
   position: relative;
-    max-width: 900px;
-    background: #454545;
-  }
+  max-width: 900px;
+  background: #454545;
+}
 
-  div#chapselect {
-    float: left;
-    margin-left: 10px;
-    padding-top: 18px;
-    font-family: 'Courier New', Courier, monospace;
-    font-weight: bold;
-    font-size: 20px;
-  }
+#chapselect {
+  position: relative;
+  float: left;
+  padding-top: 18px;
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: bold;
+  font-size: 20px;
+}
 
-  div.dropdowns {
-    float: left;
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 25px
-  }
+div.dropdowns {
+  float: left;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 25px
+}
 
-  select#chap {
-    max-width: 250px;
-  }
-
- 
-  div.break {
-    height: 70px;
-    border-right: 3px solid white;
-  }
-
-  div#viewradio {
-    display: flex;
-    justify-content: flex-end;
-    padding-right: 10px;
-    min-width: 120px;
-  }
-
-  div#radiobox {
-    padding: 12px;
-  }
-
-  hr {
-    max-width: 898px;
-    margin: 0px;
-    text-align: left;
-    padding: 0px;
-  }
-
-  span#notes {
-    font-size: 12px;
-    font-weight: normal;
-  }
-
-  .loading {
-    position: fixed;
-    width: 250px;
-    height: 250px;
-    z-index: 15;
-    border: 4px solid rgba(0,0,0,.2);
-    border-top-color: whitesmoke;
-    left: calc(50vw - 120px);
-    top: calc(50vh - 120px);
-  }
+select#chap {
+  max-width: 250px;
+}
 
 
+div.break {
+  height: 100%;
+  border-left: 3px solid white;
+}
+
+#viewradio {
+  position: relative;
+  display: flex;
+  justify-content: flex-end;
+  min-width: 175px;
+  margin: 0px;
+}
+
+#radiobox {
+  display: inline-block;
+  padding: 14px;
+  right: 0px;
+  border-left: solid white 2px;
+  background-color: rgb(49,49,49);
+  margin: -1px;
+}
+
+div#bookmark1 {
+  float: left;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  height: 100%;
+}
+
+hr {
+  max-width: 898px;
+  margin: 0px;
+  text-align: left;
+  padding: 0px;
+}
+
+span#notes {
+  font-size: 12px;
+  font-weight: normal;
+}
+
+.loading {
+  position: fixed;
+  width: 250px;
+  height: 250px;
+  z-index: 15;
+  border: 4px solid rgba(0,0,0,.2);
+  border-top-color: whitesmoke;
+  left: calc(50vw - 120px);
+  top: calc(50vh - 120px);
+}
 
 div#cover {
   display: flex;
@@ -96,23 +112,22 @@ div#footbox {
   text-align: center;
   max-width: 900px;
   padding: 0;
-  padding-top: 7px;
-  padding-bottom: 7px;
   background: #454545;
   color: white;
 }
 
 button {
   z-index: 10;
-  margin-bottom: 10px;
-  margin-top: 10px;
+  margin-bottom: 17px;
+  margin-top: 17px;
+  padding: 5px 15px 5px 15px;
 }
 
 span#help {
   z-index: 0;
   padding-right: 7px;
   position: absolute;
-  right: 0;
+  left: 7px;
   bottom: 2px;
   font-size: 12px;
   font-weight: normal;
@@ -125,9 +140,8 @@ span#footspin {
   margin: 0;
 }
 
-
 /*final notice*/
-div#info {
+aside#info {
   background-color: #454545;
   position: absolute;
   top: 0px;
@@ -136,10 +150,16 @@ div#info {
   padding-left: 7px;
   padding-right: 7px;
   border-left: 3px solid white;
-  float: right;
 }
 
 label {
   border: 0px;
   padding: 0px;
+}
+
+div#bookmark2 {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
 }

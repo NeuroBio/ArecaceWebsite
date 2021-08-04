@@ -15,7 +15,7 @@ export class SwapCases {
         you: 'hael', 'you*': 'haeli', your: 'haela', yours: 'haela',
         'your*': 'haelia', 'yours*': 'haelia',
         mine: 'klaea', my: 'klaea'
-    }
+    };
 
     NtoETrans: {} = {
         hael: 'you', haeli: 'you', haela: 'your', haelia: 'your',
@@ -23,6 +23,6 @@ export class SwapCases {
         aedarti: 'they', darti: 'they', aedartia: 'their', dartia: 'their',
         aedart: 'that one', dart: 'that one', aedarta: 'that one\'s', darta: 'that one\'s',
         klaea: 'my'
-    }
+    };
 }
 

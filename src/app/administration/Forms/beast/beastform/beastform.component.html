@@ -19,9 +19,12 @@
       {{ bio }}</option>
     </select></p>
 
-    <p>Thumb: <input #Thumb type="file" class="fileupload" (change)="getThumb($event)"></p>
-
-    <p>Full Image: <input #Full type="file" class="fileupload" (change)="getFull($event)"></p>
+    <app-upload-main
+    name="Beast Card"
+    [ID]="0"
+    [hasThumb]="true"
+    [Settings]="imageSettings"
+    ></app-upload-main>
     
     <p>Alt Text:<br/>
     <textarea formControlName="AltText" rows="4" cols="66"></textarea></p>

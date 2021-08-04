@@ -1,0 +1,89 @@
+<main>
+
+    <!-- Character image -->
+    <div id="Bio" #top>
+        <div *ngIf="loading===true" class="loading"></div>
+        <img id="BioImage" [hidden]="loading" [src]="char.Links[0]" (load)="loading=false"
+        [alt]="'Drawing of ' + char.FirstName+' '+char.LastName">
+        <a [hidden]="loading" routerLink="Download">View Full Size</a>
+    </div><br>
+
+
+    <!-- Bio facts -->
+    <section class="firstblock">
+
+        <!-- Mini header -->
+          <div class="compheader">
+            <h2 class="compheader">{{ char.FirstName }} {{ char.LastName }}</h2>
+              <app-bookmark
+              [path]="path"
+              type="Favorites"
+              [name]="name"
+              [bookmarkImage]="false"
+              ></app-bookmark>
+          </div>
+
+        <!-- actual deets -->
+          <p><b>Class: </b> {{ char.SMClass }}</p>
+          <p><b>Occupation: </b> {{ char.Occupation }}</p>
+          <p><b>Nationality: </b>{{ char.Country }}, {{ char.Territory }} Territory</p>
+          <p><b>Ethnicity: </b>{{ char.Ethnicity1 }}/{{ char.Ethnicity2 }}</p>
+          <p><b>Age: </b> {{ char.Age }}, born {{ char.Year }}{{ char.Era }}, {{ char.Qt }} {{ char.Day }}, ({{ char.Zodiac }})</p>
+          <p><b>Height: </b>{{ char.Cm }} cm</p>
+          <b>Distinguishing Marks: </b>{{ char.DistinguishingMarks }}<br>
+    </section><br>
+    <div style="clear: both"></div>
+
+
+    <!-- Personality Block-->
+    <section class="textblock">
+      <b>Personality: </b>{{ char.Personality }}<br>
+    </section><br>
+
+
+    <!-- Philo/Motivation/Goals Block-->
+    <section class="textblock">
+      <p><b>Philosophy: </b>{{ char.Philosophy }}</p>
+      <p><b>Motivations/Goals: </b>{{ char.MotivationsGoals }}</p>
+      <p><b>Strengths: </b>{{ char.Strengths }}</p>
+      <p><b>Weaknesses: </b>{{ char.Weaknesses }}</p>
+      <!-- Family and Source Abilities -->
+      <p><b>Source Abilities: </b>{{ char.SourceAbilitiesFormatted }}</p>
+      <span><b>Family in Story: </b>{{ char.RelationsFormatted }}</span>
+    </section><br>
+      
+
+    <!-- Background Block-->
+      <section class="textblock">
+
+        <!-- pick which bio version to show -->
+        <app-toggler
+        *ngIf="char.BriefBackground !== ''"
+        [toggles]="['Brief', 'Full']"
+        togglerTitle="Pick Bio Version"
+        toggleName="BioChoice"
+        (choiceEmitter)="changeBio($event)"
+        ></app-toggler><br><br>
+
+        <b>Background: </b>
+        <span *ngIf="!FullBio">{{ char.BriefBackground }}</span>
+        <span *ngIf="FullBio">{{ char.FullBackground }}</span>
+      </section><br>
+      <div style="clear: both"></div>
+
+      <!-- MISC References -->
+      <section class="textblock" id="refs" *ngIf="char.Links[2]">
+        <b>Other References:</b><br><br>
+        <app-grid
+        [collect]="char.References"
+        ></app-grid>
+        <hr>
+        <app-slider
+        [name]="'Show Preview'"
+        [flow]="'row'"
+        [width]="270"
+        ></app-slider>
+      </section>
+  </main>
+
+<router-outlet></router-outlet>

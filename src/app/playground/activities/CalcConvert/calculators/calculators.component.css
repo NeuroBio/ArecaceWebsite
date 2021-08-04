@@ -1,0 +1,41 @@
+.background {
+    display: flex;
+    justify-content: center;
+    background-image: url(https://firebasestorage.googleapis.com/v0/b/arecaceworld.appspot.com/o/WebSite%2Fsmear5.png?alt=media&token=ba18f0e4-f934-42a9-89c1-25881fcc0612);
+}
+#outer {
+    border: 1px white solid;
+    margin: 7px;
+    padding: 0px;
+    max-width: 750px;
+    background-color: rgb(45,45,45);
+}
+
+#CalcNav {
+    display: flex;
+    flex-flow: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    background-color: #454545;
+    margin: 0px;
+    padding-top: 7px;
+}
+
+#holder {
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 300px;
+}
+
+.navver {
+    display: inline-block;
+}
+
+
+.navverContainer {
+    display: inline-block;
+    width: 200px;
+}

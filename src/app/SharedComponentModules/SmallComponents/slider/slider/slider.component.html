@@ -1,0 +1,12 @@
+<section *ngIf="preview !== undefined"
+[style.flex-flow]="flow" aria-label="Show-Preview-Check-Box"
+[style.width]="width+'px'">
+    <span id="slideTwoText">{{ name }}</span>
+    <div class="slideTwo" tabindex="0" (keydown)="onKeydown($event)">
+      <input type="checkbox" value="None"
+      id="slideTwo" role="switch"
+      name="check" [checked]="preview === true"
+      (click)="changeView()">
+      <label for="slideTwo"></label>
+    </div>
+</section>

@@ -1,30 +1,40 @@
-import { BrowserModule }            from '@angular/platform-browser';
-import { NgModule, APP_INITIALIZER }                 from '@angular/core';
-import { ReactiveFormsModule }      from '@angular/forms';
+import { BrowserModule }              from '@angular/platform-browser';
+import { NgModule, APP_INITIALIZER }  from '@angular/core';
+import { ReactiveFormsModule }        from '@angular/forms';
+import { HttpClientModule }           from '@angular/common/http';
+import { A11yModule }                 from '@angular/cdk/a11y';
 
-import { AngularFireModule }        from '@angular/fire';
+import { AngularFireModule }          from '@angular/fire';
 import { AngularFireFunctionsModule } from '@angular/fire/functions';
-import { AngularFirestoreModule }   from '@angular/fire/firestore';
-import { AngularFireStorageModule } from '@angular/fire/storage';
-import { AngularFireAuthModule }    from '@angular/fire/auth';
-import { environment }              from '../environments/environment';
+import { AngularFirestoreModule }     from '@angular/fire/firestore';
+import { AngularFireStorageModule }   from '@angular/fire/storage';
+import { AngularFireAuthModule }      from '@angular/fire/auth';
+import { DeviceDetectorModule }       from 'ngx-device-detector';
 
-import { AppRoutingModule }         from './app-routing.module';
+import { environment }                from '../environments/environment';
 
-import { UpdatefeedModule }         from './SharedComponentModules/UpdateFeed/updatefeed.module';
+import { AuthService }                from './administration/security/Auth/auth.service';
+import { TextProvider }               from './GlobalServices/textprovider.service';
 
-import { AppComponent }             from './app.component';
-import { AboutComponent }           from './SimplePages/about/about.component';
-import { BadserviceComponent }      from './SimplePages/badservice/badservice.component';
-import { ContactComponent }         from './SimplePages/contact/contact.component';
-import { FAQComponent }             from './SimplePages/faq/faq.component';
-import { CopyrightComponent }       from './SimplePages/copyright/copyright.component';
-import { HomeComponent }            from './SimplePages/home/home.component';
-import { PageNotFoundComponent }    from './SimplePages/pagenotfound/pagenotfound.component';
-import { TravelorsGuideComponent }  from './SimplePages/travelorsguide/travelorsguide.component';
-import { TextProvider } from './GlobalServices/textprovider.service';
-import { AuthService } from './administration/security/Auth/auth.service';
-import { HttpClientModule } from '@angular/common/http';
+import { AppRoutingModule }           from './app-routing.module';
+import { LinkListElementModule }      from './SharedComponentModules/SmallComponents/LinkList/link-list-element.module';
+import { ScrollFrameModule }          from './SharedComponentModules/SmallComponents/scroll-frame/scroll-frame.module';
+import { ShowNewestModule }           from './SharedComponentModules/ShowNewest/show-newest.module';
+import { UpdatefeedModule }           from './SharedComponentModules/UpdateFeed/updatefeed.module';
+import { TogglerModule } from './SharedComponentModules/SmallComponents/toggler/toggler.module';
+
+import { AppComponent }               from './app.component';
+import { AboutComponent }             from './SimplePages/about/about.component';
+import { AccessibilityComponent }     from './SimplePages/accessibility/accessibility.component';
+import { BadserviceComponent }        from './SimplePages/badservice/badservice.component';
+import { ContactComponent }           from './SimplePages/contact/contact.component';
+import { CopyrightComponent }         from './SimplePages/copyright/copyright.component';
+import { FAQComponent }               from './SimplePages/faq/faq.component';
+import { HomeComponent }              from './SimplePages/home/home.component';
+import { PageNotFoundComponent }      from './SimplePages/pagenotfound/pagenotfound.component';
+import { PrivacyPolicyComponent }     from './SimplePages/privacy-policy/privacy-policy.component';
+import { TravelorsGuideComponent }    from './SimplePages/travelorsguide/travelorsguide.component';
+import { UploadLogComponent }         from './SimplePages/upload-log/upload-log.component';
 
 export function TextFactory(provider: TextProvider) {
   return () => provider.load();
@@ -44,20 +54,30 @@ export function AuthFactory(provider: AuthService) {
     PageNotFoundComponent,
     BadserviceComponent,
     ContactComponent,
+    UploadLogComponent,
+    PrivacyPolicyComponent,
+    AccessibilityComponent
     ],
 
   imports: [
     BrowserModule,
     HttpClientModule,
-    UpdatefeedModule,
-
     ReactiveFormsModule,
+    A11yModule,
 
+    UpdatefeedModule,
+    ShowNewestModule,
+    ScrollFrameModule,
+    LinkListElementModule,
+    TogglerModule,
+    
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule, // imports firebase/firestore, only needed for database features
     AngularFireAuthModule, // imports firebase/auth, only needed for auth features,
     AngularFireStorageModule, // imports firebase/storage only needed for storage features
     AngularFireFunctionsModule, //cloud functions
+
+    DeviceDetectorModule.forRoot(),
 
     AppRoutingModule,//this should always be LAST!!!
 

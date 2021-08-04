@@ -1,8 +1,21 @@
-h1 {
-    max-width: 900px;
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 div {
-    max-width: 900px;
+    background-color: rgb(53, 53, 53);
+    max-width: 650px;
+    border: 1px solid white;
+}
+
+h2 {
+    padding: 10px;
+    margin: 10px;
+}
+
+p {
+    padding: 15px;
     text-align: justify;
 }

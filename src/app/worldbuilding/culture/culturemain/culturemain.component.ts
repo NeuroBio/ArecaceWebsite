@@ -4,8 +4,10 @@ import { ActivatedRoute }             from '@angular/router';
 import { Observable }                 from 'rxjs';
 import { map }                        from 'rxjs/operators';
 
-import { Categories }                 from 'src/app/Classes/categories';
 import { GeneralcollectionService }   from 'src/app/GlobalServices/generalcollection.service';
+
+import { ReferenceCategories }        from 'src/app/Classes/UploadDownloadPaths';
+import { LinkList, LinkListElement }  from 'src/app/SharedComponentModules/SmallComponents/LinkList/linklist';
 
 @Component({
   selector: 'app-culturemain',
@@ -13,28 +15,31 @@ import { GeneralcollectionService }   from 'src/app/GlobalServices/generalcollec
 })
 export class CulturemainComponent implements OnInit {
 
-  cats: Categories = new Categories;
-  labels: string[] = this.cats.culture;
+  cats: ReferenceCategories = new ReferenceCategories;
   current: string;
-  cultureRefs$: Observable<string[][][]>;
+  cultureRefs$: Observable<LinkList[]>;
 
   constructor(private generalcollectserv: GeneralcollectionService,
               private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.cultureRefs$ = this.generalcollectserv.returnMetaData().pipe(
-      map((refs => {
-        let final:string[][][] = [];
-        for(let cat of this.labels){
-          final.push(refs.filter(ref => ref.Category === cat)
-                          .map(filtered => [filtered.Topic, filtered.ID]));
+    this.cultureRefs$ = this.generalcollectserv.returnMetaData()
+      .pipe(map((refs: any[]) => {
+        let final: LinkList[] = [];
+        for(let cat of this.cats.culture) {
+          const Data = refs.filter(ref =>
+            ref.Category === cat).map(filtered =>
+            new LinkListElement(filtered.Topic, filtered.ID));
+          final.push(new LinkList(cat, Data));
         }
         return final; 
-      }))
-    )
+      })
+    );
     
-    this.route.firstChild.paramMap.subscribe(
-      path => this.current = path.get('CultureID'))
+    this.route.firstChild.paramMap.subscribe(path => {
+      return this.current = this.generalcollectserv
+        .getCurrent(this.cultureRefs$, path.get('CultureID'));
+    });
   }
 
 }

@@ -1,20 +1,18 @@
-div#outer {
+#outer {
     border: 1px solid white;
     background-color: rgb(23, 23, 23);
-    overflow: auto;
-    max-width: 750px;
+    max-width: 760px;
     margin: 7px;
+    padding: 3px;
     position: relative;
 }
 
-div#pickItems {
+#pickItems {
     display: flex;
     align-items: center
 }
 
-div#inner {
-    background: #454545;
-    display: flex;
+nav {
     overflow: hidden;
 }
 
@@ -22,37 +20,17 @@ h3 {
     margin: 7px;
 }
 
-a.displayItem {
-    border: 3px solid #454545;
-    margin: 7px;
-    background-color: rgb(116, 116, 116);
-    height: 150px;
-    width: 150px;
-    flex-shrink: 0;
-    background-repeat: no-repeat;
-    cursor: pointer;
-    background-position: center;
-    text-align: center;
-    background-size: contain;
-}
-
-a.displayItem:hover {
-    color: black;
-    background-color: rgb(158, 158, 158);
-    border: 3px solid white;
-}
-
 a#seeAll {
-    margin: 7px;
+    margin: 17px;
 }
 
 
 img:focus {
-    outline: 2px dotted white;
+    outline: 3px dashed #e67e00;
 }
 
 img#right {
-    margin: 3px;
+    margin: 6px 6px 6px 9px;
     flex-grow: 0;
     flex-shrink: 0;
     height: 50px;
@@ -64,7 +42,7 @@ img#right {
 }
 
 img#left {
-    margin: 3px;
+    margin: 6px 9px 6px 6px;
     flex-grow: 0;
     flex-shrink: 0;
     height: 50px;
@@ -73,4 +51,54 @@ img#left {
     -webkit-transform: rotate(90deg);
     transform: rotate(90deg);
     background-color: rgba(0,0,0,.3);
+}
+
+/* List element CSS */
+.displayItem {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 20px;
+    display: inline-block;
+    background-color: rgb(116, 116, 116);
+    height: 150px;
+    width: 150px;
+    flex-shrink: 0;
+    background-repeat: no-repeat;
+    cursor: pointer;
+    background-position: center;
+    text-align: center;
+    background-size: contain;
+}
+
+.displayItem:hover {
+    background-color: rgb(158, 158, 158);
+}
+
+
+::ng-deep app-link-list.NewestCue app-link-list-element a.linklistelement {
+    display: inline-block;
+}
+
+::ng-deep app-link-list.NewestCue app-link-list-element span a {
+    border: solid 5px #454545;
+}
+::ng-deep app-link-list.NewestCue app-link-list-element span a:focus {
+    border: solid 5px whitesmoke;
+}
+::ng-deep app-link-list.NewestCue app-link-list-element span a:hover {
+    border: solid 5px whitesmoke;
+}
+
+
+
+::ng-deep app-link-list.NewestCue ul {
+    margin: 0px;
+    padding: 0px;
+    /* background: #454545; */
+    display: flex;
+}
+
+::ng-deep app-link-list.NewestCue li {
+    display: inline-block;
+    margin: 0px;
+    padding: 0px;
 }

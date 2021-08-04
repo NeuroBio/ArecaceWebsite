@@ -1,24 +1,31 @@
 
-<!-- Header -->
-<div class="compheader">
-  <h2 class="compheader">Traveler's Guide to Arecace</h2>
-</div>
-<hr>
+<main id="splatter">
 
-<div id="splatter">
-  <div id="preview">
-      <br>
-      <h3>Example Pages</h3>
-        <img id="TG" [src]="previews[index]"><br>
-        <div>
-            <button (click)="nextPage(-1)">Prev</button> <b>|||</b>
-            <button (click)="nextPage(1)">Next</button>
+  <!-- Header -->
+  <div class="compheader">
+      <h2 class="compheader">Traveler's Guide to Arecace</h2>
+  </div>
+  <hr>
+
+  <div id="centering">
+        <div id="mainContent">
+                <!-- Preview -->
+                <section id="preview">
+                    <br>
+                    <h3>Example Pages</h3>
+                    <img id="TG" [src]="previews[index]"><br>
+                    <div>
+                        <button (click)="nextPage(-1)">Prev</button> <b>|||</b>
+                        <button (click)="nextPage(1)">Next</button>
+                    </div>
+                </section>
+                
+                <!-- info on the guide -->
+                <section id="spiel" [innerHTML]="mainText"></section>
+                <div style="clear:both;"></div>
+                <br>
         </div>
-    </div>
-    
-    
-    <div id="spiel" role="main" [innerHTML]="mainText"></div>
-    <div style="clear:both;"></div>
-    <br>
-</div>
+  </div>
+  
+</main>
 

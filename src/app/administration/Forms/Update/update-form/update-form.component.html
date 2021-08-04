@@ -6,7 +6,12 @@
 
   <p>Body:<br/> <textarea formControlName="Body" rows="6" cols="65"></textarea></p>      
   
-  <p>Image: <input type="file" #Image (change)="onFile($event)"></p>
+  <app-upload-main
+  name="Optional Image"
+  [ID]="0"
+  [hasThumb]="false"
+  [Settings]="imageSettings"
+  ></app-upload-main>
 
   <p>Alt Text:<br/>
   <textarea formControlName="AltText" rows="4" cols="66"></textarea></p>

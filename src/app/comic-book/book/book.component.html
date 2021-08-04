@@ -1,95 +1,109 @@
 <div id="splatter">
+    <div id="fullblock">
 
-<!--Comic Header-->
-<div id="topblock" role="navigation">
-    <div class="container" id="chapselect">
-
-
-        <!--chapters-->
-        <div class="dropdowns">
-            Arc 1: 
-            <select id="chap" *ngIf="chapterData$ | async as chapter"
-            (change)="changeChapter($event.target.value)">
-                <option *ngFor="let chap of chapter"
-                [value]="chap.Index"
-                [selected]="chap.ID==currentChapter.ID">
-                    {{ chap.Name }}
-                </option>
-            </select> &nbsp;
-        </div>
-        
-
-        <!--Pages-->
-        <div class="dropdowns">
-            Page:
-            <select *ngIf="chapterData$ | async"
-            (change)="changePage($event.target.value)">
-                <option *ngFor="let empty of pageIndex; let ind = index"
-                    [value]="ind"
-                    [selected]="ind==currentPage-1">
-                        {{ ind+1 }}
-                </option>
-            </select>
-        </div>
-
-        <div style="clear:both"></div>
-
-
-        <!--notes-->
-        <span id="notes" *ngIf="chapterData$ | async">
-            Notes--{{ currentChapter.Message }}
-        </span>
-    </div>
+        <!--Comic Header-->
+        <div id="headerBlock">
+            <nav id="chapselect" aria-label="comic-chapter-page-navigation">
+                <!--chapters-->
+                <div class="dropdowns">
+                    <label for="chap">Arc 1: </label> 
+                    <select id="chap" *ngIf="chapterData$ | async as chapter"
+                    (change)="changeChapter($event.target.value)">
+                        <option *ngFor="let chap of chapter"
+                        [value]="chap.Index"
+                        [selected]="chap.ID==currentChapter.ID">
+                            {{ chap.Name }}
+                        </option>
+                    </select> &nbsp;
+                </div>
+                
+                <!--Pages-->
+                <div class="dropdowns">
+                    <label for="page">Page: </label>
+                    <select *ngIf="chapterData$ | async" id="page"
+                    (change)="changePage($event.target.value)">
+                        <option *ngFor="let empty of pageIndex; let ind = index"
+                            [value]="ind"
+                            [selected]="ind==currentPage-1">
+                                {{ ind+1 }}
+                        </option>
+                    </select>
+                </div>
+                <div style="clear:both"></div>
     
+                <!--notes-->
+                <span id="notes" *ngIf="chapterData$ | async">
+                    Notes--{{ currentChapter.Message }}
+                </span>
+            </nav>
+     
 
+            <!--view Radio-->
+            <div id="viewradio">
+                <div style= "display: inline-block;">
+                    <div id="bookmark1">
+                        <app-bookmark
+                        type="Comics"
+                        [path]="path"
+                        [name]="name"
+                        ></app-bookmark>
+                    </div>
 
-    <!--view Radio-->
-    <div id="viewradio" >
-        <div class="break"></div>
-        <div id="radiobox">
-            <input type="radio" id="book" name="pagestyle" checked=true value="book">
-            <label for="book">Pages</label><br/>
-            <input type="radio" id="scroll" name="pagestyle" value="scrolling" disabled="true"> 
-            <label for="scroll" style="color:#8f8f8f">Scrolling</label>
+                    <fieldset id="radiobox">
+                        <input type="radio" id="book" name="pagestyle"
+                        checked=true value="book" disabled="true">
+                        <label for="book" style="color:#8f8f8f">Pages</label><br/>
+                        <input type="radio" id="scroll" name="pagestyle"
+                        value="scrolling" disabled="true"> 
+                        <label for="scroll" style="color:#8f8f8f">Scrolling</label>
+                    </fieldset>
+                </div>
+            </div>
         </div>
-    </div>
-    <div style="clear:both"></div>
-
-<hr>
-
- <!--Loading spinner-->
-<div *ngIf="loading" class="loading"></div>
-
-
-<!--Comic Body-->
-    <div class="container" id="cover">
-        <router-outlet></router-outlet>
-    </div> 
-    <div style="clear:both"></div>
-    <hr>
+        <hr>
 
 
 
+        <!--Loading spinner-->
+        <div *ngIf="loading" class="loading"></div>
 
-    <!--Comic Footer-->
-    <div id="footbox" role="navigation">
+        <!--Comic Body-->
+        <div class="container" id="cover">
+            <router-outlet></router-outlet>
+        </div> 
+        <hr>
 
-        <!--buttons-->
-        <span>
-            <button (click)="onButton(currentPage > 1,-1)"
-            [disabled]="(currentPage === 1 && currentChapter.ID === 0)">Prev</button>
-            <b>------|||------</b>
-            <button (click)="onButton(currentPage < currentChapter.NumPages,1)"
-            [disabled]="(currentPage == currentChapter.NumPages && currentChapter.ID == maxChap)">Next</button>        
-        </span>
+
+
+        <!--Comic Footer-->
+        <div id="footbox" >
+
+            <!--buttons-->
+            <nav aria-label="next-prev-comic-navigation">
+                <button (click)="onButton(currentPage > 1,-1)"
+                [disabled]="(currentPage === 1 && currentChapter.ID === 0)">Prev</button>
+                <b>------|||------</b>
+                <button (click)="onButton(currentPage < currentChapter.NumPages, 1)"
+                [disabled]="(currentPage == currentChapter.NumPages && currentChapter.ID == maxChap)">Next</button>        
+            </nav>
         
-        <span id="help">You can also use your arrow keys!</span>
+            <!-- lower bookmark -->
+            <div id="bookmark2">
+                <app-bookmark
+                type="Comics"
+                [path]="path"
+                [name]="name"
+                ></app-bookmark>
+            </div>
+
+            <span id="help">You can also use your arrow keys!</span>
+        </div>
+
+
+        <!--Side Info-->
+        <aside id="info" role="note" [innerHTML]="mainText"></aside>
+
+
     </div>
-    <div style="clear:both"></div>
-
-      <!--Info-->
-<div id="info" role="complementary" [innerHTML]="mainText"></div>
-</div>
-
 </div>
 

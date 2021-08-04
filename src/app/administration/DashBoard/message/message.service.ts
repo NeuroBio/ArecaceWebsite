@@ -11,18 +11,16 @@ export class MessageService {
   newMessages = new BehaviorSubject<any>('');
   savedMessages = new BehaviorSubject<any>('');
 
-  constructor() { }
-
-  initilizeData(data:any[]){
+  initilizeData(data:any[]) {
     this.newMessages.next(data[0]);
     this.savedMessages.next(data[1]);
   }
 
-  getNewMessages(){
+  getNewMessages() {
     return this.newMessages;
   }
   
-  getOldMessages(){
+  getOldMessages() {
     return this.savedMessages;
   }
 }

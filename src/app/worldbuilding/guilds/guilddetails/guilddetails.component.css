@@ -3,13 +3,18 @@ div#holder {
 }
 
 div.compheader {
-    text-align: center;
-    padding-top: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    justify-content: space-between;
 }
 
 h2 {
+    flex-shrink: 1;
     margin: 0px;
     padding: 0px;
+    overflow-wrap: break-word;
+    max-width: calc(100vw - 102px);
 }
 
 div#insig {
@@ -27,11 +32,24 @@ div.textblockcontainer {
     position: relative;
     display: block;
     float: left;
+    max-width: 780px;
 }
 
 div.textblock {
-    max-width: 1000px;
     display: block;
     min-width: 300px;
     float: none;
 }
+
+div#compstretcher {
+    margin-right: 7px;
+    display: flex;
+    flex-grow: 1;
+    justify-content: center;
+}
+
+app-bookmark {
+    align-self: stretch;
+    flex-grow: 0;  
+}
+

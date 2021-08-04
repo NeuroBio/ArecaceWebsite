@@ -1,6 +1,6 @@
 
-<div id="chooser"
-*ngIf="width > 650; then sidebar else dropdown">
+<div style="max-height: 100px;"
+*ngIf="width > 650 && mobile === false; then sidebar else dropdown">
     <!-- template will replace this div -->
 </div>
 
@@ -8,15 +8,15 @@
 <ng-template #sidebar>
     <app-sidebar
     [current]="current"
-    [labels]="labels"
     [linkList]="linkList"
+    [queryParamsHandling]="queryParamsHandling"
     ></app-sidebar>
 </ng-template>
 
 <ng-template #dropdown>
   <app-drop-down
     [current]="current"
-    [labels]="labels"
     [linkList]="linkList"
+    [queryParamsHandling]="queryParamsHandling"
     ></app-drop-down>
 </ng-template>

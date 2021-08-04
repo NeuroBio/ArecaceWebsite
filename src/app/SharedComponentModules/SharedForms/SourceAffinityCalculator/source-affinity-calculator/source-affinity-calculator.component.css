@@ -4,9 +4,13 @@ Form {
     max-width: 800px;
 }
 
+input {
+    font-size: 18px;
+
+}
+
 input.short {
     width: 50px;
-    font-size: 18px;
 }
 
 div#header {
@@ -24,7 +28,8 @@ form p {
     font-weight: bold;
 }
 
-h2 {
+h3 {
+    font-size: 30px;
     color: black;
     margin: 0px;
 }
@@ -43,6 +48,8 @@ hr#top{
 
 div.stayTogether {
     display: inline-block;
+    word-wrap: break-word;
+    white-space: wrap;
 }
 
 div#bottom {
@@ -66,6 +73,7 @@ div#Error {
 }
 
 button {
+    margin: 2px;
     padding: 7px;
     padding-top: 3px;
     padding-bottom: 3px;
@@ -83,7 +91,22 @@ button:active {
     background-color: rgb(3, 43, 41);
 }
 
+button:disabled {
+    background-color: rgb(167, 167, 167);
+    cursor: default;
+}
+
 li {
     color: black;
     margin: 10px;
+}
+
+#Info {
+    margin-top: 15px;
+    background-color: rgb(136, 218, 213);
+    border: 2px solid rgb(19, 134, 131);;
+}
+
+label {
+    border: 0px;
 }

@@ -1,0 +1,18 @@
+span {
+    display: flex;
+    flex-flow: column;
+    justify-self: center;
+    align-items: center;
+}
+
+img {
+    height: 400px;
+    width: 280px;
+    object-position: left;
+    object-fit: cover;
+}
+
+span a {
+    font-size: 10px;
+    color: rgb(89, 89, 89);
+}

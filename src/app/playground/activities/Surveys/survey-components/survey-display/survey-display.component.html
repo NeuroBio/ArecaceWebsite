@@ -1,0 +1,25 @@
+<main>
+  <form [formGroup]="Form" onSubmit="return false;">
+    <h2>{{ Name }}:</h2>
+  
+    <div formArrayName="Answers">
+        <div *ngFor="let question of Questions; let i = index"
+        [formGroupName]="i">
+  
+          <section class="question">
+            <h3>{{ i+1 + ') ' + question.Question }} </h3>
+            
+            <fieldset [id]="'Answer'+i">
+              <p *ngFor="let answer of question.Answers; let j = index">
+                <input type="radio"  [value]="j" [attr.name]="'Answer'+i" [formControlName]="'Answer'+i" [id]="i + ',' + j">
+                <label [for]="i + ',' + j">{{ answer }}</label>
+              </p>
+            </fieldset>
+          </section><br>
+  
+        </div>
+        <button [disabled]="!Form.valid" (click)="onSubmit()">Submit</button>
+    </div>
+  
+  </form>
+</main>

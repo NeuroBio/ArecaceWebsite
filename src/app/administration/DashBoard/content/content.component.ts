@@ -1,8 +1,9 @@
-import { Component, OnInit }    from '@angular/core';
-import { ActivatedRoute }       from '@angular/router';
+import { Component, OnInit, OnDestroy }   from '@angular/core';
+import { ActivatedRoute }                 from '@angular/router';
+
+import {Subscription}                     from 'rxjs';
 
 import { CRUDcontrollerService }          from '../../services/CRUDcontroller.service';
-import { FirebasePaths } from 'src/app/Classes/FirebasePaths';
 
 @Component({
   selector: 'app-content',
@@ -10,30 +11,38 @@ import { FirebasePaths } from 'src/app/Classes/FirebasePaths';
   styleUrls: ['./content.component.css']
 })
 
-export class ContentComponent implements OnInit {
+export class ContentComponent implements OnInit, OnDestroy {
 
   edit = false;
-  
+  stream: Subscription;
   constructor(private route: ActivatedRoute,
               private controller: CRUDcontrollerService) { }
 
   ngOnInit() {
-    this.controller.assignFirePaths(new FirebasePaths());
     this.controller.assignButtons([true, true, true, true]);
-    this.route.firstChild.url.subscribe(path =>
+    this.stream = this.route.firstChild.url.subscribe(path =>
         this.controller.assignItemType(path[path.length-1].toString())
     );
   }
+
+  ngOnDestroy() {
+    this.stream.unsubscribe();
+    this.controller.assignItemList(undefined);
+  }
   
-  onEditCheck(edit:boolean) {
-    this.edit = edit;
+  onEditCheck(edit: number) {
+    if(edit === 0) {
+      this.edit = false;
+    } else {
+      this.edit = true;
+    }
   }
 
   onAllow(type:number) {
-    if (type===0){
+    if (type === 0) {
       this.controller.updateButton('Delete', false);
       this.controller.updateButton('UpdateAll', false);
-    } else if(type===1) {
+    } else if(type === 1) {
       this.controller.updateButton('Delete', true);
       this.controller.updateButton('UpdateAll', false);
     } else {

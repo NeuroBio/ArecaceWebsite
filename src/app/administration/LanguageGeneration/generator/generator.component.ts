@@ -1,9 +1,12 @@
-import { Component, OnInit, OnDestroy, OnChanges,
-          Output, EventEmitter, Input } from '@angular/core';
-import { Nomadic, Word, WordTypes } from '../../../Classes/rules';
-import { Subscription } from 'rxjs';
-import { CRUDcontrollerService } from '../../services/CRUDcontroller.service';
-import { Validators, FormBuilder }     from '@angular/forms';
+import { Component, OnInit, OnDestroy, 
+          OnChanges, Output, EventEmitter,
+          Input }                           from '@angular/core';
+import { Validators, FormBuilder }          from '@angular/forms';
+
+import { Subscription }                     from 'rxjs';
+
+import { Nomadic, Word, WordTypes }         from '../../../Classes/NomadicLanguage';
+import { CRUDcontrollerService }            from '../../services/CRUDcontroller.service';
 
 @Component({
   selector: 'app-generator',
@@ -12,6 +15,9 @@ import { Validators, FormBuilder }     from '@angular/forms';
 })
 export class GeneratorComponent implements OnInit, OnDestroy, OnChanges {
 
+  @Input() type: string;
+  @Output() wordEmitter: EventEmitter<string> = new EventEmitter();
+
   Dictionary: Word[];
   Nomadic = new Nomadic;
   WordTypes = new WordTypes();
@@ -19,8 +25,6 @@ export class GeneratorComponent implements OnInit, OnDestroy, OnChanges {
   stream: Subscription;
   Form = this.createForm();
   selected: number;
-  @Output() wordEmitter: EventEmitter<string> = new EventEmitter();
-  @Input() type: string;
 
   constructor(private controller: CRUDcontrollerService,
               private fb: FormBuilder) { }
@@ -44,7 +48,7 @@ export class GeneratorComponent implements OnInit, OnDestroy, OnChanges {
       Type: this.type,
       Number: ['10', Validators.pattern("^[0-9]*$")],
       Length: [null, Validators.pattern("^[0-9]*$")]
-    })
+    });
   }
 
   getWords() {

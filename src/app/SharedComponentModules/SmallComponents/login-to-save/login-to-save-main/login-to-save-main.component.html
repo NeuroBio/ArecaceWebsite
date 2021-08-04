@@ -1,0 +1,13 @@
+<div *ngIf="authorized === true; then authenticated else guest"></div>
+
+<ng-template #guest>
+    Log in to save your results:
+    <app-login></app-login>
+</ng-template>
+
+<ng-template #authenticated>
+    <button (click)="saveUserData()"
+    [disabled]="stopClicking === true || Disabled === true"
+    >Save Results</button>
+    <div role="status"> {{ message }} </div>
+</ng-template>

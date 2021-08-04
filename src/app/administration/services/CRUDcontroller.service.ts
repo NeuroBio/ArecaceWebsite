@@ -1,51 +1,57 @@
-import { Injectable }                   from '@angular/core';
-import { FormGroup }                    from '@angular/forms';
+import { Injectable }                           from '@angular/core';
 
-import { map, take }                          from 'rxjs/operators';
-import { BehaviorSubject, Observable, Subject }  from 'rxjs';
+import { map, take }                            from 'rxjs/operators';
+import { BehaviorSubject, Observable, Subject,
+         Subscription}                          from 'rxjs';
 
-import { FireBaseService }              from 'src/app/GlobalServices/firebase.service';
-import { CRUD } from './CRUD.service';
-import { ButtonController } from '../../SharedComponentModules/SharedForms/Buttons/buttoncontroller';
-import { formatDate } from '@angular/common';
-import { NewestCueService } from './newest-cue.service';
+import { FireBaseService }                      from 'src/app/GlobalServices/firebase.service';
+import { CRUD }                                 from './CRUD.service';
+import { ButtonController }                     from '../../SharedComponentModules/SharedForms/Buttons/buttoncontroller';
+import { NewestCueService }                     from './newest-cue.service';
+import { FetchService }                         from 'src/app/GlobalServices/fetch.service';
+import { CacheService }                         from 'src/app/GlobalServices/cache.service';
+
+import { CRUDdata }                             from 'src/app/Classes/ContentClasses';
+import { AllPathInfo }                          from 'src/app/Classes/UploadDownloadPaths';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class CRUDcontrollerService {
-
-  firePaths = new BehaviorSubject<any>(undefined);
   
-  showButtons = new BehaviorSubject<ButtonController>(undefined);
-  allowButtons = new BehaviorSubject<ButtonController>(new ButtonController([true, true, false, false]));
-  
+  firePaths = new AllPathInfo();
   itemType = new BehaviorSubject<string>('');
   itemToEdit = new BehaviorSubject<any>(undefined);
   itemList = new BehaviorSubject<any[]>(undefined);
+  
+  showButtons = new BehaviorSubject<ButtonController>(undefined);
+  allowButtons = new BehaviorSubject<ButtonController>(new ButtonController([true, true, false, false]));
+  ButtonSavedState = new BehaviorSubject<ButtonController>(undefined);
 
-  //activeFormData is: form data[0], new image paths[1], new images[2],
-  //old image paths[3], text path[4], new text[5], old  text path [6] 
-  activeFormData = new BehaviorSubject<any>(undefined);
+  activeFormData = new BehaviorSubject<CRUDdata>(undefined);
   
   message = new BehaviorSubject<string>(undefined);
   triggerProcess = new Subject<any>();
 
+  stream1: Subscription;
+  stream2: Subscription;
+
   constructor(private firebaseserv: FireBaseService,
               private crud: CRUD,
-              private newestCue: NewestCueService) { }
-  
+              private newestCue: NewestCueService,
+              private fetcher: FetchService,
+              private cache: CacheService) {
+    this.stream1 = this.fetcher.loading.subscribe(load => {
+      if(load === true) {
+       this.deActivateButtons();
+      } else if(load === false) {
+        this.reActivateButtons();
+      }
+    })
+  }
+
   //Data fetching functions
-  assignFirePaths(paths: any, itemType: string = '') {
-    this.firePaths.next(paths);
-    this.itemType.next(itemType);
-  }
-
-  assignButtons(states: boolean[]) {
-    this.showButtons.next(new ButtonController(states));
-  }
-
   assignItemType(itemType: string) {
     return this.itemType.next(itemType);
   }
@@ -55,199 +61,227 @@ export class CRUDcontrollerService {
   }
 
   assignItemList(path: string) {
-    return this.getEditableCollection(path).subscribe(collect => {
-      this.itemList.next(collect);
-    });
-  }
+    if(this.stream2) {
+      this.stream2.unsubscribe();
+    }
 
-  quickAssign(Form: FormGroup, edit: any): FormGroup{
-    Object.keys(Form.controls).forEach(key =>{
-      if(typeof(Form.controls[key].value) !== "object"){
-        if(edit[key] !== undefined){
-          Form.controls[key].patchValue(edit[key]);
-        }else{
-          Form.controls[key].patchValue('');
-        }
+    if(path) {
+      if(this.cache.Cache[`${this.itemType.value}-edit`]) {
+        this.cache.Cache[`${this.itemType.value}-edit`]
+        .subscribe(list => this.itemList.next(list));
+      } else {
+        return this.cache.addEditSubscription(this.itemType.value,
+          this.firePaths[this.itemType.value].Fire)
+        .then(() => {
+          this.stream2 = this.cache.Cache[`${this.itemType.value}-edit`]
+            .subscribe(list => this.itemList.next(list));
+        });
       }
-    });
-    return Form;
+    } else {
+      this.itemList.next(undefined);
+    }
   }
 
   getItemType() {
     return this.itemType;
   }
 
-  getEditableCollection(path: string): Observable<any[]>{
-      return this.firebaseserv.returnCollectionWithKeys(path).pipe(
-        map(collect =>
-          collect.sort((a,b) => a.ID > b.ID ? 1:-1),
+  getEditableCollection(path: string): Observable<any[]> {
+    return this.firebaseserv.returnCollectionWithKeys(path).pipe(
+      map(collect =>
+        collect.sort((a,b) => a.ID > b.ID ? 1:-1),
     ));
   }
  
-  getText(link: string){
+  getText(link: string) {
     return this.crud.getText(link);
   }
 
 
-
-
   //Key upload/download functions
   onSubmit() {
-    const buttonState = this.allowButtons.value;
-    this.allowButtons.next(new ButtonController([false, false, false, false]));
-
+    this.deActivateButtons()
     this.message.next("Processing...");
+
     this.triggerProcess.next();
-    this.activeFormData.pipe(take(1)).subscribe(data =>{
-  
+    return this.activeFormData.pipe(take(1))
+    .subscribe((data:CRUDdata) => {
+      
       //submit button hit with invalid form.
-      if(data[0] === "abort"){
-        this.message.next(data[1]);
-        this.allowButtons.next(buttonState);
-        return;
+      if(data.Abort) {
+        return this.throwError({stage: 'Processing', message: data.AbortMessage})
       }
 
-      this.message.next("Submitting...");
-      let meta = data[0];
-      const images = [data[1], data[2], data[3]];
-      const story = [data[4], data[5], data[6]];
-      console.log("images");
-      this.crud.uploadImages(images[0], images[1])
-      .then(links => {
-        meta = this.checkLinks(meta, links);
-        console.log("Text");
-        return this.crud.uploadStory(story[0], story[1])       
-      }).then(link =>{
-        if("StoryLink" in meta){
-          meta.StoryLink = link;
+      this.message.next("Submitting...");console.log("images");
+//IMAGES
+      this.crud.uploadImages(data.NewImageLinks, data.ImageBlobs)
+//TEXT
+      .then(links => {console.log("Text");
+        data.MetaData = this.checkLinks(data.MetaData, links);
+        return this.crud.uploadStory(data.NewTextPath, data.TextBlob)       
+//META DATA
+      }).then(link => {console.log("meta");
+        if("StoryLink" in data.MetaData) {
+          data.MetaData.StoryLink = link;
         }
-        this.newestCue.updateCue(meta, this.itemType.value);
-        // meta.TimeStampCreated = this.createTimestamp();
-        console.log("meta");
-        return this.crud.uploadItem(meta, this.firePaths.value[this.itemType.value]);
+        // this.newestCue.updateCue(
+        //   Object.assign({}, data.MetaData),
+        //   this.itemType.value, 'Created');
+        return this.crud.uploadItem(data.MetaData, this.firePaths[this.itemType.value].Fire);
+//POST UPLOAD
       }).then(() => {
         this.itemToEdit.next(undefined);
         this.message.next("Submitted!");
-        this.allowButtons.next(buttonState);
-      }).catch(err => {
-        console.log(meta)
-        this.throwError(err, buttonState);
+        this.reActivateButtons();
+//ERRORS
+      }).catch(err => {console.log(data.MetaData);
+        this.throwError(err);
       });
     });
   }
 
   async onEdit(all: boolean = false): Promise<any> {
-    const buttonState = this.allowButtons.value;
-    this.allowButtons.next(new ButtonController([false, false, false, false]));
-    let meta: any;
-    let story: any[];
-    let images: any[];
-
+    this.deActivateButtons();
     this.message.next("Processing...");
-    this.triggerProcess.next();
+    let CRUDdata: CRUDdata;
 
+    this.triggerProcess.next();
     return this.activeFormData.pipe(take(1)).toPromise()
-    .then(data => {
-      this.message.next("Editing...");
-      console.log(data);
-      meta = data[0];
-      images = [data[1], data[2], data[3]];
-      story = [data[4], data[5], data[6]];
-      console.log("images");
-      return this.crud.editImages(images[0], images[1], images[2])
-    }).then(links => {
-      meta = this.checkLinks(meta, links);
-      console.log("text");
-      return this.crud.editStory(story[0], story[1], story[2])       
-    }).then(link =>{
-      if("StoryLink" in meta){
-        meta.StoryLink = link;
+    .then(data => {console.log("images");
+      if(data.Abort) {
+        this.throwError({stage: 'Processing', message: data.AbortMessage});
+        return Promise.reject();
       }
-      // meta.TimeStampModified = this.createTimestamp();
-      console.log("meta");
-      return this.crud.editItem(meta,
-              this.firePaths.value[this.itemType.value],
+
+//IMAGES
+      this.message.next("Editing...");
+      CRUDdata = data;
+      return this.crud.editImages(CRUDdata.NewImageLinks,
+        CRUDdata.ImageBlobs, CRUDdata.OldImageLinks);
+//TEXT
+    }).then(links => {console.log("text");
+      CRUDdata.MetaData = this.checkLinks(CRUDdata.MetaData, links);
+      return this.crud.editStory(CRUDdata.NewTextPath,
+        CRUDdata.TextBlob, CRUDdata.OldTextPath);      
+//META DATA
+    }).then(link =>{console.log("meta");
+      if("StoryLink" in CRUDdata.MetaData){
+        CRUDdata.MetaData.StoryLink = link;
+      }
+        // this.newestCue.updateCue(
+        //   Object.assign({}, CRUDdata.MetaData),
+        //   this.itemType.value, 'Edited');  
+      return this.crud.editItem(CRUDdata.MetaData,
+              this.firePaths[this.itemType.value].Fire,
               this.itemToEdit.value.key);
-    }).then(() =>{
-      if(this.itemType.value !== 'Website') {
+//POST UPLOAD
+    }).then(() => {
+      if(this.itemType.value !== 'website') {
         this.itemToEdit.next(undefined);
       }
       this.message.next("Edit successful!");
-      this.allowButtons.next(buttonState);
-    }).catch(err => {
-      this.throwError(err, buttonState);
-      console.log(meta)
-      if(all){
+      this.reActivateButtons();
+//ERRORS
+    }).catch(err => {console.log(CRUDdata.MetaData)
+      this.throwError(err);
+      if(all) {
         return Promise.reject();
       }
     });
   }
 
   onDelete() {
-    const buttonState = this.allowButtons.value;
-    this.allowButtons.next(new ButtonController([false, false, false, false]));
+    this.deActivateButtons()
     this.message.next('Hold on, deleting...');
-    const item = this.itemToEdit.value
+    const item = this.itemToEdit.value;
     
     const links = [];
-    if("Links" in item){
+    if("Links" in item) {
       item.Links.forEach(link => links.push(link));
     }
-    if("StoryLink" in item){
+
+    if("StoryLink" in item) {
       links.push(item.StoryLink);
     }
-    this.crud.deleteItem(links, this.firePaths.value[this.itemType.value], item.key)
+
+    // this.newestCue.updateCue(
+    //   Object.assign({}, this.itemToEdit.value),
+    //   this.itemType.value, 'Deleted');
+    this.crud.deleteItem(links, this.firePaths[this.itemType.value].Fire, item.key)
     .then(() => {
         this.itemToEdit.next(undefined);
         this.message.next('Delete successful!')
-        this.allowButtons.next(buttonState);
+        this.reActivateButtons();
     }).catch(err => {
-        this.throwError(err, buttonState);
+        this.throwError(err);
     });
   }
 
   onUpdateAll() {
-    const buttonState = this.allowButtons.value;
-    this.allowButtons.next(new ButtonController([false, false, false, false]));
+    this.deActivateButtons();
 
-      return this.updateLoop(this.itemList.value).then(() => {      
+    return this.updateLoop(this.itemList.value).then(() => {
       this.message.next("All entries updated!");
-      this.allowButtons.next(buttonState);
-      }).catch(() => this.allowButtons.next(buttonState));
+      this.reActivateButtons();
+      }).catch(() => this.reActivateButtons());
   }
 
   async updateLoop(collect: any[]) {
-    for (const member of collect){
+    for (const member of collect) {
       this.itemToEdit.next(member);
       await this.onEdit(true).catch(() => Promise.reject());
     }
   }
 
-  throwError(err: any, button: ButtonController) {
-    this.message.next(`Execution Failed
-                      Stage: ${err.stage}
-                      Error: ${err.message}`);
-    this.allowButtons.next(button);
-  }
-
-  updateButton(which: string, to: boolean){
-    const buttonState = this.allowButtons.value;
-    buttonState[which] = to;
-    this.allowButtons.next(buttonState);
-  }
-
-  checkLinks(meta: any, links: string[]){
-    if("Links" in meta){
-      if(links[0]){
+  checkLinks(meta: any, links: string[]) {
+    if("Links" in meta) {
+      if(links[0]) {
         meta.Links = links;
-      }else{
+      } else {
         delete meta.Links;
       }
     }
     return(meta);
   }
 
-  createTimestamp() {
-    return formatDate(new Date(), 'yyyy-MM-dd, HH:mm', 'en')
+  throwError(err: any) {
+    this.message.next(`Execution Failed
+                      Stage: ${err.stage}
+                      Error: ${err.message}`);
+    this.reActivateButtons();
+  }
+
+
+  // Button control functions
+  assignButtons(states: boolean[]) {
+    this.showButtons.next(new ButtonController(states));
+  }
+
+  updateButton(which: string, to: boolean) {
+    const buttonState = this.allowButtons.value;
+    buttonState[which] = to;
+    this.allowButtons.next(buttonState);
+  }
+
+  deActivateButtons() {
+    this.ButtonSavedState.next(this.allowButtons.value);
+    this.allowButtons.next(new ButtonController([false, false, false, false]));
+  }
+
+  reActivateButtons() {
+    this.allowButtons.next(this.ButtonSavedState.value);
+  }
+
+  disposal() {
+    this.message.next('');
+  }
+
+  shutDown() {
+    if(this.stream1) {
+      this.stream1.unsubscribe();
+    }
+    if(this.stream2) {
+      this.stream2.unsubscribe();
+    }
   }
 }

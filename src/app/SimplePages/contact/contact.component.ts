@@ -1,9 +1,11 @@
 import { Component, OnInit }        from '@angular/core';
 import { FormBuilder, Validators }  from '@angular/forms';
+import { Title }                    from '@angular/platform-browser';
+
+import { ContactService }           from './contact.service';
+import { AuthService }              from 'src/app/administration/security/Auth/auth.service';
 
 import { messageValidator }         from './Validate';
-import { ContactService }           from './contact.service';
-import { AuthService } from 'src/app/administration/security/Auth/auth.service';
 
 @Component({
   selector: 'app-contact',
@@ -35,18 +37,20 @@ export class ContactComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
               private contactserv: ContactService,
-              private auth: AuthService) { }
+              private auth: AuthService,
+              private titleserv: Title) { }
 
   ngOnInit() {
+    this.titleserv.setTitle('Contact');
     window.scroll(0,0);
     this.resetTimer();
-    if(!this.auth.isLoggedIn) {
+    if(this.auth.isLoggedIn === false) {
       this.auth.anonymousLogin();
     }
   }
 
-  createForm(){
-    return this.fb.group({
+  createForm() {
+    return this.fb.group( {
       Reason: ['', Validators.required],
       FirstName: ['', Validators.required],
       Email: ['', [Validators.required,
@@ -59,113 +63,114 @@ export class ContactComponent implements OnInit {
       LastName: '',
       Phone: '',
       Reply: ''
-    });
+    } );
   }
 
-  retrieveInfo(){
-    const reason:string = this.contactForm.controls.Reason.value
-    if(reason === "Use of my work or attribution"){
+  retrieveInfo() {
+    const reason: string = this.contactForm.controls.Reason.value
+    if(reason === "Use of my work or attribution") {
       this.dropdownInfo = "Make sure you have read list items 4-7 in the FAQ!  There's a link in the footer.";
       this.tempDisable = false;
-    }else if(reason === "I want to tell you about my story!"){
-      this.dropdownInfo = "Your enthusiasm for story craft is awesome, but this isn't the place for that.  Please wait until I have the playground set up!";
+    } else if(reason === "I want to tell you about my story!") {
+      this.dropdownInfo = "Your enthusiasm for story craft is awesome, but this isn't the place for that.  Please wait until I have the playground's forum (development phase 4) set up!";
       this.tempDisable = true;
-    }else{
+    } else {
       this.dropdownInfo = undefined;
       this.tempDisable = false;
     }
   }
 
-  resetTimer(){
+  resetTimer() {
     this.ready = false;
     clearTimeout(this.timeOut);
     this.timeOut = setTimeout(() => {
-      this.ready=true;
-      this.message=undefined;
+      this.ready = true;
+      this.message = undefined;
     }, 5000);
   }
 
-  onSubmit(){
+  onSubmit() {
     this.resetErrors();
     this.active = true;
-    if(this.ready){
+    if(this.ready) {
       const form = Object.assign({}, this.contactForm.value);
       
-      if(this.checkHuman(form)){
-        if(form.Reason !== "I'm a bot :)"){
-          if(this.contactForm.valid){
+      if(this.checkHuman(form)) {
+        if(form.Reason !== "I'm a bot :)") {
+          if(this.contactForm.valid) {
             const reasonIndex = this.reasons.findIndex(rea => rea === form.Reason);
-            this.contactserv.PushMessage(form, reasonIndex).then(() => this.message = "Submitted!");
-          }else{
+            this.contactserv.PushMessage(form, reasonIndex)
+              .then(() => this.message = "Submitted!");
+          } else {
             this.findError();
           }
-        }else{
+        } else {
           this.botPost();
         }
-      }else{
+      } else {
         this.sayPosted();
       }
-    }else{
+    } else {
       this.fastPost();
     }
 
   }
 
-  checkHuman(form:any){
+  checkHuman(form: any) {
     let human = true;
-    if(form.LastName || form.Phone || form.Reply){
+    if(form.LastName || form.Phone || form.Reply) {
         human = false;
     }
     return human;
   }
 
-  resetButton(message:string, reset:boolean){
+  resetButton(message: string) {
     setTimeout(() => {
       this.active = false;
       this.message = message;
-    }, 1000)
+    }, 1000);
   }
  
-  fastPost(){
+  fastPost() {
     setTimeout(() => {
       this.active = false;
       this.message = "You are posting too quickly!";
       this.resetTimer();
-    }, 1000)
+    }, 1000);
   }
 
-  sayPosted(){
+  sayPosted() {
     setTimeout(() => {
       this.message = "Submitted!";
-    }, 1000)
+    }, 1000);
   }
 
-  botPost(){
+  botPost() {
     setTimeout(() => {
       this.message = "Haha, very funny.";
-    }, 1000)
+    }, 1000);
   }
 
-  findError(){
+  findError() {
     setTimeout(() => {
-      if(!this.contactForm.controls.Reason.valid){
-        this.ReasonInvalid = true
+      if(!this.contactForm.controls.Reason.valid) {
+        this.ReasonInvalid = true;
       }
-      if(!this.contactForm.controls.FirstName.valid){
-        this.NameInvalid = true
+      if(!this.contactForm.controls.FirstName.valid) {
+        this.NameInvalid = true;
       }
-      if(!this.contactForm.controls.Email.valid){
-        this.EmailInvalid = true
+      if(!this.contactForm.controls.Email.valid) {
+        this.EmailInvalid = true;
       }
-      if(!this.contactForm.controls.Message.valid){
-        this.MessageInvalid = true
+      if(!this.contactForm.controls.Message.valid) {
+        this.MessageInvalid = true;
       }
       this.active = false;
-      this.message = "There is an error in the form!"
-    }, 1000)
+      this.message = "There is an error in the form!";
+    }, 1000);
   }
 
-  resetErrors(){
+  resetErrors() {
     this.ReasonInvalid = false;
     this.NameInvalid = false;
     this.EmailInvalid = false;

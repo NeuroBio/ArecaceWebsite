@@ -1,19 +1,19 @@
-div.background {
+.background {
     background-color: rgb(53, 53, 53);
     background-image: url(https://firebasestorage.googleapis.com/v0/b/arecaceworld.appspot.com/o/WebSite%2Fsmear5.png?alt=media&token=ba18f0e4-f934-42a9-89c1-25881fcc0612);
 }
 
 div#date {
     position: absolute;
-    margin: 7px;
-    right: 7px;
+    margin: 3px 14px 7px 7px;
+    right: 0px;
 }
 
 div#squishNewest {
     max-width: calc( 100% - 14px);
 }
 div.compheader {
-    padding-top: 20px;
+    padding: 5px 0px 5px 0px;
     display: flex;
     justify-content: center;    
 }
@@ -23,7 +23,12 @@ div#maincontent {
     align-items: center;
 }
 
-div#quickNav {
+nav#quickNav {
+    min-width: 370px;
     margin: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
 }
 

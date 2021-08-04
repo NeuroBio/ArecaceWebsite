@@ -1,8 +1,12 @@
 import { Component, OnInit, OnDestroy }     from '@angular/core';
 import { FormBuilder, FormGroup }           from '@angular/forms';
+
 import { Subscription }                     from 'rxjs';
 
 import { CRUDcontrollerService }            from '../../../services/CRUDcontroller.service';
+import { QuickAssign }                      from 'src/app/GlobalServices/commonfunctions.service';
+
+import { CRUDdata }                         from 'src/app/Classes/ContentClasses';
 
 @Component({
   selector: 'app-storyform',
@@ -20,7 +24,8 @@ export class StoryFormComponent implements OnInit, OnDestroy {
   type: string;
 
   constructor(private controller: CRUDcontrollerService,
-              private fb: FormBuilder) { }
+              private fb: FormBuilder,
+              private qa: QuickAssign) { }
 
   ngOnInit() {
     this.stream1 = this.controller.itemToEdit
@@ -34,6 +39,7 @@ export class StoryFormComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.stream1.unsubscribe();
     this.stream2.unsubscribe();
+    this.controller.disposal();
   }
 
   createForm() {
@@ -50,8 +56,8 @@ export class StoryFormComponent implements OnInit, OnDestroy {
 
   assignFormData(editFormData: any) {
     this.onReset();
-    if(editFormData){
-      this.Form = this.controller.quickAssign(this.Form, editFormData);
+    if(editFormData) {
+      this.Form = this.qa.assign(this.Form, editFormData);
       this.controller.getText(editFormData.StoryLink).subscribe( text =>
         this.Form.controls.Story.setValue(text) );
         this.oldText = editFormData.StoryLink;
@@ -73,13 +79,12 @@ export class StoryFormComponent implements OnInit, OnDestroy {
     Final.ID = `${Final.Title.replace(/\s/g, "")}`;
     var newText = new Blob([text], {type: 'text/plain'});
     
-    this.controller.activeFormData.next([Final,
-                                        [],
-                                        [],
-                                        undefined,
-                                        `${Final.Type}/${Final.ID}`,
-                                        newText,
-                                        oldText]);
+    return this.controller.activeFormData.next(
+      new CRUDdata(false, '', Final,
+                  undefined, undefined, undefined,
+                  `${Final.Type}/${Final.ID}`,
+                  newText,
+                  oldText));
   }
 
   onReset() {

@@ -1,4 +1,6 @@
 <h3>Add/Edit Words</h3>
+
+<!-- Radio buttons -->
 <div>
     <label class="standard" for="Simple">Simple</label>
     <input id="Simple" type="radio" name="options"
@@ -11,10 +13,9 @@
     (click)="pickWordType(false)"><br>
 </div><br>
 
-<div *ngIf="simple === true; then simpleword else complexword">
-    <!-- template will replace this div -->
-</div>
 
+<!-- The word forms -->
+<div *ngIf="simple === true; then simpleword else complexword"></div>
 
 <ng-template #simpleword>
     <app-word-form></app-word-form>
@@ -26,6 +27,8 @@
 
 <hr>
 
+
+<!-- the dictionary -->
 <app-language-table
 [Dictionary]="Dictionary"
 Edit="true"

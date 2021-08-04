@@ -1,0 +1,38 @@
+<span [ngSwitch]="Type">
+
+    <!-- Standard Case: Within Site Routing -->
+    <a *ngSwitchCase="'Route'"
+    #Host tabindex="-1"
+    [routerLink]="[route]" [queryParamsHandling]="queryParamsHandling"
+    class="linklistelement"
+    (click)="click()"
+    [class.selected]="active === true">
+        <ng-container *ngTemplateOutlet="item">
+        </ng-container>
+    </a>
+
+
+    <!-- Routing out to another Website -->
+    <a  *ngSwitchCase="'Href'"
+    #Host tabindex="-1"
+    [href]="href"
+    class="linklistelement"
+    [class.selected]="active === true">
+        <ng-container *ngTemplateOutlet="item"></ng-container>
+    </a>
+
+
+    <!-- Route does not exist -->
+    <span *ngSwitchCase="'Span'"
+    #Host tabindex="-1"
+    class="linklistelement"
+    [class.selected]="active === true">
+        <ng-container *ngTemplateOutlet="item"></ng-container>
+    </span>
+
+</span>
+
+<ng-template #item>
+    <ng-content></ng-content>
+</ng-template>
+

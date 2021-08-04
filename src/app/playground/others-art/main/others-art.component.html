@@ -1,0 +1,30 @@
+<main>
+  <div class="compheader">
+    <h2 class="compheader">
+      <span id="headertext">
+        Arecace Content by Other Artists
+      </span>
+  
+      <app-slider
+      [name]="'Show Preview'"
+      ></app-slider>
+    </h2>
+  </div>
+  <hr>
+
+  <app-pixel-army></app-pixel-army>
+
+  <section id="background">
+    <hr>
+    <br>
+    <app-grid
+    [collect]="arts$ | async">
+    </app-grid>
+  
+  
+    <!--Blow up version-->
+    <router-outlet></router-outlet>
+  </section>
+</main>
+
+

@@ -1,7 +1,8 @@
-import { NgModule }             from '@angular/core';
-import { CommonModule }         from '@angular/common';
+import { NgModule }               from '@angular/core';
+import { CommonModule }           from '@angular/common';
 
-import { UpdateFeedComponent }  from './updatefeed/updatefeed.component';
+import { UpdateFeedComponent }    from './updatefeed/updatefeed.component';
+import { LinkListElementModule }  from '../SmallComponents/LinkList/link-list-element.module';
 
 @NgModule({
   declarations: [
@@ -9,6 +10,7 @@ import { UpdateFeedComponent }  from './updatefeed/updatefeed.component';
   ],
   imports: [
     CommonModule,
+    LinkListElementModule
   ],
   exports: [
     UpdateFeedComponent

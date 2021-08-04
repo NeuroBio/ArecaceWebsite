@@ -1,15 +1,87 @@
-button#logout {
+#useractions {
+    margin-right: 15px;
     float: right;
-    position: sticky;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    max-width: 190px;
 }
 
-div#outer {
+nav#special {
+    display: flex;
+}
+
+app-logout {
+    white-space: nowrap;
+}
+
+.background {
     background-image: url(https://firebasestorage.googleapis.com/v0/b/arecaceworld.appspot.com/o/WebSite%2Fsmear2.png?alt=media&token=03185fb3-b90c-4635-98c7-5e045e6b2579);
 }
 
-div#UserComponents {
+img.icon {
+    width: 46px;
+    height: 46px;
+    padding: 2px;
+    border: whitesmoke 1px solid;
+    background-color: rgb(49, 49, 49);
+    display: inline-block;
+}
+
+img.icon:hover {
+    background-color: rgb(89, 89, 89);
+}
+
+a:focus img.icon {
+    background-color: rgb(89, 89, 89);
+}
+
+img.icon:active {
+    background-color: rgb(150, 150, 150);
+}
+
+a.icon {
+    height: 52px;
+    padding: 0px;
+    display: block;
+    cursor: pointer;
+    margin: 5px;
+}
+
+.UserData {
+    float: left;
+}
+
+#announcement h4 {
+    padding: 15px 15px 0px 15px;
+    margin: 0px;
+    font-size: 24px;
+}
+
+h3.compheader {
+    margin: 0px;
+    padding: 7px;
     display: flex;
-    flex-wrap: wrap;
-    align-content: center;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#announcement {
+    background-color: rgb(49, 49, 49);
+}
+
+div#innerText {
+    padding: 15px;
+}
+
+
+#loggedoutholder {
+    max-width: 400px;
+    padding: 7px;
+    background-color: rgb(29, 29, 29);
+}
+
+#outerloggedoutholder {
+    display: flex;
     justify-content: center;
 }

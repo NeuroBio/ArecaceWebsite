@@ -1,0 +1,78 @@
+
+#background {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    background-color: rgb(53, 53, 53);
+    background-image: url("https://firebasestorage.googleapis.com/v0/b/arecaceworld.appspot.com/o/WebSite%2Fsmear.png?alt=media&token=620e725e-ea44-4670-88a2-210c372066b2");
+}
+
+#everFave {
+    display: flex;
+    background-color: #2b2b2b;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 15px;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+div#imageHolder {
+    position: relative;
+    display: flex;
+    align-self: stretch;
+    max-width: calc(100vw - 33px);
+    overflow-x: auto;
+    align-items: center;
+}
+
+img {
+    /* width: 100%; */
+    background-color: rgb(116, 116, 116);
+}
+
+.textblock {
+    width: 700px;
+    max-width: calc(100vw - 55px);
+}
+
+app-bookmark {
+    float: right;
+    align-self: stretch;
+}
+
+h3 {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0px;
+}
+
+#date {
+    font-size: 18px;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+#othersArt {
+    padding: 3px;
+    background-color: #2b2b2b;
+    text-align: center;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+hr {
+    border: 1px solid white;
+}
+
+div.loading {
+    position: absolute;
+    margin: auto;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    height: 200px;
+    width: 200px;
+}

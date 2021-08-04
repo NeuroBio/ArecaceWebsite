@@ -4,7 +4,7 @@ export class ButtonController {
     Reset: boolean;
     Delete: boolean;
     UpdateAll: boolean;
-    constructor(bool: boolean[]){
+    constructor(bool: boolean[]) {
       this.Submit = bool[0];
       this.Reset = bool[1];
       this.Delete = bool[2];

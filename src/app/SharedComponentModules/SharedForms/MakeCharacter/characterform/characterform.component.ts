@@ -1,38 +1,37 @@
-import { Component, ViewChild, OnInit,
-         OnDestroy, ElementRef }                    from '@angular/core';
-import { FormBuilder, FormArray, FormGroup}         from '@angular/forms';
+import { Component, OnInit, OnDestroy,
+         ViewChild, ElementRef }                    from '@angular/core';
+import { FormBuilder, FormArray,
+         FormGroup, Validators}                     from '@angular/forms';
+
 import { Subscription }                             from 'rxjs';
 
-import { CRUDcontrollerService }                    from '../../../../administration/services/CRUDcontroller.service';
+import { QuickAssign }                              from 'src/app/GlobalServices/commonfunctions.service';
+import { FetchService }                             from 'src/app/GlobalServices/fetch.service';
+import { UploadPreviewService }                     from 'src/app/SharedComponentModules/SharedForms/UploadPreview//upload-preview.service';
 
-import { CharacterMetaData }                        from 'src/app/Classes/charactermetadata';
+import { UploadPreviewSettings }                    from 'src/app/SharedComponentModules/SharedForms/UploadPreview//uploadpreviewclass';
+import { CharacterMetaData }                        from 'src/app/Classes/ContentClasses';
 import { SourceAbilities, Relations }               from '../formclasses';
 import { UploadCharacterDrops }                     from '../uploadcharacterdrops';
-import { BirthdayService } from '../birthday.service';
-
+import { CRUDdata }                                 from 'src/app/Classes/ContentClasses';
 
 
 @Component({
   selector: 'app-characterform',
   templateUrl: './characterform.component.html',
-  styleUrls: ['../../../../administration/Forms/Form.css']
+  styleUrls: ['../../../../administration/Forms/Form.css', './characterform.component.css']
 })
 
-export class CharacterFormComponent implements OnInit, OnDestroy{
+export class CharacterFormComponent implements OnInit, OnDestroy {
 
-//form generator vals
+  @ViewChild('addRelativeButton') addRelativeButton: ElementRef;
+  @ViewChild('addReferenceButton') addReferenceButton: ElementRef;
   DropDowns = new UploadCharacterDrops;
   Form: FormGroup;
 
-  @ViewChild('bioPicThumb', { static: true }) biopicThumbUploader: ElementRef;
-  @ViewChild('bioPicFull', { static: true }) biopicFullUploader: ElementRef;
-  biopicThumbFile: any;
-  biopicFullFile: any;
-  fullFiles: any[];
-  thumbFiles: any[];
-
   stream1: Subscription;
   stream2: Subscription;
+  stream3: Subscription;
   
   SourceAbilitiesArray = this.populateSAbilities();
   RelationsArray: FormArray;
@@ -42,34 +41,40 @@ export class CharacterFormComponent implements OnInit, OnDestroy{
   toneColor2: string;
   activeRegion: string[];
   daysArray: number[];
-  showUnique: boolean;
-  imageFolderPath: string;
 
-  constructor(private fb: FormBuilder,
-              private controller: CRUDcontrollerService,
-              private birthday: BirthdayService) {}
+  showUnique: boolean;
+  noReferences: boolean;
+  noFamily: boolean;
+
+  imageBioPicSettings = new UploadPreviewSettings([[undefined, undefined, '100MB'], [450, 450, '300KB']]);
+  imageRefSettings = new UploadPreviewSettings([[undefined, undefined, '100MB'], [200, 600, '300KB']]);
+
+    constructor(private fb: FormBuilder,
+              private fetcher: FetchService,
+              private qa: QuickAssign,
+              private uploadpreviewserv: UploadPreviewService) {}
 
   ngOnInit() {
-    if(this.controller.itemType.value === 'Character') {
-      this.imageFolderPath = "CharacterBios"
-    } else {
-      this.imageFolderPath = "UserFCs"
-    }
-    this.stream1 = this.controller.itemToEdit
+    this.stream1 = this.fetcher.itemToEdit
       .subscribe(item => this.assignFormData(item));
-    this.stream2 = this.controller.triggerProcess
+    this.stream2 = this.fetcher.processData
       .subscribe(() => this.processForm());
+    this.stream3 = this.Form.valueChanges.subscribe(valid =>
+      this.fetcher.assignvalidity(valid));
   }
 
   ngOnDestroy() {
     this.stream1.unsubscribe();
     this.stream2.unsubscribe();
+    this.stream3.unsubscribe();
+    this.fetcher.disposal();
+    this.uploadpreviewserv.clear();
   }
 
   createForm() {
     return this.fb.group({
-      FirstName: '',
-      LastName: '',
+      FirstName: ['', Validators.required],
+      LastName: ['', Validators.required],
       SMClass: 'Source Magician',
       Occupation: '',
       Country: 'Escholzian',
@@ -108,7 +113,7 @@ export class CharacterFormComponent implements OnInit, OnDestroy{
   assignFormData(editFormData: any) {
     this.onReset();
     if(editFormData) {
-      this.Form = this.controller.quickAssign(this.Form, editFormData);
+      this.Form = this.qa.assign(this.Form, editFormData);
       
       this.Form.controls.SourceAbilities.setValue(
         <SourceAbilities[]>JSON.parse(editFormData.SourceAbilities));
@@ -125,47 +130,78 @@ export class CharacterFormComponent implements OnInit, OnDestroy{
 
       this.showUnique = this.Form.controls.Unique.value.Known;
       this.setdisplayValues();
+      this.uploadpreviewserv.assignOldLinks(this.Form.controls.Links.value);
     }
   }
   
   processForm() {
-    //Invalid Form
-    //Incomplete Form
-    if((this.biopicFullFile === undefined
-      || this.biopicThumbFile === undefined)
-      && this.Form.controls.Links.value === '') {
-       this.controller.activeFormData.next(["abort",
-       "Bio files require a bio image."]);
-       return ;
+    const MainImageData = this.uploadpreviewserv.mainsData;
+    const ThumbImageData = this.uploadpreviewserv.thumbsData;
+    const Final: CharacterMetaData = Object.assign({}, this.Form.value);
+    for(let i = 0; i < MainImageData.length; i++) {
+      if(MainImageData[i] === undefined && !Final.Links[i*2+1]) {
+        if(i === 0) {
+          return this.fetcher.assignActiveFormData(
+            new CRUDdata(true, 'A main bio image is required!'));
+        } else {
+          return this.fetcher.assignActiveFormData(
+            new CRUDdata(true, `At least one of your references (${i}) lacks a main image.`));
+        }
+      }
+
+      if(ThumbImageData[i] === undefined && !Final.Links[i*2]) {
+        if(i === 0) {
+          return this.fetcher.assignActiveFormData(
+            new CRUDdata(true, 'A bio image thumb is required!'));
+        } else {
+          return this.fetcher.assignActiveFormData(
+            new CRUDdata(true, `At least one of your references (${i}) lacks an image thumb.`));
+        }
+      }
+    }
+   
+    if(!Final.FirstName || !Final.LastName) {
+      return this.fetcher.assignActiveFormData(
+        new CRUDdata(true, 'Characters require a first and last name!'));
+    }
+    
+    Final.References = this.createReference(Final.ReferenceIDs, Final.FirstName);
+
+    for(let i = 0; i < Final.References.length; i++) {
+      if(!Final.References[i].ID) {
+        return this.fetcher.assignActiveFormData(
+          new CRUDdata(true, `At least one of your references (${i+1}) lacks a name.`));
+      }
     }
 
-    const Final:CharacterMetaData = Object.assign({}, this.Form.value); 
+
+    const BioPicMain = this.uploadpreviewserv.mainsData[0];
+    const BioPicThumb = this.uploadpreviewserv.thumbsData[0];
+    const RefsMain = Object.assign([], this.uploadpreviewserv.mainsData);
+    RefsMain.splice(0,1);
+    const RefsThumb = Object.assign([], this.uploadpreviewserv.thumbsData);
+    RefsThumb.splice(0,1);
+
     Final.SourceAbilitiesFormatted = this.FormatSA(Final);
     Final.RelationsFormatted = this.FormatRelat(Final);
     Final.SourceAbilities = JSON.stringify(Final.SourceAbilities);
     Final.Relations = JSON.stringify(Final.Relations);
     Final.Unique = JSON.stringify(Final.Unique);
     Final.ID = Final.FirstName.split(' ').join('');
-    Final.References = this.createReference(Final.ReferenceIDs, Final.FirstName);
-
-    const imagePaths = [`${this.imageFolderPath}/${Final.FirstName}-Thumb`,
-                        `${this.imageFolderPath}/${Final.FirstName}-Full`
-                        ].concat(this.refNames(this.fullFiles, Final.FirstName));
     
-    const imageEvents = [this.biopicThumbFile, this.biopicFullFile]
-      .concat(this.combineLinks(this.fullFiles, this.thumbFiles));
-    
-    if(this.imageFolderPath === 'CharacterBios') {
-      this.birthday.updateBirthdayData(Final);
-    }
 
-    this.controller.activeFormData.next([Final,
-                                        imagePaths,
-                                        imageEvents,
-                                        Final.Links,
-                                        undefined,
-                                        undefined,
-                                        undefined]);
+    const imagePaths = [`CharacterBios/${Final.FirstName}-Thumb`,
+                        `CharacterBios/${Final.FirstName}-Full`]
+      .concat(this.refNames(RefsMain, Final.FirstName));
+
+    const imageEvents = [BioPicThumb, BioPicMain]
+      .concat(this.combineEvents(RefsMain, RefsThumb));
+
+    return this.fetcher.assignActiveFormData(
+      new CRUDdata(false, '', Final,
+                  imagePaths,
+                  imageEvents,
+                  Final.Links));
   }
 
   onReset() {
@@ -174,61 +210,52 @@ export class CharacterFormComponent implements OnInit, OnDestroy{
     this.Form = this.createForm();
     this.daysArray = new Array(30);
     this.setdisplayValues();
-    this.biopicFullUploader.nativeElement.value = '';
-    this.biopicFullFile = undefined;
-    this.biopicThumbUploader.nativeElement.value = '';
-    this.biopicThumbFile = undefined;
-    this.fullFiles = [];
-    this.thumbFiles = [];
     this.showUnique = false;
-  }
-
-  uploadBioPicFull(event: any) {
-    this.biopicFullFile = event;
-  }
-
-  uploadBioPicThumb(event: any) {
-    this.biopicThumbFile = event;
-  }
-
-  uploadFull(event: any, index: number) {
-    this.fullFiles[index] = event;
-  }
-
-  uploadThumb(event: any, index: number) {
-    this.thumbFiles[index] = event;
+    this.noReferences = true;
+    this.noFamily = true;
+    this.uploadpreviewserv.reset.next();
+    this.uploadpreviewserv.clear();
+    this.uploadpreviewserv.add();
   }
 
   //Processing functions
   populateSAbilities() {
     let abilityArray:FormArray = new FormArray([]);
-    for(let ability of this.DropDowns.SAbilities){
+    for(let ability of this.DropDowns.SAbilities) {
     abilityArray.push( this.fb.group({Ability: ability, Known: false}) );
     }
     return abilityArray;
   }
 
   addRelative(add: boolean, name: string = '', ship: string = '') {
-    if(add){
+    if(add) {
       (<FormArray>this.Form.controls.Relations)
-      .push(this.fb.group({RelationName: name, Relationship:ship}));
-    }else{
+      .push(this.fb.group({ RelationName: name, Relationship:ship }));
+      this.noFamily = false;
+    } else {
       (<FormArray>this.Form.controls.Relations)
       .removeAt(this.Form.controls.Relations.value.length-1);
+      if(this.Form.controls.Relations.value.length === 0) {
+        this.addRelativeButton.nativeElement.focus();
+        this.noFamily = true;
+      }
     }
   }
 
   addRef(add: boolean, ref: string = '') {
-    if(add){
+    if(add) {
       (<FormArray>this.Form.controls.ReferenceIDs)
         .push(this.fb.group({ Ref: ref }));
-      this.fullFiles.push('');
-      this.thumbFiles.push('');
-    }else{
+      this.uploadpreviewserv.add();
+      this.noReferences = false;
+    } else {
       (<FormArray>this.Form.controls.ReferenceIDs)
         .removeAt(this.Form.controls.ReferenceIDs.value.length-1);
-      this.fullFiles.pop();
-      this.thumbFiles.pop();
+      this.uploadpreviewserv.remove(this.Form.controls.ReferenceIDs.value.length-1);
+      if(this.uploadpreviewserv.mainsData.length === 1) {
+        this.addReferenceButton.nativeElement.focus();
+        this.noReferences = true;
+      }
     }
   }
 
@@ -240,12 +267,12 @@ export class CharacterFormComponent implements OnInit, OnDestroy{
       }
     });
 
-    if(data.Unique.Known){
+    if(data.Unique.Known) {
       abilities.push(data.Unique.Ability);
     }
 
     let final = abilities.join(", ");
-    if(final === ""){
+    if(final === "") {
       final = "None";
     }
     return final;
@@ -253,19 +280,18 @@ export class CharacterFormComponent implements OnInit, OnDestroy{
 
   FormatRelat(data:any) {
     let relations:string[] = [];
-    data.Relations.forEach(relation => {
-      relations.push(`${relation.RelationName}-${relation.Relationship}`)
-    });
+    data.Relations.forEach(relation => 
+      relations.push(`${relation.RelationName}-${relation.Relationship}`) );
 
     let final = relations.join(', ');
-    if(final === ""){
+    if(final === "") {
       final = "None";
     }
     return final;
   }
 
-  combineLinks(full: string[], thumb: string[]) {
-    if(thumb.length > 0){
+  combineEvents(full: string[], thumb: string[]) {
+    if(thumb.length > 0) {
       return thumb.map((thumb,i) => [thumb, full[i]])
         .reduce(function(a,b) {
           return a.concat(b); });
@@ -291,7 +317,7 @@ export class CharacterFormComponent implements OnInit, OnDestroy{
     }
 
     let references: any[] = [];
-    for(let index in ids){
+    for(let index in ids) {
       references.push({
         ID: ids[index].Ref.split(' ').join(''),
         Name: `${name} ${ids[index].Ref}`,
@@ -321,7 +347,7 @@ export class CharacterFormComponent implements OnInit, OnDestroy{
   updateTerritory(nation: string) {
     this.activeRegion = this.DropDowns.countries
       .filter(x => nation === x.id)[0].terr;
-    this.Form.patchValue({Territory: this.activeRegion[0]});
+    this.Form.patchValue({ Territory: this.activeRegion[0] });
   }
 
   updateAge(chosenQT: string) {
@@ -340,8 +366,7 @@ export class CharacterFormComponent implements OnInit, OnDestroy{
     const inches = this.Form.controls.Cm.value*.393701;
     this.Form.patchValue({
       Inch: (inches%12).toFixed(2),
-      Ft: Math.floor(inches/12)
-    });
+      Ft: Math.floor(inches/12) });
   }
 
   getDropData(group:string, id: string, formvalue: string, desired: string) {

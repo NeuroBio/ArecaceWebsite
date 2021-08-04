@@ -1,0 +1,8 @@
+button#del {
+    float: right;
+}
+
+div#buttonholder {
+    background-color: rgb(49, 49, 49);
+    padding: 7px;
+}

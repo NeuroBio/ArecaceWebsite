@@ -1,8 +1,10 @@
 <div #frame id="bookframe" (window:resize)="onResize()">
-    <div [hidden]="loading" role="main" tabindex="0">
+    <main [hidden]="loading === true ? true : false">
+
+<!-- Sub header -->
         <div #main>
             <h3>{{ story.metaData.Title }}</h3>
-            <div #tool class="tooltip">Details
+            <div role="tooltip" #tool class="tooltip" tabindex="0">Details 
                 <div class="tooltiptext" [style.width.px]="leftspace">
                     Synopsis: {{ story.metaData.Synopsis }}
                     <br><br>
@@ -12,8 +14,9 @@
         </div>
         <div style="clear: both"></div>
         <hr>
-            
-        <div id="maintext" [innerHTML]="story.text"></div>            
-    </div>
-
+        
+<!-- Text area -->            
+        <article [innerHTML]="story.text"></article>
+    
+    </main>
 </div>

@@ -1,15 +1,19 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { ShowNewestComponent } from './show-newest/show-newest.component';
-import { RouterModule } from '@angular/router';
+import { NgModule }             from '@angular/core';
+import { CommonModule }         from '@angular/common';
+import { RouterModule }         from '@angular/router';
+
+import { ShowNewestComponent }  from './show-newest/show-newest.component';
+
+import { LinkListElementModule} from '../SmallComponents/LinkList/link-list-element.module';
 
 @NgModule({
   declarations: [
-    ShowNewestComponent
+    ShowNewestComponent,
   ],
   imports: [
     CommonModule,
-    RouterModule
+    LinkListElementModule,
+    RouterModule,
   ],
   exports: [
     ShowNewestComponent

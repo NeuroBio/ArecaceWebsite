@@ -1,0 +1,28 @@
+div#googleBtn{
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    height: 46px;
+    width: 150px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-image: url("src/assets/svgs/g-normal.svg");
+    padding-left: 50px;
+    margin: 7px;
+}
+
+div#googleBtn:hover{
+    background-image: url("src/assets/svgs/g-focus.svg");
+}
+
+div#googleBtn:focus{
+    background-image: url("src/assets/svgs/g-focus.svg");
+}
+
+div#googleBtn:active{
+    background-image: url("src/assets/svgs/g-press.svg");
+}
+
+div#googleBtn:disabled{
+    background-image: url("src/assets/svgs/g-disabled.svg");
+}

@@ -1,8 +1,10 @@
 import { Injectable }                         from '@angular/core';
 import { HttpClient }                         from '@angular/common/http';
+
 import { Observable }                         from 'rxjs';
+
 import { FireBaseService }                    from 'src/app/GlobalServices/firebase.service';
-import { AuthService } from '../security/Auth/auth.service';
+import { AuthService }                        from '../security/Auth/auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -16,19 +18,21 @@ export class CRUD {
 
   uploadImages(paths: string[], images: any[]) {
     if(images[0]){
+
       let links = new Array<string>(paths.length);
       return Promise.all(images.map((event,index) => {//upload each image
         return this.firebaseserv.uploadImage(paths[index], event)
         .then(() => {
           return this.firebaseserv.returnImage(paths[index]).toPromise() //return download link
-        }).then(url => { links[index]=url } )
-      })
-      ).then(() => { return links }) //return all links
+        }).then(url => { links[index]=url } );
+
+      }) ).then(() => { return links }) //return all links
       .catch(err => {
         err.stage = "Upload Images";
         return Promise.reject(err);
-      });   
-    }else{
+      });
+
+    } else {
       return Promise.resolve([]);
     }
   }
@@ -37,28 +41,27 @@ export class CRUD {
     let links = new Array<string>(paths.length);
     return Promise.all(newImages.map((event,index) => {
       
-      if(!event){//change nothing!
+      if(!event) {//change nothing!
         links[index] = oldImages[index];
 
-      }else{//Delete old image and upload new image
+      } else {//Delete old image and upload new image
         return this.removeOldImage(oldImages[index])//this.firebaseserv.deleteImage(oldImages[index]) //delete old image
         .then(() => { return this.firebaseserv.uploadImage(paths[index], event) })//upload new image
         .then(() => { return this.firebaseserv.returnImage(paths[index]).toPromise() })//return download link
-        .then(url => { links[index]=url} )
+        .then(url => { links[index]=url} );
       }
-    })).then(() => { return(links) })
+    }) ).then(() => { return(links) })
     .catch(err => {
       err.stage = "Edit Images";
       return Promise.reject(err);
     });
   }
 
-  private removeOldImage(link:string) {
-    console.log(link)
+  private removeOldImage(link: string) {
     if(link) {
       return this.firebaseserv.deleteImage(link);
     } else {
-      return Promise.resolve(undefined)
+      return Promise.resolve();
     }
   }
 
@@ -67,8 +70,8 @@ export class CRUD {
       return this.firebaseserv.uploadBlob(path, text)//upload the text
       .then(() => { return this.firebaseserv.returnImage(path).toPromise() }//get the downloadlink
       ).catch(err => {
-        err.stage = "Upload Story"
-        return(Promise.reject(err))
+        err.stage = "Upload Story";
+        return(Promise.reject(err));
       });
     } else {
       return Promise.resolve('');
@@ -81,20 +84,20 @@ export class CRUD {
     } else {
       return this.firebaseserv.deleteImage(oldText) //delete old text
       .then(() => { return this.firebaseserv.uploadBlob(path, newText) //upload new text
-      }).then(() =>  { return this.firebaseserv.returnImage(path).toPromise() //get link
+      }).then(() => { return this.firebaseserv.returnImage(path).toPromise() //get link
       }).catch(err => {
-        err.stage = "Edit Story"
-        return(Promise.reject(err))
+        err.stage = "Edit Story";
+        return(Promise.reject(err));
       });
     }
   }
 
-  getText(link:string): Observable<string> {
+  getText(link: string): Observable<string> {
     return this.httpclient.get(link, {responseType: 'text'});
   }
 
 
-  uploadItem(newDoc:any, path:string) {
+  uploadItem(newDoc: any, path: string) {
     return this.firebaseserv.uploadDocument(newDoc, path)
     .catch(err => {
       err.stage = "Upload Item";
@@ -102,7 +105,7 @@ export class CRUD {
     });;
   }
 
-  editItem(editDoc:any, path:string, docKey:string) {
+  editItem(editDoc :any, path: string, docKey: string) {
       return this.firebaseserv.editDocument(editDoc, path, docKey)
       .catch(err => {
         err.stage = "Edit Item";
@@ -110,11 +113,10 @@ export class CRUD {
       });;
   }
 
-  //removed string[] = []
-  deleteItem(StorageUrls:string[], docPath:string, docKey:string){
-    return Promise.all(StorageUrls.map(pic =>{
-      return this.firebaseserv.deleteImage(pic)
-    })).then(()=>
+  deleteItem(StorageUrls: string[], docPath: string, docKey: string){
+    return Promise.all(StorageUrls.map(pic => {
+      return this.firebaseserv.deleteImage(pic);
+    }) ).then(() =>
       this.firebaseserv.deleteDocument(docPath, docKey)
     ).catch(err => {
       err.stage = "Delete Item and Images";

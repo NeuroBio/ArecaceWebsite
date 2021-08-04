@@ -1,14 +1,21 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { FormGroup, FormBuilder, FormArray } from '@angular/forms';
-import { Subscription } from 'rxjs';
-import { CRUDcontrollerService } from 'src/app/administration/services/CRUDcontroller.service';
-import { SurveyStatsService } from '../survey-stats.service';
+import { Component, OnInit, OnDestroy }       from '@angular/core';
+import { FormGroup, FormBuilder, FormArray }  from '@angular/forms';
+
+import { Subscription }                       from 'rxjs';
+
+import { CRUDcontrollerService }              from 'src/app/administration/services/CRUDcontroller.service';
+import { SurveyStatsService }                 from '../survey-stats.service';
+import { QuickAssign }                        from 'src/app/GlobalServices/commonfunctions.service';
+
+
+import { CRUDdata }                           from 'src/app/Classes/ContentClasses';
 
 @Component({
   selector: 'app-survey-stats',
   templateUrl: './survey-stats.component.html',
   styleUrls: ['../../Form.css']
 })
+
 export class SurveyStatsComponent implements OnInit , OnDestroy {
 
   Form: FormGroup;
@@ -25,7 +32,8 @@ export class SurveyStatsComponent implements OnInit , OnDestroy {
   
   constructor(private fb: FormBuilder,
               private controller: CRUDcontrollerService,
-              private statsserv: SurveyStatsService) { }
+              private statsserv: SurveyStatsService,
+              private qa: QuickAssign) { }
   
   ngOnInit() {
     this.stream1 = this.controller.itemToEdit
@@ -42,6 +50,7 @@ export class SurveyStatsComponent implements OnInit , OnDestroy {
     this.stream1.unsubscribe();
     this.stream2.unsubscribe();
     this.stream3.unsubscribe();
+    this.controller.disposal();
   }
 
   createForm() {
@@ -55,7 +64,7 @@ export class SurveyStatsComponent implements OnInit , OnDestroy {
     this.onReset();
     if(editFormData) {
       const safeCopy = Object.assign({}, editFormData);
-      this.controller.quickAssign(this.Form, safeCopy);
+      this.qa.assign(this.Form, safeCopy);
       delete safeCopy.ID;
       delete safeCopy.key;
       delete safeCopy.UploadTime;
@@ -76,18 +85,12 @@ export class SurveyStatsComponent implements OnInit , OnDestroy {
     })
     Final.ID = this.Form.value.ID;
     if(Final.ID === '') {
-      this.controller.activeFormData.next(["abort",
-      "Survey Stats must have at least an ID."]);
-      return ;
+      return this.controller.activeFormData.next(
+        new CRUDdata(true, 'Survey Stats must have at least an ID.'));
     }
 
-    this.controller.activeFormData.next([Final,
-                                        [],
-                                        [],
-                                        [],
-                                        undefined,
-                                        undefined,
-                                        undefined]);
+    return this.controller.activeFormData.next(
+      new CRUDdata(false, '', Final));
   }
 
   onReset() {
@@ -98,7 +101,7 @@ export class SurveyStatsComponent implements OnInit , OnDestroy {
   }
 
   addOutcome(add: boolean, index: number, name: string = 'test') {
-    if(add){
+    if(add) {
       this.outcomes.controls.push(this.fb.group({Name: name}));
     } else {
       this.outcomes.removeAt(index);
@@ -114,8 +117,8 @@ export class SurveyStatsComponent implements OnInit , OnDestroy {
       this.outcomes.removeAt(this.outcomes.length-1));
     this.surveys[index].Outcomes.forEach(o => {
       this.addOutcome(true, 0, o)
-    })
+    });
 
-    this.Form.patchValue({ID: this.surveys[index].ID})
+    this.Form.patchValue({ID: this.surveys[index].ID});
   }
 }

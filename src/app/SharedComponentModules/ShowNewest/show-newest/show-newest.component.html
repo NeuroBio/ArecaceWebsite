@@ -1,25 +1,42 @@
 
 <div id="outer">
-  <h3>Newest Posts in {{ contentType | titlecase }}</h3>
+  <h3>{{ contentType }}</h3>
   
   <div id="pickItems">
-      <img #left id="left" src="assets/svgs/back.svg"
-        alt="Prev" (click)="scroll(false)" tabindex="0">
 
-      <div #items role="nav" id="inner" *ngIf="display$ | async as display">
-        
-        <a class="strokeme displayItem" *ngFor="let member of display"
-          [style.background-image]="'url('+member.Image+')'"
-          [routerLink]="member.Link">
-          {{ member.Name }}
-        </a>
-      </div>
+    <!-- LEFT ARROW -->
+      <img #left id="left" src="assets/svgs/back.svg"
+        alt="Prev" (click)="scroll(false)" tabindex="-1">
+
+
+
+      <!-- NEWEST ITEMS -->
+      <nav *ngIf="display$ | async as display" #itemBand>
+        <div id="itemBand" >
+          <app-link-list class="NewestCue" [list]="display">
+
+            <!-- Item Template -->
+            <ng-template let-item #Item>
+               <div class="strokeme displayItem"
+               [style.background-image]="'url('+item.Item.Image+')'">
+                 {{ item.Item.Name }}
+               </div>
+            </ng-template>
+
+        </app-link-list>
+
+        </div>
+      </nav>
+
+
+
+      <!-- RIGHT ARROW -->
       <img #right id="right" src="assets/svgs/back.svg"
-        alt="Next" (click)="scroll(true)" tabindex="0">
+        alt="Next" (click)="scroll(true)" tabindex="-1">
   </div>
 
 
-  <a id="seeAll" [routerLink]="contentLink">
-    See all {{ contentType | titlecase }}
+  <a *ngIf="contentLink" id="seeAll" [routerLink]="contentLink">
+    {{ footerText }}
   </a>
 </div>

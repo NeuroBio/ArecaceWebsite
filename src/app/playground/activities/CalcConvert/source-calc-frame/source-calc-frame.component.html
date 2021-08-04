@@ -1,0 +1,13 @@
+<select *ngIf="canonSA" (change)="populateForm($event.target.value)">
+  <option value="-1" selected="true">
+    Canon Builds</option>
+  <option *ngFor="let canon of canonSA; let i = index"
+    [value]="i">{{ canon.ID.replace('-', ' ') }}</option>
+</select>
+
+<app-source-affinity-calculator
+[showName]="isUser === true"
+></app-source-affinity-calculator><br>
+
+<app-login-to-save-main
+></app-login-to-save-main>

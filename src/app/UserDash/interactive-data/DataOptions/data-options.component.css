@@ -1,0 +1,43 @@
+.outer {
+    background-color: rgb(69, 69, 69);
+    width: 400px;
+    padding: 7px;
+}
+
+h4 {
+    padding: 7px;
+    margin: 0px;
+}
+
+/* List app */
+::ng-deep app-master-link-list.DiplayUserData li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px;
+    width: calc(100% - 10px);
+}
+
+::ng-deep app-master-link-list.DiplayUserData app-link-list ul {
+    display: inline;
+}
+
+::ng-deep app-master-link-list.DiplayUserData app-link-list li {
+    display: inline;
+}
+
+::ng-deep app-master-link-list.DiplayUserData span {
+    display: inline-block;
+    margin: 3px;
+}
+
+/* Template */
+button {
+    margin: 0px
+}
+
+
+::ng-deep app-master-link-list.DiplayUserData app-link-list  {
+    display: inline;
+    white-space: nowrap
+}

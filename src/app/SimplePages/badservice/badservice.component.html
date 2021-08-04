@@ -1,25 +1,21 @@
-<div class="textblock">
+<main class="textblock">
   <h3>Well, this isn't good...</h3>
  
-  <p>If you ended up here, then one of a few things have happened:</p>
+  <p *ngIf="service === undefined">Checking your connection...!</p>
+  <p *ngIf="online === false">
+    The app is currently functioning in offline mode, so server requests cannot be completed.  You will need to get back online to go to the page you requested.
+  </p>
+  <p *ngIf="service !== undefined && online === true">TegaBot tested whether you could connect to the server and found that
+    <span *ngIf="service===true"> your connection was fine.</span>
+    <span *ngIf="service===false"> a connection could not be established.</span><br>
+    <button type="button" (click)="checkAgain()">Test again?</button>
+  </p>
+  <br><br>
  
-  <ol>
-    <li>Your connection is sketchy and cannot reach the google cloud server
-        in a timely fashion.  If you bring up the developer console on
-        desktop/laptops (F12 key) and see a red error message telling you
-        that your connection is not healthy, that is the issue.
-        Try again later or move somewhere with better reception!
-    </li><br>
-    <li>You lost contact with the internet at some point and the webpage is not
-        appropriately re-establishing a connection.  Go back a page and refresh!
-    </li><br>
-    <li>Google cloud is misbehaving.  If your connection is fine,
-        please send a support request!
-    </li>
-  </ol>
+  <p>If your connection to the server is faulty, the problem could be your internet connection, or google's servers may be having an issue (feel free to contact me).  If your connection to the server is fine, try try to go to the page you requested again.  If you end up back here, you may have discovered a bug in my code.  Definitely contact me!</p>
 
-  <p><a routerLink="contact">Contact Me About Server Issues</a><br>
+  <p><a routerLink="/contact">Contact Me About Navigation/Connection Issues</a><br>
     <span id="info">Please tell me what page you tried
       to navigate to in the request!</span>
   </p>
-</div>
+</main>

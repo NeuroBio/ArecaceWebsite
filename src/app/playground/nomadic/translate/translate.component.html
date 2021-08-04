@@ -1,13 +1,15 @@
-<form [formGroup]="Form">
+<form [formGroup]="Form" id="TransForm">
     <!-- Drop downs -->
-    <div class="trans">Translate:</div>
-    <select formControlName="NtoE"  (change)="switchDict()">
+    <label for="TranslationDirection" class="trans">Translate:</label>
+    <select formControlName="NtoE"  (change)="switchDict()"
+    id="TranslationDirection">
         <option value="true"> Nomadic to English </option>
         <option value="false"> English to Nomadic </option>
     </select> <br>
 
-    <div class="trans">Add Word:</div>
-    <select (change)="addWord($event.target.value)">
+    <label for="wordSelect" class="trans">Add Word:</label>
+    <select (change)="addWord($event.target.value)"
+    id="wordSelect">
         <option *ngFor="let word of keys"
         [value]="word">
             {{ word }}
@@ -15,17 +17,22 @@
     </select><br><br>
 
     <!-- Translation boxes -->
-    <div class="trans">Your Text:<br>
+    <div class="trans">
+        Your Text:<br>
         <textarea formControlName="RawText" rows=10 cols=40
         (change)="translate()" (keyup)="translate()"
         ></textarea>
     </div>
 
-    <div class="trans">Translation:<br>
+    <output class="trans" for="TransForm" aria-live="polite">
+        Translation:<br>
         <textarea rows=10 cols=40 readonly>{{ translation }}</textarea>
-    </div>
-    <br><br>
-    <div id="note">Notes:
+    </output>
+
+    <br><br><br>
+    <hr>
+    <aside id="note">
+        <h4>Notes:</h4>
         <ol>
             <li>This is a word-for-word translator.  It will not reorganize words into their proper gramatical placement.</li>
             <li>The translator can handle standard english plurals, possessives, and plural possessives, but unusual plurals (e.g. child to children) will be lost.  Adding an 's' to the singular form can bypass this issue (e.g. childs).</li>
@@ -35,6 +42,6 @@
             <li>The translator assumes the pronoun "we" is inclusive. To use exclusive we, type "we*".</li>
             <li>The translator assumes the pronouns "they" and "he/she/it" are familiar. To use unfamiliar forms, add a "*" to the end of the pronoun.</li>
         </ol>
-    </div>
+    </aside>
     
 </form>

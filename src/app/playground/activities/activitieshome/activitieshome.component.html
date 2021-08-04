@@ -1,0 +1,19 @@
+<div class="background">
+    <div class="compheader">
+        <h2 class="compheader">Activities</h2> <br>
+    </div>
+    <hr>
+
+    <!-- Activity choices -->
+    <nav class="toggler" aria-label="Activity-Navigation">
+        <app-toggler
+        [toggles]="linkNames"
+        togglerTitle="Pick an Activity"
+        toggleName="PickActivity"
+        [current]="selected"
+        (choiceEmitter)="pickActivity($event)"
+        ></app-toggler>
+    </nav>
+
+    <router-outlet></router-outlet>
+</div>

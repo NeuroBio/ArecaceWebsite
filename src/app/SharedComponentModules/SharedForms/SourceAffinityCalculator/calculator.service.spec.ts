@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { CalculatorService } from './calculator.service';
+import { SourceAbilityCalculatorService } from './source-ability-calculator.service';
 
-describe('CalculatorService', () => {
+describe('SourceAbilityCalculatorService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: CalculatorService = TestBed.get(CalculatorService);
+    const service: SourceAbilityCalculatorService = TestBed.get(SourceAbilityCalculatorService);
     expect(service).toBeTruthy();
   });
 });

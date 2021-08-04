@@ -1,15 +1,19 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Subscription, Subject } from 'rxjs';
-import { FormBuilder } from '@angular/forms';
-import { CRUDcontrollerService } from '../../services/CRUDcontroller.service';
-import { takeUntil } from 'rxjs/operators';
-import { Question } from 'src/app/Classes/faq';
+import { FormBuilder }                  from '@angular/forms';
+
+import { Subscription, Subject }        from 'rxjs';
+import { takeUntil }                    from 'rxjs/operators';
+
+import { CRUDcontrollerService }        from '../../services/CRUDcontroller.service';
+import { Question }                     from 'src/app/Classes/WebsiteText';
+import { CRUDdata }                     from 'src/app/Classes/ContentClasses';
 
 @Component({
   selector: 'app-faq-text',
   templateUrl: './faq-text.component.html',
   styleUrls: ['../Form.css']
 })
+
 export class FaqTextComponent implements OnInit, OnDestroy {
 
   Form = this.createForm();
@@ -22,17 +26,16 @@ export class FaqTextComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.controller.itemToEdit
-    .pipe(takeUntil(this.stop$))
-    .subscribe(item => {
-      this.assignFormData(item);
-    });
+      .pipe(takeUntil(this.stop$))
+      .subscribe(item => this.assignFormData(item));
 
     this.stream1 = this.controller.triggerProcess.subscribe(() => this.processForm());
   }
 
   ngOnDestroy() {
-    this.stop$.next(true)
+    this.stop$.next(true);
     this.stream1.unsubscribe();
+    this.controller.disposal();
   }
 
   createForm() {
@@ -47,9 +50,8 @@ export class FaqTextComponent implements OnInit, OnDestroy {
       this.onReset();
       this.QuestionsArray;
       const Questions = <Question[]>JSON.parse(editFormData.Questions);
-      Questions.forEach(question => {this.addQuestion(
-        true, question.Question, question.Answer, question.RouterLink
-      )});
+      Questions.forEach(question => 
+        this.addQuestion(true, question.Question, question.Answer, question.RouterLink));
       this.stop$.next(true);
     }
   }
@@ -57,13 +59,8 @@ export class FaqTextComponent implements OnInit, OnDestroy {
   processForm() {
     const Final = Object.assign({}, this.Form.value);
     Final.Questions = JSON.stringify(Final.Questions);
-    this.controller.activeFormData.next([Final,
-                                         [],
-                                         [],
-                                         [],
-                                         undefined,
-                                         undefined,
-                                         undefined]);
+    this.controller.activeFormData.next(
+      new CRUDdata(false, '', Final));
   }
 
   onReset() {
@@ -74,13 +71,12 @@ export class FaqTextComponent implements OnInit, OnDestroy {
 
   addQuestion(add: boolean, question: string = '',
               answer: string = '', routerLink: string = '') {
-    if(add){
+    if(add) {
       this.QuestionsArray.push(this.fb.group({
                                   Question: question,
                                   Answer: answer,
-                                  RouterLink: routerLink})
-      );
-    }else{
+                                  RouterLink: routerLink}));
+    } else {
       this.QuestionsArray.removeAt(this.QuestionsArray.value.length-1);
     }
   }

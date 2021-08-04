@@ -1,0 +1,26 @@
+section#frame {
+    display: block;
+    max-height: 500px;
+    width: calc(100% - 22px);
+    max-width: 600px;
+    border: 1px solid white;
+    margin: 10px;
+    overflow-y: auto;
+}
+
+div#frameheader {
+    position: -webkit-sticky;
+    position: sticky;
+    display: block;
+    top: 0px;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+h4#frameheader {
+    font-size: 25px;
+    padding: 5px 0px 5px 0px;
+    margin: 0px;
+    font-weight: bold;
+    text-align: center;
+
+}

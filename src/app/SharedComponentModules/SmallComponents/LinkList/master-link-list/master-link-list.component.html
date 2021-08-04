@@ -1,0 +1,40 @@
+<ul #list class="menubar"
+[attr.tabindex]="leave === true ? -1 : 0"
+(keydown)="handleKeyDown($event)" (focus)="focus()">    
+
+    <li *ngFor="let list of linkList, let i = index"
+    class="menuitem">
+        <!-- Label -->
+        <ng-container
+        [ngTemplateOutlet]="labelTemplateRef"
+        [ngTemplateOutletContext]="{$implicit: list}">
+        </ng-container>
+
+        <!-- <hr *ngIf="i!==0">
+        <div class="linklistlabel" id="type">{{ list.Name }}</div>
+        <hr> -->
+
+
+        <!-- Actual Link List -->
+        <app-link-list
+        [label]="list.Name"
+        [list]="list.Data"
+        [current]="current"
+        [queryParamsHandling]="queryParamsHandling"
+        (lableEmitter)="onSelect($event)">
+            <!-- Item Template -->
+            <ng-template let-item #Item>
+                <ng-container
+                [ngTemplateOutlet]="itemTemplateRef"
+                [ngTemplateOutletContext]="{$implicit: item}">
+                </ng-container>
+            </ng-template>
+            <ng-template let-i #Decoration>
+                <ng-container
+                [ngTemplateOutlet]="decorationTemplateRef"
+                [ngTemplateOutletContext]="{$implicit: i}">
+                </ng-container>
+            </ng-template>
+        </app-link-list>
+    </li>
+</ul>

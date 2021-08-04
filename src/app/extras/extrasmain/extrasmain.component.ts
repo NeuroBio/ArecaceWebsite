@@ -1,9 +1,9 @@
-import { Component, OnInit }          from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 
-import { Observable }                 from 'rxjs';
-import { map }                        from 'rxjs/operators';
+import { Observable, Subscription }     from 'rxjs';
+import { map }                          from 'rxjs/operators';
 
-import { GeneralcollectionService }   from 'src/app/GlobalServices/generalcollection.service';
+import { GeneralcollectionService }     from 'src/app/GlobalServices/generalcollection.service';
 
 @Component({
   selector: 'app-extrasmain',
@@ -11,18 +11,22 @@ import { GeneralcollectionService }   from 'src/app/GlobalServices/generalcollec
   styleUrls: ['./extrasmain.component.css']
 })
 
-export class ExtrasMainComponent implements OnInit {
+export class ExtrasMainComponent implements OnInit, OnDestroy {
 
   current: string;
   arts$: Observable<string[]>;
+  stream: Subscription;
 
   constructor(private generalcollectserv: GeneralcollectionService) { }
 
   ngOnInit() {
     window.scroll(0,0);
     this.arts$ = this.generalcollectserv.returnMetaData().pipe(
-      map(art => art.sort((a,b) => a.Date > b.Date ? -1 : 1))
-    )
+      map((art: any[]) => art.sort((a,b) => a.Date > b.Date ? -1 : 1)) );
+  }
+
+  ngOnDestroy() {
+    this.generalcollectserv.dispose();
   }
 
 }

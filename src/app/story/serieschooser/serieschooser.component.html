@@ -1,37 +1,37 @@
 <div id="splatter">
-  <div id="storynav" role="navigation">
+  <div id="maxTop">
+    <nav id="storynav" aria-label="Story-type-Series-and-Title-navigation">
   
-      
-    <!--Info from urlsegment 1-->
-    <div class="radio">
-        <input type="radio" name="storytype" id="Script"
-        [checked]="storyType === 'Scripts'"
-        (change)="updateType('Scripts')">
-        <label for="Script">Scripts</label>
-        <br>
-        <input type="radio" name="storytype" id="Narrative"
-        [checked]="storyType === 'Narratives'"
-        (change)="updateType('Narratives')">
-        <label for="Narrative">Narratives</label>
-    </div>
+      <!--Info from urlsegment 1-->
+      <fieldset id="radio" aria-label="Story-Type">
+          <input type="radio" name="storytype" id="Script"
+          [checked]="storyType === 'Scripts'"
+          (change)="updateType('Scripts')">
+          <label for="Script">Scripts</label>
+          <br>
+          <input type="radio" name="storytype" id="Narrative"
+          [checked]="storyType === 'Narratives'"
+          (change)="updateType('Narratives')">
+          <label for="Narrative">Narratives</label>
+      </fieldset>
+  
+      <div *ngIf="localLoading===true" class="loading"></div>
+      <div [hidden]="localLoading" id="dropbox">
 
-    <!--Info from urlsegment 2-->      
-    <div *ngIf="localLoading===true" class="loading"></div>
-    <div [hidden]="localLoading">
-      <!-- <div *ngIf="seriesMetaData$ | async as seriesMetaData" class="drops"> -->
-        <div class="drops" [style.display]="this.localLoading ? 'none' : 'inline-block'">
-          Series:
-          <select (change)="changeSeries($event.target.value)">
-            <option *ngFor="let series of seriesIDs, let i = index"
-            [selected]="series === currentSeries"
-            [value]="series">
-              {{ seriesNames[i] }}
-            </option>
-          </select>
-        </div>
-        
-        <!--Info from urlsegment 3-->
-        <div class="drops">
+          <!--Info from urlsegment 2-->
+          <div class="drops" [style.display]="this.localLoading ? 'none' : 'inline-block'">
+            Series:
+            <select (change)="changeSeries($event.target.value)">
+              <option *ngFor="let series of seriesIDs, let i = index"
+              [selected]="series === currentSeries"
+              [value]="series">
+                {{ seriesNames[i] }}
+              </option>
+            </select>
+          </div>
+          
+          <!--Info from urlsegment 3-->
+          <div class="drops">
             Section:
             <select (change)="changeSection($event.target.value)">
               <option *ngFor="let title of titlesInSeries"
@@ -40,12 +40,18 @@
                 {{ title.Title }}
               </option>
             </select>
+          </div>
+
         </div>
-    
-    </div>
-    <div style="clear: both"></div>
-    
+
+      <app-bookmark
+      [type]="storyType"
+      [path]="path"
+      [name]="name"
+      ></app-bookmark>  
+      
+    </nav>
   </div>
 
-  <router-outlet></router-outlet>
+    <router-outlet></router-outlet>
 </div>

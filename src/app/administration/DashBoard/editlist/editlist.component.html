@@ -7,9 +7,9 @@
 <div *ngIf="loading === false">
     <ul class="sidebarlist" *ngFor="let item of selectable, let i = index">
         <li class="sidebarlist"
-        [class.selected.sidebarlist] = "item.ID===selected"
+        [class.selected.sidebarlist] = "item.ID === selected"
         (click)="onSelect(item.ID,i)">
             {{ item.ID }}
-        </li>        
-    </ul>                
+        </li>
+    </ul>
 </div>

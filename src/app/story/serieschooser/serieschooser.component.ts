@@ -1,11 +1,10 @@
 import { Component, OnInit, OnDestroy }     from '@angular/core';
-import { ActivatedRoute, Router }           from '@angular/router'
+import { ActivatedRoute, Router }           from '@angular/router';
 
-import { Observable, Subscription }         from 'rxjs';
-import { tap }                              from 'rxjs/operators';
+import { Subscription }                     from 'rxjs';
 
-import { StoryService }                     from '../story.service'
-import { StoryMetaData }                    from 'src/app/Classes/storymetadata'
+import { StoryService }                     from '../story.service';
+import { StoryMetaData }                    from 'src/app/Classes/ContentClasses';
 
 @Component({
   selector: 'app-serieschooser',
@@ -23,6 +22,8 @@ export class SeriesChooserComponent implements OnInit, OnDestroy {
   currentSection: string;
   titlesInSeries: StoryMetaData[];
   storyType: string;
+  path: string;
+  name: string;
   localLoading: boolean;
 
   stream1: Subscription;
@@ -44,7 +45,7 @@ export class SeriesChooserComponent implements OnInit, OnDestroy {
       this.seriesNames = Object.values(IDName);
     });
 
-    this.stream2 = this.storyserv.getSeriesData().subscribe(titles =>
+    this.stream2 = this.storyserv.getSeriesData().subscribe(titles => 
       this.titlesInSeries = titles);
 
     this.stream3 = this.storyserv.storyType.subscribe(string => { 
@@ -62,6 +63,7 @@ export class SeriesChooserComponent implements OnInit, OnDestroy {
       this.currentSection = sec;
       this.storyserv.updateLoading(true);
       this.localLoading = false;
+      this.updatePath();
     });
   }
 
@@ -71,21 +73,31 @@ export class SeriesChooserComponent implements OnInit, OnDestroy {
     this.stream3.unsubscribe();
     this.stream4.unsubscribe();
     this.stream5.unsubscribe();
+    this.storyserv.dispose();
   }
 
-  changeSeries(series:string){
+  changeSeries(series:string) {
     this.router.navigate([`../${series}`], { relativeTo: this.route });
   }
 
-  changeSection(section:string){
+  changeSection(section:string) {
     this.router.navigate([`${section}`], { relativeTo: this.route });
   }
 
   updateType(scripts: string) {
-    if(scripts === 'Scripts') {
-      this.router.navigate([`../../Scripts`], { relativeTo: this.route });
-    }else{
-      this.router.navigate([`../../Narratives`], { relativeTo: this.route });
+    if(scripts !== this.storyType) {
+      this.storyserv.dispose();
+      if(scripts === 'Scripts') {
+        this.router.navigate([`../../Scripts`], { relativeTo: this.route });
+      } else {
+        this.router.navigate([`../../Narratives`], { relativeTo: this.route });
+      }
     }
+  }
+
+  updatePath() {
+    this.path = `story/${this.storyType}/${this.currentSeries}/${this.currentSection}`;
+    const Section = this.titlesInSeries.find(sec => sec.ID === this.currentSection);
+    this.name = `${Section.Series}: ${Section.Title}`;
   }
 }

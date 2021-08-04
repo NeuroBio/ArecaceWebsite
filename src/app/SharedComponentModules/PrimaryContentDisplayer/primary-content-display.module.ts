@@ -5,8 +5,9 @@ import { RouterModule }               from '@angular/router';
 import { DetailsDisplayComponent }    from './ContentDisplay/details-display/details-display.component';
 import { MainDisplayComponent }       from './ContentDisplay/main-display/main-display.component';
 import { NotFoundComponent }          from './ContentDisplay/notfound/notfound.component';
-import { LinkListModule } from './LinkListDisplay/linklist.module'
-import { GridBlowupModule } from './GridBlowUp/grid-blowup.module';
+import { LinkListModule }             from './LinkListDisplay/linklist.module'
+import { GridBlowupModule }           from './GridBlowUp/grid-blowup.module';
+import { BookmarkModule }             from '../SmallComponents/bookmark/bookmark.module';
 
 
 @NgModule({
@@ -19,6 +20,7 @@ import { GridBlowupModule } from './GridBlowUp/grid-blowup.module';
     CommonModule,
     LinkListModule,
     GridBlowupModule,
+    BookmarkModule,
     RouterModule
   ],
   exports: [

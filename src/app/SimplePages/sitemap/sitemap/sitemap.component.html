@@ -1,14 +1,16 @@
-<div id="splatter">
+<main id="splatter">
 
     <div class="compheader">
         <h2 class="compheader">Site Map</h2>
     </div>
-
     <hr>
-    <app-sidebar
-    [labels]="labels"
-    [linkList]="linkList">
-    </app-sidebar>                
+
+    <div id="listHolder">
+        <app-drop-down
+        [linkList]="linkList"
+        ></app-drop-down>
+    </div>
+    
     <div style="clear: both"></div>
 
-</div>
+</main>

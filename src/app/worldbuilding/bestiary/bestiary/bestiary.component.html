@@ -1,23 +1,34 @@
-<!--Header-->
 <div id="background">
-  <div class="container" class="compheader" role="header">
-    <div id="sort">
-      <div *ngFor="let option of sortOptions">
-          <input type="radio" name="sorter"  [id]="option"
-          [checked]="option === 'Biome'"
-          (click)="onSort(option)">
-          <label [for]="option">{{ option }}</label>
-          <br>    
+
+  <!--Header-->
+  <div class="compheader">
+    <h2 class="compheader">
+      <!-- Main header -->
+      <span>Bestiary</span>
+      
+      <!-- Display controls -->
+      <div id="selections">
+
+        <!-- Sort options -->
+        <fieldset>
+            <legend>Sort By:</legend>
+            <div *ngFor="let option of sortOptions">
+                <input type="radio" name="sorter"  [id]="option"
+                [checked]="option === 'Biome'" (click)="onSort(option)">
+                <label [for]="option">{{ option }}</label>
+            </div>
+        </fieldset>
+  
+        <!-- show Preview -->
+        <app-slider
+        [name]="'Show Preview'"
+        ></app-slider>
       </div>
-    </div>
-    <h3>Sort</h3>
-    <div id="centerheader">
-      <h2 class="compheader">Bestiary</h2>
-    </div>
-    <div style="clear:both"></div>
+      
+    </h2>
   </div>
-  <hr>
-  <br>
+  <div style="clear:both"></div>
+  <hr><br>
 
   <!-- Image Grid -->
   <app-grid [collect]="beasts$ | async"></app-grid>

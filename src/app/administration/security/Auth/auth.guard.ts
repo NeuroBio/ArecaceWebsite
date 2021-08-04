@@ -6,8 +6,8 @@ import { CanActivate, Router,
 import { Observable }                     from 'rxjs';
 import { take, map }                      from 'rxjs/operators';
 
-import {AuthService} from './auth.service';
-import { User } from 'src/app/Classes/user';
+import {AuthService}                      from './auth.service';
+import { User }                           from 'src/app/Classes/ContentClasses';
 
 @Injectable({
   providedIn: 'root'
@@ -16,12 +16,11 @@ import { User } from 'src/app/Classes/user';
 export class AuthGuard implements CanActivate {
   
   constructor(private auth: AuthService,
-              private router: Router){ }
+              private router: Router) { }
                
   canActivate(route: ActivatedRouteSnapshot,
               state: RouterStateSnapshot): Observable<boolean> {
     const url: string = state.url;
-    
     return this.checkAdmin(url);
   }
 
@@ -30,7 +29,7 @@ export class AuthGuard implements CanActivate {
       take(1),
       map((user:User) => {
         if(user) {
-            if(user.Admin){return true};
+            if(user.Admin){ return true };
         }
         this.auth.redirectUrl = url;
         this.router.navigate(['/kArAAdministrativeUpload']);
@@ -38,4 +37,5 @@ export class AuthGuard implements CanActivate {
       })
     );
   }
+
 }

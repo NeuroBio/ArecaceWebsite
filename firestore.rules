@@ -8,21 +8,25 @@ service cloud.firestore {
      
     match /SurveyStats/{allDocuments} {
         allow read;
-        allow update: if isUser();
+        allow update: if isLoggedIn();
         allow create: if isAdmin();
     }
   
     match /Contact/{allDocuments} {
         allow read, write: if isAdmin();
-        allow create: if isUser();
+        allow create: if isLoggedIn();
     }
 
-    match /Users/{userID} {
+    // match /Users/{userID} {
+    //     allow read, write: if isOwner(userID);
+    // }
+
+    match /Users/{userID}/{document=**} {
         allow read, write: if isOwner(userID);
     }
     
     match /NumUsers/{allDocuments} {
-    		allow read, write: if isUser();
+    	allow read, write: if isUser();
     }
 
 
@@ -30,83 +34,87 @@ service cloud.firestore {
 
 		
     match /Arc1Data/{allDocuments} {
-    		allow read;
+    	allow read;
     }
     
     match /Bestiary/{allDocuments} {
-    		allow read;
+    	allow read;
     }
     
     match /CharacterBios/{allDocuments} {
-    		allow read;
+    	allow read;
     }
     
     match /CloudData/{allDocuments} {
-    		allow read;
+    	allow read;
     }
     
     match /ConnectionTest/{allDocuments} {
-    		allow read;
+    	allow read;
     }
     
     match /CultureInfo/{allDocuments} {
-    		allow read;
+    	allow read;
     }
     
     match /Guilds/{allDocuments} {
-    		allow read;
+    	allow read;
     }
     
     match /Inanity/{allDocuments} {
-    		allow read;
+    	allow read;
     }
 
     match /LooseNotes/{allDocuments} {
-    		allow read;
+    	allow read;
     }
     
     match /Maps/{allDocuments} {
-    		allow read;
+    	allow read;
     }
     
     match /MiscArt/{allDocuments} {
-    		allow read;
+    	allow read;
     }
     
     match /Narratives/{allDocuments} {
-    		allow read;
+    	allow read;
+    }
+
+    match /NewestCue/{allDocuments} {
+    	allow read;
     }
 
     match /OthersArt/{allDocuments} {
-    		allow read;
+    	allow read;
     }
 
     match /Pixels/{allDocuments} {
-    		allow read;
+    	allow read;
     }
 
     match /Scripts/{allDocuments} {
-    		allow read;
+    	allow read;
     }
     
     match /SourceAffinities/{allDocuments} {
-    		allow read;
+    	allow read;
     }
     
     match /SourceInfo/{allDocuments} {
-    		allow read;
+    	allow read;
     }
     
     match /Surveys/{allDocuments} {
-    		allow read;
+    	allow read;
     }
     
     match /WebsiteText/{allDocuments} {
-    		allow read;
+    	allow read;
     }
 
     match /Nomadic/{allDocuments} {
-    		allow read;
+    	allow read;
     }
 
 		
@@ -120,12 +128,16 @@ service cloud.firestore {
         return get(/databases/$(database)/documents/Users/$(request.auth.uid)).data.Admin == true;
       }
 
-    function isUser() {
+    function isLoggedIn() {
         return request.auth != null;
     }
 
+    function isUser() {
+        return request.auth.token.sign_in_provider != 'anonymous';
+    }
+
     function isOwner(userID) {
-        return request.auth.uid == userID;
+        return (request.auth.uid == userID && isUser());
     }
   }
   

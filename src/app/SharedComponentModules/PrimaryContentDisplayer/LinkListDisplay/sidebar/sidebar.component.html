@@ -1,28 +1,38 @@
-<div #container class="sidebar" role="navigation">
+<div #container class="linklistcontainer">
 
-  <svg id ="greyband" [style.height.px]="greybarHeight">
-      <rect width="100%" height="100%" style="fill:#616161"/>
-  </svg>
+    <svg id ="greyband" [style.height.px]="greybarHeight">
+        <rect width="100%" height="100%" style="fill:#616161"/>
+    </svg>
 
-  
 
-  <div id="listHolder" #listHolder [style.maxHeight.px]="listHeight"
-  (window:resize)="onResize()">
-  <div #list>
-      <div *ngFor="let list of linkList, let i = index">
-          <hr *ngIf="i!==0">
-          <div class="sidebarlab">{{ labels[i] }}</div>
-          <hr>
-            <ul class="sidebarlist">
-              <li class="sidebarlist" *ngFor="let namelink of list"
-              [class.selected.sidebarlist]="namelink[1] === current"
-              (click)="onSelect(namelink[1])">
-                <a [routerLink]="[namelink[1]]">{{ namelink[0] }}</a>
-              </li>
-            </ul>
-        </div>
-    </div>      
-  </div>
+    <nav id="linklistHolder"
+    [style.max-height.px]="listHeight"
+    (window:resize)="onResize()"
+    aria-label="Content-Navigation">
+
+    <div #list>
+    <app-master-link-list
+    class="options"
+    [style.max-width.px]="250"
+    [linkList]="linkList"
+    [current]="current"
+    [queryParamsHandling]="queryParamsHandling">
+
+              <!-- Label template -->
+              <ng-template let-list #Label>
+                <hr *ngIf="list.Name !== linkList[0].Name">
+                    <div class="linklistlabel" id="type">{{ list.Name }}</div>
+                <hr>
+              </ng-template>
+              
+              <!-- List Element Template -->
+              <ng-template let-item #Item>
+                {{ item.ListName }}
+              </ng-template>
+
+        </app-master-link-list>
+    </div>
+    </nav>
 
 
 

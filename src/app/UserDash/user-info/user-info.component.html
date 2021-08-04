@@ -1,17 +1,80 @@
-<div id="accountInfo">
-    <h4>Your current roles:</h4>
-    <p>
-        User: {{ user.User }}<br>
-        Admin: {{ user.Admin }}
-    </p>
-    <h4>Your account email:</h4>
-    <p>
-        {{ user.email }}
-    </p>
+<main id="background">
+    <!-- Display stats -->
+    <article class="textblock accountInfo">
+        <h3>Settings:</h3>
+        <hr>
+        <section>
+            <h4>Your Roles:</h4>
+            <p>User-{{ user.User }}</p>
+            <p>Forum Moderator-{{ user.Mod }}</p>
+            <p>Site Admin-{{ user.Admin }}</p>
+            <br>
+            <hr>
+        </section>
+        
+        <section>
+            <h4>Email:</h4>
+            <p>{{ user.email }}</p>
+            <hr>
+        </section>
 
-    <h4>Your account User Name:</h4>
-    <p>
-        {{ user.userName }}<br>
-        <button (click)="changeUserName()">Change?</button>
-    </p>
-</div>
+        <section>
+            <h4>Account Created:</h4>
+            <p>{{ user.accountCreated }}</p>
+            <hr>
+        </section>
+
+        <section>
+            <h4>User Name:</h4>
+            <p>{{ user.userName }}<p>
+            <form [formGroup]="Form" aria-label="Change-User-Name">
+                <input type="text" formControlName="newName">
+                <button id="change" (click)="changeUserName()"
+                >Change</button>
+                <div style="clear: both;"></div>
+                <div role="status">
+                    {{ message }}
+                </div>
+            </form>
+            <hr>
+        </section>
+
+        <section>
+            <h4>View Settings:</h4>
+            <p>Show Image Previews: {{ user.showPreview}}</p>
+            <hr>
+        </section>
+
+        <br>
+        <aside aria-label="Privacy-Policy">
+            <a routerLink="/privacy">See our Privay Policy</a>
+        </aside>
+    </article>
+
+    <!-- Delete Properties -->
+    <article class="textblock accountInfo">
+        <h3 id="danger">!*Danger Zone*!</h3>
+        <button type="button" (click)="switchDanger()">{{ dangerButton }}</button>
+        <hr>
+        <div *ngIf="dangerNoodle === true">
+            <br>
+            <span id="danger">WARNING: These actions cannot be undone!</span>
+
+            <div class="align">
+                <button type="button" class="danger" (click)="deleteData()"
+                [disabled]="disabled === true">
+                    Delete Your Saved Data</button>
+                <app-tool-tip [Info]="deleteDataInfo"></app-tool-tip>
+            </div><br>
+
+            <div class="align">
+                <button type="button" class="danger" (click)="deleteAccount()"
+                [disabled]="disabled === true">
+                    Delete Your Account</button>
+                <app-tool-tip [Info]="deleteAccountInfo"></app-tool-tip>
+            </div><br>
+
+            <div role="status">{{ dangerMessage }}</div>
+        </div>
+    </article>
+</main>

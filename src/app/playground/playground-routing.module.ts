@@ -1,26 +1,26 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import { PlaygroundhomeComponent } from './playgroundhome/playgroundhome.component'
-import { OthersArtComponent } from './others-art/others-art.component';
-import { GeneralcollectionresolverService } from 'src/app/GlobalServices/generalcollectionresolver.service'
-import { BlowupmasterComponent } from '../SharedComponentModules/PrimaryContentDisplayer/GridBlowUp/blowupmaster/blowupmaster.component';
-import { GeneralmemberresolverService } from '../GlobalServices/generalmemberresolver.service';
-import { DateConverterComponent } from './CalcConvert/date-converter/date-converter.component';
-import { SourceCalcFrameComponent } from './CalcConvert/source-calc-frame/source-calc-frame.component';
+import { NgModule }                 from '@angular/core';
+import { Routes, RouterModule }     from '@angular/router';
+
+import { PlaygroundhomeComponent }  from './playgroundhome/playgroundhome.component';
+import { ForumComponent }           from './Forum/forum/forum.component';
+
 
 const playgroundRoutes: Routes = [
-  {path: '', component: PlaygroundhomeComponent,
-  children: [
-    {path: 'dateconvert', component: DateConverterComponent},
-    {path: 'sourceaffinity', component: SourceCalcFrameComponent} 
-  ]},
-  {path: 'othersart', component: OthersArtComponent,
-  resolve: {GeneralcollectionresolverService},
-  children: [
-    {path: 'notfound', redirectTo: ''},
-    {path: ':ExtraID', component: BlowupmasterComponent,
-     resolve: {links: GeneralmemberresolverService}},
-  ]}
+  { path: '', component: PlaygroundhomeComponent },
+  { path: 'forum', component: ForumComponent },
+  
+  { path: 'calc',
+    loadChildren: () => import('./activities/CalcConvert/calc-convert.module').then(m => m.CalcConvertModule) },
+  { path: 'nomadic',
+    loadChildren: () => import('./nomadic/nomadic.module').then(m => m.NomadicModule) },
+  { path: 'surveys',
+    loadChildren: () => import('./activities/Surveys/survey.module').then(m => m.SurveyModule) },
+  { path: 'notes',
+    loadChildren: () => import('./LooseNotes/loose-notes.module').then(m => m.LooseNotesModule) },
+  { path: 'othersart',
+    loadChildren: () => import('./others-art/others-art.module').then(m => m.OthersArtModule) },
+  { path: 'activities',
+    loadChildren: () => import('./activities/activities.module').then(m => m.ActivitiesModule) },
 ];
 
 @NgModule({

@@ -16,7 +16,12 @@
   <p>History:<br>
     <textarea formControlName="History" rows="15" cols="66"></textarea></p>
 
-  <p>Insignia: <input type="file" #insig (change)="onFile($event)"></p>
+  <app-upload-main
+  name="Insignia"
+  [ID]="0"
+  [hasThumb]="false"
+  [Settings]="imageSettings"
+  ></app-upload-main>
 
   <p>Alt Text:<br>
     <textarea formControlName="AltText" rows="4" cols="66"></textarea></p>

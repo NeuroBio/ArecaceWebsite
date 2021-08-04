@@ -1,74 +1,117 @@
-/*Form styling*/
-form {
-    margin:3px;
-    padding:4px;
-    width: 740px;
-    overflow: auto;
+ form {
+    position: relative;
+    margin: 3px;
+    padding: 7px;
+    width: calc(100% - 20px);
+    /* width: 800px; */
+    max-width: calc(100vw - 60px);
+    overflow: visible;
     border: 1px solid white;
     float: left;
-  }
+}
 
-  h2.formstyle {
-    padding: 5px;
-    margin: 0px;
-  }
+div.form {
+  max-width: 100%;
+  margin: 3px;
+  padding: 4px;
+  border: 1px solid white;
+  float: left;
+}
 
-  input.fileupload {
-    width: 500px;
-  }
+h2.formstyle {
+  padding: 5px;
+  margin: 0px;
+}
 
-  textarea {
-    font-size: 18px;
-    font-family: 'Courier New', Courier, monospace;
-  }
+input.fileupload {
+  width: 100%;
+  max-width: calc(100% - 160px);
+}
 
-  option {
-    font-size: 18px;  
-  }
-  
-  input {
-    font-size: 18px;
-  }
-  
-  input.short {
-    width:50px;
-    text-align: center;
-  }
-  
-  input.medium {
-    width: 130px;
-  }
+textarea {
+  font-size: 18px;
+  font-family: 'Courier New', Courier, monospace;
+  max-width: calc(100% - 7px);
+}
 
-  input.long {
-    width:600px;
-  }
-  
-  input.fileupload {
-    width:500px;
-  }
-  
-  input[type="checkbox"] {
-    width: 25px;
-    height: 25px;
-  }
+option {
+  font-size: 18px;  
+}
 
-  button[type="button"] {
-    float:right;
-  }
+.buttonFloater {
+  float: right;
 
-  app-formButtons {
-    padding-bottom: 10px;
-  }
+}
 
-  div.WYSIWYG {
-    white-space: pre-line;
-    border: 1px solid white;
-    float: left;
-    width: 400px;
-    margin:3px;
-    padding:4px;
-  }
+app-formButtons {
+  padding-bottom: 10px;
+}
 
-  label {
-    border: 0px;
-  }
+div.WYSIWYG {
+  white-space: pre-line;
+  border: 1px solid white;
+  float: left;
+  width: 400px;
+  max-width: 100%;
+  margin:3px;
+  padding:4px;
+}
+
+input {
+  margin: 5px 0px 5px 0px;
+  font-size: 18px;
+}
+
+input.short {
+  width: 50px;
+  text-align: center;
+}
+
+input.medium {
+  width: 130px;
+}
+
+input.long {
+  max-width: 600px;
+  width: 200px;
+}
+
+label {
+  background-color: rgb(59,59,59);
+  padding: 5px;
+  margin: 0px 2px 0px 1px;
+  font-size: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  border: white 1px solid;
+  font-family: 'Courier New', Courier, monospace;
+  align-items: center;
+  white-space: pre-wrap;
+}
+
+label.accessible {
+  cursor: pointer;
+}
+
+fieldset {
+  background-color: rgb(59,59,59);
+}
+
+fieldset label {
+  display: inline;
+  border: 0px;
+  font-size: 18px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+legend {
+  background-color: rgb(59,59,59);
+  padding: 5px;
+  font-size: 20px;
+  border: white 1px solid;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+select {
+  margin: 5px 0px 5px 0px;
+}

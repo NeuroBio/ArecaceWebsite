@@ -1,0 +1,27 @@
+  <app-scroll-frame
+  *ngIf="names[0]"
+  [Title]="title"
+  [Color]="'rgb(49, 49, 49)'">
+  
+    <div class="outer">
+        <app-master-link-list class="DiplayUserData"
+        [linkList]="LinkList">
+
+              <!-- Label template -->
+              <ng-template let-list #Label>
+                <span id="type">{{ list.Name }}</span>
+              </ng-template>
+              
+              <!-- List Element Template -->
+              <ng-template let-item #Item>
+                <button class="Exs" (click)="onCall(item.Item.Type, item.Item.Index)"
+                [attr.aria-label]="item.Item.Type === 'X' ? 'Delete' : item.Item.Type  + ': ' + item.ListName"
+                tabindex="-1">{{ item.Item.Type }}</button>
+              </ng-template>
+
+        </app-master-link-list>
+    </div>
+
+
+
+</app-scroll-frame>

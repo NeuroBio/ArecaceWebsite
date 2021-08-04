@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { WordFormComponent } from './word-form.component';
 
@@ -6,7 +6,7 @@ describe('WordFormComponent', () => {
   let component: WordFormComponent;
   let fixture: ComponentFixture<WordFormComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ WordFormComponent ]
     })

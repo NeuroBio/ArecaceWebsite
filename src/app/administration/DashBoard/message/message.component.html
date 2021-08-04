@@ -1,11 +1,11 @@
 <br>
 <div class="toggler">
-    <input type="radio" class="toggler" name="datapick" id="new"
-    (click)="getSaved(false)" checked=true>
-    <label for="new">New</label>
-    <input type="radio" class="toggler" name="datapick" id="saved"
-    (click)="getSaved(true)">
-    <label for="saved">Saved</label>
+    <app-toggler
+    [toggles]="['New', 'Saved']"
+    togglerTitle="Pick Data to Display"
+    toggleName="PickData"
+    (choiceEmitter)="getSaved($event)"
+    ></app-toggler>
 </div>
 <br><br>
 
@@ -31,7 +31,7 @@
               {{ mess.Date }}
           </button>
         </div>
-    </div>    
+    </div>
 </div>
 
 <!--actual messages-->

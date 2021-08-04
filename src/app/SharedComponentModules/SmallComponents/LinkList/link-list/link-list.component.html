@@ -1,0 +1,29 @@
+<ul #Host class="linklist"
+(keydown)="handleKeyDown($event)"
+[attr.tabindex]="leave === true ? -1 : 0"
+(focus)="focus()">
+
+    <li class="linklistelement"
+    *ngFor="let item of list; let i = index">
+    
+        <app-link-list-element
+        [route]="item.Route"
+        [href]="item.Href"
+        [active]="item.ListName === current"
+        [index]="i"
+        [queryParamsHandling]="queryParamsHandling"
+        (clickEventEmitter)="onClick($event)">
+        <!-- Render into List Element -->
+            <ng-container
+                  [ngTemplateOutlet]="itemTemplateRef"
+                  [ngTemplateOutletContext]="{$implicit: item}">
+            </ng-container>
+        </app-link-list-element>
+
+        <!-- Render After ith element (NOT Focused) -->
+        <ng-container
+        [ngTemplateOutlet]="decorationTemplateRef"
+        [ngTemplateOutletContext]="{$implicit: i}">
+        </ng-container>
+    </li>
+</ul>

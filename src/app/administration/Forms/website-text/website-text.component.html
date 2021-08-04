@@ -2,13 +2,11 @@
     <h2 class="formstyle">{{ key }}:</h2>
     <hr>
 
-    <p>
-    <textarea formControlName="Text" rows="30" cols="66"></textarea></p>
+    <p><textarea formControlName="Text" rows="30" cols="66"></textarea></p>
 
     <app-formButtons></app-formButtons>
 </form>
 
-<div class="WYSIWYG" [innerHTML]="Form.controls.Text.value">
+<div class="WYSIWYG" [innerHTML]="Form.controls.Text.value"></div>
 
-</div>
 <div style="clear: both"></div>

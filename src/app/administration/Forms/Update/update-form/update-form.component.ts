@@ -1,11 +1,17 @@
-import { Component, OnInit, ViewChild,
-         ElementRef, OnDestroy }              from '@angular/core';
+import { Component, OnInit, OnDestroy }       from '@angular/core';
 import { formatDate }                         from '@angular/common';
 import { FormBuilder, FormGroup }             from '@angular/forms';
+
 import { Subscription }                       from 'rxjs';
 
 import { CRUDcontrollerService }              from 'src/app/administration/services/CRUDcontroller.service';
-import { PostData }                           from 'src/app/Classes/postdata';
+import { QuickAssign }                        from 'src/app/GlobalServices/commonfunctions.service';
+import { UploadPreviewService }               from 'src/app/SharedComponentModules/SharedForms/UploadPreview/upload-preview.service';
+import { FetchService }                       from 'src/app/GlobalServices/fetch.service';
+
+import { PostData }                           from 'src/app/Classes/ContentClasses';
+import { UploadPreviewSettings }              from 'src/app/SharedComponentModules/SharedForms/UploadPreview/uploadpreviewclass';
+import { CRUDdata }                           from 'src/app/Classes/ContentClasses';
 
 @Component({
   selector: 'app-update-form',
@@ -16,15 +22,17 @@ import { PostData }                           from 'src/app/Classes/postdata';
 export class UpdateFormComponent implements OnInit, OnDestroy {
 
   Form: FormGroup;
-  @ViewChild('Image', { static: true }) imageUploader:ElementRef;
-  imageFile: any;
+  imageSettings = new UploadPreviewSettings([[600, 600, '100MB'], [undefined, undefined, '300KB']]);
   stream1: Subscription;
   stream2: Subscription;
   oldPost: any;
 
 
   constructor(private fb: FormBuilder,
-              private controller: CRUDcontrollerService) { }
+              private controller: CRUDcontrollerService,
+              private qa: QuickAssign,
+              private uploadpreviewserv: UploadPreviewService,
+              private fetcher: FetchService) { }
 
   ngOnInit() {
     this.stream1 = this.controller.itemToEdit
@@ -33,12 +41,14 @@ export class UpdateFormComponent implements OnInit, OnDestroy {
       .subscribe(() => this.processForm());
   }
   
-  ngOnDestroy(){
+  ngOnDestroy() {
     this.stream1.unsubscribe();
     this.stream2.unsubscribe();
+    this.controller.disposal();
+    this.fetcher.disposal();
   }
 
-  createForm(){
+  createForm() {
     return this.fb.group({
       Poster: 'kArA',
       Body: '',
@@ -53,50 +63,47 @@ export class UpdateFormComponent implements OnInit, OnDestroy {
   assignFormData(editFormData) {
     this.onReset();
     if(editFormData) {
-      this.Form = this.controller.quickAssign(this.Form, editFormData);
+      this.Form = this.qa.assign(this.Form, editFormData);
+      this.uploadpreviewserv.assignOldLinks(this.Form.controls.Links.value);
     }
   }
 
   processForm() {
     const Final: PostData = Object.assign({}, this.Form.value);
     let oldImages: string[] = [];
-    let newImages: any[] = []
+    let newImages: any[] = [];
+    const imageFile = this.uploadpreviewserv.mainsData[0];
 
     if(!this.oldPost) {
       Final.Date = formatDate(new Date(), 'yyyy-MM-dd', 'en');
       Final.Time = formatDate(new Date(), 'HH:mm', 'en');
       Final.ID = `${Final.Date}, ${Final.Time}`;
-    }else{
+    } else {
       Final.Date = this.oldPost.Date;
       Final.Time = this.oldPost.Time;
       Final.ID = this.oldPost.ID;
       Final.Edited = true;
-      if(this.oldPost.Links){
+      if(this.oldPost.Links) {
         oldImages = this.oldPost.Links;
       }
     }
 
-    if(this.imageFile){
-      newImages = [this.imageFile];
+    if(imageFile) {
+      newImages = [imageFile];
     }
 
-    this.controller.activeFormData.next([Final,
-                                        [`Inanity/${Final.ID}`],
-                                        newImages,
-                                        oldImages,
-                                        undefined,
-                                        undefined,
-                                        undefined]);
+    this.controller.activeFormData.next(
+      new CRUDdata(false, '', Final,
+                  [`Inanity/${Final.ID}`],
+                  newImages,
+                  oldImages));
   }
 
   onReset() {
     this.Form = this.createForm();
-    this.imageUploader.nativeElement.value = '';
-    this.imageFile = undefined;
     this.oldPost = undefined;
+    this.uploadpreviewserv.reset.next();
+    this.uploadpreviewserv.erase(0);
   }
 
-  onFile(event: any) {
-    this.imageFile = event;
-  }
 }

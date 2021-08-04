@@ -1,0 +1,18 @@
+
+image#bookmark {
+    height: 30px;
+}
+
+button#bookmark {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    border: whitesmoke 1px solid;
+    margin: 0px;
+    padding: 5px;
+}
+
+button#bookmark:disabled {
+    cursor: default;
+}

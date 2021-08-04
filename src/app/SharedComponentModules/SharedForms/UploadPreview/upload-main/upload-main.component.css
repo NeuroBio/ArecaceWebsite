@@ -1,0 +1,49 @@
+.align {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+/* img.help {
+    width: 25px;
+    height: 25px;
+    padding: 3px;
+} */
+
+
+/* .tooltip {
+    position: relative;
+    display: inline-block;
+    margin-left: 5px;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 150px;
+    background-color: black;
+    color: whitesmoke;
+    border-radius: 6px;
+    padding: 5px 0px 0px 3px;
+    white-space: pre-line;
+
+    position: absolute;
+    z-index: 1;
+    top: 102%;
+    left: -150%;
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+}
+
+.tooltip:focus .tooltiptext {
+    visibility: visible;
+} */
+
+label {
+    display: inline;
+    border: 0px;
+    font-size: 18px;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: rgba(0,0,0,0);
+}

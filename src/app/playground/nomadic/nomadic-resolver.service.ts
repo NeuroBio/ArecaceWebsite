@@ -3,6 +3,7 @@ import { Resolve, Router } from '@angular/router';
 import { take, tap } from 'rxjs/operators';
 import { FireBaseService } from '../../GlobalServices/firebase.service';
 import { NomadicService } from './nomadic.service';
+import { CacheService } from 'src/app/GlobalServices/cache.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,18 +11,24 @@ import { NomadicService } from './nomadic.service';
 export class NomadicResolverService implements Resolve<any>{
 
   constructor(private router: Router,
-              private firebaseserv: FireBaseService,
+              private cache: CacheService,
               private nomadserv: NomadicService) { }
 
   resolve() {
-    return this.firebaseserv.returnCollect('Nomadic').pipe(
-      take(1),
-      tap(dict => {
-        if(dict[0]){
-          this.nomadserv.initializeDictionary(dict);
-        } else {
-          this.router.navigate(["badservice"]);
-        }
-      }))
+    if(this.cache.Cache['nomadic']) {
+      this.nomadserv.initializeDictionary(this.cache.Cache['nomadic']);
+      
+    } else {
+      // this.cache.addSubscription('Nomadic', this.firebaseserv.returnCollect('Nomadic'));
+      return this.cache.addSubscription('nomadic', 'Nomadic')
+        .then(() => {
+          if(this.cache.Cache['nomadic'].value[0]) {
+            this.nomadserv.initializeDictionary(this.cache.Cache['nomadic']);
+          } else {
+            delete this.cache.Cache['nomadic'];
+            this.router.navigate(["badservice"]);
+          }
+      });
+    }
   }
 }

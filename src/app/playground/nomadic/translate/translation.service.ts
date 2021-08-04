@@ -1,11 +1,14 @@
-import { Injectable } from '@angular/core';
-import { NomadicService } from '../nomadic.service';
-import { SwapCases } from './TranslationSwapCases';
-import { Word } from '../../../Classes/rules';
+import { Injectable }       from '@angular/core';
+
+import { NomadicService }   from '../nomadic.service';
+
+import { SwapCases }        from './TranslationSwapCases';
+import { Word }             from '../../../Classes/NomadicLanguage';
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class TranslationService {
 
   rawDict: Word[];
@@ -25,6 +28,7 @@ export class TranslationService {
     if(trans) {
       return trans;
     }
+
     let letters = word.split('');
     if(NtoE === true) {
       trans = this.checkEnding(letters, ['a'], dict, '\'s');//possesive check
@@ -108,12 +112,12 @@ export class TranslationService {
     return;
   }
 
-  addSuffix(word: string, suffix1: string, suffix2?: string, specialcase?: string[]){
+  addSuffix(word: string, suffix1: string, suffix2?: string, specialcase?: string[]) {
     const trans = word.split('');
-    if(suffix2){
+    if(suffix2) {
       const special = specialcase
         .findIndex(letter => letter === trans[trans.length-1]) > -1;
-      if(special){
+      if(special) {
           trans.push(suffix2);
       }
     }
@@ -121,7 +125,7 @@ export class TranslationService {
     return trans.join('');
   }
 
-  addSuffixtoAll(word: string, suffix1: string, suffix2?: string, specialcase?: string[]){
+  addSuffixtoAll(word: string, suffix1: string, suffix2?: string, specialcase?: string[]) {
     let trans = Object.assign([], word.split(';'));
     trans = trans.map(trans => this.addSuffix(trans, suffix1, suffix2, specialcase));
     return trans.join(';');

@@ -1,0 +1,18 @@
+<div *ngIf="neverLoading===true; then noImages, else Images" style="background-color: aqua;"></div>
+<ng-template #Images>
+    <div id="holdon" *ngIf="loading===true">
+        <p>Large images can take a while to convert into thumbnails!</p>
+        <div class="loading"></div>
+    </div>
+    <img *ngIf="loading===false && imgUrl"
+    [src]="imgUrl" charset=UTF-8
+    [alt]="'Image preview for ' + name">
+    <img *ngIf="loading===false && !imgUrl && oldUrl"
+    [src]="oldUrl"
+    [alt]="'Old image for ' + name">
+</ng-template>
+
+<ng-template #noImages>
+    <div *ngIf="loading===true">Generating Preview</div>
+    <div *ngIf="loading===false"></div>
+</ng-template>

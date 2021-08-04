@@ -1,30 +1,34 @@
-<div class="background">
-    <div id="date">
-        Date: {{ arecaceDate }}
-    </div>
+<main class="background">
     <div class="compheader">
         <h2 class="compheader">Playground</h2>
+        <div id="date">
+            Date: {{ arecaceDate }}
+        </div>
     </div>
     <hr>
 
     <div id="maincontent">
-        <br><br>
+        <br>
+        <nav id="quickNav" aria-label="playground-navigation">
+            <app-image-button
+            *ngFor="let section of links"
+            [Size]="170"
+            [Link]="section.Link"
+            [Name]="section.Name"
+            [Src]="section.Src"
+            ></app-image-button>
+        </nav><br>
+
         <div id="squishNewest">
             <app-show-newest
-            contentType = "Art by Others"
+            contentType = "Newest Posts in Art by Others"
             collectionName = "OthersArt"
-            contentLink = "othersart">
+            contentLink = "othersart"
+            footerText = "See all Art by Others">
             </app-show-newest>
         </div>
         <br><br>
-        <div>
-            <div class="navver" role="nav" id="quickNav" *ngFor="let link of links">
-                <a class="navver" [routerLink]="link.Link">{{ link.Title }}</a>
-            </div>
-        </div>
 
-        <br><br>
-        <app-calculators></app-calculators>
     </div>
-</div>
+</main>
 

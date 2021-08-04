@@ -1,13 +1,15 @@
-<div id="outer">
-  <a class="item"
-  *ngFor="let member of collect"
-  [routerLink] = member.ID
-  role="button">
-    <div id="imageholder">
-        <img class="thumb" [src]="member.Links[0]" alt=""><br>
-    </div>
-    <div class="thumbtext">{{ member.Name }}</div>
-  </a> 
-</div>
+<nav aria-label="Image-Link-Navigation" >
+  <app-link-list class="imageLinkNav"
+  [list]="formattedCollect.Data">
 
+      <!-- Item Template -->
+      <ng-template let-item #Item>
+        <div id="imageholder">
+          <img class="thumb" [src]="item.Item.Links[0]" alt=""><br>
+        </div>
+        <div class="thumbtext">{{ item.Item.Name }}</div>
+      </ng-template>
+
+  </app-link-list>
+</nav>
 <br>

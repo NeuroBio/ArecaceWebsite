@@ -12,26 +12,6 @@ h2.compheader {
   padding-left: 5px;
 }
 
-
-
-/*Toggle buttons*/
-div.toggler {
-  display: inline-block;
-}
-
-input[type="radio"].toggler {
-  display: none;
-  visibility: hidden;
-}
-
-input[type="radio"].toggler:checked + label {
-  background-color: rgb(163, 163, 163);
-}
-
-input[type="radio"].toggler:not(:checked) + label {
-  background-color: #707070;
-}
-
 label {
   padding: 5px;
   text-align: center;
@@ -40,13 +20,16 @@ label {
   white-space: nowrap
 }
 
-label.toggler {
+select {
   cursor: pointer;
-  padding-right: 10px;
 }
 
-label.toggler:focus {
-  border: 1px dotted white;
+input[type="checkbox"] {
+  cursor: pointer;
+}
+
+input[type="file"] {
+  cursor: pointer;
 }
 
 
@@ -70,7 +53,7 @@ label.toggler:focus {
   background-color: rgb(116, 116, 116);
 }
 
-p.caption {
+.caption {
   margin-top: 0px;
   padding: 5px;
   font-size: 12px;
@@ -81,7 +64,7 @@ p.caption {
 
 
 /* extended text blocks*/
-div.textblock, .firstblock {
+.textblock, .firstblock {
   line-height: 150%;
   font-size: 10;
   white-space: pre-line;
@@ -90,52 +73,59 @@ div.textblock, .firstblock {
   color: rgb(238, 238, 238);
 }
 
-div.firstblock {
+.firstblock {
   overflow: hidden;
   min-width: 300px;
 }
 
-p.textblock {
+.textblock p, .firstblock p {
   color: inherit;
   margin: 0;
   margin-bottom: 3px;
 }
 
-
-
 /* Navigation "buttons */
-div.navver {
+.navverContainer {
   display: inline-block;
-  font-size: 25px;
-  font-weight: bold;
-  font-family: Arial, Helvetica, sans-serif;
-  padding: 0;
+  background-color: #b8b8b8;
+  border: 2px solid black;
+  padding: 1px;
   margin-right: 7px;
   margin-top: 5px;
   margin-bottom: 5px;
-  background-color: #d1d1d1;
-  border: 2px solid black; 
 }
 
-div.navver:hover {
-  background-color: #ebe9e9;
+.navverContainer:hover {
+  background-color: whitesmoke;
 }
 
-a.navver:active {
+.navverContainer:active {
   background-color: rgb(59, 59, 59);
 }
 
-a.navver {
+/* STANDARD FORM */
+.navver {
   display: block;
   color: black;
-  padding:5px;
+  padding: 5px;
+  font-size: 20px;
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: bold;
 }
 
-a.navver:hover {
-  color:black;
+.navver:active {
+  background-color: rgb(59, 59, 59);
 }
 
+.navver:focus {
+  color: black;
+  background-color: rgb(245, 245, 245);
+}
 
+.navver:hover {
+  color: black;
+  background-color: whitesmoke;
+}
 
 div.fillspace{
   overflow: hidden;
@@ -215,7 +205,11 @@ button {
 }
 
 button:hover {
-  background-color: rgb(230, 230, 230)
+  background-color: whitesmoke
+}
+
+button:focus {
+  background-color: whitesmoke
 }
 
 button:active {
@@ -251,7 +245,7 @@ b {
 
 hr {
   padding: 0px;
-  margin:0px;
+  margin: 0px;
   border-top: 2px solid white;
 }
 
@@ -280,4 +274,23 @@ option {
   font-family: 'Courier New', Courier, monospace;
   font-weight: bold;
   font-size: inherit;
+}
+
+
+button.Exs {
+  padding: 2px 7px 2px 7px;
+  margin: 5px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  color: whitesmoke;
+  background-color: rgb(45, 45, 45);
+  border: 0px;
+}
+
+button.Exs:hover {
+  background-color: rgb(116, 116, 116);
+}
+
+button.Exs:active {
+  background-color: rgb(200,200,200);
 }

@@ -1,25 +1,36 @@
-import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Router, ActivatedRoute }       from '@angular/router';
+
+import { NomadicService }               from '../nomadic.service';
 
 @Component({
   selector: 'app-nomadic-home',
   templateUrl: './nomadic-home.component.html',
   styleUrls: ['./nomadic-home.component.css']
 })
-export class NomadicHomeComponent implements OnInit {
 
-  choices = ['introduction', 'syntax', 'translate', 'dictionary'];
-  selected: string;
+export class NomadicHomeComponent implements OnInit, OnDestroy {
+
+  choiceLinks = ['introduction', 'syntax', 'translate', 'dictionary'];
+  choices = ['Introduction', 'Syntax', 'Translate', 'Dictionary'];
+  selected: number;
 
   constructor(private route: ActivatedRoute,
-              private router: Router) { }
+              private router: Router,
+              private nomadicserv: NomadicService) { }
 
   ngOnInit() {
-    this.selected = this.route.firstChild.snapshot.url[0].path
+    const index = this.choiceLinks.findIndex(choice =>
+      choice === this.route.firstChild.snapshot.url[0].path);
+    this.selected = index;
   }
 
+  ngOnDestroy() {
+    this.nomadicserv.dispose();
+  }
+  
   pickTopic(index) {
-    this.router.navigate([`${this.choices[index]}`], {relativeTo: this.route });
+    this.router.navigate([`${this.choiceLinks[index]}`], {relativeTo: this.route });
   }
 
 }

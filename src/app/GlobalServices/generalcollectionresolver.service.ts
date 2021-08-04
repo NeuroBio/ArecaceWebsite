@@ -1,9 +1,13 @@
-import { Injectable } from '@angular/core';
-import { FireBaseService } from './firebase.service';
-import { GeneralcollectionService } from './generalcollection.service';
-import { FirebasePaths } from 'src/app/Classes/FirebasePaths';
-import { take, tap } from 'rxjs/operators';
-import { ActivatedRouteSnapshot, Resolve, Router } from '@angular/router';
+import { Injectable }                 from '@angular/core';
+import { ActivatedRouteSnapshot,
+         Resolve, Router }            from '@angular/router';
+import { Title }                      from '@angular/platform-browser';
+
+
+import { GeneralcollectionService }   from './generalcollection.service';
+import { CacheService }               from './cache.service';
+
+import { AllPathInfo }                from 'src/app/Classes/UploadDownloadPaths';
 
 @Injectable({
   providedIn: 'root'
@@ -11,27 +15,46 @@ import { ActivatedRouteSnapshot, Resolve, Router } from '@angular/router';
 
 export class GeneralcollectionresolverService implements Resolve<any> {
   
-  firePaths = new FirebasePaths;
+  firePaths = new AllPathInfo;
 
-  constructor(private firebaseserv: FireBaseService,
-              private generalcollectionserv: GeneralcollectionService,
+  constructor(private generalcollectionserv: GeneralcollectionService,
+              private cache: CacheService,
+              private titleserv: Title,
               private router: Router) { }
   
-  resolve(route: ActivatedRouteSnapshot){
-    let type:string;
-    if(route.url[0]){
-      type = route.url[route.url.length-1].path;
+  resolve(route: ActivatedRouteSnapshot) {
+    const url = route['_routerState'].url.split('/');
+    const type = url[this.backstep(url)];
+
+    if(this.cache.Cache[type]){
+      this.setTitle(type);
+      return this.generalcollectionserv.initializeMetaData(this.cache.Cache[type], type);
+      
     } else {
-      type = 'extras';
+      return this.cache.addSubscription(type, this.firePaths[type].Fire)
+      .then(() => {
+          if(this.cache.Cache[type].value[0]) {
+            this.setTitle(type);
+            return this.generalcollectionserv.initializeMetaData(this.cache.Cache[type], type);
+          } else {
+            delete this.cache.Cache[type];
+            this.router.navigate(["badservice"]);
+          }
+      });
     }
-    return this.firebaseserv.returnCollect(this.firePaths[type]).pipe(
-      take(1),
-      tap(collect =>{
-        if(collect[0]){
-          this.generalcollectionserv.initializeMetaData(collect);
-        }else{
-          this.router.navigate(["badservice"])
-        }
-    }))
+  }
+
+  backstep(url: string[]) {
+    for(let i = url.length -1; i > 0; i--) {
+      if(this.firePaths[url[i]]) {
+        return i;
+      }
+    }
+  }
+
+  setTitle(type: string) {
+    const Location = type.split('');
+    Location[0] = Location[0].toLocaleUpperCase();
+    this.titleserv.setTitle(`${Location.join('')}`);
   }
 }

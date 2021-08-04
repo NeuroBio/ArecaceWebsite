@@ -1,0 +1,50 @@
+
+<!-- Conatainer -->
+<app-scroll-frame
+[Title]="'Your Bookmarks'"
+[Color]="'rgb(49, 49, 49)'">
+  <div id="outer">
+    <div *ngIf="dataExists === true; then display else notsaved"></div>
+  </div>
+</app-scroll-frame>
+
+
+<!-- Favorites -->
+<ng-template #display class="outer">
+
+    <div *ngFor="let bmt of data">
+      <h5>{{ bmt.Name }}:</h5>
+      <app-master-link-list 
+      #MasterLists
+      class="UserFavoriteData"
+      [linkList]="bmt.LinkList"
+      current="View"
+      [MasterListName]="bmt.Name">
+
+            <!-- Label template -->
+            <ng-template let-list #Label>
+              <span id="type">{{ list.Name }}:</span>
+            </ng-template>
+            
+            <!-- List Element Template -->
+            <ng-template let-item #Item>
+              <!-- Delete -->
+              <button *ngIf="!item.Route"
+              class="Exs" type="button" tabindex="-1"
+              attr.aria-label="Delete-Bookmark"
+              (click)="onDelete(item.Item.Type, item.Item.Index)">x</button>
+              <!-- View -->
+              <span *ngIf="item.Route">{{ item.Item.Name }}</span>
+             </ng-template>
+
+      </app-master-link-list>
+    </div>
+  </ng-template>
+
+
+  <!-- No favorites -->
+  <ng-template #notsaved class="outer">
+    <p tabindex="-1" #None>
+      You have not saved your place anywhere.
+    </p>
+  </ng-template>

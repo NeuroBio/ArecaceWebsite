@@ -1,25 +1,28 @@
 <form [formGroup]="Form">
-  <h2 class="formstyle"> Other's Art Form:</h2>
-  <hr>
+    <h2 class="formstyle"> Other's Art Form:</h2>
+    <hr>
 
-  <p> Piece Name: <input type="text" formControlName="Name"></p>
+    <p> Piece Name: <input type="text" formControlName="Name"></p>
 
-  <p>Thumb: <input #Thumb type="file" class="fileupload" (change)="getThumb($event)"></p>
+    <app-upload-main
+    name="Other's Art"
+    [ID]="0"
+    [hasThumb]="true"
+    [Settings]="imageSettings"
+    ></app-upload-main>
 
-  <p>FullImage: <input #Full type="file" class="fileupload" (change)="getFull($event)"></p>
-  
-  <p>Date (YYYY): <input type="text" formControlName="Date"></p>
+    <p>Date (YYYY): <input type="text" formControlName="Date"></p>
 
-  <p>Artist:<br/> <input type="text" formControlName="Artist"></p>
+    <p>Artist:<br/> <input type="text" formControlName="Artist"></p>
 
-  <p>Artist Link:<br/> <input type="text" formControlName="ArtistLink"></p>
+    <p>Artist Link:<br/> <input type="text" formControlName="ArtistLink"></p>
 
-  <p>Allowed:<br/>
-    <input type="radio" value="false" formControlName="Allowed" id="no">
-    <label for="no">No</label>
-    <input type="radio" value="true" formControlName="Allowed" id="yes">
-    <label for="yes">Yes</label>
-  </p>
+    <p>Allowed:<br/>
+        <input type="radio" value="false" formControlName="Allowed" id="no">
+        <label for="no">No</label>
+        <input type="radio" value="true" formControlName="Allowed" id="yes">
+        <label for="yes">Yes</label>
+    </p>
 
-  <app-formButtons></app-formButtons>
+    <app-formButtons></app-formButtons>
 </form>

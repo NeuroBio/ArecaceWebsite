@@ -1,0 +1,43 @@
+.outer {
+    border: 1pt solid white;
+    background-color: rgb(49, 49, 49);
+    margin: 7px;
+    max-width: 600px;
+}
+
+app-survey-stats {
+    max-width: 700px;
+}
+
+div#match {
+    margin: 5px;
+    float: right;
+    float: top;
+}
+
+div#inner {
+    padding: 7px;
+    white-space: pre-line;
+    position: relative;
+}
+
+h3 {
+    display: inline-block;
+    margin: 5px;
+    padding: 0px;
+}
+
+h3.scoreQualifier {
+    border-top: 3px white solid;
+    border-bottom: 3px white solid;
+    padding: 3px;
+}
+
+button {
+    margin: 10px;
+}
+
+div.scores {
+    padding: 7px;
+    font-size: 20px;
+}

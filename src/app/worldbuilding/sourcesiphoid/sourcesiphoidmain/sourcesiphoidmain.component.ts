@@ -4,8 +4,10 @@ import { ActivatedRoute }               from '@angular/router';
 import { Observable }                   from 'rxjs';
 import { map }                          from 'rxjs/operators';
 
-import { Categories }                   from 'src/app/Classes/categories';
 import { GeneralcollectionService }     from 'src/app/GlobalServices/generalcollection.service';
+
+import { ReferenceCategories }          from 'src/app/Classes/UploadDownloadPaths';
+import { LinkList, LinkListElement }    from 'src/app/SharedComponentModules/SmallComponents/LinkList/linklist';
 
 @Component({
   selector: 'app-sourcesiphoindmain',
@@ -14,28 +16,29 @@ import { GeneralcollectionService }     from 'src/app/GlobalServices/generalcoll
 
 export class SourceSiphoidMainComponent implements OnInit {
 
-  cats: Categories = new Categories;
-  labels: string[] = this.cats.source;
+  cats: ReferenceCategories = new ReferenceCategories;
   current: string;
-  sourceRefs$: Observable<string[][][]>;
+  sourceRefs$: Observable<LinkList[]>;
 
   constructor(private generalcollectserv: GeneralcollectionService,
               private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.sourceRefs$ = this.generalcollectserv.returnMetaData().pipe(
-      map(refs =>{
-        let final:string[][][] = [];
-        for(let cat of this.labels){
-          final.push(refs.filter(ref => ref.Category === cat)
-                          .map(filtered => [filtered.Topic, filtered.ID]));
+      map((refs: any[]) => {
+        let final:LinkList[] = [];
+        for(let cat of this.cats.source) {
+          const Data = refs.filter(ref =>
+            ref.Category === cat).map(filtered =>
+            new LinkListElement(filtered.Topic, filtered.ID));
+          final.push(new LinkList(cat, Data));
         }
         return final; 
-      })
-    );
+      }) );
 
-    this.route.firstChild.paramMap.subscribe(
-      path => this.current = path.get('SourceID')
-    );
+    this.route.firstChild.paramMap.subscribe(path => {
+      return this.current = this.generalcollectserv
+        .getCurrent(this.sourceRefs$, path.get('SourceID'));
+    });
   }
 }

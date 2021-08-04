@@ -1,5 +1,23 @@
-div#splatter{
+#splatter{
+    display: flex;
+    justify-content: center;
+    flex-flow: column;
     background-repeat: repeat;
     background-color: rgb(53, 53, 53);
     background-image: url(https://firebasestorage.googleapis.com/v0/b/arecaceworld.appspot.com/o/WebSite%2Fsmear4.png?alt=media&token=fc921624-299c-4470-b40e-a22d256f81dd);
+}
+
+app-sidebar {
+    max-height: 70vh;
+}
+
+.compheader {
+    display: flex;
+    justify-content: center;
+}
+
+#listHolder {
+    max-width: 450px;
+    overflow: hidden;
+    border: 2px white solid;
 }

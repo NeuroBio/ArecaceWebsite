@@ -1,0 +1,46 @@
+div.imagebutton {
+    padding: 0px;
+    margin: 0px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: #d1d1d1;
+    text-align: right;
+    border: 3px solid #454545;
+    display: inline-block;
+ }
+
+
+span.imagebutton {
+    padding-right: 7px;
+    position: relative;
+    top: 7px;
+    font-size: 24px;
+    font-weight: bold;
+    font-family: 'Courier New', Courier, monospace;
+    display: inline-block;
+}
+
+.div#imagebutton:hover {
+    filter: contrast(75%) saturate(90%) brightness(110%);
+    border: 3px solid #a7a7a7;
+}
+
+a.imagebutton {
+    position: relative;
+    display: block;
+    height: inherit;
+    width: inherit;
+}
+
+a.imagebutton:hover {
+    background-color: rgba(255,255,255,.5);
+}
+
+a.imagebutton:focus {
+    background-color: rgba(255,255,255,.5);
+}
+
+a.imagebutton:active {
+    background-color: rgba(0,0,0,.3);
+}
+

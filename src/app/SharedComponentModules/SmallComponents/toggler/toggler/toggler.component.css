@@ -1,0 +1,55 @@
+/*Toggle buttons*/
+.toggler {
+    display: inline-block;
+    position: relative;
+}
+
+input[type="radio"].toggler {
+    position: absolute;
+    padding: 0;
+    border: 0;
+    height: 1px;
+    width: 1px;
+    left: 1px;
+    top: 1px;
+    overflow: hidden;
+    opacity: 0;
+    pointer-events: none;
+}
+
+input[type="radio"].toggler:focus + label {
+    background-color: rgb(150, 150, 150);
+    border: 2px dotted white;
+    margin: 3px;
+}
+
+input[type="radio"].toggler:checked + label {
+    background-color: rgb(150, 150, 150);
+}
+
+input[type="radio"].toggler:checked:focus + label {
+    background-color: rgb(150, 150, 150);
+    border: 2px dotted white;
+    margin: 3px;
+
+}
+input[type="radio"].toggler:not(:checked) + label {
+    background-color: #616161;
+}
+
+label.toggler {
+    cursor: pointer;
+    color: white;
+    margin: 4px;
+}
+
+fieldset {
+    border: 0px;
+    padding: 0px;
+}
+
+legend {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 25px;
+    font-weight: bold;
+}

@@ -1,13 +1,11 @@
 <!doctype html>
 <html lang="en">
 <head>
+
   <meta charset="utf-8">
   <title>Arecace</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
-
   <base href="/">
-
   <link rel="icon" type="image/x-icon" href="favicon.ico">
 
   <style>
@@ -25,6 +23,7 @@
       height: 100%;
       background: url(./assets/Murex.png) center center no-repeat;
     }
+
     #indextitle {
       position: absolute;
       top: calc(50% + 130px);
@@ -33,6 +32,7 @@
       font-size: 40px;
       color: whitesmoke;
     }
+
     #loading {
       display: inline-block;
       width: 250px;
@@ -43,33 +43,33 @@
       animation: spin 1s ease-in infinite;
       -webkit-animation: spin 1s ease-in infinite; 
     }
+
     @keyframes spin {
       to { -webkit-transform: rotate(360deg); }
     }
+
     @-webkit-keyframes spin {
       to { -webkit-transform: rotate(360deg); }
     }
   </style>
 
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-136106805-1"></script>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-136106805-1"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-  
     gtag('config', 'UA-136106805-1');
   </script>
+  </head>
 
+  <body>
+      <app-root>
+          <div id="indexouter">
+            <div id="loading"></div>
+            <div id="indextitle">Arecace</div>
+          </div>
+      </app-root>
+  </body>
 
-
-</head>
-<body>
-  <app-root>
-    <div id="indexouter">
-        <div id="loading"></div>
-        <div id="indextitle">Arecace</div>
-    </div>
-  </app-root>
-</body>
 </html>

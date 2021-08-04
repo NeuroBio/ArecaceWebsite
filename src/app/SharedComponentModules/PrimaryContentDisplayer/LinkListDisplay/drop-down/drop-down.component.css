@@ -3,8 +3,13 @@
     left: auto;
 }
 
-div.sidebarlab {
+.linklistlabel {
     cursor: pointer;
+    padding-left: 15px;
+}
+
+#outerdrop {
+    background-color: #454545;
 }
 
 img#downUp {
@@ -12,5 +17,9 @@ img#downUp {
     cursor: pointer;
     position: relative;
     top: 5.5px;
-    background-color: rgba(0,0,0,.3);
+    background-color: #454545;
+}
+
+div#hider {
+    width: calc(100vw - 40px);
 }

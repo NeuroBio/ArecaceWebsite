@@ -1,0 +1,14 @@
+<nav id="background" aria-label="Pixel-Art-Navigation"
+*ngIf="pixels$ | async as pixels">
+
+    <app-link-list class="PixelList"
+    [list]="pixels">
+        <!-- Item Template -->
+        <ng-template let-item #Item>
+          <img #Host [src]="item.Item.Links[0]"
+          [title]="item.ListName + ' by ' + item.Item.Artist + ', ' + item.Item.Date"
+          [alt]="item.ListName + ' by ' + item.Item.Artist + ', ' + item.Item.Date">
+        </ng-template>
+    </app-link-list>
+
+</nav>

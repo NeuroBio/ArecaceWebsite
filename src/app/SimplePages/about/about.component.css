@@ -1,4 +1,6 @@
 div#splatter {
+    display: flex;
+    justify-content: center;
     background-repeat: repeat;
     background-color: rgb(53, 53, 53);
     background-image: url(https://firebasestorage.googleapis.com/v0/b/arecaceworld.appspot.com/o/WebSite%2Fsmear4.png?alt=media&token=fc921624-299c-4470-b40e-a22d256f81dd);
@@ -10,10 +12,11 @@ img#meme {
     float: left;
     background-color: rgb(116, 116, 116);
     border: 7px solid #232323;
+    margin: 0px 15px 0px 10px;
 }
 
-div#meme{
-    max-width: 1000px;
+main#meme{
+    max-width: 800px;
     padding-left: 7px;
 }
 
@@ -24,5 +27,22 @@ p {
 
 h3 {
     margin: 0px;
+    margin-bottom: 15px;
+}
+
+fieldset {
+    border: 0px;
+    padding: 0px;
+}
+
+legend {
+     font-family: 'Courier New', Courier, monospace;
+     font-size: 25px;
+     font-weight: bold;
+     padding-bottom: 7px;
+
+}
+
+.toggler {
     margin-bottom: 15px;
 }

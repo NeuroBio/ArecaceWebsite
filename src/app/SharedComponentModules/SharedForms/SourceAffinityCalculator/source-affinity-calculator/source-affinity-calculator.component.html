@@ -1,12 +1,14 @@
 <div id="outer">
   <div id="header">
-      <h2>Source Affinity Cost Calculater</h2>
+      <h3>Source Affinity Cost Calculater</h3>
   </div>
   <hr id="top">
 
   <form [formGroup]="Form">
-    <button (click)="onShow()">Info</button>
-    <div *ngIf="show">
+    <button *ngIf="viewOnly === false"
+    aria-label="Show-Hide-Info"
+    (click)="onShow()">Info</button>
+    <div *ngIf="show" id="Info">
       <ul>
         <li> Only include one copy of each Source Ability.
         </li>
@@ -15,19 +17,24 @@
         <li> Do NOT include Metamorph for modern Esarian characters unless they are fusing with a familiar (e.g. Roderick).  It is an unnecessary handicap.  Stable fusion requires Mid-Tier mastery.  Higher mastery allows for faster Formshifting.
         </li>
       </ul>
-      <hr>
     </div>
     
+      
+    <p *ngIf="showName">
+      <label for="Name">Name:</label> <input id="Name" type="text" [readOnly]="viewOnly === true" formControlName="Name">
+    </p>
+    
     <p>
-        <button type="button" (click)="addAbility()">Add Ability</button>
+        <button #addAbilityButton type="button" *ngIf="viewOnly === false"
+        (click)="addAbility()">Add Ability</button>
     </p>
     
     <div formArrayName="Abilities">
         <div *ngFor="let newAbility of abilitiesArray.controls; let i = index"
         [formGroupName]="i">
         <div class="stayTogether">
-            Ability: 
-            <select formControlName="Ability">
+            <label [for]="'Ability'+i">Ability {{i+1}}:</label> <wbr>
+            <select [id]="'Ability'+i" formControlName="Ability">
                 <option *ngFor="let ability of abilityKeys; let i = index"
                 [value]="ability">
                     {{ abilityNames[i] }}
@@ -35,14 +42,17 @@
             </select>  
         </div>
         <div class="stayTogether">
-            &nbsp; Mastery:
-            <select formControlName="Mastery">
+          <label [for]="'Mastery'+i">Mastery {{i+1}}:</label> <wbr>
+            <select [id]="'Mastery'+i" formControlName="Mastery">
               <option *ngFor="let master of mastery; let j = index" [value]="j">
                 {{ master }}
               </option>
             </select>
 
-            <button type="button" (click)="removeAbility(i)">-</button>
+            <button type="button" *ngIf="viewOnly === false"
+            [attr.aria-label]="'Remove-Ability-'+ (i+1)"
+            [disabled]="allowRemove === false"
+            (click)="removeAbility(i)">-</button>
         </div>
         <br><br>
       </div>
@@ -51,28 +61,37 @@
     <br>
   
     <div class="stayTogether">
-        Esarian Genetics:
-        <input class="short" formControlName="EsarianGenes"
+        <label for="Esarian">Esarian Genetics:</label>
+        <input id="Esarian" class="short" formControlName="EsarianGenes"
+        [readOnly]="viewOnly === true"
         type="number" min="0" max="1" step=".05">&nbsp;
     </div>
   
     <div class="stayTogether">
-        Connection Genetics:
-        <input class="short" formControlName="ConnectionGenes"
+        <label for="Connect">Connection Genetics:</label>
+        <input id="Connect" class="short" formControlName="ConnectionGenes"
+        [readOnly]="viewOnly === true"
         type="number" min="0" max="1" step=".05">
     </div>
     <br>
-  
+
     <p>
-      <button type="button" (click)=onSubmit()>Submit</button>&nbsp;
-      <button type="button" (click)=onReset()>Reset</button>
+      <button type="button" *ngIf="viewOnly === false"
+      (click)=onSubmit()>Submit</button>&nbsp;
+      <button type="button" *ngIf="viewOnly === false"
+      (click)=resetForm()>Reset</button>
     </p>
+  
   </form>
-  <div id="bottom">
+
+
+<!-- SA info -->
+  <div id="bottom" aria-live="polite">
     <div id="Error" *ngIf="error">{{ error }}</div>
-    <div id="Results" *ngIf="result">
+    <div id="Results" *ngIf="result && !error">
         Source Affinity Cost: {{ result }} <br>
         Source Magician Status: {{ rank }}
     </div>
-  </div>      
+  </div>
+
 </div>

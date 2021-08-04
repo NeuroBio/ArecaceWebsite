@@ -4,7 +4,12 @@
   
     <p> Piece Name: <input type="text" formControlName="Name"></p>
   
-    <p>Pixel: <input #File type="file" class="fileupload" (change)="getFile($event)"></p>
+    <app-upload-main
+    name="Pixel Art"
+    [ID]="0"
+    [hasThumb]="false"
+    [Settings]="imageSettings"
+    ></app-upload-main>
       
     <p>Date (YYYY): <input type="text" formControlName="Date"></p>
   
@@ -13,10 +18,10 @@
     <p>Artist Link:<br/> <input type="text" formControlName="ArtistLink"></p>
   
     <p>Allowed:<br/>
-      <input type="radio" value="false" formControlName="Allowed" id="no">
-      <label for="no">No</label>
-      <input type="radio" value="true" formControlName="Allowed" id="yes">
-      <label for="yes">Yes</label>
+        <input type="radio" value="false" formControlName="Allowed" id="no">
+        <label for="no">No</label>
+        <input type="radio" value="true" formControlName="Allowed" id="yes">
+        <label for="yes">Yes</label>
     </p>
   
     <app-formButtons></app-formButtons>

@@ -1,0 +1,24 @@
+#background {
+    background-color: rgb(53, 53, 53);
+    background-image: url(https://firebasestorage.googleapis.com/v0/b/arecaceworld.appspot.com/o/WebSite%2Fsmear3.png?alt=media&token=caecce26-e337-42b6-a31e-8af4fdef6cb3);
+}
+
+h2.compheader {
+    padding: 0px;
+    display: flex;
+    justify-content: space-between;
+}
+
+span#headertext {
+    display: flex;
+    flex-grow: 1;
+    align-items: center;
+    justify-content: center;
+}
+
+app-slider {
+    border-left: 2px solid white;
+    display: flex;
+    float: right;
+    align-content: stretch;
+}

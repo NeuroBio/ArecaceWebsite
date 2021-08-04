@@ -1,10 +1,14 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
-import { Subscription } from 'rxjs';
-import { CRUDcontrollerService } from 'src/app/administration/services/CRUDcontroller.service';
-import { LooseNotesMetaData } from 'src/app/Classes/notesmetadata';
-import { formatDate } from '@angular/common';
+import { formatDate }                   from '@angular/common';
+import { FormGroup, FormBuilder }       from '@angular/forms';
 
+import { Subscription }                 from 'rxjs';
+
+import { CRUDcontrollerService }        from 'src/app/administration/services/CRUDcontroller.service';
+import { QuickAssign }                  from 'src/app/GlobalServices/commonfunctions.service';
+
+import { LooseNotesMetaData }           from 'src/app/Classes/ContentClasses';
+import { CRUDdata }                     from 'src/app/Classes/ContentClasses';
 @Component({
   selector: 'app-loose-notes-form',
   templateUrl: './loose-notes-form.component.html',
@@ -19,6 +23,7 @@ export class LooseNotesFormComponent implements OnInit, OnDestroy {
 
 
   constructor(private fb: FormBuilder,
+              private qa: QuickAssign,
               private controller: CRUDcontrollerService) { }
 
   ngOnInit() {
@@ -31,6 +36,7 @@ export class LooseNotesFormComponent implements OnInit, OnDestroy {
   ngOnDestroy(){
     this.stream1.unsubscribe();
     this.stream2.unsubscribe();
+    this.controller.disposal();
   }
 
   createForm(){
@@ -47,7 +53,7 @@ export class LooseNotesFormComponent implements OnInit, OnDestroy {
     this.onReset();
     if(editFormData) {
       this.oldNote = true;
-      this.Form = this.controller.quickAssign(this.Form, editFormData);
+      this.Form = this.qa.assign(this.Form, editFormData);
     }
   }
 
@@ -58,17 +64,13 @@ export class LooseNotesFormComponent implements OnInit, OnDestroy {
       const Time = formatDate(new Date(), 'HH:mm', 'en');
       Final.Created = `${Today}, ${Time}`;
       Final.ID = `${Final.ShortTitle.split(' ').join('')}-${Today}`
-    }else{
+    } else {
       Final.Modified = formatDate(new Date(), 'yyyy-MM-dd, HH:mm', 'en');
     }
 
-    this.controller.activeFormData.next([Final,
-                                        [`LooseNotes/${Final.ID}`],
-                                        [],
-                                        [],
-                                        undefined,
-                                        undefined,
-                                        undefined]);
+    return this.controller.activeFormData.next(
+      new CRUDdata(false, '', Final,
+      [`LooseNotes/${Final.ID}`], [], []));
   }
 
   onReset() {

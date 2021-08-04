@@ -1,31 +1,63 @@
 
+<!-- <a [routerLink] = "[route.snapshot['_routerState'].url]" fragment="mainContent" >Skip to main content</a> -->
+
+<!-- Images enabled tester -->
 <img id="flag" #flag src="assets/tester.png" alt="">
 
+
+
 <!-- HEADER AND BANNER -->
-<div id="myHeader">
-    <div id="banner" role="banner"> 
-        <h1 id="title">Arecace</h1>
-        <nav id="header" role="navigation">
-            <div *ngFor="let link of linkList" class="navver">
-                    <a class="navver" [routerLink]="link">{{ link | titlecase }}</a>
-            </div>
-        </nav>
-    </div>
-</div>
+<header role="banner" id="banner">
+    <h1 id="websiteTitle">Arecace</h1>
+
+    <!-- Primary Navigation -->
+    <nav id="headerNav" aria-label="primary-navigation">
+         <app-link-list class="homepageNav"
+         [list]="headerLinkList.Data">
+             <!-- Item Template -->
+             <ng-template let-item #Item>
+                 <div class="navverContainer" >
+                     <div class="navver">
+                        {{ item.ListName }}
+                     </div>
+                 </div>
+             </ng-template>
+         </app-link-list>
+    </nav>
+</header>
 <hr>
 
-    <router-outlet></router-outlet>
+
+
+<router-outlet></router-outlet>
+
+
 
 <!-- FOOTER -->
 <hr>
-<div id="footer" role="navigation">
-        <a class="footer" routerLink="/about">About</a> &nbsp;<b>|</b>&nbsp;
-        <a class="footer" routerLink="/contact">Contact</a> &nbsp;<b>|</b>&nbsp;
-        <a class="footer" routerLink="/faq">FAQ</a> &nbsp;<b>|</b>&nbsp;
-        <a class="footer" routerLink="/sitemap">Site Map</a> &nbsp;<b>|</b>&nbsp;
-        <a class="footer" routerLink="/guide">Buy Traveler's Guide</a> &nbsp;<b>|</b>&nbsp;
-        <a class="footer" routerLink="/kArAAdministrativeUpload/Dash">Admin</a>
-    <br><br>
-    &copy;kArA Redwing: Website 2018-{{year}}, Content 2004-{{year}}
-    <br>
-</div>
+<footer role="contentinfo">
+
+    <!-- Footer Navigation -->
+    <nav aria-label="footer-navigation">
+        <app-link-list class="homepageNav"
+        [list]="footerLinkList.Data">
+
+            <!-- Item Template -->
+            <ng-template let-item #Item>
+                    <span class="footerLink">
+                    {{ item.ListName }}
+                    </span>
+            </ng-template>
+            <!-- Divider Template -->
+            <ng-template let-i #Decoration>
+                <span id="footerDivider" *ngIf="i !== footerLinkList.Data.length-1"><b>|</b></span>
+            </ng-template>
+        </app-link-list>
+    </nav>
+
+
+    <!-- Copyright info -->
+    <p id="footer">
+        &copy;kArA Redwing: Website 2018-{{ year }}, Content 2004-{{ year }}
+    </p>
+</footer>

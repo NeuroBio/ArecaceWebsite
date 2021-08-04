@@ -4,7 +4,7 @@ import { Routes, RouterModule }   from '@angular/router';
 import { SiteMapComponent }       from './sitemap/sitemap.component';
 
 const sitemapRoutes: Routes = [
-  {path: '', component: SiteMapComponent}, 
+  { path: '', component: SiteMapComponent }, 
 ];
 
 @NgModule({
