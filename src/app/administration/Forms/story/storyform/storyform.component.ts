@@ -1,12 +1,12 @@
-import { Component, OnInit, OnDestroy }     from '@angular/core';
-import { FormBuilder, FormGroup }           from '@angular/forms';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
-import { Subscription }                     from 'rxjs';
+import { Subscription } from 'rxjs';
 
-import { CRUDcontrollerService }            from '../../../services/CRUDcontroller.service';
-import { QuickAssign }                      from 'src/app/GlobalServices/commonfunctions.service';
+import { CRUDcontrollerService } from '../../../services/CRUDcontroller.service';
+import { QuickAssign } from 'src/app/GlobalServices/commonfunctions.service';
 
-import { CRUDdata }                         from 'src/app/Classes/ContentClasses';
+import { CRUDdata } from 'src/app/Classes/ContentClasses';
 
 @Component({
   selector: 'app-storyform',
@@ -51,12 +51,12 @@ export class StoryFormComponent implements OnInit, OnDestroy {
       Synopsis: '',
       Story: '',
       StoryLink: ''
-    })
+    });
   }
 
   assignFormData(editFormData: any) {
     this.onReset();
-    if(editFormData) {
+    if (editFormData) {
       this.Form = this.qa.assign(this.Form, editFormData);
       this.controller.getText(editFormData.StoryLink).subscribe( text =>
         this.Form.controls.Story.setValue(text) );
@@ -70,13 +70,13 @@ export class StoryFormComponent implements OnInit, OnDestroy {
     Final.type = this.type;
     
     let oldText: string;
-    if(this.oldText){
+    if (this.oldText) {
       oldText = this.oldText;
     }
     const text: string = this.Form.controls.Story.value;
     
     Final.WordCount = text.trim().split(/\s+/).length;
-    Final.ID = `${Final.Title.replace(/\s/g, "")}`;
+    Final.ID = `${Final.Title.replace(/\s/g, '')}`;
     var newText = new Blob([text], {type: 'text/plain'});
     
     return this.controller.activeFormData.next(

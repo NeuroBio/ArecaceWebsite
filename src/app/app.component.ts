@@ -39,7 +39,7 @@ export class AppComponent implements AfterViewInit {
   ngAfterViewInit() {
     setTimeout(() => { this.checkLoad(); }, 1000);
   }
-  
+
   checkLoad() {
     if (this.flag.nativeElement.offsetWidth !== 1) {
 

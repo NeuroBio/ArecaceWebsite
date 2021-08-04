@@ -10,7 +10,7 @@ export class ImageResizerService {
   resizeImage(file: any, maxheight: number, maxwidth: number, Blob: boolean) {
     return this.resizer(file, maxheight, maxwidth)
     .then(urlString => {
-        if(Blob) {
+        if (Blob) {
             return this.b64toBlob(urlString);
         } else {
             return urlString;
@@ -26,7 +26,7 @@ export class ImageResizerService {
       const img = document.createElement('img');
       let URLi;
 
-      img.onload = function() {    
+      img.onload = function() {
         setTimeout(() => {
           canvas.width = img.width;
           canvas.height = img.height;
@@ -45,7 +45,7 @@ export class ImageResizerService {
           const ratio_w_half = Math.ceil(ratio_w / 2);
           const ratio_h_half = Math.ceil(ratio_h / 2);
 
-          const ctx = canvas.getContext("2d");
+          const ctx = canvas.getContext('2d');
           const imgold = ctx.getImageData(0, 0, width_source, height_source);
           const img2 = ctx.createImageData(width, height);
           const data = imgold.data;
@@ -53,44 +53,45 @@ export class ImageResizerService {
 
           for (let j = 0; j < height; j++) {
             for (let i = 0; i < width; i++) {
-              let x2 = (i + j * width) * 4;
-                let weight = 0;
-                let weights = 0;
-                let weights_alpha = 0;
-                let gx_r = 0;
-                let gx_g = 0;
-                let gx_b = 0;
-                let gx_a = 0;
-                let center_y = (j + 0.5) * ratio_h;
-                let yy_start = Math.floor(j * ratio_h);
-                let yy_stop = Math.ceil((j + 1) * ratio_h);
-                for (let yy = yy_start; yy < yy_stop; yy++) {
-                    const dy = Math.abs(center_y - (yy + 0.5)) / ratio_h_half;
-                    const center_x = (i + 0.5) * ratio_w;
-                    const w0 = dy * dy; //pre-calc part of w
-                    const xx_start = Math.floor(i * ratio_w);
-                    const xx_stop = Math.ceil((i + 1) * ratio_w);
-                    for (let xx = xx_start; xx < xx_stop; xx++) {
-                        const dx = Math.abs(center_x - (xx + 0.5)) / ratio_w_half;
-                        const w = Math.sqrt(w0 + dx * dx);
-                        if (w >= 1) {
-                            //pixel too far
-                            continue;
-                        }
-                        //hermite filter
-                        weight = 2 * w * w * w - 3 * w * w + 1;
-                        const pos_x = 4 * (xx + yy * width_source);
-                        //alpha
-                        gx_a += weight * data[pos_x + 3];
-                        weights_alpha += weight;
-                        //colors
-                        if (data[pos_x + 3] < 255)
-                            weight = weight * data[pos_x + 3] / 250;
-                        gx_r += weight * data[pos_x];
-                        gx_g += weight * data[pos_x + 1];
-                        gx_b += weight * data[pos_x + 2];
-                        weights += weight;
-                    }
+              const x2 = (i + j * width) * 4;
+              let weight = 0;
+              let weights = 0;
+              let weights_alpha = 0;
+              let gx_r = 0;
+              let gx_g = 0;
+              let gx_b = 0;
+              let gx_a = 0;
+              const center_y = (j + 0.5) * ratio_h;
+              const yy_start = Math.floor(j * ratio_h);
+              const yy_stop = Math.ceil((j + 1) * ratio_h);
+              for (let yy = yy_start; yy < yy_stop; yy++) {
+                  const dy = Math.abs(center_y - (yy + 0.5)) / ratio_h_half;
+                  const center_x = (i + 0.5) * ratio_w;
+                  const w0 = dy * dy; // pre-calc part of w
+                  const xx_start = Math.floor(i * ratio_w);
+                  const xx_stop = Math.ceil((i + 1) * ratio_w);
+                  for (let xx = xx_start; xx < xx_stop; xx++) {
+                      const dx = Math.abs(center_x - (xx + 0.5)) / ratio_w_half;
+                      const w = Math.sqrt(w0 + dx * dx);
+                      if (w >= 1) {
+                          // pixel too far
+                          continue;
+                      }
+                      // hermite filter
+                      weight = 2 * w * w * w - 3 * w * w + 1;
+                      const pos_x = 4 * (xx + yy * width_source);
+                      // alpha
+                      gx_a += weight * data[pos_x + 3];
+                      weights_alpha += weight;
+                      // colors
+                      if (data[pos_x + 3] < 255) {
+                        weight = weight * data[pos_x + 3] / 250;
+                      }
+                      gx_r += weight * data[pos_x];
+                      gx_g += weight * data[pos_x + 1];
+                      gx_b += weight * data[pos_x + 2];
+                      weights += weight;
+                  }
                 }
                 data2[x2] = gx_r / weights;
                 data2[x2 + 1] = gx_g / weights;
@@ -101,25 +102,25 @@ export class ImageResizerService {
             canvas.width = width;
             canvas.height = height;
 
-            //draw
+            // draw
             ctx.putImageData(img2, 0, 0);
-            //https://stackoverflow.com/questions/18922880/html5-canvas-resize-downscale-image-high-quality
-            URLi = canvas.toDataURL();        
-            return resolve(URLi)
+            // https://stackoverflow.com/questions/18922880/html5-canvas-resize-downscale-image-high-quality
+            URLi = canvas.toDataURL();
+            return resolve(URLi);
         }, 10);
       }
       return img.src = URL.createObjectURL(file);
     });
 
 
-    //https://stackoverflow.com/questions/43809120/resizing-a-image-with-javascript-without-rendering-a-canvas-on-the-dom
+    // https://stackoverflow.com/questions/43809120/resizing-a-image-with-javascript-without-rendering-a-canvas-on-the-dom
   }
 
 
 
   b64toBlob(dataURI) {
     const byteString = atob(dataURI.split(',')[1]);
-    const mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0]
+    const mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
 
     const ab = new ArrayBuffer(byteString.length);
     const ia = new Uint8Array(ab);
@@ -132,11 +133,11 @@ export class ImageResizerService {
     blob['name'] = 'resized';
     blob['lastModifiedDate'] = '';
     return blob;
-    //https://stackoverflow.com/questions/12168909/blob-from-dataurl
+    // https://stackoverflow.com/questions/12168909/blob-from-dataurl
   }
 
-    // scales the canvas by (float) scale < 1
-  // returns a new canvas containing the scaled image.
+// scales the canvas by (float) scale < 1
+// returns a new canvas containing the scaled image.
 //   downScaleCanvas(cv, scale) {
 //       if (!(scale < 1) || !(scale > 0)) throw ('scale must be a positive number <1 ');
 //       var sqScale = scale * scale; // square scale = area of source pixel within target
@@ -157,7 +158,7 @@ export class ImageResizerService {
 //       var tBuffer = new Float32Array(3 * tw * th); // target buffer Float32 rgb
 //       var sR = 0, sG = 0,  sB = 0; // source's current point r,g,b
 //       /* untested !
-//       var sA = 0;  //source alpha  */    
+//       var sA = 0;  //source alpha  */
 
 //       for (sy = 0; sy < sh; sy++) {
 //           ty = sy * scale; // y src position within target
@@ -201,7 +202,7 @@ export class ImageResizerService {
 //                   tBuffer[tIndex    ] += sR * w;
 //                   tBuffer[tIndex + 1] += sG * w;
 //                   tBuffer[tIndex + 2] += sB * w;
-//                   // add weighted component for next (tX+1) px                
+//                   // add weighted component for next (tX+1) px
 //                   nw = nwx * scale
 //                   tBuffer[tIndex + 3] += sR * nw;
 //                   tBuffer[tIndex + 4] += sG * nw;
@@ -212,7 +213,7 @@ export class ImageResizerService {
 //                   tBuffer[tIndex    ] += sR * w;
 //                   tBuffer[tIndex + 1] += sG * w;
 //                   tBuffer[tIndex + 2] += sB * w;
-//                   // add weighted component for next (tY+1) px                
+//                   // add weighted component for next (tY+1) px
 //                   nw = nwy * scale
 //                   tBuffer[tIndex + 3 * tw    ] += sR * nw;
 //                   tBuffer[tIndex + 3 * tw + 1] += sG * nw;
@@ -333,7 +334,7 @@ export class ImageResizerService {
 //                     tBuffer[tIndex    ] += sR * w;
 //                     tBuffer[tIndex + 1] += sG * w;
 //                     tBuffer[tIndex + 2] += sB * w;
-//                     // add weighted component for next (tX+1) px                
+//                     // add weighted component for next (tX+1) px
 //                     nw = nwx * scale
 //                     tBuffer[tIndex + 3] += sR * nw;
 //                     tBuffer[tIndex + 4] += sG * nw;
@@ -344,7 +345,7 @@ export class ImageResizerService {
 //                     tBuffer[tIndex    ] += sR * w;
 //                     tBuffer[tIndex + 1] += sG * w;
 //                     tBuffer[tIndex + 2] += sB * w;
-//                     // add weighted component for next (tY+1) px                
+//                     // add weighted component for next (tY+1) px
 //                     nw = nwy * scale
 //                     tBuffer[tIndex + 3 * tw    ] += sR * nw;
 //                     tBuffer[tIndex + 3 * tw + 1] += sG * nw;

@@ -1,13 +1,13 @@
-import { Injectable }             from '@angular/core';
-import { AngularFireAuth }        from '@angular/fire/auth';
+import { Injectable } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/auth';
 
-import { of, BehaviorSubject }    from 'rxjs';
-import { switchMap, take }        from 'rxjs/operators';
+import { of, BehaviorSubject } from 'rxjs';
+import { switchMap, take } from 'rxjs/operators';
 
-import { auth }                   from 'firebase/app';
+import { auth } from 'firebase/app';
 
-import { User }                   from 'src/app/Classes/ContentClasses'; 
-import { FireBaseService }        from 'src/app/GlobalServices/firebase.service';
+import { User } from 'src/app/Classes/ContentClasses';
+import { FireBaseService } from 'src/app/GlobalServices/firebase.service';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +17,7 @@ export class AuthService {
 
   isLoggedIn = false;
   redirectUrl: string;
-  
+
   authState = null;
   user = new BehaviorSubject<User>(undefined);
   uid = new BehaviorSubject<string>(undefined);
@@ -26,20 +26,20 @@ export class AuthService {
               private firebaseserv: FireBaseService) { }
 
   load() {
-    this.authorize.authState.subscribe(auth => {
-      this.authState = auth;
+    this.authorize.authState.subscribe(a => {
+      this.authState = a;
     });
 
     return new Promise(resolve =>
       this.authorize.authState.pipe(switchMap(user => {
         if (user) {
           this.isLoggedIn = true;
-          if(user.isAnonymous === false) {
+          if (user.isAnonymous === false) {
             this.uid.next(user.uid);
             return this.firebaseserv.returnDocument(`Users/${user.uid}`);
           }
         }
-        return of (null); //no login or anonlogin
+        return of (null); // no login or anonlogin
       })
     ).subscribe(user => {
       this.user.next(user);
@@ -61,14 +61,15 @@ export class AuthService {
   }
 
   private oAuthLogin(provider: any, local: boolean) {
-    const sessionType = local === true ? 'local' : 'session'; 
-    if(this.authState) { //upgrade anon users
+    const sessionType = local === true ? 'local' : 'session';
+    if (this.authState) { // upgrade anon users
       return this.authorize.auth.setPersistence(sessionType)
-      .then(() => {return this.authorize.auth.currentUser.linkWithPopup(provider)})
-      .then((credential) =>
+      .then(() => {
+        return this.authorize.auth.currentUser.linkWithPopup(provider);
+      }).then((credential) =>
         this.updateUserData(credential.user, false,
                             credential.additionalUserInfo.isNewUser)
-      ).catch(err => //anon user already has an account
+      ).catch(err => // anon user already has an account
         this.authorize.auth.signInWithCredential(err.credential)
       .then((credential) =>
         this.updateUserData(credential.user, false,
@@ -87,8 +88,8 @@ export class AuthService {
   }
 
   isUser() {
-    if(this.isLoggedIn) {
-      if(!this.isAnon()) {
+    if (this.isLoggedIn) {
+      if (!this.isAnon()) {
         return this.user.value.User;
       }
     }
@@ -96,8 +97,8 @@ export class AuthService {
   }
 
   isAdmin() {
-    if(this.isLoggedIn) {
-      if(!this.isAnon()) {
+    if (this.isLoggedIn) {
+      if (!this.isAnon()) {
         return this.user.value.Admin;
       }
     }
@@ -106,7 +107,7 @@ export class AuthService {
 
   private updateUserData(user: any, anon: boolean, newUser: boolean) {
     let data: User;
-    if(newUser && !anon) {
+    if (newUser && !anon) {
       return this.firebaseserv.returnCollectionWithKeys('NumUsers').pipe(take(1))
       .subscribe(ID => {
         data = new User(user.email, ID[0].NumUsers);

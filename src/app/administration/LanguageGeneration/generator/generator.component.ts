@@ -1,12 +1,10 @@
-import { Component, OnInit, OnDestroy, 
-          OnChanges, Output, EventEmitter,
-          Input }                           from '@angular/core';
-import { Validators, FormBuilder }          from '@angular/forms';
+import { Component, OnInit, OnDestroy, OnChanges, Output, EventEmitter, Input } from '@angular/core';
+import { Validators, FormBuilder } from '@angular/forms';
 
-import { Subscription }                     from 'rxjs';
+import { Subscription } from 'rxjs';
 
-import { Nomadic, Word, WordTypes }         from '../../../Classes/NomadicLanguage';
-import { CRUDcontrollerService }            from '../../services/CRUDcontroller.service';
+import { Nomadic, Word, WordTypes } from '../../../Classes/NomadicLanguage';
+import { CRUDcontrollerService } from '../../services/CRUDcontroller.service';
 
 @Component({
   selector: 'app-generator',
@@ -46,19 +44,19 @@ export class GeneratorComponent implements OnInit, OnDestroy, OnChanges {
   createForm() {
     return this.fb.group({
       Type: this.type,
-      Number: ['10', Validators.pattern("^[0-9]*$")],
-      Length: [null, Validators.pattern("^[0-9]*$")]
+      Number: ['10', Validators.pattern('^[0-9]*$')],
+      Length: [null, Validators.pattern('^[0-9]*$')]
     });
   }
 
   getWords() {
-    let NewWords = [];
+    const NewWords = [];
     this.selected = undefined;
 
     this.Form.controls.Length.value === null ?
       length = undefined : length = this.Form.controls.Length.value;
-    
-    for(let i = 0; i < this.Form.controls.Number.value; i++) {
+
+    for (let i = 0; i < this.Form.controls.Number.value; i++) {
       NewWords.push(this.Nomadic.makeWord(this.Form.controls.Type.value,
                                           this.Dictionary, length));
     }

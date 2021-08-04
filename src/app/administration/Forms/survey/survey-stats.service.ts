@@ -1,6 +1,6 @@
-import { Injectable }                     from '@angular/core';
-import { BehaviorSubject, Subscription }  from 'rxjs';
-import { FireBaseService }                from 'src/app/GlobalServices/firebase.service';
+import { Injectable } from '@angular/core';
+import { BehaviorSubject, Subscription } from 'rxjs';
+import { FireBaseService } from 'src/app/GlobalServices/firebase.service';
 
 @Injectable({
   providedIn: 'root'

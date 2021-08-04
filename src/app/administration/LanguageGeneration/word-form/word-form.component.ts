@@ -1,12 +1,12 @@
-import { Component, OnInit, OnDestroy}            from '@angular/core';
-import { Validators, FormBuilder, FormGroup }     from '@angular/forms';
-import { Subscription }                           from 'rxjs';
+import { Component, OnInit, OnDestroy} from '@angular/core';
+import { Validators, FormBuilder, FormGroup } from '@angular/forms';
+import { Subscription } from 'rxjs';
 
-import { CRUDcontrollerService }                  from '../../services/CRUDcontroller.service';
-import { QuickAssign }                            from 'src/app/GlobalServices/commonfunctions.service';
+import { CRUDcontrollerService } from '../../services/CRUDcontroller.service';
+import { QuickAssign } from 'src/app/GlobalServices/commonfunctions.service';
 
-import { Word, Nomadic, WordTypes }               from '../../../Classes/NomadicLanguage';
-import { CRUDdata }                               from 'src/app/Classes/ContentClasses';
+import { Word, Nomadic, WordTypes } from '../../../Classes/NomadicLanguage';
+import { CRUDdata } from 'src/app/Classes/ContentClasses';
 @Component({
   selector: 'app-word-form',
   templateUrl: './word-form.component.html',
@@ -20,7 +20,7 @@ export class WordFormComponent implements OnInit, OnDestroy {
   stream1: Subscription;
   stream2: Subscription;
   activeType: string;
-  
+
   constructor(private fb: FormBuilder,
               private controller: CRUDcontrollerService,
               private qa: QuickAssign) { }
@@ -31,7 +31,7 @@ export class WordFormComponent implements OnInit, OnDestroy {
 
     this.stream2 = this.controller.triggerProcess
       .subscribe(() => this.processForm());
-    
+
     this.updateType();
   }
 
@@ -55,24 +55,24 @@ export class WordFormComponent implements OnInit, OnDestroy {
 
   assignFormData(editFormData: any) {
     this.onReset();
-    if(editFormData) {
+    if (editFormData) {
       this.Form = this.qa.assign(this.Form, editFormData);
     }
   }
 
   processForm() {
-    //Incomplete Form
-    if(!this.Form.valid) {
+    // Incomplete Form
+    if (!this.Form.valid) {
       return this.controller.activeFormData.next(
         new CRUDdata(true, 'All blanks must be filled.'));
     }
-    //Complete Form   
+    // Complete Form   
     const Final:Word = Object.assign({}, this.Form.value);
     Final.ID = Final.Indativor;
     return this.controller.activeFormData.next(
       new CRUDdata(false, '', Final));
   }
-  
+
   onReset() {
     this.Form = this.createForm();
     this.controller.message.next('');

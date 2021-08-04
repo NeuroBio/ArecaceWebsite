@@ -1,36 +1,35 @@
-import { Injectable }                           from '@angular/core';
+import { Injectable } from '@angular/core';
 
-import { map, take }                            from 'rxjs/operators';
-import { BehaviorSubject, Observable, Subject,
-         Subscription}                          from 'rxjs';
+import { map, take } from 'rxjs/operators';
+import { BehaviorSubject, Observable, Subject, Subscription} from 'rxjs';
 
-import { FireBaseService }                      from 'src/app/GlobalServices/firebase.service';
-import { CRUD }                                 from './CRUD.service';
-import { ButtonController }                     from '../../SharedComponentModules/SharedForms/Buttons/buttoncontroller';
-import { NewestCueService }                     from './newest-cue.service';
-import { FetchService }                         from 'src/app/GlobalServices/fetch.service';
-import { CacheService }                         from 'src/app/GlobalServices/cache.service';
+import { FireBaseService } from 'src/app/GlobalServices/firebase.service';
+import { CRUD } from './CRUD.service';
+import { ButtonController } from '../../SharedComponentModules/SharedForms/Buttons/buttoncontroller';
+import { NewestCueService } from './newest-cue.service';
+import { FetchService } from 'src/app/GlobalServices/fetch.service';
+import { CacheService } from 'src/app/GlobalServices/cache.service';
 
-import { CRUDdata }                             from 'src/app/Classes/ContentClasses';
-import { AllPathInfo }                          from 'src/app/Classes/UploadDownloadPaths';
+import { CRUDdata } from 'src/app/Classes/ContentClasses';
+import { AllPathInfo } from 'src/app/Classes/UploadDownloadPaths';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class CRUDcontrollerService {
-  
+
   firePaths = new AllPathInfo();
   itemType = new BehaviorSubject<string>('');
   itemToEdit = new BehaviorSubject<any>(undefined);
   itemList = new BehaviorSubject<any[]>(undefined);
-  
+
   showButtons = new BehaviorSubject<ButtonController>(undefined);
   allowButtons = new BehaviorSubject<ButtonController>(new ButtonController([true, true, false, false]));
   ButtonSavedState = new BehaviorSubject<ButtonController>(undefined);
 
   activeFormData = new BehaviorSubject<CRUDdata>(undefined);
-  
+
   message = new BehaviorSubject<string>(undefined);
   triggerProcess = new Subject<any>();
 
@@ -43,15 +42,15 @@ export class CRUDcontrollerService {
               private fetcher: FetchService,
               private cache: CacheService) {
     this.stream1 = this.fetcher.loading.subscribe(load => {
-      if(load === true) {
+      if (load === true) {
        this.deActivateButtons();
-      } else if(load === false) {
+      } else if (load === false) {
         this.reActivateButtons();
       }
-    })
+    });
   }
 
-  //Data fetching functions
+  // Data fetching functions
   assignItemType(itemType: string) {
     return this.itemType.next(itemType);
   }
@@ -61,12 +60,12 @@ export class CRUDcontrollerService {
   }
 
   assignItemList(path: string) {
-    if(this.stream2) {
+    if (this.stream2) {
       this.stream2.unsubscribe();
     }
 
-    if(path) {
-      if(this.cache.Cache[`${this.itemType.value}-edit`]) {
+    if (path) {
+      if (this.cache.Cache[`${this.itemType.value}-edit`]) {
         this.cache.Cache[`${this.itemType.value}-edit`]
         .subscribe(list => this.itemList.next(list));
       } else {
@@ -89,38 +88,38 @@ export class CRUDcontrollerService {
   getEditableCollection(path: string): Observable<any[]> {
     return this.firebaseserv.returnCollectionWithKeys(path).pipe(
       map(collect =>
-        collect.sort((a,b) => a.ID > b.ID ? 1:-1),
+        collect.sort((a, b) => a.ID > b.ID ? 1 : -1),
     ));
   }
- 
+
   getText(link: string) {
     return this.crud.getText(link);
   }
 
 
-  //Key upload/download functions
+  // Key upload/download functions
   onSubmit() {
     this.deActivateButtons()
-    this.message.next("Processing...");
+    this.message.next('Processing...');
 
     this.triggerProcess.next();
     return this.activeFormData.pipe(take(1))
     .subscribe((data:CRUDdata) => {
       
-      //submit button hit with invalid form.
-      if(data.Abort) {
-        return this.throwError({stage: 'Processing', message: data.AbortMessage})
+      // submit button hit with invalid form.
+      if (data.Abort) {
+        return this.throwError({ stage: 'Processing', message: data.AbortMessage })
       }
 
-      this.message.next("Submitting...");console.log("images");
-//IMAGES
+      this.message.next('Submitting...');console.log('images');
+// IMAGES
       this.crud.uploadImages(data.NewImageLinks, data.ImageBlobs)
-//TEXT
-      .then(links => {console.log("Text");
+// TEXT
+      .then(links => { console.log('Text');
         data.MetaData = this.checkLinks(data.MetaData, links);
-        return this.crud.uploadStory(data.NewTextPath, data.TextBlob)       
+        return this.crud.uploadStory(data.NewTextPath, data.TextBlob)
 //META DATA
-      }).then(link => {console.log("meta");
+      }).then(link => { console.log("meta");
         if("StoryLink" in data.MetaData) {
           data.MetaData.StoryLink = link;
         }
@@ -131,10 +130,11 @@ export class CRUDcontrollerService {
 //POST UPLOAD
       }).then(() => {
         this.itemToEdit.next(undefined);
-        this.message.next("Submitted!");
+        this.message.next('Submitted!');
         this.reActivateButtons();
 //ERRORS
-      }).catch(err => {console.log(data.MetaData);
+      }).catch(err => {
+        console.log(data.MetaData);
         this.throwError(err);
       });
     });
@@ -147,9 +147,10 @@ export class CRUDcontrollerService {
 
     this.triggerProcess.next();
     return this.activeFormData.pipe(take(1)).toPromise()
-    .then(data => {console.log("images");
+    .then(data => {
+      console.log("images");
       if(data.Abort) {
-        this.throwError({stage: 'Processing', message: data.AbortMessage});
+        this.throwError({ stage: 'Processing', message: data.AbortMessage });
         return Promise.reject();
       }
 
@@ -159,13 +160,15 @@ export class CRUDcontrollerService {
       return this.crud.editImages(CRUDdata.NewImageLinks,
         CRUDdata.ImageBlobs, CRUDdata.OldImageLinks);
 //TEXT
-    }).then(links => {console.log("text");
+    }).then(links => {
+      console.log("text");
       CRUDdata.MetaData = this.checkLinks(CRUDdata.MetaData, links);
       return this.crud.editStory(CRUDdata.NewTextPath,
         CRUDdata.TextBlob, CRUDdata.OldTextPath);      
 //META DATA
-    }).then(link =>{console.log("meta");
-      if("StoryLink" in CRUDdata.MetaData){
+    }).then(link =>{
+      console.log("meta");
+      if ("StoryLink" in CRUDdata.MetaData) {
         CRUDdata.MetaData.StoryLink = link;
       }
         // this.newestCue.updateCue(
@@ -182,9 +185,10 @@ export class CRUDcontrollerService {
       this.message.next("Edit successful!");
       this.reActivateButtons();
 //ERRORS
-    }).catch(err => {console.log(CRUDdata.MetaData)
+    }).catch(err => {
+      console.log(CRUDdata.MetaData)
       this.throwError(err);
-      if(all) {
+      if (all) {
         return Promise.reject();
       }
     });
@@ -196,11 +200,11 @@ export class CRUDcontrollerService {
     const item = this.itemToEdit.value;
     
     const links = [];
-    if("Links" in item) {
+    if ("Links" in item) {
       item.Links.forEach(link => links.push(link));
     }
 
-    if("StoryLink" in item) {
+    if ("StoryLink" in item) {
       links.push(item.StoryLink);
     }
 
@@ -234,8 +238,8 @@ export class CRUDcontrollerService {
   }
 
   checkLinks(meta: any, links: string[]) {
-    if("Links" in meta) {
-      if(links[0]) {
+    if ('Links' in meta) {
+      if (links[0]) {
         meta.Links = links;
       } else {
         delete meta.Links;
@@ -277,10 +281,10 @@ export class CRUDcontrollerService {
   }
 
   shutDown() {
-    if(this.stream1) {
+    if (this.stream1) {
       this.stream1.unsubscribe();
     }
-    if(this.stream2) {
+    if (this.stream2) {
       this.stream2.unsubscribe();
     }
   }

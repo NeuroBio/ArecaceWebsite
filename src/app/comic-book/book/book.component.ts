@@ -116,7 +116,7 @@ export class BookComponent implements OnInit, OnDestroy {
   }
 
   // Arrow keys (trigger button options)
-  KeyEvent(event: KeyboardEvent) { 
+  KeyEvent(event: KeyboardEvent) {
     if (event.keyCode === 39 && // right, next
       !(this.currentPage === this.currentChapter.NumPages
         && this.currentChapter.ID === this.maxChap)) { // not last page

@@ -1,14 +1,14 @@
-import { Component, OnInit, OnDestroy }         from '@angular/core';
-import { FormBuilder, FormGroup }               from '@angular/forms';
-import { Subscription }                         from 'rxjs';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { Subscription } from 'rxjs';
 
-import { CRUDcontrollerService }                from '../../../services/CRUDcontroller.service'
-import { ReferenceCategories, AllPathInfo }   from '../../../../Classes/UploadDownloadPaths'
-import { QuickAssign }                          from 'src/app/GlobalServices/commonfunctions.service';
-import { UploadPreviewService }                 from 'src/app/SharedComponentModules/SharedForms/UploadPreview/upload-preview.service';
-import { UploadPreviewSettings }                from 'src/app/SharedComponentModules/SharedForms/UploadPreview//uploadpreviewclass';
-import { FetchService }                         from 'src/app/GlobalServices/fetch.service';
-import { CRUDdata }                             from 'src/app/Classes/ContentClasses';
+import { CRUDcontrollerService } from '../../../services/CRUDcontroller.service';
+import { ReferenceCategories, AllPathInfo } from '../../../../Classes/UploadDownloadPaths';
+import { QuickAssign } from 'src/app/GlobalServices/commonfunctions.service';
+import { UploadPreviewService } from 'src/app/SharedComponentModules/SharedForms/UploadPreview/upload-preview.service';
+import { UploadPreviewSettings } from 'src/app/SharedComponentModules/SharedForms/UploadPreview//uploadpreviewclass';
+import { FetchService } from 'src/app/GlobalServices/fetch.service';
+import { CRUDdata } from 'src/app/Classes/ContentClasses';
 
 @Component({
   selector: 'app-referenceform',
@@ -17,13 +17,12 @@ import { CRUDdata }                             from 'src/app/Classes/ContentCla
 })
 
 export class ReferenceFormComponent implements OnInit, OnDestroy {
-  
+
   Form: FormGroup;
   stream1: Subscription;
   stream2: Subscription;
   imageSettings = new UploadPreviewSettings([[undefined, undefined, '100MB'], [200, 600, '300KB']]);
 
-  
   cats = new ReferenceCategories;
   paths = new AllPathInfo;
   categories: string[];
@@ -46,7 +45,7 @@ export class ReferenceFormComponent implements OnInit, OnDestroy {
 
     this.stream1 = this.controller.itemToEdit
       .subscribe(item => this.assignFormData(item));
-    
+
     this.stream2 = this.controller.triggerProcess
       .subscribe(() => this.processForm());
   }
@@ -72,7 +71,7 @@ export class ReferenceFormComponent implements OnInit, OnDestroy {
 
   assignFormData(editFormData: any) {
     this.onReset();
-    if(editFormData) {
+    if (editFormData) {
       this.Form = this.qa.assign(this.Form, editFormData);
       this.uploadpreviewserv.assignOldLinks(this.Form.controls.Links.value);
     }
@@ -81,14 +80,14 @@ export class ReferenceFormComponent implements OnInit, OnDestroy {
   processForm() {
     const imageFile = this.uploadpreviewserv.mainsData[0];
 
-     //Incomplete Form
+     // Incomplete Form
      if(imageFile === undefined
       && this.Form.controls.Links.value === '') {
       return this.controller.activeFormData.next(
         new CRUDdata(true, `${this.type} files require an image.`));
     }
-    
-    //Complete Form
+
+    // Complete Form
     const Final = Object.assign({}, this.Form.value);
     Final.ID = this.Form.controls.Topic.value.split(' ').join('');
 

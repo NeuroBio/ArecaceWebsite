@@ -1,14 +1,13 @@
-import { Component, OnInit, OnDestroy }       from '@angular/core';
-import { FormGroup, FormBuilder, FormArray }  from '@angular/forms';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { FormGroup, FormBuilder, FormArray } from '@angular/forms';
 
-import { Subscription }                       from 'rxjs';
+import { Subscription } from 'rxjs';
 
-import { CRUDcontrollerService }              from 'src/app/administration/services/CRUDcontroller.service';
-import { SurveyStatsService }                 from '../survey-stats.service';
-import { QuickAssign }                        from 'src/app/GlobalServices/commonfunctions.service';
+import { CRUDcontrollerService } from 'src/app/administration/services/CRUDcontroller.service';
+import { SurveyStatsService } from '../survey-stats.service';
+import { QuickAssign } from 'src/app/GlobalServices/commonfunctions.service';
 
-
-import { CRUDdata }                           from 'src/app/Classes/ContentClasses';
+import { CRUDdata } from 'src/app/Classes/ContentClasses';
 
 @Component({
   selector: 'app-survey-stats',
@@ -29,12 +28,14 @@ export class SurveyStatsComponent implements OnInit , OnDestroy {
   stream3: Subscription;
 
   Tallies: number[];
-  
-  constructor(private fb: FormBuilder,
-              private controller: CRUDcontrollerService,
-              private statsserv: SurveyStatsService,
-              private qa: QuickAssign) { }
-  
+
+  constructor(
+    private fb: FormBuilder,
+    private controller: CRUDcontrollerService,
+    private statsserv: SurveyStatsService,
+    private qa: QuickAssign
+  ) { }
+
   ngOnInit() {
     this.stream1 = this.controller.itemToEdit
       .subscribe(item => this.assignFormData(item));
@@ -42,8 +43,8 @@ export class SurveyStatsComponent implements OnInit , OnDestroy {
     this.stream2 = this.controller.triggerProcess
       .subscribe(() => this.processForm());
     
-    this.stream3 = this.statsserv.surveys.subscribe(surveys => {
-      this.surveys = surveys});
+    this.stream3 = this.statsserv.surveys
+      .subscribe(surveys => this.surveys = surveys);
   }
 
   ngOnDestroy() {
@@ -62,7 +63,7 @@ export class SurveyStatsComponent implements OnInit , OnDestroy {
 
   assignFormData(editFormData: any) {
     this.onReset();
-    if(editFormData) {
+    if (editFormData) {
       const safeCopy = Object.assign({}, editFormData);
       this.qa.assign(this.Form, safeCopy);
       delete safeCopy.ID;
@@ -75,16 +76,16 @@ export class SurveyStatsComponent implements OnInit , OnDestroy {
   }
 
   processForm() {
-    let Final: any = {};
+    const Final: any = {};
     this.outcomes.controls.forEach((o, i) => {
-      if(this.Tallies) {
+      if (this.Tallies) {
         Final[o.value.Name] = this.Tallies[i] !== undefined ? this.Tallies[i] : 0;
       } else {
         Final[o.value.Name] = 0;
       }
     })
     Final.ID = this.Form.value.ID;
-    if(Final.ID === '') {
+    if (Final.ID === '') {
       return this.controller.activeFormData.next(
         new CRUDdata(true, 'Survey Stats must have at least an ID.'));
     }
@@ -101,7 +102,7 @@ export class SurveyStatsComponent implements OnInit , OnDestroy {
   }
 
   addOutcome(add: boolean, index: number, name: string = 'test') {
-    if(add) {
+    if (add) {
       this.outcomes.controls.push(this.fb.group({Name: name}));
     } else {
       this.outcomes.removeAt(index);
@@ -114,11 +115,11 @@ export class SurveyStatsComponent implements OnInit , OnDestroy {
 
   populateOutcomes(index: number) {
     this.outcomes.controls.forEach(() =>
-      this.outcomes.removeAt(this.outcomes.length-1));
+      this.outcomes.removeAt(this.outcomes.length - 1));
     this.surveys[index].Outcomes.forEach(o => {
       this.addOutcome(true, 0, o)
     });
 
-    this.Form.patchValue({ID: this.surveys[index].ID});
+    this.Form.patchValue({ ID: this.surveys[index].ID });
   }
 }

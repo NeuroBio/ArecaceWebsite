@@ -1,17 +1,17 @@
-import { Component, OnInit, OnDestroy }       from '@angular/core';
-import { formatDate }                         from '@angular/common';
-import { FormBuilder, FormGroup }             from '@angular/forms';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { formatDate } from '@angular/common';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
-import { Subscription }                       from 'rxjs';
+import { Subscription } from 'rxjs';
 
-import { CRUDcontrollerService }              from 'src/app/administration/services/CRUDcontroller.service';
-import { QuickAssign }                        from 'src/app/GlobalServices/commonfunctions.service';
-import { UploadPreviewService }               from 'src/app/SharedComponentModules/SharedForms/UploadPreview/upload-preview.service';
-import { FetchService }                       from 'src/app/GlobalServices/fetch.service';
+import { CRUDcontrollerService } from 'src/app/administration/services/CRUDcontroller.service';
+import { QuickAssign } from 'src/app/GlobalServices/commonfunctions.service';
+import { UploadPreviewService } from 'src/app/SharedComponentModules/SharedForms/UploadPreview/upload-preview.service';
+import { FetchService } from 'src/app/GlobalServices/fetch.service';
 
-import { PostData }                           from 'src/app/Classes/ContentClasses';
-import { UploadPreviewSettings }              from 'src/app/SharedComponentModules/SharedForms/UploadPreview/uploadpreviewclass';
-import { CRUDdata }                           from 'src/app/Classes/ContentClasses';
+import { PostData } from 'src/app/Classes/ContentClasses';
+import { UploadPreviewSettings } from 'src/app/SharedComponentModules/SharedForms/UploadPreview/uploadpreviewclass';
+import { CRUDdata } from 'src/app/Classes/ContentClasses';
 
 @Component({
   selector: 'app-update-form',
@@ -22,7 +22,7 @@ import { CRUDdata }                           from 'src/app/Classes/ContentClass
 export class UpdateFormComponent implements OnInit, OnDestroy {
 
   Form: FormGroup;
-  imageSettings = new UploadPreviewSettings([[600, 600, '100MB'], [undefined, undefined, '300KB']]);
+  imageSettings = new UploadPreviewSettings([ [600, 600, '100MB'], [undefined, undefined, '300KB'] ]);
   stream1: Subscription;
   stream2: Subscription;
   oldPost: any;
@@ -40,7 +40,7 @@ export class UpdateFormComponent implements OnInit, OnDestroy {
     this.stream2 = this.controller.triggerProcess
       .subscribe(() => this.processForm());
   }
-  
+
   ngOnDestroy() {
     this.stream1.unsubscribe();
     this.stream2.unsubscribe();
@@ -62,7 +62,7 @@ export class UpdateFormComponent implements OnInit, OnDestroy {
 
   assignFormData(editFormData) {
     this.onReset();
-    if(editFormData) {
+    if (editFormData) {
       this.Form = this.qa.assign(this.Form, editFormData);
       this.uploadpreviewserv.assignOldLinks(this.Form.controls.Links.value);
     }
@@ -74,7 +74,7 @@ export class UpdateFormComponent implements OnInit, OnDestroy {
     let newImages: any[] = [];
     const imageFile = this.uploadpreviewserv.mainsData[0];
 
-    if(!this.oldPost) {
+    if (!this.oldPost) {
       Final.Date = formatDate(new Date(), 'yyyy-MM-dd', 'en');
       Final.Time = formatDate(new Date(), 'HH:mm', 'en');
       Final.ID = `${Final.Date}, ${Final.Time}`;
@@ -83,12 +83,12 @@ export class UpdateFormComponent implements OnInit, OnDestroy {
       Final.Time = this.oldPost.Time;
       Final.ID = this.oldPost.ID;
       Final.Edited = true;
-      if(this.oldPost.Links) {
+      if (this.oldPost.Links) {
         oldImages = this.oldPost.Links;
       }
     }
 
-    if(imageFile) {
+    if (imageFile) {
       newImages = [imageFile];
     }
 

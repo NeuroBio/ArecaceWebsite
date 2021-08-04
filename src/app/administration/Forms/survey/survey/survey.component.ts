@@ -1,14 +1,13 @@
-import { Component, OnInit, OnDestroy }         from '@angular/core';
-import { FormBuilder, FormArray, FormControl,
-  FormGroup, Validators }                       from '@angular/forms';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { FormBuilder, FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 
-import { Subscription }                         from 'rxjs';
+import { Subscription } from 'rxjs';
 
-import { CRUDcontrollerService }                from 'src/app/administration/services/CRUDcontroller.service';
-import { QuickAssign }                          from 'src/app/GlobalServices/commonfunctions.service';
+import { CRUDcontrollerService } from 'src/app/administration/services/CRUDcontroller.service';
+import { QuickAssign } from 'src/app/GlobalServices/commonfunctions.service';
 
-import { SurveyQuestion, SurveyOutcome }        from 'src/app/Classes/ContentClasses';
-import { CRUDdata }                             from 'src/app/Classes/ContentClasses';
+import { SurveyQuestion, SurveyOutcome } from 'src/app/Classes/ContentClasses';
+import { CRUDdata } from 'src/app/Classes/ContentClasses';
 
 @Component({
   selector: 'app-survey',
@@ -18,7 +17,6 @@ import { CRUDdata }                             from 'src/app/Classes/ContentCla
 
 export class SurveyComponent implements OnInit , OnDestroy {
 
-  
   questions: FormArray;
   outcomes: FormArray;
   results: FormArray;
@@ -32,11 +30,13 @@ export class SurveyComponent implements OnInit , OnDestroy {
 
   editOutcome: boolean;
   editInd: number;
-   
-  constructor(private fb: FormBuilder,
-              private controller: CRUDcontrollerService,
-              private qa: QuickAssign) { }
-  
+
+  constructor(
+    private fb: FormBuilder,
+    private controller: CRUDcontrollerService,
+    private qa: QuickAssign
+  ) { }
+
   ngOnInit() {
     this.stream1 = this.controller.itemToEdit
       .subscribe(item => this.assignFormData(item));
@@ -58,7 +58,7 @@ export class SurveyComponent implements OnInit , OnDestroy {
       Questions: this.questions,
     });
   }
-  
+
   createResultsForm() {
     return this.fb.group({
       Results: this.results
@@ -76,23 +76,23 @@ export class SurveyComponent implements OnInit , OnDestroy {
 
   assignFormData(editFormData: any) {
     this.onReset();
-    if(editFormData) {
+    if (editFormData) {
       this.mainForm = this.qa.assign(this.mainForm, editFormData);
       const outcomes: SurveyOutcome[] = JSON.parse(editFormData.Outcomes);
       const questions: SurveyQuestion[] = JSON.parse(editFormData.Questions);
       const results = JSON.parse(editFormData.Results);
 
-      outcomes.forEach(o => this.outcomes.push(this.fb.group({Name: o.Name, Text: o.Text,
-                                                              Link: o.Link, LinkName: o.LinkName})));
-      questions.forEach((q,i) => this.addQuestion(true, q.Question, q.Answers, results[i]));  
+      outcomes.forEach(o => this.outcomes.push(this.fb.group({
+        Name: o.Name, Text: o.Text, Link: o.Link, LinkName: o.LinkName
+      }) ));
+      questions.forEach((q, i) => this.addQuestion(true, q.Question, q.Answers, results[i]));  
     }
   }
   
   assignOutcomeForm(index: number) {
     this.editInd = index;
     this.editOutcome = true;
-    this.qa.assign(this.outcomeForm,
-                                this.outcomes.controls[index].value);
+    this.qa.assign(this.outcomeForm, this.outcomes.controls[index].value);
   }
   
   processForm() {
@@ -103,12 +103,14 @@ export class SurveyComponent implements OnInit , OnDestroy {
     const Outcomes: SurveyOutcome[] = this.outcomes.value;
     const MaxScores = this.calculateMaxScores(Results, Outcomes);
 
-    const Final = {Questions: JSON.stringify(Questions),
-                   Results: JSON.stringify(Results),
-                   Outcomes: JSON.stringify(Outcomes),
-                   MaxScores: JSON.stringify(MaxScores),
-                   ID: ID,
-                   Name: Name};
+    const Final = {
+      Questions: JSON.stringify(Questions),
+      Results: JSON.stringify(Results),
+      Outcomes: JSON.stringify(Outcomes),
+      MaxScores: JSON.stringify(MaxScores),
+      ID: ID,
+      Name: Name
+    };
 
     return this.controller.activeFormData.next(
       new CRUDdata(false, '', Final));
@@ -143,9 +145,9 @@ export class SurveyComponent implements OnInit , OnDestroy {
           LinkName: formData.LinkName
         });
 
-        if(oldName !== formData.Name) { //old outcome name change
-          this.results.controls.forEach((question, i) => {
-            let temp = (<FormArray>question.get('Results'))
+        if(oldName !== formData.Name) { // old outcome name change
+          this.results.controls.forEach((question, _) => {
+            const temp = (<FormArray>question.get('Results'))
             temp.controls.map((answer: FormGroup) => {
               let oldValue = answer.value[oldName];
               answer.removeControl(oldName);
@@ -155,7 +157,7 @@ export class SurveyComponent implements OnInit , OnDestroy {
           });
           this.repopulateResults(newData);
         }
-      } else { //add new outcome
+      } else { // add new outcome
         this.outcomes.push(this.fb.group({
           Name: formData.Name,
           Text: formData.Text,
@@ -163,7 +165,7 @@ export class SurveyComponent implements OnInit , OnDestroy {
           LinkName: formData.LinkName
         }));
 
-        this.results.controls.forEach((question, i) => {
+        this.results.controls.forEach((question, _) => {
           let temp = (<FormArray>question.get('Results'))
           temp.controls.map((answer: FormGroup) =>
             answer.addControl(formData.Name, new FormControl(0)) )
@@ -171,11 +173,11 @@ export class SurveyComponent implements OnInit , OnDestroy {
         });
         this.repopulateResults(newData);
       }
-    } else { //remove outcome
-      const index = this.outcomes.controls.findIndex(ctr => ctr.value.Name == formData.Name);
+    } else { // remove outcome
+      const index = this.outcomes.controls.findIndex(ctr => ctr.value.Name === formData.Name);
       
       this.outcomes.removeAt(index);
-      this.results.controls.forEach((question, i) => {
+      this.results.controls.forEach((question, _) => {
         let temp = (<FormArray>question.get('Results'));
         temp.controls.map((answer: FormGroup) =>
           answer.removeControl(formData.Name) );
@@ -189,23 +191,23 @@ export class SurveyComponent implements OnInit , OnDestroy {
 
   addQuestion(add: boolean, question: string = '',
               answers: string[] = [], results: any[] = []) {
-    if(add){
+    if (add){
       this.questions.controls.push(this.fb.group({
-                              Question: question,
-                              Answers: this.createAnswers(answers)}
-      ));
+        Question: question,
+        Answers: this.createAnswers(answers)
+      } ));
       this.results.controls.push(this.fb.group({
                               Results: this.createResult(answers, results)}));
     } else {
-      this.questions.removeAt(this.questions.length-1);
-      this.results.removeAt(this.results.length-1);
+      this.questions.removeAt(this.questions.length - 1);
+      this.results.removeAt(this.results.length - 1);
     }
   }
 
   createAnswers(answers: string[] = []) {
     let newAnswers =  this.fb.array([]);
     answers.forEach((ans) =>
-      newAnswers.push(this.fb.group({Answer: ans})));
+      newAnswers.push(this.fb.group({ Answer: ans })));
     return newAnswers;
   }
 
@@ -216,14 +218,14 @@ export class SurveyComponent implements OnInit , OnDestroy {
       tempAnswer.controls.push(this.fb.group({Answer: answer}));
       tempResult.push(this.createResultValues({}));
     } else {
-      tempAnswer.removeAt(tempAnswer.length-1);
-      tempResult.removeAt(tempResult.length-1);
+      tempAnswer.removeAt(tempAnswer.length - 1);
+      tempResult.removeAt(tempResult.length - 1);
     }
   }
 
   createResult(answers: string[] = [], results: object[] = []) {
     let newResults = this.fb.array([])
-    answers.forEach((ans, i) => {
+    answers.forEach((_, i) => {
       newResults.push(this.createResultValues(results[i]));
     });
     return newResults;
@@ -231,7 +233,7 @@ export class SurveyComponent implements OnInit , OnDestroy {
 
   createResultValues(results: object) {
     let newOutcomes = this.fb.group({})
-    this.outcomes.controls.forEach((o: FormGroup, i) => {
+    this.outcomes.controls.forEach((o: FormGroup, _) => {
       if(o.value.Name in results){
         newOutcomes.addControl(o.value.Name, new FormControl(results[o.value.Name]));
       } else {
@@ -242,9 +244,9 @@ export class SurveyComponent implements OnInit , OnDestroy {
   }
 
   unpackQuestions() {
-    let Q: SurveyQuestion[] = [];
+    const Q: SurveyQuestion[] = [];
     this.questions.controls.forEach(q => {
-      let A: string[] = [];
+      const A: string[] = [];
       (<FormArray>q.get('Answers')).controls.forEach(a => A.push(a.value.Answer));
       Q.push({Question: q.value.Question,
               Answers: A});
@@ -253,9 +255,9 @@ export class SurveyComponent implements OnInit , OnDestroy {
   }
 
   unpackResults() {
-    let R: object[][] = [];
+    const R: object[][] = [];
     this.results.controls.forEach(r => {
-      let S: object[] = [];
+      const S: object[] = [];
       (<FormArray>r.get('Results')).controls.forEach(s => S.push(s.value));
       R.push(S);
     })
@@ -263,22 +265,22 @@ export class SurveyComponent implements OnInit , OnDestroy {
   }
 
   calculateMaxScores(results: object[][], outcomes: SurveyOutcome[]) {
-    let maxScores: object = {};
-    outcomes.forEach(o => maxScores[o.Name] = 0)
+    const maxScores: object = {};
+    outcomes.forEach(o => maxScores[o.Name] = 0);
 
     results.forEach(q =>
       Object.keys(maxScores).forEach(key => {
-        let temp: number[] = q.map(a => a[key]);
-        maxScores[key] += +temp.reduce((a,b) => a > b ? a : b);
+        const temp: number[] = q.map(a => a[key]);
+        maxScores[key] += +temp.reduce((a, b) => a > b ? a : b);
       })
     );
     return maxScores;
   }
 
   repopulateResults(newData: FormArray[]) {
-    this.results.controls.forEach((crt, i) => {
+    this.results.controls.forEach((_, i) => {
       this.results.removeAt(0);
-      this.results.push(this.fb.group({Results: newData[i]}));
+      this.results.push(this.fb.group({ Results: newData[i] }));
     });
 
   }

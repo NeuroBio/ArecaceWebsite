@@ -1,10 +1,10 @@
-import { Component, OnInit, OnDestroy }       from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 
-import { Subscription }                       from 'rxjs';
-import { take }                               from 'rxjs/operators';
+import { Subscription } from 'rxjs';
+import { take } from 'rxjs/operators';
 
-import { CRUDcontrollerService }              from '../../../services/CRUDcontroller.service';
-import { FetchService }                       from '../../../../GlobalServices/fetch.service';
+import { CRUDcontrollerService } from '../../../services/CRUDcontroller.service';
+import { FetchService } from '../../../../GlobalServices/fetch.service';
 
 @Component({
   selector: 'app-source-affinity',
@@ -16,7 +16,7 @@ export class SourceAffinityComponent implements OnInit, OnDestroy {
 
   stream1: Subscription;
   stream2: Subscription;
-  
+
   constructor(private controller: CRUDcontrollerService,
               private fetcher: FetchService) { }
 
@@ -35,7 +35,7 @@ export class SourceAffinityComponent implements OnInit, OnDestroy {
 
   assignFormData(editFormData: any) {
     this.onReset();
-    if(editFormData) {
+    if (editFormData) {
       this.fetcher.assignItemtoEdit(editFormData);
     }
   }
@@ -45,10 +45,10 @@ export class SourceAffinityComponent implements OnInit, OnDestroy {
     return this.fetcher.activeFormData.pipe(take(1))
       .subscribe(Final => this.controller.activeFormData.next(Final));
   }
-  
+
   onReset() {
     this.fetcher.assignItemtoEdit(undefined);
     this.controller.message.next('');
   }
-  
+
 }

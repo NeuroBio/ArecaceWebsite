@@ -6,7 +6,7 @@ describe('ImageResizerService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: ImageResizerService = TestBed.get(ImageResizerService);
+    const service: ImageResizerService = TestBed.inject(ImageResizerService);
     expect(service).toBeTruthy();
   });
 });

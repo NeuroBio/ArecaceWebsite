@@ -47,7 +47,7 @@ export class NewestCueService {
 
   makeName(type: string, newItem: any) {
     const nameTokens = [];
-    this.AllPathInfo[type].NameTokens.forEach(token => 
+    this.AllPathInfo[type].NameTokens.forEach(token =>
       nameTokens.push(newItem[token]));
     return nameTokens.join(' ');
   }
