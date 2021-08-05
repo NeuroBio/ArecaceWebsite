@@ -61,7 +61,7 @@ export class BlowUpComponent implements OnInit {
   }
 
   showHideDescription() {
-    this.showDescription !== this.showDescription;
+    // this.showDescription !== this.showDescription;
     this.showDescription ? this.rotation = 0 : this.rotation = 270;
     this.onResize();
   }
@@ -92,7 +92,7 @@ export class BlowUpComponent implements OnInit {
   }
 
   // Arrow keys (trigger arrow options)
-  @HostListener('window:keyup', ['$event']) KeyEvent(event: KeyboardEvent) { 
+  @HostListener('window:keyup', ['$event']) KeyEvent(event: KeyboardEvent) {
     if (event.key === 'ArrowRight') { // right, next
       this.right.nativeElement.focus();
       this.onArrow(1);

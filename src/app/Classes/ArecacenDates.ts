@@ -17,7 +17,7 @@ export class DateInfo {
         'The Musician', 'The Jester',
         'The Magician', 'The Mercenary',
         'The Hunter', 'The Drifter',
-        'The Diplomat','The Philosopher'
+        'The Diplomat', 'The Philosopher'
     ];
 
     ArecaceDates: string[];
@@ -35,7 +35,7 @@ export class DateInfo {
     ];
 
     EarthDates: string[];
-    
+
     Missing = [
         '02-29', '04-29', '04-30', '05-30', '05-31',
         '07-30', '07-31', '08-30', '08-31', '10-31'
@@ -51,20 +51,20 @@ export class DateInfo {
         earthDates = earthDates.splice(355, 365)
                                .concat(earthDates.splice(0, 355));
         this.EarthDates = earthDates;
-        let arecaceDates = this.makeDates(this.ArecaceMonthLengths);
-        for (let position of this.MissingPositions) {
+        const arecaceDates = this.makeDates(this.ArecaceMonthLengths);
+        for (const position of this.MissingPositions) {
             arecaceDates.splice(position, 0, 'NA');
         }
         this.ArecaceDates = arecaceDates;
     }
 
     makeDates(monthLength: number[]) {
-        let Days = [];
+        const Days = [];
         monthLength.forEach((month, i) => {
             Array(month).fill('').forEach((_, j) => {
-                Days.push(`${this.quickFormat(i + 1)}-${this.quickFormat(j + 1)}`)
+                Days.push(`${this.quickFormat(i + 1)}-${this.quickFormat(j + 1)}`);
             });
-        })
+        });
         return Days;
     }
 
@@ -76,7 +76,7 @@ export class DateInfo {
     }
 
     arecacetoEarthConverter(QT: string, day: number) {
-        const month = this.ArecaceMonthNames.findIndex(month => QT === month) + 1;
+        const month = this.ArecaceMonthNames.findIndex(mon => QT === mon) + 1;
         const dateCheck = `${this.quickFormat(month)}-${this.quickFormat(day)}`;
         const index = this.ArecaceDates.findIndex(date => dateCheck === date);
         return this.EarthDates[index];
@@ -89,7 +89,7 @@ export class DateInfo {
         if (numericDate[0] === 'NA') {
             return 'This date doesn\'t exist on Arecace';
         } else {
-            return `${this.ArecaceMonthNames[(+numericDate[0])-1]} ${numericDate[1]}`;
+            return `${this.ArecaceMonthNames[(+numericDate[0]) - 1]} ${numericDate[1]}`;
         }
     }
 }

@@ -10,7 +10,7 @@ export class OptionsComponent implements OnInit {
 
   @Input() linkList: string[][][] = [
     [
-      ['tester 1', 'tester1'], 
+      ['tester 1', 'tester1'],
       ['tester 2', 'tester2'],
       ['tester 3', 'tester3']
     ],
@@ -32,7 +32,7 @@ export class OptionsComponent implements OnInit {
     this.mobile = this.global.phone.value;
   }
 
-  @HostListener('window:resize') 
+  @HostListener('window:resize')
   onResize() {
     this.width = window.innerWidth;
   }

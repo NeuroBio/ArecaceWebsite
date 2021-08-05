@@ -18,7 +18,7 @@ export class NewestCueService {
 
   updateCue(newItem: any, type: string, change: string) {
     newItem.UploadTime = formatDate(new Date(), 'yyyy-MM-dd, HH:mm', 'en');
-    newItem.UploadType = AllPathInfo[type].Type;
+    newItem.UploadType = this.AllPathInfo[type].Type;
     newItem.DirectLink = this.makeLink(type, newItem);
     newItem.UploadName = this.makeName(type, newItem);
     newItem.UploadChange = change;

@@ -90,11 +90,11 @@ export class SourceAbilityCalculatorService {
       costs.push([]);
       if (i === 0) {
         mastery.push(ability.Mastery + 1);
-        for(let j = 0; j < mastery[0]; j++) {
+        for (let j = 0; j < mastery[0]; j++) {
           costs[i].push(1);
         }
       } else {
-        let partials = Array<number>(i);
+        const partials = Array<number>(i);
         for (let j = 0; j < ability.Mastery + 1; j++) {
           for (let k = 0; k < partials.length; k++) {
             partials[k] = (this.Save[j] + .025 * (mastery[k])) / (2 ** (k));
@@ -117,8 +117,8 @@ export class SourceAbilityCalculatorService {
       if (i === 0) {
         saclass.BufferCost = 0;
       } else {
-        let interactions = new Array(i);
-        for (let j = 0; j < i; j++){
+        const interactions = new Array(i);
+        for (let j = 0; j < i; j++) {
           interactions.push(
             this.Related[saclass.SAClass][CostStructure[j].SAClass]
             * CostStructure[j].Level);
@@ -140,13 +140,13 @@ export class SourceAbilityCalculatorService {
     CostStructure.forEach((saclass) => {
       if (saclass.SAClass === 'Reconstruction') {
         saclass.Abilities.forEach((ability, j) => {
-          if (ability.Ability == 'Metamorph') {
+          if (ability.Ability === 'Metamorph') {
             saclass.Discounts[j] = saclass.Discounts[j].map(c => c -= eGenes * .8);
           }
         });
-      } else if(saclass.SAClass === 'ConfigurationManipulation') {
+      } else if (saclass.SAClass === 'ConfigurationManipulation') {
         saclass.Abilities.forEach((ability, j) => {
-          if (ability.Ability == 'Connection') {
+          if (ability.Ability === 'Connection') {
             saclass.Discounts[j] = saclass.Discounts[j].map(c => c -= cGenes * .25);
           }
         });
@@ -161,8 +161,8 @@ export class SourceAbilityCalculatorService {
       saclass.Discounts.forEach((sacost, i) => {
         sacost.forEach((c, j) => {
           cost += this.SAData[saclass.Abilities[i].Ability].Costs[j] * c;
-        })
-      })
+        });
+      });
     });
     return  Math.round(cost * 100) / 100;
   }

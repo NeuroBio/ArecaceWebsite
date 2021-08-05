@@ -32,7 +32,7 @@ export class SideBarComponent implements AfterViewInit {
     this.onResize();
   }
 
-  @HostListener('window:scroll') 
+  @HostListener('window:scroll')
   onResize() {
     clearTimeout(this.resizeTimer);
     this.resizeTimer = setTimeout(() => {

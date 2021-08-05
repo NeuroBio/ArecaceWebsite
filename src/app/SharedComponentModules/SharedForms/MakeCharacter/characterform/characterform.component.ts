@@ -227,7 +227,7 @@ export class CharacterFormComponent implements OnInit, OnDestroy {
   addRelative(add: boolean, name: string = '', ship: string = '') {
     if (add) {
       (<FormArray>this.Form.controls.Relations)
-      .push(this.fb.group({ RelationName: name, Relationship:ship }));
+      .push(this.fb.group({ RelationName: name, Relationship: ship }));
       this.noFamily = false;
     } else {
       (<FormArray>this.Form.controls.Relations)
@@ -276,8 +276,8 @@ export class CharacterFormComponent implements OnInit, OnDestroy {
   }
 
   FormatRelat(data: any) {
-    let relations: string[] = [];
-    data.Relations.forEach(relation => 
+    const relations: string[] = [];
+    data.Relations.forEach(relation =>
       relations.push(`${relation.RelationName}-${relation.Relationship}`) );
 
     let final = relations.join(', ');
@@ -289,7 +289,7 @@ export class CharacterFormComponent implements OnInit, OnDestroy {
 
   combineEvents(full: string[], thumb: string[]) {
     if (thumb.length > 0) {
-      return thumb.map((thumb, i) => [thumb, full[i]])
+      return thumb.map((t, i) => [t, full[i]])
         .reduce(function(a, b) {
           return a.concat(b); });
     } else {
@@ -299,7 +299,7 @@ export class CharacterFormComponent implements OnInit, OnDestroy {
 
   refNames(imageEvents: any[], name: string) {
     const imgNames: string[] = [];
-    for (let event of imageEvents) {
+    for (const event of imageEvents) {
       imgNames.push(`CharacterBios/${name}-Ref${event}-thumb`);
       imgNames.push(`CharacterBios/${name}-Ref${event}-full`);
     }
@@ -313,8 +313,8 @@ export class CharacterFormComponent implements OnInit, OnDestroy {
       name = name.concat('\'s');
     }
 
-    let references: any[] = [];
-    for (let index of ids) {
+    const references: any[] = [];
+    for (const index of ids) {
       references.push({
         ID: ids[index].Ref.split(' ').join(''),
         Name: `${name} ${ids[index].Ref}`,
@@ -326,7 +326,7 @@ export class CharacterFormComponent implements OnInit, OnDestroy {
 
 
 
-  //display functions
+  // display functions
   updateColor(select: string, which: number) {
     if (which === 1) {
       this.toneColor1 = this.DropDowns.Ethnicity
@@ -350,13 +350,13 @@ export class CharacterFormComponent implements OnInit, OnDestroy {
   updateAge(chosenQT: string) {
     const index = this.DropDowns.Quartrits.findIndex(QT => chosenQT === QT);
     this.daysArray = new Array(this.DropDowns.Months[index]);
-    this.Form.patchValue({ Zodiac: this.DropDowns.Zodiacs[index], Day: 1 })
+    this.Form.patchValue({ Zodiac: this.DropDowns.Zodiacs[index], Day: 1 });
   }
 
   updateCM() {
     const inches: number = this.Form.controls.Ft.value * 12
                           + this.Form.controls.Inch.value;
-    this.Form.patchValue({ Cm:(inches * 2.54).toFixed(2) });
+    this.Form.patchValue({ Cm: (inches * 2.54).toFixed(2) });
   }
 
   updateFtIn() {
@@ -366,7 +366,7 @@ export class CharacterFormComponent implements OnInit, OnDestroy {
       Ft: Math.floor(inches / 12) });
   }
 
-  getDropData(group:string, id: string, formvalue: string, desired: string) {
+  getDropData(group: string, id: string, formvalue: string, desired: string) {
     return this.DropDowns[group].find(member =>
       member[id] === this.Form.controls[formvalue].value)[desired];
   }

@@ -93,10 +93,10 @@ export class CRUDdata {
     OldTextPath: string;
 
     constructor(
-        abort: boolean, abortMessage: string = '', meta: any = undefined,
+        abort: boolean, abortMessage: string = '', meta: any,
         newImgLinks: string[] = [], imageBlobs: any[] = [],
-        oldImgLinks: string[] = [], newTextPath: string = undefined,
-        textBlob: any = undefined, oldTextpath: string = undefined
+        oldImgLinks: string[] = [], newTextPath?: string,
+        textBlob?: any, oldTextpath?: string
     ) {
 
         this.Abort = abort;

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild, ElementRef, QueryList, ViewChildren } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ElementRef, QueryList, ViewChildren, AfterViewInit } from '@angular/core';
 import { FocusKeyManager } from '@angular/cdk/a11y';
 
 import { LinkListComponent } from '../../../SmallComponents/LinkList/link-list/link-list.component';
@@ -11,7 +11,7 @@ import { LinkList, LinkListElement } from 'src/app/SharedComponentModules/SmallC
               './drop-down.component.css']
 })
 
-export class DropDownComponent implements OnInit {
+export class DropDownComponent implements OnInit, AfterViewInit {
 
   @Input() linkList: LinkList[] = [
     new LinkList('default', [

@@ -21,7 +21,7 @@ export class GeneralcollectionService {
     return this.collectionData;
   }
 
-  getMember(ID:string) {
+  getMember(ID: string) {
     return this.returnMetaData().pipe(
       map(members => members.find(member => member.ID === ID)) );
   }
@@ -29,7 +29,7 @@ export class GeneralcollectionService {
   getCurrent(data$: Observable<LinkList | LinkList[]>, routeID: string) {
     let current: string;
     data$.subscribe(data => {
-      if (routeID) {//child route doesn't exist
+      if (routeID) { // child route doesn't exist
         if (data instanceof LinkList) {
           const index = data.Data.findIndex(datum => datum.Route === routeID);
           current = data.Data[index].ListName;

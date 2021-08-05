@@ -23,8 +23,8 @@ export class ReferenceFormComponent implements OnInit, OnDestroy {
   stream2: Subscription;
   imageSettings = new UploadPreviewSettings([[undefined, undefined, '100MB'], [200, 600, '300KB']]);
 
-  cats = new ReferenceCategories;
-  paths = new AllPathInfo;
+  cats = new ReferenceCategories();
+  paths = new AllPathInfo();
   categories: string[];
   docPath: string;
   imagePath: 'Refs';

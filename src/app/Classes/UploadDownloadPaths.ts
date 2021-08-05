@@ -56,18 +56,18 @@ export class AllPathInfo {
     extras = new PathInfo('Extra Art', 'MiscArt', '/extras', ['Name']);
     guilds = new PathInfo('Guild', 'Guilds', '/world/guilds', ['GuildName']);
     maps = new PathInfo('Map', 'Maps', '/world/maps', ['Topic']);
-    narratives = new PathInfo('Story', 'Narratives', '/story/Narratives', ['Series', 'Title'], 'Series');
-    notes = new PathInfo('Writing Note','LooseNotes', '/playground/notes', ['ShortTitle']);
-    othersart = new PathInfo('Other\'s Art', 'OthersArt', '/playground/otherart',[], undefined, true);
-    pixels = new PathInfo('Other\'s Pixel', 'Pixels', '/playground/otherart', [], undefined, true);
-    scripts = new PathInfo('Comic Script', 'Scripts', '/story/Scripts', ['Series', 'Title'], 'Series');
+    narratives = new PathInfo('Story', 'Narratives', '/story/Narratives', ['Series', 'Title'], false, false, 'Series');
+    notes = new PathInfo('Writing Note', 'LooseNotes', '/playground/notes', ['ShortTitle']);
+    othersart = new PathInfo('Other\'s Art', 'OthersArt', '/playground/otherart', [], true);
+    pixels = new PathInfo('Other\'s Pixel', 'Pixels', '/playground/otherart', [], true);
+    scripts = new PathInfo('Comic Script', 'Scripts', '/story/Scripts', ['Series', 'Title'], false, false, 'Series');
     sourceaffinity = new PathInfo('SA Data', 'SourceAffinities', '/playground/calc/sourceaffinity', ['ID']);
-    source = new PathInfo('Source/Siphoid Info','SourceInfo', '/world/source', ['Topic']);
+    source = new PathInfo('Source/Siphoid Info', 'SourceInfo', '/world/source', ['Topic']);
     surveys = new PathInfo('Survey', 'Surveys', '/playground/surveys', ['Name']);
-    surveystats = new PathInfo('Survey Stats', 'SurveyStats', '', [], undefined,  true);
-    update = new PathInfo('Update', 'Inanity', '', [], undefined, true);
-    nomadic = new PathInfo('Nomadic Word', 'Nomadic', '/playground/nomadic/dictionary', ['Indativor'], '', false, true);
-    website = new PathInfo('Website Text', 'WebsiteText', '', [], undefined, true, true);
+    surveystats = new PathInfo('Survey Stats', 'SurveyStats', '', [], true);
+    update = new PathInfo('Update', 'Inanity', '', [], true);
+    nomadic = new PathInfo('Nomadic Word', 'Nomadic', '/playground/nomadic/dictionary', ['Indativor'], false, true, '');
+    website = new PathInfo('Website Text', 'WebsiteText', '', [], true, true);
 }
 
 export class PathInfo {
@@ -80,7 +80,7 @@ export class PathInfo {
     SpecialUpload: boolean;
 
     constructor(type: string, fire: string, local: string, nameTokens: string[],
-        extraPath: string = undefined, exclude: boolean = false, special: boolean = false) {
+        exclude: boolean = false, special: boolean = false, extraPath?: string) {
         this.Type = type;
         this.Fire = fire;
         this.Local = local;
@@ -89,7 +89,7 @@ export class PathInfo {
         this.NewestExclude = exclude;
         this.SpecialUpload = special;
     }
-} 
+}
 
 export class AllUserDataInfo {
     FanCharacters = new UserData(['FirstName', 'LastName'], 'Fan Characters', 'Fan Char');

@@ -46,7 +46,7 @@ export class FireBaseService {
   }
 
   uploadImage(filePath: string, event: any) {
-    const task = this.storage.upload(filePath, event.target.files[0])
+    const task = this.storage.upload(filePath, event.target.files[0]);
     return task.snapshotChanges().pipe(finalize(() => {})).toPromise();
   }
 
@@ -72,7 +72,7 @@ export class FireBaseService {
         take(1),
         tap(x => {
           if (!x) {
-            return this.database.collection(path).doc(document.ID).set(document)
+            return this.database.collection(path).doc(document.ID).set(document);
           }
           return x;
         })

@@ -12,7 +12,7 @@ export class EthnicityData {
 
 export class UploadCharacterDrops {
     class: string[] = [
-        'Source Magician','Sourceless', 'Esarian-Red',
+        'Source Magician', 'Sourceless', 'Esarian-Red',
         'Esarian-Blue', 'Esarian-Green', 'Wolf Type', 'Midmorph'
     ];
 
@@ -27,7 +27,7 @@ export class UploadCharacterDrops {
             id: 'Eriasten', terr: [
                 'Opunti', 'Delonix', 'The Refugee Camps'
             ]
-        }, 
+        },
         {
             id: 'Escholzian', terr: [
                 'The Chloris Plains', 'The Dead Volcanoes', 'East Greya', 'West Greya',
@@ -35,10 +35,10 @@ export class UploadCharacterDrops {
             ]
         },
         {
-            id: 'Salixen', terr:['Alliar', 'Allium', 'Anthus', 'Tanacet', 'Urtica']
+            id: 'Salixen', terr: ['Alliar', 'Allium', 'Anthus', 'Tanacet', 'Urtica']
         }
     ];
-    
+
     Months: number[];
 
     Quartrits: string[];
@@ -60,7 +60,7 @@ export class UploadCharacterDrops {
     Era: string[] = ['DE', 'pDE'];
 
     SAbilities: string[] = [
-        'Augment','Blank', 'Blaze', 'Breaker', 'Chaos',
+        'Augment', 'Blank', 'Blaze', 'Breaker', 'Chaos',
         'Communion', 'Compress',  'Connection', 'Disrupt',
         'Energy Gathering', 'Epitax', 'Ghost Hack', 'Growth',
         'Integrate', 'Maintain', 'Metamorph', 'Rebuild',

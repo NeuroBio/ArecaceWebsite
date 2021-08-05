@@ -45,7 +45,7 @@ export class GeneralcollectionresolverService implements Resolve<any> {
   }
 
   backstep(url: string[]) {
-    for (let i = url.length -1; i > 0; i--) {
+    for (let i = url.length - 1; i > 0; i--) {
       if (this.firePaths[url[i]]) {
         return i;
       }
