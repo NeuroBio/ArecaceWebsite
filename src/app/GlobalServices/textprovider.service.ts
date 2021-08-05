@@ -14,11 +14,11 @@ export class TextProvider {
     return new Promise((resolve) => {
       this.firebaseserv.returnCollect('WebsiteText')
       .subscribe(text => {
-        if(text){
+        if (text) {
           this.WebsiteText = text;
           resolve(true);
         }
-      })
+      });
     });
   }
 }

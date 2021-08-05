@@ -6,7 +6,7 @@ describe('GeneralcollectionService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: GeneralcollectionService = TestBed.get(GeneralcollectionService);
+    const service: GeneralcollectionService = TestBed.inject(GeneralcollectionService);
     expect(service).toBeTruthy();
   });
 });

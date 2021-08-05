@@ -46,7 +46,7 @@ export class ContactComponent implements OnInit {
 
   ngOnInit() {
     this.titleserv.setTitle('Contact');
-    window.scroll(0,0);
+    window.scroll(0, 0);
     this.resetTimer();
     if (this.auth.isLoggedIn === false) {
       this.auth.anonymousLogin();
@@ -63,7 +63,7 @@ export class ContactComponent implements OnInit {
                     Validators.minLength(100),
                     Validators.maxLength(5500),
                     messageValidator()]],
-      //honey
+      // honey pot
       LastName: '',
       Phone: '',
       Reply: ''
@@ -71,7 +71,7 @@ export class ContactComponent implements OnInit {
   }
 
   retrieveInfo() {
-    const reason: string = this.contactForm.controls.Reason.value
+    const reason: string = this.contactForm.controls.Reason.value;
     if (reason === 'Use of my work or attribution') {
       this.dropdownInfo = 'Make sure you have read list items 4-7 in the FAQ!  There\'s a link in the footer.';
       this.tempDisable = false;
@@ -98,7 +98,7 @@ export class ContactComponent implements OnInit {
     this.active = true;
     if (this.ready) {
       const form = Object.assign({}, this.contactForm.value);
-      
+
       if (this.checkHuman(form)) {
         if (form.Reason !== 'I\'m a bot :)') {
           if (this.contactForm.valid) {
@@ -134,7 +134,7 @@ export class ContactComponent implements OnInit {
       this.message = message;
     }, 1000);
   }
- 
+
   fastPost() {
     setTimeout(() => {
       this.active = false;

@@ -11,4 +11,3 @@ export class ButtonController {
       this.UpdateAll = bool[3];
     }
   }
-  

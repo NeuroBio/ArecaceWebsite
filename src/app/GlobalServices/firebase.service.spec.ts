@@ -6,7 +6,7 @@ describe('FireBaseService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: FireBaseService = TestBed.get(FireBaseService);
+    const service: FireBaseService = TestBed.inject(FireBaseService);
     expect(service).toBeTruthy();
   });
 });

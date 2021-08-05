@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Observable, BehaviorSubject } from 'rxjs'
+import { BehaviorSubject } from 'rxjs';
 import {FireBaseService } from 'src/app/GlobalServices/firebase.service';
-import { tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'

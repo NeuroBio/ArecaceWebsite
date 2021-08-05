@@ -1,9 +1,8 @@
-import { Component, OnInit, Input, ViewChild,
-         ElementRef, QueryList, ViewChildren }  from '@angular/core';
-import { FocusKeyManager }                      from '@angular/cdk/a11y';
+import { Component, OnInit, Input, ViewChild, ElementRef, QueryList, ViewChildren }  from '@angular/core';
+import { FocusKeyManager } from '@angular/cdk/a11y';
 
-import { LinkListComponent }                    from '../../../SmallComponents/LinkList/link-list/link-list.component';
-import { LinkList, LinkListElement }            from 'src/app/SharedComponentModules/SmallComponents/LinkList/linklist';
+import { LinkListComponent } from '../../../SmallComponents/LinkList/link-list/link-list.component';
+import { LinkList, LinkListElement } from 'src/app/SharedComponentModules/SmallComponents/LinkList/linklist';
 
 @Component({
   selector: 'app-drop-down',
@@ -14,11 +13,14 @@ import { LinkList, LinkListElement }            from 'src/app/SharedComponentMod
 
 export class DropDownComponent implements OnInit {
 
-  @Input() linkList: LinkList[] = [ new LinkList('default', [ new LinkListElement('tester 1', 'tester1'),
-                                                              new LinkListElement('tester 2', 'tester2'),
-                                                              new LinkListElement('tester 3', 'tester3') ]),
-                                    new LinkList('defaultSub', [new LinkListElement('subtester 1', 'subtester1')]) ];
-  @Input() current: string = "tester2";
+  @Input() linkList: LinkList[] = [
+    new LinkList('default', [
+      new LinkListElement('tester 1', 'tester1'),
+      new LinkListElement('tester 2', 'tester2'),
+      new LinkListElement('tester 3', 'tester3')
+    ]),
+    new LinkList('defaultSub', [new LinkListElement('subtester 1', 'subtester1')]) ];
+  @Input() current: string = 'tester2';
   @Input() queryParamsHandling: string = '';
 
   revealArray: boolean[] = [];
@@ -31,7 +33,6 @@ export class DropDownComponent implements OnInit {
 
   keyManager: FocusKeyManager<any>;
   @ViewChildren(LinkListComponent) items: QueryList<any>;
-  
 
   ngOnInit() {
     this.linkList.forEach(() => {
@@ -47,7 +48,7 @@ export class DropDownComponent implements OnInit {
   }
 
   onSelect(selected: string) {
-    if(this.keyManager) {
+    if (this.keyManager) {
       this.keyManager.setActiveItem(this.linkList
         .findIndex(list => list.Name === selected));
     } else {
@@ -56,7 +57,7 @@ export class DropDownComponent implements OnInit {
   }
 
   onReveal(index: number, show?: boolean) {
-      if(show !== undefined) {
+      if (show !== undefined) {
         this.revealArray[index] = show;
         this.rotationArray[index] = show === false ? 180 : 0;
       } else {
@@ -75,23 +76,23 @@ export class DropDownComponent implements OnInit {
       this.keyManager.onKeydown(event);
       this.focus();
 
-      if(event.key === 'ArrowUp'
+      if (event.key === 'ArrowUp'
         && this.keyManager.activeItemIndex > -1) {
         this.onReveal(this.keyManager.activeItemIndex + 1, false);
-      } else if(event.key === 'ArrowDown'
+      } else if (event.key === 'ArrowDown'
                 && this.keyManager.activeItemIndex < this.linkList.length) {
         this.onReveal(this.keyManager.activeItemIndex - 1, false);
       }
       return false;
     }
-    if(event.key === 'Tab') {
+    if (event.key === 'Tab') {
       this.leave = true;
       setTimeout(() => { this.leave = false; }, 10);
     }
   }
 
   focus() {
-    if(!this.keyManager.activeItem) {
+    if (!this.keyManager.activeItem) {
       this.keyManager.setFirstItemActive();
     }
     this.onReveal(this.keyManager.activeItemIndex, true);

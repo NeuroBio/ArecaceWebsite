@@ -39,7 +39,7 @@ export class ShowNewestComponent implements OnInit, OnDestroy {
     this.display$ = this.firebaseserv.returnCollect(this.collectionName).pipe(
       map(members => {
         members = members.filter(member => member.Allowed !== false); // remove hidden
-        members = members.sort((a, b) => a.TimeStampCreated > b.TimeStampCreated ? 1 :-1);// order
+        members = members.sort((a, b) => a.TimeStampCreated > b.TimeStampCreated ? 1 : -1); // order
 
         if (members.length > 10) { // cut to newest
           members = members.slice(0, 10);
@@ -77,7 +77,7 @@ export class ShowNewestComponent implements OnInit, OnDestroy {
     }
   }
 
-  //Arrow keys (trigger arrow options)
+  // Arrow keys (trigger arrow options)
   KeyEvent(event: KeyboardEvent) {
     if (event.key === 'ArrowRight') {
       this.right.nativeElement.focus();

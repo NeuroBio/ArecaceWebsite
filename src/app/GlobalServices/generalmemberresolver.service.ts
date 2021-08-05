@@ -1,51 +1,54 @@
-import { Injectable }                               from '@angular/core';
-import { Title }                                    from '@angular/platform-browser';
-import { Router, Resolve, ActivatedRouteSnapshot }  from '@angular/router';
+import { Injectable } from '@angular/core';
+import { Title } from '@angular/platform-browser';
+import { Router, Resolve, ActivatedRouteSnapshot } from '@angular/router';
 
-import { take, tap }                                from 'rxjs/operators';
-import { of, EMPTY }                                from 'rxjs';
+import { take, tap } from 'rxjs/operators';
+import { of, EMPTY } from 'rxjs';
 
-import { GeneralcollectionService }                 from './generalcollection.service';
-import { GetRouteSegmentsService }                  from './commonfunctions.service';
+import { GeneralcollectionService } from './generalcollection.service';
+import { GetRouteSegmentsService } from './commonfunctions.service';
 
-import { AllPathInfo }                              from '../Classes/UploadDownloadPaths';
+import { AllPathInfo } from '../Classes/UploadDownloadPaths';
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class GeneralmemberresolverService implements Resolve<any>{
 
   AllPaths = new AllPathInfo();
 
-  constructor(private generalcollectserv: GeneralcollectionService,
-              private router: Router,
-              private getrouteserv: GetRouteSegmentsService,
-              private titleserv: Title) { }
-  
+  constructor(
+    private generalcollectserv: GeneralcollectionService,
+    private router: Router,
+    private getrouteserv: GetRouteSegmentsService,
+    private titleserv: Title
+  ) { }
+
   resolve(route: ActivatedRouteSnapshot) {
     const ID = route.url[0].path;
-    if(this.checkLatest(ID, route) === false) {
+    if (this.checkLatest(ID, route) === false) {
       return;
     }
 
     return this.generalcollectserv.getMember(ID).pipe(
       take(1),
       tap(member => {
-        if(member){
+        if (member){
           this.setTitle(member);
           return of (member);
-        }else{
+        } else {
           this.router.navigate([`${this.getrouteserv.fetch(route.pathFromRoot).join('/')}/notfound`]);
           return of (EMPTY);
         }
       })
-    )
+    );
   }
 
   checkLatest(ID: string, route: any) {
-    if(ID === 'Latest') {
+    if (ID === 'Latest') {
       ID = this.generalcollectserv.collectionData.value
-      .sort((a,b) => a.Created > b.Created ? -1 : 1)[0].ID;
+        .sort((a, b) => a.Created > b.Created ? -1 : 1)[0].ID;
       const url = route['_routerState'].url.split('/');
       url.pop();
       url.push(ID);

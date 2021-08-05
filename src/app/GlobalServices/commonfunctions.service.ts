@@ -10,12 +10,12 @@ export class GetRouteSegmentsService {
 
   fetch(pathtoRoot: any[], pop: boolean = true): string[] {
     const Path = [];
-    if(pop) {
-      pathtoRoot.pop(); //remove current final segment
+    if (pop) {
+      pathtoRoot.pop(); // remove current final segment
     }
     pathtoRoot.forEach((segment, i) => {
-      if(i > 0 && segment.url != '') { //ignore root and any weirdness I can't explain
-      segment.url.forEach(subseg => Path.push(subseg))
+      if (i > 0 && segment.url !== '') { // ignore root and any weirdness I can't explain
+        segment.url.forEach(subseg => Path.push(subseg));
       }
     });
     return Path.join('/').split('/');

@@ -11,5 +11,5 @@ export function messageValidator(): ValidatorFn {
         return { 'Links': { value: control.value } };
       }
       return null;
-  }
+  };
 }

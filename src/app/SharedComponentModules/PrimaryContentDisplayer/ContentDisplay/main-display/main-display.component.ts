@@ -1,8 +1,8 @@
-import { Component, Input, OnInit, OnDestroy }      from '@angular/core';
+import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 
-import { GeneralcollectionService }                 from 'src/app/GlobalServices/generalcollection.service';
+import { GeneralcollectionService } from 'src/app/GlobalServices/generalcollection.service';
 
-import { LinkList }                                 from 'src/app/SharedComponentModules/SmallComponents/LinkList/linklist';
+import { LinkList } from 'src/app/SharedComponentModules/SmallComponents/LinkList/linklist';
 
 @Component({
   selector: 'app-main-display',
@@ -19,7 +19,7 @@ export class MainDisplayComponent implements OnInit, OnDestroy {
   constructor(private generalcollectserv: GeneralcollectionService) { }
 
   ngOnInit() {
-    window.scroll(0,0);  
+    window.scroll(0, 0);  
   }
 
   ngOnDestroy() {

@@ -11,7 +11,7 @@ import { TextProvider } from 'src/app/GlobalServices/textprovider.service';
 
 export class AboutComponent implements OnInit {
 
-  contentPicker: number = 0;
+  contentPicker = 0;
   choices: string[] = ['The Story', 'Me', 'The Website'];
   mainText: any;
 

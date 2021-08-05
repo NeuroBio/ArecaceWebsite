@@ -1,10 +1,9 @@
-import { Component, OnInit, HostListener,
-          ViewChild, ElementRef, Input }      from '@angular/core';
-import { Router, ActivatedRoute }             from '@angular/router';
+import { Component, OnInit, HostListener, ViewChild, ElementRef, Input } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 
-import { GlobalVarsService }                  from 'src/app/GlobalServices/global-vars.service';
-import { GetRouteSegmentsService }            from 'src/app/GlobalServices/commonfunctions.service';
-import { GridService }                        from '../refocus.service';
+import { GlobalVarsService } from 'src/app/GlobalServices/global-vars.service';
+import { GetRouteSegmentsService } from 'src/app/GlobalServices/commonfunctions.service';
+import { GridService } from '../refocus.service';
 
 @Component({
   selector: 'app-blowup',
@@ -13,7 +12,6 @@ import { GridService }                        from '../refocus.service';
 })
 
 export class BlowUpComponent implements OnInit {
-
 
   @Input() linksList: any[];
   @Input() index: number;
@@ -32,13 +30,13 @@ export class BlowUpComponent implements OnInit {
   @ViewChild('back', { static: true }) back: ElementRef;
   textHeight: number;
 
-  
-
-  constructor(private router: Router,
-              private route: ActivatedRoute,
-              private getsegserv: GetRouteSegmentsService,
-              private gridserv: GridService,
-              private global: GlobalVarsService) { }
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private getsegserv: GetRouteSegmentsService,
+    private gridserv: GridService,
+    private global: GlobalVarsService
+  ) { }
 
   ngOnInit() {
     this.back.nativeElement.focus();
@@ -52,7 +50,9 @@ export class BlowUpComponent implements OnInit {
   onResize() {
     setTimeout(() => {
       this.textHeight = this.bigger.nativeElement.offsetHeight - 30;
-      if(this.textHeight < 400) this.textHeight = 400;
+      if (this.textHeight < 400) {
+        this.textHeight = 400;
+      }
     }, 10);
   }
 
@@ -61,7 +61,7 @@ export class BlowUpComponent implements OnInit {
   }
 
   showHideDescription() {
-    this.showDescription = !this.showDescription;
+    this.showDescription =! this.showDescription;
     this.showDescription ? this.rotation = 0 : this.rotation = 270;
     this.onResize();
   }
@@ -76,7 +76,7 @@ export class BlowUpComponent implements OnInit {
     this.loading = this.global.ImagesLoadable.value;
     this.index += incre;
     if(this.index === -1) {
-      this.index = this.linksList.length-1;
+      this.index = this.linksList.length - 1;
     } else if(this.index === this.linksList.length) {
       this.index = 0;
     }

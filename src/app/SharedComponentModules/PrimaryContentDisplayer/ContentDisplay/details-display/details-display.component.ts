@@ -1,10 +1,10 @@
-import { Component, OnInit }          from '@angular/core';
-import { ActivatedRoute }             from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
-import { GlobalVarsService }          from 'src/app/GlobalServices/global-vars.service';
-import { GetRouteSegmentsService }    from 'src/app/GlobalServices/commonfunctions.service';
+import { GlobalVarsService } from 'src/app/GlobalServices/global-vars.service';
+import { GetRouteSegmentsService } from 'src/app/GlobalServices/commonfunctions.service';
 
-import { GeneralMetaData }            from 'src/app/Classes/ContentClasses';
+import { GeneralMetaData } from 'src/app/Classes/ContentClasses';
 
 @Component({
   selector: 'app-details-display',
@@ -19,9 +19,11 @@ export class DetailsDisplayComponent implements OnInit {
   path: string;
   name: string;
 
-  constructor(private route: ActivatedRoute,
-              private global: GlobalVarsService,
-              private getsegserv: GetRouteSegmentsService) { }
+  constructor(
+    private route: ActivatedRoute,
+    private global: GlobalVarsService,
+    private getsegserv: GetRouteSegmentsService
+  ) { }
 
   ngOnInit() {
     const mainPath = this.getsegserv.fetch(this.route.snapshot.pathFromRoot);

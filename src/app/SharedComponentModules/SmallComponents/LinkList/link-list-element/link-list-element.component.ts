@@ -10,7 +10,7 @@ export class LinkListElementComponent implements OnInit {
     @Input() active: boolean;
     @Input() route: string;
     @Input() href: string;
-    @Input() queryParamsHandling: string = '';
+    @Input() queryParamsHandling = '';
     @Input() index: number;
 
     @ViewChild('Host') Host: ElementRef;

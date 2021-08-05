@@ -1,8 +1,8 @@
-import { Injectable }                 from '@angular/core';
+import { Injectable } from '@angular/core';
 
-import { Subject, BehaviorSubject }   from 'rxjs';
+import { Subject, BehaviorSubject } from 'rxjs';
 
-import { CRUDdata }                   from 'src/app/Classes/ContentClasses';
+import { CRUDdata } from 'src/app/Classes/ContentClasses';
 @Injectable({
   providedIn: 'root'
 })
@@ -20,7 +20,7 @@ export class FetchService {
   assignItemtoEdit(item: any): void {
     this.itemToEdit.next(item);
   }
-  
+
   assignActiveFormData(activeform: any): void {
     this.activeFormData.next(activeform);
   }

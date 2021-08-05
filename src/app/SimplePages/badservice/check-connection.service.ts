@@ -13,7 +13,7 @@ import { FireBaseService } from 'src/app/GlobalServices/firebase.service';
 export class CheckConnectionService {
 
   service = new BehaviorSubject<boolean>(undefined);
-  online = new BehaviorSubject<boolean>(undefined)
+  online = new BehaviorSubject<boolean>(undefined);
 
   constructor(
     private firebaseserv: FireBaseService,

@@ -1,19 +1,17 @@
-import { Component, Input, OnInit, OnDestroy,
-         ViewChild, ElementRef, OnChanges, DoCheck }                    from '@angular/core';
+import { Component, Input, OnInit, OnDestroy, ViewChild } from '@angular/core';
 
-import { Subscription }                             from 'rxjs';
+import { Subscription } from 'rxjs';
 
-import { SliderService }                            from 'src/app/SharedComponentModules/SmallComponents/slider/slider.service';
-import { GridService }                           from '../refocus.service';
+import { SliderService } from 'src/app/SharedComponentModules/SmallComponents/slider/slider.service';
+import { GridService } from '../refocus.service';
 
-import { LinkListComponent }                        from 'src/app/SharedComponentModules/SmallComponents/LinkList/link-list/link-list.component';
+import { LinkListComponent } from 'src/app/SharedComponentModules/SmallComponents/LinkList/link-list/link-list.component';
 
-import { LinkList, LinkListElement }                from 'src/app/SharedComponentModules/SmallComponents/LinkList/linklist';
+import { LinkList, LinkListElement } from 'src/app/SharedComponentModules/SmallComponents/LinkList/linklist';
 
 @Component({
   selector: 'app-grid',
   templateUrl: './grid.component.html',
-  
   styleUrls: ['./grid.component.css']
 })
 
@@ -31,23 +29,25 @@ export class GridComponent implements OnInit, OnDestroy {
   stream2: Subscription;
   stream3: Subscription;
 
-  constructor(private sliderserv: SliderService,
-              private gridserv: GridService) { }
+  constructor(
+    private sliderserv: SliderService,
+    private gridserv: GridService
+  ) { }
 
   ngOnInit() {
     this.stream1 = this.sliderserv.preview
       .subscribe(preview => {
         this.preview = preview;
-        if(this.init === false) {
+        if (this.init === false) {
           this.updateLinks();
         }
     });
-      
+
     this.stream2 = this.gridserv.Refocus
       .subscribe(() => this.focus());
     this.stream3 = this.gridserv.Sorted
       .subscribe(() => this.updateOrder());
-    
+
     this.initializeData()
     this.init = false;
   }
@@ -67,7 +67,7 @@ export class GridComponent implements OnInit, OnDestroy {
   }
 
   updateLinks() {
-    this.formattedCollect.Data.map((item, i) => 
+    this.formattedCollect.Data.map(item => 
       item.Route = this.preview === true
       ? item.Item.ID
       : `${item.Item.ID}/Download`);

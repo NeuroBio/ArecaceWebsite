@@ -23,7 +23,7 @@ export class UploadMainComponent implements OnInit, OnDestroy {
     [undefined, undefined, undefined],
     [undefined, undefined, undefined]
   ]);
-  
+
   @ViewChild('mainInput', { static: true }) mainUploader: ElementRef;
   @ViewChild('thumbInput') thumbUploader: ElementRef;
   mainImg: UploadPreviewInfo;
@@ -68,8 +68,8 @@ export class UploadMainComponent implements OnInit, OnDestroy {
   }
 
   setReq(settings: any, type: string) {
-    const maxHeight = settings.MaxHeight === undefined ? 'none': `${settings.MaxHeight}px`;
-    const maxWidth = settings.MaxHeight === undefined ? 'none': `${settings.MaxWidth}px`;
+    const maxHeight = settings.MaxHeight === undefined ? 'none' : `${settings.MaxHeight}px`;
+    const maxWidth = settings.MaxHeight === undefined ? 'none' : `${settings.MaxWidth}px`;
     return `${type} images must be of type jpeg, png, or gif.
     \nMax Height: ${maxHeight}
     \nMax Width: ${maxWidth}
@@ -116,7 +116,7 @@ export class UploadMainComponent implements OnInit, OnDestroy {
     }
 
   }
-  
+
   makeThumb(event: any) {
     this.thumbImg.Loading = true;
     this.fetcher.assignLoading(true);
@@ -135,7 +135,7 @@ export class UploadMainComponent implements OnInit, OnDestroy {
   }
 
   CheckandAssign(event: any, type: string) {
-    return new Promise((resolve, reject) => 
+    return new Promise((resolve, reject) =>
       this.previewserv.checkFile(event, this.Settings[type])
       .then(() => {
         this.previewserv.quickFiletob64(event)
@@ -143,12 +143,12 @@ export class UploadMainComponent implements OnInit, OnDestroy {
             this.loadImage(type, event, url);
             return resolve(url);
           });
-      }).catch(error => { return reject(error); })
+      }).catch(error => reject(error))
       );
   }
 
   loadImage(type: string, event: any, url: string) {
-    if(type === 'thumb') {
+    if (type === 'thumb') {
       this.previewserv.assignThumb(this.ID, event);
       this.thumbImg.ImgUrl = url;
     } else {
@@ -159,7 +159,7 @@ export class UploadMainComponent implements OnInit, OnDestroy {
 
  onReset() {
     this.mainUploader.nativeElement.value = '';
-    if(this.thumbUploader) {
+    if (this.thumbUploader) {
       this.thumbUploader.nativeElement.value = '';
     }
     this.autoGenerate = true;

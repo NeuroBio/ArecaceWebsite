@@ -1,13 +1,13 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 
-import { Subscription }                 from 'rxjs';
+import { Subscription } from 'rxjs';
 
-import { CRUDcontrollerService }        from 'src/app/administration/services/CRUDcontroller.service';
+import { CRUDcontrollerService } from 'src/app/administration/services/CRUDcontroller.service';
 
-import { ButtonController }             from '../buttoncontroller';
+import { ButtonController } from '../buttoncontroller';
 
 @Component({
-  selector: 'app-formButtons',
+  selector: 'app-form-buttons',
   templateUrl: './buttons.component.html',
   styleUrls: []
 })
@@ -30,11 +30,9 @@ export class ButtonsComponent implements OnInit, OnDestroy {
     this.stream1 = this.controller.allowButtons
       .subscribe(array => this.allow = array);
     this.stream2 = this.controller.showButtons
-      .subscribe(array => this.show = array)
+      .subscribe(array => this.show = array);
     this.stream3 = this.controller.itemToEdit
-      .subscribe(data => {
-        this.action = data === undefined ? "Submit" : "Edit"
-      });
+      .subscribe(data => this.action = data === undefined ? 'Submit' : 'Edit');
     this.stream4 = this.controller.message
       .subscribe(string => this.message = string);
   }
@@ -47,7 +45,7 @@ export class ButtonsComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
-    if (this.action === "Submit") {
+    if (this.action === 'Submit') {
       this.controller.onSubmit();
     } else {
       this.controller.onEdit();

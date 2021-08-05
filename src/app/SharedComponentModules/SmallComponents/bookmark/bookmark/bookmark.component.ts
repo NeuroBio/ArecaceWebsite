@@ -17,7 +17,7 @@ export class BookmarkComponent implements OnInit, OnChanges, OnDestroy {
   @Input() path: string;
   @Input() type: string;
   @Input() name: string;
-  @Input() bookmarkImage: boolean = true;
+  @Input() bookmarkImage = true;
   data: User;
   color: string;
   hover = false;
@@ -43,7 +43,7 @@ export class BookmarkComponent implements OnInit, OnChanges, OnDestroy {
     if (this.bookmarkImage) {
       this.marksrc = 'assets/svgs/bookmark-bar.svg';
     } else {
-      this.marksrc ='assets/svgs/star.svg';
+      this.marksrc = 'assets/svgs/star.svg';
     }
   }
 

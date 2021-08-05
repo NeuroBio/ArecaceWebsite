@@ -6,7 +6,7 @@ describe('GetRouteSegmentsService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: GetRouteSegmentsService = TestBed.get(GetRouteSegmentsService);
+    const service: GetRouteSegmentsService = TestBed.inject(GetRouteSegmentsService);
     expect(service).toBeTruthy();
   });
 });

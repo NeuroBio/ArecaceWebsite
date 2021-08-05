@@ -6,7 +6,7 @@ describe('GeneralmemberresolverService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: GeneralmemberresolverService = TestBed.get(GeneralmemberresolverService);
+    const service: GeneralmemberresolverService = TestBed.inject(GeneralmemberresolverService);
     expect(service).toBeTruthy();
   });
 });

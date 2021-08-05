@@ -98,7 +98,7 @@ export class SourceAffinityCalculatorComponent implements OnInit, OnDestroy {
       build.push(new AbilityMastery(abimas.value.Ability, +abimas.value.Mastery)));
     const eGenes = this.Form.controls.EsarianGenes.value;
     const cGenes = this.Form.controls.ConnectionGenes.value;
-    
+
     try {
       this.result = this.SAserv.calculateAffinity(build, eGenes, cGenes);
     } catch (err) {
@@ -108,14 +108,14 @@ export class SourceAffinityCalculatorComponent implements OnInit, OnDestroy {
     }
 
     this.rank = this.getRank(this.result, eGenes);
-    
-    if (this.showName === true) {//submissions are allowed
+
+    if (this.showName === true) { // submissions are allowed
 
       if (this.Form.valid !== true) {
-        this.error ='Name is required!';
+        this.error = 'Name is required!';
         return this.fetcher.activeFormData.next(new CRUDdata(true, this.error));
       }
-  
+
       const final = {
         Build: JSON.stringify(build),
         EsarianGenes: eGenes,
@@ -131,7 +131,6 @@ export class SourceAffinityCalculatorComponent implements OnInit, OnDestroy {
     }
   }
 
-  
   resetForm() {
     if (this.new === true) {
       this.fetcher.assignItemtoEdit(undefined);
@@ -155,7 +154,7 @@ export class SourceAffinityCalculatorComponent implements OnInit, OnDestroy {
   }
 
   getRank(cost: number, eGenes:number = 0) {
-    if (cost < 5 - 5 * eGenes){ // 0
+    if (cost < 5 - 5 * eGenes) { // 0
       return 'Sourceless';
     } else if (cost < 10 - 5 * eGenes) { // 5
       return 'Below Average';

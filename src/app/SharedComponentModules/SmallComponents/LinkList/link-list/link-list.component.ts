@@ -48,7 +48,7 @@ export class LinkListComponent implements OnInit, AfterViewInit {
     setActive() {
       if (this.current) {
         let count = 0;
-        for (let element of this.list) {
+        for (const element of this.list) {
           if (element.ListName === this.current) {
             this.keyManager.setActiveItem(count);
             if (this.label) {
@@ -78,7 +78,6 @@ export class LinkListComponent implements OnInit, AfterViewInit {
         }
       }
 
-      
       if (event.key === 'Enter') {
         event.stopImmediatePropagation();
         this.keyManager.activeItem.selectItem();
@@ -89,9 +88,9 @@ export class LinkListComponent implements OnInit, AfterViewInit {
       }
 
       if (!this.label) {
-        if(event.key === 'Tab') {
+        if (event.key === 'Tab') {
           this.leave = true;
-          setTimeout(() => { this.leave = false }, 10);
+          setTimeout(() => { this.leave = false; }, 10);
           return;
         }
       }
