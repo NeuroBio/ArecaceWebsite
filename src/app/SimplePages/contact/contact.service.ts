@@ -1,7 +1,7 @@
-import { Injectable }       from '@angular/core';
-import { formatDate }       from '@angular/common';
+import { Injectable } from '@angular/core';
+import { formatDate } from '@angular/common';
 
-import { FireBaseService }  from 'src/app/GlobalServices/firebase.service';
+import { FireBaseService } from 'src/app/GlobalServices/firebase.service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +9,7 @@ import { FireBaseService }  from 'src/app/GlobalServices/firebase.service';
 
 export class ContactService {
 
-  reasons: string[] = ["No", "Use", "Issue", "QorC", "No", "Typo", "Other"];
+  reasons: string[] = ['No', 'Use', 'Issue', 'QorC', 'No', 'Typo', 'Other'];
 
   constructor(private firebaseserv: FireBaseService) { }
 

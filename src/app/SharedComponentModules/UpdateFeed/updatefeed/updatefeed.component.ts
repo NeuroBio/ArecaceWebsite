@@ -1,11 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 
-import { Subscription}                  from 'rxjs';
-import { map }                          from 'rxjs/operators';
+import { Subscription} from 'rxjs';
 
-import { UpdateService }                from '../update.service';
+import { UpdateService } from '../update.service';
 
-import { PostData }                     from 'src/app/Classes/ContentClasses';
+import { PostData } from 'src/app/Classes/ContentClasses';
 import { LinkList, LinkListElement } from '../../SmallComponents/LinkList/linklist';
 
 @Component({
@@ -27,10 +26,10 @@ export class UpdateFeedComponent implements OnInit, OnDestroy {
     this.updateserv.getPosts();
     this. stream1 = this.updateserv.posts
       .subscribe((posts: PostData[]) => {
-          if(posts) {
-            this.postList = new LinkList('Posts', posts.map(post =>
-              new LinkListElement(post.ID, undefined, undefined, post))); 
-          }
+        if (posts) {
+          this.postList = new LinkList('Posts', posts.map(post =>
+            new LinkListElement(post.ID, undefined, undefined, post)));
+        }
     });
 
     this.stream2 = this.updateserv.message

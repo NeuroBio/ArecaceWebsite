@@ -1,12 +1,10 @@
-import { Component, ViewChildren, EventEmitter,
-         QueryList, AfterViewInit, Input,
-         ElementRef, ViewChild, Output, OnInit,
-         ContentChild, TemplateRef }                    from '@angular/core';
-import { FocusKeyManager }                              from '@angular/cdk/a11y';
+import { Component, ViewChildren, EventEmitter, QueryList, AfterViewInit, Input,
+  ElementRef, ViewChild, Output, OnInit, ContentChild, TemplateRef } from '@angular/core';
+import { FocusKeyManager } from '@angular/cdk/a11y';
 
-import { LinkListElementComponent }                     from '../link-list-element/link-list-element.component';
+import { LinkListElementComponent } from '../link-list-element/link-list-element.component';
 
-import { LinkListElement }                              from '../linklist';
+import { LinkListElement } from '../linklist';
 
 @Component({
   selector: 'app-link-list',
@@ -19,8 +17,8 @@ export class LinkListComponent implements OnInit, AfterViewInit {
   @Input() list: LinkListElement[];
   @Input() label: string;
   @Input() active: boolean;
-  @Input() horizontal: boolean = true;
-  @Input() queryParamsHandling: string = '';
+  @Input() horizontal = true;
+  @Input() queryParamsHandling = '';
 
   @Output() lableEmitter = new EventEmitter<string>();
 
@@ -37,7 +35,7 @@ export class LinkListComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    if(this.horizontal === true) {
+    if (this.horizontal === true) {
       this.keyManager = new FocusKeyManager(this.items)
         .withHorizontalOrientation('ltr');
     } else {
@@ -48,12 +46,12 @@ export class LinkListComponent implements OnInit, AfterViewInit {
   }
 
     setActive() {
-      if(this.current) {
+      if (this.current) {
         let count = 0;
-        for(let element of this.list) {
-          if(element.ListName === this.current) {
+        for (let element of this.list) {
+          if (element.ListName === this.current) {
             this.keyManager.setActiveItem(count);
-            if(this.label) {
+            if (this.label) {
               this.lableEmitter.emit(this.label);
             }
             return;
@@ -61,13 +59,12 @@ export class LinkListComponent implements OnInit, AfterViewInit {
           count += 1;
         }
       }
-      
       return this.keyManager.setFirstItemActive();
     }
 
     handleKeyDown(event: KeyboardEvent) {
 
-      if(this.horizontal === true) {
+      if (this.horizontal === true) {
         if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
           event.stopImmediatePropagation();
           this.keyManager.onKeydown(event);
@@ -85,13 +82,13 @@ export class LinkListComponent implements OnInit, AfterViewInit {
       if (event.key === 'Enter') {
         event.stopImmediatePropagation();
         this.keyManager.activeItem.selectItem();
-        if(this.label) {
+        if (this.label) {
           this.lableEmitter.emit(this.label);
         }
         return false;
       }
 
-      if(!this.label) {
+      if (!this.label) {
         if(event.key === 'Tab') {
           this.leave = true;
           setTimeout(() => { this.leave = false }, 10);
@@ -103,7 +100,7 @@ export class LinkListComponent implements OnInit, AfterViewInit {
 
     onClick(index: number) {
       this.keyManager.setActiveItem(index);
-      if(this.label) {
+      if (this.label) {
         this.lableEmitter.emit(this.label);
       }
     }
@@ -113,7 +110,7 @@ export class LinkListComponent implements OnInit, AfterViewInit {
     }
 
     focus() {
-      if(!this.keyManager.activeItem) {
+      if (!this.keyManager.activeItem) {
         this.setActive();
       }
       this.keyManager.activeItem.focus();

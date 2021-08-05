@@ -5,7 +5,7 @@ export function userNameValidator(): ValidatorFn {
         const newName: string = control.value;
         if (!newName.match(/\w/)) {
           return { 'NoLetters': { value: control.value,
-                                message: 'You need to have at leats one number, digit, -, or _ in your username.' } }
+                                message: 'You need to have at leats one number, digit, -, or _ in your username.' } };
         }
         // /[\.,\/#!$%\^&;:{}=_`~@\+\?><\[\]\+"]
         const justLetters = newName.replace(/[\W_-\d]/g, '').toLowerCase();

@@ -1,17 +1,14 @@
-import { Component, OnInit, OnDestroy,
-         Input, ViewChild, ElementRef }         from '@angular/core';
-import { FormBuilder, FormArray,
-         FormGroup, Validators }                from '@angular/forms';
+import { Component, OnInit, OnDestroy, Input, ViewChild, ElementRef } from '@angular/core';
+import { FormBuilder, FormArray, FormGroup, Validators } from '@angular/forms';
 
-import { Subscription }                         from 'rxjs';
+import { Subscription } from 'rxjs';
 
-import { SourceAbilityCalculatorService }       from '../source-ability-calculator.service';
-import { FetchService }                         from 'src/app/GlobalServices/fetch.service';
-import { QuickAssign }                          from 'src/app/GlobalServices/commonfunctions.service';
+import { SourceAbilityCalculatorService } from '../source-ability-calculator.service';
+import { FetchService } from 'src/app/GlobalServices/fetch.service';
+import { QuickAssign } from 'src/app/GlobalServices/commonfunctions.service';
 
-import { AbilityData, AbilityMastery,
-         AbilityNames }                         from '../SourceAbilityData';
-import { CRUDdata }                             from 'src/app/Classes/ContentClasses';
+import { AbilityData, AbilityMastery, AbilityNames } from '../SourceAbilityData';
+import { CRUDdata } from 'src/app/Classes/ContentClasses';
 
 @Component({
   selector: 'app-source-affinity-calculator',
@@ -21,9 +18,9 @@ import { CRUDdata }                             from 'src/app/Classes/ContentCla
 
 export class SourceAffinityCalculatorComponent implements OnInit, OnDestroy {
 
-  @Input() showName: boolean = true;
-  @Input() viewOnly: boolean = false;
-  @Input() new: boolean = true;
+  @Input() showName = true;
+  @Input() viewOnly = false;
+  @Input() new = true;
 
   @ViewChild('addAbilityButton') addAbilityButton: ElementRef;
 
@@ -34,7 +31,7 @@ export class SourceAffinityCalculatorComponent implements OnInit, OnDestroy {
   abilitiesArray: FormArray;
   Form: FormGroup;
   error: string;
-  mastery = ["Low", "Mid", "High", "Top"];
+  mastery = ['Low', 'Mid', 'High', 'Top'];
   abilityKeys = Object.keys(new AbilityData());
   abilityNames = new AbilityNames().Names;
   show = false;
@@ -43,16 +40,18 @@ export class SourceAffinityCalculatorComponent implements OnInit, OnDestroy {
   stream2: Subscription;
   stream3: Subscription;
 
-  constructor(private SAserv: SourceAbilityCalculatorService,
-              private fb: FormBuilder,
-              private fetcher: FetchService,
-              private qa: QuickAssign) { }
+  constructor(
+    private SAserv: SourceAbilityCalculatorService,
+    private fb: FormBuilder,
+    private fetcher: FetchService,
+    private qa: QuickAssign
+  ) { }
 
   ngOnInit() {
     this.stream1 = this.fetcher.itemToEdit
       .subscribe(item => {
         this.assignData(item);
-        if(this.viewOnly) {
+        if (this.viewOnly) {
           this.Form.get('Abilities').disable();
         }
       });
@@ -79,7 +78,7 @@ export class SourceAffinityCalculatorComponent implements OnInit, OnDestroy {
 
   assignData(editFormData: any) {
     this.onReset();
-    if(editFormData) {
+    if (editFormData) {
       this.removeAbility(0);
       this.qa.assign(this.Form, editFormData);
       const Build = JSON.parse(editFormData.Build);
@@ -102,7 +101,7 @@ export class SourceAffinityCalculatorComponent implements OnInit, OnDestroy {
     
     try {
       this.result = this.SAserv.calculateAffinity(build, eGenes, cGenes);
-    } catch(err) {
+    } catch (err) {
       this.error = err;
       return this.fetcher.activeFormData.next(
         new CRUDdata(true, 'Calculation failed!'));
@@ -110,29 +109,31 @@ export class SourceAffinityCalculatorComponent implements OnInit, OnDestroy {
 
     this.rank = this.getRank(this.result, eGenes);
     
-    if(this.showName === true) {//submissions are allowed
+    if (this.showName === true) {//submissions are allowed
 
-      if(this.Form.valid !== true) {
+      if (this.Form.valid !== true) {
         this.error ='Name is required!';
         return this.fetcher.activeFormData.next(new CRUDdata(true, this.error));
       }
   
-      const Final = {Build: JSON.stringify(build),
-                      EsarianGenes: eGenes,
-                      ConnectionGenes: cGenes,
-                      Cost: this.result,
-                      Rank: this.rank,
-                      Name: this.Form.value.Name,
-                      ID: ''};
-      Final.ID = `${Final.Name}-(${Final.Cost})`;
+      const final = {
+        Build: JSON.stringify(build),
+        EsarianGenes: eGenes,
+        ConnectionGenes: cGenes,
+        Cost: this.result,
+        Rank: this.rank,
+        Name: this.Form.value.Name,
+        ID: ''
+      };
+      final.ID = `${final.Name}-(${final.Cost})`;
       this.fetcher.assignvalidity(true);
-      return this.fetcher.assignActiveFormData(new CRUDdata(false, '', Final));
+      return this.fetcher.assignActiveFormData(new CRUDdata(false, '', final));
     }
   }
 
   
   resetForm() {
-    if(this.new === true) {
+    if (this.new === true) {
       this.fetcher.assignItemtoEdit(undefined);
     } else {
       this.fetcher.assignItemtoEdit(this.fetcher.itemToEdit.value);
@@ -154,20 +155,20 @@ export class SourceAffinityCalculatorComponent implements OnInit, OnDestroy {
   }
 
   getRank(cost: number, eGenes:number = 0) {
-    if(cost < 5 - 5*eGenes){ //0
+    if (cost < 5 - 5 * eGenes){ // 0
       return 'Sourceless';
-    } else if(cost < 10 - 5*eGenes) { //5
+    } else if (cost < 10 - 5 * eGenes) { // 5
       return 'Below Average';
-    } else if (cost < 20 - 10*eGenes) { //10
+    } else if (cost < 20 - 10 * eGenes) { // 10
       return 'Average';
-    } else if (cost < 30 - 10*eGenes) { //20
+    } else if (cost < 30 - 10 * eGenes) { // 20
       return 'Above Average';
-    } else if (cost < 40 - 10*eGenes) { //30
+    } else if (cost < 40 - 10 * eGenes) { // 30
       return 'Impressive';
     } else if (cost < 50) {
       return 'Top Tier';
     } else {
-      return "OP, pls nerf.";
+      return 'OP, pls nerf.';
     }
   }
 
@@ -176,7 +177,7 @@ export class SourceAffinityCalculatorComponent implements OnInit, OnDestroy {
         Ability: ability,
         Mastery: mastery
     }) );
-    if(this.abilitiesArray.value.length > 1) {
+    if (this.abilitiesArray.value.length > 1) {
       this.allowRemove = true;
     }
   }
@@ -184,7 +185,7 @@ export class SourceAffinityCalculatorComponent implements OnInit, OnDestroy {
   removeAbility(index: number) {
     this.abilitiesArray.removeAt(index);
     this.addAbilityButton.nativeElement.focus();
-    if(this.abilitiesArray.value.length === 1) {
+    if (this.abilitiesArray.value.length === 1) {
       this.allowRemove = false;
     }
   }

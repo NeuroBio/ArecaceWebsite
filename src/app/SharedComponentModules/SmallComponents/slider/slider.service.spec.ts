@@ -6,7 +6,7 @@ describe('SliderService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: SliderService = TestBed.get(SliderService);
+    const service: SliderService = TestBed.inject(SliderService);
     expect(service).toBeTruthy();
   });
 });

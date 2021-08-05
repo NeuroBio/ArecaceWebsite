@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnInit }   from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-toggler',
@@ -6,13 +6,13 @@ import { Component, Input, Output, EventEmitter, OnInit }   from '@angular/core'
   styleUrls: ['./toggler.component.css']
 })
 
-export class TogglerComponent implements OnInit{
+export class TogglerComponent implements OnInit {
 
   @Input() toggles: string[];
   @Input() togglerTitle: string;
   @Input() toggleName;
-  @Input() current: number = 0;
-  @Input() visible: boolean = false;
+  @Input() current = 0;
+  @Input() visible = false;
 
   @Output() choiceEmitter = new EventEmitter<number>();
 

@@ -1,8 +1,8 @@
-import { Component, OnInit, Input, OnDestroy }  from '@angular/core';
+import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 
-import { Subscription }                         from 'rxjs';
+import { Subscription } from 'rxjs';
 
-import { GlobalVarsService }                    from 'src/app/GlobalServices/global-vars.service';
+import { GlobalVarsService } from 'src/app/GlobalServices/global-vars.service';
 
 @Component({
   selector: 'app-upload-preview',
@@ -24,7 +24,7 @@ export class UploadPreviewComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.stream1 = this.global.ImagesLoadable.subscribe(load => this.neverLoading = !load);
   }
-  
+
   ngOnDestroy() {
     this.stream1.unsubscribe();
   }

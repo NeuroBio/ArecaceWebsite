@@ -1,6 +1,6 @@
-import { Component, OnInit, Input }   from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
-import { SliderService }              from '../slider.service';
+import { SliderService } from '../slider.service';
 
 @Component({
   selector: 'app-slider',
@@ -11,15 +11,15 @@ import { SliderService }              from '../slider.service';
 export class SliderComponent implements OnInit {
 
   @Input() name: string;
-  @Input() flow: string = 'column';
-  @Input() width: number = 90;
+  @Input() flow = 'column';
+  @Input() width = 90;
   preview: boolean;
 
   constructor(private sliderserv: SliderService) { }
 
   ngOnInit() {
     this.preview = this.sliderserv.getPreview();
-    if(this.preview === undefined) {
+    if (this.preview === undefined) {
       this.preview = true;
     }
   }
@@ -30,7 +30,7 @@ export class SliderComponent implements OnInit {
   }
 
   onKeydown(event) {
-    if (event.key === "Enter" || event.key === " " || event.key === "Spacebar") {
+    if (event.key === 'Enter' || event.key === ' ' || event.key === 'Spacebar') {
       event.preventDefault();
       this.changeView();
     }

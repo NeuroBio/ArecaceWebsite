@@ -1,13 +1,12 @@
-import { Component, OnInit, OnDestroy,
-         ViewChild, ElementRef }          from '@angular/core';
-import { ActivatedRoute }                 from '@angular/router';
+import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
-import { Subscription }                   from 'rxjs';
+import { Subscription } from 'rxjs';
 
-import { DownloadPageService }            from '../download-page.service';
-import { GetRouteSegmentsService }        from 'src/app/GlobalServices/commonfunctions.service';
-import { GlobalVarsService }              from 'src/app/GlobalServices/global-vars.service';
-import { BookmarkService }                from 'src/app/SharedComponentModules/SmallComponents/bookmark/bookmark.service';
+import { DownloadPageService } from '../download-page.service';
+import { GetRouteSegmentsService } from 'src/app/GlobalServices/commonfunctions.service';
+import { GlobalVarsService } from 'src/app/GlobalServices/global-vars.service';
+import { BookmarkService } from 'src/app/SharedComponentModules/SmallComponents/bookmark/bookmark.service';
 
 @Component({
   selector: 'app-download-page',
@@ -33,7 +32,7 @@ export class DownloadPageComponent implements OnInit, OnDestroy {
               private bookmarkserv: BookmarkService) { }
 
   ngOnInit() {
-    window.scroll(0,0);
+    window.scroll(0, 0);
     const mainPath = this.getsegserv.fetch(this.route.snapshot.pathFromRoot);
     this.path = mainPath.join('/');
     this.stream = this.downloadserv.ImageData
@@ -50,7 +49,7 @@ export class DownloadPageComponent implements OnInit, OnDestroy {
     this.bookmarkserv.dispose();
   }
 
-  switchView(){
+  switchView() {
     this.full = !this.full;
   }
 
@@ -60,7 +59,7 @@ export class DownloadPageComponent implements OnInit, OnDestroy {
   }
 
   onResize() {
-    if(this.Image.nativeElement.offsetWidth + 33 < window.innerWidth) {
+    if (this.Image.nativeElement.offsetWidth + 33 < window.innerWidth) {
       this.maxed = true;
     } else {
       this.maxed = false;

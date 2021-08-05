@@ -6,7 +6,7 @@ describe('UploadPreviewService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: UploadPreviewService = TestBed.get(UploadPreviewService);
+    const service: UploadPreviewService = TestBed.inject(UploadPreviewService);
     expect(service).toBeTruthy();
   });
 });

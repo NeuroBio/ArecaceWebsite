@@ -1,11 +1,10 @@
-import { Component, OnInit, OnChanges,
-         Input, OnDestroy }                 from '@angular/core';
-import { User }                             from '../../../../Classes/ContentClasses';
+import { Component, OnInit, OnChanges, Input, OnDestroy } from '@angular/core';
+import { User } from '../../../../Classes/ContentClasses';
 
-import { Subscription }                     from 'rxjs';
+import { Subscription } from 'rxjs';
 
-import { BookmarkService }                  from '../bookmark.service';
-import { AuthService }                      from 'src/app/administration/security/Auth/auth.service';
+import { BookmarkService } from '../bookmark.service';
+import { AuthService } from 'src/app/administration/security/Auth/auth.service';
 
 @Component({
   selector: 'app-bookmark',
@@ -15,21 +14,23 @@ import { AuthService }                      from 'src/app/administration/securit
 
 export class BookmarkComponent implements OnInit, OnChanges, OnDestroy {
 
-  @Input() path;
-  @Input() type;
-  @Input() name;
+  @Input() path: string;
+  @Input() type: string;
+  @Input() name: string;
   @Input() bookmarkImage: boolean = true;
   data: User;
   color: string;
-  hover: boolean = false;
+  hover = false;
   notUser: boolean;
   marksrc: string;
   stream1: Subscription;
   stream2: Subscription;
   real: boolean;
 
-  constructor(private bookmarkserv: BookmarkService,
-              private auth: AuthService) { }
+  constructor(
+    private bookmarkserv: BookmarkService,
+    private auth: AuthService
+  ) { }
 
   ngOnInit() {
     this.stream1 = this.auth.user.subscribe(data => {
@@ -39,7 +40,7 @@ export class BookmarkComponent implements OnInit, OnChanges, OnDestroy {
     });
     this.stream2 = this.bookmarkserv.real
       .subscribe(real => this.real = real);
-    if(this.bookmarkImage) {
+    if (this.bookmarkImage) {
       this.marksrc = 'assets/svgs/bookmark-bar.svg';
     } else {
       this.marksrc ='assets/svgs/star.svg';
@@ -47,7 +48,7 @@ export class BookmarkComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   ngOnChanges() {
-    if(this.data) {
+    if (this.data) {
       this.setColors();
     }
   }
@@ -59,7 +60,7 @@ export class BookmarkComponent implements OnInit, OnChanges, OnDestroy {
 
   bookmark() {
     const index = this.checkBookmark();
-    if(index < 0) {
+    if (index < 0) {
       this.bookmarkserv.addBookmark(this.type, this.path, this.name);
     } else {
       this.bookmarkserv.removeBookmark(this.type, index);
@@ -68,7 +69,7 @@ export class BookmarkComponent implements OnInit, OnChanges, OnDestroy {
 
   checkBookmark() {
     let index;
-    if(this.data[this.type]) {
+    if (this.data[this.type]) {
       index = this.data[this.type].findIndex(link => link.path === this.path);
     } else {
       index = -1;
@@ -76,8 +77,8 @@ export class BookmarkComponent implements OnInit, OnChanges, OnDestroy {
     return index;
   }
 
-  setColors(){
-    if(this.notUser) {
+  setColors() {
+    if (this.notUser) {
       this.color = 'rgb(180,180,180)';
     } else {
       this.color = this.checkBookmark() < 0

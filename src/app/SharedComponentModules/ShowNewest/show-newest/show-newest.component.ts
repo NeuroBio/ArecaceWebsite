@@ -1,12 +1,11 @@
-import { Component, OnInit, Input,
-         ElementRef, OnDestroy, ViewChild }         from '@angular/core';
+import { Component, OnInit, Input, ElementRef, OnDestroy, ViewChild } from '@angular/core';
 
-import { Observable, fromEvent, Subscription }      from 'rxjs';
-import { map }                                      from 'rxjs/operators';
+import { Observable, fromEvent, Subscription } from 'rxjs';
+import { map } from 'rxjs/operators';
 
-import { FireBaseService }                          from 'src/app/GlobalServices/firebase.service';
+import { FireBaseService } from 'src/app/GlobalServices/firebase.service';
 
-import { LinkListElement }                          from '../../SmallComponents/LinkList/linklist';
+import { LinkListElement } from '../../SmallComponents/LinkList/linklist';
 
 @Component({
   selector: 'app-show-newest',
@@ -27,7 +26,7 @@ export class ShowNewestComponent implements OnInit, OnDestroy {
   @ViewChild('itemBand') itemBand: ElementRef;
   @ViewChild('right', { static: true }) right: ElementRef;
   @ViewChild('left', { static: true }) left: ElementRef;
-  
+
   KeyListener = fromEvent(document, 'keydown');
   stream: Subscription;
 
@@ -39,14 +38,14 @@ export class ShowNewestComponent implements OnInit, OnDestroy {
 
     this.display$ = this.firebaseserv.returnCollect(this.collectionName).pipe(
       map(members => {
-        members = members.filter(member => member.Allowed !== false);//remove hidden
-        members = members.sort((a,b) => a.TimeStampCreated > b.TimeStampCreated ? 1 :-1);// order
+        members = members.filter(member => member.Allowed !== false); // remove hidden
+        members = members.sort((a, b) => a.TimeStampCreated > b.TimeStampCreated ? 1 :-1);// order
 
-        if(members.length > 10) {//cut to newest
+        if (members.length > 10) { // cut to newest
           members = members.slice(0, 10);
         }
 
-        return members = members.map(member => //set up for display
+        return members = members.map(member => // set up for display
           member = new LinkListElement(
             member.Name,
             `${this.contentLink}/${member.ID}`,
@@ -62,15 +61,15 @@ export class ShowNewestComponent implements OnInit, OnDestroy {
 
 
   scroll(right: boolean) {
-    if(right) {
+    if (right) {
       this.animate(this.imageLength);
     } else {
-      this.animate(this.imageLength*-1);
+      this.animate(this.imageLength * -1);
     }
   }
 
   animate(amount: number) {
-    if(HTMLElement.prototype.scrollTo) {
+    if (HTMLElement.prototype.scrollTo) {
       this.itemBand.nativeElement.scrollTo(
         { left: (this.itemBand.nativeElement.scrollLeft + amount), behavior: 'smooth' });
     } else {
@@ -80,14 +79,14 @@ export class ShowNewestComponent implements OnInit, OnDestroy {
 
   //Arrow keys (trigger arrow options)
   KeyEvent(event: KeyboardEvent) {
-    if(event.key === 'ArrowRight') {
+    if (event.key === 'ArrowRight') {
       this.right.nativeElement.focus();
       this.animate(this.imageLength);
     }
 
-    if(event.key === 'ArrowLeft') {
+    if (event.key === 'ArrowLeft') {
       this.left.nativeElement.focus();
-      this.animate(this.imageLength*-1);
+      this.animate(this.imageLength * -1);
     }
   }
 

@@ -22,7 +22,7 @@ export class UserdataDetailsResolverService implements Resolve<any> {
 
   resolve(route: ActivatedRouteSnapshot) {
     const path =  route['_routerState'].url.split('/');
-    const ID = path[path.length - 1].split('\?')[0]; //remove query params
+    const ID = path[path.length - 1].split('\?')[0]; // remove query params
     const Type = path[path.length - 2];
 
     if (this.displayserv.updateCurrentUserDatum(ID) === true) {

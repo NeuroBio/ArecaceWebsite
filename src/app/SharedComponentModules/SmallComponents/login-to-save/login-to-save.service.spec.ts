@@ -6,7 +6,7 @@ describe('LoginToSaveService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: LoginToSaveService = TestBed.get(LoginToSaveService);
+    const service: LoginToSaveService = TestBed.inject(LoginToSaveService);
     expect(service).toBeTruthy();
   });
 });

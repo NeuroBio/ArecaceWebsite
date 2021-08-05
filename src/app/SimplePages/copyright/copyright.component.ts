@@ -1,7 +1,7 @@
-import { Component, OnInit }  from '@angular/core';
-import { Title }              from '@angular/platform-browser';
+import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 
-import { TextProvider }       from 'src/app/GlobalServices/textprovider.service';
+import { TextProvider } from 'src/app/GlobalServices/textprovider.service';
 
 @Component({
   selector: 'app-copyright',
@@ -13,14 +13,16 @@ export class CopyrightComponent implements OnInit {
 
   mainText: string;
 
-  constructor(private textprovider: TextProvider,
-              private titleserv: Title) { }
+  constructor(
+    private textprovider: TextProvider,
+    private titleserv: Title
+  ) { }
 
   ngOnInit() {
-    this.titleserv.setTitle('Copyright')
-    window.scroll(0,0);
+    this.titleserv.setTitle('Copyright');
+    window.scroll(0, 0);
     this.mainText = this.textprovider.WebsiteText
-      .find(member => member.ID =='copyright').Text;
+      .find(member => member.ID === 'copyright').Text;
   }
 
  }

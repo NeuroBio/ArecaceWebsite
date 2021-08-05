@@ -6,13 +6,13 @@ export class LinkListElement {
 
     constructor(name: string, route?: string, href?: string, item?: any) {
         this.ListName = name;
-        if(route) {
+        if (route) {
             this.Route = route;
         }
-        if(href) {
+        if (href) {
             this.Href = href;
         }
-        if(item){
+        if (item) {
             this.Item = item;
         }
     }

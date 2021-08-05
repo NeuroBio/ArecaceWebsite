@@ -46,12 +46,12 @@ export class PickUpComponent implements OnChanges {
     return this.crud.deleteBookmark(index, type)
     .then(() => {
       for (let i = 0; i < this.MasterLists['_results'].length; i++) {
-        let Master = this.MasterLists['_results'][i];
-        if (Master.MasterListName === type) { // correct list; still exists
+        const master = this.MasterLists['_results'][i];
+        if (master.MasterListName === type) { // correct list; still exists
           if (index > 0) { // not first
-            Master.items['_results'][index-1].focus();
+            master.items['_results'][index - 1].focus();
           } else { // first
-            Master.items['_results'][index+1].focus();
+            master.items['_results'][index + 1].focus();
           }
           return;
         }

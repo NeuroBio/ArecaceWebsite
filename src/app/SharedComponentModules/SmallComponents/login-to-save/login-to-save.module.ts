@@ -1,9 +1,9 @@
-import { NgModule }                 from '@angular/core';
-import { CommonModule }             from '@angular/common';
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 import { LoginToSaveRoutingModule } from './login-to-save-routing.module';
 import { LoginToSaveMainComponent } from './login-to-save-main/login-to-save-main.component';
-import { LoginModule }              from '../LoginButton/login.module';
+import { LoginModule } from '../LoginButton/login.module';
 
 @NgModule({
   declarations: [LoginToSaveMainComponent],

@@ -42,7 +42,7 @@ export class UserInfoComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.titleserv.setTitle('Settings');
-    this.stream1 = this.auth.user.subscribe(user => 
+    this.stream1 = this.auth.user.subscribe(user =>
       this.user = user);
 
     this.stream2 = this.crud.message.subscribe(mess =>

@@ -1,7 +1,7 @@
-import { Component, OnInit }  from '@angular/core';
-import { Title }              from '@angular/platform-browser';
+import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 
-import { TextProvider }       from 'src/app/GlobalServices/textprovider.service';
+import { TextProvider } from 'src/app/GlobalServices/textprovider.service';
 
 @Component({
   selector: 'app-about',
@@ -12,19 +12,21 @@ import { TextProvider }       from 'src/app/GlobalServices/textprovider.service'
 export class AboutComponent implements OnInit {
 
   contentPicker: number = 0;
-  choices: string[] = ['The Story', "Me", "The Website"];
+  choices: string[] = ['The Story', 'Me', 'The Website'];
   mainText: any;
 
-  constructor(private textprovider: TextProvider,
-              private titleserv: Title) { }
+  constructor(
+    private textprovider: TextProvider,
+    private titleserv: Title
+  ) { }
 
   ngOnInit() {
     this.titleserv.setTitle('About');
-    window.scroll(0,0);
+    window.scroll(0, 0);
     this.mainText = this.textprovider.WebsiteText
       .find(member => member.ID === 'about');
   }
-  
+
   pickAbout(index: number) {
     this.contentPicker = index;
   }

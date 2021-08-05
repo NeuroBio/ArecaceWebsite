@@ -6,7 +6,7 @@ describe('BadConnectionService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: CheckConnectionService = TestBed.get(CheckConnectionService);
+    const service: CheckConnectionService = TestBed.inject(CheckConnectionService);
     expect(service).toBeTruthy();
   });
 });

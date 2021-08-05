@@ -8,6 +8,6 @@ import { Component, Input } from '@angular/core';
 export class ScrollFrameComponent {
 
   @Input() Title: string;
-  @Input() Color: string = '#454545';
-  
+  @Input() Color = '#454545';
+
 }

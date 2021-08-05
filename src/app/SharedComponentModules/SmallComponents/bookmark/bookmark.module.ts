@@ -1,8 +1,8 @@
-import { NgModule }                 from '@angular/core';
-import { CommonModule }             from '@angular/common';
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
-import { BookmarkRoutingModule }    from './bookmark-routing.module';
-import { BookmarkComponent }        from './bookmark/bookmark.component';
+import { BookmarkRoutingModule } from './bookmark-routing.module';
+import { BookmarkComponent } from './bookmark/bookmark.component';
 
 
 @NgModule({

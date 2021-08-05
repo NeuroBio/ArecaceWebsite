@@ -23,14 +23,14 @@ export class ImageSettings {
         this.MaxWidth = MW;
         this.MaxSize = MS;
         this.MaxSizeRead = MSread;
-    
+
     }
 }
 
 export class UploadPreviewSettings {
     main: ImageSettings;
     thumb: ImageSettings;
-    
+
     constructor(settings: {}[]) {
         this.main = new ImageSettings(settings[0][0],settings[0][1],
             this.converttoBytes(settings[0][2]), settings[0][2]);
@@ -39,13 +39,13 @@ export class UploadPreviewSettings {
     }
 
     private converttoBytes(readable: string) {
-        if(readable) {
+        if (readable) {
             const Measures = ['KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
             let num = +readable.match(/\d/g);
             const measure = readable.match(/\w/g).toString();
             const multiply = Measures.findIndex(x => x===measure) + 1;
-            for(let i = 0; i < multiply; i++) {
-                num = num*1024;
+            for (let i = 0; i < multiply; i++) {
+                num = num * 1024;
             }
             return num;
         } else {

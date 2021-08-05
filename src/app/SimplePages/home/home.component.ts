@@ -29,8 +29,8 @@ export class HomeComponent implements OnInit {
 
   @HostListener('window:resize')
   setButtonText() {
-    if (window.innerWidth < 485){
-      this.buttonText = ['Intro', 'Scripts','Comic','Play- ground'];
+    if (window.innerWidth < 485) {
+      this.buttonText = ['Intro', 'Scripts', 'Comic', 'Play- ground'];
     } else {
       this.buttonText = [
         'Full Introduction',

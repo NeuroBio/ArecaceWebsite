@@ -1,11 +1,11 @@
-import { Injectable }                     from '@angular/core';
+import { Injectable } from '@angular/core';
 
-import { BehaviorSubject, Subscription }  from 'rxjs';
-import { map }                            from 'rxjs/operators';
+import { BehaviorSubject, Subscription } from 'rxjs';
+import { map } from 'rxjs/operators';
 
-import { CacheService }                   from 'src/app/GlobalServices/cache.service';
+import { CacheService } from 'src/app/GlobalServices/cache.service';
 
-import { PostData }                       from 'src/app/Classes/ContentClasses';
+import { PostData } from 'src/app/Classes/ContentClasses';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +20,7 @@ export class UpdateService {
   constructor(private cache: CacheService) { }
 
   getPosts() {
-    if(this.cache.Cache['updates']) {
+    if (this.cache.Cache['updates']) {
       return this.assignPosts();
     } else {
       this.message.next(undefined);
@@ -36,15 +36,15 @@ export class UpdateService {
   assignPosts() {
     this.stream = this.cache.Cache['updates']
     .pipe(map((posts: PostData[]) =>
-        posts.sort((a,b) => a.Date > b.Date ? -1
+        posts.sort((a, b) => a.Date > b.Date ? -1
         : a.Date !== b.Date ? 1
         : a.Time < b.Time ? 1
         : -1) )
     ).subscribe(posts => this.posts.next(posts));
   }
- 
+
   dispose() {
-    if(this.stream) {
+    if (this.stream) {
       this.stream.unsubscribe();
     }
   }

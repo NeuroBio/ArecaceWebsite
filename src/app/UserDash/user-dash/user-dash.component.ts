@@ -99,15 +99,15 @@ export class UserDashComponent implements OnInit, OnDestroy {
     this.actions[2].show = this.user.Admin === true;
   }
 
-  mockupUser() { //for testing purposes
-    this.user.Narratives = [ {path: "story/Narratives/SpeedChess/What'stheDifferenceBetweenanAmphibianandaReptile?",
-    time: "2020-08-26, 19:10",
-    name: "Speed Chess: What's the Difference Between an Amphibian and a Reptile"}];
-    this.user.SurveyResults = [{SurveyID: "Companion",
-    DisplayName: "Ideal Source Companion Questionair 20/08/26",
-    Name: "Ideal Source Companion Questionair"},
-    { SurveyID: "Companion",
-    DisplayName: "Ideal Source Companion Questionair 20/08/26-2",
-    Name: "Ideal Source Companion Questionair" }];
+  mockupUser() { // for testing purposes
+    this.user.Narratives = [ {path: 'story/Narratives/SpeedChess/What\'stheDifferenceBetweenanAmphibianandaReptile?',
+    time: '2020-08-26, 19:10',
+    name: 'Speed Chess: What\'s the Difference Between an Amphibian and a Reptile'}];
+    this.user.SurveyResults = [{SurveyID: 'Companion',
+    DisplayName: 'Ideal Source Companion Questionair 20/08/26',
+    Name: 'Ideal Source Companion Questionair'},
+    { SurveyID: 'Companion',
+    DisplayName: 'Ideal Source Companion Questionair 20/08/26-2',
+    Name: 'Ideal Source Companion Questionair' }];
   }
 }

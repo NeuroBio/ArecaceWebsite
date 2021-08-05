@@ -40,9 +40,9 @@ export class MessageComponent implements OnInit, OnDestroy {
       });
 
     this.stream2 = this.messageserv.getOldMessages().subscribe(mess => {
-          let final:string[][] = [];
-          for(let cat of this.classes) {
-            final.push(mess.filter(mess => mess.Reason === cat));
+          const final: string[][] = [];
+          for (const cat of this.classes) {
+            final.push(mess.filter(m => m.Reason === cat));
           }
           this.OldMessages = final;
       });
@@ -77,8 +77,7 @@ export class MessageComponent implements OnInit, OnDestroy {
       }
 
       return this.uploadserv.deleteItem([], location, this.readMessage.key)
-      .then(() => {
-        this.onReset(false)});
+      .then(() => this.onReset(false));
     }
   }
 
@@ -89,8 +88,8 @@ export class MessageComponent implements OnInit, OnDestroy {
       Date: this.readMessage.Date,
       Message: this.readMessage.Message,
       Reason: this.readMessage.Reason
-    }
-    return this.uploadserv.uploadItem(moveDoc,'ContactSaved')
+    };
+    return this.uploadserv.uploadItem(moveDoc, 'ContactSaved')
     .then(() => {
       return this.uploadserv.deleteItem([], 'Contact', this.readMessage.key);
     }).then(() => this.onReset(true));

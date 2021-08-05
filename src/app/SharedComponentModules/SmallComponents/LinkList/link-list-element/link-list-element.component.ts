@@ -1,6 +1,4 @@
-import { Component, Input, ViewChild,
-         ElementRef, OnInit, Output,
-         EventEmitter }               from '@angular/core';
+import { Component, Input, ViewChild, ElementRef, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-link-list-element',
@@ -19,19 +17,18 @@ export class LinkListElementComponent implements OnInit {
     @Output() clickEventEmitter = new EventEmitter<number>();
     Type: string;
 
-    
     ngOnInit() {
-      if(this.route !== undefined) { //within site
+      if (this.route !== undefined) { // within site
         this.Type = 'Route';
-      } else if(this.href !== undefined && this.href !== '') { //link out
+      } else if (this.href !== undefined && this.href !== '') { // link out
         this.Type = 'Href';
-      } else { //no link out in a set of link outs
+      } else { // no link out in a set of link outs
         this.Type = 'Span';
       }
     }
 
     selectItem() {
-      if(this.Type === 'Span') {
+      if (this.Type === 'Span') {
         this.Host.nativeElement.firstChild.click();
       } else {
         this.Host.nativeElement.click();
@@ -40,7 +37,7 @@ export class LinkListElementComponent implements OnInit {
 
     focus() {
       this.Host.nativeElement.focus();
-      if(this.Type === 'Span') {
+      if (this.Type === 'Span') {
         this.Host.nativeElement.firstChild.focus();
       }
     }

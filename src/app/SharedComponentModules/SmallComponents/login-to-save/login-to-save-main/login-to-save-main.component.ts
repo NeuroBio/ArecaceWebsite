@@ -1,10 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 
-import { Subscription }                 from 'rxjs';
+import { Subscription } from 'rxjs';
 
-import { AuthService }                  from 'src/app/administration/security/Auth/auth.service';
-import { LoginToSaveService }           from '../login-to-save.service';
-import { FetchService }                 from 'src/app/GlobalServices/fetch.service';
+import { AuthService } from 'src/app/administration/security/Auth/auth.service';
+import { LoginToSaveService } from '../login-to-save.service';
+import { FetchService } from 'src/app/GlobalServices/fetch.service';
 
 @Component({
   selector: 'app-login-to-save-main',

@@ -6,7 +6,7 @@ describe('DownloadResolverService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: DownloadResolverService = TestBed.get(DownloadResolverService);
+    const service: DownloadResolverService = TestBed.inject(DownloadResolverService);
     expect(service).toBeTruthy();
   });
 });

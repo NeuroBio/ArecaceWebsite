@@ -27,7 +27,7 @@ export class UserGuardGuard implements CanActivate {
   checkUser(url: string): Observable<boolean> {
     return this.auth.user.pipe(
       take(1),
-      map((user:User) => {
+      map((user: User) => {
         if (user) {
             if (user.User) { return true; }
         }

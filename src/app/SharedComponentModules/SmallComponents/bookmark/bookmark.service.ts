@@ -1,10 +1,10 @@
-import { Injectable }                     from '@angular/core';
-import { formatDate }                     from '@angular/common';
+import { Injectable } from '@angular/core';
+import { formatDate } from '@angular/common';
 
-import { Subscription, BehaviorSubject }  from 'rxjs';
+import { Subscription, BehaviorSubject } from 'rxjs';
 
-import { FireBaseService }                from 'src/app/GlobalServices/firebase.service';
-import { AuthService }                    from '../../../administration/security/Auth/auth.service';
+import { FireBaseService } from 'src/app/GlobalServices/firebase.service';
+import { AuthService } from '../../../administration/security/Auth/auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,13 +14,14 @@ export class BookmarkService {
   stream: Subscription;
   real = new BehaviorSubject<boolean>(true);
 
-  constructor(private firebaseserv: FireBaseService,
-              private auth: AuthService) {
-  }
+  constructor(
+    private firebaseserv: FireBaseService,
+    private auth: AuthService
+    ) { }
 
   addBookmark(type: string, path: string, name: string) {
     const data = this.auth.user.value;
-    if(data[type]) {
+    if (data[type]) {
       data[type].push({ path: path, time: formatDate(new Date(), 'yyyy-MM-dd, HH:mm', 'en'), name: name });
     } else {
       data[type] = [{ path: path, time: formatDate(new Date(), 'yyyy-MM-dd, HH:mm', 'en'), name: name }];

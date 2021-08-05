@@ -1,11 +1,9 @@
-import { Component, QueryList, ViewChildren,
-         Input, TemplateRef, ContentChild,
-         AfterViewInit }                      from '@angular/core';
-import { FocusKeyManager }                    from '@angular/cdk/a11y';
+import { Component, QueryList, ViewChildren, Input, TemplateRef, ContentChild, AfterViewInit } from '@angular/core';
+import { FocusKeyManager } from '@angular/cdk/a11y';
 
-import { LinkListComponent }                  from '../link-list/link-list.component';
+import { LinkListComponent } from '../link-list/link-list.component';
 
-import { LinkList, LinkListElement }          from '../linklist';
+import { LinkList, LinkListElement } from '../linklist';
 
 @Component({
   selector: 'app-master-link-list',
@@ -14,14 +12,16 @@ import { LinkList, LinkListElement }          from '../linklist';
 })
 export class MasterLinkListComponent implements AfterViewInit {
 
-  @Input() linkList: LinkList[] = [ new LinkList('default', [ new LinkListElement('tester 1', 'tester1'),
-                                                              new LinkListElement('tester 2', 'tester2'),
-                                                              new LinkListElement('tester 3', 'tester3') ]),
-                                    new LinkList('defaultSub', [new LinkListElement('subtester 1', 'subtester1')]) ];
-  @Input() current: string = "tester2";
+  @Input() linkList: LinkList[] = [
+    new LinkList('default', [
+      new LinkListElement('tester 1', 'tester1'),
+      new LinkListElement('tester 2', 'tester2'),
+      new LinkListElement('tester 3', 'tester3')
+    ]),
+    new LinkList('defaultSub', [ new LinkListElement('subtester 1', 'subtester1') ]) ];
+  @Input() current = 'tester2';
   @Input() MasterListName: string;
-  @Input() queryParamsHandling: string = '';
-
+  @Input() queryParamsHandling = '';
 
   @ContentChild('Label') labelTemplateRef: TemplateRef<any>;
   @ContentChild('Item') itemTemplateRef: TemplateRef<any>;
@@ -40,7 +40,7 @@ export class MasterLinkListComponent implements AfterViewInit {
   }
 
   onSelect(selected: string) {
-    if(this.keyManager) {
+    if (this.keyManager) {
       this.keyManager.setActiveItem(this.linkList
         .findIndex(list => list.Name === selected));
     } else {
@@ -54,15 +54,15 @@ export class MasterLinkListComponent implements AfterViewInit {
       this.keyManager.onKeydown(event);
       return false;
     }
-    
-    if(event.key === 'Tab') {
+
+    if (event.key === 'Tab') {
       this.leave = true;
-      setTimeout(() => { this.leave = false }, 10);
+      setTimeout(() => { this.leave = false; }, 10);
     }
   }
 
   focus() {
-    if(!this.keyManager.activeItem) {
+    if (!this.keyManager.activeItem) {
       this.keyManager.setFirstItemActive();
     }
     this.keyManager.activeItem.focusAbove();

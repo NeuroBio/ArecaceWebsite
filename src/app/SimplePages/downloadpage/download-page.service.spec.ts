@@ -6,7 +6,7 @@ describe('DownloadPageService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: DownloadPageService = TestBed.get(DownloadPageService);
+    const service: DownloadPageService = TestBed.inject(DownloadPageService);
     expect(service).toBeTruthy();
   });
 });

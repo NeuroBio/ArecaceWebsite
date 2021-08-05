@@ -1,11 +1,11 @@
-import { Component, OnInit }        from '@angular/core';
-import { FormBuilder, Validators }  from '@angular/forms';
-import { Title }                    from '@angular/platform-browser';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
+import { Title } from '@angular/platform-browser';
 
-import { ContactService }           from './contact.service';
-import { AuthService }              from 'src/app/administration/security/Auth/auth.service';
+import { ContactService } from './contact.service';
+import { AuthService } from 'src/app/administration/security/Auth/auth.service';
 
-import { messageValidator }         from './Validate';
+import { messageValidator } from './Validate';
 
 @Component({
   selector: 'app-contact',
@@ -18,33 +18,37 @@ export class ContactComponent implements OnInit {
   contactForm = this.createForm();
   ready: boolean;
   timeOut: any;
-  reasons: string[] = ["I'm a bot :)",
-                      "Use of my work or attribution",
-                      "Website/Accessibility issue",
-                      "Question/Comment about Arecace",
-                      "I want to tell you about my story!",
-                      "I found a typo",
-                      "Other"];
+  reasons: string[] = [
+    'I\'m a bot :)',
+    'Use of my work or attribution',
+    'Website/Accessibility issue',
+    'Question/Comment about Arecace',
+    'I want to tell you about my story!',
+    'I found a typo',
+    'Other'
+  ];
   message: string;
-  active: boolean = false;
+  active = false;
   dropdownInfo: string;
-  tempDisable: boolean = false;
+  tempDisable = false;
 
-  ReasonInvalid: boolean = false;
-  NameInvalid: boolean = false;
-  EmailInvalid: boolean = false;
-  MessageInvalid: boolean = false;
+  ReasonInvalid = false;
+  NameInvalid = false;
+  EmailInvalid = false;
+  MessageInvalid = false;
 
-  constructor(private fb: FormBuilder,
-              private contactserv: ContactService,
-              private auth: AuthService,
-              private titleserv: Title) { }
+  constructor(
+    private fb: FormBuilder,
+    private contactserv: ContactService,
+    private auth: AuthService,
+    private titleserv: Title
+  ) { }
 
   ngOnInit() {
     this.titleserv.setTitle('Contact');
     window.scroll(0,0);
     this.resetTimer();
-    if(this.auth.isLoggedIn === false) {
+    if (this.auth.isLoggedIn === false) {
       this.auth.anonymousLogin();
     }
   }
@@ -68,11 +72,11 @@ export class ContactComponent implements OnInit {
 
   retrieveInfo() {
     const reason: string = this.contactForm.controls.Reason.value
-    if(reason === "Use of my work or attribution") {
-      this.dropdownInfo = "Make sure you have read list items 4-7 in the FAQ!  There's a link in the footer.";
+    if (reason === 'Use of my work or attribution') {
+      this.dropdownInfo = 'Make sure you have read list items 4-7 in the FAQ!  There\'s a link in the footer.';
       this.tempDisable = false;
-    } else if(reason === "I want to tell you about my story!") {
-      this.dropdownInfo = "Your enthusiasm for story craft is awesome, but this isn't the place for that.  Please wait until I have the playground's forum (development phase 4) set up!";
+    } else if (reason === 'I want to tell you about my story!') {
+      this.dropdownInfo = 'Your enthusiasm for story craft is awesome, but this isn\'t the place for that.  Please wait until I have the playground\'s forum (development phase 4) set up!';
       this.tempDisable = true;
     } else {
       this.dropdownInfo = undefined;
@@ -92,15 +96,15 @@ export class ContactComponent implements OnInit {
   onSubmit() {
     this.resetErrors();
     this.active = true;
-    if(this.ready) {
+    if (this.ready) {
       const form = Object.assign({}, this.contactForm.value);
       
-      if(this.checkHuman(form)) {
-        if(form.Reason !== "I'm a bot :)") {
-          if(this.contactForm.valid) {
+      if (this.checkHuman(form)) {
+        if (form.Reason !== 'I\'m a bot :)') {
+          if (this.contactForm.valid) {
             const reasonIndex = this.reasons.findIndex(rea => rea === form.Reason);
             this.contactserv.PushMessage(form, reasonIndex)
-              .then(() => this.message = "Submitted!");
+              .then(() => this.message = 'Submitted!');
           } else {
             this.findError();
           }
@@ -118,7 +122,7 @@ export class ContactComponent implements OnInit {
 
   checkHuman(form: any) {
     let human = true;
-    if(form.LastName || form.Phone || form.Reply) {
+    if (form.LastName || form.Phone || form.Reply) {
         human = false;
     }
     return human;
@@ -134,39 +138,39 @@ export class ContactComponent implements OnInit {
   fastPost() {
     setTimeout(() => {
       this.active = false;
-      this.message = "You are posting too quickly!";
+      this.message = 'You are posting too quickly!';
       this.resetTimer();
     }, 1000);
   }
 
   sayPosted() {
     setTimeout(() => {
-      this.message = "Submitted!";
+      this.message = 'Submitted!';
     }, 1000);
   }
 
   botPost() {
     setTimeout(() => {
-      this.message = "Haha, very funny.";
+      this.message = 'Haha, very funny.';
     }, 1000);
   }
 
   findError() {
     setTimeout(() => {
-      if(!this.contactForm.controls.Reason.valid) {
+      if (!this.contactForm.controls.Reason.valid) {
         this.ReasonInvalid = true;
       }
-      if(!this.contactForm.controls.FirstName.valid) {
+      if (!this.contactForm.controls.FirstName.valid) {
         this.NameInvalid = true;
       }
-      if(!this.contactForm.controls.Email.valid) {
+      if (!this.contactForm.controls.Email.valid) {
         this.EmailInvalid = true;
       }
-      if(!this.contactForm.controls.Message.valid) {
+      if (!this.contactForm.controls.Message.valid) {
         this.MessageInvalid = true;
       }
       this.active = false;
-      this.message = "There is an error in the form!";
+      this.message = 'There is an error in the form!';
     }, 1000);
   }
 
