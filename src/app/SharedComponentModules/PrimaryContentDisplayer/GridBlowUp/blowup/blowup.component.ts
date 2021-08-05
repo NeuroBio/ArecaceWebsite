@@ -43,7 +43,7 @@ export class BlowUpComponent implements OnInit {
     this.activeMember = this.linksList[this.index];
     this.bigUrl = this.activeMember.Links[1];
     this.loading = this.global.ImagesLoadable.value;
-    setTimeout(() => { this.onResize() }, 10);
+    setTimeout(() => { this.onResize(); }, 10);
     this.setPath();
   }
 
@@ -61,7 +61,7 @@ export class BlowUpComponent implements OnInit {
   }
 
   showHideDescription() {
-    this.showDescription =! this.showDescription;
+    this.showDescription !== this.showDescription;
     this.showDescription ? this.rotation = 0 : this.rotation = 270;
     this.onResize();
   }
@@ -75,13 +75,13 @@ export class BlowUpComponent implements OnInit {
     const startIndex = this.index;
     this.loading = this.global.ImagesLoadable.value;
     this.index += incre;
-    if(this.index === -1) {
+    if (this.index === -1) {
       this.index = this.linksList.length - 1;
-    } else if(this.index === this.linksList.length) {
+    } else if (this.index === this.linksList.length) {
       this.index = 0;
     }
 
-    if(this.index === startIndex) {
+    if (this.index === startIndex) {
       this.loading = false;
     } else {
       this.activeMember = this.linksList[this.index];
@@ -91,32 +91,32 @@ export class BlowUpComponent implements OnInit {
     }
   }
 
-  //Arrow keys (trigger arrow options)
+  // Arrow keys (trigger arrow options)
   @HostListener('window:keyup', ['$event']) KeyEvent(event: KeyboardEvent) { 
-    if(event.key === 'ArrowRight'){//right, next
+    if (event.key === 'ArrowRight') { // right, next
       this.right.nativeElement.focus();
       this.onArrow(1);
     }
 
-    if(event.key === 'ArrowLeft') {//left, prev
+    if (event.key === 'ArrowLeft') { // left, prev
       this.left.nativeElement.focus();
       this.onArrow(-1);
     }
 
-    if(event.key === 'Escape') {//escape
+    if (event.key === 'Escape') { // escape
       this.router.navigate([`${this.gridPath}`]);
       this.gridserv.triggerRefocus();
     }
   }
 
   onTwistieKeydown(event: any) {
-    if (event.key === "Enter") {
+    if (event.key === 'Enter') {
       this.showHideDescription();
     }
   }
 
-  onArrowKeydown(event: any, change: number){
-    if (event.key === "Enter") {
+  onArrowKeydown(event: any, change: number) {
+    if (event.key === 'Enter') {
       this.onArrow(change);
     }
   }

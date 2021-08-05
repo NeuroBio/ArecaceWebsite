@@ -34,7 +34,7 @@ export class SiteMap {
     Interactive =
         [new LinkListElement('Surveys', this.PathInfo.surveys.Local),
         new LinkListElement('Calculators', '/playground/calc')];
-        
+
     'Misc.' =
         [new LinkListElement('Extras', this.PathInfo.extras.Local),
         new LinkListElement('Playground', '/playground'),
@@ -43,9 +43,8 @@ export class SiteMap {
 }
 
 export class LocalPaths {
-    extras: '/extras'
-    Narratives: '/story/Narratives'
-
+    extras: '/extras';
+    Narratives: '/story/Narratives';
 }
 
 export class AllPathInfo {
@@ -59,7 +58,7 @@ export class AllPathInfo {
     maps = new PathInfo('Map', 'Maps', '/world/maps', ['Topic']);
     narratives = new PathInfo('Story', 'Narratives', '/story/Narratives', ['Series', 'Title'], 'Series');
     notes = new PathInfo('Writing Note','LooseNotes', '/playground/notes', ['ShortTitle']);
-    othersart = new PathInfo('Other\'s Art', 'OthersArt', '/playground/otherart',[], undefined, true)
+    othersart = new PathInfo('Other\'s Art', 'OthersArt', '/playground/otherart',[], undefined, true);
     pixels = new PathInfo('Other\'s Pixel', 'Pixels', '/playground/otherart', [], undefined, true);
     scripts = new PathInfo('Comic Script', 'Scripts', '/story/Scripts', ['Series', 'Title'], 'Series');
     sourceaffinity = new PathInfo('SA Data', 'SourceAffinities', '/playground/calc/sourceaffinity', ['ID']);
@@ -77,7 +76,7 @@ export class PathInfo {
     Local: string;
     ExtraPath: string;
     NameTokens: string[];
-    NewestExclude: boolean
+    NewestExclude: boolean;
     SpecialUpload: boolean;
 
     constructor(type: string, fire: string, local: string, nameTokens: string[],

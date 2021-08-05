@@ -18,8 +18,8 @@ export class SideBarComponent implements AfterViewInit {
                               new LinkListElement('tester 3', 'tester3')
     ]),
     new LinkList('defaultSub', [new LinkListElement('subtester 1', 'subtester1')]) ];
-  @Input() current: string = 'tester2';
-  @Input() queryParamsHandling: string = '';
+  @Input() current = 'tester2';
+  @Input() queryParamsHandling = '';
 
   @ViewChild('container', { static: true }) container: ElementRef;
   @ViewChild('list', { static: true }) list: any;
@@ -47,13 +47,12 @@ export class SideBarComponent implements AfterViewInit {
         if (this.container.nativeElement.getBoundingClientRect().bottom > window.innerHeight) {
           this.listHeight += (window.innerHeight - this.container.nativeElement.getBoundingClientRect().bottom);
         }
-        
-        if (this.container.nativeElement.getBoundingClientRect().top < 0){
+
+        if (this.container.nativeElement.getBoundingClientRect().top < 0) {
           this.listHeight = (this.container.nativeElement.getBoundingClientRect().height +
           this.container.nativeElement.getBoundingClientRect().top);
         }
       }, 3);
-      
     }, 20);
   }
 

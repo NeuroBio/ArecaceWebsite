@@ -14,7 +14,7 @@ import { AllPathInfo } from '../Classes/UploadDownloadPaths';
   providedIn: 'root'
 })
 
-export class GeneralmemberresolverService implements Resolve<any>{
+export class GeneralmemberresolverService implements Resolve<any> {
 
   AllPaths = new AllPathInfo();
 
@@ -34,7 +34,7 @@ export class GeneralmemberresolverService implements Resolve<any>{
     return this.generalcollectserv.getMember(ID).pipe(
       take(1),
       tap(member => {
-        if (member){
+        if (member) {
           this.setTitle(member);
           return of (member);
         } else {

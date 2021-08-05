@@ -38,7 +38,7 @@ export class GeneralcollectionresolverService implements Resolve<any> {
             return this.generalcollectionserv.initializeMetaData(this.cache.Cache[type], type);
           } else {
             delete this.cache.Cache[type];
-            this.router.navigate(["badservice"]);
+            this.router.navigate(['badservice']);
           }
       });
     }

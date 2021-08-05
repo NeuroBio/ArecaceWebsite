@@ -48,7 +48,7 @@ export class GridComponent implements OnInit, OnDestroy {
     this.stream3 = this.gridserv.Sorted
       .subscribe(() => this.updateOrder());
 
-    this.initializeData()
+    this.initializeData();
     this.init = false;
   }
 
@@ -67,7 +67,7 @@ export class GridComponent implements OnInit, OnDestroy {
   }
 
   updateLinks() {
-    this.formattedCollect.Data.map(item => 
+    this.formattedCollect.Data.map(item =>
       item.Route = this.preview === true
       ? item.Item.ID
       : `${item.Item.ID}/Download`);
@@ -77,9 +77,9 @@ export class GridComponent implements OnInit, OnDestroy {
     this.formattedCollect.Data.map((item, i) => {
       item.ListName = this.collect[i].Name,
       item.Route = this.preview === true ? this.collect[i].ID : `${this.collect[i].ID}/Download`,
-      item.Item = this.collect[i]
+      item.Item = this.collect[i];
       return item;
-    })
+    });
   }
 
   focus() {

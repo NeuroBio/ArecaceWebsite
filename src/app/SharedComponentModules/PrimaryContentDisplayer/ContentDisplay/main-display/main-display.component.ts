@@ -14,12 +14,12 @@ export class MainDisplayComponent implements OnInit, OnDestroy {
 
   @Input() current: string;
   @Input() linkList: LinkList[];
-  @Input() queryParamsHandling: string = '';
+  @Input() queryParamsHandling = '';
 
   constructor(private generalcollectserv: GeneralcollectionService) { }
 
   ngOnInit() {
-    window.scroll(0, 0);  
+    window.scroll(0, 0);
   }
 
   ngOnDestroy() {

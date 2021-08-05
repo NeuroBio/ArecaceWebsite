@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild, ElementRef, QueryList, ViewChildren }  from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ElementRef, QueryList, ViewChildren } from '@angular/core';
 import { FocusKeyManager } from '@angular/cdk/a11y';
 
 import { LinkListComponent } from '../../../SmallComponents/LinkList/link-list/link-list.component';
@@ -20,8 +20,8 @@ export class DropDownComponent implements OnInit {
       new LinkListElement('tester 3', 'tester3')
     ]),
     new LinkList('defaultSub', [new LinkListElement('subtester 1', 'subtester1')]) ];
-  @Input() current: string = 'tester2';
-  @Input() queryParamsHandling: string = '';
+  @Input() current = 'tester2';
+  @Input() queryParamsHandling = '';
 
   revealArray: boolean[] = [];
   @ViewChild('linkListHolder', { static: true }) linkListHolder: ElementRef;
@@ -43,7 +43,7 @@ export class DropDownComponent implements OnInit {
 
   ngAfterViewInit() {
     this.keyManager = new FocusKeyManager(this.items)
-    .withVerticalOrientation();
+      .withVerticalOrientation();
     this.onSelect(this.initialLabel);
   }
 

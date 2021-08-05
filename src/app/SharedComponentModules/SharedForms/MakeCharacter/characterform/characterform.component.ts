@@ -130,7 +130,7 @@ export class CharacterFormComponent implements OnInit, OnDestroy {
       this.uploadpreviewserv.assignOldLinks(this.Form.controls.Links.value);
     }
   }
-  
+
   processForm() {
     const MainImageData = this.uploadpreviewserv.mainsData;
     const ThumbImageData = this.uploadpreviewserv.thumbsData;
@@ -156,12 +156,12 @@ export class CharacterFormComponent implements OnInit, OnDestroy {
         }
       }
     }
-   
+
     if (!Final.FirstName || !Final.LastName) {
       return this.fetcher.assignActiveFormData(
         new CRUDdata(true, 'Characters require a first and last name!'));
     }
-    
+
     Final.References = this.createReference(Final.ReferenceIDs, Final.FirstName);
 
     for (let i = 0; i < Final.References.length; i++) {
@@ -175,9 +175,9 @@ export class CharacterFormComponent implements OnInit, OnDestroy {
     const BioPicMain = this.uploadpreviewserv.mainsData[0];
     const BioPicThumb = this.uploadpreviewserv.thumbsData[0];
     const RefsMain = Object.assign([], this.uploadpreviewserv.mainsData);
-    RefsMain.splice(0,1);
+    RefsMain.splice(0, 1);
     const RefsThumb = Object.assign([], this.uploadpreviewserv.thumbsData);
-    RefsThumb.splice(0,1);
+    RefsThumb.splice(0, 1);
 
     Final.SourceAbilitiesFormatted = this.FormatSA(Final);
     Final.RelationsFormatted = this.FormatRelat(Final);
@@ -215,11 +215,11 @@ export class CharacterFormComponent implements OnInit, OnDestroy {
     this.uploadpreviewserv.add();
   }
 
-  //Processing functions
+  // Processing functions
   populateSAbilities() {
-    let abilityArray:FormArray = new FormArray([]);
-    for (let ability of this.DropDowns.SAbilities) {
-    abilityArray.push( this.fb.group({Ability: ability, Known: false}) );
+    const abilityArray: FormArray = new FormArray([]);
+    for (const ability of this.DropDowns.SAbilities) {
+      abilityArray.push( this.fb.group({ Ability: ability, Known: false }) );
     }
     return abilityArray;
   }
@@ -247,8 +247,8 @@ export class CharacterFormComponent implements OnInit, OnDestroy {
       this.noReferences = false;
     } else {
       (<FormArray>this.Form.controls.ReferenceIDs)
-        .removeAt(this.Form.controls.ReferenceIDs.value.length-1);
-      this.uploadpreviewserv.remove(this.Form.controls.ReferenceIDs.value.length-1);
+        .removeAt(this.Form.controls.ReferenceIDs.value.length - 1);
+      this.uploadpreviewserv.remove(this.Form.controls.ReferenceIDs.value.length - 1);
       if (this.uploadpreviewserv.mainsData.length === 1) {
         this.addReferenceButton.nativeElement.focus();
         this.noReferences = true;
@@ -256,8 +256,8 @@ export class CharacterFormComponent implements OnInit, OnDestroy {
     }
   }
 
-  FormatSA(data:any) {
-    let abilities:string[] = [];
+  FormatSA(data: any) {
+    const abilities: string[] = [];
     data.SourceAbilities.forEach(ability => {
       if (ability.Known) {
         abilities.push(ability.Ability);
@@ -275,8 +275,8 @@ export class CharacterFormComponent implements OnInit, OnDestroy {
     return final;
   }
 
-  FormatRelat(data:any) {
-    let relations:string[] = [];
+  FormatRelat(data: any) {
+    let relations: string[] = [];
     data.Relations.forEach(relation => 
       relations.push(`${relation.RelationName}-${relation.Relationship}`) );
 
@@ -289,7 +289,7 @@ export class CharacterFormComponent implements OnInit, OnDestroy {
 
   combineEvents(full: string[], thumb: string[]) {
     if (thumb.length > 0) {
-      return thumb.map((thumb,i) => [thumb, full[i]])
+      return thumb.map((thumb, i) => [thumb, full[i]])
         .reduce(function(a, b) {
           return a.concat(b); });
     } else {
@@ -297,9 +297,9 @@ export class CharacterFormComponent implements OnInit, OnDestroy {
     }
   }
 
-  refNames(imageEvents: any[], name:string) {
-    let imgNames: string[] = [];
-    for (let event in imageEvents) {
+  refNames(imageEvents: any[], name: string) {
+    const imgNames: string[] = [];
+    for (let event of imageEvents) {
       imgNames.push(`CharacterBios/${name}-Ref${event}-thumb`);
       imgNames.push(`CharacterBios/${name}-Ref${event}-full`);
     }
@@ -314,7 +314,7 @@ export class CharacterFormComponent implements OnInit, OnDestroy {
     }
 
     let references: any[] = [];
-    for (let index in ids) {
+    for (let index of ids) {
       references.push({
         ID: ids[index].Ref.split(' ').join(''),
         Name: `${name} ${ids[index].Ref}`,
@@ -376,5 +376,5 @@ export class CharacterFormComponent implements OnInit, OnDestroy {
     this.toneColor2 = this.getDropData('Ethnicity', 'id', 'Ethnicity2', 'hex');
     this.activeRegion = this.getDropData('countries', 'id', 'Country', 'terr');
   }
-  
+
 }

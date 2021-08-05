@@ -1,18 +1,20 @@
 import { DateInfo } from 'src/app/Classes/ArecacenDates';
 
-export class CountryData{
+export class CountryData {
     id: string;
     terr: string[];
 }
 
-export class EthnicityData{
+export class EthnicityData {
     id: string;
     hex: string;
 }
 
 export class UploadCharacterDrops {
-    class: string[] = ['Source Magician','Sourceless', 'Esarian-Red',
-    'Esarian-Blue', 'Esarian-Green', 'Wolf Type', 'Midmorph'];
+    class: string[] = [
+        'Source Magician','Sourceless', 'Esarian-Red',
+        'Esarian-Blue', 'Esarian-Green', 'Wolf Type', 'Midmorph'
+    ];
 
     countries: CountryData[] = [
             { id: 'Cathesten', terr: [
@@ -22,18 +24,18 @@ export class UploadCharacterDrops {
             ]
         },
         {
-            id:'Eriasten', terr: [
+            id: 'Eriasten', terr: [
                 'Opunti', 'Delonix', 'The Refugee Camps'
             ]
         }, 
         {
-            id:'Escholzian', terr: [
+            id: 'Escholzian', terr: [
                 'The Chloris Plains', 'The Dead Volcanoes', 'East Greya', 'West Greya',
                 'The Mertensian Peaks', 'The Winter Rainforest'
             ]
         },
         {
-            id:'Salixen', terr:['Alliar', 'Allium', 'Anthus', 'Tanacet', 'Urtica']
+            id: 'Salixen', terr:['Alliar', 'Allium', 'Anthus', 'Tanacet', 'Urtica']
         }
     ];
     

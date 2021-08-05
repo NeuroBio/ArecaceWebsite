@@ -17,14 +17,14 @@ export class FireBaseService {
     private database: AngularFirestore
   ) { }
 
-  returnImage(url: string): Observable<string>{
+  returnImage(url: string): Observable<string> {
     return this.storage.ref(url).getDownloadURL();
   }
 
   returnDocument(path: string): Observable<any> {
     return this.database.doc<any>(path).valueChanges();
   }
-  
+
   returnCollect(path: string): Observable<any[]> {
     return this.database.collection<any[]>(path).valueChanges();
   }
@@ -33,7 +33,7 @@ export class FireBaseService {
     return this.database.collection<any>(path).add(newDoc);
   }
 
-  editDocument(newDoc: any, path: string, key: string){
+  editDocument(newDoc: any, path: string, key: string) {
     return this.database.collection(path).doc(key).set(newDoc);
   }
 

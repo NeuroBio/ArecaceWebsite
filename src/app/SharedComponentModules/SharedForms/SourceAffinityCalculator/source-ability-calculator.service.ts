@@ -89,12 +89,12 @@ export class SourceAbilityCalculatorService {
     Abilities.forEach((ability, i) => {
       costs.push([]);
       if (i === 0) {
-        mastery.push(ability.Mastery+1);
-        for(let j=0; j < mastery[0]; j++) {
+        mastery.push(ability.Mastery + 1);
+        for(let j = 0; j < mastery[0]; j++) {
           costs[i].push(1);
         }
       } else {
-        let partials =  Array<number>(i);
+        let partials = Array<number>(i);
         for (let j = 0; j < ability.Mastery + 1; j++) {
           for (let k = 0; k < partials.length; k++) {
             partials[k] = (this.Save[j] + .025 * (mastery[k])) / (2 ** (k));
@@ -103,7 +103,7 @@ export class SourceAbilityCalculatorService {
           mastery.push(ability.Mastery + 1);
         }
       }
-    })
+    });
     return costs;
   }
 
@@ -114,14 +114,14 @@ export class SourceAbilityCalculatorService {
 
   getInteractionCost(CostStructure: any[]) {
     CostStructure.forEach((saclass, i) => {
-      if (i === 0){
+      if (i === 0) {
         saclass.BufferCost = 0;
       } else {
         let interactions = new Array(i);
-        for(let j = 0; j < i; j++){
+        for (let j = 0; j < i; j++){
           interactions.push(
             this.Related[saclass.SAClass][CostStructure[j].SAClass]
-            *CostStructure[j].Level);
+            * CostStructure[j].Level);
         }
         saclass.BufferCost = interactions.reduce((a, b) => a * b, 1) / 100;
       }
@@ -140,30 +140,30 @@ export class SourceAbilityCalculatorService {
     CostStructure.forEach((saclass) => {
       if (saclass.SAClass === 'Reconstruction') {
         saclass.Abilities.forEach((ability, j) => {
-          if(ability.Ability == 'Metamorph') {
+          if (ability.Ability == 'Metamorph') {
             saclass.Discounts[j] = saclass.Discounts[j].map(c => c -= eGenes * .8);
           }
         });
       } else if(saclass.SAClass === 'ConfigurationManipulation') {
         saclass.Abilities.forEach((ability, j) => {
-          if(ability.Ability == 'Connection') {
+          if (ability.Ability == 'Connection') {
             saclass.Discounts[j] = saclass.Discounts[j].map(c => c -= cGenes * .25);
           }
-        })
+        });
       }
     });
     return CostStructure;
   }
 
   calculateCost(CostStructure) {
-    let Cost = 0;
+    let cost = 0;
     CostStructure.forEach(saclass => {
-      saclass.Discounts.forEach((cost, i) => {
-        cost.forEach((c, j) => {
-          Cost += this.SAData[saclass.Abilities[i].Ability].Costs[j] * c
+      saclass.Discounts.forEach((sacost, i) => {
+        sacost.forEach((c, j) => {
+          cost += this.SAData[saclass.Abilities[i].Ability].Costs[j] * c;
         })
       })
     });
-    return  Math.round(Cost * 100) / 100;
+    return  Math.round(cost * 100) / 100;
   }
 }

@@ -26,7 +26,7 @@ export class CacheService {
     this.Cache[type] = new BehaviorSubject<any[]>(undefined);
     return new Promise ((resolve) => {
       return this.firebaseserv.returnCollect(path)
-        .subscribe(collect => 
+        .subscribe(collect =>
           resolve(this.Cache[type].next(collect)) );
     });
   }

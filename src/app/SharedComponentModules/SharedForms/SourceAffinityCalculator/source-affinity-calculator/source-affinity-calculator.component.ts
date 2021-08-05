@@ -153,7 +153,7 @@ export class SourceAffinityCalculatorComponent implements OnInit, OnDestroy {
     this.show = !this.show;
   }
 
-  getRank(cost: number, eGenes:number = 0) {
+  getRank(cost: number, eGenes: number = 0) {
     if (cost < 5 - 5 * eGenes) { // 0
       return 'Sourceless';
     } else if (cost < 10 - 5 * eGenes) { // 5

@@ -8,7 +8,7 @@ import { GlobalVarsService } from 'src/app/GlobalServices/global-vars.service';
 })
 export class OptionsComponent implements OnInit {
 
-  @Input() linkList: string[][][] = [ 
+  @Input() linkList: string[][][] = [
     [
       ['tester 1', 'tester1'], 
       ['tester 2', 'tester2'],
@@ -18,8 +18,8 @@ export class OptionsComponent implements OnInit {
         ['subtester 1', 'subtester1']
       ]
     ];
-  @Input() current: string = 'tester2';
-  @Input() queryParamsHandling: string = '';
+  @Input() current = 'tester2';
+  @Input() queryParamsHandling = '';
 
   width: any;
   mobile: boolean;
@@ -35,5 +35,5 @@ export class OptionsComponent implements OnInit {
   @HostListener('window:resize') 
   onResize() {
     this.width = window.innerWidth;
-    }
+  }
 }

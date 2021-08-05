@@ -1,7 +1,5 @@
 import { AbilityMastery } from '../SharedComponentModules/SharedForms/SourceAffinityCalculator/SourceAbilityData';
-import { formatDate } from '@angular/common'
-import { SliderService } from 'src/app/SharedComponentModules/SmallComponents/slider/slider.service';
-
+import { formatDate } from '@angular/common';
 
 export class GeneralMetaData {
     ID: string;
@@ -45,38 +43,38 @@ export class ChapterMetaData {
 }
 
 export class CharacterMetaData {
-    ID: string = '';
-    FirstName: string = '';
-    LastName: string = '';    
-    SMClass: string = 'Source Magician';
-    Occupation: string = '';
-    Country: string = 'Escholzian';
-    Territory: string = 'The Chloris Plains';
-    City: string = '';
-    Ethnicity1: string = 'Hns';
-    Ethnicity2: string = 'Hns';
-    Age: number = 0;
-    Year: number = 283;
-    Era: string ="DE";
-    Qt: string = 'Qt1-1';
-    Day: number = 1;
-    Zodiac: string = 'The Engineer';
-    Ft: number = 0;
-    Inch: number = 0;
-    Cm: number = 0;
-    DistinguishingMarks: string = '';
-    Personality: string = '';
-    Philosophy: string = '';
-    MotivationsGoals: string = '';
-    Strengths: string = '';
-    Weaknesses: string = '';
+    ID = '';
+    FirstName = '';
+    LastName = '';
+    SMClass = 'Source Magician';
+    Occupation = '';
+    Country = 'Escholzian';
+    Territory = 'The Chloris Plains';
+    City = '';
+    Ethnicity1 = 'Hns';
+    Ethnicity2 = 'Hns';
+    Age = 0;
+    Year = 283;
+    Era = 'DE';
+    Qt = 'Qt1-1';
+    Day = 1;
+    Zodiac = 'The Engineer';
+    Ft = 0;
+    Inch = 0;
+    Cm = 0;
+    DistinguishingMarks = '';
+    Personality = '';
+    Philosophy = '';
+    MotivationsGoals = '';
+    Strengths = '';
+    Weaknesses = '';
     SourceAbilities: string;
     Unique: string;
     SourceAbilitiesFormatted: string;
     Relations: string;
     RelationsFormatted: string;
-    BriefBackground: string = '';
-    FullBackground: string = '';
+    BriefBackground = '';
+    FullBackground = '';
     Links: string[] = [];
     ReferenceIDs: string[] = [];
     References: any[] = [];
@@ -94,10 +92,12 @@ export class CRUDdata {
     TextBlob: any;
     OldTextPath: string;
 
-    constructor(abort: boolean, abortMessage: string = '', meta: any = undefined,
-                newImgLinks: string[] = [], imageBlobs: any[] = [],
-                oldImgLinks: string[] = [], newTextPath: string = undefined,
-                textBlob: any = undefined, oldTextpath: string = undefined) {
+    constructor(
+        abort: boolean, abortMessage: string = '', meta: any = undefined,
+        newImgLinks: string[] = [], imageBlobs: any[] = [],
+        oldImgLinks: string[] = [], newTextPath: string = undefined,
+        textBlob: any = undefined, oldTextpath: string = undefined
+    ) {
 
         this.Abort = abort;
         this.AbortMessage = abortMessage;
@@ -187,7 +187,7 @@ export class SurveyQuestion {
     Question: string;
     Answers: string[];
 
-    constructor(q:string, a: string[]) {
+    constructor(q: string, a: string[]) {
         this.Question = q;
         this.Answers = a;
     }
@@ -208,8 +208,10 @@ export class SurveyData {
     ID: string;
     Name: string;
 
-    constructor(q: SurveyQuestion[], r: object[][], o: SurveyOutcome[],
-                m: any, id: string, name: string) {
+    constructor(
+        q: SurveyQuestion[], r: object[][], o: SurveyOutcome[],
+        m: any, id: string, name: string
+    ) {
         this.Questions = q;
         this.Results = r;
         this.Outcomes = o;
@@ -246,4 +248,3 @@ export class User {
         this.accountCreated = formatDate(new Date(), 'yyyy-MM-dd, HH:mm', 'en');
     }
 }
-  
