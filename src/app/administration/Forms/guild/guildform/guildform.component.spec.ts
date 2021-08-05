@@ -7,6 +7,7 @@ import { FormBuilder } from '@angular/forms';
 import { environment } from 'src/environments/environment';
 
 import { GuildFormComponent } from './guildform.component';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('GuildFormComponent', () => {
   let component: GuildFormComponent;
@@ -16,6 +17,7 @@ describe('GuildFormComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ GuildFormComponent ],
       imports: [
+        HttpClientTestingModule,
         AngularFireModule.initializeApp(environment.firebase),
       ],
       providers: [

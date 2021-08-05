@@ -1,8 +1,11 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireStorage } from '@angular/fire/storage';
+import { FormBuilder } from '@angular/forms';
+import { RouterTestingModule } from '@angular/router/testing';
 import { environment } from 'src/environments/environment';
 
 import { UserInfoComponent } from './user-info.component';
@@ -15,9 +18,12 @@ describe('UserInfoComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ UserInfoComponent ],
       imports: [
+        HttpClientTestingModule,
+        RouterTestingModule,
         AngularFireModule.initializeApp(environment.firebase),
       ],
       providers: [
+        FormBuilder,
         AngularFireAuth,
         AngularFireStorage,
         AngularFirestore

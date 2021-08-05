@@ -4,6 +4,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { FormBuilder } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { environment } from 'src/environments/environment';
 
 import { SurveyDisplayComponent } from './survey-display.component';
@@ -20,6 +21,7 @@ describe('SurveyDisplayComponent', () => {
       ],
       providers: [
         FormBuilder,
+        ActivatedRoute,
         AngularFireAuth,
         AngularFireStorage,
         AngularFirestore

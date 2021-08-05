@@ -4,6 +4,7 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireStorage } from '@angular/fire/storage';
+import { RouterTestingModule } from '@angular/router/testing';
 import { environment } from 'src/environments/environment';
 
 import { StoryResolver1Service } from './storyresolver1.service';
@@ -12,6 +13,7 @@ describe('StoryResolver1Service', () => {
   beforeEach(() => TestBed.configureTestingModule({ 
     imports: [
       HttpClientTestingModule,
+      RouterTestingModule,
       AngularFireModule.initializeApp(environment.firebase),
     ],
     providers: [

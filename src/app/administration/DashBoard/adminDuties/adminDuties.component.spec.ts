@@ -1,3 +1,4 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuth } from '@angular/fire/auth';
@@ -15,6 +16,7 @@ describe('AdminDutiesComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ AdminDutiesComponent ],
       imports: [
+        HttpClientTestingModule,
         AngularFireModule.initializeApp(environment.firebase),
       ],
       providers: [
