@@ -1,5 +1,5 @@
-import { Component, OnInit, OnDestroy }       from '@angular/core';
-import { CRUDcontrollerService }              from '../../services/CRUDcontroller.service';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { CRUDcontrollerService } from '../../services/CRUDcontroller.service';
 
 @Component({
   selector: 'app-pages',

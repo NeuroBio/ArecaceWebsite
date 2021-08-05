@@ -75,7 +75,7 @@ export class AuthService {
         this.updateUserData(credential.user, false,
                             credential.additionalUserInfo.isNewUser)) );
 
-    } else { //simple login!
+    } else { // simple login!
       return this.authorize.auth.signInWithPopup(provider)
       .then((credential) =>
         this.updateUserData(credential.user, false,

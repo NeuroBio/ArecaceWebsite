@@ -108,7 +108,7 @@ export class ImageResizerService {
             URLi = canvas.toDataURL();
             return resolve(URLi);
         }, 10);
-      }
+      };
       return img.src = URL.createObjectURL(file);
     });
 
@@ -164,7 +164,7 @@ export class ImageResizerService {
 //           ty = sy * scale; // y src position within target
 //           tY = 0 | ty;     // rounded : target pixel's y
 //           yIndex = 3 * tY * tw;  // line index within target array
-//           crossY = (tY != (0 | ty + scale)); 
+//           crossY = (tY != (0 | ty + scale));
 //           if (crossY) { // if pixel is crossing botton target pixel
 //               wy = (tY + 1 - ty); // weight of point within target pixel
 //               nwy = (ty + scale - tY - 1); // ... within y+1 target pixel
@@ -240,7 +240,7 @@ export class ImageResizerService {
 //                   tBuffer[tIndex + 3 * tw + 4] += sG * nw;
 //                   tBuffer[tIndex + 3 * tw + 5] += sB * nw;
 //               }
-//           } // end for sx 
+//           } // end for sx
 //       } // end for sy
 
 //       // create result canvas
@@ -251,7 +251,7 @@ export class ImageResizerService {
 //       var imgRes = resCtx.getImageData(0, 0, tw, th);
 //       var tByteBuffer = imgRes.data;
 //       // convert float32 array into a UInt8Clamped Array
-//       var pxIndex = 0; //  
+//       var pxIndex = 0; //
 //       for (sIndex = 0, tIndex = 0; pxIndex < tw * th; sIndex += 3, tIndex += 4, pxIndex++) {
 //           tByteBuffer[tIndex] = Math.ceil(tBuffer[sIndex]);
 //           tByteBuffer[tIndex + 1] = Math.ceil(tBuffer[sIndex + 1]);
@@ -292,12 +292,12 @@ export class ImageResizerService {
 //         getImageData(0, 0, sw, sh).data; // source buffer 8 bit rgba
 //         var tBuffer = new Float32Array(3 * tw * th); // target buffer Float32 rgb
 //         var sR = 0, sG = 0,  sB = 0, sA = 0; // source's current point r,g,b
-  
+
 //         for (sy = 0; sy < sh; sy++) {
 //             ty = sy * scale; // y src position within target
 //             tY = 0 | ty;     // rounded : target pixel's y
 //             yIndex = 3 * tY * tw;  // line index within target array
-//             crossY = (tY != (0 | ty + scale)); 
+//             crossY = (tY != (0 | ty + scale));
 //             if (crossY) { // if pixel is crossing botton target pixel
 //                 wy = (tY + 1 - ty); // weight of point within target pixel
 //                 nwy = (ty + scale - tY - 1); // ... within y+1 target pixel
@@ -372,9 +372,9 @@ export class ImageResizerService {
 //                     tBuffer[tIndex + 3 * tw + 4] += sG * nw;
 //                     tBuffer[tIndex + 3 * tw + 5] += sB * nw;
 //                 }
-//             } // end for sx 
+//             } // end for sx
 //         } // end for sy
-  
+
 //         // create result canvas
 //         var resCV = document.createElement('canvas');
 //         resCV.width = tw;
@@ -383,7 +383,7 @@ export class ImageResizerService {
 //         var imgRes = resCtx.getImageData(0, 0, tw, th);
 //         var tByteBuffer = imgRes.data;
 //         // convert float32 array into a UInt8Clamped Array
-//         var pxIndex = 0; //  
+//         var pxIndex = 0; //
 //         for (sIndex = 0, tIndex = 0; pxIndex < tw * th; sIndex += 3, tIndex += 4, pxIndex++) {
 //             tByteBuffer[tIndex] = Math.ceil(tBuffer[sIndex]);
 //             tByteBuffer[tIndex + 1] = Math.ceil(tBuffer[sIndex + 1]);

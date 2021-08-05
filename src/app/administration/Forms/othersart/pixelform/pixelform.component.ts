@@ -1,16 +1,16 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { FormGroup, FormBuilder }       from '@angular/forms';
+import { FormGroup, FormBuilder } from '@angular/forms';
 
-import { Subscription }                 from 'rxjs';
+import { Subscription } from 'rxjs';
 
-import { CRUDcontrollerService }        from 'src/app/administration/services/CRUDcontroller.service';
-import { QuickAssign }                  from 'src/app/GlobalServices/commonfunctions.service';
-import { UploadPreviewService }         from 'src/app/SharedComponentModules/SharedForms/UploadPreview//upload-preview.service';
-import { FetchService }                 from 'src/app/GlobalServices/fetch.service';
+import { CRUDcontrollerService } from 'src/app/administration/services/CRUDcontroller.service';
+import { QuickAssign } from 'src/app/GlobalServices/commonfunctions.service';
+import { UploadPreviewService } from 'src/app/SharedComponentModules/SharedForms/UploadPreview//upload-preview.service';
+import { FetchService } from 'src/app/GlobalServices/fetch.service';
 
-import { UploadPreviewSettings }        from 'src/app/SharedComponentModules/SharedForms/UploadPreview//uploadpreviewclass';
-import { OthersArt }                    from 'src/app/Classes/ContentClasses';
-import { CRUDdata }                     from 'src/app/Classes/ContentClasses';
+import { UploadPreviewSettings } from 'src/app/SharedComponentModules/SharedForms/UploadPreview//uploadpreviewclass';
+import { OthersArt } from 'src/app/Classes/ContentClasses';
+import { CRUDdata } from 'src/app/Classes/ContentClasses';
 
 @Component({
   selector: 'app-pixelform',
@@ -56,31 +56,32 @@ export class PixelformComponent implements OnInit, OnDestroy {
         Allowed: 'false'
     });
   }
-  
+
   assignFormData(editFormData: any) {
     this.onReset();
-    if(editFormData) {
+    if (editFormData) {
       this.Form = this.qa.assign(this.Form, editFormData);
       this.Form.patchValue({Allowed: editFormData.Allowed === true ? 'true' : 'false'});
       this.uploadpreviewserv.assignOldLinks(this.Form.controls.Links.value);
     }
   }
 
-  processForm() {    
+  processForm() {
     const mainFile = this.uploadpreviewserv.mainsData[0];
-    //Incomplete Form
-    if((mainFile === undefined)
+    // Incomplete Form
+    if ((mainFile === undefined)
       && this.Form.controls.Links.value === '') {
       return this.controller.activeFormData.next(
         new CRUDdata(true, 'Pixel files require images.'));
     }
-    
-    //complete form
+
+    // complete form
     const Final: OthersArt = Object.assign({}, this.Form.value);
-    Final.ID = `${this.Form.controls.Name.value.split(' ').join('')}-by-${this.Form.controls.Artist.value.split(' ').join('')}`
+    Final.ID = `${this.Form.controls.Name.value.split(' ')
+      .join('')}-by-${this.Form.controls.Artist.value.split(' ').join('')}`;
     Final.ID = Final.ID.replace('\'', '');
-    
-    Final.Allowed = this.Form.value.Allowed === "true";
+
+    Final.Allowed = this.Form.value.Allowed === 'true';
 
     return this.controller.activeFormData.next(
       new CRUDdata(false, '', Final,

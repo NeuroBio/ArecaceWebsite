@@ -6,7 +6,7 @@ describe('MessageresolverService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: MessageresolverService = TestBed.get(MessageresolverService);
+    const service: MessageresolverService = TestBed.inject(MessageresolverService);
     expect(service).toBeTruthy();
   });
 });

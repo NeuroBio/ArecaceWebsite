@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, Router, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
-  
+
 import { Observable } from 'rxjs';
 import { take, map } from 'rxjs/operators';
 
@@ -12,7 +12,7 @@ import { User } from 'src/app/Classes/ContentClasses';
 })
 
 export class AuthGuard implements CanActivate {
-  
+
   constructor(private auth: AuthService,
               private router: Router) { }
 
@@ -22,12 +22,12 @@ export class AuthGuard implements CanActivate {
     return this.checkAdmin(url);
   }
 
-  checkAdmin(url:string): Observable<boolean> {
+  checkAdmin(url: string): Observable<boolean> {
     return this.auth.user.pipe(
       take(1),
-      map((user:User) => {
+      map((user: User) => {
         if (user) {
-            if (user.Admin) { return true };
+            if (user.Admin) { return true; }
         }
         this.auth.redirectUrl = url;
         this.router.navigate(['/kArAAdministrativeUpload']);

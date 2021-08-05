@@ -1,14 +1,14 @@
-import { Component, OnInit, OnDestroy}  from '@angular/core';
-import { FormBuilder, FormGroup }       from '@angular/forms';
-import { Subscription }                 from 'rxjs';
+import { Component, OnInit, OnDestroy} from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { Subscription } from 'rxjs';
 
-import { CRUDcontrollerService }        from '../../../services/CRUDcontroller.service'
-import { ExtrasMetaData }               from 'src/app/Classes/ContentClasses';
-import { QuickAssign }                  from 'src/app/GlobalServices/commonfunctions.service';
-import { UploadPreviewService }         from 'src/app/SharedComponentModules/SharedForms/UploadPreview//upload-preview.service';
-import { UploadPreviewSettings }        from 'src/app/SharedComponentModules/SharedForms/UploadPreview//uploadpreviewclass';
-import { FetchService }                 from 'src/app/GlobalServices/fetch.service';
-import { CRUDdata }                     from 'src/app/Classes/ContentClasses';
+import { CRUDcontrollerService } from '../../../services/CRUDcontroller.service';
+import { ExtrasMetaData } from 'src/app/Classes/ContentClasses';
+import { QuickAssign } from 'src/app/GlobalServices/commonfunctions.service';
+import { UploadPreviewService } from 'src/app/SharedComponentModules/SharedForms/UploadPreview//upload-preview.service';
+import { UploadPreviewSettings } from 'src/app/SharedComponentModules/SharedForms/UploadPreview//uploadpreviewclass';
+import { FetchService } from 'src/app/GlobalServices/fetch.service';
+import { CRUDdata } from 'src/app/Classes/ContentClasses';
 @Component({
   selector: 'app-extrasform',
   templateUrl: './extrasform.component.html',
@@ -44,16 +44,16 @@ export class ExtrasFormComponent implements OnInit, OnDestroy {
 
   createForm() {
     return this.fb.group({
-        Name:'',
+        Name: '',
         Links: '',
-        Description:'',
-        Date:''
+        Description: '',
+        Date: ''
     });
   }
-  
+
   assignFormData(editFormData: any) {
     this.onReset();
-    if(editFormData) {
+    if (editFormData) {
       this.Form = this.qa.assign(this.Form, editFormData);
       this.uploadpreviewserv.assignOldLinks(this.Form.controls.Links.value);
     }
@@ -63,15 +63,15 @@ export class ExtrasFormComponent implements OnInit, OnDestroy {
     const mainFile = this.uploadpreviewserv.mainsData[0];
     const thumbFile = this.uploadpreviewserv.thumbsData[0];
 
-    //Incomplete Form
-    if((thumbFile === undefined
+    // Incomplete Form
+    if ((thumbFile === undefined
       || mainFile === undefined)
       && this.Form.controls.Links.value === '') {
       return this.controller.activeFormData.next(
         new CRUDdata(true, 'Misc files require full and thumb images.'));
     }
 
-    const Final:ExtrasMetaData = Object.assign({}, this.Form.value);
+    const Final: ExtrasMetaData = Object.assign({}, this.Form.value);
     Final.ID = this.Form.controls.Name.value.split(' ').join('');
     Final.ID = Final.ID.replace('\'', '');
 

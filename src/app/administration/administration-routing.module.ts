@@ -37,7 +37,7 @@ const AdminRoutes: Routes = [
       { path: 'Dash', component: AdminDutiesComponent,
       canActivate: [AuthGuard],
       children: [
-        { path: 'Content', component:ContentComponent,
+        { path: 'Content', component: ContentComponent,
         children: [
           { path: '', redirectTo: 'characters', pathMatch: 'full' },
           { path: 'characters', component: CharacterComponent },
@@ -59,7 +59,7 @@ const AdminRoutes: Routes = [
           { path: 'sourceaffinity', component: SourceAffinityComponent },
           { path: 'notes', component: LooseNotesFormComponent }
         ] },
-        { path: 'Pages', component:PagesComponent,
+        { path: 'Pages', component: PagesComponent,
         children: [
           { path: '', redirectTo: 'home', pathMatch: 'full'},
           { path: 'home', component: WebsiteTextComponent },
@@ -78,7 +78,7 @@ const AdminRoutes: Routes = [
          ]
       },
       { path: 'Nomadic', component: LanguageComponent },
-       {path:'Messages', component: MessageComponent,
+      { path:'Messages', component: MessageComponent,
         resolve: { MessageresolverService } }
       ]
     }

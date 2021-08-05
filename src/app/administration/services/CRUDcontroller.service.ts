@@ -99,40 +99,40 @@ export class CRUDcontrollerService {
 
   // Key upload/download functions
   onSubmit() {
-    this.deActivateButtons()
+    this.deActivateButtons();
     this.message.next('Processing...');
 
     this.triggerProcess.next();
     return this.activeFormData.pipe(take(1))
-    .subscribe((data:CRUDdata) => {
-      
+    .subscribe((data: CRUDdata) => {
+
       // submit button hit with invalid form.
       if (data.Abort) {
-        return this.throwError({ stage: 'Processing', message: data.AbortMessage })
+        return this.throwError({ stage: 'Processing', message: data.AbortMessage });
       }
 
-      this.message.next('Submitting...');console.log('images');
+      this.message.next('Submitting...');
 // IMAGES
       this.crud.uploadImages(data.NewImageLinks, data.ImageBlobs)
 // TEXT
       .then(links => { console.log('Text');
         data.MetaData = this.checkLinks(data.MetaData, links);
-        return this.crud.uploadStory(data.NewTextPath, data.TextBlob)
-//META DATA
+        return this.crud.uploadStory(data.NewTextPath, data.TextBlob);
+// META DATA
       }).then(link => { console.log("meta");
-        if("StoryLink" in data.MetaData) {
+        if ('StoryLink' in data.MetaData) {
           data.MetaData.StoryLink = link;
         }
         // this.newestCue.updateCue(
         //   Object.assign({}, data.MetaData),
         //   this.itemType.value, 'Created');
         return this.crud.uploadItem(data.MetaData, this.firePaths[this.itemType.value].Fire);
-//POST UPLOAD
+// POST UPLOAD
       }).then(() => {
         this.itemToEdit.next(undefined);
         this.message.next('Submitted!');
         this.reActivateButtons();
-//ERRORS
+// ERRORS
       }).catch(err => {
         console.log(data.MetaData);
         this.throwError(err);
@@ -142,51 +142,51 @@ export class CRUDcontrollerService {
 
   async onEdit(all: boolean = false): Promise<any> {
     this.deActivateButtons();
-    this.message.next("Processing...");
-    let CRUDdata: CRUDdata;
+    this.message.next('Processing...');
+    let Cdata: CRUDdata;
 
     this.triggerProcess.next();
     return this.activeFormData.pipe(take(1)).toPromise()
     .then(data => {
-      console.log("images");
-      if(data.Abort) {
+      console.log('images');
+      if (data.Abort) {
         this.throwError({ stage: 'Processing', message: data.AbortMessage });
         return Promise.reject();
       }
 
-//IMAGES
-      this.message.next("Editing...");
-      CRUDdata = data;
-      return this.crud.editImages(CRUDdata.NewImageLinks,
-        CRUDdata.ImageBlobs, CRUDdata.OldImageLinks);
-//TEXT
+// IMAGES
+      this.message.next('Editing...');
+      Cdata = data;
+      return this.crud.editImages(Cdata.NewImageLinks,
+        Cdata.ImageBlobs, Cdata.OldImageLinks);
+// TEXT
     }).then(links => {
-      console.log("text");
-      CRUDdata.MetaData = this.checkLinks(CRUDdata.MetaData, links);
-      return this.crud.editStory(CRUDdata.NewTextPath,
-        CRUDdata.TextBlob, CRUDdata.OldTextPath);      
-//META DATA
-    }).then(link =>{
-      console.log("meta");
-      if ("StoryLink" in CRUDdata.MetaData) {
-        CRUDdata.MetaData.StoryLink = link;
+      console.log('text');
+      Cdata.MetaData = this.checkLinks(Cdata.MetaData, links);
+      return this.crud.editStory(Cdata.NewTextPath,
+        Cdata.TextBlob, Cdata.OldTextPath);
+// META DATA
+    }).then(link => {
+      console.log('meta');
+      if ('StoryLink' in Cdata.MetaData) {
+        Cdata.MetaData.StoryLink = link;
       }
         // this.newestCue.updateCue(
         //   Object.assign({}, CRUDdata.MetaData),
-        //   this.itemType.value, 'Edited');  
-      return this.crud.editItem(CRUDdata.MetaData,
+        //   this.itemType.value, 'Edited');
+      return this.crud.editItem(Cdata.MetaData,
               this.firePaths[this.itemType.value].Fire,
               this.itemToEdit.value.key);
-//POST UPLOAD
+// POST UPLOAD
     }).then(() => {
-      if(this.itemType.value !== 'website') {
+      if (this.itemType.value !== 'website') {
         this.itemToEdit.next(undefined);
       }
-      this.message.next("Edit successful!");
+      this.message.next('Edit successful!');
       this.reActivateButtons();
-//ERRORS
+// ERRORS
     }).catch(err => {
-      console.log(CRUDdata.MetaData)
+      console.log(Cdata.MetaData);
       this.throwError(err);
       if (all) {
         return Promise.reject();
@@ -195,16 +195,16 @@ export class CRUDcontrollerService {
   }
 
   onDelete() {
-    this.deActivateButtons()
+    this.deActivateButtons();
     this.message.next('Hold on, deleting...');
     const item = this.itemToEdit.value;
-    
+
     const links = [];
-    if ("Links" in item) {
+    if ('Links' in item) {
       item.Links.forEach(link => links.push(link));
     }
 
-    if ("StoryLink" in item) {
+    if ('StoryLink' in item) {
       links.push(item.StoryLink);
     }
 
@@ -214,7 +214,7 @@ export class CRUDcontrollerService {
     this.crud.deleteItem(links, this.firePaths[this.itemType.value].Fire, item.key)
     .then(() => {
         this.itemToEdit.next(undefined);
-        this.message.next('Delete successful!')
+        this.message.next('Delete successful!');
         this.reActivateButtons();
     }).catch(err => {
         this.throwError(err);
@@ -225,7 +225,7 @@ export class CRUDcontrollerService {
     this.deActivateButtons();
 
     return this.updateLoop(this.itemList.value).then(() => {
-      this.message.next("All entries updated!");
+      this.message.next('All entries updated!');
       this.reActivateButtons();
       }).catch(() => this.reActivateButtons());
   }

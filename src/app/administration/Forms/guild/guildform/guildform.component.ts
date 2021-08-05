@@ -1,16 +1,15 @@
-import { Component, OnInit, ViewChild,
-         OnDestroy, ElementRef }        from '@angular/core';
-import { FormBuilder, FormGroup }       from '@angular/forms';
-import { Subscription }                 from 'rxjs';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { Subscription } from 'rxjs';
 
-import { CRUDcontrollerService }        from '../../../services/CRUDcontroller.service';
-import { QuickAssign }                  from 'src/app/GlobalServices/commonfunctions.service';
-import { UploadPreviewService }         from 'src/app/SharedComponentModules/SharedForms/UploadPreview//upload-preview.service';
-import { FetchService }                 from 'src/app/GlobalServices/fetch.service';
+import { CRUDcontrollerService } from '../../../services/CRUDcontroller.service';
+import { QuickAssign } from 'src/app/GlobalServices/commonfunctions.service';
+import { UploadPreviewService } from 'src/app/SharedComponentModules/SharedForms/UploadPreview//upload-preview.service';
+import { FetchService } from 'src/app/GlobalServices/fetch.service';
 
-import { UploadPreviewSettings }        from 'src/app/SharedComponentModules/SharedForms/UploadPreview//uploadpreviewclass';
-import { GuildMetaData }                from 'src/app/Classes/ContentClasses';
-import { CRUDdata }                     from 'src/app/Classes/ContentClasses';
+import { UploadPreviewSettings } from 'src/app/SharedComponentModules/SharedForms/UploadPreview//uploadpreviewclass';
+import { GuildMetaData } from 'src/app/Classes/ContentClasses';
+import { CRUDdata } from 'src/app/Classes/ContentClasses';
 
 @Component({
   selector: 'app-guildform',
@@ -19,7 +18,7 @@ import { CRUDdata }                     from 'src/app/Classes/ContentClasses';
 })
 
 export class GuildFormComponent implements OnInit, OnDestroy {
-  
+
   Form: FormGroup;
   imageSettings = new UploadPreviewSettings([[undefined, undefined, '100MB'], [200, 600, '300KB']]);
   stream1: Subscription;
@@ -62,7 +61,7 @@ export class GuildFormComponent implements OnInit, OnDestroy {
 
   assignFormData(editFormData: any) {
     this.onReset();
-    if(editFormData) {
+    if (editFormData) {
       this.Form = this.qa.assign(this.Form, editFormData);
       this.uploadpreviewserv.assignOldLinks(this.Form.controls.Links.value);
     }
@@ -70,18 +69,18 @@ export class GuildFormComponent implements OnInit, OnDestroy {
 
   processForm() {
     const imageFile = this.uploadpreviewserv.mainsData[0];
-    //Incomplete Form
-    if(imageFile === undefined
+    // Incomplete Form
+    if (imageFile === undefined
       && this.Form.controls.Links.value === '') {
       return this.controller.activeFormData.next(
         new CRUDdata(true, 'Guild files require an insignia image.'));
     }
-    
-    //Complete Form
-    const Final:GuildMetaData = Object.assign({}, this.Form.value);
+
+    // Complete Form
+    const Final: GuildMetaData = Object.assign({}, this.Form.value);
     Final.ID = Final.GuildName.split(' ')[0];
-    if(Final.ID === 'The') {
-      Final.ID = 'DIA'
+    if (Final.ID === 'The') {
+      Final.ID = 'DIA';
     }
     return this.controller.activeFormData.next(
       new CRUDdata(false, '', Final,

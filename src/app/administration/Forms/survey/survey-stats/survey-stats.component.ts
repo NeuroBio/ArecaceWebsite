@@ -42,7 +42,7 @@ export class SurveyStatsComponent implements OnInit , OnDestroy {
 
     this.stream2 = this.controller.triggerProcess
       .subscribe(() => this.processForm());
-    
+
     this.stream3 = this.statsserv.surveys
       .subscribe(surveys => this.surveys = surveys);
   }
@@ -83,7 +83,7 @@ export class SurveyStatsComponent implements OnInit , OnDestroy {
       } else {
         Final[o.value.Name] = 0;
       }
-    })
+    });
     Final.ID = this.Form.value.ID;
     if (Final.ID === '') {
       return this.controller.activeFormData.next(
@@ -117,7 +117,7 @@ export class SurveyStatsComponent implements OnInit , OnDestroy {
     this.outcomes.controls.forEach(() =>
       this.outcomes.removeAt(this.outcomes.length - 1));
     this.surveys[index].Outcomes.forEach(o => {
-      this.addOutcome(true, 0, o)
+      this.addOutcome(true, 0, o);
     });
 
     this.Form.patchValue({ ID: this.surveys[index].ID });

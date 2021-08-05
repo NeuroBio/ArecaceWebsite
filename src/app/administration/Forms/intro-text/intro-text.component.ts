@@ -1,14 +1,14 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { FormBuilder }                  from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 
-import { Subscription, Subject }        from 'rxjs';
-import { takeUntil }                    from 'rxjs/operators';
+import { Subscription, Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
-import { CRUDcontrollerService }        from '../../services/CRUDcontroller.service';
-import { QuickAssign }                  from 'src/app/GlobalServices/commonfunctions.service';
+import { CRUDcontrollerService } from '../../services/CRUDcontroller.service';
+import { QuickAssign } from 'src/app/GlobalServices/commonfunctions.service';
 
-import { Intro }                        from 'src/app/Classes/WebsiteText';
-import { CRUDdata }                     from 'src/app/Classes/ContentClasses';
+import { Intro } from 'src/app/Classes/WebsiteText';
+import { CRUDdata } from 'src/app/Classes/ContentClasses';
 
 @Component({
   selector: 'app-intro-text',
@@ -54,19 +54,19 @@ export class IntroTextComponent implements OnInit, OnDestroy {
   }
 
   assignFormData(editFormData: any) {
-    if(editFormData) {
+    if (editFormData) {
       this.onReset();
       this.Form = this.qa.assign(this.Form, editFormData);
-      
+
       const Intros = <any[]>JSON.parse(editFormData.Intros);
       Intros.forEach(intro => {
         this.addIntro(true, intro.Title, intro.Text,
                       intro.RouterLinks.join(', '),
                       intro.RouterLinksNames.join(', '),
-                      intro.Image)
+                      intro.Image);
       });
 
-      if(editFormData.Links){
+      if (editFormData.Links) {
         this.oldLinks = editFormData.Links;
       }
       this.stop$.next(true);
@@ -74,18 +74,18 @@ export class IntroTextComponent implements OnInit, OnDestroy {
   }
 
   processForm() {
-    let Final = Object.assign({}, this.Form.value);
+    const Final = Object.assign({}, this.Form.value);
     Final.Links = [];
     Final.Intros = this.formatIntro(this.IntrosArray.value);
 
-    let paths: string[] = [''];
-    this.ImageEvents.forEach((event,i) => paths.push(`Intros/${i}`));
+    const paths: string[] = [''];
+    this.ImageEvents.forEach((_, i) => paths.push(`Intros/${i}`));
     const extend = paths.length - this.oldLinks.length;
 
-    for(let i = 0; i < extend; i++){
+    for (let i = 0; i < extend; i++) {
       this.oldLinks.push('');
     }
-   
+
     return this.controller.activeFormData.next(
       new CRUDdata(false, '', Final,
                   paths,
@@ -102,17 +102,17 @@ export class IntroTextComponent implements OnInit, OnDestroy {
   addIntro(add: boolean, title: string = '', text: string = '',
             routerLinks: string = '', routerLinksNames: string = '',
             image: boolean = false) {
-    if(add) {
+    if (add) {
       this.IntrosArray.push(
         this.fb.group({Title: title,
                        Text: text,
                        RouterLinks: routerLinks,
                        RouterLinksNames: routerLinksNames,
-                       Image: image})
+                       Image: image});
       );
       this.ImageEvents.push();
     } else {
-      this.IntrosArray.removeAt(this.IntrosArray.value.length-1);
+      this.IntrosArray.removeAt(this.IntrosArray.value.length - 1);
       this.ImageEvents.pop();
     }
   }
@@ -122,8 +122,8 @@ export class IntroTextComponent implements OnInit, OnDestroy {
   }
 
   formatIntro(intros: any) {
-    const formattedIntros: Intro[] = []
-    for(let intro of intros){
+    const formattedIntros: Intro[] = [];
+    for (const intro of intros) {
       intro.RouterLinks = intro.RouterLinks.split(', ');
       intro.RouterLinksNames = intro.RouterLinksNames.split(', ');
       formattedIntros.push(intro);
@@ -131,4 +131,3 @@ export class IntroTextComponent implements OnInit, OnDestroy {
     return JSON.stringify(formattedIntros);
   }
 }
-

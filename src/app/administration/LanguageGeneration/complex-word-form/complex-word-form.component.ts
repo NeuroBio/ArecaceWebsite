@@ -84,8 +84,8 @@ export class ComplexWordFormComponent implements OnInit, OnDestroy {
       return this.controller.activeFormData.next(
         new CRUDdata(true, 'All blanks must be filled.'));
     }
-    // Complete Form   
-    const Final:Word = Object.assign({}, this.Form.value);
+    // Complete Form
+    const Final: Word = Object.assign({}, this.Form.value);
     Final.Components = this.Form.controls.ComponentWords.value.map(word => word.Word).join(';');
     Final.ComponentWords = JSON.stringify(Final.ComponentWords);
     return this.controller.activeFormData.next(
@@ -111,7 +111,7 @@ export class ComplexWordFormComponent implements OnInit, OnDestroy {
 
     Words.forEach((word, i) => {
       if (word.Core) {
-        Components[i] = word.Word.split('').splice(0,word.Word.length-2).join('');
+        Components[i] = word.Word.split('').splice(0, word.Word.length - 2).join('');
       } else {
         Components[i] = word.Word;
       }
@@ -123,7 +123,7 @@ export class ComplexWordFormComponent implements OnInit, OnDestroy {
     const newWord = this.Nomadic.concatinateWords(Words, this.Form.controls.Type.value);
     const Type = Words[Words.length - 1].Type;
     Components.join(';');
-    Levels = Levels.reduce((a,b) => +a + +b, 0);
+    Levels = Levels.reduce((a, b) => +a + +b, 0);
 
     this.Form.patchValue({Indativor: newWord, Level: Levels,
                           Components: Components, Type: Type});

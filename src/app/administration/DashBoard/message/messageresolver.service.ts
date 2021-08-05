@@ -1,20 +1,22 @@
-import { Injectable }       from '@angular/core';
-import { Resolve }          from '@angular/router';
+import { Injectable } from '@angular/core';
+import { Resolve } from '@angular/router';
 
-import { zip }              from 'rxjs';
-import { take, tap }        from 'rxjs/operators';
+import { zip } from 'rxjs';
+import { take, tap } from 'rxjs/operators';
 
-import { FireBaseService }  from 'src/app/GlobalServices/firebase.service';
-import { MessageService }   from './message.service';
+import { FireBaseService } from 'src/app/GlobalServices/firebase.service';
+import { MessageService } from './message.service';
 
 @Injectable({
   providedIn: 'root'
 })
 
-export class MessageresolverService implements Resolve<any>{
+export class MessageresolverService implements Resolve<any> {
 
-  constructor(private firebaseserv: FireBaseService,
-              private messageserv: MessageService) { }
+  constructor(
+    private firebaseserv: FireBaseService,
+    private messageserv: MessageService
+  ) { }
 
   resolve() {
     const new$ = this.firebaseserv.returnCollectionWithKeys('Contact');

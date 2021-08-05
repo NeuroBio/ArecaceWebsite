@@ -15,7 +15,7 @@ import { CRUDdata } from 'src/app/Classes/ContentClasses';
 })
 
 export class StoryFormComponent implements OnInit, OnDestroy {
-  
+
   Form: FormGroup;
   stream1: Subscription;
   stream2: Subscription;
@@ -32,10 +32,10 @@ export class StoryFormComponent implements OnInit, OnDestroy {
       .subscribe(item => this.assignFormData(item));
     this.stream2 = this.controller.triggerProcess
       .subscribe(() => this.processForm());
-    this.controller.itemType.subscribe(type => 
+    this.controller.itemType.subscribe(type =>
       this.type = type).unsubscribe();
   }
-  
+
   ngOnDestroy() {
     this.stream1.unsubscribe();
     this.stream2.unsubscribe();
@@ -65,20 +65,20 @@ export class StoryFormComponent implements OnInit, OnDestroy {
   }
 
   processForm() {
-    let Final = Object.assign({}, this.Form.value);
+    const Final = Object.assign({}, this.Form.value);
     delete Final.Story;
     Final.type = this.type;
-    
+
     let oldText: string;
     if (this.oldText) {
       oldText = this.oldText;
     }
     const text: string = this.Form.controls.Story.value;
-    
+
     Final.WordCount = text.trim().split(/\s+/).length;
     Final.ID = `${Final.Title.replace(/\s/g, '')}`;
     var newText = new Blob([text], {type: 'text/plain'});
-    
+
     return this.controller.activeFormData.next(
       new CRUDdata(false, '', Final,
                   undefined, undefined, undefined,

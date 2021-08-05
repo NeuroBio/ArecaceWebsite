@@ -1,12 +1,12 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { FormBuilder }                  from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 
-import { Subscription, Subject }        from 'rxjs';
-import { takeUntil }                    from 'rxjs/operators';
+import { Subscription, Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
-import { CRUDcontrollerService }        from '../../services/CRUDcontroller.service';
-import { Question }                     from 'src/app/Classes/WebsiteText';
-import { CRUDdata }                     from 'src/app/Classes/ContentClasses';
+import { CRUDcontrollerService } from '../../services/CRUDcontroller.service';
+import { Question } from 'src/app/Classes/WebsiteText';
+import { CRUDdata } from 'src/app/Classes/ContentClasses';
 
 @Component({
   selector: 'app-faq-text',
@@ -46,7 +46,7 @@ export class FaqTextComponent implements OnInit, OnDestroy {
   }
 
   assignFormData(editFormData: any) {
-    if(editFormData) {
+    if (editFormData) {
       this.onReset();
       this.QuestionsArray;
       const Questions = <Question[]>JSON.parse(editFormData.Questions);
@@ -71,7 +71,7 @@ export class FaqTextComponent implements OnInit, OnDestroy {
 
   addQuestion(add: boolean, question: string = '',
               answer: string = '', routerLink: string = '') {
-    if(add) {
+    if (add) {
       this.QuestionsArray.push(this.fb.group({
                                   Question: question,
                                   Answer: answer,

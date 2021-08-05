@@ -13,19 +13,19 @@ import { AuthService } from '../security/Auth/auth.service';
 export class CRUD {
 
   constructor(
-    private firebaseserv:FireBaseService,
-    private httpclient:HttpClient,
+    private firebaseserv: FireBaseService,
+    private httpclient: HttpClient,
     private auth: AuthService
   ) { }
 
   uploadImages(paths: string[], images: any[]) {
-    if (images[0]){
+    if (images[0]) {
 
       const links = new Array<string>(paths.length);
-      return Promise.all(images.map((event,index) => { // upload each image
+      return Promise.all(images.map((event, index) => { // upload each image
         return this.firebaseserv.uploadImage(paths[index], event)
         .then(() => {
-          return this.firebaseserv.returnImage(paths[index]).toPromise() // return download link
+          return this.firebaseserv.returnImage(paths[index]).toPromise(); // return download link
         }).then(url => { links[index] = url } );
 
       }) ).then(() => {
@@ -41,17 +41,19 @@ export class CRUD {
   }
 
   editImages(paths: string[], newImages: any[], oldImages: any[]) {
-    let links = new Array<string>(paths.length);
+    const links = new Array<string>(paths.length);
     return Promise.all(newImages.map((event, index) => {
-      
+
       if (!event) { // change nothing!
         links[index] = oldImages[index];
 
       } else { // Delete old image and upload new image
         return this.removeOldImage(oldImages[index]) // this.firebaseserv.deleteImage(oldImages[index]) //delete old image
-        .then(() => { return this.firebaseserv.uploadImage(paths[index], event); }) // upload new image
-        .then(() => { return this.firebaseserv.returnImage(paths[index]).toPromise(); }) // return download link
-        .then(url => { links[index] = url; } );
+        .then(() => {
+          return this.firebaseserv.uploadImage(paths[index], event); // upload new image
+        }).then(() => {
+          return this.firebaseserv.returnImage(paths[index]).toPromise(); // return download link
+        }).then(url => links[index] = url );
       }
     }) ).then(() => {
       return(links);
@@ -72,9 +74,10 @@ export class CRUD {
   uploadStory(path: string, text: Blob) {
     if (text) {
       return this.firebaseserv.uploadBlob(path, text) // upload the text
-      .then(() => { return this.firebaseserv.returnImage(path).toPromise() } // get the downloadlink
-      ).catch(err => {
-        err.stage = "Upload Story";
+      .then(() => {
+        return this.firebaseserv.returnImage(path).toPromise(); // get the downloadlink
+      }).catch(err => {
+        err.stage = 'Upload Story';
         return(Promise.reject(err));
       });
     } else {
@@ -87,8 +90,10 @@ export class CRUD {
       return oldText;
     } else {
       return this.firebaseserv.deleteImage(oldText) // delete old text
-      .then(() => { return this.firebaseserv.uploadBlob(path, newText) // upload new text
-      }).then(() => { return this.firebaseserv.returnImage(path).toPromise() // get link
+      .then(() => {
+        return this.firebaseserv.uploadBlob(path, newText); // upload new text
+      }).then(() => {
+        return this.firebaseserv.returnImage(path).toPromise(); // get link
       }).catch(err => {
         err.stage = 'Edit Story';
         return(Promise.reject(err));
@@ -147,9 +152,9 @@ export class CRUD {
 
   private uploadBlob(text:Blob, blobPath:string, path:string, seriesData:any){
     return this.firebaseserv.checkDir(path, seriesData).toPromise() // see if series folder exists
-    .then(() =>{
+    .then(() => {
       return this.firebaseserv.uploadBlob(blobPath, text); // upload the text
-    }).then(()=> {
+    }).then(() => {
       return this.firebaseserv.returnImage(blobPath).toPromise(); // get the downloadlink
     });
   }
@@ -157,8 +162,8 @@ export class CRUD {
   editWriting(editStory:any, newPath:string, newText:Blob, newBlobPath:string, newSeriesData:any,
               oldStory:any, oldPath:string){
     return this.checkSeriesChange(editStory, oldStory, oldPath, newPath, newSeriesData)
-    .then(() =>{ return this.checkBlob(newText, newBlobPath, oldStory.StoryLink)
-    }).then(link=> {
+    .then(() => { return this.checkBlob(newText, newBlobPath, oldStory.StoryLink)
+    }).then(link => {
       editStory.StoryLink = link;
       this.firebaseserv.editDocument(editStory, `${newPath}/${newSeriesData.ID}/${newSeriesData.ID}`, oldStory.key);
     }).catch(err => {

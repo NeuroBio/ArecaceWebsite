@@ -81,7 +81,7 @@ export class ReferenceFormComponent implements OnInit, OnDestroy {
     const imageFile = this.uploadpreviewserv.mainsData[0];
 
      // Incomplete Form
-     if(imageFile === undefined
+     if (imageFile === undefined
       && this.Form.controls.Links.value === '') {
       return this.controller.activeFormData.next(
         new CRUDdata(true, `${this.type} files require an image.`));

@@ -1,7 +1,7 @@
-import { Component, OnInit, OnDestroy }   from '@angular/core';
-import { Subscription }                   from 'rxjs';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs';
 
-import { CRUDcontrollerService }          from '../../services/CRUDcontroller.service';
+import { CRUDcontrollerService } from '../../services/CRUDcontroller.service';
 
 @Component({
   selector: 'app-picktype',
@@ -16,19 +16,19 @@ export class PickTypeComponent implements OnInit, OnDestroy {
   typeList: string[];
 
   constructor(private controller: CRUDcontrollerService) { }
-  
+
   ngOnInit() {
     this.stream1 = this.controller.itemType.subscribe(type  => this.current = type);
     this.typeList = Object.keys(this.controller.firePaths);
     this.typeList = this.typeList.filter(type =>
       this.controller.firePaths[type].SpecialUpload === false);
   }
-  
+
   ngOnDestroy() {
     this.stream1.unsubscribe();
   }
-  
-  onClick(type: string){
+
+  onClick(type: string) {
     this.controller.assignItemType(type);
     this.current = type;
   }
