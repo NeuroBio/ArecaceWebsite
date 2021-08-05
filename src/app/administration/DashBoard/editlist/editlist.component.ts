@@ -1,8 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute, Router }       from '@angular/router';
-import { Subscription }                 from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
-import { CRUDcontrollerService }        from '../../services/CRUDcontroller.service';
+import { CRUDcontrollerService } from '../../services/CRUDcontroller.service';
 
 @Component({
   selector: 'app-editlist',
@@ -11,13 +11,13 @@ import { CRUDcontrollerService }        from '../../services/CRUDcontroller.serv
 })
 
 export class EditListComponent implements OnInit, OnDestroy {
-  
+
   path: string;
   type: string;
 
   selected: string;
   selectable: any[];
-  loading: boolean = false;
+  loading = false;
 
   stream1: Subscription;
   stream2: Subscription;
@@ -31,7 +31,7 @@ export class EditListComponent implements OnInit, OnDestroy {
       this.type = type;
       this.controller.assignEditItem(undefined);
       this.loading = true;
-      //fix?
+      // fix?
       this.controller.assignItemList(this.controller.firePaths[type].Fire);
     });
 
@@ -50,18 +50,18 @@ export class EditListComponent implements OnInit, OnDestroy {
 
   onSelect(selected: string, ind: number) {
       this.selected = selected;
-      if(this.type === "website") {
-        this.router.navigate([`./${this.selected}`], {relativeTo: this.route})
+      if (this.type === 'website') {
+        this.router.navigate([`./${this.selected}`], {relativeTo: this.route});
       }
       this.controller.assignEditItem(this.selectable[ind]);
   }
 
   forPagesInit() {
-    if(this.type === "website"  && this.selectable) {
+    if(this.type === 'website' && this.selectable) {
       const access = this.route.snapshot.firstChild.url.toString();
       this.controller.assignEditItem(this.selectable.find(element =>
         element.ID === access));
-      this.selected = access; 
+      this.selected = access;
     }
   }
 

@@ -1,9 +1,9 @@
-import { Component, OnInit, OnDestroy }   from '@angular/core';
-import { ActivatedRoute }                 from '@angular/router';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
-import {Subscription}                     from 'rxjs';
+import { Subscription } from 'rxjs';
 
-import { CRUDcontrollerService }          from '../../services/CRUDcontroller.service';
+import { CRUDcontrollerService } from '../../services/CRUDcontroller.service';
 
 @Component({
   selector: 'app-content',
@@ -21,7 +21,7 @@ export class ContentComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.controller.assignButtons([true, true, true, true]);
     this.stream = this.route.firstChild.url.subscribe(path =>
-        this.controller.assignItemType(path[path.length-1].toString())
+        this.controller.assignItemType(path[path.length - 1].toString())
     );
   }
 
@@ -29,20 +29,20 @@ export class ContentComponent implements OnInit, OnDestroy {
     this.stream.unsubscribe();
     this.controller.assignItemList(undefined);
   }
-  
+
   onEditCheck(edit: number) {
-    if(edit === 0) {
+    if (edit === 0) {
       this.edit = false;
     } else {
       this.edit = true;
     }
   }
 
-  onAllow(type:number) {
+  onAllow(type: number) {
     if (type === 0) {
       this.controller.updateButton('Delete', false);
       this.controller.updateButton('UpdateAll', false);
-    } else if(type === 1) {
+    } else if (type === 1) {
       this.controller.updateButton('Delete', true);
       this.controller.updateButton('UpdateAll', false);
     } else {
@@ -50,5 +50,5 @@ export class ContentComponent implements OnInit, OnDestroy {
       this.controller.updateButton('UpdateAll', true);
     }
   }
-  
+
 }

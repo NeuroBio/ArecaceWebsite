@@ -90,7 +90,7 @@ export class IntroTextComponent implements OnInit, OnDestroy {
       new CRUDdata(false, '', Final,
                   paths,
                   this.ImageEvents,
-                  this.oldLinks))
+                  this.oldLinks));
   }
 
   onReset() {
@@ -108,7 +108,7 @@ export class IntroTextComponent implements OnInit, OnDestroy {
                        Text: text,
                        RouterLinks: routerLinks,
                        RouterLinksNames: routerLinksNames,
-                       Image: image});
+                       Image: image})
       );
       this.ImageEvents.push();
     } else {

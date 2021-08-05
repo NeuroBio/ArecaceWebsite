@@ -66,8 +66,8 @@ export class WordFormComponent implements OnInit, OnDestroy {
       return this.controller.activeFormData.next(
         new CRUDdata(true, 'All blanks must be filled.'));
     }
-    // Complete Form   
-    const Final:Word = Object.assign({}, this.Form.value);
+    // Complete Form
+    const Final: Word = Object.assign({}, this.Form.value);
     Final.ID = Final.Indativor;
     return this.controller.activeFormData.next(
       new CRUDdata(false, '', Final));

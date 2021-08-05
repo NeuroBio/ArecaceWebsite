@@ -30,7 +30,7 @@ export class ChapterFormComponent implements OnInit, OnDestroy {
     private controller: CRUDcontrollerService,
     private qa: QuickAssign
   ) { }
-  
+
   ngOnInit() {
     this.stream1 = this.controller.itemToEdit
       .subscribe(item => this.assignFormData(item));
@@ -64,8 +64,8 @@ export class ChapterFormComponent implements OnInit, OnDestroy {
       this.dummy = new Array(this.pageFiles.length);
     }
     this.init = false;
-  }    
-  
+  }
+
   processForm() {
     const Final: ChapterMetaData = Object.assign({}, this.Form.value);
     Final.NumPages = this.pageFiles.length;
@@ -99,8 +99,8 @@ export class ChapterFormComponent implements OnInit, OnDestroy {
   }
 
   getPagePaths(pages: any[], newChap: any) {
-    let pagePaths: string[] = [];
-    for (let i = 0; i< pages.length; i++) {
+    const pagePaths: string[] = [];
+    for (let i = 0; i < pages.length; i++) {
       pagePaths.push(`ComicPages/Arc${newChap.Arc}/${newChap.ID}-${i}`);
     }
     return(pagePaths);

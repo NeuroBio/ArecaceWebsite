@@ -1,8 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Subscription }                 from 'rxjs';
+import { Subscription } from 'rxjs';
 
-import { CRUDcontrollerService }        from '../../services/CRUDcontroller.service';
-import { Word }                         from '../../../Classes/NomadicLanguage';
+import { CRUDcontrollerService } from '../../services/CRUDcontroller.service';
+import { Word } from '../../../Classes/NomadicLanguage';
 
 @Component({
   selector: 'app-language',
@@ -25,7 +25,7 @@ export class LanguageComponent implements OnInit, OnDestroy {
     this.controller.assignItemType('nomadic');
     this.controller.assignItemList('Nomadic');
     this.stream1 = this.controller.itemToEdit.subscribe(word => {
-      if(word) {
+      if (word) {
         this.simple = word.Level === 1;
         this.disableSwitchWord = true;
       } else {

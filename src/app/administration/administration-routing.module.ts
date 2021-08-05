@@ -78,7 +78,7 @@ const AdminRoutes: Routes = [
          ]
       },
       { path: 'Nomadic', component: LanguageComponent },
-      { path:'Messages', component: MessageComponent,
+      { path: 'Messages', component: MessageComponent,
         resolve: { MessageresolverService } }
       ]
     }

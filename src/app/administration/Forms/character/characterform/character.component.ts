@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { BirthdayService } from 'src/app/administration/Forms/character/birthday.service';
-import { CRUDcontrollerService } from '../../../services/CRUDcontroller.service'
+import { CRUDcontrollerService } from '../../../services/CRUDcontroller.service';
 import { FetchService } from 'src/app/GlobalServices/fetch.service';
 import { Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';

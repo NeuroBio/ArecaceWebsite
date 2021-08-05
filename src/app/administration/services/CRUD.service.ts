@@ -26,10 +26,10 @@ export class CRUD {
         return this.firebaseserv.uploadImage(paths[index], event)
         .then(() => {
           return this.firebaseserv.returnImage(paths[index]).toPromise(); // return download link
-        }).then(url => { links[index] = url } );
+        }).then(url => { links[index] = url; } );
 
       }) ).then(() => {
-        return links // return all links
+        return links; // return all links
       }).catch(err => {
         err.stage = 'Upload Images';
         return Promise.reject(err);
@@ -111,10 +111,10 @@ export class CRUD {
     .catch(err => {
       err.stage = 'Upload Item';
       return Promise.reject(err);
-    });;
+    });
   }
 
-  editItem(editDoc :any, path: string, docKey: string) {
+  editItem(editDoc: any, path: string, docKey: string) {
       return this.firebaseserv.editDocument(editDoc, path, docKey)
       .catch(err => {
         err.stage = 'Edit Item';
@@ -122,7 +122,7 @@ export class CRUD {
       });
   }
 
-  deleteItem(StorageUrls: string[], docPath: string, docKey: string){
+  deleteItem(StorageUrls: string[], docPath: string, docKey: string) {
     return Promise.all(StorageUrls.map(pic => {
       return this.firebaseserv.deleteImage(pic);
     }) ).then(() =>
@@ -134,14 +134,9 @@ export class CRUD {
   }
 
 
-
-
-
-
-
-  uploadWriting(newStory:any, path:string, text:Blob, blobPath:string, seriesData:any){
+  uploadWriting(newStory: any, path: string, text: Blob, blobPath: string, seriesData: any){
     return this.uploadBlob(text, blobPath, path, seriesData)
-    .then(link=> {
+    .then(link => {
       newStory.StoryLink = link;
       this.firebaseserv.uploadDocument(newStory, `${path}/${seriesData.ID}/${seriesData.ID}`)
     }).catch(err => {
@@ -150,7 +145,7 @@ export class CRUD {
     });
   }
 
-  private uploadBlob(text:Blob, blobPath:string, path:string, seriesData:any){
+  private uploadBlob(text: Blob, blobPath: string, path: string, seriesData: any){
     return this.firebaseserv.checkDir(path, seriesData).toPromise() // see if series folder exists
     .then(() => {
       return this.firebaseserv.uploadBlob(blobPath, text); // upload the text

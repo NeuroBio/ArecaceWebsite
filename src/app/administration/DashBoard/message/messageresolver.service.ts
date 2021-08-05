@@ -21,7 +21,7 @@ export class MessageresolverService implements Resolve<any> {
   resolve() {
     const new$ = this.firebaseserv.returnCollectionWithKeys('Contact');
     const old$ = this.firebaseserv.returnCollectionWithKeys('ContactSaved');
-    return zip(new$,old$).pipe(
+    return zip(new$, old$).pipe(
       take(1),
       tap(data => this.messageserv.initilizeData(data))
     );

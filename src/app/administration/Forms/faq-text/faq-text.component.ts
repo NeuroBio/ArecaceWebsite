@@ -48,7 +48,6 @@ export class FaqTextComponent implements OnInit, OnDestroy {
   assignFormData(editFormData: any) {
     if (editFormData) {
       this.onReset();
-      this.QuestionsArray;
       const Questions = <Question[]>JSON.parse(editFormData.Questions);
       Questions.forEach(question => 
         this.addQuestion(true, question.Question, question.Answer, question.RouterLink));
@@ -77,7 +76,7 @@ export class FaqTextComponent implements OnInit, OnDestroy {
                                   Answer: answer,
                                   RouterLink: routerLink}));
     } else {
-      this.QuestionsArray.removeAt(this.QuestionsArray.value.length-1);
+      this.QuestionsArray.removeAt(this.QuestionsArray.value.length - 1);
     }
   }
 }

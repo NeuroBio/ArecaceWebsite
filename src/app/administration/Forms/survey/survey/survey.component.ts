@@ -231,7 +231,7 @@ export class SurveyComponent implements OnInit , OnDestroy {
   }
 
   createResultValues(results: object) {
-    const newOutcomes = this.fb.group({})
+    const newOutcomes = this.fb.group({});
     this.outcomes.controls.forEach((o: FormGroup, _) => {
       if (o.value.Name in results) {
         newOutcomes.addControl(o.value.Name, new FormControl(results[o.value.Name]));

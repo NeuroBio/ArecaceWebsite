@@ -27,7 +27,7 @@ export class BeastFormComponent implements OnInit, OnDestroy {
 
   stream1: Subscription;
   stream2: Subscription;
-  
+ 
   constructor(
     private fb: FormBuilder,
     private controller: CRUDcontrollerService,
@@ -64,7 +64,7 @@ export class BeastFormComponent implements OnInit, OnDestroy {
 
   assignFormData(editFormData: any) {
     this.onReset();
-    if(editFormData) {
+    if (editFormData) {
       this.Form = this.qa.assign(this.Form, editFormData);
       this.uploadpreviewserv.assignOldLinks(this.Form.controls.Links.value);
     }
@@ -80,24 +80,24 @@ export class BeastFormComponent implements OnInit, OnDestroy {
       return this.controller.activeFormData.next(
         new CRUDdata(true, 'Bestiary files require a card image and its thumbnail.'));
     }
-    
+
     // Complete Form
-    const Final:BeastMetaData = Object.assign({}, this.Form.value);
+    const Final: BeastMetaData = Object.assign({}, this.Form.value);
     Final.ID = Final.Name.split(' ').join('');
-    
+
     return this.controller.activeFormData.next(
       new CRUDdata(false, '', Final,
                   [`Bestiary/${Final.ID}-thumb`,
                   `Bestiary/${Final.ID}-full`],
                   [thumbFile, mainFile],
-                  Final.Links))
+                  Final.Links));
   }
-  
+
   onReset() {
     this.Form = this.createForm();
     this.controller.message.next('');
     this.uploadpreviewserv.reset.next();
     this.uploadpreviewserv.erase(0);
   }
-  
+
 }

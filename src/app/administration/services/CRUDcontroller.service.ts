@@ -119,7 +119,7 @@ export class CRUDcontrollerService {
         data.MetaData = this.checkLinks(data.MetaData, links);
         return this.crud.uploadStory(data.NewTextPath, data.TextBlob);
 // META DATA
-      }).then(link => { console.log("meta");
+      }).then(link => { console.log('meta');
         if ('StoryLink' in data.MetaData) {
           data.MetaData.StoryLink = link;
         }

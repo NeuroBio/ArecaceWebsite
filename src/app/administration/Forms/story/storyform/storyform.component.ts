@@ -77,7 +77,7 @@ export class StoryFormComponent implements OnInit, OnDestroy {
 
     Final.WordCount = text.trim().split(/\s+/).length;
     Final.ID = `${Final.Title.replace(/\s/g, '')}`;
-    var newText = new Blob([text], {type: 'text/plain'});
+    const newText = new Blob([text], {type: 'text/plain'});
 
     return this.controller.activeFormData.next(
       new CRUDdata(false, '', Final,
