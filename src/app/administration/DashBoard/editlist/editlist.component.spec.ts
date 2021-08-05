@@ -4,6 +4,7 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireStorage } from '@angular/fire/storage';
+import { ActivatedRoute } from '@angular/router';
 import { environment } from 'src/environments/environment';
 
 import { EditListComponent } from './editlist.component';
@@ -20,6 +21,7 @@ describe('EditListComponent', () => {
         AngularFireModule.initializeApp(environment.firebase),
       ],
       providers: [
+        ActivatedRoute,
         AngularFireAuth,
         AngularFireStorage,
         AngularFirestore

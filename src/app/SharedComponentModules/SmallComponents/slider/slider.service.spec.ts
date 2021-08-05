@@ -4,6 +4,8 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { environment } from 'src/environments/environment';
 
 import { SliderService } from './slider.service';
+import { AngularFireStorage } from '@angular/fire/storage';
+import {AngularFirestore } from '@angular/fire/firestore';
 
 describe('SliderService', () => {
   beforeEach(() => TestBed.configureTestingModule({
@@ -11,7 +13,9 @@ describe('SliderService', () => {
       AngularFireModule.initializeApp(environment.firebase),
     ],
     providers: [
-      AngularFireAuth
+      AngularFireAuth,
+      AngularFireStorage,
+      AngularFirestore
     ]
   }));
 

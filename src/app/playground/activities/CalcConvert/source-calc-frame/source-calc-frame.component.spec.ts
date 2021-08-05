@@ -1,3 +1,4 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuth } from '@angular/fire/auth';
@@ -17,6 +18,7 @@ describe('SourceCalcFrameComponent', () => {
       declarations: [ SourceCalcFrameComponent ],
       imports: [
         RouterTestingModule,
+        HttpClientTestingModule,
         AngularFireModule.initializeApp(environment.firebase),
       ],
       providers: [

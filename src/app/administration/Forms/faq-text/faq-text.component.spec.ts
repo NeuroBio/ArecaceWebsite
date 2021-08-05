@@ -10,7 +10,7 @@ describe('FaqTextComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ FaqTextComponent ],
-      imports: [
+      providers: [
         FormBuilder
       ]
     })

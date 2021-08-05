@@ -1,3 +1,4 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuth } from '@angular/fire/auth';
@@ -10,6 +11,7 @@ import { CRUD } from './CRUD.service';
 describe('CRUD', () => {
   beforeEach(() => TestBed.configureTestingModule({
     imports: [
+      HttpClientTestingModule,
       AngularFireModule.initializeApp(environment.firebase),
     ],
     providers: [

@@ -1,6 +1,8 @@
-import { TestBed, inject, waitForAsync } from '@angular/core/testing';
+import { TestBed, inject } from '@angular/core/testing';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFireStorage } from '@angular/fire/storage';
 import { environment } from 'src/environments/environment';
 
 import { UserGuardGuard } from './user-guard.guard';
@@ -13,7 +15,9 @@ describe('UserGuardGuard', () => {
       ],
       providers: [
         UserGuardGuard,
-        AngularFireAuth
+        AngularFireAuth,
+        AngularFireStorage,
+        AngularFirestore
       ]
     });
   });

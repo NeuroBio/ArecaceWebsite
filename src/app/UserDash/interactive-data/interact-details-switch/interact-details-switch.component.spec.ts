@@ -1,6 +1,10 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { AngularFireStorageModule } from '@angular/fire/storage';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFireStorage, AngularFireStorageModule } from '@angular/fire/storage';
 import { RouterTestingModule } from '@angular/router/testing';
+import { environment } from 'src/environments/environment';
 
 import {InteractDetailsSwitchComponent } from './interact-details-switch.component';
 
@@ -12,10 +16,13 @@ describe('InteractDetailsSwitchComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ InteractDetailsSwitchComponent ],
       imports: [
-        RouterTestingModule
+        RouterTestingModule,
+        AngularFireModule.initializeApp(environment.firebase),
       ],
       providers: [
-        AngularFireStorageModule
+        AngularFireAuth,
+        AngularFireStorage,
+        AngularFirestore
       ]
     })
     .compileComponents();

@@ -10,7 +10,7 @@ describe('OthersArtFormComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ OthersArtFormComponent ],
-      imports: [
+      providers: [
         FormBuilder
       ]
     })
