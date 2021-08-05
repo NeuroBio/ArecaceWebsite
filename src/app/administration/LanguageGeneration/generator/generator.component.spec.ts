@@ -10,7 +10,7 @@ describe('GeneratorComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ GeneratorComponent ],
-      imports: [
+      providers: [
         AngularFireStorage
       ]
     })

@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { AngularFireStorage } from '@angular/fire/storage';
 import { FormBuilder } from '@angular/forms';
 
 import { BeastFormComponent } from './beastform.component';
@@ -11,7 +12,8 @@ describe('BeastFormComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ BeastFormComponent ],
       providers: [
-        FormBuilder
+        FormBuilder,
+        AngularFireStorage
       ]
     })
     .compileComponents();

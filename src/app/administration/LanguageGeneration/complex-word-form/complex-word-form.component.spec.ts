@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { AngularFireStorage } from '@angular/fire/storage';
 import { FormBuilder } from '@angular/forms';
 
 import { ComplexWordFormComponent } from './complex-word-form.component';
@@ -11,7 +12,8 @@ describe('ComplexWordFormComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ ComplexWordFormComponent ],
       providers: [
-        FormBuilder
+        FormBuilder,
+        AngularFireStorage
       ]
     })
     .compileComponents();

@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { AngularFireStorage } from '@angular/fire/storage';
 import { FormBuilder } from '@angular/forms';
 
 import { UpdateFormComponent } from './update-form.component';
@@ -11,7 +12,8 @@ describe('UpdateFormComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ UpdateFormComponent ],
       providers: [
-        FormBuilder
+        FormBuilder,
+        AngularFireStorage
       ]
     })
     .compileComponents();

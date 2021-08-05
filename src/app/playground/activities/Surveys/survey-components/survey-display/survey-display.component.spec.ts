@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { FormBuilder } from '@angular/forms';
 
 import { SurveyDisplayComponent } from './survey-display.component';
 
@@ -8,7 +9,10 @@ describe('SurveyDisplayComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ SurveyDisplayComponent ]
+      declarations: [ SurveyDisplayComponent ],
+      imports: [
+        FormBuilder
+      ]
     })
     .compileComponents();
   }));

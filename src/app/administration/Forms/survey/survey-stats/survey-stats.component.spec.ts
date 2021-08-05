@@ -10,7 +10,7 @@ describe('SurveyStatsComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ SurveyStatsComponent ],
-      imports: [
+      providers: [
         AngularFireStorage
       ]
     })

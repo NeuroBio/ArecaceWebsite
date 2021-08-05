@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { AngularFireStorage } from '@angular/fire/storage';
 
 import { AdminDutiesComponent } from './adminDuties.component';
 
@@ -8,7 +9,10 @@ describe('AdminDutiesComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ AdminDutiesComponent ]
+      declarations: [ AdminDutiesComponent ],
+      imports: [
+        AngularFireStorage
+      ]
     })
     .compileComponents();
   }));

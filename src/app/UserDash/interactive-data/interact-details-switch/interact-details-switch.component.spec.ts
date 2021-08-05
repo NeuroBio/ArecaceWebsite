@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { AngularFireStorageModule } from '@angular/fire/storage';
 import { RouterTestingModule } from '@angular/router/testing';
 
 import {InteractDetailsSwitchComponent } from './interact-details-switch.component';
@@ -12,6 +13,9 @@ describe('InteractDetailsSwitchComponent', () => {
       declarations: [ InteractDetailsSwitchComponent ],
       imports: [
         RouterTestingModule
+      ],
+      providers: [
+        AngularFireStorageModule
       ]
     })
     .compileComponents();

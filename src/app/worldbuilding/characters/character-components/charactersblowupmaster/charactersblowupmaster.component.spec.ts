@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 
 import { CharactersBlowupmasterComponent } from './charactersblowupmaster.component';
 
@@ -8,7 +9,10 @@ describe('CharactersBlowupmasterComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ CharactersBlowupmasterComponent ]
+      declarations: [ CharactersBlowupmasterComponent ],
+      imports: [
+        RouterTestingModule
+      ]
     })
     .compileComponents();
   }));

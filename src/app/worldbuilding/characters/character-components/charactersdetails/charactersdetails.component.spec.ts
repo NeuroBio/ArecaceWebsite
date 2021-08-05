@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ActivatedRoute } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 
 import { CharactersDetailsComponent } from './charactersdetails.component';
@@ -12,6 +13,9 @@ describe('CharactersDetailsComponent', () => {
       declarations: [ CharactersDetailsComponent ],
       imports: [
         RouterTestingModule
+      ],
+      providers: [
+        ActivatedRoute
       ]
     })
     .compileComponents();

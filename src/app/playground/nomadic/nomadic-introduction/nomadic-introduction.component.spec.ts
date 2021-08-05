@@ -10,7 +10,7 @@ describe('NomadicIntroductionComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ NomadicIntroductionComponent ],
-      imports: [
+      providers: [
         AngularFireStorage
       ]
     })

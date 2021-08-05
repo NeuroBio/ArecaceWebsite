@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { FormBuilder } from '@angular/forms';
 
 import { OthersArtFormComponent } from './othersartform.component';
 
@@ -8,7 +9,10 @@ describe('OthersArtFormComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ OthersArtFormComponent ]
+      declarations: [ OthersArtFormComponent ],
+      imports: [
+        FormBuilder
+      ]
     })
     .compileComponents();
   }));

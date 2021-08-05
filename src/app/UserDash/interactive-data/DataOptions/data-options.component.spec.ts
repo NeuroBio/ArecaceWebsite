@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { AngularFireStorage } from '@angular/fire/storage';
 import { RouterTestingModule } from '@angular/router/testing';
 
 import { DataOptionsComponent } from './data-options.component';
@@ -12,6 +13,9 @@ describe('DataOptionsComponent', () => {
       declarations: [ DataOptionsComponent ],
       imports: [
         RouterTestingModule
+      ],
+      providers: [
+        AngularFireStorage
       ]
     })
     .compileComponents();

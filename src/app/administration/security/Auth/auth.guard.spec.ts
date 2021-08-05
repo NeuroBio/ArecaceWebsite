@@ -1,11 +1,20 @@
 import { TestBed, inject, waitForAsync } from '@angular/core/testing';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { environment } from 'src/environments/environment';
 
 import { AuthGuard } from './auth.guard';
 
 describe('AuthGuard', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [AuthGuard]
+      imports: [
+        AngularFireModule.initializeApp(environment.firebase),
+      ],
+      providers: [
+        AuthGuard,
+        AngularFireAuth
+      ],
     });
   });
 

@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { AngularFireStorage } from '@angular/fire/storage';
 import { FormBuilder } from '@angular/forms';
 
 import { GuildFormComponent } from './guildform.component';
@@ -11,7 +12,8 @@ describe('GuildFormComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ GuildFormComponent ],
       providers: [
-        FormBuilder
+        FormBuilder,
+        AngularFireStorage
       ]
     })
     .compileComponents();

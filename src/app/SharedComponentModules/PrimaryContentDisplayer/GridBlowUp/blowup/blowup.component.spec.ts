@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 
 import { BlowUpComponent } from './blowup.component';
 
@@ -8,7 +9,10 @@ describe('BlowUpComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ BlowUpComponent ]
+      declarations: [ BlowUpComponent ],
+      providers: [
+        RouterTestingModule
+      ]
     })
     .compileComponents();
   }));

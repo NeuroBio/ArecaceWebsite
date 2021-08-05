@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { AngularFirestore } from '@angular/fire/firestore';
 import { RouterTestingModule } from '@angular/router/testing';
 
 import { PageComponent } from './page.component';
@@ -12,6 +13,9 @@ describe('PageComponent', () => {
       declarations: [ PageComponent ],
       imports: [
         RouterTestingModule
+      ],
+      providers: [
+        AngularFirestore
       ]
     })
     .compileComponents();

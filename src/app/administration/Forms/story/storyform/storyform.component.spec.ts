@@ -1,6 +1,5 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { AngularFirestore } from '@angular/fire/firestore';
-import { AngularFireStorageModule } from '@angular/fire/storage';
+import { AngularFireStorage } from '@angular/fire/storage';
 
 import { StoryFormComponent } from './storyform.component';
 
@@ -12,7 +11,7 @@ describe('StoryFormComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ StoryFormComponent ],
       providers: [
-        AngularFireStorageModule
+        AngularFireStorage
       ]
     })
     .compileComponents();

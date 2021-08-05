@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { AngularFireStorage } from '@angular/fire/storage';
 import { FormBuilder } from '@angular/forms';
 
 import { WebsiteTextComponent } from './website-text.component';
@@ -11,7 +12,8 @@ describe('WebsiteTextComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ WebsiteTextComponent ],
       providers: [
-        FormBuilder
+        FormBuilder,
+        AngularFireStorage
       ]
     })
     .compileComponents();

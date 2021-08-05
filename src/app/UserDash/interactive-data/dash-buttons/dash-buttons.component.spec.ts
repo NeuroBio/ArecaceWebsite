@@ -10,9 +10,9 @@ describe('DashButtonsComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ DashButtonsComponent ],
-      imports: {
+      imports: [
         RouterTestingModule
-      }
+      ]
     })
     .compileComponents();
   }));

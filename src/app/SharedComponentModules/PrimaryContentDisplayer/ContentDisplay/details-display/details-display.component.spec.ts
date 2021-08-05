@@ -1,14 +1,18 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 
 import { DetailsDisplayComponent } from './details-display.component';
 
-describe('SSdetailsComponent', () => {
+describe('DetailsDisplayComponent', () => {
   let component: DetailsDisplayComponent;
   let fixture: ComponentFixture<DetailsDisplayComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [DetailsDisplayComponent ]
+      declarations: [DetailsDisplayComponent ],
+      imports: [
+        RouterTestingModule
+      ]
     })
     .compileComponents();
   }));

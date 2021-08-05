@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { FormBuilder } from '@angular/forms';
 
 import { AboutTextComponent } from './about-text.component';
 
@@ -8,7 +9,10 @@ describe('AboutTextComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ AboutTextComponent ]
+      declarations: [ AboutTextComponent ],
+      providers: [
+        FormBuilder
+      ]
     })
     .compileComponents();
   }));
