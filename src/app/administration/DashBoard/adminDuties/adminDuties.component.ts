@@ -3,7 +3,7 @@ import { CRUDcontrollerService } from '../../services/CRUDcontroller.service';
 
 @Component({
   selector: 'app-admin-duties',
-  templateUrl: './admin-duties.component.html',
+  templateUrl: './adminDuties.component.html',
 })
 
 export class AdminDutiesComponent implements OnDestroy {
