@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { AngularFireStorage } from '@angular/fire/storage';
 import { environment } from 'src/environments/environment';
 
 import { OthersArtComponent } from './others-art.component';
@@ -16,7 +17,8 @@ describe('OthersArtComponent', () => {
         AngularFireModule.initializeApp(environment.firebase),
       ],
       providers: [
-        AngularFireAuth
+        AngularFireAuth,
+        AngularFireStorage
       ]
     })
     .compileComponents();

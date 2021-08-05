@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { AngularFireStorage } from '@angular/fire/storage';
 import { FormBuilder } from '@angular/forms';
 
 import { ChapterFormComponent } from './chapterform.component';
@@ -11,7 +12,8 @@ describe('ChapterFormComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ ChapterFormComponent ],
       providers: [
-        FormBuilder
+        FormBuilder,
+        AngularFireStorage
       ]
     })
     .compileComponents();

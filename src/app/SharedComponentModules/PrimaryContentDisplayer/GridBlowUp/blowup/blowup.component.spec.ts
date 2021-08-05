@@ -10,9 +10,9 @@ describe('BlowUpComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ BlowUpComponent ],
-      providers: [
+      imports: [
         RouterTestingModule
-      ]
+      ],
     })
     .compileComponents();
   }));

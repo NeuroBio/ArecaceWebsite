@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { AngularFireModule } from '@angular/fire';
-import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFireAuth } from '@angular/fire/auth';
 import { environment } from 'src/environments/environment';
 
 import { UserdataMainResolverService } from './userdata-main-resolver.service';
@@ -11,7 +11,7 @@ describe('UserdataMainResolverService', () => {
       AngularFireModule.initializeApp(environment.firebase),
     ],
     providers: [
-      AngularFireAuthModule
+      AngularFireAuth
     ]
   }));
 

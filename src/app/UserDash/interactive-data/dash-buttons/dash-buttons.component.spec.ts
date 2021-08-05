@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { AngularFireStorage } from '@angular/fire/storage';
 import { RouterTestingModule } from '@angular/router/testing';
 
 import { DashButtonsComponent } from './dash-buttons.component';
@@ -12,6 +13,9 @@ describe('DashButtonsComponent', () => {
       declarations: [ DashButtonsComponent ],
       imports: [
         RouterTestingModule
+      ],
+      providers: [
+        AngularFireStorage
       ]
     })
     .compileComponents();

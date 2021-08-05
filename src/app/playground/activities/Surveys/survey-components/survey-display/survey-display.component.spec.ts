@@ -10,7 +10,7 @@ describe('SurveyDisplayComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ SurveyDisplayComponent ],
-      imports: [
+      providers: [
         FormBuilder
       ]
     })

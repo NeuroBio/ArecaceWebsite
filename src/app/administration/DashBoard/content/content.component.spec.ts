@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { AngularFireStorage } from '@angular/fire/storage';
 import { RouterTestingModule } from '@angular/router/testing';
 
 import { ContentComponent } from './content.component';
@@ -12,6 +13,9 @@ describe('ContentComponent', () => {
       declarations: [ ContentComponent ],
       imports: [
         RouterTestingModule
+      ],
+      providers: [
+        AngularFireStorage
       ]
     })
     .compileComponents();

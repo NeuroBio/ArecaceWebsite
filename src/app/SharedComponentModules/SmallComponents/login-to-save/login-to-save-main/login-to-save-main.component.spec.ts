@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { AngularFireModule } from '@angular/fire';
-import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFireAuth, AngularFireAuthModule } from '@angular/fire/auth';
 import { environment } from 'src/environments/environment';
 
 import { LoginToSaveMainComponent } from './login-to-save-main.component';
@@ -16,7 +16,7 @@ describe('LoginToSaveMainComponent', () => {
         AngularFireModule.initializeApp(environment.firebase),
       ],
       providers: [
-        AngularFireAuthModule
+        AngularFireAuth
       ]
     })
     .compileComponents();
