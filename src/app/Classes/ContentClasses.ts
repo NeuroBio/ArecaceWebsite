@@ -93,7 +93,7 @@ export class CRUDdata {
     OldTextPath: string;
 
     constructor(
-        abort: boolean, abortMessage: string = '', meta: any,
+        abort: boolean, abortMessage: string = '', meta: any = '',
         newImgLinks: string[] = [], imageBlobs: any[] = [],
         oldImgLinks: string[] = [], newTextPath?: string,
         textBlob?: any, oldTextpath?: string
@@ -101,7 +101,7 @@ export class CRUDdata {
 
         this.Abort = abort;
         this.AbortMessage = abortMessage;
-        this.MetaData = meta;
+        this.MetaData = meta != '' ? meta : undefined;
         this.NewImageLinks = newImgLinks;
         this.ImageBlobs = imageBlobs;
         this.OldImageLinks = oldImgLinks;
