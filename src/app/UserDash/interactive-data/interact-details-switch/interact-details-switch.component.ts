@@ -1,11 +1,11 @@
-import { Component, OnInit, OnDestroy }     from '@angular/core';
-import { ActivatedRoute }                   from '@angular/router';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
-import { Subscription }                     from 'rxjs';
+import { Subscription } from 'rxjs';
 
-import { SurveyService }                    from 'src/app/playground/activities/Surveys/survey-components/survey.service';
-import { FetchService }                     from 'src/app/GlobalServices/fetch.service';
-import { DisplayService }                   from '../display.service';
+import { SurveyService } from 'src/app/playground/activities/Surveys/survey-components/survey.service';
+import { FetchService } from 'src/app/GlobalServices/fetch.service';
+import { DisplayService } from '../display.service';
 
 @Component({
   selector: 'app-interact-details-switch',
@@ -17,28 +17,30 @@ export class InteractDetailsSwitchComponent implements OnInit, OnDestroy {
   type: string;
   view: string;
   userData: any;
-  editable: boolean
+  editable: boolean;
   stream: Subscription;
 
-  constructor(private route: ActivatedRoute,
-              private surveyserv: SurveyService,
-              private displayserv: DisplayService,
-              private fetcher: FetchService) { }
+  constructor(
+    private route: ActivatedRoute,
+    private surveyserv: SurveyService,
+    private displayserv: DisplayService,
+    private fetcher: FetchService
+  ) { }
 
   ngOnInit() {
     this.type = this.route.snapshot.parent.url[0].path;
     this.route.data.subscribe((data: { Data: any }) => {
-      window.scroll(0,0);
+      window.scroll(0, 0);
       this.userData = data.Data;
-      if(this.stream) {
+      if (this.stream) {
         this.stream.unsubscribe();
       }
-      
-      switch(this.type) {
+
+      switch (this.type) {
         case 'SurveyResults':
           this.editable = false;
           this.surveyserv.assignSurveyResults(this.userData);
-          this.fetcher.activeFormData.subscribe()
+          this.fetcher.activeFormData.subscribe();
           this.stream = this.displayserv.currentUserDatum
             .subscribe(datum => this.surveyserv.assignSurveyStats(datum.SurveyID));
           return;
@@ -54,7 +56,7 @@ export class InteractDetailsSwitchComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    if(this.stream) {
+    if (this.stream) {
       this.stream.unsubscribe();
     }
   }

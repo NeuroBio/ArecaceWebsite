@@ -1,15 +1,15 @@
-import { Component, OnInit, OnDestroy }   from '@angular/core';
-import { FormBuilder, ValidationErrors }  from '@angular/forms';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { FormBuilder, ValidationErrors } from '@angular/forms';
 
-import { Subscription }                   from 'rxjs';
+import { Subscription } from 'rxjs';
 
-import { FireBaseService }                from 'src/app/GlobalServices/firebase.service';
-import { AuthService }                    from '../../administration/security/Auth/auth.service';
-import { DashCRUDService }                from '../dash-CRUD.service';
-import { Title }                          from '@angular/platform-browser';
+import { FireBaseService } from 'src/app/GlobalServices/firebase.service';
+import { AuthService } from '../../administration/security/Auth/auth.service';
+import { DashCRUDService } from '../dash-CRUD.service';
+import { Title } from '@angular/platform-browser';
 
-import { userNameValidator }              from './userNameValidator';
-import { User }                           from 'src/app/Classes/ContentClasses';
+import { userNameValidator } from './userNameValidator';
+import { User } from 'src/app/Classes/ContentClasses';
 
 @Component({
   selector: 'app-user-info',
@@ -29,21 +29,23 @@ export class UserInfoComponent implements OnInit, OnDestroy {
   dangerButton = 'Reveal Spookiness';
   disabled = false;
 
-  deleteAccountInfo: string = 'This button will delete your account and all data associated with it.';
-  deleteDataInfo: string = 'This button will delete bookmark data and user data such as Fan Characters and Survey Results.  It will not affect the settings displayed on this page.';
+  deleteAccountInfo = 'This button will delete your account and all data associated with it.';
+  deleteDataInfo = 'This button will delete bookmark data and user data such as Fan Characters and Survey Results.  It will not affect the settings displayed on this page.';
 
-  constructor(private firebaseserv: FireBaseService,
-              private auth: AuthService,
-              private fb: FormBuilder,
-              private crud: DashCRUDService,
-              private titleserv: Title) { }
+  constructor(
+    private firebaseserv: FireBaseService,
+    private auth: AuthService,
+    private fb: FormBuilder,
+    private crud: DashCRUDService,
+    private titleserv: Title
+  ) { }
 
   ngOnInit() {
     this.titleserv.setTitle('Settings');
     this.stream1 = this.auth.user.subscribe(user => 
       this.user = user);
-    
-    this.stream2 = this.crud.message.subscribe(mess => 
+
+    this.stream2 = this.crud.message.subscribe(mess =>
       this.dangerMessage = mess);
   }
 
@@ -55,8 +57,8 @@ export class UserInfoComponent implements OnInit, OnDestroy {
 
   changeUserName() {
     this.message = '';
-    if(this.Form.valid === true) {
-      this.user.userName = this.Form.controls.newName.value
+    if (this.Form.valid === true) {
+      this.user.userName = this.Form.controls.newName.value;
       return this.firebaseserv.editDocument(this.user, 'Users', this.auth.uid.value)
       .then(() => this.onReset());
     } else {

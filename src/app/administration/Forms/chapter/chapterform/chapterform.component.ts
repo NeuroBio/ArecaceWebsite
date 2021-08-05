@@ -48,7 +48,7 @@ export class ChapterFormComponent implements OnInit, OnDestroy {
     return this.fb.group({
       Name: '',
       ID: '',
-      Index:'',
+      Index: '',
       Arc: 1,
       Message: '',
       Links: ''

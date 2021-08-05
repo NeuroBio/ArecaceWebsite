@@ -6,7 +6,7 @@ describe('UserdataDetailsResolverService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: UserdataDetailsResolverService = TestBed.get(UserdataDetailsResolverService);
+    const service: UserdataDetailsResolverService = TestBed.inject(UserdataDetailsResolverService);
     expect(service).toBeTruthy();
   });
 });

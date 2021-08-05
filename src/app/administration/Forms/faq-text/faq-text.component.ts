@@ -49,7 +49,7 @@ export class FaqTextComponent implements OnInit, OnDestroy {
     if (editFormData) {
       this.onReset();
       const Questions = <Question[]>JSON.parse(editFormData.Questions);
-      Questions.forEach(question => 
+      Questions.forEach(question =>
         this.addQuestion(true, question.Question, question.Answer, question.RouterLink));
       this.stop$.next(true);
     }

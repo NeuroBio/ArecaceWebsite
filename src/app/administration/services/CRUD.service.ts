@@ -134,18 +134,18 @@ export class CRUD {
   }
 
 
-  uploadWriting(newStory: any, path: string, text: Blob, blobPath: string, seriesData: any){
+  uploadWriting(newStory: any, path: string, text: Blob, blobPath: string, seriesData: any) {
     return this.uploadBlob(text, blobPath, path, seriesData)
     .then(link => {
       newStory.StoryLink = link;
-      this.firebaseserv.uploadDocument(newStory, `${path}/${seriesData.ID}/${seriesData.ID}`)
+      this.firebaseserv.uploadDocument(newStory, `${path}/${seriesData.ID}/${seriesData.ID}`);
     }).catch(err => {
       err.stage = 'Upload Writing';
       return Promise.reject(err);
     });
   }
 
-  private uploadBlob(text: Blob, blobPath: string, path: string, seriesData: any){
+  private uploadBlob(text: Blob, blobPath: string, path: string, seriesData: any) {
     return this.firebaseserv.checkDir(path, seriesData).toPromise() // see if series folder exists
     .then(() => {
       return this.firebaseserv.uploadBlob(blobPath, text); // upload the text
@@ -154,10 +154,12 @@ export class CRUD {
     });
   }
 
-  editWriting(editStory:any, newPath:string, newText:Blob, newBlobPath:string, newSeriesData:any,
-              oldStory:any, oldPath:string){
+  editWriting(
+    editStory: any, newPath: string, newText: Blob, newBlobPath: string,
+    newSeriesData: any, oldStory: any, oldPath: string) {
     return this.checkSeriesChange(editStory, oldStory, oldPath, newPath, newSeriesData)
-    .then(() => { return this.checkBlob(newText, newBlobPath, oldStory.StoryLink)
+    .then(() => {
+      return this.checkBlob(newText, newBlobPath, oldStory.StoryLink);
     }).then(link => {
       editStory.StoryLink = link;
       this.firebaseserv.editDocument(editStory, `${newPath}/${newSeriesData.ID}/${newSeriesData.ID}`, oldStory.key);
@@ -167,8 +169,9 @@ export class CRUD {
     });
   }
 
-  private checkSeriesChange(editStory:any, oldStory:any, oldPath:string, newPath:string, newSeriesData:any) {
-    if (editStory.Type != oldStory.Type || editStory.Series != oldStory.Series){
+  private checkSeriesChange(
+    editStory: any, oldStory: any, oldPath: string, newPath: string, newSeriesData: any) {
+    if (editStory.Type !== oldStory.Type || editStory.Series !== oldStory.Series) {
       return Promise.all([
         this.firebaseserv.checkDir(newPath, newSeriesData).toPromise(),
         this.firebaseserv.deleteDocument(oldPath, oldStory.key)
@@ -178,7 +181,7 @@ export class CRUD {
     }
   }
 
-  private checkBlob(newText:Blob, newBlobPath:string, oldBlobLink:string) {
+  private checkBlob(newText: Blob, newBlobPath: string, oldBlobLink: string) {
     if (!newText) { // change nothing!
       return oldBlobLink;
     } else {
@@ -187,7 +190,7 @@ export class CRUD {
         return this.firebaseserv.uploadBlob(newBlobPath, newText); // upload new text
       }).then(() =>  {
         return this.firebaseserv.returnImage(newBlobPath).toPromise();
-      }) // get link
+      }); // get link
     }
   }
 

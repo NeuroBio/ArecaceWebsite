@@ -1,8 +1,8 @@
-import { Component, OnInit }  from '@angular/core';
-import { Title }              from '@angular/platform-browser';
+import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 
-import { SiteMap }            from '../../../Classes/UploadDownloadPaths';
-import { LinkList, LinkListElement } from 'src/app/SharedComponentModules/SmallComponents/LinkList/linklist';
+import { SiteMap } from '../../../Classes/UploadDownloadPaths';
+import { LinkList } from 'src/app/SharedComponentModules/SmallComponents/LinkList/linklist';
 
 @Component({
   selector: 'app-sitemap',
@@ -10,7 +10,7 @@ import { LinkList, LinkListElement } from 'src/app/SharedComponentModules/SmallC
   styleUrls: ['./sitemap.component.css']
 })
 
-export class SiteMapComponent implements OnInit{
+export class SiteMapComponent implements OnInit {
 
   SiteMap = new SiteMap();
   keys: string[];
@@ -25,7 +25,7 @@ export class SiteMapComponent implements OnInit{
 
     this.linkList = this.keys.map(key =>
       new LinkList(key, this.SiteMap[key]));
-    window.scroll(0,0);
+    window.scroll(0, 0);
   }
 
  }

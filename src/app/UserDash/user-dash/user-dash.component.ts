@@ -1,13 +1,12 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Title }                        from '@angular/platform-browser';
+import { Title } from '@angular/platform-browser';
 
-import { Subscription }                 from 'rxjs';
+import { Subscription } from 'rxjs';
 
-import { AuthService }                  from 'src/app/administration/security/Auth/auth.service';
-import { TextProvider }                 from 'src/app/GlobalServices/textprovider.service';
+import { AuthService } from 'src/app/administration/security/Auth/auth.service';
+import { TextProvider } from 'src/app/GlobalServices/textprovider.service';
 
-import { User, Bookmark }                         from 'src/app/Classes/ContentClasses';
-import { compileFactoryFunction } from '@angular/compiler';
+import { User } from 'src/app/Classes/ContentClasses';
 
 @Component({
   selector: 'app-user-dash',
@@ -23,34 +22,34 @@ export class UserDashComponent implements OnInit, OnDestroy {
   savedData: any[];
   titles: string[];
   authorized: boolean;
-  actions = [ { src: '../../../../../assets/svgs/gear.svg', link: 'settings', alt: 'Settings', show: true },
-              { src: '../../../../../assets/svgs/modstar.svg', link: 'controls', alt: 'Mod Controls', show: false },
-              { src: '../../../../../assets/svgs/diamond.svg', link: '/kArAAdministrativeUpload/Dash', alt: 'Admin Controls', show: false }]
+  actions = [
+    { src: '../../../../../assets/svgs/gear.svg', link: 'settings', alt: 'Settings', show: true },
+    { src: '../../../../../assets/svgs/modstar.svg', link: 'controls', alt: 'Mod Controls', show: false },
+    { src: '../../../../../assets/svgs/diamond.svg', link: '/kArAAdministrativeUpload/Dash', alt: 'Admin Controls', show: false }
+  ];
 
   stream1: Subscription;
 
-  constructor(private auth: AuthService,
-              private textprovider: TextProvider,
-              private titleserv: Title) { }
+  constructor(
+    private auth: AuthService,
+    private textprovider: TextProvider,
+    private titleserv: Title
+  ) { }
 
   ngOnInit() {
     this.titleserv.setTitle('User Dash');
     this.loggedoutText = this.textprovider.WebsiteText
-      .find(member => member.ID =='login').Text;
+      .find(member => member.ID === 'login').Text;
     this.loggedinText = this.textprovider.WebsiteText
-      .find(member => member.ID =='userdash').Text;
-      
+      .find(member => member.ID === 'userdash').Text;
+
     this.stream1 = this.auth.user.subscribe(user => {
       this.authorized = this.auth.isUser();
-      if(user) {
+      if (user) {
         this.user = user;
         this.PrepareData();
         this.checkRoles();
       }
-      // else {
-      //   this.mockupUser();
-      //   this.PrepareData();
-      // }
     });
   }
 
@@ -60,7 +59,7 @@ export class UserDashComponent implements OnInit, OnDestroy {
 
   PrepareData() {
     this.savedData = [];
-    if(this.user.FanCharacters) {
+    if (this.user.FanCharacters) {
       this.savedData.push({
         title: 'Your Fan Characters',
         link: 'fancharacters',
@@ -71,7 +70,7 @@ export class UserDashComponent implements OnInit, OnDestroy {
         delete: false
      });
     }
-    if(this.user.SAcalculations) {
+    if (this.user.SAcalculations) {
       this.savedData.push({
         title: 'Your Source Affinity Data',
         link: 'sacalculations',
@@ -82,18 +81,16 @@ export class UserDashComponent implements OnInit, OnDestroy {
         delete: false
         });
     }
-    console.log("here")
-    if(this.user.SurveyResults) {
-      console.log("in")
+    if (this.user.SurveyResults) {
       this.savedData.push({
-      title: 'Your Survey Data',
-      link: 'surveyresults',
-      name: this.user.SurveyResults.map(survey => survey.DisplayName),
-      type: 'SurveyResults',
-      data: this.user.SurveyResults,
-      edit: false,
-      delete: true
-    });
+        title: 'Your Survey Data',
+        link: 'surveyresults',
+        name: this.user.SurveyResults.map(survey => survey.DisplayName),
+        type: 'SurveyResults',
+        data: this.user.SurveyResults,
+        edit: false,
+        delete: true
+      });
     }
   }
 
@@ -109,8 +106,8 @@ export class UserDashComponent implements OnInit, OnDestroy {
     this.user.SurveyResults = [{SurveyID: "Companion",
     DisplayName: "Ideal Source Companion Questionair 20/08/26",
     Name: "Ideal Source Companion Questionair"},
-    {SurveyID: "Companion",
+    { SurveyID: "Companion",
     DisplayName: "Ideal Source Companion Questionair 20/08/26-2",
-    Name: "Ideal Source Companion Questionair"}];
+    Name: "Ideal Source Companion Questionair" }];
   }
 }

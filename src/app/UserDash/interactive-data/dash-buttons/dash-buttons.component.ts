@@ -1,10 +1,10 @@
-import { Component, OnInit, OnDestroy }   from '@angular/core';
-import { ActivatedRoute }                 from '@angular/router'
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
-import { Subscription }                   from 'rxjs';
+import { Subscription } from 'rxjs';
 
-import { FetchService }                   from 'src/app/GlobalServices/fetch.service';
-import { DashCRUDService }                from '../../dash-CRUD.service';
+import { FetchService } from 'src/app/GlobalServices/fetch.service';
+import { DashCRUDService } from '../../dash-CRUD.service';
 
 @Component({
   selector: 'app-dash-buttons',
@@ -36,7 +36,7 @@ export class DashButtonsComponent implements OnInit, OnDestroy {
     this.stream3.unsubscribe();
     this.crud.dispose();
   }
-  
+
   onEdit() {
     this.crud.editEntry(this.route.snapshot.url[0].path);
   }

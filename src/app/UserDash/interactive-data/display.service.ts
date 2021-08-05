@@ -21,17 +21,17 @@ export class DisplayService {
     this.currentDataType.next(type);
     this.stream = this.auth.user.subscribe(user => {
       this.currentUserData.next(user[type]);
-      if(this.currentID.value) {
+      if (this.currentID.value) {
         this.updateCurrentUserDatum(this.currentID.value);
       }
-    })
-    this.generalcollectserv.initializeMetaData(this.currentUserData, this.currentDataType.value)
+    });
+    this.generalcollectserv.initializeMetaData(this.currentUserData, this.currentDataType.value);
   }
 
   updateCurrentUserDatum(ID: string) {
     const selected = this.currentUserData.value
-    .find(datum => datum.ID === ID)
-    if(selected) {
+    .find(datum => datum.ID === ID);
+    if (selected) {
       this.currentUserDatum.next(selected);
       this.currentID.next(ID);
       return true;
@@ -43,7 +43,7 @@ export class DisplayService {
   }
 
   disposal() {
-    if(this.stream) {
+    if (this.stream) {
       this.stream.unsubscribe();
     }
     this.generalcollectserv.dispose();

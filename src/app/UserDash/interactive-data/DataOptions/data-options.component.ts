@@ -1,6 +1,6 @@
-import { Component, OnInit, Input }   from '@angular/core';
-import { Router, ActivatedRoute }     from '@angular/router';
-import { LinkList, LinkListElement }  from 'src/app/SharedComponentModules/SmallComponents/LinkList/linklist';
+import { Component, OnInit, Input } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+import { LinkList, LinkListElement } from 'src/app/SharedComponentModules/SmallComponents/LinkList/linklist';
 import { DashCRUDService } from '../../dash-CRUD.service';
 
 @Component({
@@ -20,20 +20,22 @@ export class DataOptionsComponent implements OnInit {
   @Input() delete: boolean;
   LinkList: LinkList[];
 
-  constructor(private route: ActivatedRoute,
-              private router: Router,
-              private crud: DashCRUDService) { }
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private crud: DashCRUDService
+  ) { }
 
   ngOnInit() {
     const buttonTypes = ['View'];
-    if(this.edit) {
+    if (this.edit) {
       buttonTypes.push('Edit');
     }
-    if(this.delete) {
+    if (this.delete) {
       buttonTypes.push('X');
     }
 
-    this.LinkList = []
+    this.LinkList = [];
     this.names.forEach((name, i) => {
       this.LinkList.push(new LinkList(name, []));
       buttonTypes.forEach(button => {

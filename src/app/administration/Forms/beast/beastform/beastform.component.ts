@@ -27,7 +27,7 @@ export class BeastFormComponent implements OnInit, OnDestroy {
 
   stream1: Subscription;
   stream2: Subscription;
- 
+
   constructor(
     private fb: FormBuilder,
     private controller: CRUDcontrollerService,

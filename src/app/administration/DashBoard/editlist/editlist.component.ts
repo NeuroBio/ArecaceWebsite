@@ -57,7 +57,7 @@ export class EditListComponent implements OnInit, OnDestroy {
   }
 
   forPagesInit() {
-    if(this.type === 'website' && this.selectable) {
+    if (this.type === 'website' && this.selectable) {
       const access = this.route.snapshot.firstChild.url.toString();
       this.controller.assignEditItem(this.selectable.find(element =>
         element.ID === access));

@@ -1,6 +1,6 @@
-import { Component, OnInit }  from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
-import { TextProvider }       from 'src/app/GlobalServices/textprovider.service';
+import { TextProvider } from 'src/app/GlobalServices/textprovider.service';
 
 @Component({
   selector: 'app-privacy-policy',
@@ -14,9 +14,9 @@ export class PrivacyPolicyComponent implements OnInit {
   constructor(private textprovider: TextProvider) { }
 
   ngOnInit(): void {
-    window.scroll(0,0);
+    window.scroll(0, 0);
     this.dataPolicy = this.textprovider.WebsiteText
-      .find(member => member.ID =='datapolicy').Text;
+      .find(member => member.ID === 'datapolicy').Text;
   }
 
 }

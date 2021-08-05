@@ -1,17 +1,17 @@
-import { NgModule }                         from '@angular/core';
-import { Routes, RouterModule }             from '@angular/router';
+import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
 
-import { UserdataMainResolverService }      from './interactive-data/interact-home/userdata-main-resolver.service';
-import { UserdataDetailsResolverService }   from './interactive-data/interact-details-switch/userdata-details-resolver.service';
+import { UserdataMainResolverService } from './interactive-data/interact-home/userdata-main-resolver.service';
+import { UserdataDetailsResolverService } from './interactive-data/interact-details-switch/userdata-details-resolver.service';
 
-import { UserGuardGuard }                   from './user-guard.guard';
+import { UserGuardGuard } from './user-guard.guard';
 
-import { UserDashComponent }                from './user-dash/user-dash.component';
-import { InteractHomeComponent }            from './interactive-data/interact-home/interact-home.component';
-import { InteractDetailsSwitchComponent }   from './interactive-data/interact-details-switch/interact-details-switch.component';
-import { CBUMResolverService }              from '../worldbuilding/characters/character-components/charactersblowupmaster/cbumresolver.service';
-import { CharactersBlowupmasterComponent }  from '../worldbuilding/characters/character-components/charactersblowupmaster/charactersblowupmaster.component';
-import { UserInfoComponent }                from './user-info/user-info.component';
+import { UserDashComponent } from './user-dash/user-dash.component';
+import { InteractHomeComponent } from './interactive-data/interact-home/interact-home.component';
+import { InteractDetailsSwitchComponent } from './interactive-data/interact-details-switch/interact-details-switch.component';
+import { CBUMResolverService } from '../worldbuilding/characters/character-components/charactersblowupmaster/cbumresolver.service';
+import { CharactersBlowupmasterComponent } from '../worldbuilding/characters/character-components/charactersblowupmaster/charactersblowupmaster.component';
+import { UserInfoComponent } from './user-info/user-info.component';
 
 const userRoutes: Routes = [
   { path: '', component: UserDashComponent },

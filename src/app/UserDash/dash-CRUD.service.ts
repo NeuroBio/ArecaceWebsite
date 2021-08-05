@@ -1,18 +1,18 @@
-import { Injectable }               from '@angular/core';
-import { formatDate }               from '@angular/common';
-import { Router }                   from '@angular/router';
+import { Injectable } from '@angular/core';
+import { formatDate } from '@angular/common';
+import { Router } from '@angular/router';
 
-import { BehaviorSubject }          from 'rxjs';
-import { take }                     from 'rxjs/operators';
+import { BehaviorSubject } from 'rxjs';
+import { take } from 'rxjs/operators';
 
-import { FireBaseService }          from '../GlobalServices/firebase.service';
-import { AuthService }              from '../administration/security/Auth/auth.service';
-import { CRUD }                     from 'src/app/administration/services/CRUD.service';
-import { FetchService }             from 'src/app/GlobalServices/fetch.service';
+import { FireBaseService } from '../GlobalServices/firebase.service';
+import { AuthService } from '../administration/security/Auth/auth.service';
+import { CRUD } from 'src/app/administration/services/CRUD.service';
+import { FetchService } from 'src/app/GlobalServices/fetch.service';
 
-import { CRUDdata, User }           from 'src/app/Classes/ContentClasses';
-import { AllUserDataInfo }          from 'src/app/Classes/UploadDownloadPaths';
-import { DisplayService }           from './interactive-data/display.service';
+import { CRUDdata, User } from 'src/app/Classes/ContentClasses';
+import { AllUserDataInfo } from 'src/app/Classes/UploadDownloadPaths';
+import { DisplayService } from './interactive-data/display.service';
 
 @Injectable({
   providedIn: 'root'
@@ -23,12 +23,14 @@ export class DashCRUDService {
   message = new BehaviorSubject<string>(undefined);
   NameTokens = new AllUserDataInfo();
 
-  constructor(private firebaseserv: FireBaseService,
-              private auth: AuthService,
-              private displayserv: DisplayService,
-              private router: Router,
-              private fetcher: FetchService,
-              private CRUD: CRUD) { }
+  constructor(
+    private firebaseserv: FireBaseService,
+    private auth: AuthService,
+    private displayserv: DisplayService,
+    private router: Router,
+    private fetcher: FetchService,
+    private CRUD: CRUD
+  ) { }
 
   correctLinks(links: string[], ID: string, type: string) {
     return links.map(link => {
@@ -47,7 +49,7 @@ export class DashCRUDService {
     uploadInfo.MetaData.DisplayName = this.makeDisplayName(this.NameTokens[type].NameTokens, uploadInfo.MetaData);
     uploadInfo.MetaData.ID = `${this.auth.user.value.ID}_${this.getUniqueId(4)}`
 
-    if(uploadInfo.NewImageLinks[0]) {
+    if (uploadInfo.NewImageLinks[0]) {
       uploadInfo.NewImageLinks = this.correctLinks(uploadInfo.NewImageLinks,
                                                    uploadInfo.MetaData.ID, type);
     }
@@ -55,11 +57,11 @@ export class DashCRUDService {
     //upload images if any
     return this.CRUD.uploadImages(uploadInfo.NewImageLinks, uploadInfo.ImageBlobs)
     .then(links => {
-      if(links[0]) {
+      if (links[0]) {
         uploadInfo.MetaData.Links = links;
       }
       
-      if(OldData[type]) {// old data exists
+      if (OldData[type]) {// old data exists
         OldData[type].push(uploadInfo.MetaData);
       } else { //first time this data pushed
         OldData[type] = [uploadInfo.MetaData];
@@ -84,7 +86,7 @@ export class DashCRUDService {
     return this.fetcher.activeFormData.pipe(take(1))
     .subscribe(uploadInfo => {
       
-      if(uploadInfo.Abort) {
+      if (uploadInfo.Abort) {
         return this.message.next(uploadInfo.AbortMessage);
       }
       const OldData = this.auth.user.value;
@@ -94,7 +96,7 @@ export class DashCRUDService {
       uploadInfo.MetaData = this.replaceUserValues(uploadInfo.MetaData,
         OldData[type][index], type);
       
-      if(uploadInfo.NewImageLinks[0]) {
+      if (uploadInfo.NewImageLinks[0]) {
         uploadInfo.NewImageLinks = this.correctLinks(uploadInfo.NewImageLinks,
                                                      uploadInfo.MetaData.ID,
                                                      type);
@@ -104,7 +106,7 @@ export class DashCRUDService {
       return this.CRUD.editImages(uploadInfo.NewImageLinks,
         uploadInfo.ImageBlobs, uploadInfo.OldImageLinks)
       .then(links => {
-        if(links[0]) {
+        if (links[0]) {
           uploadInfo.MetaData.Links = links;
         }
         //load in edited data
@@ -130,19 +132,19 @@ export class DashCRUDService {
     const index = data[type].findIndex(x =>
       x.ID === ID);
 
-    if(data[type][index].Links) {//kill images
+    if (data[type][index].Links) { // kill images
       this.deleteImages(data[type][index]);
     }
 
-    data[type].splice(index,1);//remove from user data
+    data[type].splice(index,1); // remove from user data
     return this.firebaseserv.editDocument(data, 'Users', this.auth.uid.value)
     .then(() => {
 
-      if(data[type][0]) {
+      if (data[type][0]) {
         this.router.navigate([`/dash/${type}`],
           {queryParamsHandling: "merge"});
         this.message.next('');
-      } else { //no members remain
+      } else { // no members remain
         this.router.navigate(['/dash']);
       }
       this.fetcher.assignLoading(false);
@@ -154,13 +156,13 @@ export class DashCRUDService {
 
   deleteBookmark(index: number, type: string) {
     const data = this.auth.user.value;
-    data[type].splice(index,1);//remove from user data
+    data[type].splice(index,1); // remove from user data
     return this.firebaseserv.editDocument(data, 'Users', this.auth.uid.value);
   }
 
   deleteImages(Links: string[]) {
     return Promise.all(Links.map(link => {
-      if(link) {
+      if (link) {
         return this.firebaseserv.deleteImage(link);
       } else {
         return Promise.resolve();
@@ -185,7 +187,7 @@ export class DashCRUDService {
       stringArr.push(S4);
     }
     return stringArr.join('-');
-    //https://stackoverflow.com/questions/52836247/how-to-generate-uuid-in-angular-6
+    // https://stackoverflow.com/questions/52836247/how-to-generate-uuid-in-angular-6
   }
 
   makeDisplayName(nameTokens: string[], dataToSave: any) {
@@ -200,7 +202,7 @@ export class DashCRUDService {
     const Data = this.auth.user.value;
     const Links = [];
 
-    if(Data.FanCharacters) {
+    if (Data.FanCharacters) {
       Data.FanCharacters.forEach(char => 
         char.Links.forEach(link => Links.push(link)));  
     }
@@ -208,7 +210,7 @@ export class DashCRUDService {
     this.message.next('Deleting Images...');
     return this.deleteImages(Links) 
     .then(() => {
-      if(accountToo === true) {
+      if (accountToo === true) {
         return this.deleteAccount();
       } else {
         return this.deleteAllData(Data);

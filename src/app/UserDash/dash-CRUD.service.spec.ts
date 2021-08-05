@@ -6,7 +6,7 @@ describe('DashCRUDService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: DashCRUDService = TestBed.get(DashCRUDService);
+    const service: DashCRUDService = TestBed.inject(DashCRUDService);
     expect(service).toBeTruthy();
   });
 });
