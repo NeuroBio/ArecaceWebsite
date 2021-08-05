@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { FormBuilder } from '@angular/forms';
 
 import { DateConverterComponent } from './date-converter.component';
 
@@ -8,7 +9,10 @@ describe('DateConverterComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ DateConverterComponent ]
+      declarations: [ DateConverterComponent ],
+      providers: [
+        FormBuilder
+      ]
     })
     .compileComponents();
   }));

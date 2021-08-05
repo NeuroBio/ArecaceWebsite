@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 
 import { DetailsNotesComponent } from './details-notes.component';
 
@@ -8,7 +9,10 @@ describe('DetailsNotesComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ DetailsNotesComponent ]
+      declarations: [ DetailsNotesComponent ],
+      imports: [
+        RouterTestingModule
+      ]
     })
     .compileComponents();
   }));

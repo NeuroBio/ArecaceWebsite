@@ -1,4 +1,8 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { AngularFireStorage } from '@angular/fire/storage';
+import { environment } from 'src/environments/environment';
 
 import { ShowNewestComponent } from './show-newest.component';
 
@@ -8,7 +12,14 @@ describe('ShowNewestComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ ShowNewestComponent ]
+      declarations: [ ShowNewestComponent ],
+      imports: [
+        AngularFireModule.initializeApp(environment.firebase),
+      ],
+      providers: [
+        AngularFireAuth,
+        AngularFireStorage
+      ]
     })
     .compileComponents();
   }));

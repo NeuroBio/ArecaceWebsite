@@ -1,4 +1,8 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { AngularFireStorage } from '@angular/fire/storage';
+import { environment } from 'src/environments/environment';
 
 import { SliderComponent } from './slider.component';
 
@@ -8,7 +12,14 @@ describe('SliderComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ SliderComponent ]
+      declarations: [ SliderComponent ],
+      imports: [
+        AngularFireModule.initializeApp(environment.firebase),
+      ],
+      providers: [
+        AngularFireAuth,
+        AngularFireStorage
+      ]
     })
     .compileComponents();
   }));

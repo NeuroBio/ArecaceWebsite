@@ -1,4 +1,6 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { AngularFireStorage } from '@angular/fire/storage';
+import { FormBuilder } from '@angular/forms';
 
 import { PixelformComponent } from './pixelform.component';
 
@@ -8,7 +10,11 @@ describe('PixelformComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ PixelformComponent ]
+      declarations: [ PixelformComponent ],
+      providers: [
+        FormBuilder,
+        AngularFireStorage
+      ]
     })
     .compileComponents();
   }));

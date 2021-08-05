@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { AngularFireStorage } from '@angular/fire/storage';
 
 import { MessageComponent } from './message.component';
 
@@ -8,7 +9,10 @@ describe('MessageComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ MessageComponent ]
+      declarations: [ MessageComponent ],
+      providers: [
+        AngularFireStorage
+      ]
     })
     .compileComponents();
   }));

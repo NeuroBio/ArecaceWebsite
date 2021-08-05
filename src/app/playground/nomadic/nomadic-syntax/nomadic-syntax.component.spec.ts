@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { AngularFireStorage } from '@angular/fire/storage';
 
 import { NomadicSyntaxComponent } from './nomadic-syntax.component';
 
@@ -8,7 +9,10 @@ describe('NomadicSyntaxComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ NomadicSyntaxComponent ]
+      declarations: [ NomadicSyntaxComponent ],
+      providers: [
+        AngularFireStorage
+      ]
     })
     .compileComponents();
   }));

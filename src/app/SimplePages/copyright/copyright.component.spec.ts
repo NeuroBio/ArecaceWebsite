@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { AngularFireStorage } from '@angular/fire/storage';
 
 import { CopyrightComponent } from './copyright.component';
 
@@ -8,7 +9,10 @@ describe('CopyrightComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ CopyrightComponent ]
+      declarations: [ CopyrightComponent ],
+      providers: [
+        AngularFireStorage
+      ]
     })
     .compileComponents();
   }));

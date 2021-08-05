@@ -1,4 +1,6 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { AngularFireStorage } from '@angular/fire/storage';
+import { FormBuilder } from '@angular/forms';
 
 import { LooseNotesFormComponent } from './loose-notes-form.component';
 
@@ -8,7 +10,11 @@ describe('LooseNotesFormComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ LooseNotesFormComponent ]
+      declarations: [ LooseNotesFormComponent ],
+      providers: [
+        FormBuilder,
+        AngularFireStorage
+      ]
     })
     .compileComponents();
   }));

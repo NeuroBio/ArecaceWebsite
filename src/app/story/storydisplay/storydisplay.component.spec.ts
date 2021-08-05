@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 
 import { StorydisplayComponent } from './storydisplay.component';
 
@@ -8,7 +9,10 @@ describe('StorydisplayComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ StorydisplayComponent ]
+      declarations: [ StorydisplayComponent ],
+      imports: [
+        RouterTestingModule
+      ]
     })
     .compileComponents();
   }));

@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { AngularFireStorage } from '@angular/fire/storage';
 
 import { PickUpComponent } from './pick-up.component';
 
@@ -8,7 +9,12 @@ describe('PickUpComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ PickUpComponent ]
+      declarations: [ PickUpComponent ],
+      imports: [
+      ],
+      providers: [
+        AngularFireStorage
+      ]
     })
     .compileComponents();
   }));

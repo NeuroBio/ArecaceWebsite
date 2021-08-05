@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { FormBuilder } from '@angular/forms';
 
 import { TranslateComponent } from './translate.component';
 
@@ -8,7 +9,10 @@ describe('TranslateComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ TranslateComponent ]
+      declarations: [ TranslateComponent ],
+      providers: [
+        FormBuilder
+      ]
     })
     .compileComponents();
   }));

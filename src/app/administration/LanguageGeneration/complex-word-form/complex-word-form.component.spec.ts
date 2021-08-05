@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { FormBuilder } from '@angular/forms';
 
 import { ComplexWordFormComponent } from './complex-word-form.component';
 
@@ -8,7 +9,10 @@ describe('ComplexWordFormComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ ComplexWordFormComponent ]
+      declarations: [ ComplexWordFormComponent ],
+      providers: [
+        FormBuilder
+      ]
     })
     .compileComponents();
   }));

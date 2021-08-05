@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { FormBuilder } from '@angular/forms';
 
 import { GuildFormComponent } from './guildform.component';
 
@@ -8,7 +9,10 @@ describe('GuildFormComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ GuildFormComponent ]
+      declarations: [ GuildFormComponent ],
+      providers: [
+        FormBuilder
+      ]
     })
     .compileComponents();
   }));

@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { FormBuilder } from '@angular/forms';
 
 import { SurveyStatsComponent } from './survey-stats.component';
 
@@ -8,7 +9,10 @@ describe('SurveyStatsComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ SurveyStatsComponent ]
+      declarations: [ SurveyStatsComponent ],
+      providers: [
+        FormBuilder
+      ]
     })
     .compileComponents();
   }));

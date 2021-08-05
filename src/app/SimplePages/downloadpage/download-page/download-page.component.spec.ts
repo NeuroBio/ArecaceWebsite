@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { AngularFireStorage } from '@angular/fire/storage';
 
 import { DownloadPageComponent } from './download-page.component';
 
@@ -8,7 +9,10 @@ describe('DownloadPageComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ DownloadPageComponent ]
+      declarations: [ DownloadPageComponent ],
+      providers: [
+        AngularFireStorage
+      ]
     })
     .compileComponents();
   }));

@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { AngularFireStorage } from '@angular/fire/storage';
 
 import { PrivacyPolicyComponent } from './privacy-policy.component';
 
@@ -8,7 +9,10 @@ describe('PrivacyPolicyComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ PrivacyPolicyComponent ]
+      declarations: [ PrivacyPolicyComponent ],
+      providers: [
+        AngularFireStorage
+      ]
     })
     .compileComponents();
   }));

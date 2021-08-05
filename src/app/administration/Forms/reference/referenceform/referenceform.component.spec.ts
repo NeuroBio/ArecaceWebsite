@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { FormBuilder } from '@angular/forms';
 
 import { ReferenceFormComponent } from './referenceform.component';
 
@@ -8,7 +9,10 @@ describe('ReferenceFormComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ ReferenceFormComponent ]
+      declarations: [ ReferenceFormComponent ],
+      providers: [
+        FormBuilder
+      ]
     })
     .compileComponents();
   }));

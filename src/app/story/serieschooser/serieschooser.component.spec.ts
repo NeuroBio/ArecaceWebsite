@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 
 import { SeriesChooserComponent } from './serieschooser.component';
 
@@ -8,7 +9,10 @@ describe('SeriesChooserComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ SeriesChooserComponent ]
+      declarations: [ SeriesChooserComponent ],
+      imports: [
+        RouterTestingModule
+      ]
     })
     .compileComponents();
   }));

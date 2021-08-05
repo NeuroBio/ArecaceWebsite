@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { AngularFireStorage } from '@angular/fire/storage';
 
 import { SourceCalcFrameComponent } from './source-calc-frame.component';
 
@@ -8,7 +9,10 @@ describe('SourceCalcFrameComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ SourceCalcFrameComponent ]
+      declarations: [ SourceCalcFrameComponent ],
+      providers: [
+        AngularFireStorage
+      ]
     })
     .compileComponents();
   }));

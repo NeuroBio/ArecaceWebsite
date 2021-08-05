@@ -1,4 +1,6 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { AngularFireStorage } from '@angular/fire/storage';
+import { FormBuilder } from '@angular/forms';
 
 import { IntroTextComponent } from './intro-text.component';
 
@@ -8,7 +10,11 @@ describe('IntroTextComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ IntroTextComponent ]
+      declarations: [ IntroTextComponent ],
+      providers: [
+        FormBuilder,
+        AngularFireStorage
+      ]
     })
     .compileComponents();
   }));

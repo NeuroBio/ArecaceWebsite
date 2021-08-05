@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { RefocusService } from './refocus.service';
+import { GridService } from './refocus.service';
 
-describe('RefocusService', () => {
-  let service: RefocusService;
+describe('GridService', () => {
+  let service: GridService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(RefocusService);
+    service = TestBed.inject(GridService);
   });
 
   it('should be created', () => {

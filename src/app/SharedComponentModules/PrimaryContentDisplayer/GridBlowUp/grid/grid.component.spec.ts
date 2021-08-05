@@ -1,4 +1,7 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { environment } from 'src/environments/environment';
 
 import { GridComponent } from './grid.component';
 
@@ -8,7 +11,13 @@ describe('GridComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ GridComponent ]
+      declarations: [ GridComponent ],
+      imports: [
+        AngularFireModule.initializeApp(environment.firebase),
+      ],
+      providers: [
+        AngularFireAuth
+      ]
     })
     .compileComponents();
   }));

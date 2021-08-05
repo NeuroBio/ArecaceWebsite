@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { AngularFireStorage } from '@angular/fire/storage';
 
 import { GeneratorComponent } from './generator.component';
 
@@ -8,7 +9,10 @@ describe('GeneratorComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ GeneratorComponent ]
+      declarations: [ GeneratorComponent ],
+      imports: [
+        AngularFireStorage
+      ]
     })
     .compileComponents();
   }));

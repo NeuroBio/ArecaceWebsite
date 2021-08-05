@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 
 import { SourceSiphoidMainComponent } from './sourcesiphoidmain.component';
 
@@ -8,7 +9,10 @@ describe('SourceSiphoidMainComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ SourceSiphoidMainComponent ]
+      declarations: [ SourceSiphoidMainComponent ],
+      imports: [
+        RouterTestingModule
+      ]
     })
     .compileComponents();
   }));

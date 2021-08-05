@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { AngularFireStorage } from '@angular/fire/storage';
 
 import { UserInfoComponent } from './user-info.component';
 
@@ -8,7 +9,12 @@ describe('UserInfoComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ UserInfoComponent ]
+      declarations: [ UserInfoComponent ],
+      imports: [
+      ],
+      providers: [
+        AngularFireStorage
+      ]
     })
     .compileComponents();
   }));

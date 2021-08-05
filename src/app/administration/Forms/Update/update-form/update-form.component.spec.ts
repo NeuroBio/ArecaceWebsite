@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { FormBuilder } from '@angular/forms';
 
 import { UpdateFormComponent } from './update-form.component';
 
@@ -8,7 +9,10 @@ describe('UpdateFormComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ UpdateFormComponent ]
+      declarations: [ UpdateFormComponent ],
+      providers: [
+        FormBuilder
+      ]
     })
     .compileComponents();
   }));

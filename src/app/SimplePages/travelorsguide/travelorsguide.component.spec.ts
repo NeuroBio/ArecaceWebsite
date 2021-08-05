@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { AngularFireStorage } from '@angular/fire/storage';
 
 import { TravelorsGuideComponent } from './travelorsguide.component';
 
@@ -8,7 +9,10 @@ describe('TravelorsguideComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ TravelorsGuideComponent ]
+      declarations: [ TravelorsGuideComponent ],
+      providers: [
+        AngularFireStorage
+      ]
     })
     .compileComponents();
   }));

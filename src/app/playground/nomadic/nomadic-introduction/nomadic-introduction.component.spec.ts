@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { AngularFireStorage } from '@angular/fire/storage';
 
 import { NomadicIntroductionComponent } from './nomadic-introduction.component';
 
@@ -8,7 +9,10 @@ describe('NomadicIntroductionComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ NomadicIntroductionComponent ]
+      declarations: [ NomadicIntroductionComponent ],
+      imports: [
+        AngularFireStorage
+      ]
     })
     .compileComponents();
   }));

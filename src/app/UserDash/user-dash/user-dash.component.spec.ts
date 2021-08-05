@@ -1,4 +1,7 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { environment } from 'src/environments/environment';
 
 import { UserDashComponent } from './user-dash.component';
 
@@ -8,7 +11,13 @@ describe('UserDashComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ UserDashComponent ]
+      declarations: [ UserDashComponent ],
+      imports: [
+        AngularFireModule.initializeApp(environment.firebase),
+      ],
+      providers: [
+        AngularFireAuth
+      ]
     })
     .compileComponents();
   }));

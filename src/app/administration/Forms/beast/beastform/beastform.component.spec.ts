@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { FormBuilder } from '@angular/forms';
 
 import { BeastFormComponent } from './beastform.component';
 
@@ -8,7 +9,10 @@ describe('BeastFormComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ BeastFormComponent ]
+      declarations: [ BeastFormComponent ],
+      providers: [
+        FormBuilder
+      ]
     })
     .compileComponents();
   }));
