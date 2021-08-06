@@ -9,7 +9,9 @@ https://arecace.com/home
 `Angular`, `Firebase`, `Python`, `GCP`
 
 ## Future tasks
-- lint code
 - refactor the code to reflect my current skill level
-- add unit tests
+  - lint code (complete)
+  - create mock services and objeects (next step)
+  - get all components to pass "can create" tests (in progress)
+  
 - enter next development stage: adding a forum
