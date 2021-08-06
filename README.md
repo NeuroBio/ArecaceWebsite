@@ -13,5 +13,8 @@ https://arecace.com/home
   - lint code (complete)
   - create mock services and objeects (next step)
   - get all components to pass "can create" tests (in progress)
+  - create custom service unit tests
+  - create custom component unit tests
+  - start refactor
   
 - enter next development stage: adding a forum
