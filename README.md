@@ -11,7 +11,7 @@ https://arecace.com/home
 ## Future tasks
 - refactor the code to reflect my current skill level
   - lint code (complete)
-  - create mock services and objeects (next step)
+  - create mock services and objects (next step)
   - get all components to pass "can create" tests (in progress)
   - create custom service unit tests
   - create custom component unit tests
