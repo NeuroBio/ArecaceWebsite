@@ -24,7 +24,7 @@
     "core-js": "^2.6.12",
     "firebase": "^7.24.0",
     "firebase-admin": "^9.7.0",
-    "minimist": "^1.2.5",
+    "minimist": "^1.2.6",
     "ngx-device-detector": "^1.5.2",
     "roboto-fontface": "^0.10.0",
     "rxjs": "^6.6.7",
